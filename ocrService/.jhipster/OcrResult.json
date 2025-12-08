@@ -1,0 +1,67 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190101"
+  },
+  "applications": ["gateway", "ocrService"],
+  "clientRootFolder": "ocrService",
+  "databaseType": "sql",
+  "documentation": "R�sultat OCR par page",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "pageNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "confidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "s3ResultKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "boundingBoxes",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "wordCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "processedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "ocrService",
+  "name": "OcrResult",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "ocrJob",
+      "relationshipName": "job",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,11 @@
+id;page_number;confidence;s_3_result_key;bounding_boxes;metadata;language;word_count;processed_date;job_id
+1;21441;0.62;zowie emboss;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;publicize;28670;2025-12-07T19:52:33;1
+2;698;0.65;how mobilize;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;yippee hm;1237;2025-12-07T21:06:37;2
+3;4791;0.07;however smug treble;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;during adv;15934;2025-12-08T02:25:09;3
+4;13743;0.09;hmph superb;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;aboard ses;18824;2025-12-08T16:19:35;4
+5;28517;0.83;ew;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;incidental;8295;2025-12-08T06:31:55;5
+6;27027;0.6;yahoo loyally;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;ouch astri;11475;2025-12-08T00:35:45;6
+7;5109;0.08;search;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;worth agai;4329;2025-12-07T21:35:42;7
+8;24356;0.38;past mousse;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;why mmm;23335;2025-12-08T17:13:37;8
+9;13165;0.52;including before bleakly;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;indeed;11563;2025-12-08T14:03:09;9
+10;8993;0.46;sonnet miserable;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;huzzah;760;2025-12-08T11:02:57;10

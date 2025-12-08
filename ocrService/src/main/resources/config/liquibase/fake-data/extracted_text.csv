@@ -1,0 +1,11 @@
+id;content;page_number;language;word_count;has_structured_data;structured_data;extracted_date;job_id
+1;../fake-data/blob/hipster.txt;31854;uh-huh;11253;true;../fake-data/blob/hipster.txt;2025-12-08T03:45:11;1
+2;../fake-data/blob/hipster.txt;12666;vivaciousl;346;false;../fake-data/blob/hipster.txt;2025-12-07T22:22:35;2
+3;../fake-data/blob/hipster.txt;8676;oh neglect;8468;false;../fake-data/blob/hipster.txt;2025-12-08T12:52:28;3
+4;../fake-data/blob/hipster.txt;23736;ravioli;9115;false;../fake-data/blob/hipster.txt;2025-12-08T09:33:19;4
+5;../fake-data/blob/hipster.txt;20755;coal bookc;3759;true;../fake-data/blob/hipster.txt;2025-12-08T05:37:28;5
+6;../fake-data/blob/hipster.txt;27479;confute;6359;false;../fake-data/blob/hipster.txt;2025-12-08T15:46:58;6
+7;../fake-data/blob/hipster.txt;3423;ha;23948;true;../fake-data/blob/hipster.txt;2025-12-07T20:16:50;7
+8;../fake-data/blob/hipster.txt;9939;wilted den;10153;false;../fake-data/blob/hipster.txt;2025-12-07T19:18:57;8
+9;../fake-data/blob/hipster.txt;28872;while hund;30220;false;../fake-data/blob/hipster.txt;2025-12-08T18:11:08;9
+10;../fake-data/blob/hipster.txt;32167;ack;25261;false;../fake-data/blob/hipster.txt;2025-12-07T19:11:35;10

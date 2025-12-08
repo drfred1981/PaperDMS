@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190201"
+  },
+  "applications": ["gateway", "ocrService"],
+  "clientRootFolder": "ocrService",
+  "databaseType": "sql",
+  "documentation": "Texte extrait du document",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pageNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "wordCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "hasStructuredData",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "structuredData",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "extractedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "ocrService",
+  "name": "ExtractedText",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "ocrJob",
+      "relationshipName": "job",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}
