@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190101"
+  },
+  "applications": ["gateway", "searchService"],
+  "clientRootFolder": "searchService",
+  "databaseType": "sql",
+  "documentation": "Historique des recherches",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "query",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "filters",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "resultCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "executionTime",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "searchDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isRelevant",
+      "fieldType": "Boolean"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "searchService",
+  "name": "SearchQuery",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

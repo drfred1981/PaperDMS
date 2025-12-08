@@ -1,0 +1,11 @@
+id;query;filters;result_count;execution_time;user_id;search_date;is_relevant
+1;zowie devise;../fake-data/blob/hipster.txt;25016;10928;mid;2025-12-08T14:58:49;false
+2;stir-fry legitimize tender;../fake-data/blob/hipster.txt;4664;3858;bore;2025-12-08T00:28:09;true
+3;alarmed;../fake-data/blob/hipster.txt;8155;12490;from beside;2025-12-08T13:41:19;true
+4;admired;../fake-data/blob/hipster.txt;26143;11790;inside rule even;2025-12-08T18:33:59;false
+5;subdued;../fake-data/blob/hipster.txt;23468;26710;heartbeat pupil;2025-12-08T03:25:49;true
+6;schematise diagram converse;../fake-data/blob/hipster.txt;5764;32146;evenly scale;2025-12-08T12:34:08;true
+7;yippee ugh not;../fake-data/blob/hipster.txt;6433;71;midst reluctantly nor;2025-12-08T17:46:16;false
+8;once;../fake-data/blob/hipster.txt;24688;29253;longingly;2025-12-08T12:29:06;true
+9;major too although;../fake-data/blob/hipster.txt;24872;26196;beside;2025-12-08T00:36:36;true
+10;glossy blah;../fake-data/blob/hipster.txt;14158;5929;consistency;2025-12-08T16:43:56;true

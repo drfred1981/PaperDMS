@@ -1,0 +1,30 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 3,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "searchService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1765221349290,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["SearchIndex", "SearchQuery"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "YjlkNjA2MzkwMjFmOGVmNjg4ZDQ4NzM4MzM1NjhiYzRlM2ZiMDFhNzAxZWU1MTIzM2E2YTdlMzFlZjJmYWQ0MjJiZmU0MmFkZDg2MjIzMWUyZjEwNDhhOGNiNDhhMzNjNGJkM2QwOTI3MzcwNWYzNDRlNGJiMjNmMzRlNGM1MmU=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1765220461000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.ged.search",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8083",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}
