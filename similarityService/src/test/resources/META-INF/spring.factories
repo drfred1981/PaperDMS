@@ -1,0 +1,6 @@
+org.springframework.test.context.ContextCustomizerFactory = \
+    com.ged.similarity.config.\
+    SqlTestContainersSpringContextCustomizerFactory,com.ged.similarity.config.\
+    TestContainersSpringContextCustomizerFactory,com.ged.similarity.config.\
+    RedisTestContainersSpringContextCustomizerFactory,com.ged.similarity.config.\
+    KafkaTestContainersSpringContextCustomizerFactory

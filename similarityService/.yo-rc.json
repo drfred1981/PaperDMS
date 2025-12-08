@@ -1,0 +1,30 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 7,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "similarityService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1765221349288,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["DocumentSimilarity", "SimilarityJob", "DocumentFingerprint", "SimilarityCluster"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "YTNiYjQ4MDY3MTQyMGI4NjZmYmM1MmUyMzg1MWM0NjU4YjVhOGU0MTg3ZjZmZTBkOTYzMGYwNDhiMjQ4YjI1YTJlMWQxYjVjMjQ4NGQ0ODNjNWRlZDMxZjIwNTlkYjY0ZWZmMWJiOGVkNjc2MGY5YTJkMGM3MzhiMzNjYWM4ZGU=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1765220581000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.ged.similarity",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8087",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}
