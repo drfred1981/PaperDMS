@@ -1,0 +1,11 @@
+id;name;email;phone;address;company;type;role;confidence;is_verified;verified_by;verified_date;metadata;extracted_date;extraction_id
+1;and;Darion56@yahoo.com;(246) 401-2977 x0705;../fake-data/blob/hipster.txt;till likewise;PERSON;BCC;0.09;true;slide;2025-12-08T15:46:17;../fake-data/blob/hipster.txt;2025-12-08T15:28:26;1
+2;dish afore;Hanna99@yahoo.com;744-287-4576 x83287;../fake-data/blob/hipster.txt;quarrelsomely;PERSON;BCC;0.45;false;sad scorn;2025-12-07T22:10:14;../fake-data/blob/hipster.txt;2025-12-07T20:15:21;2
+3;woot going;Shirley_Little34@gmail.com;284.788.0527 x12136;../fake-data/blob/hipster.txt;ostrich;UNKNOWN;SENDER;0.87;false;barracks daintily;2025-12-08T11:31:57;../fake-data/blob/hipster.txt;2025-12-08T10:50:07;3
+4;shoulder heavily;Beulah_Mann@gmail.com;1-767-388-3952 x123;../fake-data/blob/hipster.txt;taxicab;PERSON;CC;0.02;true;goodwill;2025-12-08T04:12:29;../fake-data/blob/hipster.txt;2025-12-08T06:47:18;4
+5;psst whoa;Marcelina38@hotmail.com;712-271-0701;../fake-data/blob/hipster.txt;for zowie desk;ORGANIZATION;BCC;0.77;true;custom because vivaciously;2025-12-07T22:41:32;../fake-data/blob/hipster.txt;2025-12-08T15:02:47;5
+6;plus reassuringly;Jackie_Mills-Carter82@gmail.com;544-921-3676 x3265;../fake-data/blob/hipster.txt;consequently immense;PERSON;BOTH;0.27;true;although abaft;2025-12-08T09:20:14;../fake-data/blob/hipster.txt;2025-12-08T13:47:45;6
+7;offensively;Megane_Lang@gmail.com;(369) 806-2591;../fake-data/blob/hipster.txt;bookcase whose trash;ORGANIZATION;BOTH;0.59;true;hence;2025-12-08T15:13:29;../fake-data/blob/hipster.txt;2025-12-07T20:07:52;7
+8;ack curse overproduce;Ralph.Oberbrunner-Little29@gmail.com;(305) 886-8179 x9096;../fake-data/blob/hipster.txt;unless syringe;PERSON;BCC;0.91;false;corner;2025-12-08T12:44:55;../fake-data/blob/hipster.txt;2025-12-08T00:52:48;8
+9;vacation subexpression;Isabella_Reichert92@hotmail.com;(800) 579-3488;../fake-data/blob/hipster.txt;even;UNKNOWN;BCC;0.97;false;retention mmm yippee;2025-12-08T00:36:26;../fake-data/blob/hipster.txt;2025-12-08T05:36:52;9
+10;fatally bashfully;Turner_Feeney@hotmail.com;(263) 915-4322 x1087;../fake-data/blob/hipster.txt;duffel hm plus;PERSON;RECIPIENT;0.58;false;whereas the fund;2025-12-08T08:20:31;../fake-data/blob/hipster.txt;2025-12-08T15:49:39;10

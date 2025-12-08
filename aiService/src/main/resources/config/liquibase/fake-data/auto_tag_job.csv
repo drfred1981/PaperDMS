@@ -1,0 +1,11 @@
+id;document_id;s_3_key;extracted_text;status;model_version;start_date;end_date;error_message;confidence;created_date
+1;2854;likewise victoriously;../fake-data/blob/hipster.txt;FAILED;quietly why gaseous;2025-12-07T20:28:01;2025-12-08T04:32:11;../fake-data/blob/hipster.txt;0;2025-12-08T08:49:51
+2;23476;sunny;../fake-data/blob/hipster.txt;COMPLETED;antagonize tune;2025-12-07T22:12:11;2025-12-08T01:17:34;../fake-data/blob/hipster.txt;0.81;2025-12-08T12:48:51
+3;9566;into healthily ribbon;../fake-data/blob/hipster.txt;CANCELLED;across;2025-12-08T17:37:51;2025-12-08T07:12:30;../fake-data/blob/hipster.txt;0.71;2025-12-08T11:19:09
+4;17492;unless;../fake-data/blob/hipster.txt;IN_PROGRESS;likewise expert;2025-12-08T14:07:17;2025-12-08T07:53:21;../fake-data/blob/hipster.txt;0.73;2025-12-08T18:43:32
+5;2709;too;../fake-data/blob/hipster.txt;FAILED;populist briefly;2025-12-08T18:29:39;2025-12-07T22:25:01;../fake-data/blob/hipster.txt;0.5;2025-12-08T10:34:21
+6;6837;eek round so;../fake-data/blob/hipster.txt;FAILED;writhing over softly;2025-12-08T09:28:39;2025-12-08T13:41:23;../fake-data/blob/hipster.txt;0.38;2025-12-08T11:17:46
+7;18447;an hmph;../fake-data/blob/hipster.txt;PENDING;upon;2025-12-08T04:15:30;2025-12-08T09:38:04;../fake-data/blob/hipster.txt;0.97;2025-12-08T00:28:53
+8;8466;helpless common so;../fake-data/blob/hipster.txt;PENDING;astride;2025-12-08T14:32:43;2025-12-08T17:48:16;../fake-data/blob/hipster.txt;0.13;2025-12-08T11:18:35
+9;12001;duh below;../fake-data/blob/hipster.txt;CANCELLED;trolley past whose;2025-12-08T14:41:53;2025-12-08T09:36:22;../fake-data/blob/hipster.txt;0.89;2025-12-08T11:31:48
+10;13323;on insistent scholarship;../fake-data/blob/hipster.txt;COMPLETED;rust meaningfully;2025-12-08T08:44:44;2025-12-08T14:22:08;../fake-data/blob/hipster.txt;0.24;2025-12-08T01:17:51

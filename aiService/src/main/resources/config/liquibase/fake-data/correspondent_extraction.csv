@@ -1,0 +1,11 @@
+id;document_id;extracted_text;status;start_date;end_date;error_message;senders_count;recipients_count;created_date
+1;13021;../fake-data/blob/hipster.txt;FAILED;2025-12-07T23:06:29;2025-12-08T14:06:21;../fake-data/blob/hipster.txt;19722;10838;2025-12-08T06:48:38
+2;4103;../fake-data/blob/hipster.txt;COMPLETED;2025-12-07T19:29:10;2025-12-08T16:57:39;../fake-data/blob/hipster.txt;26233;528;2025-12-08T17:47:40
+3;7719;../fake-data/blob/hipster.txt;FAILED;2025-12-08T05:40:33;2025-12-08T17:28:44;../fake-data/blob/hipster.txt;10017;21244;2025-12-08T14:34:44
+4;11158;../fake-data/blob/hipster.txt;FAILED;2025-12-08T04:52:24;2025-12-08T11:45:32;../fake-data/blob/hipster.txt;12800;2169;2025-12-08T10:38:41
+5;14746;../fake-data/blob/hipster.txt;IN_PROGRESS;2025-12-07T23:48:06;2025-12-08T17:38:53;../fake-data/blob/hipster.txt;20460;32454;2025-12-08T16:22:50
+6;23555;../fake-data/blob/hipster.txt;CANCELLED;2025-12-08T13:05:59;2025-12-08T18:24:12;../fake-data/blob/hipster.txt;20806;10001;2025-12-08T05:57:56
+7;23213;../fake-data/blob/hipster.txt;FAILED;2025-12-08T17:03:37;2025-12-08T07:48:41;../fake-data/blob/hipster.txt;28704;3539;2025-12-08T06:28:04
+8;28182;../fake-data/blob/hipster.txt;FAILED;2025-12-08T17:11:29;2025-12-07T23:29:58;../fake-data/blob/hipster.txt;6064;24152;2025-12-08T05:42:26
+9;30948;../fake-data/blob/hipster.txt;COMPLETED;2025-12-07T23:53:15;2025-12-08T10:21:41;../fake-data/blob/hipster.txt;30660;2217;2025-12-08T00:48:56
+10;24587;../fake-data/blob/hipster.txt;CANCELLED;2025-12-08T05:34:38;2025-12-08T14:37:07;../fake-data/blob/hipster.txt;11376;15514;2025-12-08T04:41:05

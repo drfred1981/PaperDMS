@@ -1,0 +1,70 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190001"
+  },
+  "applications": ["gateway", "aiService"],
+  "clientRootFolder": "aiService",
+  "databaseType": "sql",
+  "documentation": "Travail de tagging automatique",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "s3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "extractedText",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "AiJobStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "modelVersion",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "confidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "aiService",
+  "name": "AutoTagJob",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

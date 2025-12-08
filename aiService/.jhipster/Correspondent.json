@@ -1,0 +1,98 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190301"
+  },
+  "applications": ["gateway", "aiService"],
+  "clientRootFolder": "aiService",
+  "databaseType": "sql",
+  "documentation": "Correspondant (exp�diteur/destinataire)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "company",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "CorrespondentType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PERSON,ORGANIZATION,SYSTEM,UNKNOWN"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "CorrespondentRole",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "SENDER,RECIPIENT,CC,BCC,BOTH"
+    },
+    {
+      "fieldName": "confidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "isVerified",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "verifiedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "verifiedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "extractedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "aiService",
+  "name": "Correspondent",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "correspondentExtraction",
+      "relationshipName": "extraction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

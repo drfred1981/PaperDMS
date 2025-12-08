@@ -1,0 +1,60 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190201"
+  },
+  "applications": ["gateway", "aiService"],
+  "clientRootFolder": "aiService",
+  "databaseType": "sql",
+  "documentation": "Extraction de correspondants",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "extractedText",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "AiJobStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "sendersCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "recipientsCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "aiService",
+  "name": "CorrespondentExtraction",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
