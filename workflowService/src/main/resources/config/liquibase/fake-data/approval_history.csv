@@ -1,0 +1,11 @@
+id;document_id;workflow_instance_id;step_number;action;comment;action_date;action_by;previous_assignee;time_taken
+1;3892;10091;22244;COMMENT;../fake-data/blob/hipster.txt;2025-12-08T06:38:51;wry circa;character;12013
+2;9915;19426;3724;APPROVE;../fake-data/blob/hipster.txt;2025-12-08T10:23:07;independence;ick nor purple;4109
+3;9889;24092;6553;DELEGATE;../fake-data/blob/hipster.txt;2025-12-08T12:15:53;squeaky sizzling;ingratiate stark;1844
+4;6539;18861;2719;COMMENT;../fake-data/blob/hipster.txt;2025-12-08T08:57:03;tightly;gladly smog hole;10743
+5;1313;30905;11370;DELEGATE;../fake-data/blob/hipster.txt;2025-12-08T09:27:42;mechanic oof meh;pfft plus taro;16641
+6;26967;25656;28057;APPROVE;../fake-data/blob/hipster.txt;2025-12-08T18:04:35;behind yahoo;er except;12434
+7;25721;23459;4704;REJECT;../fake-data/blob/hipster.txt;2025-12-08T04:10:18;address fat;intrigue present qua;7291
+8;23613;15255;20957;APPROVE;../fake-data/blob/hipster.txt;2025-12-08T12:52:00;when;intent;19325
+9;14868;19408;4318;COMMENT;../fake-data/blob/hipster.txt;2025-12-08T13:41:58;anenst midst finally;ride out until;20900
+10;6662;6461;13863;REJECT;../fake-data/blob/hipster.txt;2025-12-08T07:57:07;heavenly;thankfully supposing since;11733

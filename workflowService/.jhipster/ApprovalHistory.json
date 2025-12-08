@@ -1,0 +1,64 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190401"
+  },
+  "applications": ["gateway", "workflowService"],
+  "clientRootFolder": "workflowService",
+  "databaseType": "sql",
+  "documentation": "Historique d'approbation",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "workflowInstanceId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "stepNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "TaskAction",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "APPROVE,REJECT,REQUEST_CHANGES,DELEGATE,CANCEL,COMMENT"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "actionDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "actionBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "previousAssignee",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "timeTaken",
+      "fieldType": "Long"
+    }
+  ],
+  "microserviceName": "workflowService",
+  "name": "ApprovalHistory",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

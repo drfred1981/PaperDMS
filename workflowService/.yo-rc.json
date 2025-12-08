@@ -1,0 +1,30 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 5,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "workflowService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1765221349287,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["Workflow", "WorkflowStep", "WorkflowInstance", "WorkflowTask", "ApprovalHistory"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "ODM3YWY4ZDRmM2Y3NjJjN2RjYjkwNjJiY2VhYWM2ZmI1YWJkMGUxODkwMjUwZGMzZjJmZjI4MzY0ZDEyZGZjNGExYmUzNzZlZGZlMTYzZWVmYzk5Mzc0ZmFkZGRiZTBlOWY3ZWEyM2JhYzk4NDZlZGVmZTZmZGE4YmM1MzhjMDI=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1765220641000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "com.ged.workflow",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8085",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}

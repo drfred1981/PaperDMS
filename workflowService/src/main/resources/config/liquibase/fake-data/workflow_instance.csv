@@ -1,0 +1,11 @@
+id;document_id;status;current_step_number;start_date;due_date;completed_date;cancelled_date;cancellation_reason;priority;metadata;created_by;workflow_id
+1;32029;IN_PROGRESS;26312;2025-12-08T03:40:01;2025-12-08T17:10:09;2025-12-08T15:19:03;2025-12-07T20:28:00;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;pinion;1
+2;18384;ON_HOLD;27617;2025-12-08T03:48:37;2025-12-08T08:58:13;2025-12-08T03:57:35;2025-12-08T16:26:47;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;yearly minus;2
+3;14841;REJECTED;1865;2025-12-07T22:14:10;2025-12-08T11:41:43;2025-12-08T01:58:19;2025-12-08T18:28:21;../fake-data/blob/hipster.txt;NORMAL;../fake-data/blob/hipster.txt;or grouper;3
+4;16664;REJECTED;29684;2025-12-08T18:19:34;2025-12-08T02:14:38;2025-12-08T00:13:41;2025-12-08T08:26:11;../fake-data/blob/hipster.txt;URGENT;../fake-data/blob/hipster.txt;duh wrong;4
+5;23518;PENDING;5555;2025-12-08T17:01:31;2025-12-08T00:55:55;2025-12-08T18:19:07;2025-12-07T22:45:23;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;near;5
+6;24293;COMPLETED;7586;2025-12-08T05:12:40;2025-12-08T12:40:08;2025-12-08T09:36:33;2025-12-07T20:37:49;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;outlying;6
+7;167;PENDING;28012;2025-12-08T15:43:26;2025-12-08T15:55:26;2025-12-07T20:37:26;2025-12-08T13:13:17;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;defensive and fooey;7
+8;18538;IN_PROGRESS;25424;2025-12-08T13:53:36;2025-12-08T09:28:14;2025-12-08T15:32:15;2025-12-08T08:17:42;../fake-data/blob/hipster.txt;URGENT;../fake-data/blob/hipster.txt;maestro hence;8
+9;31418;IN_PROGRESS;13266;2025-12-07T23:21:28;2025-12-08T17:20:24;2025-12-08T12:41:09;2025-12-08T11:11:03;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;like;9
+10;11005;COMPLETED;13481;2025-12-08T06:58:19;2025-12-08T16:01:33;2025-12-07T23:30:17;2025-12-08T09:26:54;../fake-data/blob/hipster.txt;NORMAL;../fake-data/blob/hipster.txt;pomelo whereas;10

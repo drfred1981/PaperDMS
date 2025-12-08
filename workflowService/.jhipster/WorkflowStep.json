@@ -1,0 +1,88 @@
+{
+  "annotations": {
+    "changelogDate": "20251208190101"
+  },
+  "applications": ["gateway", "workflowService"],
+  "clientRootFolder": "workflowService",
+  "databaseType": "sql",
+  "documentation": "�tape de workflow",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "stepNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "stepType",
+      "fieldType": "WorkflowStepType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "APPROVAL,REVIEW,SIGNATURE,NOTIFICATION,CUSTOM"
+    },
+    {
+      "fieldName": "assigneeType",
+      "fieldType": "AssigneeType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "USER,GROUP,ROLE,DYNAMIC"
+    },
+    {
+      "fieldName": "assigneeId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "assigneeGroup",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "dueInDays",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isRequired",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "canDelegate",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "canReject",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "configuration",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "microserviceName": "workflowService",
+  "name": "WorkflowStep",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "workflow",
+      "relationshipName": "workflow",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
