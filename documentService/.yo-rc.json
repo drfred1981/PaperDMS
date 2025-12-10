@@ -1,0 +1,29 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "documentService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1765349654449,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": true,
+    "entities": [],
+    "jhipsterVersion": "9.0.0-beta.0",
+    "jwtSecretKey": "MjEwNjhkMmFjZjVkZmYxZWFiMTE0OGJiZWJjMDIxYTEwMDc4ZDY2N2E1YTgxNzc0ZDE5MGI2NTZjYzY3MTY2MTAzMjEzNmY3YzVjYWZlZGViNDZjOGVmYjNjZWU2ZjIyOTQ5MDljNjU2YzYwZGRlNmY1OTdjM2ZjOGE5MmFhZmM=",
+    "languages": ["en"],
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.document",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8081",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true
+  }
+}
