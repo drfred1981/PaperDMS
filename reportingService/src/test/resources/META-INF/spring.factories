@@ -1,0 +1,4 @@
+org.springframework.test.context.ContextCustomizerFactory = \
+    fr.smartprod.paperdms.reporting.config.SqlTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
+    reporting.config.RedisTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.reporting.config.\
+    KafkaTestContainersSpringContextCustomizerFactory

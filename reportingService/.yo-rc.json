@@ -1,0 +1,27 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 14,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "reportingService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1765349654449,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": [],
+    "jhipsterVersion": "9.0.0-beta.0",
+    "jwtSecretKey": "MjMyYWI4M2U0Njk4ODZjMGM1NWVkZWVjZmZiNjg1NzBkMDU0MDFmZDllMDQ2MjEyMWZiNDc3MGQ0NDRkYWRmYjRjYjVkM2E3MzUyYzA4NmNmZDYwMzRhYWJlYTQ2NmQwYTIwZTdkMThiNzJjYWI2YzIxYjAyMGMxYmQ2MjY1ZWY=",
+    "languages": ["en"],
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.reporting",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8094",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true
+  }
+}
