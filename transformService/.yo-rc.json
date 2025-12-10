@@ -1,0 +1,27 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 12,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "transformService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1765349654451,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": [],
+    "jhipsterVersion": "9.0.0-beta.0",
+    "jwtSecretKey": "ZTA5NTBlNTgxZDA4MjkwY2UxNDE2NDkzNzUwODRiOWFmY2Y1MzgxMDZjZWE0NTcyYjlmZDQ3MDk5ZGMzYjUwYzRkNjIzZjE4N2U0MDc0YTI5ZDVjNTM5ODE2ZjZjZDE4MTg1MjA0NGM4MWE4NDU2MTVjOTRjYzI0OGYyYWJiY2Q=",
+    "languages": ["en"],
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.transform",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8092",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true
+  }
+}
