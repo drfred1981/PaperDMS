@@ -1,0 +1,27 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 11,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "scanService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1765349654447,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": [],
+    "jhipsterVersion": "9.0.0-beta.0",
+    "jwtSecretKey": "OTU3NzczZmMzNWY4MDQ5MDQ4ODI0M2JmNmFjMWJjODdiMWNhYzNiZGNhZWM2MGNmZDIxOGJjYWQ3MzI2ZjZmYWM2ZjMzY2Y5YmQxZDViNzViMzM0MDg3MDQ3MmI1NWEwOTU3MzI2Y2Q5YjZiZDA3MzI1ZTljODRmMGZmOTYwNjQ=",
+    "languages": ["en"],
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.scan",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8091",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true
+  }
+}
