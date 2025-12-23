@@ -2,21 +2,175 @@
   "generator-jhipster": {
     "applicationIndex": 0,
     "applicationType": "gateway",
+    "applications": {
+      "aiService": {
+        "applicationIndex": 6,
+        "serverPort": "8086"
+      },
+      "archiveService": {
+        "applicationIndex": 8,
+        "serverPort": "8088"
+      },
+      "businessDocService": {
+        "applicationIndex": 13,
+        "serverPort": "8093"
+      },
+      "documentService": {
+        "applicationIndex": 1,
+        "serverPort": "8081"
+      },
+      "emailImportService": {
+        "applicationIndex": 10,
+        "serverPort": "8090"
+      },
+      "exportService": {
+        "applicationIndex": 9,
+        "serverPort": "8089"
+      },
+      "monitoringService": {
+        "applicationIndex": 15,
+        "serverPort": "8095"
+      },
+      "notificationService": {
+        "applicationIndex": 4,
+        "serverPort": "8084"
+      },
+      "ocrService": {
+        "applicationIndex": 2,
+        "serverPort": "8082"
+      },
+      "reportingService": {
+        "applicationIndex": 14,
+        "serverPort": "8094"
+      },
+      "scanService": {
+        "applicationIndex": 11,
+        "serverPort": "8091"
+      },
+      "searchService": {
+        "applicationIndex": 3,
+        "serverPort": "8083"
+      },
+      "similarityService": {
+        "applicationIndex": 7,
+        "serverPort": "8087"
+      },
+      "transformService": {
+        "applicationIndex": 12,
+        "serverPort": "8092"
+      },
+      "workflowService": {
+        "applicationIndex": 5,
+        "serverPort": "8085"
+      }
+    },
     "authenticationType": "jwt",
     "baseName": "gateway",
     "buildTool": "maven",
     "cacheProvider": "redis",
     "clientFramework": "angular",
-    "creationTimestamp": 1765349654445,
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "devServerPort": 4200,
     "enableHibernateCache": true,
     "enableSwaggerCodegen": true,
-    "entities": [],
+    "entities": [
+      "Document",
+      "DocumentServiceStatus",
+      "Folder",
+      "Tag",
+      "TagCategory",
+      "DocumentTag",
+      "DocumentType",
+      "DocumentTypeField",
+      "DocumentMetadata",
+      "ExtractedField",
+      "DocumentPermission",
+      "PermissionGroup",
+      "DocumentAudit",
+      "DocumentComment",
+      "DocumentRelation",
+      "DocumentStatistics",
+      "DocumentTemplate",
+      "SavedSearch",
+      "SmartFolder",
+      "Bookmark",
+      "DocumentVersion",
+      "DocumentProcess",
+      "OcrJob",
+      "OcrResult",
+      "ExtractedText",
+      "OcrComparison",
+      "OcrCache",
+      "SearchIndex",
+      "SearchQuery",
+      "SemanticSearch",
+      "SearchFacet",
+      "Notification",
+      "NotificationTemplate",
+      "NotificationPreference",
+      "NotificationEvent",
+      "WebhookSubscription",
+      "WebhookLog",
+      "Workflow",
+      "WorkflowStep",
+      "WorkflowInstance",
+      "WorkflowTask",
+      "ApprovalHistory",
+      "AutoTagJob",
+      "TagPrediction",
+      "CorrespondentExtraction",
+      "Correspondent",
+      "LanguageDetection",
+      "AiCache",
+      "DocumentSimilarity",
+      "SimilarityJob",
+      "DocumentFingerprint",
+      "SimilarityCluster",
+      "ArchiveJob",
+      "ArchiveDocument",
+      "ExportJob",
+      "ExportPattern",
+      "ExportResult",
+      "EmailImport",
+      "EmailAttachment",
+      "ImportRule",
+      "ImportMapping",
+      "ScanJob",
+      "ScanBatch",
+      "ScannerConfiguration",
+      "ScannedPage",
+      "ConversionJob",
+      "WatermarkJob",
+      "RedactionJob",
+      "CompressionJob",
+      "MergeJob",
+      "ComparisonJob",
+      "Invoice",
+      "InvoiceLine",
+      "Contract",
+      "ContractClause",
+      "BankStatement",
+      "BankTransaction",
+      "Manual",
+      "ManualChapter",
+      "Dashboard",
+      "DashboardWidget",
+      "ScheduledReport",
+      "ReportExecution",
+      "PerformanceMetric",
+      "SystemMetric",
+      "Alert",
+      "AlertRule",
+      "DocumentWatch",
+      "MaintenanceTask",
+      "SystemHealth",
+      "ServiceStatus"
+    ],
     "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "OTA4YTM5YjE1OTRlYjNiYTM4YTE2MjlkZTA0YjRmMWRlYjM4N2U4YTA3ZmNhZjMzOTU1OGE4ZTY2NjBmZTExZDY2MDFiYjEyNjk5ZDkzNjhlYzk4ZGZhOTA3Y2E4NjY0YmZlNGQwNzc4YjI0MzI3ZGUxNmY5MTliMzg3MGE0ZTA=",
+    "jwtSecretKey": "ZjQ2YTBjZWI4ZDU2NTY4ZjhhMDIxMGM2NDVjN2Q1Njc0NDkyOTA5OGM5YjY1YmViNjNkZTlhODljM2Y0NWY0MzE1YjRhYjNiZDVjMzI5MzRmYWUzYzczOTRkNWIyOTdlZGZjZGJjZmRjNzIyYzgyOWVlMmVlYzk1OTExM2E2YWY=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1766249715000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -27,6 +181,7 @@
     "serverPort": 8080,
     "serviceDiscoveryType": "consul",
     "skipCommitHook": true,
-    "websocket": "spring-websocket"
+    "websocket": "spring-websocket",
+    "withAdminUi": true
   }
 }

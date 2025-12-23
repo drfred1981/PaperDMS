@@ -1,0 +1,39 @@
+{
+  "gatewayApp": {
+    "exportServiceExportResult": {
+      "home": {
+        "title": "Export Results",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Export Result",
+        "createOrEditLabel": "Create or edit a Export Result",
+        "notFound": "No Export Results found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Export Result {{ id }}?"
+      },
+      "detail": {
+        "title": "Export Result"
+      },
+      "id": "ID",
+      "exportJobId": "Export Job Id",
+      "documentId": "Document Id",
+      "documentSha256": "Document Sha 256",
+      "originalFileName": "Original File Name",
+      "exportedPath": "Exported Path",
+      "exportedFileName": "Exported File Name",
+      "s3ExportKey": "S 3 Export Key",
+      "fileSize": "File Size",
+      "status": "Status",
+      "errorMessage": "Error Message",
+      "exportedDate": "Exported Date",
+      "exportJob": "Export Job"
+    }
+  },
+  "exportServiceApp": {
+    "exportServiceExportResult": {
+      "created": "A new Export Result is created with identifier {{ param }}",
+      "updated": "A Export Result is updated with identifier {{ param }}",
+      "deleted": "A Export Result is deleted with identifier {{ param }}"
+    }
+  }
+}

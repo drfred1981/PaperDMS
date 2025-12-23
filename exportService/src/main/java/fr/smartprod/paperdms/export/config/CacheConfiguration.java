@@ -78,6 +78,9 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
+            createCache(cm, fr.smartprod.paperdms.export.domain.ExportJob.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.export.domain.ExportPattern.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.export.domain.ExportResult.class.getName(), jcacheConfiguration);
             // jhipster-needle-redis-add-entry
         };
     }

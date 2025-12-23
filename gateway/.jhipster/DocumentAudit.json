@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20251220153715"
+  },
+  "applications": ["gateway", "documentService"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "AuditAction",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CREATED,VIEWED,DOWNLOADED,MODIFIED,DELETED,SHARED,PRINTED,EXPORTED,PERMISSIONS_CHANGED,WORKFLOW_STARTED,WORKFLOW_COMPLETED,COMMENTED,RELATION_ADDED,RELATION_REMOVED,ARCHIVED,RESTORED,SERVICE_STATUS_CHANGED"
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "userIp",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "45"
+    },
+    {
+      "fieldName": "actionDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "additionalInfo",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "documentService",
+  "name": "DocumentAudit",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

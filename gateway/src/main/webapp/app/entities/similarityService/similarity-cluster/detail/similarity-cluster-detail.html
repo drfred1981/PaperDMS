@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (similarityCluster(); as similarityClusterRef) {
+      <div>
+        <h2 data-cy="similarityClusterDetailsHeading">
+          <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.detail.title">Similarity Cluster</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.name">Name</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.description">Description</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.algorithm">Algorithm</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.SimilarityAlgorithm.' + (similarityClusterRef.algorithm ?? 'null')">{{
+              {
+                null: '',
+                COSINE: 'COSINE',
+                JACCARD: 'JACCARD',
+                LEVENSHTEIN: 'LEVENSHTEIN',
+                LSH: 'LSH',
+                DEEP_LEARNING: 'DEEP_LEARNING',
+                COMBINED: 'COMBINED',
+              }[similarityClusterRef.algorithm ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.centroid">Centroid</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.centroid }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.documentCount">Document Count</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.documentCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.avgSimilarity">Avg Similarity</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.avgSimilarity }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.lastUpdated">Last Updated</span></dt>
+          <dd>
+            <span>{{ similarityClusterRef.lastUpdated | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/similarity-cluster', similarityClusterRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

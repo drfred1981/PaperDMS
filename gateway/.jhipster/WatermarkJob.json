@@ -1,0 +1,111 @@
+{
+  "annotations": {
+    "changelogDate": "20251220163115"
+  },
+  "applications": ["gateway", "transformService"],
+  "clientRootFolder": "transformService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "watermarkType",
+      "fieldType": "WatermarkType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TEXT,IMAGE,QR_CODE,INVISIBLE"
+    },
+    {
+      "fieldName": "watermarkText",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "watermarkImageS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "position",
+      "fieldType": "WatermarkPosition",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TOP_LEFT,TOP_CENTER,TOP_RIGHT,CENTER,DIAGONAL,BOTTOM_LEFT,BOTTOM_CENTER,BOTTOM_RIGHT,TILED,CUSTOM"
+    },
+    {
+      "fieldName": "opacity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "100",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "fontSize",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "color",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "7"
+    },
+    {
+      "fieldName": "rotation",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "tiled",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "outputS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "outputDocumentId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "TransformStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,PROCESSING,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "transformService",
+  "name": "WatermarkJob",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

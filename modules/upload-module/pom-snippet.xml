@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  SNIPPET À COPIER DANS documentService/pom.xml
+  
+  Copie ce bloc dans la section <dependencies> de ton pom.xml
+  juste avant la balise fermante </dependencies>
+-->
+
+<!-- ========================================== -->
+<!-- PAPERDMS UPLOAD FEATURE - DÉPENDANCES -->
+<!-- ========================================== -->
+
+<!-- PaperDMS Common Library - Shared Kafka Events -->
+<dependency>
+    <groupId>fr.smartprod.paperdms</groupId>
+    <artifactId>paperdms-common</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+
+<!-- AWS SDK for S3 Storage -->
+<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>s3</artifactId>
+    <version>2.20.0</version>
+</dependency>
+
+<!-- AWS SDK Auth (required for S3 client) -->
+<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>auth</artifactId>
+    <version>2.20.0</version>
+</dependency>
+
+<!-- Apache PDFBox for PDF Processing (page count extraction) -->
+<dependency>
+    <groupId>org.apache.pdfbox</groupId>
+    <artifactId>pdfbox</artifactId>
+    <version>3.0.0</version>
+</dependency>
+
+<!-- ========================================== -->
+<!-- FIN PAPERDMS UPLOAD FEATURE -->
+<!-- ========================================== -->

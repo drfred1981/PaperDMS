@@ -1,0 +1,141 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-statistics-heading"
+        data-cy="DocumentStatisticsCreateUpdateHeading"
+        jhiTranslate="gatewayApp.documentServiceDocumentStatistics.home.createOrEditLabel"
+      >
+        Create or edit a Document Statistics
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.documentServiceDocumentStatistics.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let documentIdRef = editForm.get('documentId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentId" jhiTranslate="gatewayApp.documentServiceDocumentStatistics.documentId"
+            >Document Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentId"
+            id="field_documentId"
+            data-cy="documentId"
+            formControlName="documentId"
+          />
+          @if (documentIdRef.invalid && (documentIdRef.dirty || documentIdRef.touched)) {
+            <div>
+              @if (editForm.get('documentId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('documentId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_viewsTotal" jhiTranslate="gatewayApp.documentServiceDocumentStatistics.viewsTotal"
+            >Views Total</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="viewsTotal"
+            id="field_viewsTotal"
+            data-cy="viewsTotal"
+            formControlName="viewsTotal"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_downloadsTotal" jhiTranslate="gatewayApp.documentServiceDocumentStatistics.downloadsTotal"
+            >Downloads Total</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="downloadsTotal"
+            id="field_downloadsTotal"
+            data-cy="downloadsTotal"
+            formControlName="downloadsTotal"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_uniqueViewers" jhiTranslate="gatewayApp.documentServiceDocumentStatistics.uniqueViewers"
+            >Unique Viewers</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="uniqueViewers"
+            id="field_uniqueViewers"
+            data-cy="uniqueViewers"
+            formControlName="uniqueViewers"
+          />
+        </div>
+
+        @let lastUpdatedRef = editForm.get('lastUpdated')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_lastUpdated" jhiTranslate="gatewayApp.documentServiceDocumentStatistics.lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (lastUpdatedRef.invalid && (lastUpdatedRef.dirty || lastUpdatedRef.touched)) {
+            <div>
+              @if (editForm.get('lastUpdated')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('lastUpdated')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

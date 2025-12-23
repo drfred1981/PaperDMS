@@ -1,0 +1,89 @@
+// ============================================================================
+// 11 - EMAIL IMPORT SERVICE (4 entités)
+// ============================================================================
+
+enum ImportStatus {
+  PENDING, PROCESSING, COMPLETED, PARTIAL, FAILED, IGNORED
+}
+
+enum AttachmentStatus {
+  PENDING, PROCESSING, IMPORTED, SKIPPED, FAILED
+}
+
+enum EmailField {
+  FROM, TO, CC, BCC, SUBJECT, BODY, BODY_HTML, DATE,
+  ATTACHMENT_NAME, ATTACHMENT_COUNT, MESSAGE_ID, IN_REPLY_TO, HEADERS
+}
+
+enum MappingTransformation {
+  NONE, UPPERCASE, LOWERCASE, TRIM, EXTRACT_DATE, EXTRACT_NUMBER,
+  EXTRACT_EMAIL, REGEX_EXTRACT, REPLACE, SPLIT, CONCAT, CUSTOM
+}
+
+entity EmailImport {
+  fromEmail String required maxlength(255)
+  toEmail String required maxlength(255)
+  subject String maxlength(1000)
+  body TextBlob
+  bodyHtml TextBlob
+  receivedDate Instant required
+  processedDate Instant
+  status ImportStatus required
+  folderId Long
+  documentTypeId Long
+  attachmentCount Integer
+  documentsCreated Integer
+  appliedRuleId Long
+  errorMessage TextBlob
+  metadata TextBlob
+}
+
+entity EmailAttachment {
+  emailImportId Long required
+  fileName String required maxlength(500)
+  fileSize Long required
+  mimeType String required maxlength(100)
+  sha256 String required maxlength(64)
+  s3Key String maxlength(1000)
+  documentId Long
+  status AttachmentStatus required
+  errorMessage TextBlob
+}
+
+entity ImportRule {
+  name String required maxlength(255) unique
+  description TextBlob
+  priority Integer required
+  isActive Boolean required
+  conditions TextBlob required
+  actions TextBlob required
+  folderId Long
+  documentTypeId Long
+  applyTags TextBlob
+  notifyUsers TextBlob
+  matchCount Integer
+  lastMatchDate Instant
+  createdBy String required maxlength(50)
+  createdDate Instant required
+  lastModifiedDate Instant
+}
+
+entity ImportMapping {
+  ruleId Long required
+  emailField EmailField required
+  documentField String required maxlength(100)
+  transformation MappingTransformation
+  transformationConfig TextBlob
+  isRequired Boolean required
+  defaultValue String maxlength(500)
+  validationRegex String maxlength(500)
+}
+
+relationship ManyToOne {
+  EmailAttachment{emailImport required} to EmailImport
+  ImportMapping{rule required} to ImportRule
+  EmailImport{appliedRule} to ImportRule
+}
+
+microservice EmailImport, EmailAttachment, ImportRule, 
+             ImportMapping with emailImportService

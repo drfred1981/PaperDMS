@@ -1,23 +1,29 @@
 {
   "annotations": {
-    "changelogDate": "20251208190001"
+    "changelogDate": "20251220152514"
   },
   "applications": ["gateway", "ocrService"],
   "clientRootFolder": "ocrService",
   "databaseType": "sql",
-  "documentation": "Travail OCR avec Apache Tika",
   "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "status",
       "fieldType": "OcrStatus",
+      "fieldTypeDocumentation": "OCR Service - 7 Entit�s",
       "fieldValidateRules": ["required"],
-      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED,RETRYING"
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED,RETRYING,COMPARING"
     },
     {
       "fieldName": "documentId",
       "fieldType": "Long",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
     },
     {
       "fieldName": "s3Key",
@@ -32,16 +38,57 @@
       "fieldValidateRulesMaxlength": "255"
     },
     {
-      "fieldName": "language",
+      "fieldName": "requestedLanguage",
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
       "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "detectedLanguage",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "languageConfidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "ocrEngine",
+      "fieldType": "OcrEngine",
+      "fieldValues": "TIKA_TESSERACT,TIKA_NATIVE,OPENAI_VISION,GOOGLE_VISION,AWS_TEXTRACT,AZURE_VISION,ANTHROPIC_CLAUDE,CUSTOM,HYBRID"
     },
     {
       "fieldName": "tikaEndpoint",
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
       "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "aiProvider",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "aiModel",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "resultCacheKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "128"
+    },
+    {
+      "fieldName": "isCached",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "startDate",
@@ -75,6 +122,14 @@
       "fieldType": "Integer"
     },
     {
+      "fieldName": "processingTime",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "costEstimate",
+      "fieldType": "Double"
+    },
+    {
       "fieldName": "createdDate",
       "fieldType": "Instant",
       "fieldValidateRules": ["required"]
@@ -90,14 +145,7 @@
   "microserviceName": "ocrService",
   "name": "OcrJob",
   "pagination": "pagination",
-  "relationships": [
-    {
-      "otherEntityName": "tikaConfiguration",
-      "relationshipName": "tikaConfig",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    }
-  ],
+  "relationships": [],
   "searchEngine": "no",
   "service": "serviceImpl"
 }

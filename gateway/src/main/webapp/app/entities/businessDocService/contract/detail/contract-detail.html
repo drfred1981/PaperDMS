@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (contract(); as contractRef) {
+      <div>
+        <h2 data-cy="contractDetailsHeading"><span jhiTranslate="gatewayApp.businessDocServiceContract.detail.title">Contract</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ contractRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ contractRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.contractNumber">Contract Number</span></dt>
+          <dd>
+            <span>{{ contractRef.contractNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.contractType">Contract Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ContractType.' + (contractRef.contractType ?? 'null')">{{
+              {
+                null: '',
+                SERVICE_AGREEMENT: 'SERVICE_AGREEMENT',
+                PURCHASE_CONTRACT: 'PURCHASE_CONTRACT',
+                SALES_CONTRACT: 'SALES_CONTRACT',
+                LEASE: 'LEASE',
+                EMPLOYMENT: 'EMPLOYMENT',
+                NDA: 'NDA',
+                SLA: 'SLA',
+                LICENSE: 'LICENSE',
+                PARTNERSHIP: 'PARTNERSHIP',
+                CONSULTING: 'CONSULTING',
+                MAINTENANCE: 'MAINTENANCE',
+                OTHER: 'OTHER',
+              }[contractRef.contractType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.title">Title</span></dt>
+          <dd>
+            <span>{{ contractRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.partyA">Party A</span></dt>
+          <dd>
+            <span>{{ contractRef.partyA }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.partyB">Party B</span></dt>
+          <dd>
+            <span>{{ contractRef.partyB }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ contractRef.startDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ contractRef.endDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.autoRenew">Auto Renew</span></dt>
+          <dd>
+            <span>{{ contractRef.autoRenew }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.contractValue">Contract Value</span></dt>
+          <dd>
+            <span>{{ contractRef.contractValue }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.currency">Currency</span></dt>
+          <dd>
+            <span>{{ contractRef.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ContractStatus.' + (contractRef.status ?? 'null')">{{
+              {
+                null: '',
+                DRAFT: 'DRAFT',
+                UNDER_NEGOTIATION: 'UNDER_NEGOTIATION',
+                PENDING_SIGNATURE: 'PENDING_SIGNATURE',
+                ACTIVE: 'ACTIVE',
+                SUSPENDED: 'SUSPENDED',
+                EXPIRED: 'EXPIRED',
+                TERMINATED: 'TERMINATED',
+                RENEWED: 'RENEWED',
+                ARCHIVED: 'ARCHIVED',
+              }[contractRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceContract.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ contractRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/contract', contractRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

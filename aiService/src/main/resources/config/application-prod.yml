@@ -10,14 +10,14 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
 # ===================================================================
 
 logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    com.ged.ai: INFO
+    fr.smartprod.paperdms.ai: INFO
 
 management:
   prometheus:
@@ -80,7 +80,7 @@ spring:
 # ===================================================================
 server:
   port: 8086
-  shutdown: graceful # see https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-graceful-shutdown
+  shutdown: graceful # see https://docs.spring.io/spring-boot/reference/web/graceful-shutdown.html#web.graceful-shutdown
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json,image/svg+xml
@@ -111,7 +111,7 @@ jhipster:
         # - In the Consul configserver
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: NmZmZGZkM2M3NjNmNjBiZTRlNDdlNmExN2YzNjk1MmMzZTBhYTllNTNlNmQ2ZWFkYzgyMjM0NjM4NGRiMmMwZmE4MDcwZTk4OGM0YjcxN2U4YWNmNmI3NjAxYjQ4MzI5ZTIxN2VhMGE2NjUyYzI1NmY1YjIzYmIyNjA1ZmYxMWU=
+        base64-secret: OTA0NjQ2YjVlZWVmNDQ5NGFkOWFmY2UwNWVlZGY1ZmRhNmIxYzA0NGNhMDY4OGNmZGQ3Yjk5ZGQwMGQyZjI0MTkxOGUxMGY1ZmVhYzllNzI5NDg3N2U4ZGE2NGMwMjUwZmEzOGYyNmFjYTQzYmE2NTVlZWNiYjFiYjcwNzkyYWU=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

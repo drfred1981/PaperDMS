@@ -1,0 +1,220 @@
+<div>
+  <h2 id="page-heading" data-cy="WorkflowInstanceHeading">
+    <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.home.title">Workflow Instances</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined" />
+        <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-workflow-instance"
+        [routerLink]="['/workflow-instance/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.home.createLabel">Create a new Workflow Instance</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (workflowInstances().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.home.notFound">No Workflow Instances found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.documentId">Document Id</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currentStepNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.currentStepNumber">Current Step Number</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dueDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.dueDate">Due Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="completedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.completedDate">Completed Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cancelledDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.cancelledDate">Cancelled Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cancellationReason">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.cancellationReason">Cancellation Reason</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="priority">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.priority">Priority</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metadata">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.metadata">Metadata</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="workflow.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.workflow">Workflow</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (workflowInstance of workflowInstances(); track trackId(workflowInstance)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/workflow-instance', workflowInstance.id, 'view']">{{ workflowInstance.id }}</a>
+              </td>
+              <td>{{ workflowInstance.documentId }}</td>
+              <td [jhiTranslate]="'gatewayApp.WorkflowInstanceStatus.' + (workflowInstance.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    IN_PROGRESS: 'IN_PROGRESS',
+                    COMPLETED: 'COMPLETED',
+                    CANCELLED: 'CANCELLED',
+                    REJECTED: 'REJECTED',
+                    ON_HOLD: 'ON_HOLD',
+                  }[workflowInstance.status ?? 'null']
+                }}
+              </td>
+              <td>{{ workflowInstance.currentStepNumber }}</td>
+              <td>{{ workflowInstance.startDate | formatMediumDatetime }}</td>
+              <td>{{ workflowInstance.dueDate | formatMediumDatetime }}</td>
+              <td>{{ workflowInstance.completedDate | formatMediumDatetime }}</td>
+              <td>{{ workflowInstance.cancelledDate | formatMediumDatetime }}</td>
+              <td>{{ workflowInstance.cancellationReason }}</td>
+              <td [jhiTranslate]="'gatewayApp.WorkflowPriority.' + (workflowInstance.priority ?? 'null')">
+                {{ { null: '', LOW: 'LOW', NORMAL: 'NORMAL', HIGH: 'HIGH', URGENT: 'URGENT' }[workflowInstance.priority ?? 'null'] }}
+              </td>
+              <td>{{ workflowInstance.metadata }}</td>
+              <td>{{ workflowInstance.createdBy }}</td>
+              <td>
+                @if (workflowInstance.workflow) {
+                  <div>
+                    <a [routerLink]="['/workflow', workflowInstance.workflow.id, 'view']">{{ workflowInstance.workflow.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/workflow-instance', workflowInstance.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/workflow-instance', workflowInstance.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(workflowInstance)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (workflowInstances().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

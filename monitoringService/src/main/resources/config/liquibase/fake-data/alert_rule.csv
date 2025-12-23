@@ -1,0 +1,11 @@
+id;name;description;alert_type;conditions;severity;recipients;is_active;trigger_count;last_triggered;created_by;created_date
+1;cauliflower anenst geez;../fake-data/blob/hipster.txt;HIGH_ERROR_RATE;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;false;13736;2025-12-19T21:06:19;abnormally around;2025-12-19T15:42:04
+2;frantically gently;../fake-data/blob/hipster.txt;PERMISSION_CHANGED;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;false;17222;2025-12-20T06:07:14;stock oof;2025-12-20T03:10:43
+3;yahoo meanwhile;../fake-data/blob/hipster.txt;MISSING_METADATA;../fake-data/blob/hipster.txt;CRITICAL;../fake-data/blob/hipster.txt;true;16202;2025-12-19T21:43:29;along whereas;2025-12-20T03:40:09
+4;blank truthfully phooey;../fake-data/blob/hipster.txt;STORAGE_QUOTA;../fake-data/blob/hipster.txt;CRITICAL;../fake-data/blob/hipster.txt;false;13531;2025-12-19T20:33:54;with reproach;2025-12-20T06:17:53
+5;cash;../fake-data/blob/hipster.txt;COMPLIANCE_VIOLATION;../fake-data/blob/hipster.txt;MEDIUM;../fake-data/blob/hipster.txt;true;32252;2025-12-19T15:29:34;maintainer;2025-12-20T06:07:13
+6;ew readies;../fake-data/blob/hipster.txt;STORAGE_QUOTA;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;true;31435;2025-12-19T15:50:15;how;2025-12-19T15:50:37
+7;huzzah;../fake-data/blob/hipster.txt;PERMISSION_CHANGED;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;true;7418;2025-12-20T02:22:17;since;2025-12-19T20:57:25
+8;against even gah;../fake-data/blob/hipster.txt;UNUSUAL_ACTIVITY;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;true;7011;2025-12-20T01:39:03;ha aha;2025-12-20T03:13:34
+9;slipper;../fake-data/blob/hipster.txt;SERVICE_DOWN;../fake-data/blob/hipster.txt;MEDIUM;../fake-data/blob/hipster.txt;true;26248;2025-12-20T11:42:10;dime;2025-12-19T17:16:31
+10;integer distorted lustrous;../fake-data/blob/hipster.txt;UNUSUAL_ACTIVITY;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;false;14175;2025-12-20T10:17:13;like angrily;2025-12-20T01:17:14

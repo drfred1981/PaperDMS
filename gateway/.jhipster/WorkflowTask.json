@@ -1,0 +1,81 @@
+{
+  "annotations": {
+    "changelogDate": "20251220160515"
+  },
+  "applications": ["gateway", "workflowService"],
+  "clientRootFolder": "workflowService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "assigneeId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "TaskStatus",
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,DELEGATED,CANCELLED,OVERDUE"
+    },
+    {
+      "fieldName": "action",
+      "fieldType": "TaskAction",
+      "fieldValues": "APPROVE,REJECT,REQUEST_CHANGES,DELEGATE,CANCEL,COMMENT"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "assignedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dueDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "completedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "reminderSent",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "delegatedTo",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "delegatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "workflowService",
+  "name": "WorkflowTask",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "workflowInstance",
+      "relationshipName": "instance",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "workflowStep",
+      "relationshipName": "step",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

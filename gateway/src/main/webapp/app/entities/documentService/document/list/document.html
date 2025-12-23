@@ -1,0 +1,371 @@
+<div>
+  <h2 id="page-heading" data-cy="DocumentHeading">
+    <span jhiTranslate="gatewayApp.documentServiceDocument.home.title">Documents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined" />
+        <span jhiTranslate="gatewayApp.documentServiceDocument.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-document"
+        [routerLink]="['/document/new']"
+      >
+        <fa-icon icon="plus" />
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.documentServiceDocument.home.createLabel">Create a new Document</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.documentServiceDocument.home.search"
+          >Search for Document</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.documentServiceDocument.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search" />
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt" />
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (documents().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.documentServiceDocument.home.notFound">No Documents found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.title">Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fileName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.fileName">File Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fileSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.fileSize">File Size</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mimeType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.mimeType">Mime Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.sha256">Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.s3Key">S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Bucket">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.s3Bucket">S 3 Bucket</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Region">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.s3Region">S 3 Region</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Etag">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.s3Etag">S 3 Etag</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="thumbnailS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.thumbnailS3Key">Thumbnail S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="thumbnailSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.thumbnailSha256">Thumbnail Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="webpPreviewS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.webpPreviewS3Key">Webp Preview S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="webpPreviewSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.webpPreviewSha256">Webp Preview Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="uploadDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.uploadDate">Upload Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isPublic">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.isPublic">Is Public</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="downloadCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.downloadCount">Download Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="viewCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.viewCount">View Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="detectedLanguage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.detectedLanguage">Detected Language</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="manualLanguage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.manualLanguage">Manual Language</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="languageConfidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.languageConfidence">Language Confidence</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.pageCount">Page Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.createdBy">Created By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="folder.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.folder">Folder</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentType.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocument.documentType">Document Type</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (document of documents(); track trackId(document)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/document', document.id, 'view']">{{ document.id }}</a>
+              </td>
+              <td>{{ document.title }}</td>
+              <td>{{ document.fileName }}</td>
+              <td>{{ document.fileSize }}</td>
+              <td>{{ document.mimeType }}</td>
+              <td>{{ document.sha256 }}</td>
+              <td>{{ document.s3Key }}</td>
+              <td>{{ document.s3Bucket }}</td>
+              <td>{{ document.s3Region }}</td>
+              <td>{{ document.s3Etag }}</td>
+              <td>{{ document.thumbnailS3Key }}</td>
+              <td>{{ document.thumbnailSha256 }}</td>
+              <td>{{ document.webpPreviewS3Key }}</td>
+              <td>{{ document.webpPreviewSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.DocumentStatus.' + (document.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    UPLOADING: 'UPLOADING',
+                    UPLOADED: 'UPLOADED',
+                    ACTIVE: 'ACTIVE',
+                    ARCHIVED: 'ARCHIVED',
+                    DELETED: 'DELETED',
+                    ERROR: 'ERROR',
+                  }[document.status ?? 'null']
+                }}
+              </td>
+              <td>{{ document.uploadDate | formatMediumDatetime }}</td>
+              <td>{{ document.isPublic }}</td>
+              <td>{{ document.downloadCount }}</td>
+              <td>{{ document.viewCount }}</td>
+              <td>{{ document.detectedLanguage }}</td>
+              <td>{{ document.manualLanguage }}</td>
+              <td>{{ document.languageConfidence }}</td>
+              <td>{{ document.pageCount }}</td>
+              <td>{{ document.createdDate | formatMediumDatetime }}</td>
+              <td>{{ document.createdBy }}</td>
+              <td>
+                @if (document.folder) {
+                  <div>
+                    <a [routerLink]="['/folder', document.folder.id, 'view']">{{ document.folder.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (document.documentType) {
+                  <div>
+                    <a [routerLink]="['/document-type', document.documentType.id, 'view']">{{ document.documentType.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/document', document.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/document', document.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(document)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (documents().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

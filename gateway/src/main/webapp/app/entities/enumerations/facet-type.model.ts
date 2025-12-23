@@ -1,0 +1,11 @@
+export enum FacetType {
+  TERMS = 'TERMS',
+
+  DATE_RANGE = 'DATE_RANGE',
+
+  NUMBER_RANGE = 'NUMBER_RANGE',
+
+  HIERARCHY = 'HIERARCHY',
+
+  NESTED = 'NESTED',
+}

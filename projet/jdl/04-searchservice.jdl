@@ -1,0 +1,63 @@
+/**
+ * Search Service - 4 Entités
+ */
+
+// Enums
+enum FacetType {
+  TERMS, DATE_RANGE, NUMBER_RANGE, HIERARCHY, NESTED
+}
+
+// Entités
+entity SearchIndex {
+  documentId Long required
+  indexedContent TextBlob required
+  metadata TextBlob
+  tags String maxlength(2000)
+  correspondents String maxlength(1000)
+  extractedEntities TextBlob
+  indexedDate Instant required
+  lastUpdated Instant
+}
+
+entity SearchQuery {
+  query String required maxlength(1000)
+  filters TextBlob
+  resultCount Integer
+  executionTime Long
+  userId String maxlength(50)
+  searchDate Instant required
+  isRelevant Boolean
+}
+
+entity SemanticSearch {
+  query String required maxlength(1000)
+  queryEmbedding TextBlob required
+  results TextBlob required
+  relevanceScores TextBlob
+  modelUsed String maxlength(100)
+  executionTime Long
+  userId String maxlength(50)
+  searchDate Instant required
+}
+
+entity SearchFacet {
+  searchQueryId Long
+  facetName String required maxlength(100)
+  facetType FacetType required
+  values TextBlob required
+  counts TextBlob required
+}
+
+// Relations
+relationship ManyToOne {
+  SearchFacet{searchQuery} to SearchQuery
+}
+
+// Options
+paginate all with pagination
+filter SearchQuery, SemanticSearch
+service all with serviceImpl
+dto all with mapstruct
+search SearchIndex with elasticsearch
+
+microservice SearchIndex, SearchQuery, SemanticSearch, SearchFacet with searchService

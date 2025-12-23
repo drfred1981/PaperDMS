@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20251220161515"
+  },
+  "applications": ["gateway", "similarityService"],
+  "clientRootFolder": "similarityService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "fingerprintType",
+      "fieldType": "FingerprintType",
+      "fieldValues": "HASH,PERCEPTUAL,VECTOR_EMBEDDING,TF_IDF,BERT"
+    },
+    {
+      "fieldName": "fingerprint",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "vectorEmbedding",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "computedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant"
+    }
+  ],
+  "microserviceName": "similarityService",
+  "name": "DocumentFingerprint",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

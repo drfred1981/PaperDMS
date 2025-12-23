@@ -1,0 +1,127 @@
+
+// ============================================================================
+// 07 - AI SERVICE (6 entités)
+// ============================================================================
+
+// Enums AI Service
+enum AiJobStatus {
+  PENDING, IN_PROGRESS, COMPLETED, FAILED, CANCELLED
+}
+
+enum CorrespondentType {
+  PERSON, ORGANIZATION, SYSTEM, UNKNOWN
+}
+
+enum CorrespondentRole {
+  SENDER, RECIPIENT, CC, BCC, BOTH
+}
+
+enum LanguageDetectionMethod {
+  TIKA, LANGDETECT, FASTTEXT, BERT_MULTILINGUAL, MANUAL, COMBINED
+}
+
+entity AutoTagJob {
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  s3Key String required maxlength(1000)
+  extractedText TextBlob
+  extractedTextSha256 String maxlength(64)
+  detectedLanguage String maxlength(10)
+  languageConfidence Double min(0) max(1)
+  status AiJobStatus
+  modelVersion String maxlength(50)
+  resultCacheKey String maxlength(128)
+  isCached Boolean required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  confidence Double min(0) max(1)
+  createdDate Instant required
+}
+
+entity TagPrediction {
+  tagName String required maxlength(100)
+  confidence Double required min(0) max(1)
+  reason String maxlength(500)
+  modelVersion String maxlength(50)
+  predictionS3Key String maxlength(1000)
+  isAccepted Boolean
+  acceptedBy String maxlength(50)
+  acceptedDate Instant
+  predictionDate Instant required
+}
+
+entity CorrespondentExtraction {
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  extractedText TextBlob required
+  extractedTextSha256 String required maxlength(64)
+  detectedLanguage String maxlength(10)
+  languageConfidence Double min(0) max(1)
+  status AiJobStatus
+  resultCacheKey String maxlength(128)
+  isCached Boolean required
+  resultS3Key String maxlength(1000)
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  sendersCount Integer
+  recipientsCount Integer
+  createdDate Instant required
+}
+
+entity Correspondent {
+  name String required maxlength(255)
+  email String maxlength(255)
+  phone String maxlength(50)
+  address TextBlob
+  company String maxlength(255)
+  type CorrespondentType
+  role CorrespondentRole
+  confidence Double min(0) max(1)
+  isVerified Boolean required
+  verifiedBy String maxlength(50)
+  verifiedDate Instant
+  metadata TextBlob
+  extractedDate Instant required
+}
+
+entity LanguageDetection {
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  detectedLanguage String required maxlength(10)
+  confidence Double required min(0) max(1)
+  detectionMethod LanguageDetectionMethod
+  alternativeLanguages TextBlob
+  textSample TextBlob
+  resultCacheKey String maxlength(128)
+  isCached Boolean required
+  detectedDate Instant required
+  modelVersion String maxlength(50)
+}
+
+entity AiCache {
+  cacheKey String required maxlength(128) unique
+  inputSha256 String required maxlength(64)
+  aiProvider String required maxlength(100)
+  aiModel String maxlength(100)
+  operation String required maxlength(100)
+  inputData TextBlob
+  resultData TextBlob
+  s3ResultKey String maxlength(1000)
+  confidence Double min(0) max(1)
+  metadata TextBlob
+  hits Integer
+  cost Double
+  lastAccessDate Instant
+  createdDate Instant required
+  expirationDate Instant
+}
+
+relationship ManyToOne {
+  TagPrediction{job required} to AutoTagJob
+  Correspondent{extraction required} to CorrespondentExtraction
+}
+
+microservice AutoTagJob, TagPrediction, CorrespondentExtraction, 
+             Correspondent, LanguageDetection, AiCache with aiService

@@ -1,0 +1,89 @@
+{
+  "annotations": {
+    "changelogDate": "20251220152514"
+  },
+  "applications": ["gateway", "monitoringService"],
+  "clientRootFolder": "monitoringService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "alertRuleId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "severity",
+      "fieldType": "Severity",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LOW,MEDIUM,HIGH,CRITICAL"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "entityType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "entityId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "AlertStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,ACKNOWLEDGED,RESOLVED,DISMISSED,ESCALATED"
+    },
+    {
+      "fieldName": "triggeredDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "acknowledgedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "acknowledgedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "resolvedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "resolvedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "monitoringService",
+  "name": "Alert",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "alertRule",
+      "relationshipName": "alertRule",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

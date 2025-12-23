@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20251220154615"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "WorkflowInstanceStatus",
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,CANCELLED,REJECTED,ON_HOLD"
+    },
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    }
+  ],
+  "name": "DocumentProcess",
+  "pagination": "pagination",
+  "relationships": [],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,11 @@
+{
+  "gatewayApp": {
+    "ScannerType": {
+      "null": "",
+      "NETWORK": "NETWORK",
+      "LOCAL": "LOCAL",
+      "MOBILE": "MOBILE",
+      "MULTIFUNCTION": "MULTIFUNCTION"
+    }
+  }
+}

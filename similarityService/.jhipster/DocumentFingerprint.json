@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190201"
+    "changelogDate": "20251220152714"
   },
   "applications": ["gateway", "similarityService"],
   "clientRootFolder": "similarityService",
   "databaseType": "sql",
-  "documentation": "Empreinte num�rique du document",
   "dto": "mapstruct",
   "fields": [
     {
@@ -16,7 +15,6 @@
     {
       "fieldName": "fingerprintType",
       "fieldType": "FingerprintType",
-      "fieldValidateRules": ["required"],
       "fieldValues": "HASH,PERCEPTUAL,VECTOR_EMBEDDING,TF_IDF,BERT"
     },
     {
@@ -46,6 +44,6 @@
   "name": "DocumentFingerprint",
   "pagination": "pagination",
   "relationships": [],
-  "searchEngine": "no",
+  "searchEngine": "elasticsearch",
   "service": "serviceImpl"
 }

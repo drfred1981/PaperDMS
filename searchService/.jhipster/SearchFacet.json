@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20251220152814"
+  },
+  "applications": ["gateway", "searchService"],
+  "clientRootFolder": "searchService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "searchQueryId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "facetName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "facetType",
+      "fieldType": "FacetType",
+      "fieldTypeDocumentation": "Search Service - 4 Entit�s",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TERMS,DATE_RANGE,NUMBER_RANGE,HIERARCHY,NESTED"
+    },
+    {
+      "fieldName": "values",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "counts",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "searchService",
+  "name": "SearchFacet",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "searchQuery",
+      "relationshipName": "searchQuery",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

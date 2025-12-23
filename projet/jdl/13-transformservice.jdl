@@ -1,0 +1,134 @@
+// ============================================================================
+// 13 - TRANSFORM SERVICE (6 entités)
+// ============================================================================
+
+enum TransformStatus {
+  PENDING, PROCESSING, COMPLETED, FAILED, CANCELLED
+}
+
+enum WatermarkType {
+  TEXT, IMAGE, QR_CODE, INVISIBLE
+}
+
+enum WatermarkPosition {
+  TOP_LEFT, TOP_CENTER, TOP_RIGHT, CENTER, DIAGONAL,
+  BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, TILED, CUSTOM
+}
+
+enum RedactionType {
+  BLACK_BOX, WHITE_BOX, PATTERN, PIXELATE, BLUR
+}
+
+enum CompressionType {
+  LOSSLESS, LOSSY, ADAPTIVE
+}
+
+enum ComparisonType {
+  TEXT_DIFF, PDF_VISUAL, METADATA, CONTENT_HASH, SEMANTIC, SIDE_BY_SIDE
+}
+
+entity ConversionJob {
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  sourceFormat String required maxlength(50)
+  targetFormat String required maxlength(50)
+  conversionEngine String maxlength(100)
+  options TextBlob
+  outputS3Key String maxlength(1000)
+  outputDocumentId Long
+  status TransformStatus required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity WatermarkJob {
+  documentId Long required
+  watermarkType WatermarkType required
+  watermarkText String maxlength(500)
+  watermarkImageS3Key String maxlength(1000)
+  position WatermarkPosition required
+  opacity Integer min(0) max(100)
+  fontSize Integer
+  color String maxlength(7)
+  rotation Integer
+  tiled Boolean
+  outputS3Key String maxlength(1000)
+  outputDocumentId Long
+  status TransformStatus required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity RedactionJob {
+  documentId Long required
+  redactionAreas TextBlob required
+  redactionType RedactionType required
+  redactionColor String maxlength(7)
+  replaceWith String maxlength(500)
+  outputS3Key String maxlength(1000)
+  outputDocumentId Long
+  status TransformStatus required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity CompressionJob {
+  documentId Long required
+  compressionType CompressionType required
+  quality Integer min(0) max(100)
+  targetSizeKb Long
+  originalSize Long
+  compressedSize Long
+  compressionRatio Double
+  outputS3Key String maxlength(1000)
+  outputDocumentId Long
+  status TransformStatus required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity MergeJob {
+  name String required maxlength(255)
+  sourceDocumentIds TextBlob required
+  mergeOrder TextBlob required
+  includeBookmarks Boolean
+  includeToc Boolean
+  addPageNumbers Boolean
+  outputS3Key String maxlength(1000)
+  outputDocumentId Long
+  status TransformStatus required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity ComparisonJob {
+  documentId1 Long required
+  documentId2 Long required
+  comparisonType ComparisonType required
+  differences TextBlob
+  differenceCount Integer
+  similarityPercentage Double min(0) max(100)
+  diffReportS3Key String maxlength(1000)
+  diffVisualS3Key String maxlength(1000)
+  status TransformStatus required
+  comparedDate Instant required
+  comparedBy String required maxlength(50)
+}
+
+microservice ConversionJob, WatermarkJob, RedactionJob, CompressionJob, 
+             MergeJob, ComparisonJob with transformService

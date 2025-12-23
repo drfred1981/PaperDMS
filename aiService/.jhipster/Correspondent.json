@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190301"
+    "changelogDate": "20251220152814"
   },
   "applications": ["gateway", "aiService"],
   "clientRootFolder": "aiService",
   "databaseType": "sql",
-  "documentation": "Correspondant (exp�diteur/destinataire)",
   "dto": "mapstruct",
   "fields": [
     {
@@ -39,13 +38,11 @@
     {
       "fieldName": "type",
       "fieldType": "CorrespondentType",
-      "fieldValidateRules": ["required"],
       "fieldValues": "PERSON,ORGANIZATION,SYSTEM,UNKNOWN"
     },
     {
       "fieldName": "role",
       "fieldType": "CorrespondentRole",
-      "fieldValidateRules": ["required"],
       "fieldValues": "SENDER,RECIPIENT,CC,BCC,BOTH"
     },
     {

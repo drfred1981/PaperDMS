@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20251220154015"
+  },
+  "applications": ["gateway", "documentService"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "viewsTotal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "downloadsTotal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "uniqueViewers",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "documentService",
+  "name": "DocumentStatistics",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

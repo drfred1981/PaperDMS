@@ -1,0 +1,39 @@
+{
+  "gatewayApp": {
+    "monitoringServiceMaintenanceTask": {
+      "home": {
+        "title": "Maintenance Tasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Maintenance Task",
+        "createOrEditLabel": "Create or edit a Maintenance Task",
+        "notFound": "No Maintenance Tasks found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Maintenance Task {{ id }}?"
+      },
+      "detail": {
+        "title": "Maintenance Task"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "taskType": "Task Type",
+      "schedule": "Schedule",
+      "status": "Status",
+      "isActive": "Is Active",
+      "lastRun": "Last Run",
+      "nextRun": "Next Run",
+      "duration": "Duration",
+      "recordsProcessed": "Records Processed",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  },
+  "monitoringServiceApp": {
+    "monitoringServiceMaintenanceTask": {
+      "created": "A new Maintenance Task is created with identifier {{ param }}",
+      "updated": "A Maintenance Task is updated with identifier {{ param }}",
+      "deleted": "A Maintenance Task is deleted with identifier {{ param }}"
+    }
+  }
+}

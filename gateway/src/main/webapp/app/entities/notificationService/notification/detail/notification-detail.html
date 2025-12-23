@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notification(); as notificationRef) {
+      <div>
+        <h2 data-cy="notificationDetailsHeading">
+          <span jhiTranslate="gatewayApp.notificationServiceNotification.detail.title">Notification</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ notificationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.title">Title</span></dt>
+          <dd>
+            <span>{{ notificationRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.message">Message</span></dt>
+          <dd>
+            <span>{{ notificationRef.message }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.NotificationType.' + (notificationRef.type ?? 'null')">{{
+              {
+                null: '',
+                DOCUMENT_UPLOADED: 'DOCUMENT_UPLOADED',
+                DOCUMENT_PROCESSED: 'DOCUMENT_PROCESSED',
+                DOCUMENT_SHARED: 'DOCUMENT_SHARED',
+                WORKFLOW_ASSIGNED: 'WORKFLOW_ASSIGNED',
+                WORKFLOW_APPROVED: 'WORKFLOW_APPROVED',
+                WORKFLOW_REJECTED: 'WORKFLOW_REJECTED',
+                WORKFLOW_COMPLETED: 'WORKFLOW_COMPLETED',
+                OCR_COMPLETED: 'OCR_COMPLETED',
+                AI_TAG_SUGGESTED: 'AI_TAG_SUGGESTED',
+                SIMILAR_DOCUMENT_FOUND: 'SIMILAR_DOCUMENT_FOUND',
+                SYSTEM_ALERT: 'SYSTEM_ALERT',
+                CUSTOM: 'CUSTOM',
+              }[notificationRef.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.priority">Priority</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.NotificationPriority.' + (notificationRef.priority ?? 'null')">{{
+              { null: '', LOW: 'LOW', NORMAL: 'NORMAL', HIGH: 'HIGH', URGENT: 'URGENT' }[notificationRef.priority ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.recipientId">Recipient Id</span></dt>
+          <dd>
+            <span>{{ notificationRef.recipientId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.isRead">Is Read</span></dt>
+          <dd>
+            <span>{{ notificationRef.isRead }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.readDate">Read Date</span></dt>
+          <dd>
+            <span>{{ notificationRef.readDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.channel">Channel</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.NotificationChannel.' + (notificationRef.channel ?? 'null')">{{
+              { null: '', EMAIL: 'EMAIL', PUSH: 'PUSH', IN_APP: 'IN_APP', SMS: 'SMS', WEBHOOK: 'WEBHOOK' }[
+                notificationRef.channel ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.relatedEntityType">Related Entity Type</span></dt>
+          <dd>
+            <span>{{ notificationRef.relatedEntityType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.relatedEntityId">Related Entity Id</span></dt>
+          <dd>
+            <span>{{ notificationRef.relatedEntityId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.actionUrl">Action Url</span></dt>
+          <dd>
+            <span>{{ notificationRef.actionUrl }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ notificationRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.expirationDate">Expiration Date</span></dt>
+          <dd>
+            <span>{{ notificationRef.expirationDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.sentDate">Sent Date</span></dt>
+          <dd>
+            <span>{{ notificationRef.sentDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ notificationRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotification.template">Template</span></dt>
+          <dd>
+            @if (notification()!.template) {
+              <div>
+                <a [routerLink]="['/notification-template', notification()!.template?.id, 'view']">{{ notificationRef.template?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/notification', notificationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

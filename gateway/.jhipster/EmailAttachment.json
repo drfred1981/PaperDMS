@@ -1,0 +1,73 @@
+{
+  "annotations": {
+    "changelogDate": "20251220162315"
+  },
+  "applications": ["gateway", "emailImportService"],
+  "clientRootFolder": "emailImportService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "emailImportId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fileName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "fileSize",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mimeType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "sha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "s3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "AttachmentStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,PROCESSING,IMPORTED,SKIPPED,FAILED"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "microserviceName": "emailImportService",
+  "name": "EmailAttachment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "emailImport",
+      "relationshipName": "emailImport",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20251220154514"
+  },
+  "applications": ["gateway", "documentService"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "userId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "entityType",
+      "fieldType": "BookmarkType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DOCUMENT,FOLDER,SEARCH,DASHBOARD,WORKFLOW,SMART_FOLDER"
+    },
+    {
+      "fieldName": "entityId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "documentService",
+  "name": "Bookmark",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

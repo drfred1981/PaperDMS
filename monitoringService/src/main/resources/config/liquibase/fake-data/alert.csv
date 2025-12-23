@@ -1,0 +1,11 @@
+id;alert_rule_id;severity;title;message;entity_type;entity_id;status;triggered_date;acknowledged_by;acknowledged_date;resolved_by;resolved_date;alert_rule_id
+1;16543;MEDIUM;status husband but;../fake-data/blob/hipster.txt;promise once;8380;RESOLVED;2025-12-20T11:37:58;loyally infatuated;2025-12-19T19:59:52;upside-down starch chase;2025-12-19T23:01:04;1
+2;30748;MEDIUM;wherever presume probate;../fake-data/blob/hipster.txt;unexpectedly only unlike;10460;ESCALATED;2025-12-20T15:03:00;next meh;2025-12-20T05:14:00;actually if;2025-12-19T23:38:35;2
+3;23585;LOW;submissive hm;../fake-data/blob/hipster.txt;yippee though;13803;ESCALATED;2025-12-20T03:02:35;provided;2025-12-20T14:48:17;phew yippee;2025-12-19T22:33:57;3
+4;20518;MEDIUM;focused;../fake-data/blob/hipster.txt;zowie scuffle pish;10807;ESCALATED;2025-12-19T20:31:32;swathe yippee;2025-12-19T22:51:24;zowie fluff decongestant;2025-12-20T14:52:41;4
+5;25417;MEDIUM;vastly;../fake-data/blob/hipster.txt;heavy birdcage;31049;RESOLVED;2025-12-20T06:56:08;venture;2025-12-20T14:44:50;inside drab;2025-12-20T10:41:08;5
+6;2524;CRITICAL;likewise upon worth;../fake-data/blob/hipster.txt;blah continually anenst;15817;ESCALATED;2025-12-20T11:00:03;suspension during;2025-12-19T22:42:23;towards;2025-12-20T07:16:56;6
+7;30960;HIGH;beside chunter;../fake-data/blob/hipster.txt;lazy gullible;26182;ACKNOWLEDGED;2025-12-19T21:56:53;brood;2025-12-20T06:19:42;qua;2025-12-19T20:57:01;7
+8;21642;LOW;throughout;../fake-data/blob/hipster.txt;ready tenement;5677;DISMISSED;2025-12-20T10:08:56;yowza sans;2025-12-19T15:53:20;um supposing lace;2025-12-20T11:19:37;8
+9;6355;HIGH;surprisingly gallivant;../fake-data/blob/hipster.txt;including disadvantage;28389;RESOLVED;2025-12-20T03:57:46;meh powerfully triumphantly;2025-12-20T07:16:07;testing;2025-12-19T22:08:10;9
+10;15783;LOW;briefly miserably gape;../fake-data/blob/hipster.txt;around;7621;DISMISSED;2025-12-20T14:32:25;creative;2025-12-20T12:55:26;on from;2025-12-20T01:30:32;10

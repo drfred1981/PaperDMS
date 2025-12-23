@@ -1,0 +1,125 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2>Upload Documents</h2>
+      
+      <!-- Upload Configuration -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="documentType" class="form-label">Document Type *</label>
+              <select id="documentType" class="form-select" [(ngModel)]="documentTypeId">
+                <option *ngFor="let type of documentTypes" [value]="type.id">
+                  {{ type.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="folder" class="form-label">Folder (Optional)</label>
+              <select id="folder" class="form-select" [(ngModel)]="folderId">
+                <option [value]="null">-- Root Folder --</option>
+                <option *ngFor="let folder of folders" [value]="folder.id">
+                  {{ folder.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drag and Drop Zone -->
+      <div 
+        class="drop-zone mb-3"
+        [class.dragging]="isDragging"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        (click)="fileInput.click()">
+        <div class="drop-zone-content">
+          <i class="bi bi-cloud-upload drop-zone-icon"></i>
+          <p class="drop-zone-text">Drag and drop PDF files here</p>
+          <p class="drop-zone-subtext">or click to browse</p>
+          <input
+            #fileInput
+            type="file"
+            accept="application/pdf"
+            multiple
+            style="display: none"
+            (change)="onFileSelected($event)">
+        </div>
+      </div>
+
+      <!-- File List -->
+      <div class="card" *ngIf="selectedFiles.length > 0">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Files to Upload ({{ selectedFiles.length }})</span>
+          <div>
+            <button 
+              class="btn btn-sm btn-primary me-2" 
+              (click)="uploadAllFiles()"
+              [disabled]="!documentTypeId">
+              <i class="bi bi-upload"></i> Upload All
+            </button>
+            <button 
+              class="btn btn-sm btn-outline-secondary" 
+              (click)="clearCompleted()">
+              <i class="bi bi-trash"></i> Clear Completed
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush">
+            <div 
+              *ngFor="let file of selectedFiles" 
+              class="list-group-item">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-file-pdf file-icon text-danger me-3"></i>
+                <div class="flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <h6 class="mb-1">{{ file.name }}</h6>
+                      <small class="text-muted">{{ formatFileSize(file.size) }}</small>
+                    </div>
+                    <div class="text-end">
+                      <i [class]="getStatusIcon(file) + ' ' + getStatusColor(file)"></i>
+                      <span class="ms-2 small" [class]="getStatusColor(file)">
+                        {{ uploadStatus.get(file.name) || 'pending' }}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <!-- Progress Bar -->
+                  <div 
+                    *ngIf="uploadStatus.get(file.name) === 'uploading' || uploadStatus.get(file.name) === 'hashing'"
+                    class="progress mt-2" style="height: 5px;">
+                    <div 
+                      class="progress-bar progress-bar-striped progress-bar-animated" 
+                      role="progressbar" 
+                      [style.width.%]="uploadProgress.get(file.name) || 0"
+                      [attr.aria-valuenow]="uploadProgress.get(file.name) || 0"
+                      aria-valuemin="0" 
+                      aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+                <button 
+                  class="btn btn-sm btn-outline-danger ms-3" 
+                  (click)="removeFile(file)"
+                  [disabled]="uploadStatus.get(file.name) === 'uploading'">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="selectedFiles.length === 0" class="alert alert-info mt-3">
+        <i class="bi bi-info-circle me-2"></i>
+        No files selected. Drag and drop PDF files or click the drop zone to select files.
+      </div>
+    </div>
+  </div>
+</div>

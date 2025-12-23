@@ -1,0 +1,13 @@
+export enum BookmarkType {
+  DOCUMENT = 'DOCUMENT',
+
+  FOLDER = 'FOLDER',
+
+  SEARCH = 'SEARCH',
+
+  DASHBOARD = 'DASHBOARD',
+
+  WORKFLOW = 'WORKFLOW',
+
+  SMART_FOLDER = 'SMART_FOLDER',
+}

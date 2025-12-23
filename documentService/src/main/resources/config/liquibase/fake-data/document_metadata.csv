@@ -1,0 +1,11 @@
+id;key;value;data_type;is_searchable;created_date;document_id
+1;wordy innocently anesthetize;../fake-data/blob/hipster.txt;DECIMAL;true;2025-12-20T11:07:22;1
+2;unnaturally;../fake-data/blob/hipster.txt;PERCENTAGE;false;2025-12-20T05:38:35;2
+3;eek whoa;../fake-data/blob/hipster.txt;NUMBER;true;2025-12-20T12:47:29;3
+4;metabolise brightly;../fake-data/blob/hipster.txt;JSON;true;2025-12-20T14:09:52;4
+5;deficient;../fake-data/blob/hipster.txt;PERCENTAGE;false;2025-12-20T09:37:27;5
+6;of since annual;../fake-data/blob/hipster.txt;DATE;true;2025-12-20T13:21:50;6
+7;haul;../fake-data/blob/hipster.txt;STRING;true;2025-12-20T08:58:30;7
+8;greatly anenst;../fake-data/blob/hipster.txt;PERCENTAGE;true;2025-12-20T03:14:40;8
+9;given;../fake-data/blob/hipster.txt;PHONE;true;2025-12-20T15:27:41;9
+10;regularly hm compassionate;../fake-data/blob/hipster.txt;PHONE;true;2025-12-20T14:03:36;10

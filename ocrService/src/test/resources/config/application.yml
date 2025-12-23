@@ -10,7 +10,7 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
 # ===================================================================
 
 spring:
@@ -84,8 +84,6 @@ server:
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 jhipster:
-  clientApp:
-    name: 'ocrServiceApp'
   mail:
     from: ocrService@localhost.com
     base-url: http://127.0.0.1:8080
@@ -101,7 +99,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: ZTFlOThiMDlhOTMzMDM5M2EwOWZjMGQwNDY5OWU4ODkwYjc1ZDhmNzI3NzA4MjM3M2RiMTZhNDFlYTFiOTliM2ZhMTI5YWM5YzA0NDg2Mzg2Zjk5MWZjYzE1YjhiN2EzODkzZTdkZDNkYTA2MTU2N2M0MjUyZWJkYmIyZTlhOGE=
+        base64-secret: ZmY0OTBlZTg1YjE4NjQ0ZTM2MTc1MjNhMDIzZGEzOTJlZGIzMmViMmVmZTk0NDI1ZTI3MzU3MWZhNmU0ODY4MzQ5YzA3Zjg4NGNiNzhlOGEzMjI4YzM4NjE0NWFiZDI3MzE3OTRkYjQzM2YwNjQ5NzQ0M2E0NTU1ZTUwYmUzNjI=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 86400

@@ -1,0 +1,11 @@
+export enum BatchStatus {
+  PENDING = 'PENDING',
+
+  IN_PROGRESS = 'IN_PROGRESS',
+
+  COMPLETED = 'COMPLETED',
+
+  PARTIAL = 'PARTIAL',
+
+  FAILED = 'FAILED',
+}

@@ -1,0 +1,123 @@
+/**
+ * Notification Service - 6 Entités
+ */
+
+// Enums
+enum NotificationType {
+  DOCUMENT_UPLOADED, DOCUMENT_PROCESSED, DOCUMENT_SHARED, WORKFLOW_ASSIGNED,
+  WORKFLOW_APPROVED, WORKFLOW_REJECTED, WORKFLOW_COMPLETED, OCR_COMPLETED,
+  AI_TAG_SUGGESTED, SIMILAR_DOCUMENT_FOUND, SYSTEM_ALERT, CUSTOM
+}
+
+enum NotificationPriority {
+  LOW, NORMAL, HIGH, URGENT
+}
+
+enum NotificationChannel {
+  EMAIL, PUSH, IN_APP, SMS, WEBHOOK
+}
+
+enum NotificationFrequency {
+  IMMEDIATELY, HOURLY, DAILY, WEEKLY, NEVER
+}
+
+// Entités
+entity Notification {
+  title String required maxlength(255)
+  message TextBlob required
+  type NotificationType
+  priority NotificationPriority
+  recipientId String required maxlength(50)
+  isRead Boolean required
+  readDate Instant
+  channel NotificationChannel
+  relatedEntityType String maxlength(100)
+  relatedEntityId Long
+  actionUrl String maxlength(500)
+  metadata TextBlob
+  expirationDate Instant
+  sentDate Instant required
+  createdDate Instant required
+}
+
+entity NotificationTemplate {
+  name String required maxlength(100) unique
+  subject String required maxlength(255)
+  bodyTemplate TextBlob required
+  type NotificationType
+  channel NotificationChannel
+  variables TextBlob
+  isActive Boolean required
+  createdDate Instant required
+  lastModifiedDate Instant
+}
+
+entity NotificationPreference {
+  userId String required maxlength(50) unique
+  emailEnabled Boolean required
+  pushEnabled Boolean required
+  inAppEnabled Boolean required
+  notificationTypes TextBlob
+  quietHoursStart String maxlength(5)
+  quietHoursEnd String maxlength(5)
+  frequency NotificationFrequency
+  lastModifiedDate Instant
+}
+
+entity NotificationEvent {
+  eventType String required maxlength(100)
+  entityType String maxlength(100)
+  entityId Long
+  userId String maxlength(50)
+  eventData TextBlob
+  eventDate Instant required
+  processed Boolean required
+  processedDate Instant
+}
+
+entity WebhookSubscription {
+  name String required maxlength(255)
+  url String required maxlength(1000)
+  secret String maxlength(255)
+  events TextBlob required
+  headers TextBlob
+  isActive Boolean required
+  retryCount Integer
+  maxRetries Integer
+  retryDelay Integer
+  lastTriggerDate Instant
+  lastSuccessDate Instant
+  lastErrorMessage TextBlob
+  failureCount Integer
+  createdBy String required maxlength(50)
+  createdDate Instant required
+  lastModifiedDate Instant
+}
+
+entity WebhookLog {
+  subscriptionId Long required
+  eventType String required maxlength(100)
+  payload TextBlob
+  responseStatus Integer
+  responseBody TextBlob
+  responseTime Long
+  attemptNumber Integer
+  isSuccess Boolean required
+  errorMessage TextBlob
+  sentDate Instant required
+}
+
+// Relations
+relationship ManyToOne {
+  Notification{template} to NotificationTemplate
+  WebhookLog{subscription required} to WebhookSubscription
+}
+
+// Options
+paginate all with pagination
+filter Notification, WebhookSubscription
+service all with serviceImpl
+dto all with mapstruct
+
+microservice Notification, NotificationTemplate, NotificationPreference, 
+             NotificationEvent, WebhookSubscription, WebhookLog with notificationService

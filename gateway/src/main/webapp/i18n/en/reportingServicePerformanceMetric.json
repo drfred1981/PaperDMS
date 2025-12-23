@@ -1,0 +1,33 @@
+{
+  "gatewayApp": {
+    "reportingServicePerformanceMetric": {
+      "home": {
+        "title": "Performance Metrics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Performance Metric",
+        "createOrEditLabel": "Create or edit a Performance Metric",
+        "notFound": "No Performance Metrics found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Performance Metric {{ id }}?"
+      },
+      "detail": {
+        "title": "Performance Metric"
+      },
+      "id": "ID",
+      "metricName": "Metric Name",
+      "metricType": "Metric Type",
+      "value": "Value",
+      "unit": "Unit",
+      "serviceName": "Service Name",
+      "timestamp": "Timestamp"
+    }
+  },
+  "reportingServiceApp": {
+    "reportingServicePerformanceMetric": {
+      "created": "A new Performance Metric is created with identifier {{ param }}",
+      "updated": "A Performance Metric is updated with identifier {{ param }}",
+      "deleted": "A Performance Metric is deleted with identifier {{ param }}"
+    }
+  }
+}

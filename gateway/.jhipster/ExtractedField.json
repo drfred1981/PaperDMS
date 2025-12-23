@@ -1,0 +1,55 @@
+{
+  "annotations": {
+    "changelogDate": "20251220153415"
+  },
+  "applications": ["gateway", "documentService"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fieldKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "fieldValue",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "confidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "extractionMethod",
+      "fieldType": "ExtractionMethod",
+      "fieldValues": "OCR,NLP,REGEX,MANUAL,AI_MODEL,TEMPLATE_MATCHING,BARCODE,QR_CODE"
+    },
+    {
+      "fieldName": "isVerified",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "extractedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "documentService",
+  "name": "ExtractedField",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

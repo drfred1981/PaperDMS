@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentPermission": {
+      "home": {
+        "title": "Document Permissions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Permission",
+        "createOrEditLabel": "Create or edit a Document Permission",
+        "notFound": "No Document Permissions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Permission {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Permission"
+      },
+      "id": "ID",
+      "documentId": "Document Id",
+      "principalType": "Principal Type",
+      "principalId": "Principal Id",
+      "permission": "Permission",
+      "canDelegate": "Can Delegate",
+      "grantedBy": "Granted By",
+      "grantedDate": "Granted Date",
+      "permissionGroup": "Permission Group"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentPermission": {
+      "created": "A new Document Permission is created with identifier {{ param }}",
+      "updated": "A Document Permission is updated with identifier {{ param }}",
+      "deleted": "A Document Permission is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+Je voudrais créer une application microservice avec jhipster, de gestion électronique de document, ocr, tagging et recherche. pour cela, je vais utiliser jhispter l'intégration de angular, redis, kafka, postgresql, elasticsearch, audit d'entité, du monitoring, etc. le stoackage des ficheirs sera sur s3, les fichiers images webp générées aussi sur s3 il me faudra aussi du filtering sur les entitées et de la pagination ; je voudrais commencer par décrire mes applications
+Il ya dans les fichiers de quoi générer les entitiées et les applicatins qui ont toutes été déocupées en microservices, plus le détail des technologies etc.
+
+
+ne pas écrire dans les classes et fichiers déja généré spar jhipster et utiliser les classes  fichiers composants déja écrit par jhipster
+pour le routing de angular, jhipster a définit des routes.ts plutot que des routing-modules.
+pour les variables de s3 par exemple je voudrais que'elle soient récupérées par des variables d'environnement.
+pour les classe dto d'event kafka, écris les dans une shared library paperdms-common, qui sera utilisée par tous les microservices utilisant cette classe
+chaque fonction doit être idempotente, testée, chaque use-case doit avoir un test de bout en bout, des smoke tests
+pour chaque document qui est en cours de traitement il faut mettre un marqueur dans la base de donnée pour éviter que le document soit traité par une autre instance en meme temps, 
+tu peux rajouter une entité s'il n'y en a pas, (fais le moi savoir)
+chaque action doit être enregistrée dans le DocumentServiceStatus
+il ne doit pas y avoir de commentaire seulement  des logs de plusieurs niveau
+chaque fonction doit avoir une javadoc, (les logs et la javadoc doivent être écrits en anglais ainsi que le code, les préconisations et tout ce que tu produis)
+penses à écrire une  installation a partir du zip de toutes les classes que tu as définies, avec un modop et une description.
+
+
+dans un premier temps, je voudrais commencer à remplir la partie ajout de fichier pdf par exemple dans la première étape de remplissage
+Peux-tu générer cette fonctionnalité d'upload comme un nouveau service/composant etc. 
+
+
+
+# Demande de développement - Système de gestion électronique de documents (PaperDMS)
+
+## Contexte du projet
+
+Je souhaite créer une application de **gestion électronique de documents (GED)** basée sur une architecture microservices avec JHipster. Le système doit inclure les fonctionnalités suivantes :
+- OCR (reconnaissance optique de caractères)
+- Tagging (étiquetage de documents)
+- Recherche de documents
+
+## Stack technique imposée
+
+L'application utilisera JHipster avec les technologies suivantes :
+- **Frontend** : Angular
+- **Cache** : Redis
+- **Messaging** : Kafka
+- **Base de données** : PostgreSQL
+- **Recherche** : Elasticsearch
+- **Stockage fichiers** : S3 (fichiers PDF originaux + images WebP générées)
+- **Fonctionnalités JHipster** : Audit d'entités, monitoring, filtering, pagination
+
+## Contraintes techniques importantes
+
+### Structure du code
+- **NE PAS modifier** les classes et fichiers générés par JHipster
+- Utiliser les composants, classes et fichiers déjà créés par JHipster
+- Pour Angular : JHipster utilise des **routes.ts** (pas de routing-modules)
+
+### Configuration
+- Les variables de configuration (S3, etc.) doivent être récupérées via **variables d'environnement**
+
+### Bibliothèque partagée
+- Créer une **shared library `paperdms-common`** pour les classes DTO des événements Kafka
+- Cette bibliothèque sera utilisée par tous les microservices
+
+### Qualité du code
+- **Idempotence** : chaque fonction doit être idempotente
+- **Tests** : 
+  - Tests unitaires pour chaque fonction
+  - Tests end-to-end pour chaque use-case
+  - Smoke tests
+- **Documentation** : 
+  - Javadoc pour chaque fonction
+  - PAS de commentaires dans le code, uniquement des **logs multi-niveaux**
+  - **Tout en anglais** : code, logs, javadoc, préconisations, documentation
+
+### Traitement concurrent
+- Implémenter un **système de verrouillage** dans la base de données pour éviter qu'un document soit traité simultanément par plusieurs instances
+- Chaque action doit être enregistrée dans l'entité **DocumentServiceStatus**
+
+### Entités
+- Tu peux ajouter une entité si nécessaire (me le signaler)
+- Voir les fichiers joints pour les définitions des entités et applications (architecture microservices déjà découpée)
+
+## Livrable attendu
+
+- **Guide d'installation** complet à partir du ZIP contenant toutes les classes générées
+- **Mode opératoire** détaillé
+- **Description** de l'architecture et des composants
+
+---
+
+## Première fonctionnalité à développer : Upload de fichiers PDF
+
+Pour commencer, je souhaite développer la **fonctionnalité d'upload de fichiers PDF** comme première étape du workflow de traitement.
+
+**Demande spécifique** : Peux-tu générer cette fonctionnalité d'upload   complet, en respectant toutes les contraintes ci-dessus ?
+
+Utilise les events kafka pour informer les abonnés suivants des différentes étapes suivie par un document
+
+---
+
+**Question** : As-tu besoin que je te partage les fichiers de définition des entités et de l'architecture microservices pour commencer ?

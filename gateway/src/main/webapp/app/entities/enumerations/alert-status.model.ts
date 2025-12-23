@@ -1,0 +1,11 @@
+export enum AlertStatus {
+  ACTIVE = 'ACTIVE',
+
+  ACKNOWLEDGED = 'ACKNOWLEDGED',
+
+  RESOLVED = 'RESOLVED',
+
+  DISMISSED = 'DISMISSED',
+
+  ESCALATED = 'ESCALATED',
+}

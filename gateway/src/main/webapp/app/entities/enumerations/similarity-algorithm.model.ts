@@ -1,0 +1,13 @@
+export enum SimilarityAlgorithm {
+  COSINE = 'COSINE',
+
+  JACCARD = 'JACCARD',
+
+  LEVENSHTEIN = 'LEVENSHTEIN',
+
+  LSH = 'LSH',
+
+  DEEP_LEARNING = 'DEEP_LEARNING',
+
+  COMBINED = 'COMBINED',
+}

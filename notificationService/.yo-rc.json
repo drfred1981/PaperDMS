@@ -6,24 +6,30 @@
     "baseName": "notificationService",
     "buildTool": "maven",
     "cacheProvider": "redis",
-    "creationTimestamp": 1765221349290,
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
-    "entities": ["Notification", "NotificationTemplate", "NotificationPreference", "NotificationEvent"],
-    "jhipsterVersion": "8.11.0",
-    "jwtSecretKey": "ZDY5ZDZhNjMwZTUxM2JjNGJlNGE0NTQyYTBiMjJhNTY1ODEzNWM4MjkyZDhlMWRiNDE1OGVlYTBlZGVmZDczNWQ1MTg3YjE1YzNhMjllNGExOTNiMDU5Y2EzOTcwNjBhMDEzNGY2NjkyMmE2NjE4NDM3MTcxMDE4NjdjYWJmYzU=",
+    "entities": [
+      "Notification",
+      "NotificationTemplate",
+      "NotificationPreference",
+      "NotificationEvent",
+      "WebhookSubscription",
+      "WebhookLog"
+    ],
+    "jhipsterVersion": "9.0.0-beta.0",
+    "jwtSecretKey": "NWVlMDFjNjVmN2FlOGYwOGExNjY5MjlmOGFjMzUxNjkxYzUxZDczMGFhYmY2Mzg5NGIzN2FmM2YwNjQyZTJkMjc1YzNhMThlYzVkYWZjOTE0ZjdlZWJlNTllZTU4YzRkZjU0YTE5MWNiNzllYTBmN2YzOTdjZTFhZDMyMWFkMDA=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1765220581000,
+    "lastLiquibaseTimestamp": 1766244614000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
-    "packageName": "com.ged.notification",
+    "packageName": "fr.smartprod.paperdms.notification",
     "prodDatabaseType": "postgresql",
     "serverPort": "8084",
     "serviceDiscoveryType": "consul",
     "skipClient": true,
     "skipCommitHook": true,
-    "skipUserManagement": true
+    "withAdminUi": true
   }
 }

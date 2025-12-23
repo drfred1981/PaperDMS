@@ -1,0 +1,13 @@
+export enum ManualStatus {
+  DRAFT = 'DRAFT',
+
+  REVIEW = 'REVIEW',
+
+  APPROVED = 'APPROVED',
+
+  PUBLISHED = 'PUBLISHED',
+
+  ARCHIVED = 'ARCHIVED',
+
+  OBSOLETE = 'OBSOLETE',
+}

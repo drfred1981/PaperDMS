@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentVersion": {
+      "home": {
+        "title": "Document Versions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Version",
+        "createOrEditLabel": "Create or edit a Document Version",
+        "notFound": "No Document Versions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Version {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Version"
+      },
+      "id": "ID",
+      "versionNumber": "Version Number",
+      "sha256": "Sha 256",
+      "s3Key": "S 3 Key",
+      "fileSize": "File Size",
+      "uploadDate": "Upload Date",
+      "isActive": "Is Active",
+      "createdBy": "Created By",
+      "document": "Document"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentVersion": {
+      "created": "A new Document Version is created with identifier {{ param }}",
+      "updated": "A Document Version is updated with identifier {{ param }}",
+      "deleted": "A Document Version is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "annotations": {
+    "changelogDate": "20251220162215"
+  },
+  "applications": ["gateway", "emailImportService"],
+  "clientRootFolder": "emailImportService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "fromEmail",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "toEmail",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "body",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "bodyHtml",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "receivedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "processedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ImportStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,PROCESSING,COMPLETED,PARTIAL,FAILED,IGNORED"
+    },
+    {
+      "fieldName": "folderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "documentTypeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "attachmentCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "documentsCreated",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "appliedRuleId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "emailImportService",
+  "name": "EmailImport",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "importRule",
+      "relationshipName": "appliedRule",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

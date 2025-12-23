@@ -1,0 +1,11 @@
+id;name;description;report_type;query;schedule;format;recipients;is_active;last_run;next_run;created_by;created_date
+1;swathe;../fake-data/blob/hipster.txt;CONTRACT_EXPIRATION;../fake-data/blob/hipster.txt;since lean next;CSV;../fake-data/blob/hipster.txt;true;2025-12-19T16:58:57;2025-12-20T05:08:33;brr;2025-12-19T21:47:14
+2;ridge relative;../fake-data/blob/hipster.txt;TAG_USAGE;../fake-data/blob/hipster.txt;aside huzzah;XML;../fake-data/blob/hipster.txt;false;2025-12-20T01:25:43;2025-12-20T09:35:54;sleet frilly;2025-12-20T10:32:25
+3;partially;../fake-data/blob/hipster.txt;CUSTOM;../fake-data/blob/hipster.txt;hence giant;HTML;../fake-data/blob/hipster.txt;false;2025-12-19T23:43:15;2025-12-20T12:19:11;beyond;2025-12-20T10:05:26
+4;whoa yawn all;../fake-data/blob/hipster.txt;USER_ACTIVITY;../fake-data/blob/hipster.txt;atop wearily;EXCEL;../fake-data/blob/hipster.txt;false;2025-12-19T23:09:12;2025-12-20T12:56:51;coolly apropos hydrolyze;2025-12-20T06:02:43
+5;the hence artistic;../fake-data/blob/hipster.txt;DOCUMENT_INVENTORY;../fake-data/blob/hipster.txt;violent;PDF;../fake-data/blob/hipster.txt;true;2025-12-20T10:16:34;2025-12-19T23:48:56;quietly;2025-12-20T08:02:18
+6;quietly judgementally sermon;../fake-data/blob/hipster.txt;CONTRACT_EXPIRATION;../fake-data/blob/hipster.txt;hm;EXCEL;../fake-data/blob/hipster.txt;false;2025-12-20T10:54:05;2025-12-19T16:10:42;sternly pish;2025-12-20T06:20:01
+7;often;../fake-data/blob/hipster.txt;DOCUMENT_INVENTORY;../fake-data/blob/hipster.txt;versus politely;EXCEL;../fake-data/blob/hipster.txt;true;2025-12-20T05:22:04;2025-12-20T13:38:19;director ethyl infatuated;2025-12-19T15:45:53
+8;purse boo;../fake-data/blob/hipster.txt;STORAGE_ANALYSIS;../fake-data/blob/hipster.txt;flint;JSON;../fake-data/blob/hipster.txt;false;2025-12-20T15:24:28;2025-12-20T06:28:23;hm;2025-12-20T06:00:48
+9;limply;../fake-data/blob/hipster.txt;USER_ACTIVITY;../fake-data/blob/hipster.txt;abscond;CSV;../fake-data/blob/hipster.txt;false;2025-12-20T00:40:48;2025-12-19T21:53:22;sandbar sizzling outset;2025-12-20T11:54:16
+10;key ugh hm;../fake-data/blob/hipster.txt;TAG_USAGE;../fake-data/blob/hipster.txt;next;JSON;../fake-data/blob/hipster.txt;true;2025-12-19T23:35:29;2025-12-19T23:16:57;yum factorize duh;2025-12-19T15:36:26

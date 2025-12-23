@@ -1,0 +1,12 @@
+{
+  "gatewayApp": {
+    "StatementStatus": {
+      "null": "",
+      "DRAFT": "DRAFT",
+      "PENDING": "PENDING",
+      "PROCESSED": "PROCESSED",
+      "RECONCILED": "RECONCILED",
+      "ARCHIVED": "ARCHIVED"
+    }
+  }
+}

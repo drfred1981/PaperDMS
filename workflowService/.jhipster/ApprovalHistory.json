@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190401"
+    "changelogDate": "20251220152915"
   },
   "applications": ["gateway", "workflowService"],
   "clientRootFolder": "workflowService",
   "databaseType": "sql",
-  "documentation": "Historique d'approbation",
   "dto": "mapstruct",
   "fields": [
     {
@@ -26,7 +25,6 @@
     {
       "fieldName": "action",
       "fieldType": "TaskAction",
-      "fieldValidateRules": ["required"],
       "fieldValues": "APPROVE,REJECT,REQUEST_CHANGES,DELEGATE,CANCEL,COMMENT"
     },
     {

@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20251220164115"
+  },
+  "applications": ["gateway", "businessDocService"],
+  "clientRootFolder": "businessDocService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "statementId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "transactionDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "debitAmount",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "creditAmount",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "balance",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isReconciled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "businessDocService",
+  "name": "BankTransaction",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "bankStatement",
+      "relationshipName": "statement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,19 @@
+{
+  "gatewayApp": {
+    "ContractType": {
+      "null": "",
+      "SERVICE_AGREEMENT": "SERVICE_AGREEMENT",
+      "PURCHASE_CONTRACT": "PURCHASE_CONTRACT",
+      "SALES_CONTRACT": "SALES_CONTRACT",
+      "LEASE": "LEASE",
+      "EMPLOYMENT": "EMPLOYMENT",
+      "NDA": "NDA",
+      "SLA": "SLA",
+      "LICENSE": "LICENSE",
+      "PARTNERSHIP": "PARTNERSHIP",
+      "CONSULTING": "CONSULTING",
+      "MAINTENANCE": "MAINTENANCE",
+      "OTHER": "OTHER"
+    }
+  }
+}

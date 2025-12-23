@@ -1,0 +1,32 @@
+{
+  "gatewayApp": {
+    "documentServicePermissionGroup": {
+      "home": {
+        "title": "Permission Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Permission Group",
+        "createOrEditLabel": "Create or edit a Permission Group",
+        "notFound": "No Permission Groups found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Permission Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Permission Group"
+      },
+      "id": "ID",
+      "name": "Name",
+      "permissions": "Permissions",
+      "isSystem": "Is System",
+      "createdDate": "Created Date",
+      "createdBy": "Created By"
+    }
+  },
+  "documentServiceApp": {
+    "documentServicePermissionGroup": {
+      "created": "A new Permission Group is created with identifier {{ param }}",
+      "updated": "A Permission Group is updated with identifier {{ param }}",
+      "deleted": "A Permission Group is deleted with identifier {{ param }}"
+    }
+  }
+}

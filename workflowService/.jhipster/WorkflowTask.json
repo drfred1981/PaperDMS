@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190301"
+    "changelogDate": "20251220152815"
   },
   "applications": ["gateway", "workflowService"],
   "clientRootFolder": "workflowService",
   "databaseType": "sql",
-  "documentation": "T�che de workflow",
   "dto": "mapstruct",
   "fields": [
     {
@@ -17,7 +16,6 @@
     {
       "fieldName": "status",
       "fieldType": "TaskStatus",
-      "fieldValidateRules": ["required"],
       "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,DELEGATED,CANCELLED,OVERDUE"
     },
     {

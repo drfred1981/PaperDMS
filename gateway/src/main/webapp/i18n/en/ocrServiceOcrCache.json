@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "ocrServiceOcrCache": {
+      "home": {
+        "title": "Ocr Caches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ocr Cache",
+        "createOrEditLabel": "Create or edit a Ocr Cache",
+        "notFound": "No Ocr Caches found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Ocr Cache {{ id }}?"
+      },
+      "detail": {
+        "title": "Ocr Cache"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "ocrEngine": "Ocr Engine",
+      "language": "Language",
+      "pageCount": "Page Count",
+      "totalConfidence": "Total Confidence",
+      "s3ResultKey": "S 3 Result Key",
+      "s3Bucket": "S 3 Bucket",
+      "extractedTextS3Key": "Extracted Text S 3 Key",
+      "metadata": "Metadata",
+      "hits": "Hits",
+      "lastAccessDate": "Last Access Date",
+      "createdDate": "Created Date",
+      "expirationDate": "Expiration Date"
+    }
+  },
+  "ocrServiceApp": {
+    "ocrServiceOcrCache": {
+      "created": "A new Ocr Cache is created with identifier {{ param }}",
+      "updated": "A Ocr Cache is updated with identifier {{ param }}",
+      "deleted": "A Ocr Cache is deleted with identifier {{ param }}"
+    }
+  }
+}

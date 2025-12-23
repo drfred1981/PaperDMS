@@ -1,0 +1,76 @@
+{
+  "annotations": {
+    "changelogDate": "20251220161115"
+  },
+  "applications": ["gateway", "aiService"],
+  "clientRootFolder": "aiService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "detectedLanguage",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "confidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "detectionMethod",
+      "fieldType": "LanguageDetectionMethod",
+      "fieldValues": "TIKA,LANGDETECT,FASTTEXT,BERT_MULTILINGUAL,MANUAL,COMBINED"
+    },
+    {
+      "fieldName": "alternativeLanguages",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "textSample",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "resultCacheKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "128"
+    },
+    {
+      "fieldName": "isCached",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "detectedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "modelVersion",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "microserviceName": "aiService",
+  "name": "LanguageDetection",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

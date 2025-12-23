@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentSimilarity(); as documentSimilarityRef) {
+      <div>
+        <h2 data-cy="documentSimilarityDetailsHeading">
+          <span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.detail.title">Document Similarity</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.documentId1">Document Id 1</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.documentId1 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.documentId2">Document Id 2</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.documentId2 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.similarityScore">Similarity Score</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.similarityScore }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.algorithm">Algorithm</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.SimilarityAlgorithm.' + (documentSimilarityRef.algorithm ?? 'null')">{{
+              {
+                null: '',
+                COSINE: 'COSINE',
+                JACCARD: 'JACCARD',
+                LEVENSHTEIN: 'LEVENSHTEIN',
+                LSH: 'LSH',
+                DEEP_LEARNING: 'DEEP_LEARNING',
+                COMBINED: 'COMBINED',
+              }[documentSimilarityRef.algorithm ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.features">Features</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.features }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.computedDate">Computed Date</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.computedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.isRelevant">Is Relevant</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.isRelevant }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.reviewedBy">Reviewed By</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.reviewedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.reviewedDate">Reviewed Date</span></dt>
+          <dd>
+            <span>{{ documentSimilarityRef.reviewedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceDocumentSimilarity.job">Job</span></dt>
+          <dd>
+            @if (documentSimilarity()!.job) {
+              <div>
+                <a [routerLink]="['/similarity-job', documentSimilarity()!.job?.id, 'view']">{{ documentSimilarityRef.job?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-similarity', documentSimilarityRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

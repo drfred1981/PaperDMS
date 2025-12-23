@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190101"
+    "changelogDate": "20251220152614"
   },
   "applications": ["gateway", "similarityService"],
   "clientRootFolder": "similarityService",
   "databaseType": "sql",
-  "documentation": "Travail de calcul de similarit�",
   "dto": "mapstruct",
   "fields": [
     {
@@ -14,21 +13,24 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
       "fieldName": "status",
       "fieldType": "AiJobStatus",
-      "fieldValidateRules": ["required"],
       "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED"
     },
     {
       "fieldName": "algorithm",
       "fieldType": "SimilarityAlgorithm",
-      "fieldValidateRules": ["required"],
       "fieldValues": "COSINE,JACCARD,LEVENSHTEIN,LSH,DEEP_LEARNING,COMBINED"
     },
     {
       "fieldName": "scope",
       "fieldType": "SimilarityScope",
-      "fieldValidateRules": ["required"],
       "fieldValues": "ALL_DOCUMENTS,SAME_FOLDER,SAME_TYPE,SAME_TAGS,CUSTOM"
     },
     {

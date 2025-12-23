@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "monitoringServiceServiceStatus": {
+      "home": {
+        "title": "Service Statuses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Service Status",
+        "createOrEditLabel": "Create or edit a Service Status",
+        "notFound": "No Service Statuses found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Service Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Service Status"
+      },
+      "id": "ID",
+      "serviceName": "Service Name",
+      "serviceType": "Service Type",
+      "status": "Status",
+      "endpoint": "Endpoint",
+      "port": "Port",
+      "version": "Version",
+      "lastPing": "Last Ping",
+      "isHealthy": "Is Healthy"
+    }
+  },
+  "monitoringServiceApp": {
+    "monitoringServiceServiceStatus": {
+      "created": "A new Service Status is created with identifier {{ param }}",
+      "updated": "A Service Status is updated with identifier {{ param }}",
+      "deleted": "A Service Status is deleted with identifier {{ param }}"
+    }
+  }
+}

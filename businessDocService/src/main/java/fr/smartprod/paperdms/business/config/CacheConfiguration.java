@@ -78,6 +78,15 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
+            createCache(cm, fr.smartprod.paperdms.business.domain.Invoice.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.InvoiceLine.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.Contract.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.ContractClause.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.BankStatement.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.BankTransaction.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.Manual.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.ManualChapter.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.business.domain.ManualChapter.class.getName() + ".subchapters", jcacheConfiguration);
             // jhipster-needle-redis-add-entry
         };
     }

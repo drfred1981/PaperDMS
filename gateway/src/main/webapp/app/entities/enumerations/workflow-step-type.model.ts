@@ -1,0 +1,11 @@
+export enum WorkflowStepType {
+  APPROVAL = 'APPROVAL',
+
+  REVIEW = 'REVIEW',
+
+  SIGNATURE = 'SIGNATURE',
+
+  NOTIFICATION = 'NOTIFICATION',
+
+  CUSTOM = 'CUSTOM',
+}

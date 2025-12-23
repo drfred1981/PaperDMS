@@ -1,5 +1,5 @@
 org.springframework.test.context.ContextCustomizerFactory = \
-    com.ged.ai.config.SqlTestContainersSpringContextCustomizerFactory,com.ged.\
-    ai.config.TestContainersSpringContextCustomizerFactory,com.ged.ai.config.\
-    RedisTestContainersSpringContextCustomizerFactory,com.ged.ai.config.\
+    fr.smartprod.paperdms.ai.config.SqlTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.ai.config.\
+    TestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.ai.config.\
+    RedisTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.ai.config.\
     KafkaTestContainersSpringContextCustomizerFactory

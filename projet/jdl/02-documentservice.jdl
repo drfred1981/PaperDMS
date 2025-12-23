@@ -1,0 +1,252 @@
+
+
+entity Document {
+  title String required maxlength(500)
+  fileName String required maxlength(500)
+  fileSize Long required
+  mimeType String required maxlength(100)
+  sha256 String required maxlength(64) unique
+  s3Key String required maxlength(1000)
+  s3Bucket String required maxlength(255)
+  s3Region String maxlength(50)
+  s3Etag String maxlength(100)
+  thumbnailS3Key String maxlength(1000)
+  thumbnailSha256 String maxlength(64)
+  webpPreviewS3Key String maxlength(1000)
+  webpPreviewSha256 String maxlength(64) 
+  uploadDate Instant required
+  isPublic Boolean required
+  downloadCount Integer
+  viewCount Integer
+  detectedLanguage String maxlength(10)
+  manualLanguage String maxlength(10)
+  languageConfidence Double min(0) max(1)
+  pageCount Integer
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity DocumentServiceStatus {
+  documentId Long required
+  serviceType ServiceType required
+  status ServiceStatus required
+  statusDetails TextBlob
+  errorMessage TextBlob
+  retryCount Integer
+  lastProcessedDate Instant
+  processingStartDate Instant
+  processingEndDate Instant
+  processingDuration Long
+  jobId String maxlength(100)
+  priority Integer
+  updatedBy String maxlength(50)
+  updatedDate Instant required
+}
+
+entity Folder {
+  name String required maxlength(255)
+  description TextBlob
+  path String maxlength(1000)
+  isShared Boolean required
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity Tag {
+  name String required maxlength(100) unique
+  color String maxlength(7)
+  description String maxlength(500)
+  usageCount Integer
+  isSystem Boolean required
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity TagCategory {
+  name String required maxlength(100) unique
+  color String maxlength(7)
+  displayOrder Integer
+  isSystem Boolean required
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity DocumentTag {
+  assignedDate Instant required
+  assignedBy String required maxlength(50)
+  confidence Double min(0) max(1)
+  isAutoTagged Boolean required
+  source TagSource
+}
+
+entity DocumentType {
+  name String required maxlength(100) unique
+  code String required maxlength(50) unique
+  icon String maxlength(50)
+  color String maxlength(7)
+  isActive Boolean required
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity DocumentTypeField {
+  fieldKey String required maxlength(100)
+  fieldLabel String required maxlength(255)
+  dataType MetadataType
+  isRequired Boolean required
+  isSearchable Boolean required
+  createdDate Instant required
+}
+
+entity DocumentMetadata {
+  key String required maxlength(100)
+  value TextBlob required
+  dataType MetadataType
+  isSearchable Boolean required
+  createdDate Instant required
+}
+
+entity ExtractedField {
+  documentId Long required
+  fieldKey String required maxlength(100)
+  fieldValue TextBlob required
+  confidence Double min(0) max(1)
+  extractionMethod ExtractionMethod
+  isVerified Boolean required
+  extractedDate Instant required
+}
+
+
+entity DocumentPermission {
+  documentId Long required
+  principalType PrincipalType required
+  principalId String required maxlength(100)
+  permission PermissionType required
+  canDelegate Boolean required
+  grantedBy String required maxlength(50)
+  grantedDate Instant required
+}
+
+entity PermissionGroup {
+  name String required maxlength(100) unique
+  permissions TextBlob required
+  isSystem Boolean required
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity DocumentAudit {
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  action AuditAction required
+  userId String required maxlength(50)
+  userIp String maxlength(45)
+  actionDate Instant required
+  additionalInfo TextBlob
+}
+
+entity DocumentComment {
+  documentId Long required
+  content TextBlob required
+  pageNumber Integer
+  isResolved Boolean required
+  authorId String required maxlength(50)
+  createdDate Instant required
+}
+
+entity DocumentRelation {
+  sourceDocumentId Long required
+  targetDocumentId Long required
+  relationType RelationType required
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity DocumentStatistics {
+  documentId Long required unique
+  viewsTotal Integer
+  downloadsTotal Integer
+  uniqueViewers Integer
+  lastUpdated Instant required
+}
+
+entity DocumentTemplate {
+  name String required maxlength(255)
+  templateSha256 String required maxlength(64)
+  templateS3Key String required maxlength(1000)
+  isActive Boolean required
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity SavedSearch {
+  name String required maxlength(255)
+  query TextBlob required
+  isPublic Boolean required
+  isAlert Boolean required
+  alertFrequency AlertFrequency
+  userId String required maxlength(50)
+  createdDate Instant required
+}
+
+entity SmartFolder {
+  name String required maxlength(255)
+  queryJson TextBlob required
+  autoRefresh Boolean required
+  isPublic Boolean required
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity Bookmark {
+  userId String required maxlength(50)
+  entityType BookmarkType required
+  entityId Long required
+  createdDate Instant required
+}
+
+entity DocumentVersion {
+  versionNumber Integer required
+  sha256 String required maxlength(64)
+  s3Key String required maxlength(1000)
+  fileSize Long required
+  uploadDate Instant required
+  isActive Boolean required
+  createdBy String required maxlength(50)
+}
+
+// Relations
+relationship ManyToOne {
+  Document{folder} to Folder
+  Document{documentType required} to DocumentType
+  DocumentVersion{document required} to Document
+  DocumentTag{document required} to Document
+  DocumentServiceStatus{document required} to Document
+  DocumentTag{tag required} to Tag
+  DocumentMetadata{document required} to Document
+  DocumentPermission{permissionGroup} to PermissionGroup 
+  DocumentTemplate{documentType required} to DocumentType
+}
+
+relationship OneToMany {
+  Folder{children} to Folder{parent}
+  TagCategory{children} to TagCategory{parent}
+  TagCategory{tags} to Tag{tagCategory}
+  DocumentType{fields} to DocumentTypeField{documentType}
+  DocumentComment{replies} to DocumentComment{parentComment}
+}
+
+// Options
+paginate all with pagination
+filter Document, Folder, Tag, TagCategory, DocumentType, DocumentPermission,
+       DocumentAudit, DocumentComment, DocumentRelation, SavedSearch, SmartFolder,
+       DocumentServiceStatus
+service all with serviceImpl
+dto all with mapstruct
+search Document, Tag, TagCategory, DocumentType, ExtractedField, DocumentServiceStatus with elasticsearch
+
+microservice Document, DocumentVersion, Folder, Tag, DocumentTag, DocumentMetadata,
+             DocumentType, TagCategory, DocumentTypeField, ExtractedField,
+             DocumentPermission, PermissionGroup, DocumentAudit, DocumentComment,
+             DocumentRelation, DocumentStatistics, DocumentTemplate, SavedSearch,
+             SmartFolder, Bookmark, DocumentServiceStatus with documentService

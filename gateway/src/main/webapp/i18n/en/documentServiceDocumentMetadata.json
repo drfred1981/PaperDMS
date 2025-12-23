@@ -1,0 +1,33 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentMetadata": {
+      "home": {
+        "title": "Document Metadata",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Metadata",
+        "createOrEditLabel": "Create or edit a Document Metadata",
+        "notFound": "No Document Metadata found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Metadata {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Metadata"
+      },
+      "id": "ID",
+      "key": "Key",
+      "value": "Value",
+      "dataType": "Data Type",
+      "isSearchable": "Is Searchable",
+      "createdDate": "Created Date",
+      "document": "Document"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentMetadata": {
+      "created": "A new Document Metadata is created with identifier {{ param }}",
+      "updated": "A Document Metadata is updated with identifier {{ param }}",
+      "deleted": "A Document Metadata is deleted with identifier {{ param }}"
+    }
+  }
+}

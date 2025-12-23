@@ -1,0 +1,89 @@
+{
+  "annotations": {
+    "changelogDate": "20251220162815"
+  },
+  "applications": ["gateway", "scanService"],
+  "clientRootFolder": "scanService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "scannerType",
+      "fieldType": "ScannerType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NETWORK,LOCAL,MOBILE,MULTIFUNCTION"
+    },
+    {
+      "fieldName": "ipAddress",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "45"
+    },
+    {
+      "fieldName": "port",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "protocol",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "manufacturer",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "model",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "defaultColorMode",
+      "fieldType": "ColorMode",
+      "fieldValues": "BLACK_WHITE,GRAYSCALE,COLOR,AUTO"
+    },
+    {
+      "fieldName": "defaultResolution",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "defaultFormat",
+      "fieldType": "ScanFormat",
+      "fieldValues": "PDF,TIFF,JPEG,PNG"
+    },
+    {
+      "fieldName": "capabilities",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "microserviceName": "scanService",
+  "name": "ScannerConfiguration",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

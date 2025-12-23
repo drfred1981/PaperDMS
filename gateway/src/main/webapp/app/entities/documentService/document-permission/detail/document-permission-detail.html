@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentPermission(); as documentPermissionRef) {
+      <div>
+        <h2 data-cy="documentPermissionDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.detail.title">Document Permission</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentPermissionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ documentPermissionRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.principalType">Principal Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.PrincipalType.' + (documentPermissionRef.principalType ?? 'null')">{{
+              { null: '', USER: 'USER', GROUP: 'GROUP', ROLE: 'ROLE', PUBLIC: 'PUBLIC', DEPARTMENT: 'DEPARTMENT' }[
+                documentPermissionRef.principalType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.principalId">Principal Id</span></dt>
+          <dd>
+            <span>{{ documentPermissionRef.principalId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.permission">Permission</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.PermissionType.' + (documentPermissionRef.permission ?? 'null')">{{
+              {
+                null: '',
+                VIEW: 'VIEW',
+                DOWNLOAD: 'DOWNLOAD',
+                EDIT: 'EDIT',
+                DELETE: 'DELETE',
+                SHARE: 'SHARE',
+                APPROVE: 'APPROVE',
+                PRINT: 'PRINT',
+                EXPORT: 'EXPORT',
+                COMMENT: 'COMMENT',
+                MANAGE_PERMISSIONS: 'MANAGE_PERMISSIONS',
+                FULL_CONTROL: 'FULL_CONTROL',
+              }[documentPermissionRef.permission ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.canDelegate">Can Delegate</span></dt>
+          <dd>
+            <span>{{ documentPermissionRef.canDelegate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.grantedBy">Granted By</span></dt>
+          <dd>
+            <span>{{ documentPermissionRef.grantedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.grantedDate">Granted Date</span></dt>
+          <dd>
+            <span>{{ documentPermissionRef.grantedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentPermission.permissionGroup">Permission Group</span></dt>
+          <dd>
+            @if (documentPermission()!.permissionGroup) {
+              <div>
+                <a [routerLink]="['/permission-group', documentPermission()!.permissionGroup?.id, 'view']">{{
+                  documentPermissionRef.permissionGroup?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-permission', documentPermissionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

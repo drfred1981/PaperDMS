@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "searchServiceSearchIndex": {
+      "home": {
+        "title": "Search Indices",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Search Index",
+        "createOrEditLabel": "Create or edit a Search Index",
+        "search": "Search for Search Index",
+        "notFound": "No Search Indices found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Search Index {{ id }}?"
+      },
+      "detail": {
+        "title": "Search Index"
+      },
+      "id": "ID",
+      "documentId": "Document Id",
+      "indexedContent": "Indexed Content",
+      "metadata": "Metadata",
+      "tags": "Tags",
+      "correspondents": "Correspondents",
+      "extractedEntities": "Extracted Entities",
+      "indexedDate": "Indexed Date",
+      "lastUpdated": "Last Updated"
+    }
+  },
+  "searchServiceApp": {
+    "searchServiceSearchIndex": {
+      "created": "A new Search Index is created with identifier {{ param }}",
+      "updated": "A Search Index is updated with identifier {{ param }}",
+      "deleted": "A Search Index is deleted with identifier {{ param }}"
+    }
+  }
+}

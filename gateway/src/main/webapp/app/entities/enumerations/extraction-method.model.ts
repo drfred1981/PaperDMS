@@ -1,0 +1,17 @@
+export enum ExtractionMethod {
+  OCR = 'OCR',
+
+  NLP = 'NLP',
+
+  REGEX = 'REGEX',
+
+  MANUAL = 'MANUAL',
+
+  AI_MODEL = 'AI_MODEL',
+
+  TEMPLATE_MATCHING = 'TEMPLATE_MATCHING',
+
+  BARCODE = 'BARCODE',
+
+  QR_CODE = 'QR_CODE',
+}

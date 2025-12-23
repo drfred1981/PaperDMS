@@ -1,0 +1,43 @@
+{
+  "gatewayApp": {
+    "ocrServiceOcrResult": {
+      "home": {
+        "title": "Ocr Results",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ocr Result",
+        "createOrEditLabel": "Create or edit a Ocr Result",
+        "notFound": "No Ocr Results found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Ocr Result {{ id }}?"
+      },
+      "detail": {
+        "title": "Ocr Result"
+      },
+      "id": "ID",
+      "pageNumber": "Page Number",
+      "pageSha256": "Page Sha 256",
+      "confidence": "Confidence",
+      "s3ResultKey": "S 3 Result Key",
+      "s3Bucket": "S 3 Bucket",
+      "s3BoundingBoxKey": "S 3 Bounding Box Key",
+      "boundingBoxes": "Bounding Boxes",
+      "metadata": "Metadata",
+      "language": "Language",
+      "wordCount": "Word Count",
+      "ocrEngine": "Ocr Engine",
+      "processingTime": "Processing Time",
+      "rawResponse": "Raw Response",
+      "rawResponseS3Key": "Raw Response S 3 Key",
+      "processedDate": "Processed Date",
+      "job": "Job"
+    }
+  },
+  "ocrServiceApp": {
+    "ocrServiceOcrResult": {
+      "created": "A new Ocr Result is created with identifier {{ param }}",
+      "updated": "A Ocr Result is updated with identifier {{ param }}",
+      "deleted": "A Ocr Result is deleted with identifier {{ param }}"
+    }
+  }
+}

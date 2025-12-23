@@ -1,0 +1,147 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-search-query-heading"
+        data-cy="SearchQueryCreateUpdateHeading"
+        jhiTranslate="gatewayApp.searchServiceSearchQuery.home.createOrEditLabel"
+      >
+        Create or edit a Search Query
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.searchServiceSearchQuery.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let queryRef = editForm.get('query')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_query" jhiTranslate="gatewayApp.searchServiceSearchQuery.query">Query</label>
+          <input type="text" class="form-control" name="query" id="field_query" data-cy="query" formControlName="query" />
+          @if (queryRef.invalid && (queryRef.dirty || queryRef.touched)) {
+            <div>
+              @if (editForm.get('query')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('query')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_filters" jhiTranslate="gatewayApp.searchServiceSearchQuery.filters">Filters</label>
+          <textarea class="form-control" name="filters" id="field_filters" data-cy="filters" formControlName="filters"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_resultCount" jhiTranslate="gatewayApp.searchServiceSearchQuery.resultCount"
+            >Result Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="resultCount"
+            id="field_resultCount"
+            data-cy="resultCount"
+            formControlName="resultCount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_executionTime" jhiTranslate="gatewayApp.searchServiceSearchQuery.executionTime"
+            >Execution Time</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="executionTime"
+            id="field_executionTime"
+            data-cy="executionTime"
+            formControlName="executionTime"
+          />
+        </div>
+
+        @let userIdRef = editForm.get('userId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_userId" jhiTranslate="gatewayApp.searchServiceSearchQuery.userId">User Id</label>
+          <input type="text" class="form-control" name="userId" id="field_userId" data-cy="userId" formControlName="userId" />
+          @if (userIdRef.invalid && (userIdRef.dirty || userIdRef.touched)) {
+            <div>
+              @if (editForm.get('userId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let searchDateRef = editForm.get('searchDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_searchDate" jhiTranslate="gatewayApp.searchServiceSearchQuery.searchDate">Search Date</label>
+          <div class="d-flex">
+            <input
+              id="field_searchDate"
+              data-cy="searchDate"
+              type="datetime-local"
+              class="form-control"
+              name="searchDate"
+              formControlName="searchDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (searchDateRef.invalid && (searchDateRef.dirty || searchDateRef.touched)) {
+            <div>
+              @if (editForm.get('searchDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('searchDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isRelevant" jhiTranslate="gatewayApp.searchServiceSearchQuery.isRelevant">Is Relevant</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isRelevant"
+            id="field_isRelevant"
+            data-cy="isRelevant"
+            formControlName="isRelevant"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

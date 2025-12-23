@@ -1,0 +1,288 @@
+<div>
+  <h2 id="page-heading" data-cy="DocumentServiceStatusHeading">
+    <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.home.title">Document Service Statuses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined" />
+        <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-document-service-status"
+        [routerLink]="['/document-service-status/new']"
+      >
+        <fa-icon icon="plus" />
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.home.createLabel"
+          >Create a new Document Service Status</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.home.search"
+          >Search for Document Service Status</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.documentServiceDocumentServiceStatus.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search" />
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt" />
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (documentServiceStatuses().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.home.notFound">No Document Service Statuses found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.documentId">Document Id</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="serviceType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.serviceType">Service Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="statusDetails">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.statusDetails">Status Details</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="retryCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.retryCount">Retry Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastProcessedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.lastProcessedDate">Last Processed Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processingStartDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.processingStartDate">Processing Start Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processingEndDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.processingEndDate">Processing End Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processingDuration">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.processingDuration">Processing Duration</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="jobId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.jobId">Job Id</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="priority">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.priority">Priority</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updatedBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.updatedBy">Updated By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort" />
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updatedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentServiceStatus.updatedDate">Updated Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (documentServiceStatus of documentServiceStatuses(); track trackId(documentServiceStatus)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/document-service-status', documentServiceStatus.id, 'view']">{{ documentServiceStatus.id }}</a>
+              </td>
+              <td>{{ documentServiceStatus.documentId }}</td>
+              <td [jhiTranslate]="'gatewayApp.ServiceType.' + (documentServiceStatus.serviceType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    OCR_SERVICE: 'OCR_SERVICE',
+                    AI_SERVICE: 'AI_SERVICE',
+                    WORKFLOW_SERVICE: 'WORKFLOW_SERVICE',
+                    SEARCH_SERVICE: 'SEARCH_SERVICE',
+                    TRANSFORM_SERVICE: 'TRANSFORM_SERVICE',
+                    ARCHIVE_SERVICE: 'ARCHIVE_SERVICE',
+                    EXPORT_SERVICE: 'EXPORT_SERVICE',
+                    SIMILARITY_SERVICE: 'SIMILARITY_SERVICE',
+                    BUSINESS_SERVICE: 'BUSINESS_SERVICE',
+                    SCAN_SERVICE: 'SCAN_SERVICE',
+                    EMAIL_IMPORT_SERVICE: 'EMAIL_IMPORT_SERVICE',
+                    REPORTING_SERVICE: 'REPORTING_SERVICE',
+                    MONITORING_SERVICE: 'MONITORING_SERVICE',
+                  }[documentServiceStatus.serviceType ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.ServiceStatus.' + (documentServiceStatus.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    NOT_APPLICABLE: 'NOT_APPLICABLE',
+                    PENDING: 'PENDING',
+                    QUEUED: 'QUEUED',
+                    IN_PROGRESS: 'IN_PROGRESS',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                    SKIPPED: 'SKIPPED',
+                    RETRYING: 'RETRYING',
+                    PARTIALLY_COMPLETED: 'PARTIALLY_COMPLETED',
+                  }[documentServiceStatus.status ?? 'null']
+                }}
+              </td>
+              <td>{{ documentServiceStatus.statusDetails }}</td>
+              <td>{{ documentServiceStatus.errorMessage }}</td>
+              <td>{{ documentServiceStatus.retryCount }}</td>
+              <td>{{ documentServiceStatus.lastProcessedDate | formatMediumDatetime }}</td>
+              <td>{{ documentServiceStatus.processingStartDate | formatMediumDatetime }}</td>
+              <td>{{ documentServiceStatus.processingEndDate | formatMediumDatetime }}</td>
+              <td>{{ documentServiceStatus.processingDuration }}</td>
+              <td>{{ documentServiceStatus.jobId }}</td>
+              <td>{{ documentServiceStatus.priority }}</td>
+              <td>{{ documentServiceStatus.updatedBy }}</td>
+              <td>{{ documentServiceStatus.updatedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/document-service-status', documentServiceStatus.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/document-service-status', documentServiceStatus.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(documentServiceStatus)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (documentServiceStatuses().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

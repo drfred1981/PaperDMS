@@ -1,0 +1,11 @@
+id;document_id;principal_type;principal_id;permission;can_delegate;granted_by;granted_date
+1;2319;USER;yuck than meh;MANAGE_PERMISSIONS;true;because medium;2025-12-20T00:54:28
+2;25935;ROLE;apropos under;EDIT;false;obligation spectacles quietly;2025-12-19T17:30:35
+3;12345;PUBLIC;only;EDIT;true;grouper;2025-12-20T00:42:19
+4;25071;USER;doubter fooey nor;PRINT;true;or till;2025-12-20T12:39:36
+5;6542;USER;yowza;COMMENT;true;inasmuch in;2025-12-20T08:36:22
+6;3699;PUBLIC;under;MANAGE_PERMISSIONS;false;even;2025-12-20T15:31:47
+7;4731;ROLE;beneath;PRINT;true;joyfully as prestigious;2025-12-20T10:16:24
+8;19630;PUBLIC;unfit majestic;COMMENT;true;safely unless marimba;2025-12-20T11:43:16
+9;25761;GROUP;misjudge until sharply;VIEW;false;through;2025-12-20T01:01:55
+10;2635;ROLE;drat longingly;EDIT;true;yet overfeed on;2025-12-19T19:33:38

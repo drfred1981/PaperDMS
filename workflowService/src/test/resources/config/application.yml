@@ -10,7 +10,7 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
 # ===================================================================
 
 spring:
@@ -84,8 +84,6 @@ server:
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 jhipster:
-  clientApp:
-    name: 'workflowServiceApp'
   mail:
     from: workflowService@localhost.com
     base-url: http://127.0.0.1:8080
@@ -101,7 +99,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: ODM3YWY4ZDRmM2Y3NjJjN2RjYjkwNjJiY2VhYWM2ZmI1YWJkMGUxODkwMjUwZGMzZjJmZjI4MzY0ZDEyZGZjNGExYmUzNzZlZGZlMTYzZWVmYzk5Mzc0ZmFkZGRiZTBlOWY3ZWEyM2JhYzk4NDZlZGVmZTZmZGE4YmM1MzhjMDI=
+        base64-secret: ZmMwYzE2ZjUwZDM4OGM1ZDlkMjAwMjgwYzY2ZmNjNWVjY2MzYzUyNWNjMzM2MTA0OTc4NTBlNjA2NzMxNTE3MTVhYWFkMmM3ZWE0ODA2MDljYjM0ZDllMjBiYWI0MWJjNWM4YTUyMGU4YTE4ZDBjMjAwODU2NjZjODM0OGExMWI=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 86400

@@ -6,14 +6,14 @@
     "baseName": "businessDocService",
     "buildTool": "maven",
     "cacheProvider": "redis",
-    "creationTimestamp": 1765349654450,
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
-    "entities": [],
+    "entities": ["Invoice", "InvoiceLine", "Contract", "ContractClause", "BankStatement", "BankTransaction", "Manual", "ManualChapter"],
     "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "MjExYmU5MDc3ZDMzZmQ2M2FhODZmODFhMjg0OTlhYWQ0YTE2M2NjMWYwZjZlZDI5ZDc5MGFkMmExMTcwNmQwNGEwNThjYWEyMGEwOGFiYjQ1ZWIxYWE3NWIzOTJmNmJkNTlmNjNiMDE0ZjkzNjkwZjNlMDkwYzQ4Y2Q4OTEzMzE=",
+    "jwtSecretKey": "NmNmMDUyZjc3ZGVkZThlZDlhZTlkZWRiNDJjOTA2ZDdjYzA1MTY0MjRlMWFkMmY0NzViMDJhOGYyZjczZTBkMDEzY2M0Yjk0MmI1N2U5NmMzMWVhY2M1ODkyYzVlOTEyNTU0MWJiOWY0YzBjNDg2NjU0MWFmMWNkMDlkNzU0NDA=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1766244734000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -23,6 +23,7 @@
     "serverPort": "8093",
     "serviceDiscoveryType": "consul",
     "skipClient": true,
-    "skipCommitHook": true
+    "skipCommitHook": true,
+    "withAdminUi": true
   }
 }

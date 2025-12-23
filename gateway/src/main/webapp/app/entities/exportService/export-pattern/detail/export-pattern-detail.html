@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (exportPattern(); as exportPatternRef) {
+      <div>
+        <h2 data-cy="exportPatternDetailsHeading">
+          <span jhiTranslate="gatewayApp.exportServiceExportPattern.detail.title">Export Pattern</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.name">Name</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.description">Description</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.pathTemplate">Path Template</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.pathTemplate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.fileNameTemplate">File Name Template</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.fileNameTemplate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.variables">Variables</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.variables }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.examples">Examples</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.examples }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.isSystem">Is System</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.isSystem }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.usageCount">Usage Count</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.usageCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportPattern.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ exportPatternRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/export-pattern', exportPatternRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,11 @@
+export enum WatchType {
+  AUTHOR = 'AUTHOR',
+
+  REVIEWER = 'REVIEWER',
+
+  AUDITOR = 'AUDITOR',
+
+  STAKEHOLDER = 'STAKEHOLDER',
+
+  CUSTOM = 'CUSTOM',
+}

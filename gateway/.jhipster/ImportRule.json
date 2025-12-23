@@ -1,0 +1,87 @@
+{
+  "annotations": {
+    "changelogDate": "20251220162415"
+  },
+  "applications": ["gateway", "emailImportService"],
+  "clientRootFolder": "emailImportService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "conditions",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "actions",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "folderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "documentTypeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "applyTags",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "notifyUsers",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "matchCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastMatchDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "emailImportService",
+  "name": "ImportRule",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

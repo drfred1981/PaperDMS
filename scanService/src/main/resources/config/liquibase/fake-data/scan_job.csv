@@ -1,0 +1,11 @@
+id;name;description;scanner_config_id;batch_id;document_type_id;folder_id;page_count;status;color_mode;resolution;file_format;start_date;end_date;error_message;created_by;created_date;scanner_config_id
+1;after next upon;../fake-data/blob/hipster.txt;23024;22148;28673;9183;10435;COMPLETED;GRAYSCALE;14042;TIFF;2025-12-20T10:25:50;2025-12-20T14:21:12;../fake-data/blob/hipster.txt;um diver boohoo;2025-12-20T06:02:35;1
+2;lest ick until;../fake-data/blob/hipster.txt;26000;29150;16684;23237;1019;SCANNING;AUTO;6070;JPEG;2025-12-19T21:02:32;2025-12-20T11:14:15;../fake-data/blob/hipster.txt;hunger advertisement;2025-12-20T10:07:31;2
+3;aha ah;../fake-data/blob/hipster.txt;15425;2242;14788;19214;8814;PENDING;BLACK_WHITE;8523;TIFF;2025-12-19T22:54:59;2025-12-20T10:05:12;../fake-data/blob/hipster.txt;video into forenenst;2025-12-19T16:54:30;3
+4;gah;../fake-data/blob/hipster.txt;30001;25684;29676;32052;32579;FAILED;GRAYSCALE;29625;JPEG;2025-12-19T18:45:42;2025-12-20T01:24:43;../fake-data/blob/hipster.txt;near crossly reorganisation;2025-12-19T21:38:58;4
+5;under;../fake-data/blob/hipster.txt;30359;23911;12682;30162;3384;SCANNING;AUTO;4926;JPEG;2025-12-20T12:26:04;2025-12-19T20:55:08;../fake-data/blob/hipster.txt;fortunate representation phew;2025-12-20T00:40:16;5
+6;before;../fake-data/blob/hipster.txt;3242;23930;480;24492;31881;CANCELLED;GRAYSCALE;25156;PDF;2025-12-20T01:58:54;2025-12-19T21:10:33;../fake-data/blob/hipster.txt;with sonata;2025-12-20T02:02:20;6
+7;once because;../fake-data/blob/hipster.txt;7215;28480;24660;1303;6891;FAILED;GRAYSCALE;27498;PNG;2025-12-20T13:44:10;2025-12-20T00:05:46;../fake-data/blob/hipster.txt;longingly phooey plait;2025-12-20T02:06:59;7
+8;till within;../fake-data/blob/hipster.txt;19068;3918;15256;17249;12979;SCANNING;GRAYSCALE;3843;PDF;2025-12-20T13:27:43;2025-12-20T15:20:54;../fake-data/blob/hipster.txt;shakily;2025-12-20T04:56:37;8
+9;woot proud while;../fake-data/blob/hipster.txt;8229;15125;11941;239;24721;COMPLETED;BLACK_WHITE;18112;PDF;2025-12-20T10:35:15;2025-12-19T21:37:14;../fake-data/blob/hipster.txt;graffiti meanwhile provided;2025-12-19T23:22:05;9
+10;mid;../fake-data/blob/hipster.txt;25074;26261;14965;7888;26541;FAILED;GRAYSCALE;18631;TIFF;2025-12-20T14:14:36;2025-12-20T11:59:33;../fake-data/blob/hipster.txt;frankly newsprint;2025-12-20T09:33:41;10

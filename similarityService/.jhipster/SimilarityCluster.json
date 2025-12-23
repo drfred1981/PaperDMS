@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190301"
+    "changelogDate": "20251220152814"
   },
   "applications": ["gateway", "similarityService"],
   "clientRootFolder": "similarityService",
   "databaseType": "sql",
-  "documentation": "Cluster de documents similaires",
   "dto": "mapstruct",
   "fields": [
     {
@@ -21,7 +20,6 @@
     {
       "fieldName": "algorithm",
       "fieldType": "SimilarityAlgorithm",
-      "fieldValidateRules": ["required"],
       "fieldValues": "COSINE,JACCARD,LEVENSHTEIN,LSH,DEEP_LEARNING,COMBINED"
     },
     {

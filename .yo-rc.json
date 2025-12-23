@@ -1,1 +1,24 @@
-{"generator-jhipster":{"applicationType":"gateway","gitCompany":"","baseName":"PaperDMS","packageName":"fr.smartprod.paperdms","packageFolder":"fr/smartprod/paperdms","serverPort":8080,"serviceDiscoveryType":"consul","authenticationType":"jwt","cacheProvider":"redis","enableHibernateCache":true,"websocket":"spring-websocket","databaseType":"sql","devDatabaseType":"h2Disk","prodDatabaseType":"postgresql","searchEngine":"elasticsearch","enableSwaggerCodegen":"true","messageBroker":"kafka","buildTool":"maven","useSass":true,"clientPackageManager":"npm","testFrameworks":["gatling","cucumber"],"enableTranslation":true,"nativeLanguage":"en","languages":["en","fr"],"clientFramework":"angularX","jhiPrefix":"jhi","withAdminUi":true,"blueprints":[],"iaCTools":["bicep","terraform"]},"git-provider":"GitHub","git-company":"drfred1981","repository-name":"PaperDMS"}
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "gateway",
+      "documentService",
+      "ocrService",
+      "searchService",
+      "notificationService",
+      "workflowService",
+      "aiService",
+      "similarityService",
+      "archiveService",
+      "exportService",
+      "emailImportService",
+      "scanService",
+      "transformService",
+      "businessDocService",
+      "reportingService",
+      "monitoringService"
+    ],
+    "baseName": "workspaces",
+    "deploymentType": "none"
+  }
+}

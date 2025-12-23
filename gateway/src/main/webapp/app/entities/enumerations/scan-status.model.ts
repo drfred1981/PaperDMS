@@ -1,0 +1,11 @@
+export enum ScanStatus {
+  PENDING = 'PENDING',
+
+  SCANNING = 'SCANNING',
+
+  COMPLETED = 'COMPLETED',
+
+  FAILED = 'FAILED',
+
+  CANCELLED = 'CANCELLED',
+}

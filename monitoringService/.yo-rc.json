@@ -6,14 +6,14 @@
     "baseName": "monitoringService",
     "buildTool": "maven",
     "cacheProvider": "redis",
-    "creationTimestamp": 1765349654449,
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
-    "entities": [],
+    "entities": ["Alert", "AlertRule", "DocumentWatch", "MaintenanceTask", "SystemHealth", "ServiceStatus"],
     "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "ZTBkZGY0YzQ3ZmMxMjkyNjg0NGIwYzdhOTdkMTMyYWFjNDdjODk3ZjE0OWU5ODBkZjJiMjJjMDljM2QzN2UzOGFiZjUzMjBmYjI2YzNmZjFjMWJlMWFhNmIxOWQwOTg5ZDIzOTAxNmJjNzZkODJkZDQzMjk1Nzg2Yzk0YzUyMzQ=",
+    "jwtSecretKey": "ODdhYmE3ZjJjYmU5NmZmMzIxOTgzMTQ4ODNiNGMzMDRiZTkxZWJiMTcyODhjOTU4ZDRiMDU5MzFmMWU2NDgwOTZhNWQ4ZmQwNmIxMmM1MjgxNWM2MDkwNDNjYWE5ZDhmZTM5MWUxOTczOGMxODZhZGFlZmM1N2MzMjk1NThmODM=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1766244614000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -22,6 +22,7 @@
     "serverPort": "8095",
     "serviceDiscoveryType": "consul",
     "skipClient": true,
-    "skipCommitHook": true
+    "skipCommitHook": true,
+    "withAdminUi": true
   }
 }

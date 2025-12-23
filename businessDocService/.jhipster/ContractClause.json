@@ -1,0 +1,57 @@
+{
+  "annotations": {
+    "changelogDate": "20251220152814"
+  },
+  "applications": ["gateway", "businessDocService"],
+  "clientRootFolder": "businessDocService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "contractId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "clauseNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "clauseType",
+      "fieldType": "ClauseType",
+      "fieldValues": "GENERAL,PAYMENT,TERMINATION,CONFIDENTIALITY,LIABILITY,DISPUTE_RESOLUTION,INTELLECTUAL_PROPERTY,WARRANTY,FORCE_MAJEURE,AMENDMENT"
+    },
+    {
+      "fieldName": "isMandatory",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "businessDocService",
+  "name": "ContractClause",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "contract",
+      "relationshipName": "contract",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

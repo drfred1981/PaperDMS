@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notificationEvent(); as notificationEventRef) {
+      <div>
+        <h2 data-cy="notificationEventDetailsHeading">
+          <span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.detail.title">Notification Event</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.eventType">Event Type</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.eventType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.entityType">Entity Type</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.entityType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.entityId">Entity Id</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.entityId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.userId">User Id</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.eventData">Event Data</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.eventData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.eventDate">Event Date</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.eventDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.processed">Processed</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.processed }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationEvent.processedDate">Processed Date</span></dt>
+          <dd>
+            <span>{{ notificationEventRef.processedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/notification-event', notificationEventRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,115 @@
+/**
+ * Workflow Service - 5 Entités
+ */
+
+// Enums
+enum WorkflowStepType {
+  APPROVAL, REVIEW, SIGNATURE, NOTIFICATION, CUSTOM
+}
+
+enum AssigneeType {
+  USER, GROUP, ROLE, DYNAMIC
+}
+
+enum WorkflowInstanceStatus {
+  PENDING, IN_PROGRESS, COMPLETED, CANCELLED, REJECTED, ON_HOLD
+}
+
+enum WorkflowPriority {
+  LOW, NORMAL, HIGH, URGENT
+}
+
+enum TaskStatus {
+  PENDING, IN_PROGRESS, COMPLETED, DELEGATED, CANCELLED, OVERDUE
+}
+
+enum TaskAction {
+  APPROVE, REJECT, REQUEST_CHANGES, DELEGATE, CANCEL, COMMENT
+}
+
+// Entités
+entity Workflow {
+  name String required maxlength(255)
+  description TextBlob
+  version Integer required
+  isActive Boolean required
+  isParallel Boolean required
+  autoStart Boolean required
+  triggerEvent String maxlength(100)
+  configuration TextBlob
+  createdDate Instant required
+  lastModifiedDate Instant
+  createdBy String required maxlength(50)
+}
+
+entity WorkflowStep {
+  stepNumber Integer required
+  name String required maxlength(255)
+  description TextBlob
+  stepType WorkflowStepType
+  assigneeType AssigneeType
+  assigneeId String maxlength(50)
+  assigneeGroup String maxlength(100)
+  dueInDays Integer
+  isRequired Boolean required
+  canDelegate Boolean required
+  canReject Boolean required
+  configuration TextBlob
+}
+
+entity WorkflowInstance {
+  documentId Long required
+  status WorkflowInstanceStatus
+  currentStepNumber Integer
+  startDate Instant required
+  dueDate Instant
+  completedDate Instant
+  cancelledDate Instant
+  cancellationReason TextBlob
+  priority WorkflowPriority
+  metadata TextBlob
+  createdBy String required maxlength(50)
+}
+
+entity WorkflowTask {
+  assigneeId String required maxlength(50)
+  status TaskStatus
+  action TaskAction
+  comment TextBlob
+  assignedDate Instant required
+  dueDate Instant
+  completedDate Instant
+  reminderSent Boolean required
+  delegatedTo String maxlength(50)
+  delegatedDate Instant
+}
+
+entity ApprovalHistory {
+  documentId Long required
+  workflowInstanceId Long required
+  stepNumber Integer required
+  action TaskAction
+  comment TextBlob
+  actionDate Instant required
+  actionBy String required maxlength(50)
+  previousAssignee String maxlength(50)
+  timeTaken Long
+}
+
+// Relations
+relationship ManyToOne {
+  WorkflowStep{workflow required} to Workflow
+  WorkflowInstance{workflow required} to Workflow
+  WorkflowTask{instance required} to WorkflowInstance
+  WorkflowTask{step required} to WorkflowStep
+}
+
+// Options
+paginate all with pagination
+filter Workflow, WorkflowInstance, WorkflowTask
+service all with serviceImpl
+dto all with mapstruct
+search Workflow with elasticsearch
+
+microservice Workflow, WorkflowStep, WorkflowInstance, WorkflowTask, 
+             ApprovalHistory with workflowService

@@ -1,0 +1,349 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-bank-statement-heading"
+        data-cy="BankStatementCreateUpdateHeading"
+        jhiTranslate="gatewayApp.businessDocServiceBankStatement.home.createOrEditLabel"
+      >
+        Create or edit a Bank Statement
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.businessDocServiceBankStatement.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let documentIdRef = editForm.get('documentId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentId" jhiTranslate="gatewayApp.businessDocServiceBankStatement.documentId"
+            >Document Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentId"
+            id="field_documentId"
+            data-cy="documentId"
+            formControlName="documentId"
+          />
+          @if (documentIdRef.invalid && (documentIdRef.dirty || documentIdRef.touched)) {
+            <div>
+              @if (editForm.get('documentId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('documentId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let accountNumberRef = editForm.get('accountNumber')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_accountNumber" jhiTranslate="gatewayApp.businessDocServiceBankStatement.accountNumber"
+            >Account Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountNumber"
+            id="field_accountNumber"
+            data-cy="accountNumber"
+            formControlName="accountNumber"
+          />
+          @if (accountNumberRef.invalid && (accountNumberRef.dirty || accountNumberRef.touched)) {
+            <div>
+              @if (editForm.get('accountNumber')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('accountNumber')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let bankNameRef = editForm.get('bankName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_bankName" jhiTranslate="gatewayApp.businessDocServiceBankStatement.bankName"
+            >Bank Name</label
+          >
+          <input type="text" class="form-control" name="bankName" id="field_bankName" data-cy="bankName" formControlName="bankName" />
+          @if (bankNameRef.invalid && (bankNameRef.dirty || bankNameRef.touched)) {
+            <div>
+              @if (editForm.get('bankName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('bankName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let statementDateRef = editForm.get('statementDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_statementDate" jhiTranslate="gatewayApp.businessDocServiceBankStatement.statementDate"
+            >Statement Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_statementDate"
+              data-cy="statementDate"
+              type="text"
+              class="form-control"
+              name="statementDate"
+              ngbDatepicker
+              #statementDateDp="ngbDatepicker"
+              formControlName="statementDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="statementDateDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (statementDateRef.invalid && (statementDateRef.dirty || statementDateRef.touched)) {
+            <div>
+              @if (editForm.get('statementDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let statementPeriodStartRef = editForm.get('statementPeriodStart')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_statementPeriodStart"
+            jhiTranslate="gatewayApp.businessDocServiceBankStatement.statementPeriodStart"
+            >Statement Period Start</label
+          >
+          <div class="input-group">
+            <input
+              id="field_statementPeriodStart"
+              data-cy="statementPeriodStart"
+              type="text"
+              class="form-control"
+              name="statementPeriodStart"
+              ngbDatepicker
+              #statementPeriodStartDp="ngbDatepicker"
+              formControlName="statementPeriodStart"
+            />
+            <button type="button" class="btn btn-secondary" (click)="statementPeriodStartDp.toggle()">
+              <fa-icon icon="calendar-alt" />
+            </button>
+          </div>
+          @if (statementPeriodStartRef.invalid && (statementPeriodStartRef.dirty || statementPeriodStartRef.touched)) {
+            <div>
+              @if (editForm.get('statementPeriodStart')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let statementPeriodEndRef = editForm.get('statementPeriodEnd')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_statementPeriodEnd"
+            jhiTranslate="gatewayApp.businessDocServiceBankStatement.statementPeriodEnd"
+            >Statement Period End</label
+          >
+          <div class="input-group">
+            <input
+              id="field_statementPeriodEnd"
+              data-cy="statementPeriodEnd"
+              type="text"
+              class="form-control"
+              name="statementPeriodEnd"
+              ngbDatepicker
+              #statementPeriodEndDp="ngbDatepicker"
+              formControlName="statementPeriodEnd"
+            />
+            <button type="button" class="btn btn-secondary" (click)="statementPeriodEndDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (statementPeriodEndRef.invalid && (statementPeriodEndRef.dirty || statementPeriodEndRef.touched)) {
+            <div>
+              @if (editForm.get('statementPeriodEnd')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let openingBalanceRef = editForm.get('openingBalance')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_openingBalance" jhiTranslate="gatewayApp.businessDocServiceBankStatement.openingBalance"
+            >Opening Balance</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="openingBalance"
+            id="field_openingBalance"
+            data-cy="openingBalance"
+            formControlName="openingBalance"
+          />
+          @if (openingBalanceRef.invalid && (openingBalanceRef.dirty || openingBalanceRef.touched)) {
+            <div>
+              @if (editForm.get('openingBalance')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('openingBalance')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let closingBalanceRef = editForm.get('closingBalance')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_closingBalance" jhiTranslate="gatewayApp.businessDocServiceBankStatement.closingBalance"
+            >Closing Balance</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="closingBalance"
+            id="field_closingBalance"
+            data-cy="closingBalance"
+            formControlName="closingBalance"
+          />
+          @if (closingBalanceRef.invalid && (closingBalanceRef.dirty || closingBalanceRef.touched)) {
+            <div>
+              @if (editForm.get('closingBalance')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('closingBalance')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let currencyRef = editForm.get('currency')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_currency" jhiTranslate="gatewayApp.businessDocServiceBankStatement.currency">Currency</label>
+          <input type="text" class="form-control" name="currency" id="field_currency" data-cy="currency" formControlName="currency" />
+          @if (currencyRef.invalid && (currencyRef.dirty || currencyRef.touched)) {
+            <div>
+              @if (editForm.get('currency')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('currency')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '3' }"
+                  >This field cannot be longer than 3 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.businessDocServiceBankStatement.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.StatementStatus.null' | translate }}</option>
+            @for (statementStatus of statementStatusValues; track $index) {
+              <option [value]="statementStatus">{{ 'gatewayApp.StatementStatus.' + statementStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let isReconciledRef = editForm.get('isReconciled')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isReconciled" jhiTranslate="gatewayApp.businessDocServiceBankStatement.isReconciled"
+            >Is Reconciled</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isReconciled"
+            id="field_isReconciled"
+            data-cy="isReconciled"
+            formControlName="isReconciled"
+          />
+          @if (isReconciledRef.invalid && (isReconciledRef.dirty || isReconciledRef.touched)) {
+            <div>
+              @if (editForm.get('isReconciled')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.businessDocServiceBankStatement.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

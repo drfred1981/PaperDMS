@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190001"
+    "changelogDate": "20251220152514"
   },
   "applications": ["gateway", "searchService"],
   "clientRootFolder": "searchService",
   "databaseType": "sql",
-  "documentation": "Index de recherche",
   "dto": "mapstruct",
   "fields": [
     {

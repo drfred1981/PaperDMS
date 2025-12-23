@@ -1,0 +1,34 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentTypeField": {
+      "home": {
+        "title": "Document Type Fields",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Type Field",
+        "createOrEditLabel": "Create or edit a Document Type Field",
+        "notFound": "No Document Type Fields found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Type Field {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Type Field"
+      },
+      "id": "ID",
+      "fieldKey": "Field Key",
+      "fieldLabel": "Field Label",
+      "dataType": "Data Type",
+      "isRequired": "Is Required",
+      "isSearchable": "Is Searchable",
+      "createdDate": "Created Date",
+      "documentType": "Document Type"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentTypeField": {
+      "created": "A new Document Type Field is created with identifier {{ param }}",
+      "updated": "A Document Type Field is updated with identifier {{ param }}",
+      "deleted": "A Document Type Field is deleted with identifier {{ param }}"
+    }
+  }
+}

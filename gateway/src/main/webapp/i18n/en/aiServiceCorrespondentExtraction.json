@@ -1,0 +1,43 @@
+{
+  "gatewayApp": {
+    "aiServiceCorrespondentExtraction": {
+      "home": {
+        "title": "Correspondent Extractions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Correspondent Extraction",
+        "createOrEditLabel": "Create or edit a Correspondent Extraction",
+        "notFound": "No Correspondent Extractions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Correspondent Extraction {{ id }}?"
+      },
+      "detail": {
+        "title": "Correspondent Extraction"
+      },
+      "id": "ID",
+      "documentId": "Document Id",
+      "documentSha256": "Document Sha 256",
+      "extractedText": "Extracted Text",
+      "extractedTextSha256": "Extracted Text Sha 256",
+      "detectedLanguage": "Detected Language",
+      "languageConfidence": "Language Confidence",
+      "status": "Status",
+      "resultCacheKey": "Result Cache Key",
+      "isCached": "Is Cached",
+      "resultS3Key": "Result S 3 Key",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "sendersCount": "Senders Count",
+      "recipientsCount": "Recipients Count",
+      "createdDate": "Created Date"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceCorrespondentExtraction": {
+      "created": "A new Correspondent Extraction is created with identifier {{ param }}",
+      "updated": "A Correspondent Extraction is updated with identifier {{ param }}",
+      "deleted": "A Correspondent Extraction is deleted with identifier {{ param }}"
+    }
+  }
+}

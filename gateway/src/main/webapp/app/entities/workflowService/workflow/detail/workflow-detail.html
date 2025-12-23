@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (workflow(); as workflowRef) {
+      <div>
+        <h2 data-cy="workflowDetailsHeading"><span jhiTranslate="gatewayApp.workflowServiceWorkflow.detail.title">Workflow</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ workflowRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.name">Name</span></dt>
+          <dd>
+            <span>{{ workflowRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.description">Description</span></dt>
+          <dd>
+            <span>{{ workflowRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.version">Version</span></dt>
+          <dd>
+            <span>{{ workflowRef.version }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ workflowRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.isParallel">Is Parallel</span></dt>
+          <dd>
+            <span>{{ workflowRef.isParallel }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.autoStart">Auto Start</span></dt>
+          <dd>
+            <span>{{ workflowRef.autoStart }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.triggerEvent">Trigger Event</span></dt>
+          <dd>
+            <span>{{ workflowRef.triggerEvent }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.configuration">Configuration</span></dt>
+          <dd>
+            <span>{{ workflowRef.configuration }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ workflowRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ workflowRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflow.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ workflowRef.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/workflow', workflowRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

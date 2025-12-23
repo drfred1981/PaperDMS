@@ -1,0 +1,11 @@
+id;document_id;account_number;bank_name;statement_date;statement_period_start;statement_period_end;opening_balance;closing_balance;currency;status;is_reconciled;created_date
+1;27498;gosh;sans;2025-12-20;2025-12-19;2025-12-19;32201.74;3238.42;and;RECONCILED;false;2025-12-20T05:45:27
+2;8811;seriously however;mediocre triumphantly;2025-12-20;2025-12-20;2025-12-20;7964.16;30581.9;sup;PENDING;true;2025-12-19T15:35:13
+3;24343;gummy fabricate uh-huh;randomize pfft;2025-12-20;2025-12-20;2025-12-19;20897.3;3803.6;eve;DRAFT;true;2025-12-20T10:39:52
+4;25146;clamor presell;bah idealistic;2025-12-20;2025-12-19;2025-12-20;1537.19;10451.67;hoi;RECONCILED;false;2025-12-20T08:15:48
+5;27274;secondary;apparatus searchingly;2025-12-20;2025-12-19;2025-12-20;23208.86;7179.67;nor;ARCHIVED;true;2025-12-19T19:35:42
+6;32434;summarise pace;overtrain step behind;2025-12-20;2025-12-20;2025-12-20;32592.52;24945.87;dur;PENDING;false;2025-12-19T17:37:23
+7;16707;veto cheap;majestic;2025-12-20;2025-12-20;2025-12-20;12970.89;9183.54;raw;PENDING;false;2025-12-20T14:29:08
+8;22849;vice now;until emotional;2025-12-20;2025-12-20;2025-12-20;27360.67;17476.38;whe;DRAFT;false;2025-12-19T22:43:04
+9;26181;ascertain gad valuable;fiercely;2025-12-20;2025-12-19;2025-12-20;4711.77;9092.8;via;RECONCILED;true;2025-12-20T09:58:17
+10;31840;below;furthermore;2025-12-20;2025-12-19;2025-12-20;5164.33;8334.23;for;PROCESSED;true;2025-12-20T11:28:54

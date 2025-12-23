@@ -1,0 +1,42 @@
+{
+  "gatewayApp": {
+    "emailImportServiceImportRule": {
+      "home": {
+        "title": "Import Rules",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Import Rule",
+        "createOrEditLabel": "Create or edit a Import Rule",
+        "notFound": "No Import Rules found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Import Rule {{ id }}?"
+      },
+      "detail": {
+        "title": "Import Rule"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "priority": "Priority",
+      "isActive": "Is Active",
+      "conditions": "Conditions",
+      "actions": "Actions",
+      "folderId": "Folder Id",
+      "documentTypeId": "Document Type Id",
+      "applyTags": "Apply Tags",
+      "notifyUsers": "Notify Users",
+      "matchCount": "Match Count",
+      "lastMatchDate": "Last Match Date",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  },
+  "emailImportServiceApp": {
+    "emailImportServiceImportRule": {
+      "created": "A new Import Rule is created with identifier {{ param }}",
+      "updated": "A Import Rule is updated with identifier {{ param }}",
+      "deleted": "A Import Rule is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "workflowServiceWorkflowStep": {
+      "home": {
+        "title": "Workflow Steps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Workflow Step",
+        "createOrEditLabel": "Create or edit a Workflow Step",
+        "notFound": "No Workflow Steps found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Workflow Step {{ id }}?"
+      },
+      "detail": {
+        "title": "Workflow Step"
+      },
+      "id": "ID",
+      "stepNumber": "Step Number",
+      "name": "Name",
+      "description": "Description",
+      "stepType": "Step Type",
+      "assigneeType": "Assignee Type",
+      "assigneeId": "Assignee Id",
+      "assigneeGroup": "Assignee Group",
+      "dueInDays": "Due In Days",
+      "isRequired": "Is Required",
+      "canDelegate": "Can Delegate",
+      "canReject": "Can Reject",
+      "configuration": "Configuration",
+      "workflow": "Workflow"
+    }
+  },
+  "workflowServiceApp": {
+    "workflowServiceWorkflowStep": {
+      "created": "A new Workflow Step is created with identifier {{ param }}",
+      "updated": "A Workflow Step is updated with identifier {{ param }}",
+      "deleted": "A Workflow Step is deleted with identifier {{ param }}"
+    }
+  }
+}

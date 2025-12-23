@@ -1,0 +1,198 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-manual-chapter-heading"
+        data-cy="ManualChapterCreateUpdateHeading"
+        jhiTranslate="gatewayApp.businessDocServiceManualChapter.home.createOrEditLabel"
+      >
+        Create or edit a Manual Chapter
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.businessDocServiceManualChapter.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let manualIdRef = editForm.get('manualId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_manualId" jhiTranslate="gatewayApp.businessDocServiceManualChapter.manualId"
+            >Manual Id</label
+          >
+          <input type="number" class="form-control" name="manualId" id="field_manualId" data-cy="manualId" formControlName="manualId" />
+          @if (manualIdRef.invalid && (manualIdRef.dirty || manualIdRef.touched)) {
+            <div>
+              @if (editForm.get('manualId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('manualId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let chapterNumberRef = editForm.get('chapterNumber')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_chapterNumber" jhiTranslate="gatewayApp.businessDocServiceManualChapter.chapterNumber"
+            >Chapter Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="chapterNumber"
+            id="field_chapterNumber"
+            data-cy="chapterNumber"
+            formControlName="chapterNumber"
+          />
+          @if (chapterNumberRef.invalid && (chapterNumberRef.dirty || chapterNumberRef.touched)) {
+            <div>
+              @if (editForm.get('chapterNumber')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('chapterNumber')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let titleRef = editForm.get('title')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_title" jhiTranslate="gatewayApp.businessDocServiceManualChapter.title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          @if (titleRef.invalid && (titleRef.dirty || titleRef.touched)) {
+            <div>
+              @if (editForm.get('title')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('title')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '500' }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_content" jhiTranslate="gatewayApp.businessDocServiceManualChapter.content">Content</label>
+          <textarea class="form-control" name="content" id="field_content" data-cy="content" formControlName="content"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pageStart" jhiTranslate="gatewayApp.businessDocServiceManualChapter.pageStart"
+            >Page Start</label
+          >
+          <input type="number" class="form-control" name="pageStart" id="field_pageStart" data-cy="pageStart" formControlName="pageStart" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pageEnd" jhiTranslate="gatewayApp.businessDocServiceManualChapter.pageEnd">Page End</label>
+          <input type="number" class="form-control" name="pageEnd" id="field_pageEnd" data-cy="pageEnd" formControlName="pageEnd" />
+        </div>
+
+        @let levelRef = editForm.get('level')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_level" jhiTranslate="gatewayApp.businessDocServiceManualChapter.level">Level</label>
+          <input type="number" class="form-control" name="level" id="field_level" data-cy="level" formControlName="level" />
+          @if (levelRef.invalid && (levelRef.dirty || levelRef.touched)) {
+            <div>
+              @if (editForm.get('level')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('level')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_displayOrder" jhiTranslate="gatewayApp.businessDocServiceManualChapter.displayOrder"
+            >Display Order</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="displayOrder"
+            id="field_displayOrder"
+            data-cy="displayOrder"
+            formControlName="displayOrder"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_manual" jhiTranslate="gatewayApp.businessDocServiceManualChapter.manual">Manual</label>
+          <select
+            class="form-control"
+            id="field_manual"
+            data-cy="manual"
+            name="manual"
+            formControlName="manual"
+            [compareWith]="compareManual"
+          >
+            @if (!editForm.get('manual')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (manualOption of manualsSharedCollection(); track $index) {
+              <option [ngValue]="manualOption">{{ manualOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['manual'])!.invalid && (editForm.get(['manual'])!.dirty || editForm.get(['manual'])!.touched)) {
+          <div>
+            @if (editForm.get(['manual'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_parentChapter" jhiTranslate="gatewayApp.businessDocServiceManualChapter.parentChapter"
+            >Parent Chapter</label
+          >
+          <select
+            class="form-control"
+            id="field_parentChapter"
+            data-cy="parentChapter"
+            name="parentChapter"
+            formControlName="parentChapter"
+            [compareWith]="compareManualChapter"
+          >
+            <option [ngValue]="null"></option>
+            @for (manualChapterOption of manualChaptersSharedCollection(); track $index) {
+              <option [ngValue]="manualChapterOption">{{ manualChapterOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

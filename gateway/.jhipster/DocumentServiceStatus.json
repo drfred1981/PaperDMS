@@ -1,0 +1,85 @@
+{
+  "annotations": {
+    "changelogDate": "20251220152615"
+  },
+  "applications": ["gateway", "documentService"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "documentation": "NOUVELLE ENTIT�: Permet de tracker le statut d'un document pour chaque service\\nChaque ligne repr�sente l'�tat du document dans un service sp�cifique",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "serviceType",
+      "fieldType": "ServiceType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "OCR_SERVICE,AI_SERVICE,WORKFLOW_SERVICE,SEARCH_SERVICE,TRANSFORM_SERVICE,ARCHIVE_SERVICE,EXPORT_SERVICE,SIMILARITY_SERVICE,BUSINESS_SERVICE,SCAN_SERVICE,EMAIL_IMPORT_SERVICE,REPORTING_SERVICE,MONITORING_SERVICE"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ServiceStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NOT_APPLICABLE,PENDING,QUEUED,IN_PROGRESS,COMPLETED,FAILED,CANCELLED,SKIPPED,RETRYING,PARTIALLY_COMPLETED"
+    },
+    {
+      "fieldName": "statusDetails",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "retryCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastProcessedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "processingStartDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "processingEndDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "processingDuration",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "jobId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "documentService",
+  "name": "DocumentServiceStatus",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

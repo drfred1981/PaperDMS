@@ -1,0 +1,152 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (document(); as documentRef) {
+      <div>
+        <h2 data-cy="documentDetailsHeading"><span jhiTranslate="gatewayApp.documentServiceDocument.detail.title">Document</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.title">Title</span></dt>
+          <dd>
+            <span>{{ documentRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.fileName">File Name</span></dt>
+          <dd>
+            <span>{{ documentRef.fileName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.fileSize">File Size</span></dt>
+          <dd>
+            <span>{{ documentRef.fileSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.mimeType">Mime Type</span></dt>
+          <dd>
+            <span>{{ documentRef.mimeType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.sha256">Sha 256</span></dt>
+          <dd>
+            <span>{{ documentRef.sha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.s3Key">S 3 Key</span></dt>
+          <dd>
+            <span>{{ documentRef.s3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.s3Bucket">S 3 Bucket</span></dt>
+          <dd>
+            <span>{{ documentRef.s3Bucket }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.s3Region">S 3 Region</span></dt>
+          <dd>
+            <span>{{ documentRef.s3Region }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.s3Etag">S 3 Etag</span></dt>
+          <dd>
+            <span>{{ documentRef.s3Etag }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.thumbnailS3Key">Thumbnail S 3 Key</span></dt>
+          <dd>
+            <span>{{ documentRef.thumbnailS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.thumbnailSha256">Thumbnail Sha 256</span></dt>
+          <dd>
+            <span>{{ documentRef.thumbnailSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.webpPreviewS3Key">Webp Preview S 3 Key</span></dt>
+          <dd>
+            <span>{{ documentRef.webpPreviewS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.webpPreviewSha256">Webp Preview Sha 256</span></dt>
+          <dd>
+            <span>{{ documentRef.webpPreviewSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.DocumentStatus.' + (documentRef.status ?? 'null')">{{
+              {
+                null: '',
+                UPLOADING: 'UPLOADING',
+                UPLOADED: 'UPLOADED',
+                ACTIVE: 'ACTIVE',
+                ARCHIVED: 'ARCHIVED',
+                DELETED: 'DELETED',
+                ERROR: 'ERROR',
+              }[documentRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.uploadDate">Upload Date</span></dt>
+          <dd>
+            <span>{{ documentRef.uploadDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.isPublic">Is Public</span></dt>
+          <dd>
+            <span>{{ documentRef.isPublic }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.downloadCount">Download Count</span></dt>
+          <dd>
+            <span>{{ documentRef.downloadCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.viewCount">View Count</span></dt>
+          <dd>
+            <span>{{ documentRef.viewCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.detectedLanguage">Detected Language</span></dt>
+          <dd>
+            <span>{{ documentRef.detectedLanguage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.manualLanguage">Manual Language</span></dt>
+          <dd>
+            <span>{{ documentRef.manualLanguage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.languageConfidence">Language Confidence</span></dt>
+          <dd>
+            <span>{{ documentRef.languageConfidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.pageCount">Page Count</span></dt>
+          <dd>
+            <span>{{ documentRef.pageCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ documentRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ documentRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.folder">Folder</span></dt>
+          <dd>
+            @if (document()!.folder) {
+              <div>
+                <a [routerLink]="['/folder', document()!.folder?.id, 'view']">{{ documentRef.folder?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocument.documentType">Document Type</span></dt>
+          <dd>
+            @if (document()!.documentType) {
+              <div>
+                <a [routerLink]="['/document-type', document()!.documentType?.id, 'view']">{{ documentRef.documentType?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document', documentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

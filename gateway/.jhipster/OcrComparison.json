@@ -1,0 +1,96 @@
+{
+  "annotations": {
+    "changelogDate": "20251220155015"
+  },
+  "applications": ["gateway", "ocrService"],
+  "clientRootFolder": "ocrService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "pageNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "tikaText",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "tikaConfidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "aiText",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "aiConfidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "similarity",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "differences",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "differencesS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "selectedEngine",
+      "fieldType": "OcrEngine",
+      "fieldValues": "TIKA_TESSERACT,TIKA_NATIVE,OPENAI_VISION,GOOGLE_VISION,AWS_TEXTRACT,AZURE_VISION,ANTHROPIC_CLAUDE,CUSTOM,HYBRID"
+    },
+    {
+      "fieldName": "selectedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "selectedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "comparisonDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "microserviceName": "ocrService",
+  "name": "OcrComparison",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

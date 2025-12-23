@@ -1,0 +1,11 @@
+id;export_job_id;document_id;document_sha_256;original_file_name;exported_path;exported_file_name;s_3_export_key;file_size;status;error_message;exported_date;export_job_id
+1;3888;18642;qua warm adjourn;psst;acidly;educated;however;15724;FAILED;../fake-data/blob/hipster.txt;2025-12-20T06:45:36;1
+2;26253;7966;intrigue daily;oh remarkable despite;about;anti;reorient;25772;SKIPPED;../fake-data/blob/hipster.txt;2025-12-20T13:02:10;2
+3;13715;7209;for;even spew even;consequently;rigidly meanwhile;throbbing popularize fixed;18125;FAILED;../fake-data/blob/hipster.txt;2025-12-20T02:45:48;3
+4;17816;697;phew;ah through;rare fluffy;clinking inveigle furlough;overconfidently dwell lest;12125;SUCCESS;../fake-data/blob/hipster.txt;2025-12-19T16:41:38;4
+5;14780;22794;selfish incidentally;especially eternity;greedily mosh;psst;elevation;10850;SKIPPED;../fake-data/blob/hipster.txt;2025-12-19T17:52:05;5
+6;14001;29399;as bandwidth;hourly gah for;aw millet;pick anti sudden;questioningly until;15505;SKIPPED;../fake-data/blob/hipster.txt;2025-12-19T17:25:40;6
+7;8957;8707;phooey winding;aw request ragged;unlike solidly generously;within;vivaciously;28517;SUCCESS;../fake-data/blob/hipster.txt;2025-12-20T01:24:02;7
+8;15455;23842;aw;developing hopelessly;unless around;blind ghost;loosely regular;22632;SKIPPED;../fake-data/blob/hipster.txt;2025-12-19T19:47:46;8
+9;30987;4485;as seriously ha;if;amidst vanish;expostulate unethically but;volleyball but worthy;9762;SKIPPED;../fake-data/blob/hipster.txt;2025-12-20T06:56:56;9
+10;11595;2467;woot;ah why;poppy vaguely;sate;gleefully;11700;SKIPPED;../fake-data/blob/hipster.txt;2025-12-20T14:32:11;10

@@ -1,0 +1,117 @@
+{
+  "annotations": {
+    "changelogDate": "20251220152514"
+  },
+  "applications": ["gateway", "exportService"],
+  "clientRootFolder": "exportService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "documentQuery",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "exportPatternId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "exportFormat",
+      "fieldType": "ExportFormat",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ORIGINAL,PDF,PDF_A,ZIP,FOLDER,CSV_INDEX,JSON_METADATA"
+    },
+    {
+      "fieldName": "includeMetadata",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "includeVersions",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "includeComments",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "includeAuditTrail",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "s3ExportKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "exportSize",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "documentCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "filesGenerated",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ExportStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,EXPORTING,COMPLETED,PARTIAL,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "exportService",
+  "name": "ExportJob",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "exportPattern",
+      "relationshipName": "exportPattern",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

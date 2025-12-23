@@ -1,0 +1,286 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-ocr-cache-heading"
+        data-cy="OcrCacheCreateUpdateHeading"
+        jhiTranslate="gatewayApp.ocrServiceOcrCache.home.createOrEditLabel"
+      >
+        Create or edit a Ocr Cache
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.ocrServiceOcrCache.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let documentSha256Ref = editForm.get('documentSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentSha256" jhiTranslate="gatewayApp.ocrServiceOcrCache.documentSha256"
+            >Document Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="documentSha256"
+            id="field_documentSha256"
+            data-cy="documentSha256"
+            formControlName="documentSha256"
+          />
+          @if (documentSha256Ref.invalid && (documentSha256Ref.dirty || documentSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('documentSha256')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('documentSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ocrEngine" jhiTranslate="gatewayApp.ocrServiceOcrCache.ocrEngine">Ocr Engine</label>
+          <select class="form-control" name="ocrEngine" formControlName="ocrEngine" id="field_ocrEngine" data-cy="ocrEngine">
+            <option [ngValue]="null">{{ 'gatewayApp.OcrEngine.null' | translate }}</option>
+            @for (ocrEngine of ocrEngineValues; track $index) {
+              <option [value]="ocrEngine">{{ 'gatewayApp.OcrEngine.' + ocrEngine | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let languageRef = editForm.get('language')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_language" jhiTranslate="gatewayApp.ocrServiceOcrCache.language">Language</label>
+          <input type="text" class="form-control" name="language" id="field_language" data-cy="language" formControlName="language" />
+          @if (languageRef.invalid && (languageRef.dirty || languageRef.touched)) {
+            <div>
+              @if (editForm.get('language')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '10' }"
+                  >This field cannot be longer than 10 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let pageCountRef = editForm.get('pageCount')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_pageCount" jhiTranslate="gatewayApp.ocrServiceOcrCache.pageCount">Page Count</label>
+          <input type="number" class="form-control" name="pageCount" id="field_pageCount" data-cy="pageCount" formControlName="pageCount" />
+          @if (pageCountRef.invalid && (pageCountRef.dirty || pageCountRef.touched)) {
+            <div>
+              @if (editForm.get('pageCount')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('pageCount')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let totalConfidenceRef = editForm.get('totalConfidence')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_totalConfidence" jhiTranslate="gatewayApp.ocrServiceOcrCache.totalConfidence"
+            >Total Confidence</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalConfidence"
+            id="field_totalConfidence"
+            data-cy="totalConfidence"
+            formControlName="totalConfidence"
+          />
+          @if (totalConfidenceRef.invalid && (totalConfidenceRef.dirty || totalConfidenceRef.touched)) {
+            <div>
+              @if (editForm.get('totalConfidence')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('totalConfidence')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >This field cannot be more than 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalConfidence')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let s3ResultKeyRef = editForm.get('s3ResultKey')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3ResultKey" jhiTranslate="gatewayApp.ocrServiceOcrCache.s3ResultKey">S 3 Result Key</label>
+          <input
+            type="text"
+            class="form-control"
+            name="s3ResultKey"
+            id="field_s3ResultKey"
+            data-cy="s3ResultKey"
+            formControlName="s3ResultKey"
+          />
+          @if (s3ResultKeyRef.invalid && (s3ResultKeyRef.dirty || s3ResultKeyRef.touched)) {
+            <div>
+              @if (editForm.get('s3ResultKey')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('s3ResultKey')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let s3BucketRef = editForm.get('s3Bucket')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3Bucket" jhiTranslate="gatewayApp.ocrServiceOcrCache.s3Bucket">S 3 Bucket</label>
+          <input type="text" class="form-control" name="s3Bucket" id="field_s3Bucket" data-cy="s3Bucket" formControlName="s3Bucket" />
+          @if (s3BucketRef.invalid && (s3BucketRef.dirty || s3BucketRef.touched)) {
+            <div>
+              @if (editForm.get('s3Bucket')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('s3Bucket')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let extractedTextS3KeyRef = editForm.get('extractedTextS3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_extractedTextS3Key" jhiTranslate="gatewayApp.ocrServiceOcrCache.extractedTextS3Key"
+            >Extracted Text S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="extractedTextS3Key"
+            id="field_extractedTextS3Key"
+            data-cy="extractedTextS3Key"
+            formControlName="extractedTextS3Key"
+          />
+          @if (extractedTextS3KeyRef.invalid && (extractedTextS3KeyRef.dirty || extractedTextS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('extractedTextS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_metadata" jhiTranslate="gatewayApp.ocrServiceOcrCache.metadata">Metadata</label>
+          <textarea class="form-control" name="metadata" id="field_metadata" data-cy="metadata" formControlName="metadata"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_hits" jhiTranslate="gatewayApp.ocrServiceOcrCache.hits">Hits</label>
+          <input type="number" class="form-control" name="hits" id="field_hits" data-cy="hits" formControlName="hits" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastAccessDate" jhiTranslate="gatewayApp.ocrServiceOcrCache.lastAccessDate"
+            >Last Access Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastAccessDate"
+              data-cy="lastAccessDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastAccessDate"
+              formControlName="lastAccessDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.ocrServiceOcrCache.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_expirationDate" jhiTranslate="gatewayApp.ocrServiceOcrCache.expirationDate"
+            >Expiration Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_expirationDate"
+              data-cy="expirationDate"
+              type="datetime-local"
+              class="form-control"
+              name="expirationDate"
+              formControlName="expirationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

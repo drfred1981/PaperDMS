@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (systemMetric(); as systemMetricRef) {
+      <div>
+        <h2 data-cy="systemMetricDetailsHeading">
+          <span jhiTranslate="gatewayApp.reportingServiceSystemMetric.detail.title">System Metric</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.metricName">Metric Name</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.metricName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.cpuUsage">Cpu Usage</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.cpuUsage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.memoryUsage">Memory Usage</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.memoryUsage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.diskUsage">Disk Usage</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.diskUsage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.networkIn">Network In</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.networkIn }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.networkOut">Network Out</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.networkOut }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.activeConnections">Active Connections</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.activeConnections }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceSystemMetric.timestamp">Timestamp</span></dt>
+          <dd>
+            <span>{{ systemMetricRef.timestamp | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/system-metric', systemMetricRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

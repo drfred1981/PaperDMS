@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity OcrComparison.
+    -->
+    <changeSet id="20251220152814-1" author="jhipster">
+        <createTable tableName="ocr_comparison">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="document_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="document_sha_256" type="varchar(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="page_number" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="tika_text" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="tika_confidence" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="ai_text" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="ai_confidence" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="similarity" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="differences" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="differences_s_3_key" type="varchar(1000)">
+                <constraints nullable="true" />
+            </column>
+            <column name="selected_engine" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="selected_by" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="selected_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="comparison_date" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="metadata" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="ocr_comparison" columnName="selected_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="ocr_comparison" columnName="comparison_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20251220152814-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/ocr_comparison.csv"
+                  separator=";"
+                  tableName="ocr_comparison"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="document_id" type="numeric"/>
+            <column name="document_sha_256" type="string"/>
+            <column name="page_number" type="numeric"/>
+            <column name="tika_text" type="clob"/>
+            <column name="tika_confidence" type="numeric"/>
+            <column name="ai_text" type="clob"/>
+            <column name="ai_confidence" type="numeric"/>
+            <column name="similarity" type="numeric"/>
+            <column name="differences" type="clob"/>
+            <column name="differences_s_3_key" type="string"/>
+            <column name="selected_engine" type="string"/>
+            <column name="selected_by" type="string"/>
+            <column name="selected_date" type="date"/>
+            <column name="comparison_date" type="date"/>
+            <column name="metadata" type="clob"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

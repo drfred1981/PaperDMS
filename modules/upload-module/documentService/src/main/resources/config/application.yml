@@ -1,0 +1,50 @@
+# Document Service Configuration
+# This file should be placed in documentService/src/main/resources/config/application.yml
+
+spring:
+  application:
+    name: documentService
+  
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: fr.smartprod.paperdms.common.event
+        spring.json.use.type.headers: false
+  
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+paperdms:
+  s3:
+    bucket: ${S3_BUCKET:paperdms-documents}
+    region: ${S3_REGION:us-east-1}
+    prefix: ${S3_PREFIX:documents/}
+    access-key: ${S3_ACCESS_KEY:}
+    secret-key: ${S3_SECRET_KEY:}
+    endpoint: ${S3_ENDPOINT:}  # For MinIO or custom S3-compatible endpoints
+  
+  kafka:
+    topic:
+      document-events: ${KAFKA_DOCUMENT_EVENTS_TOPIC:paperdms.document.events}
+      service-status: ${KAFKA_SERVICE_STATUS_TOPIC:paperdms.document.service-status}
+
+# AWS SDK Configuration
+aws:
+  s3:
+    enabled: true
+
+logging:
+  level:
+    fr.smartprod.paperdms: DEBUG
+    org.springframework.kafka: INFO
+    software.amazon.awssdk: INFO

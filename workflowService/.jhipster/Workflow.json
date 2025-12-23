@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190001"
+    "changelogDate": "20251220152515"
   },
   "applications": ["gateway", "workflowService"],
   "clientRootFolder": "workflowService",
   "databaseType": "sql",
-  "documentation": "D�finition de workflow",
   "dto": "mapstruct",
   "fields": [
     {
@@ -69,6 +68,6 @@
   "name": "Workflow",
   "pagination": "pagination",
   "relationships": [],
-  "searchEngine": "no",
+  "searchEngine": "elasticsearch",
   "service": "serviceImpl"
 }

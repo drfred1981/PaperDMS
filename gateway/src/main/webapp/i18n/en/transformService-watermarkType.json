@@ -1,0 +1,11 @@
+{
+  "gatewayApp": {
+    "WatermarkType": {
+      "null": "",
+      "TEXT": "TEXT",
+      "IMAGE": "IMAGE",
+      "QR_CODE": "QR_CODE",
+      "INVISIBLE": "INVISIBLE"
+    }
+  }
+}

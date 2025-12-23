@@ -1,0 +1,39 @@
+{
+  "gatewayApp": {
+    "reportingServiceScheduledReport": {
+      "home": {
+        "title": "Scheduled Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Scheduled Report",
+        "createOrEditLabel": "Create or edit a Scheduled Report",
+        "notFound": "No Scheduled Reports found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Scheduled Report {{ id }}?"
+      },
+      "detail": {
+        "title": "Scheduled Report"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "reportType": "Report Type",
+      "query": "Query",
+      "schedule": "Schedule",
+      "format": "Format",
+      "recipients": "Recipients",
+      "isActive": "Is Active",
+      "lastRun": "Last Run",
+      "nextRun": "Next Run",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  },
+  "reportingServiceApp": {
+    "reportingServiceScheduledReport": {
+      "created": "A new Scheduled Report is created with identifier {{ param }}",
+      "updated": "A Scheduled Report is updated with identifier {{ param }}",
+      "deleted": "A Scheduled Report is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -102,7 +102,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: ZTBkZGY0YzQ3ZmMxMjkyNjg0NGIwYzdhOTdkMTMyYWFjNDdjODk3ZjE0OWU5ODBkZjJiMjJjMDljM2QzN2UzOGFiZjUzMjBmYjI2YzNmZjFjMWJlMWFhNmIxOWQwOTg5ZDIzOTAxNmJjNzZkODJkZDQzMjk1Nzg2Yzk0YzUyMzQ=
+        base64-secret: ODdhYmE3ZjJjYmU5NmZmMzIxOTgzMTQ4ODNiNGMzMDRiZTkxZWJiMTcyODhjOTU4ZDRiMDU5MzFmMWU2NDgwOTZhNWQ4ZmQwNmIxMmM1MjgxNWM2MDkwNDNjYWE5ZDhmZTM5MWUxOTczOGMxODZhZGFlZmM1N2MzMjk1NThmODM=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

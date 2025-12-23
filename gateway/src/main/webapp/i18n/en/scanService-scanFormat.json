@@ -1,0 +1,11 @@
+{
+  "gatewayApp": {
+    "ScanFormat": {
+      "null": "",
+      "PDF": "PDF",
+      "TIFF": "TIFF",
+      "JPEG": "JPEG",
+      "PNG": "PNG"
+    }
+  }
+}

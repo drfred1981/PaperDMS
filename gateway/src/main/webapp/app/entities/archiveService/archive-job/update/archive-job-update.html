@@ -1,0 +1,400 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-archive-job-heading"
+        data-cy="ArchiveJobCreateUpdateHeading"
+        jhiTranslate="gatewayApp.archiveServiceArchiveJob.home.createOrEditLabel"
+      >
+        Create or edit a Archive Job
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.archiveServiceArchiveJob.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="gatewayApp.archiveServiceArchiveJob.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="gatewayApp.archiveServiceArchiveJob.description"
+            >Description</label
+          >
+          <textarea
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          ></textarea>
+        </div>
+
+        @let documentQueryRef = editForm.get('documentQuery')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentQuery" jhiTranslate="gatewayApp.archiveServiceArchiveJob.documentQuery"
+            >Document Query</label
+          >
+          <textarea
+            class="form-control"
+            name="documentQuery"
+            id="field_documentQuery"
+            data-cy="documentQuery"
+            formControlName="documentQuery"
+          ></textarea>
+          @if (documentQueryRef.invalid && (documentQueryRef.dirty || documentQueryRef.touched)) {
+            <div>
+              @if (editForm.get('documentQuery')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let archiveFormatRef = editForm.get('archiveFormat')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_archiveFormat" jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveFormat"
+            >Archive Format</label
+          >
+          <select
+            class="form-control"
+            name="archiveFormat"
+            formControlName="archiveFormat"
+            id="field_archiveFormat"
+            data-cy="archiveFormat"
+          >
+            <option [ngValue]="null">{{ 'gatewayApp.ArchiveFormat.null' | translate }}</option>
+            @for (archiveFormat of archiveFormatValues; track $index) {
+              <option [value]="archiveFormat">{{ 'gatewayApp.ArchiveFormat.' + archiveFormat | translate }}</option>
+            }
+          </select>
+          @if (archiveFormatRef.invalid && (archiveFormatRef.dirty || archiveFormatRef.touched)) {
+            <div>
+              @if (editForm.get('archiveFormat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let compressionLevelRef = editForm.get('compressionLevel')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_compressionLevel" jhiTranslate="gatewayApp.archiveServiceArchiveJob.compressionLevel"
+            >Compression Level</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="compressionLevel"
+            id="field_compressionLevel"
+            data-cy="compressionLevel"
+            formControlName="compressionLevel"
+          />
+          @if (compressionLevelRef.invalid && (compressionLevelRef.dirty || compressionLevelRef.touched)) {
+            <div>
+              @if (editForm.get('compressionLevel')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('compressionLevel')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '9' }"
+                  >This field cannot be more than 9.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('compressionLevel')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let encryptionEnabledRef = editForm.get('encryptionEnabled')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_encryptionEnabled" jhiTranslate="gatewayApp.archiveServiceArchiveJob.encryptionEnabled"
+            >Encryption Enabled</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="encryptionEnabled"
+            id="field_encryptionEnabled"
+            data-cy="encryptionEnabled"
+            formControlName="encryptionEnabled"
+          />
+          @if (encryptionEnabledRef.invalid && (encryptionEnabledRef.dirty || encryptionEnabledRef.touched)) {
+            <div>
+              @if (editForm.get('encryptionEnabled')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let encryptionAlgorithmRef = editForm.get('encryptionAlgorithm')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_encryptionAlgorithm" jhiTranslate="gatewayApp.archiveServiceArchiveJob.encryptionAlgorithm"
+            >Encryption Algorithm</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="encryptionAlgorithm"
+            id="field_encryptionAlgorithm"
+            data-cy="encryptionAlgorithm"
+            formControlName="encryptionAlgorithm"
+          />
+          @if (encryptionAlgorithmRef.invalid && (encryptionAlgorithmRef.dirty || encryptionAlgorithmRef.touched)) {
+            <div>
+              @if (editForm.get('encryptionAlgorithm')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let passwordRef = editForm.get('password')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_password" jhiTranslate="gatewayApp.archiveServiceArchiveJob.password">Password</label>
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+          @if (passwordRef.invalid && (passwordRef.dirty || passwordRef.touched)) {
+            <div>
+              @if (editForm.get('password')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let s3ArchiveKeyRef = editForm.get('s3ArchiveKey')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3ArchiveKey" jhiTranslate="gatewayApp.archiveServiceArchiveJob.s3ArchiveKey"
+            >S 3 Archive Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="s3ArchiveKey"
+            id="field_s3ArchiveKey"
+            data-cy="s3ArchiveKey"
+            formControlName="s3ArchiveKey"
+          />
+          @if (s3ArchiveKeyRef.invalid && (s3ArchiveKeyRef.dirty || s3ArchiveKeyRef.touched)) {
+            <div>
+              @if (editForm.get('s3ArchiveKey')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let archiveSha256Ref = editForm.get('archiveSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_archiveSha256" jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveSha256"
+            >Archive Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="archiveSha256"
+            id="field_archiveSha256"
+            data-cy="archiveSha256"
+            formControlName="archiveSha256"
+          />
+          @if (archiveSha256Ref.invalid && (archiveSha256Ref.dirty || archiveSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('archiveSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_archiveSize" jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveSize"
+            >Archive Size</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="archiveSize"
+            id="field_archiveSize"
+            data-cy="archiveSize"
+            formControlName="archiveSize"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_documentCount" jhiTranslate="gatewayApp.archiveServiceArchiveJob.documentCount"
+            >Document Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentCount"
+            id="field_documentCount"
+            data-cy="documentCount"
+            formControlName="documentCount"
+          />
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.archiveServiceArchiveJob.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.ArchiveStatus.null' | translate }}</option>
+            @for (archiveStatus of archiveStatusValues; track $index) {
+              <option [value]="archiveStatus">{{ 'gatewayApp.ArchiveStatus.' + archiveStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" jhiTranslate="gatewayApp.archiveServiceArchiveJob.startDate">Start Date</label>
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="gatewayApp.archiveServiceArchiveJob.endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_errorMessage" jhiTranslate="gatewayApp.archiveServiceArchiveJob.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        @let createdByRef = editForm.get('createdBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="gatewayApp.archiveServiceArchiveJob.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+          @if (createdByRef.invalid && (createdByRef.dirty || createdByRef.touched)) {
+            <div>
+              @if (editForm.get('createdBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('createdBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.archiveServiceArchiveJob.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

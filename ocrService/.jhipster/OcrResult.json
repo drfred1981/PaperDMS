@@ -1,17 +1,22 @@
 {
   "annotations": {
-    "changelogDate": "20251208190101"
+    "changelogDate": "20251220152614"
   },
   "applications": ["gateway", "ocrService"],
   "clientRootFolder": "ocrService",
   "databaseType": "sql",
-  "documentation": "R�sultat OCR par page",
   "dto": "mapstruct",
   "fields": [
     {
       "fieldName": "pageNumber",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pageSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64"
     },
     {
       "fieldName": "confidence",
@@ -22,6 +27,18 @@
     },
     {
       "fieldName": "s3ResultKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "s3Bucket",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "s3BoundingBoxKey",
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
       "fieldValidateRulesMaxlength": "1000"
@@ -43,6 +60,25 @@
     {
       "fieldName": "wordCount",
       "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ocrEngine",
+      "fieldType": "OcrEngine",
+      "fieldValues": "TIKA_TESSERACT,TIKA_NATIVE,OPENAI_VISION,GOOGLE_VISION,AWS_TEXTRACT,AZURE_VISION,ANTHROPIC_CLAUDE,CUSTOM,HYBRID"
+    },
+    {
+      "fieldName": "processingTime",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "rawResponse",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "rawResponseS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
     },
     {
       "fieldName": "processedDate",

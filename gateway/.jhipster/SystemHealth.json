@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20251220165415"
+  },
+  "applications": ["gateway", "monitoringService"],
+  "clientRootFolder": "monitoringService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "serviceName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "HealthStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "HEALTHY,DEGRADED,UNHEALTHY,UNKNOWN"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "uptime",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "cpuUsage",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "memoryUsage",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "errorRate",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "lastCheck",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "monitoringService",
+  "name": "SystemHealth",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

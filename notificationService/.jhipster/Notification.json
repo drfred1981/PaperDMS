@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190001"
+    "changelogDate": "20251220152514"
   },
   "applications": ["gateway", "notificationService"],
   "clientRootFolder": "notificationService",
   "databaseType": "sql",
-  "documentation": "Notification utilisateur",
   "dto": "mapstruct",
   "fields": [
     {
@@ -22,13 +21,12 @@
     {
       "fieldName": "type",
       "fieldType": "NotificationType",
-      "fieldValidateRules": ["required"],
+      "fieldTypeDocumentation": "Notification Service - 6 Entit�s",
       "fieldValues": "DOCUMENT_UPLOADED,DOCUMENT_PROCESSED,DOCUMENT_SHARED,WORKFLOW_ASSIGNED,WORKFLOW_APPROVED,WORKFLOW_REJECTED,WORKFLOW_COMPLETED,OCR_COMPLETED,AI_TAG_SUGGESTED,SIMILAR_DOCUMENT_FOUND,SYSTEM_ALERT,CUSTOM"
     },
     {
       "fieldName": "priority",
       "fieldType": "NotificationPriority",
-      "fieldValidateRules": ["required"],
       "fieldValues": "LOW,NORMAL,HIGH,URGENT"
     },
     {
@@ -49,7 +47,6 @@
     {
       "fieldName": "channel",
       "fieldType": "NotificationChannel",
-      "fieldValidateRules": ["required"],
       "fieldValues": "EMAIL,PUSH,IN_APP,SMS,WEBHOOK"
     },
     {

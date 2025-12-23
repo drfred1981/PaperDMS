@@ -1,0 +1,325 @@
+<div>
+  <h2 id="page-heading" data-cy="OcrJobHeading">
+    <span jhiTranslate="gatewayApp.ocrServiceOcrJob.home.title">Ocr Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined" />
+        <span jhiTranslate="gatewayApp.ocrServiceOcrJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ocr-job"
+        [routerLink]="['/ocr-job/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="gatewayApp.ocrServiceOcrJob.home.createLabel">Create a new Ocr Job</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (ocrJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.ocrServiceOcrJob.home.notFound">No Ocr Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.documentId">Document Id</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.documentSha256">Document Sha 256</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.s3Key">S 3 Key</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Bucket">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.s3Bucket">S 3 Bucket</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestedLanguage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.requestedLanguage">Requested Language</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="detectedLanguage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.detectedLanguage">Detected Language</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="languageConfidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.languageConfidence">Language Confidence</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ocrEngine">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.ocrEngine">Ocr Engine</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tikaEndpoint">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.tikaEndpoint">Tika Endpoint</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="aiProvider">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.aiProvider">Ai Provider</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="aiModel">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.aiModel">Ai Model</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="resultCacheKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.resultCacheKey">Result Cache Key</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isCached">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.isCached">Is Cached</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.errorMessage">Error Message</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.pageCount">Page Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="progress">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.progress">Progress</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="retryCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.retryCount">Retry Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="priority">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.priority">Priority</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processingTime">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.processingTime">Processing Time</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="costEstimate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.costEstimate">Cost Estimate</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrJob.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ocrJob of ocrJobs(); track trackId(ocrJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ocr-job', ocrJob.id, 'view']">{{ ocrJob.id }}</a>
+              </td>
+              <td [jhiTranslate]="'gatewayApp.OcrStatus.' + (ocrJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    IN_PROGRESS: 'IN_PROGRESS',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                    RETRYING: 'RETRYING',
+                    COMPARING: 'COMPARING',
+                  }[ocrJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ ocrJob.documentId }}</td>
+              <td>{{ ocrJob.documentSha256 }}</td>
+              <td>{{ ocrJob.s3Key }}</td>
+              <td>{{ ocrJob.s3Bucket }}</td>
+              <td>{{ ocrJob.requestedLanguage }}</td>
+              <td>{{ ocrJob.detectedLanguage }}</td>
+              <td>{{ ocrJob.languageConfidence }}</td>
+              <td [jhiTranslate]="'gatewayApp.OcrEngine.' + (ocrJob.ocrEngine ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    TIKA_TESSERACT: 'TIKA_TESSERACT',
+                    TIKA_NATIVE: 'TIKA_NATIVE',
+                    OPENAI_VISION: 'OPENAI_VISION',
+                    GOOGLE_VISION: 'GOOGLE_VISION',
+                    AWS_TEXTRACT: 'AWS_TEXTRACT',
+                    AZURE_VISION: 'AZURE_VISION',
+                    ANTHROPIC_CLAUDE: 'ANTHROPIC_CLAUDE',
+                    CUSTOM: 'CUSTOM',
+                    HYBRID: 'HYBRID',
+                  }[ocrJob.ocrEngine ?? 'null']
+                }}
+              </td>
+              <td>{{ ocrJob.tikaEndpoint }}</td>
+              <td>{{ ocrJob.aiProvider }}</td>
+              <td>{{ ocrJob.aiModel }}</td>
+              <td>{{ ocrJob.resultCacheKey }}</td>
+              <td>{{ ocrJob.isCached }}</td>
+              <td>{{ ocrJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ ocrJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ ocrJob.errorMessage }}</td>
+              <td>{{ ocrJob.pageCount }}</td>
+              <td>{{ ocrJob.progress }}</td>
+              <td>{{ ocrJob.retryCount }}</td>
+              <td>{{ ocrJob.priority }}</td>
+              <td>{{ ocrJob.processingTime }}</td>
+              <td>{{ ocrJob.costEstimate }}</td>
+              <td>{{ ocrJob.createdDate | formatMediumDatetime }}</td>
+              <td>{{ ocrJob.createdBy }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/ocr-job', ocrJob.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/ocr-job', ocrJob.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(ocrJob)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (ocrJobs().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

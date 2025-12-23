@@ -1,0 +1,90 @@
+{
+  "annotations": {
+    "changelogDate": "20251220163315"
+  },
+  "applications": ["gateway", "transformService"],
+  "clientRootFolder": "transformService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "compressionType",
+      "fieldType": "CompressionType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LOSSLESS,LOSSY,ADAPTIVE"
+    },
+    {
+      "fieldName": "quality",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "100",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "targetSizeKb",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "originalSize",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "compressedSize",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "compressionRatio",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "outputS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "outputDocumentId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "TransformStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,PROCESSING,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "transformService",
+  "name": "CompressionJob",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

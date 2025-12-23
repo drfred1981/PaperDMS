@@ -1,0 +1,11 @@
+id;document_id;field_key;field_value;confidence;extraction_method;is_verified;extracted_date
+1;25284;tinderbox;../fake-data/blob/hipster.txt;0.11;REGEX;false;2025-12-20T05:47:20
+2;24511;ugh;../fake-data/blob/hipster.txt;0.17;MANUAL;true;2025-12-20T10:00:24
+3;18242;gah whoever qua;../fake-data/blob/hipster.txt;0.71;AI_MODEL;false;2025-12-19T23:39:50
+4;28114;um junior hovercraft;../fake-data/blob/hipster.txt;0.52;BARCODE;false;2025-12-20T10:31:17
+5;31498;aha more;../fake-data/blob/hipster.txt;0.91;MANUAL;false;2025-12-19T18:09:01
+6;3111;scorn venture;../fake-data/blob/hipster.txt;0.74;REGEX;true;2025-12-20T14:20:22
+7;13696;discontinue testing hence;../fake-data/blob/hipster.txt;0.6;OCR;false;2025-12-20T10:33:13
+8;14767;omelet;../fake-data/blob/hipster.txt;0.24;BARCODE;false;2025-12-19T22:29:24
+9;7274;slap but;../fake-data/blob/hipster.txt;0.27;MANUAL;false;2025-12-20T06:25:09
+10;18439;comparison once;../fake-data/blob/hipster.txt;0.92;AI_MODEL;true;2025-12-20T04:37:49

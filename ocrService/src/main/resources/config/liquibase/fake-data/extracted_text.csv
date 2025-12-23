@@ -1,11 +1,11 @@
-id;content;page_number;language;word_count;has_structured_data;structured_data;extracted_date;job_id
-1;../fake-data/blob/hipster.txt;31854;uh-huh;11253;true;../fake-data/blob/hipster.txt;2025-12-08T03:45:11;1
-2;../fake-data/blob/hipster.txt;12666;vivaciousl;346;false;../fake-data/blob/hipster.txt;2025-12-07T22:22:35;2
-3;../fake-data/blob/hipster.txt;8676;oh neglect;8468;false;../fake-data/blob/hipster.txt;2025-12-08T12:52:28;3
-4;../fake-data/blob/hipster.txt;23736;ravioli;9115;false;../fake-data/blob/hipster.txt;2025-12-08T09:33:19;4
-5;../fake-data/blob/hipster.txt;20755;coal bookc;3759;true;../fake-data/blob/hipster.txt;2025-12-08T05:37:28;5
-6;../fake-data/blob/hipster.txt;27479;confute;6359;false;../fake-data/blob/hipster.txt;2025-12-08T15:46:58;6
-7;../fake-data/blob/hipster.txt;3423;ha;23948;true;../fake-data/blob/hipster.txt;2025-12-07T20:16:50;7
-8;../fake-data/blob/hipster.txt;9939;wilted den;10153;false;../fake-data/blob/hipster.txt;2025-12-07T19:18:57;8
-9;../fake-data/blob/hipster.txt;28872;while hund;30220;false;../fake-data/blob/hipster.txt;2025-12-08T18:11:08;9
-10;../fake-data/blob/hipster.txt;32167;ack;25261;false;../fake-data/blob/hipster.txt;2025-12-07T19:11:35;10
+id;content;content_sha_256;s_3_content_key;s_3_bucket;page_number;language;word_count;has_structured_data;structured_data;structured_data_s_3_key;extracted_date;job_id
+1;../fake-data/blob/hipster.txt;heartfelt buzzing jazz;gymnast the low;kissingly hawk beneficial;11717;possession;22869;true;../fake-data/blob/hipster.txt;bookcase;2025-12-19T18:12:26;1
+2;../fake-data/blob/hipster.txt;charter;frenetically;shallow notwithstanding;18034;cycle inci;25731;true;../fake-data/blob/hipster.txt;viability boo;2025-12-19T15:30:48;2
+3;../fake-data/blob/hipster.txt;badly quintessential reflate;readies parody;challenge woot;28236;guest who;30054;false;../fake-data/blob/hipster.txt;likable;2025-12-20T10:38:39;3
+4;../fake-data/blob/hipster.txt;boo;ghost fumigate;electronics countess lava;25032;bide broad;7871;true;../fake-data/blob/hipster.txt;below tightly;2025-12-20T04:15:26;4
+5;../fake-data/blob/hipster.txt;oof wholly sense;spark unlike superior;inasmuch hmph;23748;till;1253;false;../fake-data/blob/hipster.txt;nor riser;2025-12-20T13:03:09;5
+6;../fake-data/blob/hipster.txt;oh potentially;against angle;meanwhile;9510;following ;19257;false;../fake-data/blob/hipster.txt;preside stale unto;2025-12-20T06:52:04;6
+7;../fake-data/blob/hipster.txt;meanwhile drain keenly;furthermore;unethically;30789;weatherize;21474;false;../fake-data/blob/hipster.txt;disposer;2025-12-20T04:48:32;7
+8;../fake-data/blob/hipster.txt;pushy before;although into;nice;30980;economise ;28448;true;../fake-data/blob/hipster.txt;honestly who fen;2025-12-19T19:19:50;8
+9;../fake-data/blob/hipster.txt;chainstay celebrated;ugh mmm general;kissingly;14062;dreamily;6499;true;../fake-data/blob/hipster.txt;phew;2025-12-20T13:44:27;9
+10;../fake-data/blob/hipster.txt;sadly ornery vivaciously;patiently sashay;casement;27146;long pfft;887;true;../fake-data/blob/hipster.txt;make quaver hornet;2025-12-20T08:57:46;10

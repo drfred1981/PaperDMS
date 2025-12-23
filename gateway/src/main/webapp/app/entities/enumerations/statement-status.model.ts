@@ -1,0 +1,11 @@
+export enum StatementStatus {
+  DRAFT = 'DRAFT',
+
+  PENDING = 'PENDING',
+
+  PROCESSED = 'PROCESSED',
+
+  RECONCILED = 'RECONCILED',
+
+  ARCHIVED = 'ARCHIVED',
+}

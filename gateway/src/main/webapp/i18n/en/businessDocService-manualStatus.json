@@ -1,0 +1,13 @@
+{
+  "gatewayApp": {
+    "ManualStatus": {
+      "null": "",
+      "DRAFT": "DRAFT",
+      "REVIEW": "REVIEW",
+      "APPROVED": "APPROVED",
+      "PUBLISHED": "PUBLISHED",
+      "ARCHIVED": "ARCHIVED",
+      "OBSOLETE": "OBSOLETE"
+    }
+  }
+}

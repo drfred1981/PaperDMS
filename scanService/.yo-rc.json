@@ -6,14 +6,14 @@
     "baseName": "scanService",
     "buildTool": "maven",
     "cacheProvider": "redis",
-    "creationTimestamp": 1765349654447,
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
-    "entities": [],
+    "entities": ["ScanJob", "ScanBatch", "ScannerConfiguration", "ScannedPage"],
     "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "OTU3NzczZmMzNWY4MDQ5MDQ4ODI0M2JmNmFjMWJjODdiMWNhYzNiZGNhZWM2MGNmZDIxOGJjYWQ3MzI2ZjZmYWM2ZjMzY2Y5YmQxZDViNzViMzM0MDg3MDQ3MmI1NWEwOTU3MzI2Y2Q5YjZiZDA3MzI1ZTljODRmMGZmOTYwNjQ=",
+    "jwtSecretKey": "MTkwNTUxYjA3YmRlYzkxNjIzZTM4YTQwYzhlNzVjNjA1NGRhODg0OGZlYmU3ZGZkNjE3ZWY0OWQ5YjcwYjhhYWYwZWI2ZjdjNmVlZjBmMjlmY2MxZDQ2ZGI2MzQ4N2ZkN2YwNGY2MDk3MjJjMzk4OGVlZjc1MzIxMmU2YmRkMjk=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1766244494000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -22,6 +22,7 @@
     "serverPort": "8091",
     "serviceDiscoveryType": "consul",
     "skipClient": true,
-    "skipCommitHook": true
+    "skipCommitHook": true,
+    "withAdminUi": true
   }
 }

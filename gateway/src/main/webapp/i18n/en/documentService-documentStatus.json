@@ -1,0 +1,13 @@
+{
+  "gatewayApp": {
+    "DocumentStatus": {
+      "null": "",
+      "UPLOADING": "UPLOADING",
+      "UPLOADED": "UPLOADED",
+      "ACTIVE": "ACTIVE",
+      "ARCHIVED": "ARCHIVED",
+      "DELETED": "DELETED",
+      "ERROR": "ERROR"
+    }
+  }
+}

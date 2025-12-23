@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190201"
+    "changelogDate": "20251220152715"
   },
   "applications": ["gateway", "workflowService"],
   "clientRootFolder": "workflowService",
   "databaseType": "sql",
-  "documentation": "Instance de workflow",
   "dto": "mapstruct",
   "fields": [
     {
@@ -16,7 +15,6 @@
     {
       "fieldName": "status",
       "fieldType": "WorkflowInstanceStatus",
-      "fieldValidateRules": ["required"],
       "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,CANCELLED,REJECTED,ON_HOLD"
     },
     {
@@ -47,7 +45,6 @@
     {
       "fieldName": "priority",
       "fieldType": "WorkflowPriority",
-      "fieldValidateRules": ["required"],
       "fieldValues": "LOW,NORMAL,HIGH,URGENT"
     },
     {

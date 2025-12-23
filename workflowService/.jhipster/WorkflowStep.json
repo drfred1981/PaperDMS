@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190101"
+    "changelogDate": "20251220152615"
   },
   "applications": ["gateway", "workflowService"],
   "clientRootFolder": "workflowService",
   "databaseType": "sql",
-  "documentation": "�tape de workflow",
   "dto": "mapstruct",
   "fields": [
     {
@@ -26,13 +25,12 @@
     {
       "fieldName": "stepType",
       "fieldType": "WorkflowStepType",
-      "fieldValidateRules": ["required"],
+      "fieldTypeDocumentation": "Workflow Service - 5 Entit�s",
       "fieldValues": "APPROVAL,REVIEW,SIGNATURE,NOTIFICATION,CUSTOM"
     },
     {
       "fieldName": "assigneeType",
       "fieldType": "AssigneeType",
-      "fieldValidateRules": ["required"],
       "fieldValues": "USER,GROUP,ROLE,DYNAMIC"
     },
     {

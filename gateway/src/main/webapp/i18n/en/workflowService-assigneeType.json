@@ -1,0 +1,11 @@
+{
+  "gatewayApp": {
+    "AssigneeType": {
+      "null": "",
+      "USER": "USER",
+      "GROUP": "GROUP",
+      "ROLE": "ROLE",
+      "DYNAMIC": "DYNAMIC"
+    }
+  }
+}

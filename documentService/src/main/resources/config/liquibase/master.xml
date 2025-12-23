@@ -12,7 +12,39 @@
     <property name="timeType" value="time(6)" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152514_added_entity_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152614_added_entity_DocumentVersion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152714_added_entity_DocumentServiceStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152814_added_entity_Folder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152914_added_entity_Tag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153014_added_entity_DocumentTag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153114_added_entity_DocumentMetadata.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153214_added_entity_DocumentType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153314_added_entity_TagCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153414_added_entity_DocumentTypeField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153514_added_entity_ExtractedField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153614_added_entity_DocumentPermission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153714_added_entity_PermissionGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153814_added_entity_DocumentAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153914_added_entity_DocumentComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220154014_added_entity_DocumentRelation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220154114_added_entity_DocumentStatistics.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220154214_added_entity_DocumentTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220154314_added_entity_SavedSearch.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220154414_added_entity_SmartFolder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220154514_added_entity_Bookmark.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20251220152514_added_entity_constraints_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152614_added_entity_constraints_DocumentVersion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152814_added_entity_constraints_Folder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152914_added_entity_constraints_Tag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153014_added_entity_constraints_DocumentTag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153114_added_entity_constraints_DocumentMetadata.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153314_added_entity_constraints_TagCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153414_added_entity_constraints_DocumentTypeField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153614_added_entity_constraints_DocumentPermission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153914_added_entity_constraints_DocumentComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220154214_added_entity_constraints_DocumentTemplate.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

@@ -1,0 +1,52 @@
+{
+  "gatewayApp": {
+    "ocrServiceOcrJob": {
+      "home": {
+        "title": "Ocr Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Ocr Job",
+        "createOrEditLabel": "Create or edit a Ocr Job",
+        "notFound": "No Ocr Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Ocr Job {{ id }}?"
+      },
+      "detail": {
+        "title": "Ocr Job"
+      },
+      "id": "ID",
+      "status": "Status",
+      "documentId": "Document Id",
+      "documentSha256": "Document Sha 256",
+      "s3Key": "S 3 Key",
+      "s3Bucket": "S 3 Bucket",
+      "requestedLanguage": "Requested Language",
+      "detectedLanguage": "Detected Language",
+      "languageConfidence": "Language Confidence",
+      "ocrEngine": "Ocr Engine",
+      "tikaEndpoint": "Tika Endpoint",
+      "aiProvider": "Ai Provider",
+      "aiModel": "Ai Model",
+      "resultCacheKey": "Result Cache Key",
+      "isCached": "Is Cached",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "pageCount": "Page Count",
+      "progress": "Progress",
+      "retryCount": "Retry Count",
+      "priority": "Priority",
+      "processingTime": "Processing Time",
+      "costEstimate": "Cost Estimate",
+      "createdDate": "Created Date",
+      "createdBy": "Created By"
+    }
+  },
+  "ocrServiceApp": {
+    "ocrServiceOcrJob": {
+      "created": "A new Ocr Job is created with identifier {{ param }}",
+      "updated": "A Ocr Job is updated with identifier {{ param }}",
+      "deleted": "A Ocr Job is deleted with identifier {{ param }}"
+    }
+  }
+}

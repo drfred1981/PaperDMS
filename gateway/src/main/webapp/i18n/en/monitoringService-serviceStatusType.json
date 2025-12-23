@@ -1,0 +1,13 @@
+{
+  "gatewayApp": {
+    "ServiceStatusType": {
+      "null": "",
+      "RUNNING": "RUNNING",
+      "STARTING": "STARTING",
+      "STOPPING": "STOPPING",
+      "STOPPED": "STOPPED",
+      "ERROR": "ERROR",
+      "MAINTENANCE": "MAINTENANCE"
+    }
+  }
+}

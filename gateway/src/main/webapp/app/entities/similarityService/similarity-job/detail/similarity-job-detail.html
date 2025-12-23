@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (similarityJob(); as similarityJobRef) {
+      <div>
+        <h2 data-cy="similarityJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.detail.title">Similarity Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AiJobStatus.' + (similarityJobRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                IN_PROGRESS: 'IN_PROGRESS',
+                COMPLETED: 'COMPLETED',
+                FAILED: 'FAILED',
+                CANCELLED: 'CANCELLED',
+              }[similarityJobRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.algorithm">Algorithm</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.SimilarityAlgorithm.' + (similarityJobRef.algorithm ?? 'null')">{{
+              {
+                null: '',
+                COSINE: 'COSINE',
+                JACCARD: 'JACCARD',
+                LEVENSHTEIN: 'LEVENSHTEIN',
+                LSH: 'LSH',
+                DEEP_LEARNING: 'DEEP_LEARNING',
+                COMBINED: 'COMBINED',
+              }[similarityJobRef.algorithm ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.scope">Scope</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.SimilarityScope.' + (similarityJobRef.scope ?? 'null')">{{
+              {
+                null: '',
+                ALL_DOCUMENTS: 'ALL_DOCUMENTS',
+                SAME_FOLDER: 'SAME_FOLDER',
+                SAME_TYPE: 'SAME_TYPE',
+                SAME_TAGS: 'SAME_TAGS',
+                CUSTOM: 'CUSTOM',
+              }[similarityJobRef.scope ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.minSimilarityThreshold">Min Similarity Threshold</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.minSimilarityThreshold }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.matchesFound">Matches Found</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.matchesFound }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ similarityJobRef.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/similarity-job', similarityJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,70 @@
+// ============================================================================
+// 08 - SIMILARITY SERVICE (4 entités)
+// ============================================================================
+
+enum SimilarityAlgorithm {
+  COSINE, JACCARD, LEVENSHTEIN, LSH, DEEP_LEARNING, COMBINED
+}
+
+enum SimilarityScope {
+  ALL_DOCUMENTS, SAME_FOLDER, SAME_TYPE, SAME_TAGS, CUSTOM
+}
+
+enum FingerprintType {
+  HASH, PERCEPTUAL, VECTOR_EMBEDDING, TF_IDF, BERT
+}
+
+entity DocumentSimilarity {
+  documentId1 Long required
+  documentId2 Long required
+  similarityScore Double required min(0) max(1)
+  algorithm SimilarityAlgorithm
+  features TextBlob
+  computedDate Instant required
+  isRelevant Boolean
+  reviewedBy String maxlength(50)
+  reviewedDate Instant
+}
+
+entity SimilarityJob {
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  status AiJobStatus
+  algorithm SimilarityAlgorithm
+  scope SimilarityScope
+  minSimilarityThreshold Double min(0) max(1)
+  matchesFound Integer
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity DocumentFingerprint {
+  documentId Long required unique
+  fingerprintType FingerprintType
+  fingerprint TextBlob required
+  vectorEmbedding TextBlob
+  metadata TextBlob
+  computedDate Instant required
+  lastUpdated Instant
+}
+
+entity SimilarityCluster {
+  name String maxlength(255)
+  description TextBlob
+  algorithm SimilarityAlgorithm
+  centroid TextBlob
+  documentCount Integer
+  avgSimilarity Double min(0) max(1)
+  createdDate Instant required
+  lastUpdated Instant
+}
+
+relationship ManyToOne {
+  DocumentSimilarity{job} to SimilarityJob
+}
+
+microservice DocumentSimilarity, SimilarityJob, DocumentFingerprint, 
+             SimilarityCluster with similarityService

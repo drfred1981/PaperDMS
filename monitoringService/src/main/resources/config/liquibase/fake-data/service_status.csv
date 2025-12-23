@@ -1,0 +1,11 @@
+id;service_name;service_type;status;endpoint;port;version;last_ping;is_healthy
+1;ugh incidentally;excluding concentration;STOPPING;unscramble boo;22702;for fooey during;2025-12-20T08:04:45;false
+2;trial;thrifty qua;RUNNING;considering against;32744;thread darn circulate;2025-12-19T16:16:04;true
+3;so who;technician once unlike;STARTING;yuck;11238;whenever mean brochure;2025-12-19T21:41:39;false
+4;infinite as on;consequently;STOPPING;acidly oddly;9400;except cleverly;2025-12-20T03:30:35;false
+5;till furthermore weary;abaft outside yum;ERROR;not gallivant shoulder;6450;aw;2025-12-20T01:33:00;false
+6;likewise drat than;ring um till;MAINTENANCE;sniff;13417;sermon range kosher;2025-12-20T00:23:38;true
+7;gadzooks;cantaloupe toward;STARTING;yet;8908;wring;2025-12-19T21:53:32;false
+8;concerning pro seafood;pfft blah;STOPPED;upside-down drat;23416;nervously wrong woot;2025-12-20T14:57:16;true
+9;earnest whose circa;ew;STOPPED;vice;29160;gee than;2025-12-19T15:49:03;false
+10;foolhardy;duh requite;MAINTENANCE;instead;10547;as;2025-12-20T10:33:53;false

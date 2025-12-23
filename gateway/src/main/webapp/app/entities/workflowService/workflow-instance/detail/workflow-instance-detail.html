@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (workflowInstance(); as workflowInstanceRef) {
+      <div>
+        <h2 data-cy="workflowInstanceDetailsHeading">
+          <span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.detail.title">Workflow Instance</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WorkflowInstanceStatus.' + (workflowInstanceRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                IN_PROGRESS: 'IN_PROGRESS',
+                COMPLETED: 'COMPLETED',
+                CANCELLED: 'CANCELLED',
+                REJECTED: 'REJECTED',
+                ON_HOLD: 'ON_HOLD',
+              }[workflowInstanceRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.currentStepNumber">Current Step Number</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.currentStepNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.dueDate">Due Date</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.dueDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.completedDate">Completed Date</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.completedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.cancelledDate">Cancelled Date</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.cancelledDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.cancellationReason">Cancellation Reason</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.cancellationReason }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.priority">Priority</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WorkflowPriority.' + (workflowInstanceRef.priority ?? 'null')">{{
+              { null: '', LOW: 'LOW', NORMAL: 'NORMAL', HIGH: 'HIGH', URGENT: 'URGENT' }[workflowInstanceRef.priority ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ workflowInstanceRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceWorkflowInstance.workflow">Workflow</span></dt>
+          <dd>
+            @if (workflowInstance()!.workflow) {
+              <div>
+                <a [routerLink]="['/workflow', workflowInstance()!.workflow?.id, 'view']">{{ workflowInstanceRef.workflow?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/workflow-instance', workflowInstanceRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

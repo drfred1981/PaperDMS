@@ -1,0 +1,338 @@
+/**
+ * PaperDMS - Définition des 16 Applications
+ * Fichier 1/20
+ */
+
+application {
+  config {
+    baseName gateway
+    applicationType gateway
+    packageName fr.smartprod.paperdms.gateway
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    cacheProvider redis
+    buildTool maven
+    clientFramework angular
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+    enableHibernateCache true
+    websocket spring-websocket
+    reactive false
+  }
+  entities *
+}
+
+application {
+  config {
+    baseName documentService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.document
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8081
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+    enableHibernateCache true
+  }
+  
+  entities Document, DocumentVersion,DocumentServiceStatus, Folder, Tag, DocumentTag, DocumentMetadata,  DocumentType, TagCategory, DocumentTypeField, ExtractedField, DocumentPermission, PermissionGroup, DocumentAudit, DocumentComment, DocumentRelation, DocumentStatistics, DocumentTemplate, SavedSearch,              SmartFolder, Bookmark
+}
+
+application {
+  config {
+    baseName ocrService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.ocr
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8082
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities OcrJob, OcrResult, ExtractedText,  OcrComparison, OcrCache
+}
+
+application {
+  config {
+    baseName searchService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.search
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8083
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities SearchIndex, SearchQuery, SemanticSearch, SearchFacet
+}
+
+application {
+  config {
+    baseName notificationService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.notification
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8084
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities Notification, NotificationTemplate, NotificationPreference, NotificationEvent, WebhookSubscription, WebhookLog
+}
+
+application {
+  config {
+    baseName workflowService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.workflow
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8085
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities Workflow, WorkflowStep, WorkflowInstance, WorkflowTask, ApprovalHistory
+}
+
+application {
+  config {
+    baseName aiService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.ai
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8086
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities AutoTagJob, TagPrediction, CorrespondentExtraction,  Correspondent, LanguageDetection, AiCache
+}
+
+application {
+  config {
+    baseName similarityService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.similarity
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8087
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities  DocumentSimilarity, SimilarityJob, DocumentFingerprint,  SimilarityCluster 
+}
+
+application {
+  config {
+    baseName archiveService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.archive
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8088
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities ArchiveJob, ArchiveDocument
+}
+
+application {
+  config {
+    baseName exportService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.export
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8089
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities ExportJob, ExportPattern, ExportResult 
+}
+
+application {
+  config {
+    baseName emailImportService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.emailimport
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8090
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities EmailImport, EmailAttachment, ImportRule, ImportMapping 
+}
+
+application {
+  config {
+    baseName scanService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.scan
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8091
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities ScanJob, ScanBatch, ScannerConfiguration, ScannedPage 
+}
+
+application {
+  config {
+    baseName transformService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.transform
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8092
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities ConversionJob, WatermarkJob, RedactionJob, CompressionJob,  MergeJob, ComparisonJob
+}
+
+application {
+  config {
+    baseName businessDocService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.business
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8093
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities Invoice, InvoiceLine, Contract, ContractClause,  BankStatement, BankTransaction, Manual, ManualChapter
+}
+
+application {
+  config {
+    baseName reportingService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.reporting
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8094
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities Dashboard, DashboardWidget, ScheduledReport, ReportExecution, PerformanceMetric, SystemMetric 
+}
+
+application {
+  config {
+    baseName monitoringService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.monitoring
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8095
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities Alert, AlertRule, DocumentWatch, MaintenanceTask,  SystemHealth, ServiceStatus
+}
+
+/**
+ * Configuration Docker Compose pour JHipster
+ */
+deployment {
+  deploymentType docker-compose
+  
+  // Liste des applications
+  appsFolders [gateway, documentService, ocrService]
+  
+  // Service discovery
+  serviceDiscoveryType consul
+  
+  // Monitoring
+  monitoring prometheus
+  
+}

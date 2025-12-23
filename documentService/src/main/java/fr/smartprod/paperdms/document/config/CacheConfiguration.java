@@ -78,6 +78,32 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentVersion.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentServiceStatus.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Folder.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Folder.class.getName() + ".children", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Tag.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentTag.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentMetadata.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentType.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentType.class.getName() + ".fields", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.TagCategory.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.TagCategory.class.getName() + ".children", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.TagCategory.class.getName() + ".tags", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentTypeField.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.ExtractedField.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentPermission.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.PermissionGroup.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentAudit.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentComment.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentComment.class.getName() + ".replies", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentRelation.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentStatistics.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentTemplate.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.SavedSearch.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.SmartFolder.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Bookmark.class.getName(), jcacheConfiguration);
             // jhipster-needle-redis-add-entry
         };
     }

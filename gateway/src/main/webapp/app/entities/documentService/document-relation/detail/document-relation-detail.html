@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentRelation(); as documentRelationRef) {
+      <div>
+        <h2 data-cy="documentRelationDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceDocumentRelation.detail.title">Document Relation</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentRelationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentRelation.sourceDocumentId">Source Document Id</span></dt>
+          <dd>
+            <span>{{ documentRelationRef.sourceDocumentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentRelation.targetDocumentId">Target Document Id</span></dt>
+          <dd>
+            <span>{{ documentRelationRef.targetDocumentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentRelation.relationType">Relation Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.RelationType.' + (documentRelationRef.relationType ?? 'null')">{{
+              {
+                null: '',
+                RELATED_TO: 'RELATED_TO',
+                REPLACES: 'REPLACES',
+                REPLACED_BY: 'REPLACED_BY',
+                SUPPLEMENTS: 'SUPPLEMENTS',
+                SUPPLEMENTED_BY: 'SUPPLEMENTED_BY',
+                REFERENCED_BY: 'REFERENCED_BY',
+                REFERENCES: 'REFERENCES',
+                ATTACHMENT_OF: 'ATTACHMENT_OF',
+                HAS_ATTACHMENT: 'HAS_ATTACHMENT',
+                VERSION_OF: 'VERSION_OF',
+                HAS_VERSION: 'HAS_VERSION',
+                COPY_OF: 'COPY_OF',
+                ORIGINAL_OF: 'ORIGINAL_OF',
+                PART_OF: 'PART_OF',
+                HAS_PART: 'HAS_PART',
+                RESPONSE_TO: 'RESPONSE_TO',
+                HAS_RESPONSE: 'HAS_RESPONSE',
+                AMENDMENT_OF: 'AMENDMENT_OF',
+                HAS_AMENDMENT: 'HAS_AMENDMENT',
+                CUSTOM: 'CUSTOM',
+              }[documentRelationRef.relationType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentRelation.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ documentRelationRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentRelation.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ documentRelationRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-relation', documentRelationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

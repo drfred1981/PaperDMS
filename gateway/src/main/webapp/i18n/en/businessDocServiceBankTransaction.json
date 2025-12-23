@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "businessDocServiceBankTransaction": {
+      "home": {
+        "title": "Bank Transactions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Bank Transaction",
+        "createOrEditLabel": "Create or edit a Bank Transaction",
+        "notFound": "No Bank Transactions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Bank Transaction {{ id }}?"
+      },
+      "detail": {
+        "title": "Bank Transaction"
+      },
+      "id": "ID",
+      "statementId": "Statement Id",
+      "transactionDate": "Transaction Date",
+      "description": "Description",
+      "debitAmount": "Debit Amount",
+      "creditAmount": "Credit Amount",
+      "balance": "Balance",
+      "isReconciled": "Is Reconciled",
+      "statement": "Statement"
+    }
+  },
+  "businessDocServiceApp": {
+    "businessDocServiceBankTransaction": {
+      "created": "A new Bank Transaction is created with identifier {{ param }}",
+      "updated": "A Bank Transaction is updated with identifier {{ param }}",
+      "deleted": "A Bank Transaction is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "gatewayApp": {
+    "notificationServiceWebhookLog": {
+      "home": {
+        "title": "Webhook Logs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Webhook Log",
+        "createOrEditLabel": "Create or edit a Webhook Log",
+        "notFound": "No Webhook Logs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Webhook Log {{ id }}?"
+      },
+      "detail": {
+        "title": "Webhook Log"
+      },
+      "id": "ID",
+      "subscriptionId": "Subscription Id",
+      "eventType": "Event Type",
+      "payload": "Payload",
+      "responseStatus": "Response Status",
+      "responseBody": "Response Body",
+      "responseTime": "Response Time",
+      "attemptNumber": "Attempt Number",
+      "isSuccess": "Is Success",
+      "errorMessage": "Error Message",
+      "sentDate": "Sent Date",
+      "subscription": "Subscription"
+    }
+  },
+  "notificationServiceApp": {
+    "notificationServiceWebhookLog": {
+      "created": "A new Webhook Log is created with identifier {{ param }}",
+      "updated": "A Webhook Log is updated with identifier {{ param }}",
+      "deleted": "A Webhook Log is deleted with identifier {{ param }}"
+    }
+  }
+}

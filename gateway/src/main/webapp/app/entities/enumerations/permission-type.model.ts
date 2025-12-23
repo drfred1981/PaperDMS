@@ -1,0 +1,23 @@
+export enum PermissionType {
+  VIEW = 'VIEW',
+
+  DOWNLOAD = 'DOWNLOAD',
+
+  EDIT = 'EDIT',
+
+  DELETE = 'DELETE',
+
+  SHARE = 'SHARE',
+
+  APPROVE = 'APPROVE',
+
+  PRINT = 'PRINT',
+
+  EXPORT = 'EXPORT',
+
+  COMMENT = 'COMMENT',
+
+  MANAGE_PERMISSIONS = 'MANAGE_PERMISSIONS',
+
+  FULL_CONTROL = 'FULL_CONTROL',
+}

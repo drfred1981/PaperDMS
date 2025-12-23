@@ -6,14 +6,14 @@
     "baseName": "reportingService",
     "buildTool": "maven",
     "cacheProvider": "redis",
-    "creationTimestamp": 1765349654449,
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
-    "entities": [],
+    "entities": ["Dashboard", "DashboardWidget", "ScheduledReport", "ReportExecution", "PerformanceMetric", "SystemMetric"],
     "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "MjMyYWI4M2U0Njk4ODZjMGM1NWVkZWVjZmZiNjg1NzBkMDU0MDFmZDllMDQ2MjEyMWZiNDc3MGQ0NDRkYWRmYjRjYjVkM2E3MzUyYzA4NmNmZDYwMzRhYWJlYTQ2NmQwYTIwZTdkMThiNzJjYWI2YzIxYjAyMGMxYmQ2MjY1ZWY=",
+    "jwtSecretKey": "Zjk5YzJhMDMxZjViMzVmNWY4YjlmNWVjYmE3ZTViNjkzNjI1MDk2Yzk0MjZkZDI3MmM5NTgyNDBjZmQxYjU2ZjYyMTU0NWQ5ODk3OTFhNTA5M2EwYjM5MmI3ZTc2YTE2MmRjMWU5Mjc0M2Q2YzQ4ZjhmNmZlNjc4YTljODRlZTI=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1766244614000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -22,6 +22,7 @@
     "serverPort": "8094",
     "serviceDiscoveryType": "consul",
     "skipClient": true,
-    "skipCommitHook": true
+    "skipCommitHook": true,
+    "withAdminUi": true
   }
 }

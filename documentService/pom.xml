@@ -345,6 +345,32 @@
             <artifactId>testcontainers</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+        	<groupId>fr.smartprod.paperdms</groupId>
+		    <artifactId>paperdms-common</artifactId>
+		    <version>1.0.0</version>
+        </dependency>
+		
+		<!-- AWS SDK for S3 Storage -->
+		<dependency>
+		    <groupId>software.amazon.awssdk</groupId>
+		    <artifactId>s3</artifactId>
+		    <version>2.20.0</version>
+		</dependency>
+		
+		<!-- AWS SDK Core (required for S3) -->
+		<dependency>
+		    <groupId>software.amazon.awssdk</groupId>
+		    <artifactId>auth</artifactId>
+		    <version>2.20.0</version>
+		</dependency>
+		
+		<!-- Apache PDFBox for PDF Processing -->
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>3.0.0</version>
+		</dependency>
     </dependencies>
 
     <build>

@@ -1,0 +1,122 @@
+// ============================================================================
+// 16 - MONITORING SERVICE (6 entités)
+// ============================================================================
+
+enum AlertType {
+  DOCUMENT_EXPIRATION, STORAGE_QUOTA, UNUSUAL_ACTIVITY,
+  COMPLIANCE_VIOLATION, WORKFLOW_DELAYED, FAILED_OCR,
+  MISSING_METADATA, DUPLICATE_DETECTED, PERMISSION_CHANGED,
+  SERVICE_DOWN, HIGH_ERROR_RATE, CONTRACT_EXPIRATION,
+  INVOICE_OVERDUE, SYSTEM_OVERLOAD
+}
+
+enum AlertStatus {
+  ACTIVE, ACKNOWLEDGED, RESOLVED, DISMISSED, ESCALATED
+}
+
+enum Severity {
+  LOW, MEDIUM, HIGH, CRITICAL
+}
+
+enum WatchType {
+  AUTHOR, REVIEWER, AUDITOR, STAKEHOLDER, CUSTOM
+}
+
+enum MaintenanceType {
+  CLEANUP_DELETED, REBUILD_INDEX, OPTIMIZE_STORAGE, VERIFY_CHECKSUMS,
+  EXPIRE_TEMP_FILES, PRUNE_AUDIT_LOGS, UPDATE_STATISTICS,
+  VACUUM_DATABASE, ROTATE_LOGS, BACKUP_DATABASE
+}
+
+enum HealthStatus {
+  HEALTHY, DEGRADED, UNHEALTHY, UNKNOWN
+}
+
+enum ServiceStatusType {
+  RUNNING, STARTING, STOPPING, STOPPED, ERROR, MAINTENANCE
+}
+
+entity Alert {
+  alertRuleId Long required
+  severity Severity required
+  title String required maxlength(255)
+  message TextBlob required
+  entityType String maxlength(100)
+  entityId Long
+  status AlertStatus required
+  triggeredDate Instant required
+  acknowledgedBy String maxlength(50)
+  acknowledgedDate Instant
+  resolvedBy String maxlength(50)
+  resolvedDate Instant
+}
+
+entity AlertRule {
+  name String required maxlength(255)
+  description TextBlob
+  alertType AlertType required
+  conditions TextBlob required
+  severity Severity required
+  recipients TextBlob required
+  isActive Boolean required
+  triggerCount Integer
+  lastTriggered Instant
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity DocumentWatch {
+  documentId Long required
+  userId String required maxlength(50)
+  watchType WatchType required
+  notifyOnView Boolean required
+  notifyOnDownload Boolean required
+  notifyOnModify Boolean required
+  notifyOnShare Boolean required
+  notifyOnDelete Boolean required
+  createdDate Instant required
+}
+
+entity MaintenanceTask {
+  name String required maxlength(255)
+  description TextBlob
+  taskType MaintenanceType required
+  schedule String required maxlength(100)
+  status TransformStatus required
+  isActive Boolean required
+  lastRun Instant
+  nextRun Instant
+  duration Long
+  recordsProcessed Integer
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity SystemHealth {
+  serviceName String required maxlength(100)
+  status HealthStatus required
+  version String maxlength(50)
+  uptime Long
+  cpuUsage Double
+  memoryUsage Double
+  errorRate Double
+  lastCheck Instant required
+}
+
+entity ServiceStatus {
+  serviceName String required maxlength(100) unique
+  serviceType String maxlength(50)
+  status ServiceStatusType required
+  endpoint String maxlength(500)
+  port Integer
+  version String maxlength(50)
+  lastPing Instant
+  isHealthy Boolean required
+}
+
+relationship ManyToOne {
+  Alert{alertRule required} to AlertRule
+}
+
+microservice Alert, AlertRule, DocumentWatch, MaintenanceTask, 
+             SystemHealth, ServiceStatus with monitoringService

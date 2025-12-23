@@ -1,0 +1,11 @@
+{
+  "gatewayApp": {
+    "CorrespondentType": {
+      "null": "",
+      "PERSON": "PERSON",
+      "ORGANIZATION": "ORGANIZATION",
+      "SYSTEM": "SYSTEM",
+      "UNKNOWN": "UNKNOWN"
+    }
+  }
+}

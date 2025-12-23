@@ -1,0 +1,328 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-compression-job-heading"
+        data-cy="CompressionJobCreateUpdateHeading"
+        jhiTranslate="gatewayApp.transformServiceCompressionJob.home.createOrEditLabel"
+      >
+        Create or edit a Compression Job
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.transformServiceCompressionJob.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let documentIdRef = editForm.get('documentId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentId" jhiTranslate="gatewayApp.transformServiceCompressionJob.documentId"
+            >Document Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentId"
+            id="field_documentId"
+            data-cy="documentId"
+            formControlName="documentId"
+          />
+          @if (documentIdRef.invalid && (documentIdRef.dirty || documentIdRef.touched)) {
+            <div>
+              @if (editForm.get('documentId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('documentId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let compressionTypeRef = editForm.get('compressionType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_compressionType" jhiTranslate="gatewayApp.transformServiceCompressionJob.compressionType"
+            >Compression Type</label
+          >
+          <select
+            class="form-control"
+            name="compressionType"
+            formControlName="compressionType"
+            id="field_compressionType"
+            data-cy="compressionType"
+          >
+            <option [ngValue]="null">{{ 'gatewayApp.CompressionType.null' | translate }}</option>
+            @for (compressionType of compressionTypeValues; track $index) {
+              <option [value]="compressionType">{{ 'gatewayApp.CompressionType.' + compressionType | translate }}</option>
+            }
+          </select>
+          @if (compressionTypeRef.invalid && (compressionTypeRef.dirty || compressionTypeRef.touched)) {
+            <div>
+              @if (editForm.get('compressionType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let qualityRef = editForm.get('quality')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_quality" jhiTranslate="gatewayApp.transformServiceCompressionJob.quality">Quality</label>
+          <input type="number" class="form-control" name="quality" id="field_quality" data-cy="quality" formControlName="quality" />
+          @if (qualityRef.invalid && (qualityRef.dirty || qualityRef.touched)) {
+            <div>
+              @if (editForm.get('quality')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('quality')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '100' }"
+                  >This field cannot be more than 100.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('quality')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_targetSizeKb" jhiTranslate="gatewayApp.transformServiceCompressionJob.targetSizeKb"
+            >Target Size Kb</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="targetSizeKb"
+            id="field_targetSizeKb"
+            data-cy="targetSizeKb"
+            formControlName="targetSizeKb"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_originalSize" jhiTranslate="gatewayApp.transformServiceCompressionJob.originalSize"
+            >Original Size</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="originalSize"
+            id="field_originalSize"
+            data-cy="originalSize"
+            formControlName="originalSize"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_compressedSize" jhiTranslate="gatewayApp.transformServiceCompressionJob.compressedSize"
+            >Compressed Size</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="compressedSize"
+            id="field_compressedSize"
+            data-cy="compressedSize"
+            formControlName="compressedSize"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_compressionRatio" jhiTranslate="gatewayApp.transformServiceCompressionJob.compressionRatio"
+            >Compression Ratio</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="compressionRatio"
+            id="field_compressionRatio"
+            data-cy="compressionRatio"
+            formControlName="compressionRatio"
+          />
+        </div>
+
+        @let outputS3KeyRef = editForm.get('outputS3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_outputS3Key" jhiTranslate="gatewayApp.transformServiceCompressionJob.outputS3Key"
+            >Output S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="outputS3Key"
+            id="field_outputS3Key"
+            data-cy="outputS3Key"
+            formControlName="outputS3Key"
+          />
+          @if (outputS3KeyRef.invalid && (outputS3KeyRef.dirty || outputS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('outputS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_outputDocumentId" jhiTranslate="gatewayApp.transformServiceCompressionJob.outputDocumentId"
+            >Output Document Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="outputDocumentId"
+            id="field_outputDocumentId"
+            data-cy="outputDocumentId"
+            formControlName="outputDocumentId"
+          />
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.transformServiceCompressionJob.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.TransformStatus.null' | translate }}</option>
+            @for (transformStatus of transformStatusValues; track $index) {
+              <option [value]="transformStatus">{{ 'gatewayApp.TransformStatus.' + transformStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" jhiTranslate="gatewayApp.transformServiceCompressionJob.startDate"
+            >Start Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="gatewayApp.transformServiceCompressionJob.endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_errorMessage" jhiTranslate="gatewayApp.transformServiceCompressionJob.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        @let createdByRef = editForm.get('createdBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="gatewayApp.transformServiceCompressionJob.createdBy"
+            >Created By</label
+          >
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+          @if (createdByRef.invalid && (createdByRef.dirty || createdByRef.touched)) {
+            <div>
+              @if (editForm.get('createdBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('createdBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.transformServiceCompressionJob.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

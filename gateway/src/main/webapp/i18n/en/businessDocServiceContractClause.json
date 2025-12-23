@@ -1,0 +1,34 @@
+{
+  "gatewayApp": {
+    "businessDocServiceContractClause": {
+      "home": {
+        "title": "Contract Clauses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Contract Clause",
+        "createOrEditLabel": "Create or edit a Contract Clause",
+        "notFound": "No Contract Clauses found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Contract Clause {{ id }}?"
+      },
+      "detail": {
+        "title": "Contract Clause"
+      },
+      "id": "ID",
+      "contractId": "Contract Id",
+      "clauseNumber": "Clause Number",
+      "title": "Title",
+      "content": "Content",
+      "clauseType": "Clause Type",
+      "isMandatory": "Is Mandatory",
+      "contract": "Contract"
+    }
+  },
+  "businessDocServiceApp": {
+    "businessDocServiceContractClause": {
+      "created": "A new Contract Clause is created with identifier {{ param }}",
+      "updated": "A Contract Clause is updated with identifier {{ param }}",
+      "deleted": "A Contract Clause is deleted with identifier {{ param }}"
+    }
+  }
+}

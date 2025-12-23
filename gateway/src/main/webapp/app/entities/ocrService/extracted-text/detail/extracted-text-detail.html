@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (extractedText(); as extractedTextRef) {
+      <div>
+        <h2 data-cy="extractedTextDetailsHeading">
+          <span jhiTranslate="gatewayApp.ocrServiceExtractedText.detail.title">Extracted Text</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.content">Content</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.contentSha256">Content Sha 256</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.contentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.s3ContentKey">S 3 Content Key</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.s3ContentKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.s3Bucket">S 3 Bucket</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.s3Bucket }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.pageNumber">Page Number</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.pageNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.language">Language</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.language }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.wordCount">Word Count</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.wordCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.hasStructuredData">Has Structured Data</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.hasStructuredData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.structuredData">Structured Data</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.structuredData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.structuredDataS3Key">Structured Data S 3 Key</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.structuredDataS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.extractedDate">Extracted Date</span></dt>
+          <dd>
+            <span>{{ extractedTextRef.extractedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceExtractedText.job">Job</span></dt>
+          <dd>
+            @if (extractedText()!.job) {
+              <div>
+                <a [routerLink]="['/ocr-job', extractedText()!.job?.id, 'view']">{{ extractedTextRef.job?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/extracted-text', extractedTextRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

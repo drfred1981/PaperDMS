@@ -1,11 +1,11 @@
-id;document_id;extracted_text;status;start_date;end_date;error_message;senders_count;recipients_count;created_date
-1;13021;../fake-data/blob/hipster.txt;FAILED;2025-12-07T23:06:29;2025-12-08T14:06:21;../fake-data/blob/hipster.txt;19722;10838;2025-12-08T06:48:38
-2;4103;../fake-data/blob/hipster.txt;COMPLETED;2025-12-07T19:29:10;2025-12-08T16:57:39;../fake-data/blob/hipster.txt;26233;528;2025-12-08T17:47:40
-3;7719;../fake-data/blob/hipster.txt;FAILED;2025-12-08T05:40:33;2025-12-08T17:28:44;../fake-data/blob/hipster.txt;10017;21244;2025-12-08T14:34:44
-4;11158;../fake-data/blob/hipster.txt;FAILED;2025-12-08T04:52:24;2025-12-08T11:45:32;../fake-data/blob/hipster.txt;12800;2169;2025-12-08T10:38:41
-5;14746;../fake-data/blob/hipster.txt;IN_PROGRESS;2025-12-07T23:48:06;2025-12-08T17:38:53;../fake-data/blob/hipster.txt;20460;32454;2025-12-08T16:22:50
-6;23555;../fake-data/blob/hipster.txt;CANCELLED;2025-12-08T13:05:59;2025-12-08T18:24:12;../fake-data/blob/hipster.txt;20806;10001;2025-12-08T05:57:56
-7;23213;../fake-data/blob/hipster.txt;FAILED;2025-12-08T17:03:37;2025-12-08T07:48:41;../fake-data/blob/hipster.txt;28704;3539;2025-12-08T06:28:04
-8;28182;../fake-data/blob/hipster.txt;FAILED;2025-12-08T17:11:29;2025-12-07T23:29:58;../fake-data/blob/hipster.txt;6064;24152;2025-12-08T05:42:26
-9;30948;../fake-data/blob/hipster.txt;COMPLETED;2025-12-07T23:53:15;2025-12-08T10:21:41;../fake-data/blob/hipster.txt;30660;2217;2025-12-08T00:48:56
-10;24587;../fake-data/blob/hipster.txt;CANCELLED;2025-12-08T05:34:38;2025-12-08T14:37:07;../fake-data/blob/hipster.txt;11376;15514;2025-12-08T04:41:05
+id;document_id;document_sha_256;extracted_text;extracted_text_sha_256;detected_language;language_confidence;status;result_cache_key;is_cached;result_s_3_key;start_date;end_date;error_message;senders_count;recipients_count;created_date
+1;13021;or sedately netsuke;../fake-data/blob/hipster.txt;fooey sleepy;mundane ap;0.94;PENDING;hold;false;compromise coal young;2025-12-19T21:12:46;2025-12-20T11:57:14;../fake-data/blob/hipster.txt;20666;22706;2025-12-19T16:15:57
+2;3618;phooey geez nervously;../fake-data/blob/hipster.txt;unimportant outside geez;phew;0.85;COMPLETED;brush wise;false;ack;2025-12-19T21:45:25;2025-12-19T21:16:17;../fake-data/blob/hipster.txt;13341;8441;2025-12-19T21:54:30
+3;11231;how even arcade;../fake-data/blob/hipster.txt;summarise mmm the;devise uni;0.69;CANCELLED;upliftingly boo bah;true;tomb unless kaleidoscopic;2025-12-19T17:56:39;2025-12-20T07:49:31;../fake-data/blob/hipster.txt;21276;24179;2025-12-19T17:03:57
+4;3751;before;../fake-data/blob/hipster.txt;psst and when;transom ar;0.15;CANCELLED;boo geez aha;false;yippee since;2025-12-20T06:38:47;2025-12-20T00:39:25;../fake-data/blob/hipster.txt;27409;2314;2025-12-20T09:22:55
+5;13918;reporter;../fake-data/blob/hipster.txt;good-natured;somber mol;0.06;IN_PROGRESS;sans;true;simplistic utilization;2025-12-19T19:30:48;2025-12-20T13:08:32;../fake-data/blob/hipster.txt;853;25287;2025-12-20T11:55:22
+6;26065;regularly duh;../fake-data/blob/hipster.txt;upliftingly descendant form;who;0.17;IN_PROGRESS;partial scramble;false;like bashfully;2025-12-19T21:40:33;2025-12-19T20:49:34;../fake-data/blob/hipster.txt;1260;30201;2025-12-20T03:42:34
+7;31731;inferior yuck;../fake-data/blob/hipster.txt;because;scar;0.53;COMPLETED;boo beside;false;gah abaft;2025-12-20T00:12:53;2025-12-20T12:33:49;../fake-data/blob/hipster.txt;24063;798;2025-12-19T23:30:36
+8;10159;linear amongst;../fake-data/blob/hipster.txt;gasp loyally um;unto wrath;0.1;IN_PROGRESS;yuck;false;lively towards;2025-12-20T07:52:29;2025-12-20T07:22:42;../fake-data/blob/hipster.txt;12689;29030;2025-12-20T04:55:25
+9;11313;variable;../fake-data/blob/hipster.txt;angrily;vibration ;0.36;FAILED;beep;false;psst angle coexist;2025-12-19T16:02:33;2025-12-20T14:21:01;../fake-data/blob/hipster.txt;9924;1069;2025-12-20T02:20:33
+10;1247;arrogantly yet;../fake-data/blob/hipster.txt;to;descendant;0.52;PENDING;sunny yuck;true;vaguely;2025-12-20T13:45:22;2025-12-20T13:49:16;../fake-data/blob/hipster.txt;30756;15533;2025-12-20T13:17:08

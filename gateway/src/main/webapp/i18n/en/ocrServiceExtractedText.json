@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "ocrServiceExtractedText": {
+      "home": {
+        "title": "Extracted Texts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Extracted Text",
+        "createOrEditLabel": "Create or edit a Extracted Text",
+        "search": "Search for Extracted Text",
+        "notFound": "No Extracted Texts found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Extracted Text {{ id }}?"
+      },
+      "detail": {
+        "title": "Extracted Text"
+      },
+      "id": "ID",
+      "content": "Content",
+      "contentSha256": "Content Sha 256",
+      "s3ContentKey": "S 3 Content Key",
+      "s3Bucket": "S 3 Bucket",
+      "pageNumber": "Page Number",
+      "language": "Language",
+      "wordCount": "Word Count",
+      "hasStructuredData": "Has Structured Data",
+      "structuredData": "Structured Data",
+      "structuredDataS3Key": "Structured Data S 3 Key",
+      "extractedDate": "Extracted Date",
+      "job": "Job"
+    }
+  },
+  "ocrServiceApp": {
+    "ocrServiceExtractedText": {
+      "created": "A new Extracted Text is created with identifier {{ param }}",
+      "updated": "A Extracted Text is updated with identifier {{ param }}",
+      "deleted": "A Extracted Text is deleted with identifier {{ param }}"
+    }
+  }
+}

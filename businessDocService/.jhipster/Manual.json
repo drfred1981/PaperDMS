@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "changelogDate": "20251220153114"
+  },
+  "applications": ["gateway", "businessDocService"],
+  "clientRootFolder": "businessDocService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "manualType",
+      "fieldType": "ManualType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "USER_MANUAL,TECHNICAL_MANUAL,INSTALLATION_GUIDE,MAINTENANCE_GUIDE,TRAINING_MATERIAL,POLICY_DOCUMENT,PROCEDURE,STANDARD,SPECIFICATION"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "publicationDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "pageCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ManualStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DRAFT,REVIEW,APPROVED,PUBLISHED,ARCHIVED,OBSOLETE"
+    },
+    {
+      "fieldName": "isPublic",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "businessDocService",
+  "name": "Manual",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

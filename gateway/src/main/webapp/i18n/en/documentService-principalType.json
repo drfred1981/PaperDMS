@@ -1,0 +1,12 @@
+{
+  "gatewayApp": {
+    "PrincipalType": {
+      "null": "",
+      "USER": "USER",
+      "GROUP": "GROUP",
+      "ROLE": "ROLE",
+      "PUBLIC": "PUBLIC",
+      "DEPARTMENT": "DEPARTMENT"
+    }
+  }
+}

@@ -2,7 +2,7 @@
 name: searchservice
 services:
   postgresql:
-    image: postgres:17.4
+    image: postgres:18.1
     # volumes:
     #   - ~/volumes/jhipster/searchService/postgresql/:/var/lib/postgresql/data/
     environment:

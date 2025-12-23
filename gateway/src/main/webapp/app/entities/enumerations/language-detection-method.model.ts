@@ -1,0 +1,13 @@
+export enum LanguageDetectionMethod {
+  TIKA = 'TIKA',
+
+  LANGDETECT = 'LANGDETECT',
+
+  FASTTEXT = 'FASTTEXT',
+
+  BERT_MULTILINGUAL = 'BERT_MULTILINGUAL',
+
+  MANUAL = 'MANUAL',
+
+  COMBINED = 'COMBINED',
+}

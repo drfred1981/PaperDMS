@@ -1,0 +1,300 @@
+---
+title: Document Service - Modèle de Données
+---
+classDiagram
+    class Document {
+        +Long id
+        +String title
+        +String description
+        +String fileName
+        +Long fileSize
+        +String mimeType
+        +String sha256
+        +String s3Key
+        +String s3Bucket
+        +String s3Region
+        +String s3Etag
+        +String thumbnailS3Key
+        +String thumbnailSha256
+        +String webpPreviewS3Key
+        +String webpPreviewSha256
+        +DocumentStatus status
+        +Instant uploadDate
+        +Instant processedDate
+        +Instant expirationDate
+        +Boolean isPublic
+        +Boolean isEncrypted
+        +Integer downloadCount
+        +Integer viewCount
+        +String detectedLanguage
+        +String manualLanguage
+        +Double languageConfidence
+        +Integer pageCount
+        +Instant createdDate
+        +String createdBy
+        +Instant lastModifiedDate
+        +String lastModifiedBy
+    }
+    
+    class DocumentType {
+        +Long id
+        +String name
+        +String code
+        +String description
+        +String icon
+        +String color
+        +String allowedMimeTypes
+        +Integer defaultRetentionDays
+        +Boolean requiresApproval
+        +Boolean requiresSignature
+        +String templateS3Key
+        +String metadata
+        +Boolean isActive
+        +Integer displayOrder
+        +Instant createdDate
+        +String createdBy
+    }
+    
+    class DocumentTypeField {
+        +Long id
+        +String fieldKey
+        +String fieldLabel
+        +MetadataType dataType
+        +Boolean isRequired
+        +Boolean isSearchable
+        +Boolean isSystemField
+        +String defaultValue
+        +String validationRegex
+        +String allowedValues
+        +String placeholder
+        +String helpText
+        +Integer displayOrder
+        +String groupName
+        +Boolean isActive
+        +Instant createdDate
+    }
+    
+    class DocumentVersion {
+        +Long id
+        +Integer versionNumber
+        +String fileName
+        +String sha256
+        +String s3Key
+        +Long fileSize
+        +Instant uploadDate
+        +String comment
+        +Boolean isActive
+        +String createdBy
+    }
+    
+    class Folder {
+        +Long id
+        +String name
+        +String description
+        +String path
+        +Long parentId
+        +Boolean isShared
+        +String permissions
+        +Instant createdDate
+        +String createdBy
+        +Instant lastModifiedDate
+        +String lastModifiedBy
+    }
+    
+    class Tag {
+        +Long id
+        +String name
+        +String color
+        +String description
+        +String icon
+        +Integer usageCount
+        +Boolean isSystem
+        +Boolean isActive
+        +Instant createdDate
+        +String createdBy
+    }
+    
+    class TagCategory {
+        +Long id
+        +String name
+        +String description
+        +String color
+        +String icon
+        +Integer displayOrder
+        +Boolean isSystem
+        +Boolean isActive
+        +Long parentId
+        +Instant createdDate
+        +String createdBy
+    }
+    
+    class DocumentTag {
+        +Long id
+        +Instant assignedDate
+        +String assignedBy
+        +Double confidence
+        +Boolean isAutoTagged
+        +TagSource source
+    }
+    
+    class DocumentMetadata {
+        +Long id
+        +String key
+        +String value
+        +MetadataType dataType
+        +Boolean isSearchable
+        +Boolean isRequired
+        +Integer displayOrder
+        +Instant createdDate
+    }
+    
+    class ExtractedField {
+        +Long id
+        +Long documentId
+        +String fieldKey
+        +String fieldValue
+        +MetadataType dataType
+        +Double confidence
+        +ExtractionMethod extractionMethod
+        +Integer pageNumber
+        +String boundingBox
+        +Boolean isVerified
+        +String verifiedBy
+        +Instant verifiedDate
+        +String originalValue
+        +Instant extractedDate
+    }
+    
+    class DocumentPermission {
+        +Long id
+        +Long documentId
+        +PrincipalType principalType
+        +String principalId
+        +PermissionType permission
+        +Boolean canDelegate
+        +String grantedBy
+        +Instant grantedDate
+        +Instant expirationDate
+        +Boolean isInherited
+        +Long inheritedFrom
+        +String metadata
+    }
+    
+    class PermissionGroup {
+        +Long id
+        +String name
+        +String description
+        +String permissions
+        +Boolean isSystem
+        +Boolean isActive
+        +String createdBy
+        +Instant createdDate
+        +Instant lastModifiedDate
+    }
+    
+    Document "1" --> "0..*" DocumentVersion : versions
+    Document "1" --> "0..*" DocumentTag : tags
+    Document "1" --> "0..*" DocumentMetadata : metadata
+    Document "1" --> "0..*" DocumentPermission : permissions
+    Document "*" --> "1" DocumentType : type
+    Document "*" --> "0..1" Folder : folder
+    
+    DocumentType "1" --> "0..*" DocumentTypeField : fields
+    
+    DocumentTag "*" --> "1" Tag : tag
+    Tag "*" --> "0..1" TagCategory : category
+    
+    TagCategory "1" --> "0..*" TagCategory : children
+    
+    Folder "1" --> "0..*" Folder : children
+    
+    ExtractedField "*" --> "0..1" DocumentType : documentType
+    
+    DocumentPermission "*" --> "0..1" PermissionGroup : permissionGroup
+    
+    class DocumentStatus {
+        <<enumeration>>
+        UPLOADING
+        UPLOADED
+        PROCESSING
+        PROCESSED
+        OCR_PENDING
+        OCR_IN_PROGRESS
+        OCR_COMPLETED
+        OCR_FAILED
+        AI_PROCESSING
+        INDEXED
+        WORKFLOW_PENDING
+        WORKFLOW_IN_PROGRESS
+        APPROVED
+        REJECTED
+        ARCHIVED
+        DELETED
+        ERROR
+    }
+    
+    class TagSource {
+        <<enumeration>>
+        MANUAL
+        AI_SUGGESTED
+        AI_CONFIRMED
+        RULE_BASED
+        IMPORTED
+    }
+    
+    class MetadataType {
+        <<enumeration>>
+        STRING
+        NUMBER
+        INTEGER
+        DECIMAL
+        DATE
+        DATETIME
+        BOOLEAN
+        EMAIL
+        PHONE
+        URL
+        JSON
+        ARRAY
+        CURRENCY
+        PERCENTAGE
+    }
+    
+    class ExtractionMethod {
+        <<enumeration>>
+        OCR
+        NLP
+        REGEX
+        MANUAL
+        AI_MODEL
+        TEMPLATE_MATCHING
+        BARCODE
+        QR_CODE
+    }
+    
+    class PrincipalType {
+        <<enumeration>>
+        USER
+        GROUP
+        ROLE
+        PUBLIC
+        DEPARTMENT
+    }
+    
+    class PermissionType {
+        <<enumeration>>
+        VIEW
+        DOWNLOAD
+        EDIT
+        DELETE
+        SHARE
+        APPROVE
+        PRINT
+        EXPORT
+        COMMENT
+        MANAGE_PERMISSIONS
+        FULL_CONTROL
+    }
+    
+    note for DocumentPermission "Granular Permissions\n- User/Group/Role based\n- Delegatable\n- Expirable\n- Inheritable from folders"
+    note for PermissionGroup "Permission Templates\n- Reusable sets\n- System/Custom\n- JSON configuration"

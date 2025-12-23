@@ -1,0 +1,133 @@
+/**
+ * OCR Service - 7 Entit�s
+ */
+
+// Enums
+enum OcrStatus {
+  PENDING, IN_PROGRESS, COMPLETED, FAILED, CANCELLED, RETRYING, COMPARING
+}
+
+enum OcrEngine {
+  TIKA_TESSERACT, TIKA_NATIVE, OPENAI_VISION, GOOGLE_VISION,
+  AWS_TEXTRACT, AZURE_VISION, ANTHROPIC_CLAUDE, CUSTOM, HYBRID
+}
+
+enum AiOcrProvider {
+  OPENAI, GOOGLE_CLOUD, AWS, AZURE, ANTHROPIC, CUSTOM
+}
+entity DocumentProcess {
+  status WorkflowInstanceStatus
+  documentId Long required
+  documentSha256 String required maxlength(64)
+}
+entity OcrJob {
+  status OcrStatus required
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  s3Key String required maxlength(1000)
+  s3Bucket String required maxlength(255)
+  requestedLanguage String maxlength(10)
+  detectedLanguage String maxlength(10)
+  languageConfidence Double min(0) max(1)
+  ocrEngine OcrEngine
+  tikaEndpoint String maxlength(500)
+  aiProvider String maxlength(100)
+  aiModel String maxlength(100)
+  resultCacheKey String maxlength(128)
+  isCached Boolean required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  pageCount Integer
+  progress Integer min(0) max(100)
+  retryCount Integer
+  priority Integer
+  processingTime Long
+  costEstimate Double
+  createdDate Instant required
+  createdBy String required maxlength(50)
+}
+
+entity OcrResult {
+  pageNumber Integer required
+  pageSha256 String maxlength(64)
+  confidence Double min(0) max(1)
+  s3ResultKey String maxlength(1000)
+  s3Bucket String required maxlength(255)
+  s3BoundingBoxKey String maxlength(1000)
+  boundingBoxes TextBlob
+  metadata TextBlob
+  language String maxlength(10)
+  wordCount Integer
+  ocrEngine OcrEngine
+  processingTime Long
+  rawResponse TextBlob
+  rawResponseS3Key String maxlength(1000)
+  processedDate Instant required
+}
+
+entity ExtractedText {
+  content TextBlob required
+  contentSha256 String maxlength(64)
+  s3ContentKey String maxlength(1000)
+  s3Bucket String required maxlength(255)
+  pageNumber Integer required
+  language String maxlength(10)
+  wordCount Integer
+  hasStructuredData Boolean
+  structuredData TextBlob
+  structuredDataS3Key String maxlength(1000)
+  extractedDate Instant required
+}
+
+  
+
+entity OcrComparison {
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  pageNumber Integer required
+  tikaText TextBlob
+  tikaConfidence Double min(0) max(1)
+  aiText TextBlob
+  aiConfidence Double min(0) max(1)
+  similarity Double min(0) max(1)
+  differences TextBlob
+  differencesS3Key String maxlength(1000)
+  selectedEngine OcrEngine
+  selectedBy String maxlength(50)
+  selectedDate Instant
+  comparisonDate Instant required
+  metadata TextBlob
+}
+
+entity OcrCache {
+  documentSha256 String required maxlength(64) unique
+  ocrEngine OcrEngine
+  language String maxlength(10)
+  pageCount Integer required
+  totalConfidence Double min(0) max(1)
+  s3ResultKey String required maxlength(1000)
+  s3Bucket String required maxlength(255)
+  extractedTextS3Key String maxlength(1000)
+  metadata TextBlob
+  hits Integer
+  lastAccessDate Instant
+  createdDate Instant required
+  expirationDate Instant
+}
+
+// Relations
+relationship ManyToOne {
+  OcrResult{job required} to OcrJob
+  ExtractedText{job required} to OcrJob
+}
+
+// Options
+paginate all with pagination
+filter OcrJob
+service all with serviceImpl
+dto all with mapstruct
+search ExtractedText with elasticsearch
+
+microservice OcrJob, OcrResult, ExtractedText, 
+ OcrComparison, OcrCache with ocrService

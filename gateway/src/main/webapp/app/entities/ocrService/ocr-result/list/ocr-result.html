@@ -1,0 +1,243 @@
+<div>
+  <h2 id="page-heading" data-cy="OcrResultHeading">
+    <span jhiTranslate="gatewayApp.ocrServiceOcrResult.home.title">Ocr Results</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined" />
+        <span jhiTranslate="gatewayApp.ocrServiceOcrResult.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ocr-result"
+        [routerLink]="['/ocr-result/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="gatewayApp.ocrServiceOcrResult.home.createLabel">Create a new Ocr Result</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (ocrResults().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.ocrServiceOcrResult.home.notFound">No Ocr Results found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.pageNumber">Page Number</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.pageSha256">Page Sha 256</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="confidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.confidence">Confidence</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3ResultKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.s3ResultKey">S 3 Result Key</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Bucket">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.s3Bucket">S 3 Bucket</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3BoundingBoxKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.s3BoundingBoxKey">S 3 Bounding Box Key</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="boundingBoxes">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.boundingBoxes">Bounding Boxes</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metadata">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.metadata">Metadata</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="language">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.language">Language</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="wordCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.wordCount">Word Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ocrEngine">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.ocrEngine">Ocr Engine</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processingTime">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.processingTime">Processing Time</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rawResponse">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.rawResponse">Raw Response</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rawResponseS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.rawResponseS3Key">Raw Response S 3 Key</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.processedDate">Processed Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="job.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOcrResult.job">Job</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ocrResult of ocrResults(); track trackId(ocrResult)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ocr-result', ocrResult.id, 'view']">{{ ocrResult.id }}</a>
+              </td>
+              <td>{{ ocrResult.pageNumber }}</td>
+              <td>{{ ocrResult.pageSha256 }}</td>
+              <td>{{ ocrResult.confidence }}</td>
+              <td>{{ ocrResult.s3ResultKey }}</td>
+              <td>{{ ocrResult.s3Bucket }}</td>
+              <td>{{ ocrResult.s3BoundingBoxKey }}</td>
+              <td>{{ ocrResult.boundingBoxes }}</td>
+              <td>{{ ocrResult.metadata }}</td>
+              <td>{{ ocrResult.language }}</td>
+              <td>{{ ocrResult.wordCount }}</td>
+              <td [jhiTranslate]="'gatewayApp.OcrEngine.' + (ocrResult.ocrEngine ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    TIKA_TESSERACT: 'TIKA_TESSERACT',
+                    TIKA_NATIVE: 'TIKA_NATIVE',
+                    OPENAI_VISION: 'OPENAI_VISION',
+                    GOOGLE_VISION: 'GOOGLE_VISION',
+                    AWS_TEXTRACT: 'AWS_TEXTRACT',
+                    AZURE_VISION: 'AZURE_VISION',
+                    ANTHROPIC_CLAUDE: 'ANTHROPIC_CLAUDE',
+                    CUSTOM: 'CUSTOM',
+                    HYBRID: 'HYBRID',
+                  }[ocrResult.ocrEngine ?? 'null']
+                }}
+              </td>
+              <td>{{ ocrResult.processingTime }}</td>
+              <td>{{ ocrResult.rawResponse }}</td>
+              <td>{{ ocrResult.rawResponseS3Key }}</td>
+              <td>{{ ocrResult.processedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (ocrResult.job) {
+                  <div>
+                    <a [routerLink]="['/ocr-job', ocrResult.job.id, 'view']">{{ ocrResult.job.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/ocr-result', ocrResult.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/ocr-result', ocrResult.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(ocrResult)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (ocrResults().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

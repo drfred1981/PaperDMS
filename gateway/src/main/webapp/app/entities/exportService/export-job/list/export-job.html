@@ -1,0 +1,287 @@
+<div>
+  <h2 id="page-heading" data-cy="ExportJobHeading">
+    <span jhiTranslate="gatewayApp.exportServiceExportJob.home.title">Export Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined" />
+        <span jhiTranslate="gatewayApp.exportServiceExportJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-export-job"
+        [routerLink]="['/export-job/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="gatewayApp.exportServiceExportJob.home.createLabel">Create a new Export Job</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (exportJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.exportServiceExportJob.home.notFound">No Export Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentQuery">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.documentQuery">Document Query</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="exportPatternId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.exportPatternId">Export Pattern Id</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="exportFormat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.exportFormat">Export Format</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="includeMetadata">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.includeMetadata">Include Metadata</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="includeVersions">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.includeVersions">Include Versions</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="includeComments">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.includeComments">Include Comments</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="includeAuditTrail">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.includeAuditTrail">Include Audit Trail</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3ExportKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.s3ExportKey">S 3 Export Key</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="exportSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.exportSize">Export Size</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.documentCount">Document Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="filesGenerated">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.filesGenerated">Files Generated</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.errorMessage">Error Message</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="exportPattern.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.exportServiceExportJob.exportPattern">Export Pattern</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (exportJob of exportJobs(); track trackId(exportJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/export-job', exportJob.id, 'view']">{{ exportJob.id }}</a>
+              </td>
+              <td>{{ exportJob.name }}</td>
+              <td>{{ exportJob.description }}</td>
+              <td>{{ exportJob.documentQuery }}</td>
+              <td>{{ exportJob.exportPatternId }}</td>
+              <td [jhiTranslate]="'gatewayApp.ExportFormat.' + (exportJob.exportFormat ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    ORIGINAL: 'ORIGINAL',
+                    PDF: 'PDF',
+                    PDF_A: 'PDF_A',
+                    ZIP: 'ZIP',
+                    FOLDER: 'FOLDER',
+                    CSV_INDEX: 'CSV_INDEX',
+                    JSON_METADATA: 'JSON_METADATA',
+                  }[exportJob.exportFormat ?? 'null']
+                }}
+              </td>
+              <td>{{ exportJob.includeMetadata }}</td>
+              <td>{{ exportJob.includeVersions }}</td>
+              <td>{{ exportJob.includeComments }}</td>
+              <td>{{ exportJob.includeAuditTrail }}</td>
+              <td>{{ exportJob.s3ExportKey }}</td>
+              <td>{{ exportJob.exportSize }}</td>
+              <td>{{ exportJob.documentCount }}</td>
+              <td>{{ exportJob.filesGenerated }}</td>
+              <td [jhiTranslate]="'gatewayApp.ExportStatus.' + (exportJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    EXPORTING: 'EXPORTING',
+                    COMPLETED: 'COMPLETED',
+                    PARTIAL: 'PARTIAL',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[exportJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ exportJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ exportJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ exportJob.errorMessage }}</td>
+              <td>{{ exportJob.createdBy }}</td>
+              <td>{{ exportJob.createdDate | formatMediumDatetime }}</td>
+              <td>
+                @if (exportJob.exportPattern) {
+                  <div>
+                    <a [routerLink]="['/export-pattern', exportJob.exportPattern.id, 'view']">{{ exportJob.exportPattern.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/export-job', exportJob.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/export-job', exportJob.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(exportJob)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (exportJobs().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

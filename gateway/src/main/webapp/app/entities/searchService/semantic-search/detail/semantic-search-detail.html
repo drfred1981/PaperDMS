@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (semanticSearch(); as semanticSearchRef) {
+      <div>
+        <h2 data-cy="semanticSearchDetailsHeading">
+          <span jhiTranslate="gatewayApp.searchServiceSemanticSearch.detail.title">Semantic Search</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.query">Query</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.query }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.queryEmbedding">Query Embedding</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.queryEmbedding }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.results">Results</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.results }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.relevanceScores">Relevance Scores</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.relevanceScores }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.modelUsed">Model Used</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.modelUsed }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.executionTime">Execution Time</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.executionTime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.userId">User Id</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSemanticSearch.searchDate">Search Date</span></dt>
+          <dd>
+            <span>{{ semanticSearchRef.searchDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/semantic-search', semanticSearchRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "similarityServiceDocumentSimilarity": {
+      "home": {
+        "title": "Document Similarities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Similarity",
+        "createOrEditLabel": "Create or edit a Document Similarity",
+        "notFound": "No Document Similarities found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Similarity {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Similarity"
+      },
+      "id": "ID",
+      "documentId1": "Document Id 1",
+      "documentId2": "Document Id 2",
+      "similarityScore": "Similarity Score",
+      "algorithm": "Algorithm",
+      "features": "Features",
+      "computedDate": "Computed Date",
+      "isRelevant": "Is Relevant",
+      "reviewedBy": "Reviewed By",
+      "reviewedDate": "Reviewed Date",
+      "job": "Job"
+    }
+  },
+  "similarityServiceApp": {
+    "similarityServiceDocumentSimilarity": {
+      "created": "A new Document Similarity is created with identifier {{ param }}",
+      "updated": "A Document Similarity is updated with identifier {{ param }}",
+      "deleted": "A Document Similarity is deleted with identifier {{ param }}"
+    }
+  }
+}

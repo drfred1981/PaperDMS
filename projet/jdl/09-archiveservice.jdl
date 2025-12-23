@@ -1,0 +1,48 @@
+// ============================================================================
+// 09 - ARCHIVE SERVICE (2 entités)
+// ============================================================================
+
+enum ArchiveFormat {
+  ZIP, TAR, TAR_GZ, TAR_BZ2, TAR_XZ, SEVEN_ZIP
+}
+
+enum ArchiveStatus {
+  PENDING, ARCHIVING, COMPLETED, FAILED, CANCELLED
+}
+
+entity ArchiveJob {
+  name String required maxlength(255)
+  description TextBlob
+  documentQuery TextBlob required
+  archiveFormat ArchiveFormat required
+  compressionLevel Integer min(0) max(9)
+  encryptionEnabled Boolean required
+  encryptionAlgorithm String maxlength(50)
+  password String maxlength(255)
+  s3ArchiveKey String maxlength(1000)
+  archiveSha256 String maxlength(64)
+  archiveSize Long
+  documentCount Integer
+  status ArchiveStatus required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity ArchiveDocument {
+  archiveJobId Long required
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  originalPath String maxlength(1000)
+  archivePath String maxlength(1000)
+  fileSize Long
+  addedDate Instant required
+}
+
+relationship ManyToOne {
+  ArchiveDocument{archiveJob required} to ArchiveJob
+}
+
+microservice ArchiveJob, ArchiveDocument with archiveService

@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (languageDetection(); as languageDetectionRef) {
+      <div>
+        <h2 data-cy="languageDetectionDetailsHeading">
+          <span jhiTranslate="gatewayApp.aiServiceLanguageDetection.detail.title">Language Detection</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.detectedLanguage">Detected Language</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.detectedLanguage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.detectionMethod">Detection Method</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.LanguageDetectionMethod.' + (languageDetectionRef.detectionMethod ?? 'null')">{{
+              {
+                null: '',
+                TIKA: 'TIKA',
+                LANGDETECT: 'LANGDETECT',
+                FASTTEXT: 'FASTTEXT',
+                BERT_MULTILINGUAL: 'BERT_MULTILINGUAL',
+                MANUAL: 'MANUAL',
+                COMBINED: 'COMBINED',
+              }[languageDetectionRef.detectionMethod ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.alternativeLanguages">Alternative Languages</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.alternativeLanguages }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.textSample">Text Sample</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.textSample }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.resultCacheKey">Result Cache Key</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.resultCacheKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.isCached">Is Cached</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.isCached }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.detectedDate">Detected Date</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.detectedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceLanguageDetection.modelVersion">Model Version</span></dt>
+          <dd>
+            <span>{{ languageDetectionRef.modelVersion }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/language-detection', languageDetectionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

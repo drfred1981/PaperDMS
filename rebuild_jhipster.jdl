@@ -1,0 +1,1 @@
+jhipster import-jdl ./projet/jdl/*.jdl --with-admin-ui --experimental

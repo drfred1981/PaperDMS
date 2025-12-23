@@ -12,6 +12,12 @@
     <property name="timeType" value="time(6)" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152514_added_entity_ConversionJob.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152614_added_entity_WatermarkJob.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152714_added_entity_RedactionJob.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152814_added_entity_CompressionJob.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220152914_added_entity_MergeJob.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251220153014_added_entity_ComparisonJob.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->

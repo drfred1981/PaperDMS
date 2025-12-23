@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20251220164915"
+  },
+  "applications": ["gateway", "reportingService"],
+  "clientRootFolder": "reportingService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "metricName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "cpuUsage",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "memoryUsage",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "diskUsage",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "networkIn",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "networkOut",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "activeConnections",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "timestamp",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "reportingService",
+  "name": "SystemMetric",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

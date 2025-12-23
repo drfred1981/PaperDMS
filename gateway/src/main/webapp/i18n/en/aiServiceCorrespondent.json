@@ -1,0 +1,42 @@
+{
+  "gatewayApp": {
+    "aiServiceCorrespondent": {
+      "home": {
+        "title": "Correspondents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Correspondent",
+        "createOrEditLabel": "Create or edit a Correspondent",
+        "search": "Search for Correspondent",
+        "notFound": "No Correspondents found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Correspondent {{ id }}?"
+      },
+      "detail": {
+        "title": "Correspondent"
+      },
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "company": "Company",
+      "type": "Type",
+      "role": "Role",
+      "confidence": "Confidence",
+      "isVerified": "Is Verified",
+      "verifiedBy": "Verified By",
+      "verifiedDate": "Verified Date",
+      "metadata": "Metadata",
+      "extractedDate": "Extracted Date",
+      "extraction": "Extraction"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceCorrespondent": {
+      "created": "A new Correspondent is created with identifier {{ param }}",
+      "updated": "A Correspondent is updated with identifier {{ param }}",
+      "deleted": "A Correspondent is deleted with identifier {{ param }}"
+    }
+  }
+}

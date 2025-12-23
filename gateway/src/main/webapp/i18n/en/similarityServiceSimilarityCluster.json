@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "similarityServiceSimilarityCluster": {
+      "home": {
+        "title": "Similarity Clusters",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Similarity Cluster",
+        "createOrEditLabel": "Create or edit a Similarity Cluster",
+        "notFound": "No Similarity Clusters found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Similarity Cluster {{ id }}?"
+      },
+      "detail": {
+        "title": "Similarity Cluster"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "algorithm": "Algorithm",
+      "centroid": "Centroid",
+      "documentCount": "Document Count",
+      "avgSimilarity": "Avg Similarity",
+      "createdDate": "Created Date",
+      "lastUpdated": "Last Updated"
+    }
+  },
+  "similarityServiceApp": {
+    "similarityServiceSimilarityCluster": {
+      "created": "A new Similarity Cluster is created with identifier {{ param }}",
+      "updated": "A Similarity Cluster is updated with identifier {{ param }}",
+      "deleted": "A Similarity Cluster is deleted with identifier {{ param }}"
+    }
+  }
+}

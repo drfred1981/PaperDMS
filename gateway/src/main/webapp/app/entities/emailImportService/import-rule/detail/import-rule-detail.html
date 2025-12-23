@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (importRule(); as importRuleRef) {
+      <div>
+        <h2 data-cy="importRuleDetailsHeading">
+          <span jhiTranslate="gatewayApp.emailImportServiceImportRule.detail.title">Import Rule</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ importRuleRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.name">Name</span></dt>
+          <dd>
+            <span>{{ importRuleRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.description">Description</span></dt>
+          <dd>
+            <span>{{ importRuleRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.priority">Priority</span></dt>
+          <dd>
+            <span>{{ importRuleRef.priority }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ importRuleRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.conditions">Conditions</span></dt>
+          <dd>
+            <span>{{ importRuleRef.conditions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.actions">Actions</span></dt>
+          <dd>
+            <span>{{ importRuleRef.actions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.folderId">Folder Id</span></dt>
+          <dd>
+            <span>{{ importRuleRef.folderId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.documentTypeId">Document Type Id</span></dt>
+          <dd>
+            <span>{{ importRuleRef.documentTypeId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.applyTags">Apply Tags</span></dt>
+          <dd>
+            <span>{{ importRuleRef.applyTags }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.notifyUsers">Notify Users</span></dt>
+          <dd>
+            <span>{{ importRuleRef.notifyUsers }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.matchCount">Match Count</span></dt>
+          <dd>
+            <span>{{ importRuleRef.matchCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.lastMatchDate">Last Match Date</span></dt>
+          <dd>
+            <span>{{ importRuleRef.lastMatchDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ importRuleRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ importRuleRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportServiceImportRule.lastModifiedDate">Last Modified Date</span></dt>
+          <dd>
+            <span>{{ importRuleRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/import-rule', importRuleRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

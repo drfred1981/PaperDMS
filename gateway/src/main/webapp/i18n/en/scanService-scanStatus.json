@@ -1,0 +1,12 @@
+{
+  "gatewayApp": {
+    "ScanStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "SCANNING": "SCANNING",
+      "COMPLETED": "COMPLETED",
+      "FAILED": "FAILED",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190201"
+    "changelogDate": "20251220152714"
   },
   "applications": ["gateway", "aiService"],
   "clientRootFolder": "aiService",
   "databaseType": "sql",
-  "documentation": "Extraction de correspondants",
   "dto": "mapstruct",
   "fields": [
     {
@@ -14,15 +13,56 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
       "fieldName": "extractedText",
       "fieldType": "TextBlob",
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "extractedTextSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "detectedLanguage",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "languageConfidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
       "fieldName": "status",
       "fieldType": "AiJobStatus",
-      "fieldValidateRules": ["required"],
       "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "resultCacheKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "128"
+    },
+    {
+      "fieldName": "isCached",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "resultS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
     },
     {
       "fieldName": "startDate",

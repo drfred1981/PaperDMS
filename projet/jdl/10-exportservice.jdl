@@ -1,0 +1,73 @@
+// ============================================================================
+// 10 - EXPORT SERVICE (3 entités)
+// ============================================================================
+
+enum ExportFormat {
+  ORIGINAL, PDF, PDF_A, ZIP, FOLDER, CSV_INDEX, JSON_METADATA
+}
+
+enum ExportStatus {
+  PENDING, EXPORTING, COMPLETED, PARTIAL, FAILED, CANCELLED
+}
+
+enum ExportResultStatus {
+  SUCCESS, FAILED, SKIPPED
+}
+
+entity ExportJob {
+  name String required maxlength(255)
+  description TextBlob
+  documentQuery TextBlob required
+  exportPatternId Long required
+  exportFormat ExportFormat required
+  includeMetadata Boolean required
+  includeVersions Boolean required
+  includeComments Boolean
+  includeAuditTrail Boolean
+  s3ExportKey String maxlength(1000)
+  exportSize Long
+  documentCount Integer
+  filesGenerated Integer
+  status ExportStatus required
+  startDate Instant
+  endDate Instant
+  errorMessage TextBlob
+  createdBy String required maxlength(50)
+  createdDate Instant required
+}
+
+entity ExportPattern {
+  name String required maxlength(255) unique
+  description TextBlob
+  pathTemplate String required maxlength(1000)
+  fileNameTemplate String required maxlength(500)
+  variables TextBlob
+  examples TextBlob
+  isSystem Boolean required
+  isActive Boolean required
+  usageCount Integer
+  createdBy String required maxlength(50)
+  createdDate Instant required
+  lastModifiedDate Instant
+}
+
+entity ExportResult {
+  exportJobId Long required
+  documentId Long required
+  documentSha256 String required maxlength(64)
+  originalFileName String maxlength(500)
+  exportedPath String maxlength(1000)
+  exportedFileName String maxlength(500)
+  s3ExportKey String maxlength(1000)
+  fileSize Long
+  status ExportResultStatus
+  errorMessage TextBlob
+  exportedDate Instant required
+}
+
+relationship ManyToOne {
+  ExportJob{exportPattern required} to ExportPattern
+  ExportResult{exportJob required} to ExportJob
+}
+
+microservice ExportJob, ExportPattern, ExportResult with exportService

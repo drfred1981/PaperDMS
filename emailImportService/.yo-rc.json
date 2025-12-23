@@ -6,14 +6,14 @@
     "baseName": "emailImportService",
     "buildTool": "maven",
     "cacheProvider": "redis",
-    "creationTimestamp": 1765349654447,
     "databaseType": "sql",
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
-    "entities": [],
+    "entities": ["EmailImport", "EmailAttachment", "ImportRule", "ImportMapping"],
     "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "ZWVmY2ZlN2RjZjFiOWNlMDAzOWJhYTFjYmM1NzNjY2NlMWFiYTdhOGRlMjM2NGNlNTNkNGFhYTlhYjE5OWIwYTY3MjlhNWY3ODBkZWQ2ZjM2OTZkZWY2NWE1ZWVlZDZjMzg0MzRkNjEzOWRlYzdkMWJkYTJlY2FkYTUyMmEwZTg=",
+    "jwtSecretKey": "NGJiMTJkZWY4ZGE4ZmFiZGYyMWEwMWQwNmRlZTU1MGNmZWIzOWRlNmU4NzNhOGQ4MWZhOGIyMzY5MzhiNjUwODM2OWNkNDA5ZGQyOWQxYmVkNjcyMzc3MDQyOTI1MTliNWJmZmE3MTZiMWViZTBiM2IyMzQxOWUyMTY3MjJhYTY=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1766244494000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -22,6 +22,7 @@
     "serverPort": "8090",
     "serviceDiscoveryType": "consul",
     "skipClient": true,
-    "skipCommitHook": true
+    "skipCommitHook": true,
+    "withAdminUi": true
   }
 }

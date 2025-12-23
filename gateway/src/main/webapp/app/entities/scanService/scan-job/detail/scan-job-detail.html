@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (scanJob(); as scanJobRef) {
+      <div>
+        <h2 data-cy="scanJobDetailsHeading"><span jhiTranslate="gatewayApp.scanServiceScanJob.detail.title">Scan Job</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ scanJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.name">Name</span></dt>
+          <dd>
+            <span>{{ scanJobRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.description">Description</span></dt>
+          <dd>
+            <span>{{ scanJobRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.scannerConfigId">Scanner Config Id</span></dt>
+          <dd>
+            <span>{{ scanJobRef.scannerConfigId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.batchId">Batch Id</span></dt>
+          <dd>
+            <span>{{ scanJobRef.batchId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.documentTypeId">Document Type Id</span></dt>
+          <dd>
+            <span>{{ scanJobRef.documentTypeId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.folderId">Folder Id</span></dt>
+          <dd>
+            <span>{{ scanJobRef.folderId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.pageCount">Page Count</span></dt>
+          <dd>
+            <span>{{ scanJobRef.pageCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ScanStatus.' + (scanJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', SCANNING: 'SCANNING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                scanJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.colorMode">Color Mode</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ColorMode.' + (scanJobRef.colorMode ?? 'null')">{{
+              { null: '', BLACK_WHITE: 'BLACK_WHITE', GRAYSCALE: 'GRAYSCALE', COLOR: 'COLOR', AUTO: 'AUTO' }[scanJobRef.colorMode ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.resolution">Resolution</span></dt>
+          <dd>
+            <span>{{ scanJobRef.resolution }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.fileFormat">File Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ScanFormat.' + (scanJobRef.fileFormat ?? 'null')">{{
+              { null: '', PDF: 'PDF', TIFF: 'TIFF', JPEG: 'JPEG', PNG: 'PNG' }[scanJobRef.fileFormat ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ scanJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ scanJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ scanJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ scanJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ scanJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.scannerConfig">Scanner Config</span></dt>
+          <dd>
+            @if (scanJob()!.scannerConfig) {
+              <div>
+                <a [routerLink]="['/scanner-configuration', scanJob()!.scannerConfig?.id, 'view']">{{ scanJobRef.scannerConfig?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScanJob.batch">Batch</span></dt>
+          <dd>
+            @if (scanJob()!.batch) {
+              <div>
+                <a [routerLink]="['/scan-batch', scanJob()!.batch?.id, 'view']">{{ scanJobRef.batch?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/scan-job', scanJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

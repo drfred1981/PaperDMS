@@ -1,0 +1,79 @@
+{
+  "annotations": {
+    "changelogDate": "20251220152714"
+  },
+  "applications": ["gateway", "reportingService"],
+  "clientRootFolder": "reportingService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "reportType",
+      "fieldType": "ReportType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DOCUMENT_INVENTORY,USER_ACTIVITY,STORAGE_ANALYSIS,COMPLIANCE_AUDIT,WORKFLOW_PERFORMANCE,TAG_USAGE,INVOICE_SUMMARY,CONTRACT_EXPIRATION,BANK_RECONCILIATION,PERFORMANCE_METRICS,SYSTEM_HEALTH,CUSTOM"
+    },
+    {
+      "fieldName": "query",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "schedule",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "format",
+      "fieldType": "ReportFormat",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PDF,EXCEL,CSV,JSON,HTML,XML"
+    },
+    {
+      "fieldName": "recipients",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastRun",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "nextRun",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "reportingService",
+  "name": "ScheduledReport",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

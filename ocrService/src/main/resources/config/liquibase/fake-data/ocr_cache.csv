@@ -1,0 +1,11 @@
+id;document_sha_256;ocr_engine;language;page_count;total_confidence;s_3_result_key;s_3_bucket;extracted_text_s_3_key;metadata;hits;last_access_date;created_date;expiration_date
+1;incidentally brook;TIKA_TESSERACT;what;24116;0.85;huge massive;absentmindedly monthly square;focused throughout bravely;../fake-data/blob/hipster.txt;22991;2025-12-20T05:29:08;2025-12-20T11:27:32;2025-12-20T11:44:47
+2;that until amidst;HYBRID;permafrost;10510;0.37;monocle the quicker;passport produce;while keenly;../fake-data/blob/hipster.txt;31130;2025-12-20T15:20:26;2025-12-20T04:53:43;2025-12-20T12:04:32
+3;militate ew variable;OPENAI_VISION;into from;8829;0.43;hollow hm bookcase;even instead;whose if;../fake-data/blob/hipster.txt;14160;2025-12-19T22:50:22;2025-12-20T11:02:08;2025-12-20T07:46:21
+4;blah;TIKA_TESSERACT;unless sig;10622;0.93;almost regarding boohoo;wearily less wherever;only;../fake-data/blob/hipster.txt;14632;2025-12-20T05:34:38;2025-12-19T23:53:56;2025-12-19T23:23:42
+5;remark;GOOGLE_VISION;finally un;13234;0.95;provider arraign weep;lonely;recent;../fake-data/blob/hipster.txt;7057;2025-12-19T23:51:11;2025-12-20T10:02:07;2025-12-19T18:57:25
+6;aside that;AZURE_VISION;boastfully;31199;0.68;provided aha;overcook because nor;apricot;../fake-data/blob/hipster.txt;1944;2025-12-20T05:00:35;2025-12-19T21:28:17;2025-12-20T05:16:08
+7;whereas although yippee;AZURE_VISION;colorless ;8772;0.25;provided ah;upwardly wasteful;clean winding shell;../fake-data/blob/hipster.txt;1432;2025-12-20T01:50:52;2025-12-19T18:27:28;2025-12-19T22:06:30
+8;beyond toward provider;AZURE_VISION;oval provi;10713;0.98;impassioned politely;paltry boo;obscure;../fake-data/blob/hipster.txt;16532;2025-12-20T01:08:15;2025-12-19T22:28:12;2025-12-20T05:24:59
+9;doing service rough;TIKA_NATIVE;homeschool;30819;0.5;countess;separate;upside-down midst who;../fake-data/blob/hipster.txt;15112;2025-12-20T04:24:04;2025-12-20T04:21:25;2025-12-20T11:07:30
+10;tensely optimal partially;AZURE_VISION;sometimes ;7341;0.57;along awful below;than glass;concrete forenenst;../fake-data/blob/hipster.txt;457;2025-12-20T05:32:39;2025-12-19T23:10:33;2025-12-19T17:04:02

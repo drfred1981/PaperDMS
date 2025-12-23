@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251208190201"
+    "changelogDate": "20251220152714"
   },
   "applications": ["gateway", "notificationService"],
   "clientRootFolder": "notificationService",
   "databaseType": "sql",
-  "documentation": "Pr�f�rences de notification",
   "dto": "mapstruct",
   "fields": [
     {
@@ -48,7 +47,6 @@
     {
       "fieldName": "frequency",
       "fieldType": "NotificationFrequency",
-      "fieldValidateRules": ["required"],
       "fieldValues": "IMMEDIATELY,HOURLY,DAILY,WEEKLY,NEVER"
     },
     {

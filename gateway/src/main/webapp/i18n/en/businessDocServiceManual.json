@@ -1,0 +1,38 @@
+{
+  "gatewayApp": {
+    "businessDocServiceManual": {
+      "home": {
+        "title": "Manuals",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Manual",
+        "createOrEditLabel": "Create or edit a Manual",
+        "search": "Search for Manual",
+        "notFound": "No Manuals found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Manual {{ id }}?"
+      },
+      "detail": {
+        "title": "Manual"
+      },
+      "id": "ID",
+      "documentId": "Document Id",
+      "title": "Title",
+      "manualType": "Manual Type",
+      "version": "Version",
+      "language": "Language",
+      "publicationDate": "Publication Date",
+      "pageCount": "Page Count",
+      "status": "Status",
+      "isPublic": "Is Public",
+      "createdDate": "Created Date"
+    }
+  },
+  "businessDocServiceApp": {
+    "businessDocServiceManual": {
+      "created": "A new Manual is created with identifier {{ param }}",
+      "updated": "A Manual is updated with identifier {{ param }}",
+      "deleted": "A Manual is deleted with identifier {{ param }}"
+    }
+  }
+}

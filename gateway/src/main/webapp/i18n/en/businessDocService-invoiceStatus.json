@@ -1,0 +1,16 @@
+{
+  "gatewayApp": {
+    "InvoiceStatus": {
+      "null": "",
+      "DRAFT": "DRAFT",
+      "PENDING_APPROVAL": "PENDING_APPROVAL",
+      "APPROVED": "APPROVED",
+      "SENT": "SENT",
+      "PAID": "PAID",
+      "PARTIALLY_PAID": "PARTIALLY_PAID",
+      "OVERDUE": "OVERDUE",
+      "CANCELLED": "CANCELLED",
+      "DISPUTED": "DISPUTED"
+    }
+  }
+}

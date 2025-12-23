@@ -1,0 +1,68 @@
+{
+  "annotations": {
+    "changelogDate": "20251220152614"
+  },
+  "applications": ["gateway", "reportingService"],
+  "clientRootFolder": "reportingService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dashboardId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "widgetType",
+      "fieldType": "WidgetType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DOCUMENT_COUNT,STORAGE_USAGE,RECENT_UPLOADS,TOP_TAGS,WORKFLOW_STATUS,USER_ACTIVITY,CHART_LINE,CHART_BAR,CHART_PIE,CHART_DOUGHNUT,CHART_AREA,TABLE,METRIC,HEATMAP,GAUGE,TIMELINE"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "configuration",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataSource",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "position",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sizeX",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sizeY",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "reportingService",
+  "name": "DashboardWidget",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "dashboard",
+      "relationshipName": "dashboard",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

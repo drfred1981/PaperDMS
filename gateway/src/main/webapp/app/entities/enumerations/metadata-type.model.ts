@@ -1,0 +1,29 @@
+export enum MetadataType {
+  STRING = 'STRING',
+
+  NUMBER = 'NUMBER',
+
+  INTEGER = 'INTEGER',
+
+  DECIMAL = 'DECIMAL',
+
+  DATE = 'DATE',
+
+  DATETIME = 'DATETIME',
+
+  BOOLEAN = 'BOOLEAN',
+
+  EMAIL = 'EMAIL',
+
+  PHONE = 'PHONE',
+
+  URL = 'URL',
+
+  JSON = 'JSON',
+
+  ARRAY = 'ARRAY',
+
+  CURRENCY = 'CURRENCY',
+
+  PERCENTAGE = 'PERCENTAGE',
+}

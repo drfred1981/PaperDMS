@@ -1,0 +1,44 @@
+import dayjs from 'dayjs/esm';
+
+import { IScanBatch, NewScanBatch } from './scan-batch.model';
+
+export const sampleWithRequiredData: IScanBatch = {
+  id: 10420,
+  name: 'how ah',
+  status: 'FAILED',
+  createdBy: 'atop machine miserably',
+  createdDate: dayjs('2025-12-19T17:15'),
+};
+
+export const sampleWithPartialData: IScanBatch = {
+  id: 11404,
+  name: 'out supposing',
+  status: 'PARTIAL',
+  createdBy: 'enormously keenly yesterday',
+  createdDate: dayjs('2025-12-20T10:34'),
+};
+
+export const sampleWithFullData: IScanBatch = {
+  id: 5817,
+  name: 'dapper responsible',
+  description: '../fake-data/blob/hipster.txt',
+  totalJobs: 28241,
+  completedJobs: 9801,
+  totalPages: 30220,
+  status: 'COMPLETED',
+  createdBy: 'profane dull',
+  createdDate: dayjs('2025-12-20T13:02'),
+};
+
+export const sampleWithNewData: NewScanBatch = {
+  name: 'across starboard',
+  status: 'PENDING',
+  createdBy: 'hawk prime',
+  createdDate: dayjs('2025-12-20T10:07'),
+  id: null,
+};
+
+Object.freeze(sampleWithNewData);
+Object.freeze(sampleWithRequiredData);
+Object.freeze(sampleWithPartialData);
+Object.freeze(sampleWithFullData);

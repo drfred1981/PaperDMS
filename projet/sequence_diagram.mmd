@@ -1,0 +1,100 @@
+---
+title: Flux Complet - Upload et Traitement de Document
+---
+sequenceDiagram
+    actor User
+    participant Gateway
+    participant DocService as Document Service
+    participant S3
+    participant Kafka
+    participant OCRService as OCR Service
+    participant Tika as Apache Tika
+    participant AIService as AI Service
+    participant SimService as Similarity Service
+    participant SearchService as Search Service
+    participant NotifService as Notification Service
+    participant WorkflowService as Workflow Service
+    
+    User->>Gateway: Upload Document (type: Facture)
+    Gateway->>DocService: POST /api/documents
+    
+    rect rgb(200, 220, 250)
+        Note over DocService,S3: Phase 1: Stockage
+        DocService->>S3: Upload file
+        S3-->>DocService: S3 Key
+        DocService->>DocService: Create Document entity
+        DocService->>Kafka: Publish document.uploaded
+        DocService-->>Gateway: Document created (status: UPLOADED)
+        Gateway-->>User: Upload successful
+    end
+    
+    rect rgb(250, 220, 200)
+        Note over OCRService,Tika: Phase 2: OCR
+        OCRService->>Kafka: Subscribe document.uploaded
+        OCRService->>OCRService: Create OcrJob
+        OCRService->>Tika: POST /tika (extract text)
+        Tika-->>OCRService: Extracted text + metadata
+        OCRService->>OCRService: Save ExtractedText
+        OCRService->>Kafka: Publish ocr.completed
+        OCRService->>DocService: Update status: OCR_COMPLETED
+    end
+    
+    rect rgb(220, 250, 220)
+        Note over AIService: Phase 3: AI Processing
+        AIService->>Kafka: Subscribe ocr.completed
+        
+        par Auto-tagging
+            AIService->>AIService: Create AutoTagJob
+            AIService->>AIService: ML prediction (NLP)
+            AIService->>AIService: Save TagPrediction
+            AIService->>DocService: Apply suggested tags
+            AIService->>Kafka: Publish ai.tags.suggested
+        and Correspondent Extraction
+            AIService->>AIService: Create CorrespondentExtraction
+            AIService->>AIService: NER (Named Entity Recognition)
+            AIService->>AIService: Extract names, emails, phones
+            AIService->>AIService: Save Correspondents
+            AIService->>Kafka: Publish correspondents.extracted
+        and Field Extraction
+            AIService->>AIService: Extract key-value pairs
+            AIService->>DocService: Save ExtractedFields
+            AIService->>Kafka: Publish fields.extracted
+        end
+    end
+    
+    rect rgb(250, 250, 200)
+        Note over SimService: Phase 4: Similarity Detection
+        SimService->>Kafka: Subscribe ocr.completed
+        SimService->>SimService: Create SimilarityJob
+        SimService->>SimService: Compute fingerprint
+        SimService->>SimService: Compare with existing docs
+        SimService->>SimService: Save DocumentSimilarity (score > 0.8)
+        SimService->>Kafka: Publish similarity.found
+    end
+    
+    rect rgb(220, 250, 250)
+        Note over SearchService: Phase 5: Indexation
+        SearchService->>Kafka: Subscribe multiple events
+        SearchService->>SearchService: Aggregate data
+        SearchService->>SearchService: Create SearchIndex
+        SearchService->>SearchService: Index to Elasticsearch
+        SearchService->>Kafka: Publish document.indexed
+    end
+    
+    rect rgb(250, 220, 250)
+        Note over WorkflowService: Phase 6: Workflow (si requis)
+        WorkflowService->>Kafka: Subscribe document.indexed
+        WorkflowService->>WorkflowService: Check if approval required
+        WorkflowService->>WorkflowService: Create WorkflowInstance
+        WorkflowService->>WorkflowService: Create WorkflowTask
+        WorkflowService->>Kafka: Publish workflow.task.assigned
+    end
+    
+    rect rgb(255, 230, 230)
+        Note over NotifService,User: Phase 7: Notifications
+        NotifService->>Kafka: Subscribe all events
+        NotifService->>NotifService: Create Notifications
+        NotifService->>User: Email notification
+        NotifService->>Gateway: Push notification (WebSocket)
+        Gateway-->>User: Real-time update
+    end

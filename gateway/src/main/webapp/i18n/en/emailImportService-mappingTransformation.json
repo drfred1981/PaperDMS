@@ -1,0 +1,19 @@
+{
+  "gatewayApp": {
+    "MappingTransformation": {
+      "null": "",
+      "NONE": "NONE",
+      "UPPERCASE": "UPPERCASE",
+      "LOWERCASE": "LOWERCASE",
+      "TRIM": "TRIM",
+      "EXTRACT_DATE": "EXTRACT_DATE",
+      "EXTRACT_NUMBER": "EXTRACT_NUMBER",
+      "EXTRACT_EMAIL": "EXTRACT_EMAIL",
+      "REGEX_EXTRACT": "REGEX_EXTRACT",
+      "REPLACE": "REPLACE",
+      "SPLIT": "SPLIT",
+      "CONCAT": "CONCAT",
+      "CUSTOM": "CUSTOM"
+    }
+  }
+}

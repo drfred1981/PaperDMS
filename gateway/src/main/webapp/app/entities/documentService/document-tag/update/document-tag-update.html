@@ -1,0 +1,210 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-tag-heading"
+        data-cy="DocumentTagCreateUpdateHeading"
+        jhiTranslate="gatewayApp.documentServiceDocumentTag.home.createOrEditLabel"
+      >
+        Create or edit a Document Tag
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.documentServiceDocumentTag.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let assignedDateRef = editForm.get('assignedDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_assignedDate" jhiTranslate="gatewayApp.documentServiceDocumentTag.assignedDate"
+            >Assigned Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_assignedDate"
+              data-cy="assignedDate"
+              type="datetime-local"
+              class="form-control"
+              name="assignedDate"
+              formControlName="assignedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (assignedDateRef.invalid && (assignedDateRef.dirty || assignedDateRef.touched)) {
+            <div>
+              @if (editForm.get('assignedDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('assignedDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let assignedByRef = editForm.get('assignedBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_assignedBy" jhiTranslate="gatewayApp.documentServiceDocumentTag.assignedBy"
+            >Assigned By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="assignedBy"
+            id="field_assignedBy"
+            data-cy="assignedBy"
+            formControlName="assignedBy"
+          />
+          @if (assignedByRef.invalid && (assignedByRef.dirty || assignedByRef.touched)) {
+            <div>
+              @if (editForm.get('assignedBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('assignedBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let confidenceRef = editForm.get('confidence')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_confidence" jhiTranslate="gatewayApp.documentServiceDocumentTag.confidence"
+            >Confidence</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="confidence"
+            id="field_confidence"
+            data-cy="confidence"
+            formControlName="confidence"
+          />
+          @if (confidenceRef.invalid && (confidenceRef.dirty || confidenceRef.touched)) {
+            <div>
+              @if (editForm.get('confidence')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('confidence')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >This field cannot be more than 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('confidence')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let isAutoTaggedRef = editForm.get('isAutoTagged')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isAutoTagged" jhiTranslate="gatewayApp.documentServiceDocumentTag.isAutoTagged"
+            >Is Auto Tagged</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isAutoTagged"
+            id="field_isAutoTagged"
+            data-cy="isAutoTagged"
+            formControlName="isAutoTagged"
+          />
+          @if (isAutoTaggedRef.invalid && (isAutoTaggedRef.dirty || isAutoTaggedRef.touched)) {
+            <div>
+              @if (editForm.get('isAutoTagged')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_source" jhiTranslate="gatewayApp.documentServiceDocumentTag.source">Source</label>
+          <select class="form-control" name="source" formControlName="source" id="field_source" data-cy="source">
+            <option [ngValue]="null">{{ 'gatewayApp.TagSource.null' | translate }}</option>
+            @for (tagSource of tagSourceValues; track $index) {
+              <option [value]="tagSource">{{ 'gatewayApp.TagSource.' + tagSource | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_document" jhiTranslate="gatewayApp.documentServiceDocumentTag.document">Document</label>
+          <select
+            class="form-control"
+            id="field_document"
+            data-cy="document"
+            name="document"
+            formControlName="document"
+            [compareWith]="compareDocument"
+          >
+            @if (!editForm.get('document')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (documentOption of documentsSharedCollection(); track $index) {
+              <option [ngValue]="documentOption">{{ documentOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['document'])!.invalid && (editForm.get(['document'])!.dirty || editForm.get(['document'])!.touched)) {
+          <div>
+            @if (editForm.get(['document'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tag" jhiTranslate="gatewayApp.documentServiceDocumentTag.tag">Tag</label>
+          <select class="form-control" id="field_tag" data-cy="tag" name="tag" formControlName="tag" [compareWith]="compareTag">
+            @if (!editForm.get('tag')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (tagOption of tagsSharedCollection(); track $index) {
+              <option [ngValue]="tagOption">{{ tagOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['tag'])!.invalid && (editForm.get(['tag'])!.dirty || editForm.get(['tag'])!.touched)) {
+          <div>
+            @if (editForm.get(['tag'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

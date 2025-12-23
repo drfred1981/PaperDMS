@@ -1,0 +1,11 @@
+export enum InvoiceType {
+  PURCHASE = 'PURCHASE',
+
+  SALES = 'SALES',
+
+  CREDIT_NOTE = 'CREDIT_NOTE',
+
+  DEBIT_NOTE = 'DEBIT_NOTE',
+
+  PROFORMA = 'PROFORMA',
+}
