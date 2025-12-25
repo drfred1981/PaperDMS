@@ -200,9 +200,6 @@ jobs:
             needs-node: false
     
     # Build only if service changed OR building all
-    if: |
-      needs.detect-changes.outputs.all-services == 'true' ||
-      needs.detect-changes.outputs[matrix.service] == 'true'
     
     steps:
       - uses: actions/checkout@v4
