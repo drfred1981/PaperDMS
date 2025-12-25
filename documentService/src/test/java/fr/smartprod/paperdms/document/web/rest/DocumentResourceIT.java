@@ -14,7 +14,6 @@ import fr.smartprod.paperdms.document.IntegrationTest;
 import fr.smartprod.paperdms.document.domain.Document;
 import fr.smartprod.paperdms.document.domain.DocumentType;
 import fr.smartprod.paperdms.document.domain.Folder;
-import fr.smartprod.paperdms.document.domain.enumeration.DocumentStatus;
 import fr.smartprod.paperdms.document.repository.DocumentRepository;
 import fr.smartprod.paperdms.document.repository.search.DocumentSearchRepository;
 import fr.smartprod.paperdms.document.service.dto.DocumentDTO;
@@ -86,9 +85,6 @@ class DocumentResourceIT {
     private static final String DEFAULT_WEBP_PREVIEW_SHA_256 = "AAAAAAAAAA";
     private static final String UPDATED_WEBP_PREVIEW_SHA_256 = "BBBBBBBBBB";
 
-    private static final DocumentStatus DEFAULT_STATUS = DocumentStatus.UPLOADING;
-    private static final DocumentStatus UPDATED_STATUS = DocumentStatus.UPLOADED;
-
     private static final Instant DEFAULT_UPLOAD_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_UPLOAD_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -128,7 +124,7 @@ class DocumentResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/documents/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -173,7 +169,6 @@ class DocumentResourceIT {
             .thumbnailSha256(DEFAULT_THUMBNAIL_SHA_256)
             .webpPreviewS3Key(DEFAULT_WEBP_PREVIEW_S_3_KEY)
             .webpPreviewSha256(DEFAULT_WEBP_PREVIEW_SHA_256)
-            .status(DEFAULT_STATUS)
             .uploadDate(DEFAULT_UPLOAD_DATE)
             .isPublic(DEFAULT_IS_PUBLIC)
             .downloadCount(DEFAULT_DOWNLOAD_COUNT)
@@ -218,7 +213,6 @@ class DocumentResourceIT {
             .thumbnailSha256(UPDATED_THUMBNAIL_SHA_256)
             .webpPreviewS3Key(UPDATED_WEBP_PREVIEW_S_3_KEY)
             .webpPreviewSha256(UPDATED_WEBP_PREVIEW_SHA_256)
-            .status(UPDATED_STATUS)
             .uploadDate(UPDATED_UPLOAD_DATE)
             .isPublic(UPDATED_IS_PUBLIC)
             .downloadCount(UPDATED_DOWNLOAD_COUNT)
@@ -458,27 +452,6 @@ class DocumentResourceIT {
 
     @Test
     @Transactional
-    void checkStatusIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        int searchDatabaseSizeBefore = IterableUtil.sizeOf(documentSearchRepository.findAll());
-        // set the field null
-        document.setStatus(null);
-
-        // Create the Document, which fails.
-        DocumentDTO documentDTO = documentMapper.toDto(document);
-
-        restDocumentMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(documentDTO)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-
-        int searchDatabaseSizeAfter = IterableUtil.sizeOf(documentSearchRepository.findAll());
-        assertThat(searchDatabaseSizeAfter).isEqualTo(searchDatabaseSizeBefore);
-    }
-
-    @Test
-    @Transactional
     void checkUploadDateIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         int searchDatabaseSizeBefore = IterableUtil.sizeOf(documentSearchRepository.findAll());
@@ -586,7 +559,6 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.[*].thumbnailSha256").value(hasItem(DEFAULT_THUMBNAIL_SHA_256)))
             .andExpect(jsonPath("$.[*].webpPreviewS3Key").value(hasItem(DEFAULT_WEBP_PREVIEW_S_3_KEY)))
             .andExpect(jsonPath("$.[*].webpPreviewSha256").value(hasItem(DEFAULT_WEBP_PREVIEW_SHA_256)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].uploadDate").value(hasItem(DEFAULT_UPLOAD_DATE.toString())))
             .andExpect(jsonPath("$.[*].isPublic").value(hasItem(DEFAULT_IS_PUBLIC)))
             .andExpect(jsonPath("$.[*].downloadCount").value(hasItem(DEFAULT_DOWNLOAD_COUNT)))
@@ -624,7 +596,6 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.thumbnailSha256").value(DEFAULT_THUMBNAIL_SHA_256))
             .andExpect(jsonPath("$.webpPreviewS3Key").value(DEFAULT_WEBP_PREVIEW_S_3_KEY))
             .andExpect(jsonPath("$.webpPreviewSha256").value(DEFAULT_WEBP_PREVIEW_SHA_256))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.uploadDate").value(DEFAULT_UPLOAD_DATE.toString()))
             .andExpect(jsonPath("$.isPublic").value(DEFAULT_IS_PUBLIC))
             .andExpect(jsonPath("$.downloadCount").value(DEFAULT_DOWNLOAD_COUNT))
@@ -1372,36 +1343,6 @@ class DocumentResourceIT {
 
     @Test
     @Transactional
-    void getAllDocumentsByStatusIsEqualToSomething() throws Exception {
-        // Initialize the database
-        insertedDocument = documentRepository.saveAndFlush(document);
-
-        // Get all the documentList where status equals to
-        defaultDocumentFiltering("status.equals=" + DEFAULT_STATUS, "status.equals=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDocumentsByStatusIsInShouldWork() throws Exception {
-        // Initialize the database
-        insertedDocument = documentRepository.saveAndFlush(document);
-
-        // Get all the documentList where status in
-        defaultDocumentFiltering("status.in=" + DEFAULT_STATUS + "," + UPDATED_STATUS, "status.in=" + UPDATED_STATUS);
-    }
-
-    @Test
-    @Transactional
-    void getAllDocumentsByStatusIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        insertedDocument = documentRepository.saveAndFlush(document);
-
-        // Get all the documentList where status is not null
-        defaultDocumentFiltering("status.specified=true", "status.specified=false");
-    }
-
-    @Test
-    @Transactional
     void getAllDocumentsByUploadDateIsEqualToSomething() throws Exception {
         // Initialize the database
         insertedDocument = documentRepository.saveAndFlush(document);
@@ -2054,7 +1995,6 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.[*].thumbnailSha256").value(hasItem(DEFAULT_THUMBNAIL_SHA_256)))
             .andExpect(jsonPath("$.[*].webpPreviewS3Key").value(hasItem(DEFAULT_WEBP_PREVIEW_S_3_KEY)))
             .andExpect(jsonPath("$.[*].webpPreviewSha256").value(hasItem(DEFAULT_WEBP_PREVIEW_SHA_256)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].uploadDate").value(hasItem(DEFAULT_UPLOAD_DATE.toString())))
             .andExpect(jsonPath("$.[*].isPublic").value(hasItem(DEFAULT_IS_PUBLIC)))
             .andExpect(jsonPath("$.[*].downloadCount").value(hasItem(DEFAULT_DOWNLOAD_COUNT)))
@@ -2128,7 +2068,6 @@ class DocumentResourceIT {
             .thumbnailSha256(UPDATED_THUMBNAIL_SHA_256)
             .webpPreviewS3Key(UPDATED_WEBP_PREVIEW_S_3_KEY)
             .webpPreviewSha256(UPDATED_WEBP_PREVIEW_SHA_256)
-            .status(UPDATED_STATUS)
             .uploadDate(UPDATED_UPLOAD_DATE)
             .isPublic(UPDATED_IS_PUBLIC)
             .downloadCount(UPDATED_DOWNLOAD_COUNT)
@@ -2249,21 +2188,17 @@ class DocumentResourceIT {
         partialUpdatedDocument.setId(document.getId());
 
         partialUpdatedDocument
-            .title(UPDATED_TITLE)
             .fileName(UPDATED_FILE_NAME)
             .fileSize(UPDATED_FILE_SIZE)
             .mimeType(UPDATED_MIME_TYPE)
             .sha256(UPDATED_SHA_256)
             .s3Bucket(UPDATED_S_3_BUCKET)
-            .thumbnailS3Key(UPDATED_THUMBNAIL_S_3_KEY)
-            .thumbnailSha256(UPDATED_THUMBNAIL_SHA_256)
+            .s3Region(UPDATED_S_3_REGION)
+            .s3Etag(UPDATED_S_3_ETAG)
             .webpPreviewS3Key(UPDATED_WEBP_PREVIEW_S_3_KEY)
-            .status(UPDATED_STATUS)
-            .downloadCount(UPDATED_DOWNLOAD_COUNT)
-            .viewCount(UPDATED_VIEW_COUNT)
-            .manualLanguage(UPDATED_MANUAL_LANGUAGE)
-            .languageConfidence(UPDATED_LANGUAGE_CONFIDENCE)
-            .pageCount(UPDATED_PAGE_COUNT);
+            .webpPreviewSha256(UPDATED_WEBP_PREVIEW_SHA_256)
+            .detectedLanguage(UPDATED_DETECTED_LANGUAGE)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restDocumentMockMvc
             .perform(
@@ -2305,7 +2240,6 @@ class DocumentResourceIT {
             .thumbnailSha256(UPDATED_THUMBNAIL_SHA_256)
             .webpPreviewS3Key(UPDATED_WEBP_PREVIEW_S_3_KEY)
             .webpPreviewSha256(UPDATED_WEBP_PREVIEW_SHA_256)
-            .status(UPDATED_STATUS)
             .uploadDate(UPDATED_UPLOAD_DATE)
             .isPublic(UPDATED_IS_PUBLIC)
             .downloadCount(UPDATED_DOWNLOAD_COUNT)
@@ -2451,7 +2385,6 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.[*].thumbnailSha256").value(hasItem(DEFAULT_THUMBNAIL_SHA_256)))
             .andExpect(jsonPath("$.[*].webpPreviewS3Key").value(hasItem(DEFAULT_WEBP_PREVIEW_S_3_KEY)))
             .andExpect(jsonPath("$.[*].webpPreviewSha256").value(hasItem(DEFAULT_WEBP_PREVIEW_SHA_256)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].uploadDate").value(hasItem(DEFAULT_UPLOAD_DATE.toString())))
             .andExpect(jsonPath("$.[*].isPublic").value(hasItem(DEFAULT_IS_PUBLIC)))
             .andExpect(jsonPath("$.[*].downloadCount").value(hasItem(DEFAULT_DOWNLOAD_COUNT)))

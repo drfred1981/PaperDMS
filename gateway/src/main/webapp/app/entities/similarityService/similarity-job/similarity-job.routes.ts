@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import SimilarityJobResolve from './route/similarity-job-routing-resolve.service';
 
 const similarityJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/similarity-job').then(m => m.SimilarityJob),
+    loadComponent: () => import('./list/similarity-job.component').then(m => m.SimilarityJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const similarityJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/similarity-job-detail').then(m => m.SimilarityJobDetail),
+    loadComponent: () => import('./detail/similarity-job-detail.component').then(m => m.SimilarityJobDetailComponent),
     resolve: {
       similarityJob: SimilarityJobResolve,
     },
@@ -24,7 +23,7 @@ const similarityJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/similarity-job-update').then(m => m.SimilarityJobUpdate),
+    loadComponent: () => import('./update/similarity-job-update.component').then(m => m.SimilarityJobUpdateComponent),
     resolve: {
       similarityJob: SimilarityJobResolve,
     },
@@ -32,7 +31,7 @@ const similarityJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/similarity-job-update').then(m => m.SimilarityJobUpdate),
+    loadComponent: () => import('./update/similarity-job-update.component').then(m => m.SimilarityJobUpdateComponent),
     resolve: {
       similarityJob: SimilarityJobResolve,
     },

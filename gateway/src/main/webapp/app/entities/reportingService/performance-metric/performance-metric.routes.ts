@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import PerformanceMetricResolve from './route/performance-metric-routing-resolve.service';
 
 const performanceMetricRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/performance-metric').then(m => m.PerformanceMetric),
+    loadComponent: () => import('./list/performance-metric.component').then(m => m.PerformanceMetricComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const performanceMetricRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/performance-metric-detail').then(m => m.PerformanceMetricDetail),
+    loadComponent: () => import('./detail/performance-metric-detail.component').then(m => m.PerformanceMetricDetailComponent),
     resolve: {
       performanceMetric: PerformanceMetricResolve,
     },
@@ -24,7 +23,7 @@ const performanceMetricRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/performance-metric-update').then(m => m.PerformanceMetricUpdate),
+    loadComponent: () => import('./update/performance-metric-update.component').then(m => m.PerformanceMetricUpdateComponent),
     resolve: {
       performanceMetric: PerformanceMetricResolve,
     },
@@ -32,7 +31,7 @@ const performanceMetricRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/performance-metric-update').then(m => m.PerformanceMetricUpdate),
+    loadComponent: () => import('./update/performance-metric-update.component').then(m => m.PerformanceMetricUpdateComponent),
     resolve: {
       performanceMetric: PerformanceMetricResolve,
     },

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentProcessResolve from './route/document-process-routing-resolve.service';
 
 const documentProcessRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-process').then(m => m.DocumentProcess),
+    loadComponent: () => import('./list/document-process.component').then(m => m.DocumentProcessComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentProcessRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-process-detail').then(m => m.DocumentProcessDetail),
+    loadComponent: () => import('./detail/document-process-detail.component').then(m => m.DocumentProcessDetailComponent),
     resolve: {
       documentProcess: DocumentProcessResolve,
     },
@@ -24,7 +23,7 @@ const documentProcessRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-process-update').then(m => m.DocumentProcessUpdate),
+    loadComponent: () => import('./update/document-process-update.component').then(m => m.DocumentProcessUpdateComponent),
     resolve: {
       documentProcess: DocumentProcessResolve,
     },
@@ -32,7 +31,7 @@ const documentProcessRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-process-update').then(m => m.DocumentProcessUpdate),
+    loadComponent: () => import('./update/document-process-update.component').then(m => m.DocumentProcessUpdateComponent),
     resolve: {
       documentProcess: DocumentProcessResolve,
     },

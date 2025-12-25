@@ -1,7 +1,5 @@
 package fr.smartprod.paperdms.document.service.dto;
 
-import fr.smartprod.paperdms.document.domain.enumeration.DocumentStatus;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -10,9 +8,6 @@ import java.util.Objects;
 /**
  * A DTO for the {@link fr.smartprod.paperdms.document.domain.Document} entity.
  */
-@Schema(
-    description = "Document Service - 22 Entit�s (MODIFI�)\nMODIFICATION: Ajout de DocumentServiceStatus pour tracker l'�tat par service"
-)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class DocumentDTO implements Serializable {
 
@@ -62,9 +57,6 @@ public class DocumentDTO implements Serializable {
 
     @Size(max = 64)
     private String webpPreviewSha256;
-
-    @NotNull
-    private DocumentStatus status;
 
     @NotNull
     private Instant uploadDate;
@@ -212,14 +204,6 @@ public class DocumentDTO implements Serializable {
         this.webpPreviewSha256 = webpPreviewSha256;
     }
 
-    public DocumentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(DocumentStatus status) {
-        this.status = status;
-    }
-
     public Instant getUploadDate() {
         return uploadDate;
     }
@@ -355,7 +339,6 @@ public class DocumentDTO implements Serializable {
             ", thumbnailSha256='" + getThumbnailSha256() + "'" +
             ", webpPreviewS3Key='" + getWebpPreviewS3Key() + "'" +
             ", webpPreviewSha256='" + getWebpPreviewSha256() + "'" +
-            ", status='" + getStatus() + "'" +
             ", uploadDate='" + getUploadDate() + "'" +
             ", isPublic='" + getIsPublic() + "'" +
             ", downloadCount=" + getDownloadCount() +

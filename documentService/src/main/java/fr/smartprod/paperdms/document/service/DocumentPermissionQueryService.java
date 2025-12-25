@@ -71,7 +71,7 @@ public class DocumentPermissionQueryService extends QueryService<DocumentPermiss
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<DocumentPermission> createSpecification(DocumentPermissionCriteria criteria) {
-        Specification<DocumentPermission> specification = Specification.unrestricted();
+        Specification<DocumentPermission> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

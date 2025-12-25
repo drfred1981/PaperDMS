@@ -68,7 +68,7 @@ class NotificationPreferenceResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -422,8 +422,8 @@ class NotificationPreferenceResourceIT {
         partialUpdatedNotificationPreference.setId(notificationPreference.getId());
 
         partialUpdatedNotificationPreference
+            .userId(UPDATED_USER_ID)
             .inAppEnabled(UPDATED_IN_APP_ENABLED)
-            .notificationTypes(UPDATED_NOTIFICATION_TYPES)
             .quietHoursStart(UPDATED_QUIET_HOURS_START)
             .quietHoursEnd(UPDATED_QUIET_HOURS_END);
 

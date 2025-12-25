@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IBookmark = {
   userId: 'failing',
   entityType: 'FOLDER',
   entityId: 23354,
-  createdDate: dayjs('2025-12-20T10:29'),
+  createdDate: dayjs('2025-12-25T05:28'),
 };
 
 export const sampleWithPartialData: IBookmark = {
@@ -15,7 +15,7 @@ export const sampleWithPartialData: IBookmark = {
   userId: 'ew outside',
   entityType: 'WORKFLOW',
   entityId: 19275,
-  createdDate: dayjs('2025-12-19T22:49'),
+  createdDate: dayjs('2025-12-24T17:48'),
 };
 
 export const sampleWithFullData: IBookmark = {
@@ -23,14 +23,14 @@ export const sampleWithFullData: IBookmark = {
   userId: 'antique',
   entityType: 'DOCUMENT',
   entityId: 25438,
-  createdDate: dayjs('2025-12-19T19:37'),
+  createdDate: dayjs('2025-12-24T14:36'),
 };
 
 export const sampleWithNewData: NewBookmark = {
   userId: 'bah sans excellent',
   entityType: 'SEARCH',
   entityId: 28954,
-  createdDate: dayjs('2025-12-20T05:52'),
+  createdDate: dayjs('2025-12-25T00:51'),
   id: null,
 };
 

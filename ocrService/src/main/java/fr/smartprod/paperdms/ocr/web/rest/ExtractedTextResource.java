@@ -36,7 +36,7 @@ public class ExtractedTextResource {
 
     private static final String ENTITY_NAME = "ocrServiceExtractedText";
 
-    @Value("${jhipster.clientApp.name:ocrService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ExtractedTextService extractedTextService;

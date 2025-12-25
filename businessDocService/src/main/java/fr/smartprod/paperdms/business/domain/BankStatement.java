@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.business.domain;
 import fr.smartprod.paperdms.business.domain.enumeration.StatementStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -19,7 +18,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class BankStatement implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs/esm';
-
-import { ServiceStatus } from 'app/entities/enumerations/service-status.model';
+import { IDocument } from 'app/entities/documentService/document/document.model';
 import { ServiceType } from 'app/entities/enumerations/service-type.model';
+import { ServiceStatus } from 'app/entities/enumerations/service-status.model';
 
 export interface IDocumentServiceStatus {
   id: number;
@@ -19,6 +19,7 @@ export interface IDocumentServiceStatus {
   priority?: number | null;
   updatedBy?: string | null;
   updatedDate?: dayjs.Dayjs | null;
+  document?: Pick<IDocument, 'id'> | null;
 }
 
 export type NewDocumentServiceStatus = Omit<IDocumentServiceStatus, 'id'> & { id: null };

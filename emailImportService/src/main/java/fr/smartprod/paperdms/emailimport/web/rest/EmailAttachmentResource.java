@@ -35,7 +35,7 @@ public class EmailAttachmentResource {
 
     private static final String ENTITY_NAME = "emailImportServiceEmailAttachment";
 
-    @Value("${jhipster.clientApp.name:emailImportService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final EmailAttachmentService emailAttachmentService;

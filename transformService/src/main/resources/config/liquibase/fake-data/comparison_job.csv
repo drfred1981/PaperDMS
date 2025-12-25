@@ -1,11 +1,11 @@
 id;document_id_1;document_id_2;comparison_type;differences;difference_count;similarity_percentage;diff_report_s_3_key;diff_visual_s_3_key;status;compared_date;compared_by
-1;23922;21395;CONTENT_HASH;../fake-data/blob/hipster.txt;31116;45.13;yesterday clear-cut cinema;fence huzzah;PENDING;2025-12-19T22:33:08;which yet pish
-2;28620;10595;SEMANTIC;../fake-data/blob/hipster.txt;5415;49.93;petticoat questionably whether;drat ack nab;PROCESSING;2025-12-20T08:45:52;hamburger modulo
-3;29061;26527;METADATA;../fake-data/blob/hipster.txt;7754;56.08;luck;account sleepy;FAILED;2025-12-19T23:56:50;through populist
-4;21253;5120;CONTENT_HASH;../fake-data/blob/hipster.txt;2202;88.13;sedately dissemble;anneal pfft;PROCESSING;2025-12-20T05:45:50;valentine
-5;465;3802;SEMANTIC;../fake-data/blob/hipster.txt;15789;67.66;hm;stupendous before;CANCELLED;2025-12-20T14:56:53;usefully
-6;12295;4184;CONTENT_HASH;../fake-data/blob/hipster.txt;4609;49.53;politely great;near oh;PENDING;2025-12-20T04:17:36;boohoo abscond
-7;22481;5557;TEXT_DIFF;../fake-data/blob/hipster.txt;6136;19.7;bah;jazz;FAILED;2025-12-19T23:22:39;director dishonor
-8;11715;17827;SEMANTIC;../fake-data/blob/hipster.txt;28993;28.67;meal save;regularly;COMPLETED;2025-12-20T10:23:07;specific without an
-9;3933;29158;PDF_VISUAL;../fake-data/blob/hipster.txt;23295;61.17;finally;accessorise instead;PROCESSING;2025-12-19T20:49:22;embarrassment gadzooks
-10;23734;7817;PDF_VISUAL;../fake-data/blob/hipster.txt;28433;37.27;bracelet intervention;because jaggedly;CANCELLED;2025-12-20T11:56:51;safely noxious
+1;23922;21395;CONTENT_HASH;../fake-data/blob/hipster.txt;31116;45.13;yesterday clear-cut cinema;fence huzzah;PENDING;2025-12-24T17:32:10;which yet pish
+2;28620;10595;SEMANTIC;../fake-data/blob/hipster.txt;5415;49.93;petticoat questionably whether;drat ack nab;PROCESSING;2025-12-25T03:44:54;hamburger modulo
+3;29061;26527;METADATA;../fake-data/blob/hipster.txt;7754;56.08;luck;account sleepy;FAILED;2025-12-24T18:55:52;through populist
+4;21253;5120;CONTENT_HASH;../fake-data/blob/hipster.txt;2202;88.13;sedately dissemble;anneal pfft;PROCESSING;2025-12-25T00:44:52;valentine
+5;465;3802;SEMANTIC;../fake-data/blob/hipster.txt;15789;67.66;hm;stupendous before;CANCELLED;2025-12-25T09:55:55;usefully
+6;12295;4184;CONTENT_HASH;../fake-data/blob/hipster.txt;4609;49.53;politely great;near oh;PENDING;2025-12-24T23:16:38;boohoo abscond
+7;22481;5557;TEXT_DIFF;../fake-data/blob/hipster.txt;6136;19.7;bah;jazz;FAILED;2025-12-24T18:21:41;director dishonor
+8;11715;17827;SEMANTIC;../fake-data/blob/hipster.txt;28993;28.67;meal save;regularly;COMPLETED;2025-12-25T05:22:09;specific without an
+9;3933;29158;PDF_VISUAL;../fake-data/blob/hipster.txt;23295;61.17;finally;accessorise instead;PROCESSING;2025-12-24T15:48:24;embarrassment gadzooks
+10;23734;7817;PDF_VISUAL;../fake-data/blob/hipster.txt;28433;37.27;bracelet intervention;because jaggedly;CANCELLED;2025-12-25T06:55:53;safely noxious

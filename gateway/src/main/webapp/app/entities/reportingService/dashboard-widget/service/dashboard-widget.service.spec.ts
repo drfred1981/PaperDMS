@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDashboardWidget } from '../dashboard-widget.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../dashboard-widget.test-samples';
@@ -100,7 +100,8 @@ describe('DashboardWidget Service', () => {
       it('should add a DashboardWidget to an empty array', () => {
         const dashboardWidget: IDashboardWidget = sampleWithRequiredData;
         expectedResult = service.addDashboardWidgetToCollectionIfMissing([], dashboardWidget);
-        expect(expectedResult).toEqual([dashboardWidget]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(dashboardWidget);
       });
 
       it('should not add a DashboardWidget to an array that contains it', () => {
@@ -134,13 +135,16 @@ describe('DashboardWidget Service', () => {
         const dashboardWidget: IDashboardWidget = sampleWithRequiredData;
         const dashboardWidget2: IDashboardWidget = sampleWithPartialData;
         expectedResult = service.addDashboardWidgetToCollectionIfMissing([], dashboardWidget, dashboardWidget2);
-        expect(expectedResult).toEqual([dashboardWidget, dashboardWidget2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(dashboardWidget);
+        expect(expectedResult).toContain(dashboardWidget2);
       });
 
       it('should accept null and undefined values', () => {
         const dashboardWidget: IDashboardWidget = sampleWithRequiredData;
         expectedResult = service.addDashboardWidgetToCollectionIfMissing([], null, dashboardWidget, undefined);
-        expect(expectedResult).toEqual([dashboardWidget]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(dashboardWidget);
       });
 
       it('should return initial array if no DashboardWidget is added', () => {

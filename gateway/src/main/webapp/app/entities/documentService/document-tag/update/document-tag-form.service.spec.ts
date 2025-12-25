@@ -8,6 +8,7 @@ describe('DocumentTag Form Service', () => {
   let service: DocumentTagFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentTagFormService);
   });
 
@@ -52,7 +53,7 @@ describe('DocumentTag Form Service', () => {
       it('should return NewDocumentTag for default DocumentTag initial value', () => {
         const formGroup = service.createDocumentTagFormGroup(sampleWithNewData);
 
-        const documentTag = service.getDocumentTag(formGroup);
+        const documentTag = service.getDocumentTag(formGroup) as any;
 
         expect(documentTag).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('DocumentTag Form Service', () => {
       it('should return NewDocumentTag for empty DocumentTag initial value', () => {
         const formGroup = service.createDocumentTagFormGroup();
 
-        const documentTag = service.getDocumentTag(formGroup);
+        const documentTag = service.getDocumentTag(formGroup) as any;
 
         expect(documentTag).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('DocumentTag Form Service', () => {
       it('should return IDocumentTag', () => {
         const formGroup = service.createDocumentTagFormGroup(sampleWithRequiredData);
 
-        const documentTag = service.getDocumentTag(formGroup);
+        const documentTag = service.getDocumentTag(formGroup) as any;
 
         expect(documentTag).toMatchObject(sampleWithRequiredData);
       });

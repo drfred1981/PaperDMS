@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import NotificationPreferenceResolve from './route/notification-preference-routing-resolve.service';
 
 const notificationPreferenceRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/notification-preference').then(m => m.NotificationPreference),
+    loadComponent: () => import('./list/notification-preference.component').then(m => m.NotificationPreferenceComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const notificationPreferenceRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/notification-preference-detail').then(m => m.NotificationPreferenceDetail),
+    loadComponent: () => import('./detail/notification-preference-detail.component').then(m => m.NotificationPreferenceDetailComponent),
     resolve: {
       notificationPreference: NotificationPreferenceResolve,
     },
@@ -24,7 +23,7 @@ const notificationPreferenceRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/notification-preference-update').then(m => m.NotificationPreferenceUpdate),
+    loadComponent: () => import('./update/notification-preference-update.component').then(m => m.NotificationPreferenceUpdateComponent),
     resolve: {
       notificationPreference: NotificationPreferenceResolve,
     },
@@ -32,7 +31,7 @@ const notificationPreferenceRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/notification-preference-update').then(m => m.NotificationPreferenceUpdate),
+    loadComponent: () => import('./update/notification-preference-update.component').then(m => m.NotificationPreferenceUpdateComponent),
     resolve: {
       notificationPreference: NotificationPreferenceResolve,
     },

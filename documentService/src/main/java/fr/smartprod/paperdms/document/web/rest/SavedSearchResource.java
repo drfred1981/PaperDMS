@@ -37,7 +37,7 @@ public class SavedSearchResource {
 
     private static final String ENTITY_NAME = "documentServiceSavedSearch";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SavedSearchService savedSearchService;

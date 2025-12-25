@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class DocumentPermissionTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static DocumentPermission getDocumentPermissionSample1() {
         return new DocumentPermission().id(1L).documentId(1L).principalId("principalId1").grantedBy("grantedBy1");

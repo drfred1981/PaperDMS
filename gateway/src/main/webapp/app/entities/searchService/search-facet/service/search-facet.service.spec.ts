@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISearchFacet } from '../search-facet.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../search-facet.test-samples';
@@ -100,7 +100,8 @@ describe('SearchFacet Service', () => {
       it('should add a SearchFacet to an empty array', () => {
         const searchFacet: ISearchFacet = sampleWithRequiredData;
         expectedResult = service.addSearchFacetToCollectionIfMissing([], searchFacet);
-        expect(expectedResult).toEqual([searchFacet]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(searchFacet);
       });
 
       it('should not add a SearchFacet to an array that contains it', () => {
@@ -134,13 +135,16 @@ describe('SearchFacet Service', () => {
         const searchFacet: ISearchFacet = sampleWithRequiredData;
         const searchFacet2: ISearchFacet = sampleWithPartialData;
         expectedResult = service.addSearchFacetToCollectionIfMissing([], searchFacet, searchFacet2);
-        expect(expectedResult).toEqual([searchFacet, searchFacet2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(searchFacet);
+        expect(expectedResult).toContain(searchFacet2);
       });
 
       it('should accept null and undefined values', () => {
         const searchFacet: ISearchFacet = sampleWithRequiredData;
         expectedResult = service.addSearchFacetToCollectionIfMissing([], null, searchFacet, undefined);
-        expect(expectedResult).toEqual([searchFacet]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(searchFacet);
       });
 
       it('should return initial array if no SearchFacet is added', () => {

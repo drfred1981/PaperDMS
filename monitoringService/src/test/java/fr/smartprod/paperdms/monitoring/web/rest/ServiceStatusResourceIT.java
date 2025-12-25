@@ -65,7 +65,7 @@ class ServiceStatusResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -389,11 +389,7 @@ class ServiceStatusResourceIT {
         ServiceStatus partialUpdatedServiceStatus = new ServiceStatus();
         partialUpdatedServiceStatus.setId(serviceStatus.getId());
 
-        partialUpdatedServiceStatus
-            .serviceName(UPDATED_SERVICE_NAME)
-            .serviceType(UPDATED_SERVICE_TYPE)
-            .port(UPDATED_PORT)
-            .version(UPDATED_VERSION);
+        partialUpdatedServiceStatus.status(UPDATED_STATUS).port(UPDATED_PORT).isHealthy(UPDATED_IS_HEALTHY);
 
         restServiceStatusMockMvc
             .perform(

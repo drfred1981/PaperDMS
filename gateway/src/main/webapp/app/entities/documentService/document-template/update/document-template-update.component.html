@@ -1,0 +1,208 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-template-heading"
+        data-cy="DocumentTemplateCreateUpdateHeading"
+        jhiTranslate="gatewayApp.documentServiceDocumentTemplate.home.createOrEditLabel"
+      >
+        Create or edit a Document Template
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let templateSha256Ref = editForm.get('templateSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_templateSha256" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.templateSha256"
+            >Template Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateSha256"
+            id="field_templateSha256"
+            data-cy="templateSha256"
+            formControlName="templateSha256"
+          />
+          @if (templateSha256Ref.invalid && (templateSha256Ref.dirty || templateSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('templateSha256')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('templateSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let templateS3KeyRef = editForm.get('templateS3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_templateS3Key" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.templateS3Key"
+            >Template S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateS3Key"
+            id="field_templateS3Key"
+            data-cy="templateS3Key"
+            formControlName="templateS3Key"
+          />
+          @if (templateS3KeyRef.invalid && (templateS3KeyRef.dirty || templateS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('templateS3Key')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('templateS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let isActiveRef = editForm.get('isActive')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isActive" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.isActive"
+            >Is Active</label
+          >
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+          @if (isActiveRef.invalid && (isActiveRef.dirty || isActiveRef.touched)) {
+            <div>
+              @if (editForm.get('isActive')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let createdByRef = editForm.get('createdBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.createdBy"
+            >Created By</label
+          >
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+          @if (createdByRef.invalid && (createdByRef.dirty || createdByRef.touched)) {
+            <div>
+              @if (editForm.get('createdBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('createdBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_documentType" jhiTranslate="gatewayApp.documentServiceDocumentTemplate.documentType"
+            >Document Type</label
+          >
+          <select
+            class="form-control"
+            id="field_documentType"
+            data-cy="documentType"
+            name="documentType"
+            formControlName="documentType"
+            [compareWith]="compareDocumentType"
+          >
+            @if (!editForm.get('documentType')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (documentTypeOption of documentTypesSharedCollection; track $index) {
+              <option [ngValue]="documentTypeOption">{{ documentTypeOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['documentType'])!.invalid && (editForm.get(['documentType'])!.dirty || editForm.get(['documentType'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['documentType'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

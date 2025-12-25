@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.gateway.domain;
 import fr.smartprod.paperdms.gateway.domain.enumeration.WorkflowInstanceStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -15,7 +14,6 @@ import java.io.Serializable;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class DocumentProcess implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -36,18 +34,7 @@ public class DocumentProcess implements Serializable {
     @NotNull
     @Size(max = 64)
     @Column(name = "document_sha_256", length = 64, nullable = false)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String documentSha256;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

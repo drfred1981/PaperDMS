@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISmartFolder } from '../smart-folder.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../smart-folder.test-samples';
@@ -101,7 +101,8 @@ describe('SmartFolder Service', () => {
       it('should add a SmartFolder to an empty array', () => {
         const smartFolder: ISmartFolder = sampleWithRequiredData;
         expectedResult = service.addSmartFolderToCollectionIfMissing([], smartFolder);
-        expect(expectedResult).toEqual([smartFolder]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(smartFolder);
       });
 
       it('should not add a SmartFolder to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('SmartFolder Service', () => {
         const smartFolder: ISmartFolder = sampleWithRequiredData;
         const smartFolder2: ISmartFolder = sampleWithPartialData;
         expectedResult = service.addSmartFolderToCollectionIfMissing([], smartFolder, smartFolder2);
-        expect(expectedResult).toEqual([smartFolder, smartFolder2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(smartFolder);
+        expect(expectedResult).toContain(smartFolder2);
       });
 
       it('should accept null and undefined values', () => {
         const smartFolder: ISmartFolder = sampleWithRequiredData;
         expectedResult = service.addSmartFolderToCollectionIfMissing([], null, smartFolder, undefined);
-        expect(expectedResult).toEqual([smartFolder]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(smartFolder);
       });
 
       it('should return initial array if no SmartFolder is added', () => {

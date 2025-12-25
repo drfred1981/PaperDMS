@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IScheduledReport, NewScheduledReport } from '../scheduled-report.model';
 
@@ -52,10 +51,10 @@ export type ScheduledReportFormGroup = FormGroup<ScheduledReportFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class ScheduledReportFormService {
-  createScheduledReportFormGroup(scheduledReport?: ScheduledReportFormGroupInput): ScheduledReportFormGroup {
+  createScheduledReportFormGroup(scheduledReport: ScheduledReportFormGroupInput = { id: null }): ScheduledReportFormGroup {
     const scheduledReportRawValue = this.convertScheduledReportToScheduledReportRawValue({
       ...this.getFormDefaults(),
-      ...(scheduledReport ?? { id: null }),
+      ...scheduledReport,
     });
     return new FormGroup<ScheduledReportFormGroupContent>({
       id: new FormControl(
@@ -104,10 +103,12 @@ export class ScheduledReportFormService {
 
   resetForm(form: ScheduledReportFormGroup, scheduledReport: ScheduledReportFormGroupInput): void {
     const scheduledReportRawValue = this.convertScheduledReportToScheduledReportRawValue({ ...this.getFormDefaults(), ...scheduledReport });
-    form.reset({
-      ...scheduledReportRawValue,
-      id: { value: scheduledReportRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...scheduledReportRawValue,
+        id: { value: scheduledReportRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ScheduledReportFormDefaults {

@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20251220154815"
+    "changelogDate": "20251225104716"
   },
   "applications": ["gateway", "ocrService"],
   "clientRootFolder": "ocrService",

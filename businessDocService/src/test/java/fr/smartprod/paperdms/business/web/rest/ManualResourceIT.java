@@ -85,7 +85,7 @@ class ManualResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/manuals/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1138,10 +1138,11 @@ class ManualResourceIT {
         partialUpdatedManual.setId(manual.getId());
 
         partialUpdatedManual
-            .documentId(UPDATED_DOCUMENT_ID)
             .title(UPDATED_TITLE)
             .manualType(UPDATED_MANUAL_TYPE)
-            .pageCount(UPDATED_PAGE_COUNT);
+            .pageCount(UPDATED_PAGE_COUNT)
+            .isPublic(UPDATED_IS_PUBLIC)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restManualMockMvc
             .perform(

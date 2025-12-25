@@ -5,7 +5,7 @@ import { IWorkflowInstance, NewWorkflowInstance } from './workflow-instance.mode
 export const sampleWithRequiredData: IWorkflowInstance = {
   id: 29309,
   documentId: 21351,
-  startDate: dayjs('2025-12-20T00:49'),
+  startDate: dayjs('2025-12-24T19:48'),
   createdBy: 'unwelcome gastropod',
 };
 
@@ -13,9 +13,9 @@ export const sampleWithPartialData: IWorkflowInstance = {
   id: 20587,
   documentId: 17685,
   currentStepNumber: 5976,
-  startDate: dayjs('2025-12-20T01:26'),
-  dueDate: dayjs('2025-12-19T23:23'),
-  cancelledDate: dayjs('2025-12-20T15:11'),
+  startDate: dayjs('2025-12-24T20:25'),
+  dueDate: dayjs('2025-12-24T18:22'),
+  cancelledDate: dayjs('2025-12-25T10:10'),
   cancellationReason: '../fake-data/blob/hipster.txt',
   metadata: '../fake-data/blob/hipster.txt',
   createdBy: 'demonstrate deliberately brown',
@@ -26,10 +26,10 @@ export const sampleWithFullData: IWorkflowInstance = {
   documentId: 11488,
   status: 'COMPLETED',
   currentStepNumber: 14536,
-  startDate: dayjs('2025-12-20T12:56'),
-  dueDate: dayjs('2025-12-19T20:04'),
-  completedDate: dayjs('2025-12-20T11:59'),
-  cancelledDate: dayjs('2025-12-20T00:55'),
+  startDate: dayjs('2025-12-25T07:55'),
+  dueDate: dayjs('2025-12-24T15:03'),
+  completedDate: dayjs('2025-12-25T06:58'),
+  cancelledDate: dayjs('2025-12-24T19:54'),
   cancellationReason: '../fake-data/blob/hipster.txt',
   priority: 'HIGH',
   metadata: '../fake-data/blob/hipster.txt',
@@ -38,7 +38,7 @@ export const sampleWithFullData: IWorkflowInstance = {
 
 export const sampleWithNewData: NewWorkflowInstance = {
   documentId: 27202,
-  startDate: dayjs('2025-12-19T22:34'),
+  startDate: dayjs('2025-12-24T17:33'),
   createdBy: 'straw esteemed',
   id: null,
 };

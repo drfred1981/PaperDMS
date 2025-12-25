@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { BatchStatus } from 'app/entities/enumerations/batch-status.model';
 
 export interface IScanBatch {

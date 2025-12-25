@@ -8,6 +8,7 @@ describe('AutoTagJob Form Service', () => {
   let service: AutoTagJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(AutoTagJobFormService);
   });
 
@@ -70,7 +71,7 @@ describe('AutoTagJob Form Service', () => {
       it('should return NewAutoTagJob for default AutoTagJob initial value', () => {
         const formGroup = service.createAutoTagJobFormGroup(sampleWithNewData);
 
-        const autoTagJob = service.getAutoTagJob(formGroup);
+        const autoTagJob = service.getAutoTagJob(formGroup) as any;
 
         expect(autoTagJob).toMatchObject(sampleWithNewData);
       });
@@ -78,7 +79,7 @@ describe('AutoTagJob Form Service', () => {
       it('should return NewAutoTagJob for empty AutoTagJob initial value', () => {
         const formGroup = service.createAutoTagJobFormGroup();
 
-        const autoTagJob = service.getAutoTagJob(formGroup);
+        const autoTagJob = service.getAutoTagJob(formGroup) as any;
 
         expect(autoTagJob).toMatchObject({});
       });
@@ -86,7 +87,7 @@ describe('AutoTagJob Form Service', () => {
       it('should return IAutoTagJob', () => {
         const formGroup = service.createAutoTagJobFormGroup(sampleWithRequiredData);
 
-        const autoTagJob = service.getAutoTagJob(formGroup);
+        const autoTagJob = service.getAutoTagJob(formGroup) as any;
 
         expect(autoTagJob).toMatchObject(sampleWithRequiredData);
       });

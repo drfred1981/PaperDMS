@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IReportExecution } from '../report-execution.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../report-execution.test-samples';
@@ -102,7 +102,8 @@ describe('ReportExecution Service', () => {
       it('should add a ReportExecution to an empty array', () => {
         const reportExecution: IReportExecution = sampleWithRequiredData;
         expectedResult = service.addReportExecutionToCollectionIfMissing([], reportExecution);
-        expect(expectedResult).toEqual([reportExecution]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(reportExecution);
       });
 
       it('should not add a ReportExecution to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('ReportExecution Service', () => {
         const reportExecution: IReportExecution = sampleWithRequiredData;
         const reportExecution2: IReportExecution = sampleWithPartialData;
         expectedResult = service.addReportExecutionToCollectionIfMissing([], reportExecution, reportExecution2);
-        expect(expectedResult).toEqual([reportExecution, reportExecution2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(reportExecution);
+        expect(expectedResult).toContain(reportExecution2);
       });
 
       it('should accept null and undefined values', () => {
         const reportExecution: IReportExecution = sampleWithRequiredData;
         expectedResult = service.addReportExecutionToCollectionIfMissing([], null, reportExecution, undefined);
-        expect(expectedResult).toEqual([reportExecution]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(reportExecution);
       });
 
       it('should return initial array if no ReportExecution is added', () => {

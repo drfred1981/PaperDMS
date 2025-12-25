@@ -8,6 +8,7 @@ describe('DocumentWatch Form Service', () => {
   let service: DocumentWatchFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentWatchFormService);
   });
 
@@ -56,7 +57,7 @@ describe('DocumentWatch Form Service', () => {
       it('should return NewDocumentWatch for default DocumentWatch initial value', () => {
         const formGroup = service.createDocumentWatchFormGroup(sampleWithNewData);
 
-        const documentWatch = service.getDocumentWatch(formGroup);
+        const documentWatch = service.getDocumentWatch(formGroup) as any;
 
         expect(documentWatch).toMatchObject(sampleWithNewData);
       });
@@ -64,7 +65,7 @@ describe('DocumentWatch Form Service', () => {
       it('should return NewDocumentWatch for empty DocumentWatch initial value', () => {
         const formGroup = service.createDocumentWatchFormGroup();
 
-        const documentWatch = service.getDocumentWatch(formGroup);
+        const documentWatch = service.getDocumentWatch(formGroup) as any;
 
         expect(documentWatch).toMatchObject({});
       });
@@ -72,7 +73,7 @@ describe('DocumentWatch Form Service', () => {
       it('should return IDocumentWatch', () => {
         const formGroup = service.createDocumentWatchFormGroup(sampleWithRequiredData);
 
-        const documentWatch = service.getDocumentWatch(formGroup);
+        const documentWatch = service.getDocumentWatch(formGroup) as any;
 
         expect(documentWatch).toMatchObject(sampleWithRequiredData);
       });

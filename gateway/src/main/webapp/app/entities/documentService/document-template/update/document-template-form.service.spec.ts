@@ -8,6 +8,7 @@ describe('DocumentTemplate Form Service', () => {
   let service: DocumentTemplateFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentTemplateFormService);
   });
 
@@ -52,7 +53,7 @@ describe('DocumentTemplate Form Service', () => {
       it('should return NewDocumentTemplate for default DocumentTemplate initial value', () => {
         const formGroup = service.createDocumentTemplateFormGroup(sampleWithNewData);
 
-        const documentTemplate = service.getDocumentTemplate(formGroup);
+        const documentTemplate = service.getDocumentTemplate(formGroup) as any;
 
         expect(documentTemplate).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('DocumentTemplate Form Service', () => {
       it('should return NewDocumentTemplate for empty DocumentTemplate initial value', () => {
         const formGroup = service.createDocumentTemplateFormGroup();
 
-        const documentTemplate = service.getDocumentTemplate(formGroup);
+        const documentTemplate = service.getDocumentTemplate(formGroup) as any;
 
         expect(documentTemplate).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('DocumentTemplate Form Service', () => {
       it('should return IDocumentTemplate', () => {
         const formGroup = service.createDocumentTemplateFormGroup(sampleWithRequiredData);
 
-        const documentTemplate = service.getDocumentTemplate(formGroup);
+        const documentTemplate = service.getDocumentTemplate(formGroup) as any;
 
         expect(documentTemplate).toMatchObject(sampleWithRequiredData);
       });

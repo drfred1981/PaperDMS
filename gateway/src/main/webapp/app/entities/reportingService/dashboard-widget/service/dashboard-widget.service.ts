@@ -1,11 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDashboardWidget, NewDashboardWidget } from '../dashboard-widget.model';
 
 export type PartialUpdateDashboardWidget = Partial<IDashboardWidget> & Pick<IDashboardWidget, 'id'>;
@@ -25,23 +24,19 @@ export class DashboardWidgetService {
   }
 
   update(dashboardWidget: IDashboardWidget): Observable<EntityResponseType> {
-    return this.http.put<IDashboardWidget>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getDashboardWidgetIdentifier(dashboardWidget))}`,
-      dashboardWidget,
-      { observe: 'response' },
-    );
+    return this.http.put<IDashboardWidget>(`${this.resourceUrl}/${this.getDashboardWidgetIdentifier(dashboardWidget)}`, dashboardWidget, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(dashboardWidget: PartialUpdateDashboardWidget): Observable<EntityResponseType> {
-    return this.http.patch<IDashboardWidget>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getDashboardWidgetIdentifier(dashboardWidget))}`,
-      dashboardWidget,
-      { observe: 'response' },
-    );
+    return this.http.patch<IDashboardWidget>(`${this.resourceUrl}/${this.getDashboardWidgetIdentifier(dashboardWidget)}`, dashboardWidget, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IDashboardWidget>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.get<IDashboardWidget>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -50,7 +45,7 @@ export class DashboardWidgetService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDashboardWidgetIdentifier(dashboardWidget: Pick<IDashboardWidget, 'id'>): number {

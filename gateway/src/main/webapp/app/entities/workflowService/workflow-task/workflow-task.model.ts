@@ -1,9 +1,8 @@
 import dayjs from 'dayjs/esm';
-
-import { TaskAction } from 'app/entities/enumerations/task-action.model';
-import { TaskStatus } from 'app/entities/enumerations/task-status.model';
 import { IWorkflowInstance } from 'app/entities/workflowService/workflow-instance/workflow-instance.model';
 import { IWorkflowStep } from 'app/entities/workflowService/workflow-step/workflow-step.model';
+import { TaskStatus } from 'app/entities/enumerations/task-status.model';
+import { TaskAction } from 'app/entities/enumerations/task-action.model';
 
 export interface IWorkflowTask {
   id: number;

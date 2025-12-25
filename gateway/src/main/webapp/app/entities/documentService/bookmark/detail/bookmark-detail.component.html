@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (bookmark(); as bookmarkRef) {
+      <div>
+        <h2 data-cy="bookmarkDetailsHeading"><span jhiTranslate="gatewayApp.documentServiceBookmark.detail.title">Bookmark</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ bookmarkRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceBookmark.userId">User Id</span></dt>
+          <dd>
+            <span>{{ bookmarkRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceBookmark.entityType">Entity Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.BookmarkType.' + (bookmarkRef.entityType ?? 'null')">{{
+              {
+                null: '',
+                DOCUMENT: 'DOCUMENT',
+                FOLDER: 'FOLDER',
+                SEARCH: 'SEARCH',
+                DASHBOARD: 'DASHBOARD',
+                WORKFLOW: 'WORKFLOW',
+                SMART_FOLDER: 'SMART_FOLDER',
+              }[bookmarkRef.entityType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceBookmark.entityId">Entity Id</span></dt>
+          <dd>
+            <span>{{ bookmarkRef.entityId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceBookmark.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ bookmarkRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/bookmark', bookmarkRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

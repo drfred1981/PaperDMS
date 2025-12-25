@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IAiCache } from '../ai-cache.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../ai-cache.test-samples';
@@ -103,7 +103,8 @@ describe('AiCache Service', () => {
       it('should add a AiCache to an empty array', () => {
         const aiCache: IAiCache = sampleWithRequiredData;
         expectedResult = service.addAiCacheToCollectionIfMissing([], aiCache);
-        expect(expectedResult).toEqual([aiCache]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(aiCache);
       });
 
       it('should not add a AiCache to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('AiCache Service', () => {
         const aiCache: IAiCache = sampleWithRequiredData;
         const aiCache2: IAiCache = sampleWithPartialData;
         expectedResult = service.addAiCacheToCollectionIfMissing([], aiCache, aiCache2);
-        expect(expectedResult).toEqual([aiCache, aiCache2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(aiCache);
+        expect(expectedResult).toContain(aiCache2);
       });
 
       it('should accept null and undefined values', () => {
         const aiCache: IAiCache = sampleWithRequiredData;
         expectedResult = service.addAiCacheToCollectionIfMissing([], null, aiCache, undefined);
-        expect(expectedResult).toEqual([aiCache]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(aiCache);
       });
 
       it('should return initial array if no AiCache is added', () => {

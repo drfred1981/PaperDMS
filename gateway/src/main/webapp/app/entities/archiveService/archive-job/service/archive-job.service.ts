@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IArchiveJob, NewArchiveJob } from '../archive-job.model';
 
 export type PartialUpdateArchiveJob = Partial<IArchiveJob> & Pick<IArchiveJob, 'id'>;
@@ -43,24 +43,20 @@ export class ArchiveJobService {
   update(archiveJob: IArchiveJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(archiveJob);
     return this.http
-      .put<RestArchiveJob>(`${this.resourceUrl}/${encodeURIComponent(this.getArchiveJobIdentifier(archiveJob))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestArchiveJob>(`${this.resourceUrl}/${this.getArchiveJobIdentifier(archiveJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(archiveJob: PartialUpdateArchiveJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(archiveJob);
     return this.http
-      .patch<RestArchiveJob>(`${this.resourceUrl}/${encodeURIComponent(this.getArchiveJobIdentifier(archiveJob))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestArchiveJob>(`${this.resourceUrl}/${this.getArchiveJobIdentifier(archiveJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestArchiveJob>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestArchiveJob>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -72,7 +68,7 @@ export class ArchiveJobService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getArchiveJobIdentifier(archiveJob: Pick<IArchiveJob, 'id'>): number {

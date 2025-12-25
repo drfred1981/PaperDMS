@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { HealthStatus } from 'app/entities/enumerations/health-status.model';
 
 export interface ISystemHealth {

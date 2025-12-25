@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IOcrResult } from '../ocr-result.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../ocr-result.test-samples';
@@ -101,7 +101,8 @@ describe('OcrResult Service', () => {
       it('should add a OcrResult to an empty array', () => {
         const ocrResult: IOcrResult = sampleWithRequiredData;
         expectedResult = service.addOcrResultToCollectionIfMissing([], ocrResult);
-        expect(expectedResult).toEqual([ocrResult]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrResult);
       });
 
       it('should not add a OcrResult to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('OcrResult Service', () => {
         const ocrResult: IOcrResult = sampleWithRequiredData;
         const ocrResult2: IOcrResult = sampleWithPartialData;
         expectedResult = service.addOcrResultToCollectionIfMissing([], ocrResult, ocrResult2);
-        expect(expectedResult).toEqual([ocrResult, ocrResult2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(ocrResult);
+        expect(expectedResult).toContain(ocrResult2);
       });
 
       it('should accept null and undefined values', () => {
         const ocrResult: IOcrResult = sampleWithRequiredData;
         expectedResult = service.addOcrResultToCollectionIfMissing([], null, ocrResult, undefined);
-        expect(expectedResult).toEqual([ocrResult]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrResult);
       });
 
       it('should return initial array if no OcrResult is added', () => {

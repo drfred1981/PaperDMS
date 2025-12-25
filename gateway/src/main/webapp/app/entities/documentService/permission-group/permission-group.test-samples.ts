@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IPermissionGroup = {
   name: 'smog',
   permissions: '../fake-data/blob/hipster.txt',
   isSystem: false,
-  createdDate: dayjs('2025-12-19T18:16'),
+  createdDate: dayjs('2025-12-24T13:15'),
   createdBy: 'intensely ack',
 };
 
@@ -16,7 +16,7 @@ export const sampleWithPartialData: IPermissionGroup = {
   name: 'institute',
   permissions: '../fake-data/blob/hipster.txt',
   isSystem: false,
-  createdDate: dayjs('2025-12-20T03:13'),
+  createdDate: dayjs('2025-12-24T22:12'),
   createdBy: 'once mortally',
 };
 
@@ -25,7 +25,7 @@ export const sampleWithFullData: IPermissionGroup = {
   name: 'till behind',
   permissions: '../fake-data/blob/hipster.txt',
   isSystem: true,
-  createdDate: dayjs('2025-12-19T19:36'),
+  createdDate: dayjs('2025-12-24T14:35'),
   createdBy: 'unnaturally orientate very',
 };
 
@@ -33,7 +33,7 @@ export const sampleWithNewData: NewPermissionGroup = {
   name: 'fluffy certification',
   permissions: '../fake-data/blob/hipster.txt',
   isSystem: true,
-  createdDate: dayjs('2025-12-20T11:23'),
+  createdDate: dayjs('2025-12-25T06:22'),
   createdBy: 'train reboot',
   id: null,
 };

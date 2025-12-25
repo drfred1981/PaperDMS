@@ -8,6 +8,7 @@ describe('DocumentFingerprint Form Service', () => {
   let service: DocumentFingerprintFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentFingerprintFormService);
   });
 
@@ -52,7 +53,7 @@ describe('DocumentFingerprint Form Service', () => {
       it('should return NewDocumentFingerprint for default DocumentFingerprint initial value', () => {
         const formGroup = service.createDocumentFingerprintFormGroup(sampleWithNewData);
 
-        const documentFingerprint = service.getDocumentFingerprint(formGroup);
+        const documentFingerprint = service.getDocumentFingerprint(formGroup) as any;
 
         expect(documentFingerprint).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('DocumentFingerprint Form Service', () => {
       it('should return NewDocumentFingerprint for empty DocumentFingerprint initial value', () => {
         const formGroup = service.createDocumentFingerprintFormGroup();
 
-        const documentFingerprint = service.getDocumentFingerprint(formGroup);
+        const documentFingerprint = service.getDocumentFingerprint(formGroup) as any;
 
         expect(documentFingerprint).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('DocumentFingerprint Form Service', () => {
       it('should return IDocumentFingerprint', () => {
         const formGroup = service.createDocumentFingerprintFormGroup(sampleWithRequiredData);
 
-        const documentFingerprint = service.getDocumentFingerprint(formGroup);
+        const documentFingerprint = service.getDocumentFingerprint(formGroup) as any;
 
         expect(documentFingerprint).toMatchObject(sampleWithRequiredData);
       });

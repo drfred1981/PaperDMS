@@ -67,7 +67,7 @@ public class SmartFolderQueryService extends QueryService<SmartFolder> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<SmartFolder> createSpecification(SmartFolderCriteria criteria) {
-        Specification<SmartFolder> specification = Specification.unrestricted();
+        Specification<SmartFolder> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

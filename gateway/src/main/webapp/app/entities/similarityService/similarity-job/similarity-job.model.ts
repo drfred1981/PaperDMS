@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { AiJobStatus } from 'app/entities/enumerations/ai-job-status.model';
 import { SimilarityAlgorithm } from 'app/entities/enumerations/similarity-algorithm.model';
 import { SimilarityScope } from 'app/entities/enumerations/similarity-scope.model';

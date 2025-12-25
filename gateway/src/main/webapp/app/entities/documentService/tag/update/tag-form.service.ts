@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ITag, NewTag } from '../tag.model';
 
@@ -46,10 +45,10 @@ export type TagFormGroup = FormGroup<TagFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class TagFormService {
-  createTagFormGroup(tag?: TagFormGroupInput): TagFormGroup {
+  createTagFormGroup(tag: TagFormGroupInput = { id: null }): TagFormGroup {
     const tagRawValue = this.convertTagToTagRawValue({
       ...this.getFormDefaults(),
-      ...(tag ?? { id: null }),
+      ...tag,
     });
     return new FormGroup<TagFormGroupContent>({
       id: new FormControl(
@@ -88,10 +87,12 @@ export class TagFormService {
 
   resetForm(form: TagFormGroup, tag: TagFormGroupInput): void {
     const tagRawValue = this.convertTagToTagRawValue({ ...this.getFormDefaults(), ...tag });
-    form.reset({
-      ...tagRawValue,
-      id: { value: tagRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...tagRawValue,
+        id: { value: tagRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): TagFormDefaults {

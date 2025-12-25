@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ICorrespondent, NewCorrespondent } from '../correspondent.model';
 
@@ -53,10 +52,10 @@ export type CorrespondentFormGroup = FormGroup<CorrespondentFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class CorrespondentFormService {
-  createCorrespondentFormGroup(correspondent?: CorrespondentFormGroupInput): CorrespondentFormGroup {
+  createCorrespondentFormGroup(correspondent: CorrespondentFormGroupInput = { id: null }): CorrespondentFormGroup {
     const correspondentRawValue = this.convertCorrespondentToCorrespondentRawValue({
       ...this.getFormDefaults(),
-      ...(correspondent ?? { id: null }),
+      ...correspondent,
     });
     return new FormGroup<CorrespondentFormGroupContent>({
       id: new FormControl(
@@ -107,10 +106,12 @@ export class CorrespondentFormService {
 
   resetForm(form: CorrespondentFormGroup, correspondent: CorrespondentFormGroupInput): void {
     const correspondentRawValue = this.convertCorrespondentToCorrespondentRawValue({ ...this.getFormDefaults(), ...correspondent });
-    form.reset({
-      ...correspondentRawValue,
-      id: { value: correspondentRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...correspondentRawValue,
+        id: { value: correspondentRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): CorrespondentFormDefaults {

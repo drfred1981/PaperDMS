@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IWorkflowStep } from '../workflow-step.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../workflow-step.test-samples';
@@ -100,7 +100,8 @@ describe('WorkflowStep Service', () => {
       it('should add a WorkflowStep to an empty array', () => {
         const workflowStep: IWorkflowStep = sampleWithRequiredData;
         expectedResult = service.addWorkflowStepToCollectionIfMissing([], workflowStep);
-        expect(expectedResult).toEqual([workflowStep]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflowStep);
       });
 
       it('should not add a WorkflowStep to an array that contains it', () => {
@@ -134,13 +135,16 @@ describe('WorkflowStep Service', () => {
         const workflowStep: IWorkflowStep = sampleWithRequiredData;
         const workflowStep2: IWorkflowStep = sampleWithPartialData;
         expectedResult = service.addWorkflowStepToCollectionIfMissing([], workflowStep, workflowStep2);
-        expect(expectedResult).toEqual([workflowStep, workflowStep2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(workflowStep);
+        expect(expectedResult).toContain(workflowStep2);
       });
 
       it('should accept null and undefined values', () => {
         const workflowStep: IWorkflowStep = sampleWithRequiredData;
         expectedResult = service.addWorkflowStepToCollectionIfMissing([], null, workflowStep, undefined);
-        expect(expectedResult).toEqual([workflowStep]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflowStep);
       });
 
       it('should return initial array if no WorkflowStep is added', () => {

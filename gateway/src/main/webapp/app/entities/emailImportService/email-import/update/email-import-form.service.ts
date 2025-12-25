@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IEmailImport, NewEmailImport } from '../email-import.model';
 
@@ -55,10 +54,10 @@ export type EmailImportFormGroup = FormGroup<EmailImportFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class EmailImportFormService {
-  createEmailImportFormGroup(emailImport?: EmailImportFormGroupInput): EmailImportFormGroup {
+  createEmailImportFormGroup(emailImport: EmailImportFormGroupInput = { id: null }): EmailImportFormGroup {
     const emailImportRawValue = this.convertEmailImportToEmailImportRawValue({
       ...this.getFormDefaults(),
-      ...(emailImport ?? { id: null }),
+      ...emailImport,
     });
     return new FormGroup<EmailImportFormGroupContent>({
       id: new FormControl(
@@ -103,10 +102,12 @@ export class EmailImportFormService {
 
   resetForm(form: EmailImportFormGroup, emailImport: EmailImportFormGroupInput): void {
     const emailImportRawValue = this.convertEmailImportToEmailImportRawValue({ ...this.getFormDefaults(), ...emailImport });
-    form.reset({
-      ...emailImportRawValue,
-      id: { value: emailImportRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...emailImportRawValue,
+        id: { value: emailImportRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): EmailImportFormDefaults {

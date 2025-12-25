@@ -64,7 +64,7 @@ class SystemMetricResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -371,7 +371,13 @@ class SystemMetricResourceIT {
         SystemMetric partialUpdatedSystemMetric = new SystemMetric();
         partialUpdatedSystemMetric.setId(systemMetric.getId());
 
-        partialUpdatedSystemMetric.networkOut(UPDATED_NETWORK_OUT).timestamp(UPDATED_TIMESTAMP);
+        partialUpdatedSystemMetric
+            .metricName(UPDATED_METRIC_NAME)
+            .cpuUsage(UPDATED_CPU_USAGE)
+            .diskUsage(UPDATED_DISK_USAGE)
+            .networkIn(UPDATED_NETWORK_IN)
+            .networkOut(UPDATED_NETWORK_OUT)
+            .activeConnections(UPDATED_ACTIVE_CONNECTIONS);
 
         restSystemMetricMockMvc
             .perform(

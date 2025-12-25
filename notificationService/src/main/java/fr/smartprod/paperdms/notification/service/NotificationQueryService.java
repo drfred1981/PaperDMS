@@ -68,7 +68,7 @@ public class NotificationQueryService extends QueryService<Notification> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Notification> createSpecification(NotificationCriteria criteria) {
-        Specification<Notification> specification = Specification.unrestricted();
+        Specification<Notification> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

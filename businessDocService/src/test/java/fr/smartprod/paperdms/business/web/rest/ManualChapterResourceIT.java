@@ -63,7 +63,7 @@ class ManualChapterResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -426,14 +426,7 @@ class ManualChapterResourceIT {
         ManualChapter partialUpdatedManualChapter = new ManualChapter();
         partialUpdatedManualChapter.setId(manualChapter.getId());
 
-        partialUpdatedManualChapter
-            .manualId(UPDATED_MANUAL_ID)
-            .chapterNumber(UPDATED_CHAPTER_NUMBER)
-            .title(UPDATED_TITLE)
-            .content(UPDATED_CONTENT)
-            .pageEnd(UPDATED_PAGE_END)
-            .level(UPDATED_LEVEL)
-            .displayOrder(UPDATED_DISPLAY_ORDER);
+        partialUpdatedManualChapter.content(UPDATED_CONTENT);
 
         restManualChapterMockMvc
             .perform(

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ManualResolve from './route/manual-routing-resolve.service';
 
 const manualRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/manual').then(m => m.Manual),
+    loadComponent: () => import('./list/manual.component').then(m => m.ManualComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const manualRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/manual-detail').then(m => m.ManualDetail),
+    loadComponent: () => import('./detail/manual-detail.component').then(m => m.ManualDetailComponent),
     resolve: {
       manual: ManualResolve,
     },
@@ -24,7 +23,7 @@ const manualRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/manual-update').then(m => m.ManualUpdate),
+    loadComponent: () => import('./update/manual-update.component').then(m => m.ManualUpdateComponent),
     resolve: {
       manual: ManualResolve,
     },
@@ -32,7 +31,7 @@ const manualRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/manual-update').then(m => m.ManualUpdate),
+    loadComponent: () => import('./update/manual-update.component').then(m => m.ManualUpdateComponent),
     resolve: {
       manual: ManualResolve,
     },

@@ -8,6 +8,7 @@ describe('ScheduledReport Form Service', () => {
   let service: ScheduledReportFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ScheduledReportFormService);
   });
 
@@ -62,7 +63,7 @@ describe('ScheduledReport Form Service', () => {
       it('should return NewScheduledReport for default ScheduledReport initial value', () => {
         const formGroup = service.createScheduledReportFormGroup(sampleWithNewData);
 
-        const scheduledReport = service.getScheduledReport(formGroup);
+        const scheduledReport = service.getScheduledReport(formGroup) as any;
 
         expect(scheduledReport).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('ScheduledReport Form Service', () => {
       it('should return NewScheduledReport for empty ScheduledReport initial value', () => {
         const formGroup = service.createScheduledReportFormGroup();
 
-        const scheduledReport = service.getScheduledReport(formGroup);
+        const scheduledReport = service.getScheduledReport(formGroup) as any;
 
         expect(scheduledReport).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('ScheduledReport Form Service', () => {
       it('should return IScheduledReport', () => {
         const formGroup = service.createScheduledReportFormGroup(sampleWithRequiredData);
 
-        const scheduledReport = service.getScheduledReport(formGroup);
+        const scheduledReport = service.getScheduledReport(formGroup) as any;
 
         expect(scheduledReport).toMatchObject(sampleWithRequiredData);
       });

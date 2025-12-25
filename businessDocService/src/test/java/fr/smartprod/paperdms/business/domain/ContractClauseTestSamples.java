@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ContractClauseTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static ContractClause getContractClauseSample1() {
         return new ContractClause().id(1L).contractId(1L).clauseNumber("clauseNumber1").title("title1");

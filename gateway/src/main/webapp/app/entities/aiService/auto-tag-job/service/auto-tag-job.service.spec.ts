@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IAutoTagJob } from '../auto-tag-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../auto-tag-job.test-samples';
@@ -103,7 +103,8 @@ describe('AutoTagJob Service', () => {
       it('should add a AutoTagJob to an empty array', () => {
         const autoTagJob: IAutoTagJob = sampleWithRequiredData;
         expectedResult = service.addAutoTagJobToCollectionIfMissing([], autoTagJob);
-        expect(expectedResult).toEqual([autoTagJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(autoTagJob);
       });
 
       it('should not add a AutoTagJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('AutoTagJob Service', () => {
         const autoTagJob: IAutoTagJob = sampleWithRequiredData;
         const autoTagJob2: IAutoTagJob = sampleWithPartialData;
         expectedResult = service.addAutoTagJobToCollectionIfMissing([], autoTagJob, autoTagJob2);
-        expect(expectedResult).toEqual([autoTagJob, autoTagJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(autoTagJob);
+        expect(expectedResult).toContain(autoTagJob2);
       });
 
       it('should accept null and undefined values', () => {
         const autoTagJob: IAutoTagJob = sampleWithRequiredData;
         expectedResult = service.addAutoTagJobToCollectionIfMissing([], null, autoTagJob, undefined);
-        expect(expectedResult).toEqual([autoTagJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(autoTagJob);
       });
 
       it('should return initial array if no AutoTagJob is added', () => {

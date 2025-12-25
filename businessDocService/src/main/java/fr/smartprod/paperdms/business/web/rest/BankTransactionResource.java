@@ -35,7 +35,7 @@ public class BankTransactionResource {
 
     private static final String ENTITY_NAME = "businessDocServiceBankTransaction";
 
-    @Value("${jhipster.clientApp.name:businessDocService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final BankTransactionService bankTransactionService;

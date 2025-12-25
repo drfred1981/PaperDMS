@@ -27,10 +27,10 @@ export type DocumentProcessFormGroup = FormGroup<DocumentProcessFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class DocumentProcessFormService {
-  createDocumentProcessFormGroup(documentProcess?: DocumentProcessFormGroupInput): DocumentProcessFormGroup {
+  createDocumentProcessFormGroup(documentProcess: DocumentProcessFormGroupInput = { id: null }): DocumentProcessFormGroup {
     const documentProcessRawValue = {
       ...this.getFormDefaults(),
-      ...(documentProcess ?? { id: null }),
+      ...documentProcess,
     };
     return new FormGroup<DocumentProcessFormGroupContent>({
       id: new FormControl(
@@ -56,10 +56,12 @@ export class DocumentProcessFormService {
 
   resetForm(form: DocumentProcessFormGroup, documentProcess: DocumentProcessFormGroupInput): void {
     const documentProcessRawValue = { ...this.getFormDefaults(), ...documentProcess };
-    form.reset({
-      ...documentProcessRawValue,
-      id: { value: documentProcessRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentProcessRawValue,
+        id: { value: documentProcessRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentProcessFormDefaults {

@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (tag(); as tagRef) {
+      <div>
+        <h2 data-cy="tagDetailsHeading"><span jhiTranslate="gatewayApp.documentServiceTag.detail.title">Tag</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ tagRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.name">Name</span></dt>
+          <dd>
+            <span>{{ tagRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.color">Color</span></dt>
+          <dd>
+            <span>{{ tagRef.color }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.description">Description</span></dt>
+          <dd>
+            <span>{{ tagRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.usageCount">Usage Count</span></dt>
+          <dd>
+            <span>{{ tagRef.usageCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.isSystem">Is System</span></dt>
+          <dd>
+            <span>{{ tagRef.isSystem }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ tagRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ tagRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceTag.tagCategory">Tag Category</span></dt>
+          <dd>
+            @if (tag()!.tagCategory) {
+              <div>
+                <a [routerLink]="['/tag-category', tag()!.tagCategory?.id, 'view']">{{ tagRef.tagCategory?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/tag', tagRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

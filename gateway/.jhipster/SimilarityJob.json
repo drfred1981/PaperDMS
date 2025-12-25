@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20251220161415"
+    "changelogDate": "20251225111316"
   },
   "applications": ["gateway", "similarityService"],
   "clientRootFolder": "similarityService",

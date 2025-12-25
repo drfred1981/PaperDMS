@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDashboard, NewDashboard } from '../dashboard.model';
 
@@ -46,10 +45,10 @@ export type DashboardFormGroup = FormGroup<DashboardFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DashboardFormService {
-  createDashboardFormGroup(dashboard?: DashboardFormGroupInput): DashboardFormGroup {
+  createDashboardFormGroup(dashboard: DashboardFormGroupInput = { id: null }): DashboardFormGroup {
     const dashboardRawValue = this.convertDashboardToDashboardRawValue({
       ...this.getFormDefaults(),
-      ...(dashboard ?? { id: null }),
+      ...dashboard,
     });
     return new FormGroup<DashboardFormGroupContent>({
       id: new FormControl(
@@ -86,10 +85,12 @@ export class DashboardFormService {
 
   resetForm(form: DashboardFormGroup, dashboard: DashboardFormGroupInput): void {
     const dashboardRawValue = this.convertDashboardToDashboardRawValue({ ...this.getFormDefaults(), ...dashboard });
-    form.reset({
-      ...dashboardRawValue,
-      id: { value: dashboardRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...dashboardRawValue,
+        id: { value: dashboardRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DashboardFormDefaults {

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ConversionJobResolve from './route/conversion-job-routing-resolve.service';
 
 const conversionJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/conversion-job').then(m => m.ConversionJob),
+    loadComponent: () => import('./list/conversion-job.component').then(m => m.ConversionJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const conversionJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/conversion-job-detail').then(m => m.ConversionJobDetail),
+    loadComponent: () => import('./detail/conversion-job-detail.component').then(m => m.ConversionJobDetailComponent),
     resolve: {
       conversionJob: ConversionJobResolve,
     },
@@ -24,7 +23,7 @@ const conversionJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/conversion-job-update').then(m => m.ConversionJobUpdate),
+    loadComponent: () => import('./update/conversion-job-update.component').then(m => m.ConversionJobUpdateComponent),
     resolve: {
       conversionJob: ConversionJobResolve,
     },
@@ -32,7 +31,7 @@ const conversionJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/conversion-job-update').then(m => m.ConversionJobUpdate),
+    loadComponent: () => import('./update/conversion-job-update.component').then(m => m.ConversionJobUpdateComponent),
     resolve: {
       conversionJob: ConversionJobResolve,
     },

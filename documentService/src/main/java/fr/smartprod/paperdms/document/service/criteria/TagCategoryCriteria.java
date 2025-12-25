@@ -1,6 +1,5 @@
 package fr.smartprod.paperdms.document.service.criteria;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,7 +20,6 @@ import tech.jhipster.service.filter.*;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class TagCategoryCriteria implements Serializable, Criteria {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

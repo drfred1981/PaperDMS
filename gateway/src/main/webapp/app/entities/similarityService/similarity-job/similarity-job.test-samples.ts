@@ -6,7 +6,7 @@ export const sampleWithRequiredData: ISimilarityJob = {
   id: 12676,
   documentId: 12348,
   documentSha256: 'waver quietly',
-  createdDate: dayjs('2025-12-20T09:56'),
+  createdDate: dayjs('2025-12-25T04:55'),
   createdBy: 'blissfully',
 };
 
@@ -17,7 +17,7 @@ export const sampleWithPartialData: ISimilarityJob = {
   status: 'FAILED',
   minSimilarityThreshold: 0.76,
   matchesFound: 11680,
-  createdDate: dayjs('2025-12-20T02:08'),
+  createdDate: dayjs('2025-12-24T21:07'),
   createdBy: 'boohoo',
 };
 
@@ -30,17 +30,17 @@ export const sampleWithFullData: ISimilarityJob = {
   scope: 'ALL_DOCUMENTS',
   minSimilarityThreshold: 0.19,
   matchesFound: 14698,
-  startDate: dayjs('2025-12-19T18:13'),
-  endDate: dayjs('2025-12-20T03:15'),
+  startDate: dayjs('2025-12-24T13:12'),
+  endDate: dayjs('2025-12-24T22:14'),
   errorMessage: '../fake-data/blob/hipster.txt',
-  createdDate: dayjs('2025-12-19T16:46'),
+  createdDate: dayjs('2025-12-24T11:45'),
   createdBy: 'majestically until',
 };
 
 export const sampleWithNewData: NewSimilarityJob = {
   documentId: 9987,
   documentSha256: 'meanwhile colorful',
-  createdDate: dayjs('2025-12-19T21:43'),
+  createdDate: dayjs('2025-12-24T16:42'),
   createdBy: 'staid dissemble',
   id: null,
 };

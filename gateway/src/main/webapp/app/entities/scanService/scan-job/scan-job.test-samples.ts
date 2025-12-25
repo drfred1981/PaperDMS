@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IScanJob = {
   scannerConfigId: 19635,
   status: 'CANCELLED',
   createdBy: 'netsuke which next',
-  createdDate: dayjs('2025-12-20T00:54'),
+  createdDate: dayjs('2025-12-24T19:53'),
 };
 
 export const sampleWithPartialData: IScanJob = {
@@ -18,11 +18,11 @@ export const sampleWithPartialData: IScanJob = {
   status: 'COMPLETED',
   colorMode: 'COLOR',
   resolution: 5176,
-  startDate: dayjs('2025-12-19T22:47'),
-  endDate: dayjs('2025-12-20T05:55'),
+  startDate: dayjs('2025-12-24T17:46'),
+  endDate: dayjs('2025-12-25T00:54'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'justly formula',
-  createdDate: dayjs('2025-12-19T16:26'),
+  createdDate: dayjs('2025-12-24T11:25'),
 };
 
 export const sampleWithFullData: IScanJob = {
@@ -38,11 +38,11 @@ export const sampleWithFullData: IScanJob = {
   colorMode: 'BLACK_WHITE',
   resolution: 14861,
   fileFormat: 'JPEG',
-  startDate: dayjs('2025-12-20T10:31'),
-  endDate: dayjs('2025-12-20T09:49'),
+  startDate: dayjs('2025-12-25T05:30'),
+  endDate: dayjs('2025-12-25T04:48'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'huzzah source what',
-  createdDate: dayjs('2025-12-19T20:02'),
+  createdDate: dayjs('2025-12-24T15:01'),
 };
 
 export const sampleWithNewData: NewScanJob = {
@@ -50,7 +50,7 @@ export const sampleWithNewData: NewScanJob = {
   scannerConfigId: 18267,
   status: 'COMPLETED',
   createdBy: 'norm lamp brr',
-  createdDate: dayjs('2025-12-20T03:12'),
+  createdDate: dayjs('2025-12-24T22:11'),
   id: null,
 };
 

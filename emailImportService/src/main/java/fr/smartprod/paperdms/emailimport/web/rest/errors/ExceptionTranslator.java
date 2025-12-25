@@ -52,7 +52,7 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(ExceptionTranslator.class);
 
-    @Value("${jhipster.clientApp.name:emailImportService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final Environment env;
@@ -147,7 +147,7 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
     }
 
     private String extractTitleForResponseStatus(Throwable err, int statusCode) {
-        var specialStatus = extractResponseStatus(err);
+        ResponseStatus specialStatus = extractResponseStatus(err);
         return specialStatus == null ? HttpStatus.valueOf(statusCode).getReasonPhrase() : specialStatus.reason();
     }
 
@@ -219,12 +219,12 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler {
     private HttpHeaders buildHeaders(Throwable err) {
         return err instanceof BadRequestAlertException badRequestAlertException
             ? HeaderUtil.createFailureAlert(
-                  applicationName,
-                  true,
-                  badRequestAlertException.getEntityName(),
-                  badRequestAlertException.getErrorKey(),
-                  badRequestAlertException.getMessage()
-              )
+                applicationName,
+                true,
+                badRequestAlertException.getEntityName(),
+                badRequestAlertException.getErrorKey(),
+                badRequestAlertException.getMessage()
+            )
             : null;
     }
 

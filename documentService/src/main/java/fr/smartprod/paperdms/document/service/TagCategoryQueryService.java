@@ -76,7 +76,7 @@ public class TagCategoryQueryService extends QueryService<TagCategory> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<TagCategory> createSpecification(TagCategoryCriteria criteria) {
-        Specification<TagCategory> specification = Specification.unrestricted();
+        Specification<TagCategory> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

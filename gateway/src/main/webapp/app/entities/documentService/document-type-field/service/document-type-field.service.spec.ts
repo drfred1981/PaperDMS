@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentTypeField } from '../document-type-field.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-type-field.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentTypeField Service', () => {
       it('should add a DocumentTypeField to an empty array', () => {
         const documentTypeField: IDocumentTypeField = sampleWithRequiredData;
         expectedResult = service.addDocumentTypeFieldToCollectionIfMissing([], documentTypeField);
-        expect(expectedResult).toEqual([documentTypeField]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentTypeField);
       });
 
       it('should not add a DocumentTypeField to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentTypeField Service', () => {
         const documentTypeField: IDocumentTypeField = sampleWithRequiredData;
         const documentTypeField2: IDocumentTypeField = sampleWithPartialData;
         expectedResult = service.addDocumentTypeFieldToCollectionIfMissing([], documentTypeField, documentTypeField2);
-        expect(expectedResult).toEqual([documentTypeField, documentTypeField2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentTypeField);
+        expect(expectedResult).toContain(documentTypeField2);
       });
 
       it('should accept null and undefined values', () => {
         const documentTypeField: IDocumentTypeField = sampleWithRequiredData;
         expectedResult = service.addDocumentTypeFieldToCollectionIfMissing([], null, documentTypeField, undefined);
-        expect(expectedResult).toEqual([documentTypeField]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentTypeField);
       });
 
       it('should return initial array if no DocumentTypeField is added', () => {

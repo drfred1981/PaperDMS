@@ -68,7 +68,7 @@ class ScanBatchResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -869,10 +869,11 @@ class ScanBatchResourceIT {
         partialUpdatedScanBatch.setId(scanBatch.getId());
 
         partialUpdatedScanBatch
-            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
             .totalJobs(UPDATED_TOTAL_JOBS)
-            .totalPages(UPDATED_TOTAL_PAGES)
-            .createdBy(UPDATED_CREATED_BY);
+            .completedJobs(UPDATED_COMPLETED_JOBS)
+            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restScanBatchMockMvc
             .perform(

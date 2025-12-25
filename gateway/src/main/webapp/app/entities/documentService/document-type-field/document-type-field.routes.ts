@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentTypeFieldResolve from './route/document-type-field-routing-resolve.service';
 
 const documentTypeFieldRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-type-field').then(m => m.DocumentTypeField),
+    loadComponent: () => import('./list/document-type-field.component').then(m => m.DocumentTypeFieldComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentTypeFieldRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-type-field-detail').then(m => m.DocumentTypeFieldDetail),
+    loadComponent: () => import('./detail/document-type-field-detail.component').then(m => m.DocumentTypeFieldDetailComponent),
     resolve: {
       documentTypeField: DocumentTypeFieldResolve,
     },
@@ -24,7 +23,7 @@ const documentTypeFieldRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-type-field-update').then(m => m.DocumentTypeFieldUpdate),
+    loadComponent: () => import('./update/document-type-field-update.component').then(m => m.DocumentTypeFieldUpdateComponent),
     resolve: {
       documentTypeField: DocumentTypeFieldResolve,
     },
@@ -32,7 +31,7 @@ const documentTypeFieldRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-type-field-update').then(m => m.DocumentTypeFieldUpdate),
+    loadComponent: () => import('./update/document-type-field-update.component').then(m => m.DocumentTypeFieldUpdateComponent),
     resolve: {
       documentTypeField: DocumentTypeFieldResolve,
     },

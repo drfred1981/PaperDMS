@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import OcrCacheResolve from './route/ocr-cache-routing-resolve.service';
 
 const ocrCacheRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/ocr-cache').then(m => m.OcrCache),
+    loadComponent: () => import('./list/ocr-cache.component').then(m => m.OcrCacheComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const ocrCacheRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/ocr-cache-detail').then(m => m.OcrCacheDetail),
+    loadComponent: () => import('./detail/ocr-cache-detail.component').then(m => m.OcrCacheDetailComponent),
     resolve: {
       ocrCache: OcrCacheResolve,
     },
@@ -24,7 +23,7 @@ const ocrCacheRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/ocr-cache-update').then(m => m.OcrCacheUpdate),
+    loadComponent: () => import('./update/ocr-cache-update.component').then(m => m.OcrCacheUpdateComponent),
     resolve: {
       ocrCache: OcrCacheResolve,
     },
@@ -32,7 +31,7 @@ const ocrCacheRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/ocr-cache-update').then(m => m.OcrCacheUpdate),
+    loadComponent: () => import('./update/ocr-cache-update.component').then(m => m.OcrCacheUpdateComponent),
     resolve: {
       ocrCache: OcrCacheResolve,
     },

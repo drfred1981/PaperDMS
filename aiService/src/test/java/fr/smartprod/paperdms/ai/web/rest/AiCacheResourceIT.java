@@ -85,7 +85,7 @@ class AiCacheResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -476,12 +476,14 @@ class AiCacheResourceIT {
 
         partialUpdatedAiCache
             .inputSha256(UPDATED_INPUT_SHA_256)
+            .aiProvider(UPDATED_AI_PROVIDER)
+            .operation(UPDATED_OPERATION)
             .inputData(UPDATED_INPUT_DATA)
-            .hits(UPDATED_HITS)
-            .cost(UPDATED_COST)
+            .s3ResultKey(UPDATED_S_3_RESULT_KEY)
+            .confidence(UPDATED_CONFIDENCE)
+            .metadata(UPDATED_METADATA)
             .lastAccessDate(UPDATED_LAST_ACCESS_DATE)
-            .createdDate(UPDATED_CREATED_DATE)
-            .expirationDate(UPDATED_EXPIRATION_DATE);
+            .createdDate(UPDATED_CREATED_DATE);
 
         restAiCacheMockMvc
             .perform(

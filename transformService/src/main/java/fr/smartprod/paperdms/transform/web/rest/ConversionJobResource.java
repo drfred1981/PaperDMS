@@ -37,7 +37,7 @@ public class ConversionJobResource {
 
     private static final String ENTITY_NAME = "transformServiceConversionJob";
 
-    @Value("${jhipster.clientApp.name:transformService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ConversionJobService conversionJobService;

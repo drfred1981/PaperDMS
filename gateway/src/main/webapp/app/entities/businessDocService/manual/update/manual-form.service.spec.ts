@@ -8,6 +8,7 @@ describe('Manual Form Service', () => {
   let service: ManualFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ManualFormService);
   });
 
@@ -58,7 +59,7 @@ describe('Manual Form Service', () => {
       it('should return NewManual for default Manual initial value', () => {
         const formGroup = service.createManualFormGroup(sampleWithNewData);
 
-        const manual = service.getManual(formGroup);
+        const manual = service.getManual(formGroup) as any;
 
         expect(manual).toMatchObject(sampleWithNewData);
       });
@@ -66,7 +67,7 @@ describe('Manual Form Service', () => {
       it('should return NewManual for empty Manual initial value', () => {
         const formGroup = service.createManualFormGroup();
 
-        const manual = service.getManual(formGroup);
+        const manual = service.getManual(formGroup) as any;
 
         expect(manual).toMatchObject({});
       });
@@ -74,7 +75,7 @@ describe('Manual Form Service', () => {
       it('should return IManual', () => {
         const formGroup = service.createManualFormGroup(sampleWithRequiredData);
 
-        const manual = service.getManual(formGroup);
+        const manual = service.getManual(formGroup) as any;
 
         expect(manual).toMatchObject(sampleWithRequiredData);
       });

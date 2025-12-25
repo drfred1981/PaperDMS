@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (permissionGroup(); as permissionGroupRef) {
+      <div>
+        <h2 data-cy="permissionGroupDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServicePermissionGroup.detail.title">Permission Group</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ permissionGroupRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServicePermissionGroup.name">Name</span></dt>
+          <dd>
+            <span>{{ permissionGroupRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServicePermissionGroup.permissions">Permissions</span></dt>
+          <dd>
+            <span>{{ permissionGroupRef.permissions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServicePermissionGroup.isSystem">Is System</span></dt>
+          <dd>
+            <span>{{ permissionGroupRef.isSystem }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServicePermissionGroup.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ permissionGroupRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServicePermissionGroup.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ permissionGroupRef.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/permission-group', permissionGroupRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

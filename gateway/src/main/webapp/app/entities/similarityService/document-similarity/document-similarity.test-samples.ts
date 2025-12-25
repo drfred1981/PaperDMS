@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IDocumentSimilarity = {
   documentId1: 11684,
   documentId2: 7502,
   similarityScore: 0.39,
-  computedDate: dayjs('2025-12-20T11:29'),
+  computedDate: dayjs('2025-12-25T06:28'),
 };
 
 export const sampleWithPartialData: IDocumentSimilarity = {
@@ -15,9 +15,9 @@ export const sampleWithPartialData: IDocumentSimilarity = {
   documentId1: 19472,
   documentId2: 23207,
   similarityScore: 0.64,
-  computedDate: dayjs('2025-12-19T22:37'),
+  computedDate: dayjs('2025-12-24T17:36'),
   reviewedBy: 'woot',
-  reviewedDate: dayjs('2025-12-19T20:54'),
+  reviewedDate: dayjs('2025-12-24T15:53'),
 };
 
 export const sampleWithFullData: IDocumentSimilarity = {
@@ -27,17 +27,17 @@ export const sampleWithFullData: IDocumentSimilarity = {
   similarityScore: 0.54,
   algorithm: 'JACCARD',
   features: '../fake-data/blob/hipster.txt',
-  computedDate: dayjs('2025-12-20T02:13'),
+  computedDate: dayjs('2025-12-24T21:12'),
   isRelevant: true,
   reviewedBy: 'stark',
-  reviewedDate: dayjs('2025-12-20T11:45'),
+  reviewedDate: dayjs('2025-12-25T06:44'),
 };
 
 export const sampleWithNewData: NewDocumentSimilarity = {
   documentId1: 26229,
   documentId2: 9110,
   similarityScore: 0.28,
-  computedDate: dayjs('2025-12-19T17:17'),
+  computedDate: dayjs('2025-12-24T12:16'),
   id: null,
 };
 

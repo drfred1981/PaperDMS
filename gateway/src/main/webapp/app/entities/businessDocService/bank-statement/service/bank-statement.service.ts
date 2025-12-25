@@ -1,13 +1,13 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IBankStatement, NewBankStatement } from '../bank-statement.model';
 
 export type PartialUpdateBankStatement = Partial<IBankStatement> & Pick<IBankStatement, 'id'>;
@@ -48,24 +48,20 @@ export class BankStatementService {
   update(bankStatement: IBankStatement): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(bankStatement);
     return this.http
-      .put<RestBankStatement>(`${this.resourceUrl}/${encodeURIComponent(this.getBankStatementIdentifier(bankStatement))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestBankStatement>(`${this.resourceUrl}/${this.getBankStatementIdentifier(bankStatement)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(bankStatement: PartialUpdateBankStatement): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(bankStatement);
     return this.http
-      .patch<RestBankStatement>(`${this.resourceUrl}/${encodeURIComponent(this.getBankStatementIdentifier(bankStatement))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestBankStatement>(`${this.resourceUrl}/${this.getBankStatementIdentifier(bankStatement)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestBankStatement>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestBankStatement>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -77,7 +73,7 @@ export class BankStatementService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getBankStatementIdentifier(bankStatement: Pick<IBankStatement, 'id'>): number {

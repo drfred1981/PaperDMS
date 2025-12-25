@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { ExtractionMethod } from 'app/entities/enumerations/extraction-method.model';
 
 export interface IExtractedField {

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { ILanguageDetection, NewLanguageDetection } from '../language-detection.model';
 
 export type PartialUpdateLanguageDetection = Partial<ILanguageDetection> & Pick<ILanguageDetection, 'id'>;
@@ -41,28 +41,24 @@ export class LanguageDetectionService {
   update(languageDetection: ILanguageDetection): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(languageDetection);
     return this.http
-      .put<RestLanguageDetection>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getLanguageDetectionIdentifier(languageDetection))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestLanguageDetection>(`${this.resourceUrl}/${this.getLanguageDetectionIdentifier(languageDetection)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(languageDetection: PartialUpdateLanguageDetection): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(languageDetection);
     return this.http
-      .patch<RestLanguageDetection>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getLanguageDetectionIdentifier(languageDetection))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestLanguageDetection>(`${this.resourceUrl}/${this.getLanguageDetectionIdentifier(languageDetection)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestLanguageDetection>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestLanguageDetection>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -74,7 +70,7 @@ export class LanguageDetectionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getLanguageDetectionIdentifier(languageDetection: Pick<ILanguageDetection, 'id'>): number {

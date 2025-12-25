@@ -67,7 +67,7 @@ public class SimilarityJobQueryService extends QueryService<SimilarityJob> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<SimilarityJob> createSpecification(SimilarityJobCriteria criteria) {
-        Specification<SimilarityJob> specification = Specification.unrestricted();
+        Specification<SimilarityJob> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

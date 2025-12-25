@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IInvoice } from '../invoice.model';
@@ -119,7 +119,8 @@ describe('Invoice Service', () => {
       it('should add a Invoice to an empty array', () => {
         const invoice: IInvoice = sampleWithRequiredData;
         expectedResult = service.addInvoiceToCollectionIfMissing([], invoice);
-        expect(expectedResult).toEqual([invoice]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(invoice);
       });
 
       it('should not add a Invoice to an array that contains it', () => {
@@ -153,13 +154,16 @@ describe('Invoice Service', () => {
         const invoice: IInvoice = sampleWithRequiredData;
         const invoice2: IInvoice = sampleWithPartialData;
         expectedResult = service.addInvoiceToCollectionIfMissing([], invoice, invoice2);
-        expect(expectedResult).toEqual([invoice, invoice2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(invoice);
+        expect(expectedResult).toContain(invoice2);
       });
 
       it('should accept null and undefined values', () => {
         const invoice: IInvoice = sampleWithRequiredData;
         expectedResult = service.addInvoiceToCollectionIfMissing([], null, invoice, undefined);
-        expect(expectedResult).toEqual([invoice]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(invoice);
       });
 
       it('should return initial array if no Invoice is added', () => {

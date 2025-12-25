@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IApprovalHistory, NewApprovalHistory } from '../approval-history.model';
 
@@ -47,10 +46,10 @@ export type ApprovalHistoryFormGroup = FormGroup<ApprovalHistoryFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class ApprovalHistoryFormService {
-  createApprovalHistoryFormGroup(approvalHistory?: ApprovalHistoryFormGroupInput): ApprovalHistoryFormGroup {
+  createApprovalHistoryFormGroup(approvalHistory: ApprovalHistoryFormGroupInput = { id: null }): ApprovalHistoryFormGroup {
     const approvalHistoryRawValue = this.convertApprovalHistoryToApprovalHistoryRawValue({
       ...this.getFormDefaults(),
-      ...(approvalHistory ?? { id: null }),
+      ...approvalHistory,
     });
     return new FormGroup<ApprovalHistoryFormGroupContent>({
       id: new FormControl(
@@ -92,10 +91,12 @@ export class ApprovalHistoryFormService {
 
   resetForm(form: ApprovalHistoryFormGroup, approvalHistory: ApprovalHistoryFormGroupInput): void {
     const approvalHistoryRawValue = this.convertApprovalHistoryToApprovalHistoryRawValue({ ...this.getFormDefaults(), ...approvalHistory });
-    form.reset({
-      ...approvalHistoryRawValue,
-      id: { value: approvalHistoryRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...approvalHistoryRawValue,
+        id: { value: approvalHistoryRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ApprovalHistoryFormDefaults {

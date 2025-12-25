@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IManual, NewManual } from '../manual.model';
 
@@ -48,10 +47,10 @@ export type ManualFormGroup = FormGroup<ManualFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ManualFormService {
-  createManualFormGroup(manual?: ManualFormGroupInput): ManualFormGroup {
+  createManualFormGroup(manual: ManualFormGroupInput = { id: null }): ManualFormGroup {
     const manualRawValue = this.convertManualToManualRawValue({
       ...this.getFormDefaults(),
-      ...(manual ?? { id: null }),
+      ...manual,
     });
     return new FormGroup<ManualFormGroupContent>({
       id: new FormControl(
@@ -96,10 +95,12 @@ export class ManualFormService {
 
   resetForm(form: ManualFormGroup, manual: ManualFormGroupInput): void {
     const manualRawValue = this.convertManualToManualRawValue({ ...this.getFormDefaults(), ...manual });
-    form.reset({
-      ...manualRawValue,
-      id: { value: manualRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...manualRawValue,
+        id: { value: manualRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ManualFormDefaults {

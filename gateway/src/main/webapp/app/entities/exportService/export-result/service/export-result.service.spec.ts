@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IExportResult } from '../export-result.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../export-result.test-samples';
@@ -101,7 +101,8 @@ describe('ExportResult Service', () => {
       it('should add a ExportResult to an empty array', () => {
         const exportResult: IExportResult = sampleWithRequiredData;
         expectedResult = service.addExportResultToCollectionIfMissing([], exportResult);
-        expect(expectedResult).toEqual([exportResult]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(exportResult);
       });
 
       it('should not add a ExportResult to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('ExportResult Service', () => {
         const exportResult: IExportResult = sampleWithRequiredData;
         const exportResult2: IExportResult = sampleWithPartialData;
         expectedResult = service.addExportResultToCollectionIfMissing([], exportResult, exportResult2);
-        expect(expectedResult).toEqual([exportResult, exportResult2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(exportResult);
+        expect(expectedResult).toContain(exportResult2);
       });
 
       it('should accept null and undefined values', () => {
         const exportResult: IExportResult = sampleWithRequiredData;
         expectedResult = service.addExportResultToCollectionIfMissing([], null, exportResult, undefined);
-        expect(expectedResult).toEqual([exportResult]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(exportResult);
       });
 
       it('should return initial array if no ExportResult is added', () => {

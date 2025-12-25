@@ -10,7 +10,7 @@ export const sampleWithRequiredData: IImportRule = {
   conditions: '../fake-data/blob/hipster.txt',
   actions: '../fake-data/blob/hipster.txt',
   createdBy: 'foolish ah',
-  createdDate: dayjs('2025-12-19T20:52'),
+  createdDate: dayjs('2025-12-24T15:51'),
 };
 
 export const sampleWithPartialData: IImportRule = {
@@ -23,9 +23,9 @@ export const sampleWithPartialData: IImportRule = {
   folderId: 32627,
   documentTypeId: 23093,
   matchCount: 18963,
-  lastMatchDate: dayjs('2025-12-20T10:17'),
+  lastMatchDate: dayjs('2025-12-25T05:16'),
   createdBy: 'furlough promptly',
-  createdDate: dayjs('2025-12-20T01:53'),
+  createdDate: dayjs('2025-12-24T20:52'),
 };
 
 export const sampleWithFullData: IImportRule = {
@@ -41,10 +41,10 @@ export const sampleWithFullData: IImportRule = {
   applyTags: '../fake-data/blob/hipster.txt',
   notifyUsers: '../fake-data/blob/hipster.txt',
   matchCount: 24110,
-  lastMatchDate: dayjs('2025-12-19T17:12'),
+  lastMatchDate: dayjs('2025-12-24T12:11'),
   createdBy: 'blacken',
-  createdDate: dayjs('2025-12-20T13:07'),
-  lastModifiedDate: dayjs('2025-12-19T23:20'),
+  createdDate: dayjs('2025-12-25T08:06'),
+  lastModifiedDate: dayjs('2025-12-24T18:19'),
 };
 
 export const sampleWithNewData: NewImportRule = {
@@ -54,7 +54,7 @@ export const sampleWithNewData: NewImportRule = {
   conditions: '../fake-data/blob/hipster.txt',
   actions: '../fake-data/blob/hipster.txt',
   createdBy: 'unruly',
-  createdDate: dayjs('2025-12-19T21:53'),
+  createdDate: dayjs('2025-12-24T16:52'),
   id: null,
 };
 

@@ -35,7 +35,7 @@ public class SystemHealthResource {
 
     private static final String ENTITY_NAME = "monitoringServiceSystemHealth";
 
-    @Value("${jhipster.clientApp.name:monitoringService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SystemHealthService systemHealthService;

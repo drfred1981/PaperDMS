@@ -74,7 +74,7 @@ class WorkflowTaskResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -895,7 +895,13 @@ class WorkflowTaskResourceIT {
         WorkflowTask partialUpdatedWorkflowTask = new WorkflowTask();
         partialUpdatedWorkflowTask.setId(workflowTask.getId());
 
-        partialUpdatedWorkflowTask.status(UPDATED_STATUS).delegatedDate(UPDATED_DELEGATED_DATE);
+        partialUpdatedWorkflowTask
+            .status(UPDATED_STATUS)
+            .action(UPDATED_ACTION)
+            .comment(UPDATED_COMMENT)
+            .assignedDate(UPDATED_ASSIGNED_DATE)
+            .dueDate(UPDATED_DUE_DATE)
+            .delegatedTo(UPDATED_DELEGATED_TO);
 
         restWorkflowTaskMockMvc
             .perform(

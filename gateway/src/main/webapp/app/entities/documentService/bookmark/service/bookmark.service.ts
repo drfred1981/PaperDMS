@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IBookmark, NewBookmark } from '../bookmark.model';
 
 export type PartialUpdateBookmark = Partial<IBookmark> & Pick<IBookmark, 'id'>;
@@ -41,20 +41,20 @@ export class BookmarkService {
   update(bookmark: IBookmark): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(bookmark);
     return this.http
-      .put<RestBookmark>(`${this.resourceUrl}/${encodeURIComponent(this.getBookmarkIdentifier(bookmark))}`, copy, { observe: 'response' })
+      .put<RestBookmark>(`${this.resourceUrl}/${this.getBookmarkIdentifier(bookmark)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(bookmark: PartialUpdateBookmark): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(bookmark);
     return this.http
-      .patch<RestBookmark>(`${this.resourceUrl}/${encodeURIComponent(this.getBookmarkIdentifier(bookmark))}`, copy, { observe: 'response' })
+      .patch<RestBookmark>(`${this.resourceUrl}/${this.getBookmarkIdentifier(bookmark)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestBookmark>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestBookmark>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -66,7 +66,7 @@ export class BookmarkService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getBookmarkIdentifier(bookmark: Pick<IBookmark, 'id'>): number {

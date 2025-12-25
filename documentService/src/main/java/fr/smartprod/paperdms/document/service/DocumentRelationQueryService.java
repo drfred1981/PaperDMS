@@ -70,7 +70,7 @@ public class DocumentRelationQueryService extends QueryService<DocumentRelation>
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<DocumentRelation> createSpecification(DocumentRelationCriteria criteria) {
-        Specification<DocumentRelation> specification = Specification.unrestricted();
+        Specification<DocumentRelation> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

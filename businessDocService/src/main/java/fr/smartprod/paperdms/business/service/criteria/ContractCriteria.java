@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.business.service.criteria;
 
 import fr.smartprod.paperdms.business.domain.enumeration.ContractStatus;
 import fr.smartprod.paperdms.business.domain.enumeration.ContractType;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class ContractCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

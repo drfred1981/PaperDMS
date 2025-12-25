@@ -35,7 +35,7 @@ public class AiCacheResource {
 
     private static final String ENTITY_NAME = "aiServiceAiCache";
 
-    @Value("${jhipster.clientApp.name:aiService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final AiCacheService aiCacheService;

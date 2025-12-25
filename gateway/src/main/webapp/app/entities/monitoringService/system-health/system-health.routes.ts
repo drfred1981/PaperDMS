@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import SystemHealthResolve from './route/system-health-routing-resolve.service';
 
 const systemHealthRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/system-health').then(m => m.SystemHealth),
+    loadComponent: () => import('./list/system-health.component').then(m => m.SystemHealthComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const systemHealthRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/system-health-detail').then(m => m.SystemHealthDetail),
+    loadComponent: () => import('./detail/system-health-detail.component').then(m => m.SystemHealthDetailComponent),
     resolve: {
       systemHealth: SystemHealthResolve,
     },
@@ -24,7 +23,7 @@ const systemHealthRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/system-health-update').then(m => m.SystemHealthUpdate),
+    loadComponent: () => import('./update/system-health-update.component').then(m => m.SystemHealthUpdateComponent),
     resolve: {
       systemHealth: SystemHealthResolve,
     },
@@ -32,7 +31,7 @@ const systemHealthRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/system-health-update').then(m => m.SystemHealthUpdate),
+    loadComponent: () => import('./update/system-health-update.component').then(m => m.SystemHealthUpdateComponent),
     resolve: {
       systemHealth: SystemHealthResolve,
     },

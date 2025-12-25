@@ -35,7 +35,7 @@ public class ComparisonJobResource {
 
     private static final String ENTITY_NAME = "transformServiceComparisonJob";
 
-    @Value("${jhipster.clientApp.name:transformService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ComparisonJobService comparisonJobService;

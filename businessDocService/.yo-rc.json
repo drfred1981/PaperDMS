@@ -10,10 +10,10 @@
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
     "entities": ["Invoice", "InvoiceLine", "Contract", "ContractClause", "BankStatement", "BankTransaction", "Manual", "ManualChapter"],
-    "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "NmNmMDUyZjc3ZGVkZThlZDlhZTlkZWRiNDJjOTA2ZDdjYzA1MTY0MjRlMWFkMmY0NzViMDJhOGYyZjczZTBkMDEzY2M0Yjk0MmI1N2U5NmMzMWVhY2M1ODkyYzVlOTEyNTU0MWJiOWY0YzBjNDg2NjU0MWFmMWNkMDlkNzU0NDA=",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "YzFiYzUwZTJmMWNkY2E5MDIzNWRiMTRhNDAxNDNjODMzZTVhOGRlNmRkY2QwMjI1ZWYwZmEzNjk4MTY2M2JlYjc2NWU2YTg2ZGIyNjdmMjI4ZTkyOWJmZTAzODhkYmQ3ZTllYjg5YWZmNDA3ZWM2NjMxYTU4YTM4NGQ0ODYzNWQ=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1766244734000,
+    "lastLiquibaseTimestamp": 1766658676000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -24,6 +24,7 @@
     "serviceDiscoveryType": "consul",
     "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

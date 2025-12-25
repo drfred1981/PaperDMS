@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ReportExecutionResolve from './route/report-execution-routing-resolve.service';
 
 const reportExecutionRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/report-execution').then(m => m.ReportExecution),
+    loadComponent: () => import('./list/report-execution.component').then(m => m.ReportExecutionComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const reportExecutionRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/report-execution-detail').then(m => m.ReportExecutionDetail),
+    loadComponent: () => import('./detail/report-execution-detail.component').then(m => m.ReportExecutionDetailComponent),
     resolve: {
       reportExecution: ReportExecutionResolve,
     },
@@ -24,7 +23,7 @@ const reportExecutionRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/report-execution-update').then(m => m.ReportExecutionUpdate),
+    loadComponent: () => import('./update/report-execution-update.component').then(m => m.ReportExecutionUpdateComponent),
     resolve: {
       reportExecution: ReportExecutionResolve,
     },
@@ -32,7 +31,7 @@ const reportExecutionRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/report-execution-update').then(m => m.ReportExecutionUpdate),
+    loadComponent: () => import('./update/report-execution-update.component').then(m => m.ReportExecutionUpdateComponent),
     resolve: {
       reportExecution: ReportExecutionResolve,
     },

@@ -7,7 +7,6 @@ node_modules/
 npm-debug.log.*
 /.awcache/*
 /.cache-loader/*
-/dist/
 
 ######################
 # SASS
@@ -21,6 +20,7 @@ npm-debug.log.*
 .project
 .metadata
 tmp/
+tmp/**/*
 *.tmp
 *.bak
 *.swp

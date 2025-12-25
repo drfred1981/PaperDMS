@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MergeJobTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static MergeJob getMergeJobSample1() {
         return new MergeJob().id(1L).name("name1").outputS3Key("outputS3Key1").outputDocumentId(1L).createdBy("createdBy1");

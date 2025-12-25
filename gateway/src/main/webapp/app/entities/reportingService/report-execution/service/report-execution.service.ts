@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IReportExecution, NewReportExecution } from '../report-execution.model';
 
 export type PartialUpdateReportExecution = Partial<IReportExecution> & Pick<IReportExecution, 'id'>;
@@ -42,16 +42,14 @@ export class ReportExecutionService {
   update(reportExecution: IReportExecution): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(reportExecution);
     return this.http
-      .put<RestReportExecution>(`${this.resourceUrl}/${encodeURIComponent(this.getReportExecutionIdentifier(reportExecution))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestReportExecution>(`${this.resourceUrl}/${this.getReportExecutionIdentifier(reportExecution)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(reportExecution: PartialUpdateReportExecution): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(reportExecution);
     return this.http
-      .patch<RestReportExecution>(`${this.resourceUrl}/${encodeURIComponent(this.getReportExecutionIdentifier(reportExecution))}`, copy, {
+      .patch<RestReportExecution>(`${this.resourceUrl}/${this.getReportExecutionIdentifier(reportExecution)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -59,7 +57,7 @@ export class ReportExecutionService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestReportExecution>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestReportExecution>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +69,7 @@ export class ReportExecutionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getReportExecutionIdentifier(reportExecution: Pick<IReportExecution, 'id'>): number {

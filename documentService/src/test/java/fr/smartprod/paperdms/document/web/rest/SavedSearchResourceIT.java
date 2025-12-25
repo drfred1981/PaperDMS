@@ -62,7 +62,7 @@ class SavedSearchResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -705,7 +705,7 @@ class SavedSearchResourceIT {
         SavedSearch partialUpdatedSavedSearch = new SavedSearch();
         partialUpdatedSavedSearch.setId(savedSearch.getId());
 
-        partialUpdatedSavedSearch.name(UPDATED_NAME).query(UPDATED_QUERY).isPublic(UPDATED_IS_PUBLIC);
+        partialUpdatedSavedSearch.name(UPDATED_NAME).query(UPDATED_QUERY).userId(UPDATED_USER_ID);
 
         restSavedSearchMockMvc
             .perform(

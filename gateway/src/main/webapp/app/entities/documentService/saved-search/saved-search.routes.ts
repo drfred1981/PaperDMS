@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import SavedSearchResolve from './route/saved-search-routing-resolve.service';
 
 const savedSearchRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/saved-search').then(m => m.SavedSearch),
+    loadComponent: () => import('./list/saved-search.component').then(m => m.SavedSearchComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const savedSearchRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/saved-search-detail').then(m => m.SavedSearchDetail),
+    loadComponent: () => import('./detail/saved-search-detail.component').then(m => m.SavedSearchDetailComponent),
     resolve: {
       savedSearch: SavedSearchResolve,
     },
@@ -24,7 +23,7 @@ const savedSearchRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/saved-search-update').then(m => m.SavedSearchUpdate),
+    loadComponent: () => import('./update/saved-search-update.component').then(m => m.SavedSearchUpdateComponent),
     resolve: {
       savedSearch: SavedSearchResolve,
     },
@@ -32,7 +31,7 @@ const savedSearchRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/saved-search-update').then(m => m.SavedSearchUpdate),
+    loadComponent: () => import('./update/saved-search-update.component').then(m => m.SavedSearchUpdateComponent),
     resolve: {
       savedSearch: SavedSearchResolve,
     },

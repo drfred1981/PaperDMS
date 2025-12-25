@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IConversionJob } from '../conversion-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../conversion-job.test-samples';
@@ -103,7 +103,8 @@ describe('ConversionJob Service', () => {
       it('should add a ConversionJob to an empty array', () => {
         const conversionJob: IConversionJob = sampleWithRequiredData;
         expectedResult = service.addConversionJobToCollectionIfMissing([], conversionJob);
-        expect(expectedResult).toEqual([conversionJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(conversionJob);
       });
 
       it('should not add a ConversionJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('ConversionJob Service', () => {
         const conversionJob: IConversionJob = sampleWithRequiredData;
         const conversionJob2: IConversionJob = sampleWithPartialData;
         expectedResult = service.addConversionJobToCollectionIfMissing([], conversionJob, conversionJob2);
-        expect(expectedResult).toEqual([conversionJob, conversionJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(conversionJob);
+        expect(expectedResult).toContain(conversionJob2);
       });
 
       it('should accept null and undefined values', () => {
         const conversionJob: IConversionJob = sampleWithRequiredData;
         expectedResult = service.addConversionJobToCollectionIfMissing([], null, conversionJob, undefined);
-        expect(expectedResult).toEqual([conversionJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(conversionJob);
       });
 
       it('should return initial array if no ConversionJob is added', () => {

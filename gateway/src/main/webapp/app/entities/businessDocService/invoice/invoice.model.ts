@@ -1,7 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { InvoiceStatus } from 'app/entities/enumerations/invoice-status.model';
 import { InvoiceType } from 'app/entities/enumerations/invoice-type.model';
+import { InvoiceStatus } from 'app/entities/enumerations/invoice-status.model';
 import { PaymentMethod } from 'app/entities/enumerations/payment-method.model';
 
 export interface IInvoice {

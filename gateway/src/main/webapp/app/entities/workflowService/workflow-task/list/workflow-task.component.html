@@ -1,0 +1,227 @@
+<div>
+  <h2 id="page-heading" data-cy="WorkflowTaskHeading">
+    <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.home.title">Workflow Tasks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-workflow-task"
+        [routerLink]="['/workflow-task/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.home.createLabel">Create a new Workflow Task</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (workflowTasks().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.home.notFound">No Workflow Tasks found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="assigneeId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.assigneeId">Assignee Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="action">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.action">Action</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="comment">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.comment">Comment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="assignedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.assignedDate">Assigned Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dueDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.dueDate">Due Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="completedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.completedDate">Completed Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reminderSent">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.reminderSent">Reminder Sent</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="delegatedTo">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.delegatedTo">Delegated To</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="delegatedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.delegatedDate">Delegated Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="instance.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.instance">Instance</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="step.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowTask.step">Step</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (workflowTask of workflowTasks(); track trackId(workflowTask)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/workflow-task', workflowTask.id, 'view']">{{ workflowTask.id }}</a>
+              </td>
+              <td>{{ workflowTask.assigneeId }}</td>
+              <td [jhiTranslate]="'gatewayApp.TaskStatus.' + (workflowTask.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    IN_PROGRESS: 'IN_PROGRESS',
+                    COMPLETED: 'COMPLETED',
+                    DELEGATED: 'DELEGATED',
+                    CANCELLED: 'CANCELLED',
+                    OVERDUE: 'OVERDUE',
+                  }[workflowTask.status ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.TaskAction.' + (workflowTask.action ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    APPROVE: 'APPROVE',
+                    REJECT: 'REJECT',
+                    REQUEST_CHANGES: 'REQUEST_CHANGES',
+                    DELEGATE: 'DELEGATE',
+                    CANCEL: 'CANCEL',
+                    COMMENT: 'COMMENT',
+                  }[workflowTask.action ?? 'null']
+                }}
+              </td>
+              <td>{{ workflowTask.comment }}</td>
+              <td>{{ workflowTask.assignedDate | formatMediumDatetime }}</td>
+              <td>{{ workflowTask.dueDate | formatMediumDatetime }}</td>
+              <td>{{ workflowTask.completedDate | formatMediumDatetime }}</td>
+              <td>{{ workflowTask.reminderSent }}</td>
+              <td>{{ workflowTask.delegatedTo }}</td>
+              <td>{{ workflowTask.delegatedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (workflowTask.instance) {
+                  <div>
+                    <a [routerLink]="['/workflow-instance', workflowTask.instance.id, 'view']">{{ workflowTask.instance.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (workflowTask.step) {
+                  <div>
+                    <a [routerLink]="['/workflow-step', workflowTask.step.id, 'view']">{{ workflowTask.step.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/workflow-task', workflowTask.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/workflow-task', workflowTask.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(workflowTask)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (workflowTasks().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

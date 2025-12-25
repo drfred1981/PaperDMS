@@ -8,6 +8,7 @@ describe('ImportRule Form Service', () => {
   let service: ImportRuleFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ImportRuleFormService);
   });
 
@@ -68,7 +69,7 @@ describe('ImportRule Form Service', () => {
       it('should return NewImportRule for default ImportRule initial value', () => {
         const formGroup = service.createImportRuleFormGroup(sampleWithNewData);
 
-        const importRule = service.getImportRule(formGroup);
+        const importRule = service.getImportRule(formGroup) as any;
 
         expect(importRule).toMatchObject(sampleWithNewData);
       });
@@ -76,7 +77,7 @@ describe('ImportRule Form Service', () => {
       it('should return NewImportRule for empty ImportRule initial value', () => {
         const formGroup = service.createImportRuleFormGroup();
 
-        const importRule = service.getImportRule(formGroup);
+        const importRule = service.getImportRule(formGroup) as any;
 
         expect(importRule).toMatchObject({});
       });
@@ -84,7 +85,7 @@ describe('ImportRule Form Service', () => {
       it('should return IImportRule', () => {
         const formGroup = service.createImportRuleFormGroup(sampleWithRequiredData);
 
-        const importRule = service.getImportRule(formGroup);
+        const importRule = service.getImportRule(formGroup) as any;
 
         expect(importRule).toMatchObject(sampleWithRequiredData);
       });

@@ -8,6 +8,7 @@ describe('DocumentTypeField Form Service', () => {
   let service: DocumentTypeFieldFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentTypeFieldFormService);
   });
 
@@ -52,7 +53,7 @@ describe('DocumentTypeField Form Service', () => {
       it('should return NewDocumentTypeField for default DocumentTypeField initial value', () => {
         const formGroup = service.createDocumentTypeFieldFormGroup(sampleWithNewData);
 
-        const documentTypeField = service.getDocumentTypeField(formGroup);
+        const documentTypeField = service.getDocumentTypeField(formGroup) as any;
 
         expect(documentTypeField).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('DocumentTypeField Form Service', () => {
       it('should return NewDocumentTypeField for empty DocumentTypeField initial value', () => {
         const formGroup = service.createDocumentTypeFieldFormGroup();
 
-        const documentTypeField = service.getDocumentTypeField(formGroup);
+        const documentTypeField = service.getDocumentTypeField(formGroup) as any;
 
         expect(documentTypeField).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('DocumentTypeField Form Service', () => {
       it('should return IDocumentTypeField', () => {
         const formGroup = service.createDocumentTypeFieldFormGroup(sampleWithRequiredData);
 
-        const documentTypeField = service.getDocumentTypeField(formGroup);
+        const documentTypeField = service.getDocumentTypeField(formGroup) as any;
 
         expect(documentTypeField).toMatchObject(sampleWithRequiredData);
       });

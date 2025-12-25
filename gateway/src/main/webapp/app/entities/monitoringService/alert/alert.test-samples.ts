@@ -9,7 +9,7 @@ export const sampleWithRequiredData: IAlert = {
   title: 'ad save',
   message: '../fake-data/blob/hipster.txt',
   status: 'RESOLVED',
-  triggeredDate: dayjs('2025-12-20T16:04'),
+  triggeredDate: dayjs('2025-12-25T11:03'),
 };
 
 export const sampleWithPartialData: IAlert = {
@@ -20,8 +20,8 @@ export const sampleWithPartialData: IAlert = {
   message: '../fake-data/blob/hipster.txt',
   entityType: 'aboard',
   status: 'ACTIVE',
-  triggeredDate: dayjs('2025-12-19T22:53'),
-  acknowledgedDate: dayjs('2025-12-20T06:12'),
+  triggeredDate: dayjs('2025-12-24T17:52'),
+  acknowledgedDate: dayjs('2025-12-25T01:11'),
 };
 
 export const sampleWithFullData: IAlert = {
@@ -33,11 +33,11 @@ export const sampleWithFullData: IAlert = {
   entityType: 'speedy viciously',
   entityId: 28853,
   status: 'DISMISSED',
-  triggeredDate: dayjs('2025-12-19T20:43'),
+  triggeredDate: dayjs('2025-12-24T15:42'),
   acknowledgedBy: 'supportive',
-  acknowledgedDate: dayjs('2025-12-20T13:41'),
+  acknowledgedDate: dayjs('2025-12-25T08:40'),
   resolvedBy: 'brilliant venom mob',
-  resolvedDate: dayjs('2025-12-20T14:40'),
+  resolvedDate: dayjs('2025-12-25T09:39'),
 };
 
 export const sampleWithNewData: NewAlert = {
@@ -46,7 +46,7 @@ export const sampleWithNewData: NewAlert = {
   title: 'geez',
   message: '../fake-data/blob/hipster.txt',
   status: 'RESOLVED',
-  triggeredDate: dayjs('2025-12-20T10:41'),
+  triggeredDate: dayjs('2025-12-25T05:40'),
   id: null,
 };
 

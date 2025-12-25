@@ -35,7 +35,7 @@ public class SimilarityClusterResource {
 
     private static final String ENTITY_NAME = "similarityServiceSimilarityCluster";
 
-    @Value("${jhipster.clientApp.name:similarityService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SimilarityClusterService similarityClusterService;

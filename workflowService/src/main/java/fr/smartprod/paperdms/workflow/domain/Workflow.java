@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.workflow.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import org.hibernate.annotations.Cache;
@@ -18,7 +17,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Workflow implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -30,34 +28,12 @@ public class Workflow implements Serializable {
     @NotNull
     @Size(max = 255)
     @Column(name = "name", length = 255, nullable = false)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String name;
 
     @Lob
     @Column(name = "description")
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String description;
 
     @NotNull
@@ -82,34 +58,12 @@ public class Workflow implements Serializable {
 
     @Size(max = 100)
     @Column(name = "trigger_event", length = 100)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String triggerEvent;
 
     @Lob
     @Column(name = "configuration")
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String configuration;
 
     @NotNull
@@ -122,18 +76,7 @@ public class Workflow implements Serializable {
     @NotNull
     @Size(max = 50)
     @Column(name = "created_by", length = 50, nullable = false)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String createdBy;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

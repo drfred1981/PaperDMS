@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IComparisonJob, NewComparisonJob } from '../comparison-job.model';
 
@@ -49,10 +48,10 @@ export type ComparisonJobFormGroup = FormGroup<ComparisonJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ComparisonJobFormService {
-  createComparisonJobFormGroup(comparisonJob?: ComparisonJobFormGroupInput): ComparisonJobFormGroup {
+  createComparisonJobFormGroup(comparisonJob: ComparisonJobFormGroupInput = { id: null }): ComparisonJobFormGroup {
     const comparisonJobRawValue = this.convertComparisonJobToComparisonJobRawValue({
       ...this.getFormDefaults(),
-      ...(comparisonJob ?? { id: null }),
+      ...comparisonJob,
     });
     return new FormGroup<ComparisonJobFormGroupContent>({
       id: new FormControl(
@@ -100,10 +99,12 @@ export class ComparisonJobFormService {
 
   resetForm(form: ComparisonJobFormGroup, comparisonJob: ComparisonJobFormGroupInput): void {
     const comparisonJobRawValue = this.convertComparisonJobToComparisonJobRawValue({ ...this.getFormDefaults(), ...comparisonJob });
-    form.reset({
-      ...comparisonJobRawValue,
-      id: { value: comparisonJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...comparisonJobRawValue,
+        id: { value: comparisonJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ComparisonJobFormDefaults {

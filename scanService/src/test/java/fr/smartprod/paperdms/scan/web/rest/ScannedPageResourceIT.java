@@ -74,7 +74,7 @@ class ScannedPageResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -471,11 +471,11 @@ class ScannedPageResourceIT {
 
         partialUpdatedScannedPage
             .scanJobId(UPDATED_SCAN_JOB_ID)
-            .pageNumber(UPDATED_PAGE_NUMBER)
+            .sha256(UPDATED_SHA_256)
             .s3Key(UPDATED_S_3_KEY)
             .s3PreviewKey(UPDATED_S_3_PREVIEW_KEY)
             .fileSize(UPDATED_FILE_SIZE)
-            .height(UPDATED_HEIGHT)
+            .width(UPDATED_WIDTH)
             .dpi(UPDATED_DPI);
 
         restScannedPageMockMvc

@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.workflow.service.criteria;
 
 import fr.smartprod.paperdms.workflow.domain.enumeration.TaskAction;
 import fr.smartprod.paperdms.workflow.domain.enumeration.TaskStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class WorkflowTaskCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

@@ -37,7 +37,7 @@ public class SearchQueryResource {
 
     private static final String ENTITY_NAME = "searchServiceSearchQuery";
 
-    @Value("${jhipster.clientApp.name:searchService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SearchQueryService searchQueryService;

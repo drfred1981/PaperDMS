@@ -1,0 +1,185 @@
+<div>
+  <h2 id="page-heading" data-cy="ManualChapterHeading">
+    <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.home.title">Manual Chapters</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-manual-chapter"
+        [routerLink]="['/manual-chapter/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.home.createLabel">Create a new Manual Chapter</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (manualChapters().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.home.notFound">No Manual Chapters found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="manualId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.manualId">Manual Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="chapterNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.chapterNumber">Chapter Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.title">Title</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="content">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.content">Content</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageStart">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.pageStart">Page Start</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageEnd">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.pageEnd">Page End</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="level">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.level">Level</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="displayOrder">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.displayOrder">Display Order</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="manual.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.manual">Manual</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="parentChapter.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceManualChapter.parentChapter">Parent Chapter</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (manualChapter of manualChapters(); track trackId(manualChapter)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/manual-chapter', manualChapter.id, 'view']">{{ manualChapter.id }}</a>
+              </td>
+              <td>{{ manualChapter.manualId }}</td>
+              <td>{{ manualChapter.chapterNumber }}</td>
+              <td>{{ manualChapter.title }}</td>
+              <td>{{ manualChapter.content }}</td>
+              <td>{{ manualChapter.pageStart }}</td>
+              <td>{{ manualChapter.pageEnd }}</td>
+              <td>{{ manualChapter.level }}</td>
+              <td>{{ manualChapter.displayOrder }}</td>
+              <td>
+                @if (manualChapter.manual) {
+                  <div>
+                    <a [routerLink]="['/manual', manualChapter.manual.id, 'view']">{{ manualChapter.manual.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (manualChapter.parentChapter) {
+                  <div>
+                    <a [routerLink]="['/manual-chapter', manualChapter.parentChapter.id, 'view']">{{ manualChapter.parentChapter.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/manual-chapter', manualChapter.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/manual-chapter', manualChapter.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(manualChapter)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (manualChapters().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -35,7 +35,7 @@ public class ReportExecutionResource {
 
     private static final String ENTITY_NAME = "reportingServiceReportExecution";
 
-    @Value("${jhipster.clientApp.name:reportingService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ReportExecutionService reportExecutionService;

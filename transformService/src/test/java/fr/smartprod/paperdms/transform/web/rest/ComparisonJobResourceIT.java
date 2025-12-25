@@ -75,7 +75,7 @@ class ComparisonJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -466,8 +466,10 @@ class ComparisonJobResourceIT {
         partialUpdatedComparisonJob.setId(comparisonJob.getId());
 
         partialUpdatedComparisonJob
-            .comparisonType(UPDATED_COMPARISON_TYPE)
-            .differenceCount(UPDATED_DIFFERENCE_COUNT)
+            .documentId1(UPDATED_DOCUMENT_ID_1)
+            .documentId2(UPDATED_DOCUMENT_ID_2)
+            .similarityPercentage(UPDATED_SIMILARITY_PERCENTAGE)
+            .diffReportS3Key(UPDATED_DIFF_REPORT_S_3_KEY)
             .status(UPDATED_STATUS)
             .comparedDate(UPDATED_COMPARED_DATE);
 

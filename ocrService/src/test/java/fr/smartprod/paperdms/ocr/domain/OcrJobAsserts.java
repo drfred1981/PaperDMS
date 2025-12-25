@@ -54,8 +54,7 @@ public class OcrJobAsserts {
             .satisfies(a -> assertThat(a.gets3Bucket()).as("check s3Bucket").isEqualTo(expected.gets3Bucket()))
             .satisfies(a -> assertThat(a.getRequestedLanguage()).as("check requestedLanguage").isEqualTo(expected.getRequestedLanguage()))
             .satisfies(a -> assertThat(a.getDetectedLanguage()).as("check detectedLanguage").isEqualTo(expected.getDetectedLanguage()))
-            .satisfies(a ->
-                assertThat(a.getLanguageConfidence()).as("check languageConfidence").isEqualTo(expected.getLanguageConfidence())
+            .satisfies(a -> assertThat(a.getLanguageConfidence()).as("check languageConfidence").isEqualTo(expected.getLanguageConfidence())
             )
             .satisfies(a -> assertThat(a.getOcrEngine()).as("check ocrEngine").isEqualTo(expected.getOcrEngine()))
             .satisfies(a -> assertThat(a.getTikaEndpoint()).as("check tikaEndpoint").isEqualTo(expected.getTikaEndpoint()))

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IApprovalHistory } from '../approval-history.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../approval-history.test-samples';
@@ -101,7 +101,8 @@ describe('ApprovalHistory Service', () => {
       it('should add a ApprovalHistory to an empty array', () => {
         const approvalHistory: IApprovalHistory = sampleWithRequiredData;
         expectedResult = service.addApprovalHistoryToCollectionIfMissing([], approvalHistory);
-        expect(expectedResult).toEqual([approvalHistory]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(approvalHistory);
       });
 
       it('should not add a ApprovalHistory to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('ApprovalHistory Service', () => {
         const approvalHistory: IApprovalHistory = sampleWithRequiredData;
         const approvalHistory2: IApprovalHistory = sampleWithPartialData;
         expectedResult = service.addApprovalHistoryToCollectionIfMissing([], approvalHistory, approvalHistory2);
-        expect(expectedResult).toEqual([approvalHistory, approvalHistory2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(approvalHistory);
+        expect(expectedResult).toContain(approvalHistory2);
       });
 
       it('should accept null and undefined values', () => {
         const approvalHistory: IApprovalHistory = sampleWithRequiredData;
         expectedResult = service.addApprovalHistoryToCollectionIfMissing([], null, approvalHistory, undefined);
-        expect(expectedResult).toEqual([approvalHistory]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(approvalHistory);
       });
 
       it('should return initial array if no ApprovalHistory is added', () => {

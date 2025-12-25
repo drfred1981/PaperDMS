@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import WatermarkJobResolve from './route/watermark-job-routing-resolve.service';
 
 const watermarkJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/watermark-job').then(m => m.WatermarkJob),
+    loadComponent: () => import('./list/watermark-job.component').then(m => m.WatermarkJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const watermarkJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/watermark-job-detail').then(m => m.WatermarkJobDetail),
+    loadComponent: () => import('./detail/watermark-job-detail.component').then(m => m.WatermarkJobDetailComponent),
     resolve: {
       watermarkJob: WatermarkJobResolve,
     },
@@ -24,7 +23,7 @@ const watermarkJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/watermark-job-update').then(m => m.WatermarkJobUpdate),
+    loadComponent: () => import('./update/watermark-job-update.component').then(m => m.WatermarkJobUpdateComponent),
     resolve: {
       watermarkJob: WatermarkJobResolve,
     },
@@ -32,7 +31,7 @@ const watermarkJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/watermark-job-update').then(m => m.WatermarkJobUpdate),
+    loadComponent: () => import('./update/watermark-job-update.component').then(m => m.WatermarkJobUpdateComponent),
     resolve: {
       watermarkJob: WatermarkJobResolve,
     },

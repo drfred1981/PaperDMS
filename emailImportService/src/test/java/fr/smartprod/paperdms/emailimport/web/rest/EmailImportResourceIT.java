@@ -92,7 +92,7 @@ class EmailImportResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1230,12 +1230,10 @@ class EmailImportResourceIT {
         partialUpdatedEmailImport
             .fromEmail(UPDATED_FROM_EMAIL)
             .toEmail(UPDATED_TO_EMAIL)
-            .body(UPDATED_BODY)
-            .bodyHtml(UPDATED_BODY_HTML)
-            .receivedDate(UPDATED_RECEIVED_DATE)
             .status(UPDATED_STATUS)
-            .folderId(UPDATED_FOLDER_ID)
-            .metadata(UPDATED_METADATA);
+            .attachmentCount(UPDATED_ATTACHMENT_COUNT)
+            .documentsCreated(UPDATED_DOCUMENTS_CREATED)
+            .appliedRuleId(UPDATED_APPLIED_RULE_ID);
 
         restEmailImportMockMvc
             .perform(

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IApprovalHistory, NewApprovalHistory } from '../approval-history.model';
 
 export type PartialUpdateApprovalHistory = Partial<IApprovalHistory> & Pick<IApprovalHistory, 'id'>;
@@ -41,16 +41,14 @@ export class ApprovalHistoryService {
   update(approvalHistory: IApprovalHistory): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(approvalHistory);
     return this.http
-      .put<RestApprovalHistory>(`${this.resourceUrl}/${encodeURIComponent(this.getApprovalHistoryIdentifier(approvalHistory))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestApprovalHistory>(`${this.resourceUrl}/${this.getApprovalHistoryIdentifier(approvalHistory)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(approvalHistory: PartialUpdateApprovalHistory): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(approvalHistory);
     return this.http
-      .patch<RestApprovalHistory>(`${this.resourceUrl}/${encodeURIComponent(this.getApprovalHistoryIdentifier(approvalHistory))}`, copy, {
+      .patch<RestApprovalHistory>(`${this.resourceUrl}/${this.getApprovalHistoryIdentifier(approvalHistory)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -58,7 +56,7 @@ export class ApprovalHistoryService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestApprovalHistory>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestApprovalHistory>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +68,7 @@ export class ApprovalHistoryService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getApprovalHistoryIdentifier(approvalHistory: Pick<IApprovalHistory, 'id'>): number {

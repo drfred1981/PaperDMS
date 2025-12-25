@@ -26,7 +26,7 @@
       };
 
       const getBearerToken = () => {
-        let authToken = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
+        var authToken = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
         if (authToken) {
           authToken = JSON.parse(authToken);
           return `Bearer ${authToken}`;
@@ -136,10 +136,10 @@
           },
         });
 
-        globalThis.ui = ui;
+        window.ui = ui;
       }
 
-      globalThis.onload = async function () {
+      window.onload = async function () {
         const baseUrl = 'v3/api-docs';
         const serverBaseUri = document.baseURI.replace('swagger-ui/', '');
         const axiosConfig = createAxiosConfig(serverBaseUri);

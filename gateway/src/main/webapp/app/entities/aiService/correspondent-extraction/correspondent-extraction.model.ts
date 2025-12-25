@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { AiJobStatus } from 'app/entities/enumerations/ai-job-status.model';
 
 export interface ICorrespondentExtraction {

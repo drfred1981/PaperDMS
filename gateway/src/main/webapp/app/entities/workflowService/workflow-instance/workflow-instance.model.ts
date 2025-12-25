@@ -1,8 +1,7 @@
 import dayjs from 'dayjs/esm';
-
+import { IWorkflow } from 'app/entities/workflowService/workflow/workflow.model';
 import { WorkflowInstanceStatus } from 'app/entities/enumerations/workflow-instance-status.model';
 import { WorkflowPriority } from 'app/entities/enumerations/workflow-priority.model';
-import { IWorkflow } from 'app/entities/workflowService/workflow/workflow.model';
 
 export interface IWorkflowInstance {
   id: number;

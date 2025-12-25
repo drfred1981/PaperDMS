@@ -1,5 +1,4 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ApplicationConfig, LOCALE_ID, importProvidersFrom, inject, provideZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, importProvidersFrom, inject } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import {
   NavigationError,
@@ -12,18 +11,18 @@ import {
   withNavigationErrorHandler,
 } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 import './config/dayjs';
-import { environment } from 'environments/environment';
-
 import { TranslationModule } from 'app/shared/language/translation.module';
-
-import { AppPageTitleStrategy } from './app-page-title-strategy';
-import routes from './app.routes';
-import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
+import { environment } from 'environments/environment';
 import { httpInterceptorProviders } from './core/interceptor';
+import routes from './app.routes';
+// jhipster-needle-angular-add-module-import JHipster will add new module here
+import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
+import { AppPageTitleStrategy } from './app-page-title-strategy';
 
 const routerFeatures: RouterFeatures[] = [
   withComponentInputBinding(),
@@ -46,7 +45,6 @@ if (environment.DEBUG_INFO_ENABLED) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZonelessChangeDetection(),
     provideRouter(routes, ...routerFeatures),
     importProvidersFrom(BrowserModule),
     // Set this to true to enable service worker (PWA)
@@ -58,5 +56,6 @@ export const appConfig: ApplicationConfig = {
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
     { provide: TitleStrategy, useClass: AppPageTitleStrategy },
+    // jhipster-needle-angular-add-module JHipster will add new module here
   ],
 };

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IOcrJob, NewOcrJob } from '../ocr-job.model';
 
@@ -65,10 +64,10 @@ export type OcrJobFormGroup = FormGroup<OcrJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class OcrJobFormService {
-  createOcrJobFormGroup(ocrJob?: OcrJobFormGroupInput): OcrJobFormGroup {
+  createOcrJobFormGroup(ocrJob: OcrJobFormGroupInput = { id: null }): OcrJobFormGroup {
     const ocrJobRawValue = this.convertOcrJobToOcrJobRawValue({
       ...this.getFormDefaults(),
-      ...(ocrJob ?? { id: null }),
+      ...ocrJob,
     });
     return new FormGroup<OcrJobFormGroupContent>({
       id: new FormControl(
@@ -144,10 +143,12 @@ export class OcrJobFormService {
 
   resetForm(form: OcrJobFormGroup, ocrJob: OcrJobFormGroupInput): void {
     const ocrJobRawValue = this.convertOcrJobToOcrJobRawValue({ ...this.getFormDefaults(), ...ocrJob });
-    form.reset({
-      ...ocrJobRawValue,
-      id: { value: ocrJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...ocrJobRawValue,
+        id: { value: ocrJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): OcrJobFormDefaults {

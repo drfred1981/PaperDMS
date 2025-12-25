@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IDocumentRelation = {
   targetDocumentId: 8318,
   relationType: 'HAS_VERSION',
   createdBy: 'poor versus',
-  createdDate: dayjs('2025-12-20T13:03'),
+  createdDate: dayjs('2025-12-25T08:02'),
 };
 
 export const sampleWithPartialData: IDocumentRelation = {
@@ -17,7 +17,7 @@ export const sampleWithPartialData: IDocumentRelation = {
   targetDocumentId: 27970,
   relationType: 'ATTACHMENT_OF',
   createdBy: 'bah',
-  createdDate: dayjs('2025-12-20T01:46'),
+  createdDate: dayjs('2025-12-24T20:45'),
 };
 
 export const sampleWithFullData: IDocumentRelation = {
@@ -26,7 +26,7 @@ export const sampleWithFullData: IDocumentRelation = {
   targetDocumentId: 10592,
   relationType: 'SUPPLEMENTED_BY',
   createdBy: 'ew',
-  createdDate: dayjs('2025-12-20T13:08'),
+  createdDate: dayjs('2025-12-25T08:07'),
 };
 
 export const sampleWithNewData: NewDocumentRelation = {
@@ -34,7 +34,7 @@ export const sampleWithNewData: NewDocumentRelation = {
   targetDocumentId: 3594,
   relationType: 'REPLACES',
   createdBy: 'lest whereas',
-  createdDate: dayjs('2025-12-19T16:01'),
+  createdDate: dayjs('2025-12-24T11:00'),
   id: null,
 };
 

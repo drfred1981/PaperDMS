@@ -4,7 +4,7 @@ import { ISimilarityCluster, NewSimilarityCluster } from './similarity-cluster.m
 
 export const sampleWithRequiredData: ISimilarityCluster = {
   id: 30282,
-  createdDate: dayjs('2025-12-20T05:59'),
+  createdDate: dayjs('2025-12-25T00:58'),
 };
 
 export const sampleWithPartialData: ISimilarityCluster = {
@@ -12,7 +12,7 @@ export const sampleWithPartialData: ISimilarityCluster = {
   name: 'boo',
   algorithm: 'COMBINED',
   avgSimilarity: 0.42,
-  createdDate: dayjs('2025-12-19T16:19'),
+  createdDate: dayjs('2025-12-24T11:18'),
 };
 
 export const sampleWithFullData: ISimilarityCluster = {
@@ -23,12 +23,12 @@ export const sampleWithFullData: ISimilarityCluster = {
   centroid: '../fake-data/blob/hipster.txt',
   documentCount: 17112,
   avgSimilarity: 0.01,
-  createdDate: dayjs('2025-12-19T22:23'),
-  lastUpdated: dayjs('2025-12-20T16:15'),
+  createdDate: dayjs('2025-12-24T17:22'),
+  lastUpdated: dayjs('2025-12-25T11:14'),
 };
 
 export const sampleWithNewData: NewSimilarityCluster = {
-  createdDate: dayjs('2025-12-19T23:36'),
+  createdDate: dayjs('2025-12-24T18:35'),
   id: null,
 };
 

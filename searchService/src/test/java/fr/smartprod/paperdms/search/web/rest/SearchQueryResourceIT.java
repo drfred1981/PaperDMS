@@ -63,7 +63,7 @@ class SearchQueryResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -756,7 +756,7 @@ class SearchQueryResourceIT {
         SearchQuery partialUpdatedSearchQuery = new SearchQuery();
         partialUpdatedSearchQuery.setId(searchQuery.getId());
 
-        partialUpdatedSearchQuery.query(UPDATED_QUERY).resultCount(UPDATED_RESULT_COUNT).userId(UPDATED_USER_ID);
+        partialUpdatedSearchQuery.filters(UPDATED_FILTERS).userId(UPDATED_USER_ID).isRelevant(UPDATED_IS_RELEVANT);
 
         restSearchQueryMockMvc
             .perform(

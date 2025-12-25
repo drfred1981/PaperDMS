@@ -8,6 +8,7 @@ describe('BankStatement Form Service', () => {
   let service: BankStatementFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(BankStatementFormService);
   });
 
@@ -62,7 +63,7 @@ describe('BankStatement Form Service', () => {
       it('should return NewBankStatement for default BankStatement initial value', () => {
         const formGroup = service.createBankStatementFormGroup(sampleWithNewData);
 
-        const bankStatement = service.getBankStatement(formGroup);
+        const bankStatement = service.getBankStatement(formGroup) as any;
 
         expect(bankStatement).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('BankStatement Form Service', () => {
       it('should return NewBankStatement for empty BankStatement initial value', () => {
         const formGroup = service.createBankStatementFormGroup();
 
-        const bankStatement = service.getBankStatement(formGroup);
+        const bankStatement = service.getBankStatement(formGroup) as any;
 
         expect(bankStatement).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('BankStatement Form Service', () => {
       it('should return IBankStatement', () => {
         const formGroup = service.createBankStatementFormGroup(sampleWithRequiredData);
 
-        const bankStatement = service.getBankStatement(formGroup);
+        const bankStatement = service.getBankStatement(formGroup) as any;
 
         expect(bankStatement).toMatchObject(sampleWithRequiredData);
       });

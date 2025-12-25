@@ -8,6 +8,7 @@ describe('OcrJob Form Service', () => {
   let service: OcrJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(OcrJobFormService);
   });
 
@@ -88,7 +89,7 @@ describe('OcrJob Form Service', () => {
       it('should return NewOcrJob for default OcrJob initial value', () => {
         const formGroup = service.createOcrJobFormGroup(sampleWithNewData);
 
-        const ocrJob = service.getOcrJob(formGroup);
+        const ocrJob = service.getOcrJob(formGroup) as any;
 
         expect(ocrJob).toMatchObject(sampleWithNewData);
       });
@@ -96,7 +97,7 @@ describe('OcrJob Form Service', () => {
       it('should return NewOcrJob for empty OcrJob initial value', () => {
         const formGroup = service.createOcrJobFormGroup();
 
-        const ocrJob = service.getOcrJob(formGroup);
+        const ocrJob = service.getOcrJob(formGroup) as any;
 
         expect(ocrJob).toMatchObject({});
       });
@@ -104,7 +105,7 @@ describe('OcrJob Form Service', () => {
       it('should return IOcrJob', () => {
         const formGroup = service.createOcrJobFormGroup(sampleWithRequiredData);
 
-        const ocrJob = service.getOcrJob(formGroup);
+        const ocrJob = service.getOcrJob(formGroup) as any;
 
         expect(ocrJob).toMatchObject(sampleWithRequiredData);
       });

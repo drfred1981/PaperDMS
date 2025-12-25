@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IScannerConfiguration, NewScannerConfiguration } from '../scanner-configuration.model';
 
@@ -53,10 +52,12 @@ export type ScannerConfigurationFormGroup = FormGroup<ScannerConfigurationFormGr
 
 @Injectable({ providedIn: 'root' })
 export class ScannerConfigurationFormService {
-  createScannerConfigurationFormGroup(scannerConfiguration?: ScannerConfigurationFormGroupInput): ScannerConfigurationFormGroup {
+  createScannerConfigurationFormGroup(
+    scannerConfiguration: ScannerConfigurationFormGroupInput = { id: null },
+  ): ScannerConfigurationFormGroup {
     const scannerConfigurationRawValue = this.convertScannerConfigurationToScannerConfigurationRawValue({
       ...this.getFormDefaults(),
-      ...(scannerConfiguration ?? { id: null }),
+      ...scannerConfiguration,
     });
     return new FormGroup<ScannerConfigurationFormGroupContent>({
       id: new FormControl(
@@ -110,10 +111,12 @@ export class ScannerConfigurationFormService {
       ...this.getFormDefaults(),
       ...scannerConfiguration,
     });
-    form.reset({
-      ...scannerConfigurationRawValue,
-      id: { value: scannerConfigurationRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...scannerConfigurationRawValue,
+        id: { value: scannerConfigurationRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ScannerConfigurationFormDefaults {

@@ -35,7 +35,7 @@ public class ApprovalHistoryResource {
 
     private static final String ENTITY_NAME = "workflowServiceApprovalHistory";
 
-    @Value("${jhipster.clientApp.name:workflowService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ApprovalHistoryService approvalHistoryService;

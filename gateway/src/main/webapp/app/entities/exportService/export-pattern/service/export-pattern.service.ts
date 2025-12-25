@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IExportPattern, NewExportPattern } from '../export-pattern.model';
 
 export type PartialUpdateExportPattern = Partial<IExportPattern> & Pick<IExportPattern, 'id'>;
@@ -42,24 +42,20 @@ export class ExportPatternService {
   update(exportPattern: IExportPattern): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(exportPattern);
     return this.http
-      .put<RestExportPattern>(`${this.resourceUrl}/${encodeURIComponent(this.getExportPatternIdentifier(exportPattern))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestExportPattern>(`${this.resourceUrl}/${this.getExportPatternIdentifier(exportPattern)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(exportPattern: PartialUpdateExportPattern): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(exportPattern);
     return this.http
-      .patch<RestExportPattern>(`${this.resourceUrl}/${encodeURIComponent(this.getExportPatternIdentifier(exportPattern))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestExportPattern>(`${this.resourceUrl}/${this.getExportPatternIdentifier(exportPattern)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestExportPattern>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestExportPattern>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +67,7 @@ export class ExportPatternService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getExportPatternIdentifier(exportPattern: Pick<IExportPattern, 'id'>): number {

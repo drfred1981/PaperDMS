@@ -68,7 +68,7 @@ class TagPredictionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -420,10 +420,12 @@ class TagPredictionResourceIT {
         partialUpdatedTagPrediction.setId(tagPrediction.getId());
 
         partialUpdatedTagPrediction
+            .confidence(UPDATED_CONFIDENCE)
             .reason(UPDATED_REASON)
             .modelVersion(UPDATED_MODEL_VERSION)
-            .acceptedBy(UPDATED_ACCEPTED_BY)
-            .acceptedDate(UPDATED_ACCEPTED_DATE);
+            .predictionS3Key(UPDATED_PREDICTION_S_3_KEY)
+            .isAccepted(UPDATED_IS_ACCEPTED)
+            .predictionDate(UPDATED_PREDICTION_DATE);
 
         restTagPredictionMockMvc
             .perform(

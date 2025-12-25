@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IExtractedText = {
   content: '../fake-data/blob/hipster.txt',
   s3Bucket: 'boo',
   pageNumber: 25784,
-  extractedDate: dayjs('2025-12-20T05:33'),
+  extractedDate: dayjs('2025-12-25T00:32'),
 };
 
 export const sampleWithPartialData: IExtractedText = {
@@ -19,7 +19,7 @@ export const sampleWithPartialData: IExtractedText = {
   language: 'whereas yu',
   structuredData: '../fake-data/blob/hipster.txt',
   structuredDataS3Key: 'cease flimsy rear',
-  extractedDate: dayjs('2025-12-20T04:23'),
+  extractedDate: dayjs('2025-12-24T23:22'),
 };
 
 export const sampleWithFullData: IExtractedText = {
@@ -34,14 +34,14 @@ export const sampleWithFullData: IExtractedText = {
   hasStructuredData: false,
   structuredData: '../fake-data/blob/hipster.txt',
   structuredDataS3Key: 'whose amid although',
-  extractedDate: dayjs('2025-12-20T10:51'),
+  extractedDate: dayjs('2025-12-25T05:50'),
 };
 
 export const sampleWithNewData: NewExtractedText = {
   content: '../fake-data/blob/hipster.txt',
   s3Bucket: 'behest aw factorise',
   pageNumber: 23300,
-  extractedDate: dayjs('2025-12-20T02:04'),
+  extractedDate: dayjs('2025-12-24T21:03'),
   id: null,
 };
 

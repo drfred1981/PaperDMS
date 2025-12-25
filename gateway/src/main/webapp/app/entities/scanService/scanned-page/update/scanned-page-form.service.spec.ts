@@ -8,6 +8,7 @@ describe('ScannedPage Form Service', () => {
   let service: ScannedPageFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ScannedPageFormService);
   });
 
@@ -62,7 +63,7 @@ describe('ScannedPage Form Service', () => {
       it('should return NewScannedPage for default ScannedPage initial value', () => {
         const formGroup = service.createScannedPageFormGroup(sampleWithNewData);
 
-        const scannedPage = service.getScannedPage(formGroup);
+        const scannedPage = service.getScannedPage(formGroup) as any;
 
         expect(scannedPage).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('ScannedPage Form Service', () => {
       it('should return NewScannedPage for empty ScannedPage initial value', () => {
         const formGroup = service.createScannedPageFormGroup();
 
-        const scannedPage = service.getScannedPage(formGroup);
+        const scannedPage = service.getScannedPage(formGroup) as any;
 
         expect(scannedPage).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('ScannedPage Form Service', () => {
       it('should return IScannedPage', () => {
         const formGroup = service.createScannedPageFormGroup(sampleWithRequiredData);
 
-        const scannedPage = service.getScannedPage(formGroup);
+        const scannedPage = service.getScannedPage(formGroup) as any;
 
         expect(scannedPage).toMatchObject(sampleWithRequiredData);
       });

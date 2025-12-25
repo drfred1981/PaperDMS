@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentStatistics, NewDocumentStatistics } from '../document-statistics.model';
 
@@ -43,10 +42,10 @@ export type DocumentStatisticsFormGroup = FormGroup<DocumentStatisticsFormGroupC
 
 @Injectable({ providedIn: 'root' })
 export class DocumentStatisticsFormService {
-  createDocumentStatisticsFormGroup(documentStatistics?: DocumentStatisticsFormGroupInput): DocumentStatisticsFormGroup {
+  createDocumentStatisticsFormGroup(documentStatistics: DocumentStatisticsFormGroupInput = { id: null }): DocumentStatisticsFormGroup {
     const documentStatisticsRawValue = this.convertDocumentStatisticsToDocumentStatisticsRawValue({
       ...this.getFormDefaults(),
-      ...(documentStatistics ?? { id: null }),
+      ...documentStatistics,
     });
     return new FormGroup<DocumentStatisticsFormGroupContent>({
       id: new FormControl(
@@ -79,10 +78,12 @@ export class DocumentStatisticsFormService {
       ...this.getFormDefaults(),
       ...documentStatistics,
     });
-    form.reset({
-      ...documentStatisticsRawValue,
-      id: { value: documentStatisticsRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentStatisticsRawValue,
+        id: { value: documentStatisticsRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentStatisticsFormDefaults {

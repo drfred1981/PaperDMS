@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import AutoTagJobResolve from './route/auto-tag-job-routing-resolve.service';
 
 const autoTagJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/auto-tag-job').then(m => m.AutoTagJob),
+    loadComponent: () => import('./list/auto-tag-job.component').then(m => m.AutoTagJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const autoTagJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/auto-tag-job-detail').then(m => m.AutoTagJobDetail),
+    loadComponent: () => import('./detail/auto-tag-job-detail.component').then(m => m.AutoTagJobDetailComponent),
     resolve: {
       autoTagJob: AutoTagJobResolve,
     },
@@ -24,7 +23,7 @@ const autoTagJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/auto-tag-job-update').then(m => m.AutoTagJobUpdate),
+    loadComponent: () => import('./update/auto-tag-job-update.component').then(m => m.AutoTagJobUpdateComponent),
     resolve: {
       autoTagJob: AutoTagJobResolve,
     },
@@ -32,7 +31,7 @@ const autoTagJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/auto-tag-job-update').then(m => m.AutoTagJobUpdate),
+    loadComponent: () => import('./update/auto-tag-job-update.component').then(m => m.AutoTagJobUpdateComponent),
     resolve: {
       autoTagJob: AutoTagJobResolve,
     },

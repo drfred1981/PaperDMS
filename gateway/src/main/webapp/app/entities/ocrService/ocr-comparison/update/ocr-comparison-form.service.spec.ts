@@ -8,6 +8,7 @@ describe('OcrComparison Form Service', () => {
   let service: OcrComparisonFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(OcrComparisonFormService);
   });
 
@@ -68,7 +69,7 @@ describe('OcrComparison Form Service', () => {
       it('should return NewOcrComparison for default OcrComparison initial value', () => {
         const formGroup = service.createOcrComparisonFormGroup(sampleWithNewData);
 
-        const ocrComparison = service.getOcrComparison(formGroup);
+        const ocrComparison = service.getOcrComparison(formGroup) as any;
 
         expect(ocrComparison).toMatchObject(sampleWithNewData);
       });
@@ -76,7 +77,7 @@ describe('OcrComparison Form Service', () => {
       it('should return NewOcrComparison for empty OcrComparison initial value', () => {
         const formGroup = service.createOcrComparisonFormGroup();
 
-        const ocrComparison = service.getOcrComparison(formGroup);
+        const ocrComparison = service.getOcrComparison(formGroup) as any;
 
         expect(ocrComparison).toMatchObject({});
       });
@@ -84,7 +85,7 @@ describe('OcrComparison Form Service', () => {
       it('should return IOcrComparison', () => {
         const formGroup = service.createOcrComparisonFormGroup(sampleWithRequiredData);
 
-        const ocrComparison = service.getOcrComparison(formGroup);
+        const ocrComparison = service.getOcrComparison(formGroup) as any;
 
         expect(ocrComparison).toMatchObject(sampleWithRequiredData);
       });

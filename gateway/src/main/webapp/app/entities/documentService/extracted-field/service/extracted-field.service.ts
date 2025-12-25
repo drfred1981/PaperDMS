@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IExtractedField, NewExtractedField } from '../extracted-field.model';
 
 export type PartialUpdateExtractedField = Partial<IExtractedField> & Pick<IExtractedField, 'id'>;
@@ -44,24 +45,20 @@ export class ExtractedFieldService {
   update(extractedField: IExtractedField): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(extractedField);
     return this.http
-      .put<RestExtractedField>(`${this.resourceUrl}/${encodeURIComponent(this.getExtractedFieldIdentifier(extractedField))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestExtractedField>(`${this.resourceUrl}/${this.getExtractedFieldIdentifier(extractedField)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(extractedField: PartialUpdateExtractedField): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(extractedField);
     return this.http
-      .patch<RestExtractedField>(`${this.resourceUrl}/${encodeURIComponent(this.getExtractedFieldIdentifier(extractedField))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestExtractedField>(`${this.resourceUrl}/${this.getExtractedFieldIdentifier(extractedField)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestExtractedField>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestExtractedField>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -73,7 +70,7 @@ export class ExtractedFieldService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

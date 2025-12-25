@@ -9,7 +9,7 @@ export const sampleWithRequiredData: IWatermarkJob = {
   position: 'TOP_RIGHT',
   status: 'PENDING',
   createdBy: 'brr eek',
-  createdDate: dayjs('2025-12-19T18:16'),
+  createdDate: dayjs('2025-12-24T13:15'),
 };
 
 export const sampleWithPartialData: IWatermarkJob = {
@@ -23,10 +23,10 @@ export const sampleWithPartialData: IWatermarkJob = {
   fontSize: 31948,
   color: 'orange',
   status: 'PROCESSING',
-  startDate: dayjs('2025-12-20T02:02'),
+  startDate: dayjs('2025-12-24T21:01'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'eminent ha',
-  createdDate: dayjs('2025-12-20T01:22'),
+  createdDate: dayjs('2025-12-24T20:21'),
 };
 
 export const sampleWithFullData: IWatermarkJob = {
@@ -44,11 +44,11 @@ export const sampleWithFullData: IWatermarkJob = {
   outputS3Key: 'bitterly',
   outputDocumentId: 13726,
   status: 'COMPLETED',
-  startDate: dayjs('2025-12-19T20:08'),
-  endDate: dayjs('2025-12-20T03:18'),
+  startDate: dayjs('2025-12-24T15:07'),
+  endDate: dayjs('2025-12-24T22:17'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'penalise suffocate helpfully',
-  createdDate: dayjs('2025-12-19T23:26'),
+  createdDate: dayjs('2025-12-24T18:25'),
 };
 
 export const sampleWithNewData: NewWatermarkJob = {
@@ -57,7 +57,7 @@ export const sampleWithNewData: NewWatermarkJob = {
   position: 'BOTTOM_CENTER',
   status: 'PROCESSING',
   createdBy: 'poorly stylish',
-  createdDate: dayjs('2025-12-19T23:03'),
+  createdDate: dayjs('2025-12-24T18:02'),
   id: null,
 };
 

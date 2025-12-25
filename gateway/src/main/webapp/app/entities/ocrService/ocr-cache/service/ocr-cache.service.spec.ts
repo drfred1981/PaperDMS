@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IOcrCache } from '../ocr-cache.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../ocr-cache.test-samples';
@@ -103,7 +103,8 @@ describe('OcrCache Service', () => {
       it('should add a OcrCache to an empty array', () => {
         const ocrCache: IOcrCache = sampleWithRequiredData;
         expectedResult = service.addOcrCacheToCollectionIfMissing([], ocrCache);
-        expect(expectedResult).toEqual([ocrCache]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrCache);
       });
 
       it('should not add a OcrCache to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('OcrCache Service', () => {
         const ocrCache: IOcrCache = sampleWithRequiredData;
         const ocrCache2: IOcrCache = sampleWithPartialData;
         expectedResult = service.addOcrCacheToCollectionIfMissing([], ocrCache, ocrCache2);
-        expect(expectedResult).toEqual([ocrCache, ocrCache2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(ocrCache);
+        expect(expectedResult).toContain(ocrCache2);
       });
 
       it('should accept null and undefined values', () => {
         const ocrCache: IOcrCache = sampleWithRequiredData;
         expectedResult = service.addOcrCacheToCollectionIfMissing([], null, ocrCache, undefined);
-        expect(expectedResult).toEqual([ocrCache]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrCache);
       });
 
       it('should return initial array if no OcrCache is added', () => {

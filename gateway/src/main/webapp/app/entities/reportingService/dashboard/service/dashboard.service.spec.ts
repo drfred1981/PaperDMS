@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDashboard } from '../dashboard.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../dashboard.test-samples';
@@ -101,7 +101,8 @@ describe('Dashboard Service', () => {
       it('should add a Dashboard to an empty array', () => {
         const dashboard: IDashboard = sampleWithRequiredData;
         expectedResult = service.addDashboardToCollectionIfMissing([], dashboard);
-        expect(expectedResult).toEqual([dashboard]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(dashboard);
       });
 
       it('should not add a Dashboard to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('Dashboard Service', () => {
         const dashboard: IDashboard = sampleWithRequiredData;
         const dashboard2: IDashboard = sampleWithPartialData;
         expectedResult = service.addDashboardToCollectionIfMissing([], dashboard, dashboard2);
-        expect(expectedResult).toEqual([dashboard, dashboard2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(dashboard);
+        expect(expectedResult).toContain(dashboard2);
       });
 
       it('should accept null and undefined values', () => {
         const dashboard: IDashboard = sampleWithRequiredData;
         expectedResult = service.addDashboardToCollectionIfMissing([], null, dashboard, undefined);
-        expect(expectedResult).toEqual([dashboard]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(dashboard);
       });
 
       it('should return initial array if no Dashboard is added', () => {

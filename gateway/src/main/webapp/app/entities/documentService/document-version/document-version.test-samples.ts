@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IDocumentVersion = {
   sha256: 'athwart although',
   s3Key: 'golden',
   fileSize: 3803,
-  uploadDate: dayjs('2025-12-19T21:17'),
+  uploadDate: dayjs('2025-12-24T16:16'),
   isActive: true,
   createdBy: 'past made-up annually',
 };
@@ -19,7 +19,7 @@ export const sampleWithPartialData: IDocumentVersion = {
   sha256: 'parody',
   s3Key: 'gulp ew across',
   fileSize: 25012,
-  uploadDate: dayjs('2025-12-19T19:29'),
+  uploadDate: dayjs('2025-12-24T14:28'),
   isActive: false,
   createdBy: 'settle pfft psst',
 };
@@ -30,7 +30,7 @@ export const sampleWithFullData: IDocumentVersion = {
   sha256: 'rebound sport',
   s3Key: 'until',
   fileSize: 497,
-  uploadDate: dayjs('2025-12-20T13:43'),
+  uploadDate: dayjs('2025-12-25T08:42'),
   isActive: true,
   createdBy: 'yum',
 };
@@ -40,7 +40,7 @@ export const sampleWithNewData: NewDocumentVersion = {
   sha256: 'towards ouch till',
   s3Key: 'down however',
   fileSize: 30190,
-  uploadDate: dayjs('2025-12-20T04:03'),
+  uploadDate: dayjs('2025-12-24T23:02'),
   isActive: false,
   createdBy: 'who',
   id: null,

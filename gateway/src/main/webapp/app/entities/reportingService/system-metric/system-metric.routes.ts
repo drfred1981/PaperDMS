@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import SystemMetricResolve from './route/system-metric-routing-resolve.service';
 
 const systemMetricRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/system-metric').then(m => m.SystemMetric),
+    loadComponent: () => import('./list/system-metric.component').then(m => m.SystemMetricComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const systemMetricRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/system-metric-detail').then(m => m.SystemMetricDetail),
+    loadComponent: () => import('./detail/system-metric-detail.component').then(m => m.SystemMetricDetailComponent),
     resolve: {
       systemMetric: SystemMetricResolve,
     },
@@ -24,7 +23,7 @@ const systemMetricRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/system-metric-update').then(m => m.SystemMetricUpdate),
+    loadComponent: () => import('./update/system-metric-update.component').then(m => m.SystemMetricUpdateComponent),
     resolve: {
       systemMetric: SystemMetricResolve,
     },
@@ -32,7 +31,7 @@ const systemMetricRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/system-metric-update').then(m => m.SystemMetricUpdate),
+    loadComponent: () => import('./update/system-metric-update.component').then(m => m.SystemMetricUpdateComponent),
     resolve: {
       systemMetric: SystemMetricResolve,
     },

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentServiceStatusResolve from './route/document-service-status-routing-resolve.service';
 
 const documentServiceStatusRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-service-status').then(m => m.DocumentServiceStatus),
+    loadComponent: () => import('./list/document-service-status.component').then(m => m.DocumentServiceStatusComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentServiceStatusRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-service-status-detail').then(m => m.DocumentServiceStatusDetail),
+    loadComponent: () => import('./detail/document-service-status-detail.component').then(m => m.DocumentServiceStatusDetailComponent),
     resolve: {
       documentServiceStatus: DocumentServiceStatusResolve,
     },
@@ -24,7 +23,7 @@ const documentServiceStatusRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-service-status-update').then(m => m.DocumentServiceStatusUpdate),
+    loadComponent: () => import('./update/document-service-status-update.component').then(m => m.DocumentServiceStatusUpdateComponent),
     resolve: {
       documentServiceStatus: DocumentServiceStatusResolve,
     },
@@ -32,7 +31,7 @@ const documentServiceStatusRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-service-status-update').then(m => m.DocumentServiceStatusUpdate),
+    loadComponent: () => import('./update/document-service-status-update.component').then(m => m.DocumentServiceStatusUpdateComponent),
     resolve: {
       documentServiceStatus: DocumentServiceStatusResolve,
     },

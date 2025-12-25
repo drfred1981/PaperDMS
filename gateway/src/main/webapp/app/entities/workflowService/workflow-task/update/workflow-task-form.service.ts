@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IWorkflowTask, NewWorkflowTask } from '../workflow-task.model';
 
@@ -56,10 +55,10 @@ export type WorkflowTaskFormGroup = FormGroup<WorkflowTaskFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class WorkflowTaskFormService {
-  createWorkflowTaskFormGroup(workflowTask?: WorkflowTaskFormGroupInput): WorkflowTaskFormGroup {
+  createWorkflowTaskFormGroup(workflowTask: WorkflowTaskFormGroupInput = { id: null }): WorkflowTaskFormGroup {
     const workflowTaskRawValue = this.convertWorkflowTaskToWorkflowTaskRawValue({
       ...this.getFormDefaults(),
-      ...(workflowTask ?? { id: null }),
+      ...workflowTask,
     });
     return new FormGroup<WorkflowTaskFormGroupContent>({
       id: new FormControl(
@@ -102,10 +101,12 @@ export class WorkflowTaskFormService {
 
   resetForm(form: WorkflowTaskFormGroup, workflowTask: WorkflowTaskFormGroupInput): void {
     const workflowTaskRawValue = this.convertWorkflowTaskToWorkflowTaskRawValue({ ...this.getFormDefaults(), ...workflowTask });
-    form.reset({
-      ...workflowTaskRawValue,
-      id: { value: workflowTaskRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...workflowTaskRawValue,
+        id: { value: workflowTaskRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): WorkflowTaskFormDefaults {

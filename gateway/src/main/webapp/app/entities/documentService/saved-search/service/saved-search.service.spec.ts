@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISavedSearch } from '../saved-search.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../saved-search.test-samples';
@@ -101,7 +101,8 @@ describe('SavedSearch Service', () => {
       it('should add a SavedSearch to an empty array', () => {
         const savedSearch: ISavedSearch = sampleWithRequiredData;
         expectedResult = service.addSavedSearchToCollectionIfMissing([], savedSearch);
-        expect(expectedResult).toEqual([savedSearch]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(savedSearch);
       });
 
       it('should not add a SavedSearch to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('SavedSearch Service', () => {
         const savedSearch: ISavedSearch = sampleWithRequiredData;
         const savedSearch2: ISavedSearch = sampleWithPartialData;
         expectedResult = service.addSavedSearchToCollectionIfMissing([], savedSearch, savedSearch2);
-        expect(expectedResult).toEqual([savedSearch, savedSearch2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(savedSearch);
+        expect(expectedResult).toContain(savedSearch2);
       });
 
       it('should accept null and undefined values', () => {
         const savedSearch: ISavedSearch = sampleWithRequiredData;
         expectedResult = service.addSavedSearchToCollectionIfMissing([], null, savedSearch, undefined);
-        expect(expectedResult).toEqual([savedSearch]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(savedSearch);
       });
 
       it('should return initial array if no SavedSearch is added', () => {

@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { TaskAction } from 'app/entities/enumerations/task-action.model';
 
 export interface IApprovalHistory {

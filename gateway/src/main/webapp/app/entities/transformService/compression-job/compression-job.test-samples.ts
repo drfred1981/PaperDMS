@@ -8,7 +8,7 @@ export const sampleWithRequiredData: ICompressionJob = {
   compressionType: 'LOSSY',
   status: 'CANCELLED',
   createdBy: 'pace brr yuck',
-  createdDate: dayjs('2025-12-20T10:31'),
+  createdDate: dayjs('2025-12-25T05:30'),
 };
 
 export const sampleWithPartialData: ICompressionJob = {
@@ -19,7 +19,7 @@ export const sampleWithPartialData: ICompressionJob = {
   status: 'PROCESSING',
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'shipper whoever',
-  createdDate: dayjs('2025-12-20T03:41'),
+  createdDate: dayjs('2025-12-24T22:40'),
 };
 
 export const sampleWithFullData: ICompressionJob = {
@@ -34,11 +34,11 @@ export const sampleWithFullData: ICompressionJob = {
   outputS3Key: 'what humor',
   outputDocumentId: 23410,
   status: 'CANCELLED',
-  startDate: dayjs('2025-12-20T01:12'),
-  endDate: dayjs('2025-12-20T04:06'),
+  startDate: dayjs('2025-12-24T20:11'),
+  endDate: dayjs('2025-12-24T23:05'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'anti but',
-  createdDate: dayjs('2025-12-19T23:45'),
+  createdDate: dayjs('2025-12-24T18:44'),
 };
 
 export const sampleWithNewData: NewCompressionJob = {
@@ -46,7 +46,7 @@ export const sampleWithNewData: NewCompressionJob = {
   compressionType: 'LOSSY',
   status: 'PENDING',
   createdBy: 'cemetery blank',
-  createdDate: dayjs('2025-12-19T22:14'),
+  createdDate: dayjs('2025-12-24T17:13'),
   id: null,
 };
 

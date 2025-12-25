@@ -67,7 +67,7 @@ public class ConversionJobQueryService extends QueryService<ConversionJob> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<ConversionJob> createSpecification(ConversionJobCriteria criteria) {
-        Specification<ConversionJob> specification = Specification.unrestricted();
+        Specification<ConversionJob> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

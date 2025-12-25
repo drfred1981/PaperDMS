@@ -6,7 +6,7 @@ export const sampleWithRequiredData: ITagCategory = {
   id: 3418,
   name: 'exotic boohoo moralise',
   isSystem: true,
-  createdDate: dayjs('2025-12-19T21:43'),
+  createdDate: dayjs('2025-12-24T16:42'),
   createdBy: 'guidance phooey',
 };
 
@@ -15,7 +15,7 @@ export const sampleWithPartialData: ITagCategory = {
   name: 'adventurously instead',
   displayOrder: 25312,
   isSystem: false,
-  createdDate: dayjs('2025-12-19T18:42'),
+  createdDate: dayjs('2025-12-24T13:41'),
   createdBy: 'fervently red retention',
 };
 
@@ -25,14 +25,14 @@ export const sampleWithFullData: ITagCategory = {
   color: 'olive',
   displayOrder: 10023,
   isSystem: false,
-  createdDate: dayjs('2025-12-19T16:16'),
+  createdDate: dayjs('2025-12-24T11:15'),
   createdBy: 'frivolous',
 };
 
 export const sampleWithNewData: NewTagCategory = {
   name: 'boo deploy meanwhile',
   isSystem: false,
-  createdDate: dayjs('2025-12-19T18:11'),
+  createdDate: dayjs('2025-12-24T13:10'),
   createdBy: 'towards',
   id: null,
 };

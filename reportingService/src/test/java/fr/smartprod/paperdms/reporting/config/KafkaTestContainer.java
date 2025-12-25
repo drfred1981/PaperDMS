@@ -1,6 +1,5 @@
 package fr.smartprod.paperdms.reporting.config;
 
-import java.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -24,9 +23,8 @@ public class KafkaTestContainer implements InitializingBean, DisposableBean {
     @Override
     public void afterPropertiesSet() {
         if (null == kafkaContainer) {
-            kafkaContainer = new KafkaContainer(DockerImageName.parse("apache/kafka-native:4.1.1"))
+            kafkaContainer = new KafkaContainer(DockerImageName.parse("apache/kafka-native:4.0.0"))
                 .withLogConsumer(new Slf4jLogConsumer(LOG))
-                .withStartupTimeout(Duration.ofMinutes(3))
                 .withEnv("KAFKA_LISTENERS", "PLAINTEXT://:9092,BROKER://:9093,CONTROLLER://:9094")
                 .withReuse(true);
         }

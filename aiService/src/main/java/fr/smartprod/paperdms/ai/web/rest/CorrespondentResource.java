@@ -38,7 +38,7 @@ public class CorrespondentResource {
 
     private static final String ENTITY_NAME = "aiServiceCorrespondent";
 
-    @Value("${jhipster.clientApp.name:aiService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final CorrespondentService correspondentService;

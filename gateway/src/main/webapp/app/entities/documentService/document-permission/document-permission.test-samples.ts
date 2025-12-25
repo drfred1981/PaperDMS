@@ -10,7 +10,7 @@ export const sampleWithRequiredData: IDocumentPermission = {
   permission: 'DOWNLOAD',
   canDelegate: false,
   grantedBy: 'amid off fax',
-  grantedDate: dayjs('2025-12-19T20:06'),
+  grantedDate: dayjs('2025-12-24T15:05'),
 };
 
 export const sampleWithPartialData: IDocumentPermission = {
@@ -21,7 +21,7 @@ export const sampleWithPartialData: IDocumentPermission = {
   permission: 'DOWNLOAD',
   canDelegate: true,
   grantedBy: 'drat physically oh',
-  grantedDate: dayjs('2025-12-20T12:55'),
+  grantedDate: dayjs('2025-12-25T07:54'),
 };
 
 export const sampleWithFullData: IDocumentPermission = {
@@ -32,7 +32,7 @@ export const sampleWithFullData: IDocumentPermission = {
   permission: 'MANAGE_PERMISSIONS',
   canDelegate: true,
   grantedBy: 'repeatedly',
-  grantedDate: dayjs('2025-12-20T07:12'),
+  grantedDate: dayjs('2025-12-25T02:11'),
 };
 
 export const sampleWithNewData: NewDocumentPermission = {
@@ -42,7 +42,7 @@ export const sampleWithNewData: NewDocumentPermission = {
   permission: 'APPROVE',
   canDelegate: false,
   grantedBy: 'self-reliant pivot effector',
-  grantedDate: dayjs('2025-12-19T18:37'),
+  grantedDate: dayjs('2025-12-24T13:36'),
   id: null,
 };
 

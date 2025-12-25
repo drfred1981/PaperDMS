@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IExportJob } from '../export-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../export-job.test-samples';
@@ -103,7 +103,8 @@ describe('ExportJob Service', () => {
       it('should add a ExportJob to an empty array', () => {
         const exportJob: IExportJob = sampleWithRequiredData;
         expectedResult = service.addExportJobToCollectionIfMissing([], exportJob);
-        expect(expectedResult).toEqual([exportJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(exportJob);
       });
 
       it('should not add a ExportJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('ExportJob Service', () => {
         const exportJob: IExportJob = sampleWithRequiredData;
         const exportJob2: IExportJob = sampleWithPartialData;
         expectedResult = service.addExportJobToCollectionIfMissing([], exportJob, exportJob2);
-        expect(expectedResult).toEqual([exportJob, exportJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(exportJob);
+        expect(expectedResult).toContain(exportJob2);
       });
 
       it('should accept null and undefined values', () => {
         const exportJob: IExportJob = sampleWithRequiredData;
         expectedResult = service.addExportJobToCollectionIfMissing([], null, exportJob, undefined);
-        expect(expectedResult).toEqual([exportJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(exportJob);
       });
 
       it('should return initial array if no ExportJob is added', () => {

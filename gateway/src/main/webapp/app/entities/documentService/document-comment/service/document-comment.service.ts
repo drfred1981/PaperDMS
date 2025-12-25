@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentComment, NewDocumentComment } from '../document-comment.model';
 
 export type PartialUpdateDocumentComment = Partial<IDocumentComment> & Pick<IDocumentComment, 'id'>;
@@ -41,16 +41,14 @@ export class DocumentCommentService {
   update(documentComment: IDocumentComment): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentComment);
     return this.http
-      .put<RestDocumentComment>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentCommentIdentifier(documentComment))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestDocumentComment>(`${this.resourceUrl}/${this.getDocumentCommentIdentifier(documentComment)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentComment: PartialUpdateDocumentComment): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentComment);
     return this.http
-      .patch<RestDocumentComment>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentCommentIdentifier(documentComment))}`, copy, {
+      .patch<RestDocumentComment>(`${this.resourceUrl}/${this.getDocumentCommentIdentifier(documentComment)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -58,7 +56,7 @@ export class DocumentCommentService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentComment>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentComment>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +68,7 @@ export class DocumentCommentService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentCommentIdentifier(documentComment: Pick<IDocumentComment, 'id'>): number {

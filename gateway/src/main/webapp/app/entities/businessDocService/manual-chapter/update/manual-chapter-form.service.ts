@@ -34,10 +34,10 @@ export type ManualChapterFormGroup = FormGroup<ManualChapterFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ManualChapterFormService {
-  createManualChapterFormGroup(manualChapter?: ManualChapterFormGroupInput): ManualChapterFormGroup {
+  createManualChapterFormGroup(manualChapter: ManualChapterFormGroupInput = { id: null }): ManualChapterFormGroup {
     const manualChapterRawValue = {
       ...this.getFormDefaults(),
-      ...(manualChapter ?? { id: null }),
+      ...manualChapter,
     };
     return new FormGroup<ManualChapterFormGroupContent>({
       id: new FormControl(
@@ -76,10 +76,12 @@ export class ManualChapterFormService {
 
   resetForm(form: ManualChapterFormGroup, manualChapter: ManualChapterFormGroupInput): void {
     const manualChapterRawValue = { ...this.getFormDefaults(), ...manualChapter };
-    form.reset({
-      ...manualChapterRawValue,
-      id: { value: manualChapterRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...manualChapterRawValue,
+        id: { value: manualChapterRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ManualChapterFormDefaults {

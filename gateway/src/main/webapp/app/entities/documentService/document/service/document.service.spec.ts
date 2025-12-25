@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocument } from '../document.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document.test-samples';
@@ -116,7 +116,8 @@ describe('Document Service', () => {
       it('should add a Document to an empty array', () => {
         const document: IDocument = sampleWithRequiredData;
         expectedResult = service.addDocumentToCollectionIfMissing([], document);
-        expect(expectedResult).toEqual([document]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(document);
       });
 
       it('should not add a Document to an array that contains it', () => {
@@ -150,13 +151,16 @@ describe('Document Service', () => {
         const document: IDocument = sampleWithRequiredData;
         const document2: IDocument = sampleWithPartialData;
         expectedResult = service.addDocumentToCollectionIfMissing([], document, document2);
-        expect(expectedResult).toEqual([document, document2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(document);
+        expect(expectedResult).toContain(document2);
       });
 
       it('should accept null and undefined values', () => {
         const document: IDocument = sampleWithRequiredData;
         expectedResult = service.addDocumentToCollectionIfMissing([], null, document, undefined);
-        expect(expectedResult).toEqual([document]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(document);
       });
 
       it('should return initial array if no Document is added', () => {

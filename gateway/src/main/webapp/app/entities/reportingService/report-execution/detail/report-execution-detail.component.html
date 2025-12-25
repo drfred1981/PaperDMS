@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportExecution(); as reportExecutionRef) {
+      <div>
+        <h2 data-cy="reportExecutionDetailsHeading">
+          <span jhiTranslate="gatewayApp.reportingServiceReportExecution.detail.title">Report Execution</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.scheduledReportId">Scheduled Report Id</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.scheduledReportId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ReportExecutionStatus.' + (reportExecutionRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', RUNNING: 'RUNNING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                reportExecutionRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.recordsProcessed">Records Processed</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.recordsProcessed }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.outputSize">Output Size</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.outputSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ reportExecutionRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportExecution.scheduledReport">Scheduled Report</span></dt>
+          <dd>
+            @if (reportExecution()!.scheduledReport) {
+              <div>
+                <a [routerLink]="['/scheduled-report', reportExecution()!.scheduledReport?.id, 'view']">{{
+                  reportExecutionRef.scheduledReport?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/report-execution', reportExecutionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

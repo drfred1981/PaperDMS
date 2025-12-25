@@ -25,6 +25,7 @@
 *.scss          text
 *.sh            text eol=lf
 *.sql           text
+*.txt           text
 *.ts            text
 *.xml           text
 *.yaml          text

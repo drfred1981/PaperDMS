@@ -67,7 +67,7 @@ class EmailAttachmentResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -469,14 +469,7 @@ class EmailAttachmentResourceIT {
         EmailAttachment partialUpdatedEmailAttachment = new EmailAttachment();
         partialUpdatedEmailAttachment.setId(emailAttachment.getId());
 
-        partialUpdatedEmailAttachment
-            .emailImportId(UPDATED_EMAIL_IMPORT_ID)
-            .fileName(UPDATED_FILE_NAME)
-            .fileSize(UPDATED_FILE_SIZE)
-            .mimeType(UPDATED_MIME_TYPE)
-            .s3Key(UPDATED_S_3_KEY)
-            .documentId(UPDATED_DOCUMENT_ID)
-            .errorMessage(UPDATED_ERROR_MESSAGE);
+        partialUpdatedEmailAttachment.emailImportId(UPDATED_EMAIL_IMPORT_ID).s3Key(UPDATED_S_3_KEY).documentId(UPDATED_DOCUMENT_ID);
 
         restEmailAttachmentMockMvc
             .perform(

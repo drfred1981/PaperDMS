@@ -37,7 +37,7 @@ public class ScanBatchResource {
 
     private static final String ENTITY_NAME = "scanServiceScanBatch";
 
-    @Value("${jhipster.clientApp.name:scanService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ScanBatchService scanBatchService;

@@ -65,7 +65,7 @@ class DocumentPermissionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -870,11 +870,7 @@ class DocumentPermissionResourceIT {
         DocumentPermission partialUpdatedDocumentPermission = new DocumentPermission();
         partialUpdatedDocumentPermission.setId(documentPermission.getId());
 
-        partialUpdatedDocumentPermission
-            .documentId(UPDATED_DOCUMENT_ID)
-            .principalType(UPDATED_PRINCIPAL_TYPE)
-            .canDelegate(UPDATED_CAN_DELEGATE)
-            .grantedBy(UPDATED_GRANTED_BY);
+        partialUpdatedDocumentPermission.principalId(UPDATED_PRINCIPAL_ID).grantedDate(UPDATED_GRANTED_DATE);
 
         restDocumentPermissionMockMvc
             .perform(

@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { SmartFolderService } from '../service/smart-folder.service';
 import { ISmartFolder } from '../smart-folder.model';
+import { SmartFolderService } from '../service/smart-folder.service';
 
 const smartFolderResolve = (route: ActivatedRouteSnapshot): Observable<null | ISmartFolder> => {
   const id = route.params.id;

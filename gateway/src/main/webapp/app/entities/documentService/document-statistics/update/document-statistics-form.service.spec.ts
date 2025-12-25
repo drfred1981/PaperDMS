@@ -8,6 +8,7 @@ describe('DocumentStatistics Form Service', () => {
   let service: DocumentStatisticsFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentStatisticsFormService);
   });
 
@@ -48,7 +49,7 @@ describe('DocumentStatistics Form Service', () => {
       it('should return NewDocumentStatistics for default DocumentStatistics initial value', () => {
         const formGroup = service.createDocumentStatisticsFormGroup(sampleWithNewData);
 
-        const documentStatistics = service.getDocumentStatistics(formGroup);
+        const documentStatistics = service.getDocumentStatistics(formGroup) as any;
 
         expect(documentStatistics).toMatchObject(sampleWithNewData);
       });
@@ -56,7 +57,7 @@ describe('DocumentStatistics Form Service', () => {
       it('should return NewDocumentStatistics for empty DocumentStatistics initial value', () => {
         const formGroup = service.createDocumentStatisticsFormGroup();
 
-        const documentStatistics = service.getDocumentStatistics(formGroup);
+        const documentStatistics = service.getDocumentStatistics(formGroup) as any;
 
         expect(documentStatistics).toMatchObject({});
       });
@@ -64,7 +65,7 @@ describe('DocumentStatistics Form Service', () => {
       it('should return IDocumentStatistics', () => {
         const formGroup = service.createDocumentStatisticsFormGroup(sampleWithRequiredData);
 
-        const documentStatistics = service.getDocumentStatistics(formGroup);
+        const documentStatistics = service.getDocumentStatistics(formGroup) as any;
 
         expect(documentStatistics).toMatchObject(sampleWithRequiredData);
       });

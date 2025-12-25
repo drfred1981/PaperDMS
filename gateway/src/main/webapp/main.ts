@@ -1,1 +1,1 @@
-import('./bootstrap').catch((err: unknown) => console.error(err)); // NOSONAR
+import('./bootstrap').catch((err: unknown) => console.error(err));

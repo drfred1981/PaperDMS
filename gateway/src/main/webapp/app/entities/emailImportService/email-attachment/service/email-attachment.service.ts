@@ -1,11 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IEmailAttachment, NewEmailAttachment } from '../email-attachment.model';
 
 export type PartialUpdateEmailAttachment = Partial<IEmailAttachment> & Pick<IEmailAttachment, 'id'>;
@@ -25,23 +24,19 @@ export class EmailAttachmentService {
   }
 
   update(emailAttachment: IEmailAttachment): Observable<EntityResponseType> {
-    return this.http.put<IEmailAttachment>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getEmailAttachmentIdentifier(emailAttachment))}`,
-      emailAttachment,
-      { observe: 'response' },
-    );
+    return this.http.put<IEmailAttachment>(`${this.resourceUrl}/${this.getEmailAttachmentIdentifier(emailAttachment)}`, emailAttachment, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(emailAttachment: PartialUpdateEmailAttachment): Observable<EntityResponseType> {
-    return this.http.patch<IEmailAttachment>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getEmailAttachmentIdentifier(emailAttachment))}`,
-      emailAttachment,
-      { observe: 'response' },
-    );
+    return this.http.patch<IEmailAttachment>(`${this.resourceUrl}/${this.getEmailAttachmentIdentifier(emailAttachment)}`, emailAttachment, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IEmailAttachment>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.get<IEmailAttachment>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -50,7 +45,7 @@ export class EmailAttachmentService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getEmailAttachmentIdentifier(emailAttachment: Pick<IEmailAttachment, 'id'>): number {

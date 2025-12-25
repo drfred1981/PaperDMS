@@ -8,6 +8,7 @@ describe('TagCategory Form Service', () => {
   let service: TagCategoryFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(TagCategoryFormService);
   });
 
@@ -52,7 +53,7 @@ describe('TagCategory Form Service', () => {
       it('should return NewTagCategory for default TagCategory initial value', () => {
         const formGroup = service.createTagCategoryFormGroup(sampleWithNewData);
 
-        const tagCategory = service.getTagCategory(formGroup);
+        const tagCategory = service.getTagCategory(formGroup) as any;
 
         expect(tagCategory).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('TagCategory Form Service', () => {
       it('should return NewTagCategory for empty TagCategory initial value', () => {
         const formGroup = service.createTagCategoryFormGroup();
 
-        const tagCategory = service.getTagCategory(formGroup);
+        const tagCategory = service.getTagCategory(formGroup) as any;
 
         expect(tagCategory).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('TagCategory Form Service', () => {
       it('should return ITagCategory', () => {
         const formGroup = service.createTagCategoryFormGroup(sampleWithRequiredData);
 
-        const tagCategory = service.getTagCategory(formGroup);
+        const tagCategory = service.getTagCategory(formGroup) as any;
 
         expect(tagCategory).toMatchObject(sampleWithRequiredData);
       });

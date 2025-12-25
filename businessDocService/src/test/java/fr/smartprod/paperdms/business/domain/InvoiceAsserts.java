@@ -55,12 +55,10 @@ public class InvoiceAsserts {
             .satisfies(a -> assertThat(a.getIssueDate()).as("check issueDate").isEqualTo(expected.getIssueDate()))
             .satisfies(a -> assertThat(a.getDueDate()).as("check dueDate").isEqualTo(expected.getDueDate()))
             .satisfies(a -> assertThat(a.getPaymentDate()).as("check paymentDate").isEqualTo(expected.getPaymentDate()))
-            .satisfies(a ->
-                assertThat(a.getTotalAmountExclTax()).as("check totalAmountExclTax").isEqualTo(expected.getTotalAmountExclTax())
+            .satisfies(a -> assertThat(a.getTotalAmountExclTax()).as("check totalAmountExclTax").isEqualTo(expected.getTotalAmountExclTax())
             )
             .satisfies(a -> assertThat(a.getTaxAmount()).as("check taxAmount").isEqualTo(expected.getTaxAmount()))
-            .satisfies(a ->
-                assertThat(a.getTotalAmountInclTax()).as("check totalAmountInclTax").isEqualTo(expected.getTotalAmountInclTax())
+            .satisfies(a -> assertThat(a.getTotalAmountInclTax()).as("check totalAmountInclTax").isEqualTo(expected.getTotalAmountInclTax())
             )
             .satisfies(a -> assertThat(a.getCurrency()).as("check currency").isEqualTo(expected.getCurrency()))
             .satisfies(a -> assertThat(a.getStatus()).as("check status").isEqualTo(expected.getStatus()))

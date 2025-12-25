@@ -1,11 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { ISearchFacet, NewSearchFacet } from '../search-facet.model';
 
 export type PartialUpdateSearchFacet = Partial<ISearchFacet> & Pick<ISearchFacet, 'id'>;
@@ -25,23 +24,19 @@ export class SearchFacetService {
   }
 
   update(searchFacet: ISearchFacet): Observable<EntityResponseType> {
-    return this.http.put<ISearchFacet>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getSearchFacetIdentifier(searchFacet))}`,
-      searchFacet,
-      { observe: 'response' },
-    );
+    return this.http.put<ISearchFacet>(`${this.resourceUrl}/${this.getSearchFacetIdentifier(searchFacet)}`, searchFacet, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(searchFacet: PartialUpdateSearchFacet): Observable<EntityResponseType> {
-    return this.http.patch<ISearchFacet>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getSearchFacetIdentifier(searchFacet))}`,
-      searchFacet,
-      { observe: 'response' },
-    );
+    return this.http.patch<ISearchFacet>(`${this.resourceUrl}/${this.getSearchFacetIdentifier(searchFacet)}`, searchFacet, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<ISearchFacet>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.get<ISearchFacet>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -50,7 +45,7 @@ export class SearchFacetService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getSearchFacetIdentifier(searchFacet: Pick<ISearchFacet, 'id'>): number {

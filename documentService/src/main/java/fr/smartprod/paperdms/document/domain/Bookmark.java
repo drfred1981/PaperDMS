@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.document.domain;
 import fr.smartprod.paperdms.document.domain.enumeration.BookmarkType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import org.hibernate.annotations.Cache;
@@ -18,7 +17,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Bookmark implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

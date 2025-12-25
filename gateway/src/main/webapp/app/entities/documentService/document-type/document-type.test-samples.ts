@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IDocumentType = {
   name: 'personalise',
   code: 'yum meanwhile section',
   isActive: true,
-  createdDate: dayjs('2025-12-20T05:01'),
+  createdDate: dayjs('2025-12-25T00:00'),
   createdBy: 'before wealthy pixellate',
 };
 
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IDocumentType = {
   icon: 'lest of',
   color: 'maroon',
   isActive: false,
-  createdDate: dayjs('2025-12-19T17:40'),
+  createdDate: dayjs('2025-12-24T12:39'),
   createdBy: 'roundabout or tenant',
 };
 
@@ -29,7 +29,7 @@ export const sampleWithFullData: IDocumentType = {
   icon: 'rigidly without why',
   color: 'orchid',
   isActive: false,
-  createdDate: dayjs('2025-12-19T17:13'),
+  createdDate: dayjs('2025-12-24T12:12'),
   createdBy: 'sting massage the',
 };
 
@@ -37,7 +37,7 @@ export const sampleWithNewData: NewDocumentType = {
   name: 'grimy ugh',
   code: 'out',
   isActive: true,
-  createdDate: dayjs('2025-12-20T00:57'),
+  createdDate: dayjs('2025-12-24T19:56'),
   createdBy: 'drab psst immediately',
   id: null,
 };

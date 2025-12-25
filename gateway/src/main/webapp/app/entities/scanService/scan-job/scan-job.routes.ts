@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ScanJobResolve from './route/scan-job-routing-resolve.service';
 
 const scanJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/scan-job').then(m => m.ScanJob),
+    loadComponent: () => import('./list/scan-job.component').then(m => m.ScanJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const scanJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/scan-job-detail').then(m => m.ScanJobDetail),
+    loadComponent: () => import('./detail/scan-job-detail.component').then(m => m.ScanJobDetailComponent),
     resolve: {
       scanJob: ScanJobResolve,
     },
@@ -24,7 +23,7 @@ const scanJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/scan-job-update').then(m => m.ScanJobUpdate),
+    loadComponent: () => import('./update/scan-job-update.component').then(m => m.ScanJobUpdateComponent),
     resolve: {
       scanJob: ScanJobResolve,
     },
@@ -32,7 +31,7 @@ const scanJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/scan-job-update').then(m => m.ScanJobUpdate),
+    loadComponent: () => import('./update/scan-job-update.component').then(m => m.ScanJobUpdateComponent),
     resolve: {
       scanJob: ScanJobResolve,
     },

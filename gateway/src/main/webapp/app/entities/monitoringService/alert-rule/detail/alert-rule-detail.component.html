@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (alertRule(); as alertRuleRef) {
+      <div>
+        <h2 data-cy="alertRuleDetailsHeading"><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.detail.title">Alert Rule</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.name">Name</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.description">Description</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.alertType">Alert Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AlertType.' + (alertRuleRef.alertType ?? 'null')">{{
+              {
+                null: '',
+                DOCUMENT_EXPIRATION: 'DOCUMENT_EXPIRATION',
+                STORAGE_QUOTA: 'STORAGE_QUOTA',
+                UNUSUAL_ACTIVITY: 'UNUSUAL_ACTIVITY',
+                COMPLIANCE_VIOLATION: 'COMPLIANCE_VIOLATION',
+                WORKFLOW_DELAYED: 'WORKFLOW_DELAYED',
+                FAILED_OCR: 'FAILED_OCR',
+                MISSING_METADATA: 'MISSING_METADATA',
+                DUPLICATE_DETECTED: 'DUPLICATE_DETECTED',
+                PERMISSION_CHANGED: 'PERMISSION_CHANGED',
+                SERVICE_DOWN: 'SERVICE_DOWN',
+                HIGH_ERROR_RATE: 'HIGH_ERROR_RATE',
+                CONTRACT_EXPIRATION: 'CONTRACT_EXPIRATION',
+                INVOICE_OVERDUE: 'INVOICE_OVERDUE',
+                SYSTEM_OVERLOAD: 'SYSTEM_OVERLOAD',
+              }[alertRuleRef.alertType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.conditions">Conditions</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.conditions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.severity">Severity</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.Severity.' + (alertRuleRef.severity ?? 'null')">{{
+              { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', CRITICAL: 'CRITICAL' }[alertRuleRef.severity ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.recipients">Recipients</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.recipients }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.triggerCount">Trigger Count</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.triggerCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.lastTriggered">Last Triggered</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.lastTriggered | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlertRule.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ alertRuleRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/alert-rule', alertRuleRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

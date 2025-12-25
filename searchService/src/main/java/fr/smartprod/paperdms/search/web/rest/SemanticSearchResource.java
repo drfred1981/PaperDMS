@@ -37,7 +37,7 @@ public class SemanticSearchResource {
 
     private static final String ENTITY_NAME = "searchServiceSemanticSearch";
 
-    @Value("${jhipster.clientApp.name:searchService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SemanticSearchService semanticSearchService;

@@ -67,7 +67,7 @@ public class WatermarkJobQueryService extends QueryService<WatermarkJob> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<WatermarkJob> createSpecification(WatermarkJobCriteria criteria) {
-        Specification<WatermarkJob> specification = Specification.unrestricted();
+        Specification<WatermarkJob> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

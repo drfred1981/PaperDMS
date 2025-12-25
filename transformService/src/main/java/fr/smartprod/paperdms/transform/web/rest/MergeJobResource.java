@@ -35,7 +35,7 @@ public class MergeJobResource {
 
     private static final String ENTITY_NAME = "transformServiceMergeJob";
 
-    @Value("${jhipster.clientApp.name:transformService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final MergeJobService mergeJobService;

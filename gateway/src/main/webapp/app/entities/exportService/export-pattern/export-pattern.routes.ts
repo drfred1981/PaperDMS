@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ExportPatternResolve from './route/export-pattern-routing-resolve.service';
 
 const exportPatternRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/export-pattern').then(m => m.ExportPattern),
+    loadComponent: () => import('./list/export-pattern.component').then(m => m.ExportPatternComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const exportPatternRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/export-pattern-detail').then(m => m.ExportPatternDetail),
+    loadComponent: () => import('./detail/export-pattern-detail.component').then(m => m.ExportPatternDetailComponent),
     resolve: {
       exportPattern: ExportPatternResolve,
     },
@@ -24,7 +23,7 @@ const exportPatternRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/export-pattern-update').then(m => m.ExportPatternUpdate),
+    loadComponent: () => import('./update/export-pattern-update.component').then(m => m.ExportPatternUpdateComponent),
     resolve: {
       exportPattern: ExportPatternResolve,
     },
@@ -32,7 +31,7 @@ const exportPatternRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/export-pattern-update').then(m => m.ExportPatternUpdate),
+    loadComponent: () => import('./update/export-pattern-update.component').then(m => m.ExportPatternUpdateComponent),
     resolve: {
       exportPattern: ExportPatternResolve,
     },

@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentMetadata(); as documentMetadataRef) {
+      <div>
+        <h2 data-cy="documentMetadataDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceDocumentMetadata.detail.title">Document Metadata</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentMetadataRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentMetadata.key">Key</span></dt>
+          <dd>
+            <span>{{ documentMetadataRef.key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentMetadata.value">Value</span></dt>
+          <dd>
+            <span>{{ documentMetadataRef.value }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentMetadata.dataType">Data Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.MetadataType.' + (documentMetadataRef.dataType ?? 'null')">{{
+              {
+                null: '',
+                STRING: 'STRING',
+                NUMBER: 'NUMBER',
+                INTEGER: 'INTEGER',
+                DECIMAL: 'DECIMAL',
+                DATE: 'DATE',
+                DATETIME: 'DATETIME',
+                BOOLEAN: 'BOOLEAN',
+                EMAIL: 'EMAIL',
+                PHONE: 'PHONE',
+                URL: 'URL',
+                JSON: 'JSON',
+                ARRAY: 'ARRAY',
+                CURRENCY: 'CURRENCY',
+                PERCENTAGE: 'PERCENTAGE',
+              }[documentMetadataRef.dataType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentMetadata.isSearchable">Is Searchable</span></dt>
+          <dd>
+            <span>{{ documentMetadataRef.isSearchable }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentMetadata.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ documentMetadataRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentMetadata.document">Document</span></dt>
+          <dd>
+            @if (documentMetadata()!.document) {
+              <div>
+                <a [routerLink]="['/document', documentMetadata()!.document?.id, 'view']">{{ documentMetadataRef.document?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-metadata', documentMetadataRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

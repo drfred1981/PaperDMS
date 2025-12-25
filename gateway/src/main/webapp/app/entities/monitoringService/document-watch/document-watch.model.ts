@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { WatchType } from 'app/entities/enumerations/watch-type.model';
 
 export interface IDocumentWatch {

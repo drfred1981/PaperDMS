@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentWatch } from '../document-watch.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-watch.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentWatch Service', () => {
       it('should add a DocumentWatch to an empty array', () => {
         const documentWatch: IDocumentWatch = sampleWithRequiredData;
         expectedResult = service.addDocumentWatchToCollectionIfMissing([], documentWatch);
-        expect(expectedResult).toEqual([documentWatch]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentWatch);
       });
 
       it('should not add a DocumentWatch to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentWatch Service', () => {
         const documentWatch: IDocumentWatch = sampleWithRequiredData;
         const documentWatch2: IDocumentWatch = sampleWithPartialData;
         expectedResult = service.addDocumentWatchToCollectionIfMissing([], documentWatch, documentWatch2);
-        expect(expectedResult).toEqual([documentWatch, documentWatch2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentWatch);
+        expect(expectedResult).toContain(documentWatch2);
       });
 
       it('should accept null and undefined values', () => {
         const documentWatch: IDocumentWatch = sampleWithRequiredData;
         expectedResult = service.addDocumentWatchToCollectionIfMissing([], null, documentWatch, undefined);
-        expect(expectedResult).toEqual([documentWatch]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentWatch);
       });
 
       it('should return initial array if no DocumentWatch is added', () => {

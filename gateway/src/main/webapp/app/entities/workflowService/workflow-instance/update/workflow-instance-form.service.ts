@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IWorkflowInstance, NewWorkflowInstance } from '../workflow-instance.model';
 
@@ -56,10 +55,10 @@ export type WorkflowInstanceFormGroup = FormGroup<WorkflowInstanceFormGroupConte
 
 @Injectable({ providedIn: 'root' })
 export class WorkflowInstanceFormService {
-  createWorkflowInstanceFormGroup(workflowInstance?: WorkflowInstanceFormGroupInput): WorkflowInstanceFormGroup {
+  createWorkflowInstanceFormGroup(workflowInstance: WorkflowInstanceFormGroupInput = { id: null }): WorkflowInstanceFormGroup {
     const workflowInstanceRawValue = this.convertWorkflowInstanceToWorkflowInstanceRawValue({
       ...this.getFormDefaults(),
-      ...(workflowInstance ?? { id: null }),
+      ...workflowInstance,
     });
     return new FormGroup<WorkflowInstanceFormGroupContent>({
       id: new FormControl(
@@ -103,10 +102,12 @@ export class WorkflowInstanceFormService {
       ...this.getFormDefaults(),
       ...workflowInstance,
     });
-    form.reset({
-      ...workflowInstanceRawValue,
-      id: { value: workflowInstanceRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...workflowInstanceRawValue,
+        id: { value: workflowInstanceRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): WorkflowInstanceFormDefaults {

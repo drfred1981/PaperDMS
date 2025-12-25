@@ -66,7 +66,7 @@ class ReportExecutionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -413,9 +413,11 @@ class ReportExecutionResourceIT {
         partialUpdatedReportExecution.setId(reportExecution.getId());
 
         partialUpdatedReportExecution
-            .scheduledReportId(UPDATED_SCHEDULED_REPORT_ID)
             .status(UPDATED_STATUS)
-            .outputS3Key(UPDATED_OUTPUT_S_3_KEY);
+            .endDate(UPDATED_END_DATE)
+            .recordsProcessed(UPDATED_RECORDS_PROCESSED)
+            .outputS3Key(UPDATED_OUTPUT_S_3_KEY)
+            .outputSize(UPDATED_OUTPUT_SIZE);
 
         restReportExecutionMockMvc
             .perform(

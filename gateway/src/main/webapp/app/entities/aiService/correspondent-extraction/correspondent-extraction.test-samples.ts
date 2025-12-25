@@ -9,7 +9,7 @@ export const sampleWithRequiredData: ICorrespondentExtraction = {
   extractedText: '../fake-data/blob/hipster.txt',
   extractedTextSha256: 'properly woot',
   isCached: true,
-  createdDate: dayjs('2025-12-20T12:54'),
+  createdDate: dayjs('2025-12-25T07:53'),
 };
 
 export const sampleWithPartialData: ICorrespondentExtraction = {
@@ -20,10 +20,10 @@ export const sampleWithPartialData: ICorrespondentExtraction = {
   extractedTextSha256: 'vice',
   status: 'FAILED',
   isCached: true,
-  startDate: dayjs('2025-12-20T12:34'),
+  startDate: dayjs('2025-12-25T07:33'),
   sendersCount: 9444,
   recipientsCount: 32733,
-  createdDate: dayjs('2025-12-19T18:03'),
+  createdDate: dayjs('2025-12-24T13:02'),
 };
 
 export const sampleWithFullData: ICorrespondentExtraction = {
@@ -38,12 +38,12 @@ export const sampleWithFullData: ICorrespondentExtraction = {
   resultCacheKey: 'density',
   isCached: true,
   resultS3Key: 'dwell ah lazily',
-  startDate: dayjs('2025-12-19T17:15'),
-  endDate: dayjs('2025-12-19T23:46'),
+  startDate: dayjs('2025-12-24T12:14'),
+  endDate: dayjs('2025-12-24T18:45'),
   errorMessage: '../fake-data/blob/hipster.txt',
   sendersCount: 18238,
   recipientsCount: 29655,
-  createdDate: dayjs('2025-12-20T01:37'),
+  createdDate: dayjs('2025-12-24T20:36'),
 };
 
 export const sampleWithNewData: NewCorrespondentExtraction = {
@@ -52,7 +52,7 @@ export const sampleWithNewData: NewCorrespondentExtraction = {
   extractedText: '../fake-data/blob/hipster.txt',
   extractedTextSha256: 'dimly duh',
   isCached: false,
-  createdDate: dayjs('2025-12-20T04:34'),
+  createdDate: dayjs('2025-12-24T23:33'),
   id: null,
 };
 

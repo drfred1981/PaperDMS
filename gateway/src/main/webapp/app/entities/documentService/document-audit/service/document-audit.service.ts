@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentAudit, NewDocumentAudit } from '../document-audit.model';
 
 export type PartialUpdateDocumentAudit = Partial<IDocumentAudit> & Pick<IDocumentAudit, 'id'>;
@@ -41,24 +41,20 @@ export class DocumentAuditService {
   update(documentAudit: IDocumentAudit): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentAudit);
     return this.http
-      .put<RestDocumentAudit>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentAuditIdentifier(documentAudit))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestDocumentAudit>(`${this.resourceUrl}/${this.getDocumentAuditIdentifier(documentAudit)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentAudit: PartialUpdateDocumentAudit): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentAudit);
     return this.http
-      .patch<RestDocumentAudit>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentAuditIdentifier(documentAudit))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestDocumentAudit>(`${this.resourceUrl}/${this.getDocumentAuditIdentifier(documentAudit)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentAudit>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentAudit>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class DocumentAuditService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentAuditIdentifier(documentAudit: Pick<IDocumentAudit, 'id'>): number {

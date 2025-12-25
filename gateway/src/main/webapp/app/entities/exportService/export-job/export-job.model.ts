@@ -1,8 +1,7 @@
 import dayjs from 'dayjs/esm';
-
+import { IExportPattern } from 'app/entities/exportService/export-pattern/export-pattern.model';
 import { ExportFormat } from 'app/entities/enumerations/export-format.model';
 import { ExportStatus } from 'app/entities/enumerations/export-status.model';
-import { IExportPattern } from 'app/entities/exportService/export-pattern/export-pattern.model';
 
 export interface IExportJob {
   id: number;

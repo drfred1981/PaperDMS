@@ -85,7 +85,7 @@ class ConversionJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1217,13 +1217,10 @@ class ConversionJobResourceIT {
         partialUpdatedConversionJob.setId(conversionJob.getId());
 
         partialUpdatedConversionJob
-            .documentId(UPDATED_DOCUMENT_ID)
             .documentSha256(UPDATED_DOCUMENT_SHA_256)
-            .conversionEngine(UPDATED_CONVERSION_ENGINE)
-            .options(UPDATED_OPTIONS)
+            .targetFormat(UPDATED_TARGET_FORMAT)
             .outputS3Key(UPDATED_OUTPUT_S_3_KEY)
-            .status(UPDATED_STATUS)
-            .startDate(UPDATED_START_DATE)
+            .errorMessage(UPDATED_ERROR_MESSAGE)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE);
 

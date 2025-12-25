@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
 
-import PasswordResetFinish from './password-reset-finish';
+import PasswordResetFinishComponent from './password-reset-finish.component';
 
 const passwordResetFinishRoute: Route = {
   path: 'reset/finish',
-  component: PasswordResetFinish,
+  component: PasswordResetFinishComponent,
   title: 'global.menu.account.password',
 };
 

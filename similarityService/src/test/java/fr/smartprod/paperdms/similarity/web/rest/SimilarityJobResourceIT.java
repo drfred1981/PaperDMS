@@ -82,7 +82,7 @@ class SimilarityJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1063,9 +1063,8 @@ class SimilarityJobResourceIT {
         partialUpdatedSimilarityJob.setId(similarityJob.getId());
 
         partialUpdatedSimilarityJob
-            .documentSha256(UPDATED_DOCUMENT_SHA_256)
             .algorithm(UPDATED_ALGORITHM)
-            .startDate(UPDATED_START_DATE)
+            .minSimilarityThreshold(UPDATED_MIN_SIMILARITY_THRESHOLD)
             .endDate(UPDATED_END_DATE)
             .errorMessage(UPDATED_ERROR_MESSAGE)
             .createdDate(UPDATED_CREATED_DATE);

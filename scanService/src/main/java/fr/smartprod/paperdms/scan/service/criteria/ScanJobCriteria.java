@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.scan.service.criteria;
 import fr.smartprod.paperdms.scan.domain.enumeration.ColorMode;
 import fr.smartprod.paperdms.scan.domain.enumeration.ScanFormat;
 import fr.smartprod.paperdms.scan.domain.enumeration.ScanStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -75,7 +74,6 @@ public class ScanJobCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

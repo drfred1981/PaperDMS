@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ScannedPageResolve from './route/scanned-page-routing-resolve.service';
 
 const scannedPageRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/scanned-page').then(m => m.ScannedPage),
+    loadComponent: () => import('./list/scanned-page.component').then(m => m.ScannedPageComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const scannedPageRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/scanned-page-detail').then(m => m.ScannedPageDetail),
+    loadComponent: () => import('./detail/scanned-page-detail.component').then(m => m.ScannedPageDetailComponent),
     resolve: {
       scannedPage: ScannedPageResolve,
     },
@@ -24,7 +23,7 @@ const scannedPageRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/scanned-page-update').then(m => m.ScannedPageUpdate),
+    loadComponent: () => import('./update/scanned-page-update.component').then(m => m.ScannedPageUpdateComponent),
     resolve: {
       scannedPage: ScannedPageResolve,
     },
@@ -32,7 +31,7 @@ const scannedPageRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/scanned-page-update').then(m => m.ScannedPageUpdate),
+    loadComponent: () => import('./update/scanned-page-update.component').then(m => m.ScannedPageUpdateComponent),
     resolve: {
       scannedPage: ScannedPageResolve,
     },

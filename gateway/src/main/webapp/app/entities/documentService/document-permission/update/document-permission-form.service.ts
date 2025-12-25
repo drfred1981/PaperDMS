@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentPermission, NewDocumentPermission } from '../document-permission.model';
 
@@ -46,10 +45,10 @@ export type DocumentPermissionFormGroup = FormGroup<DocumentPermissionFormGroupC
 
 @Injectable({ providedIn: 'root' })
 export class DocumentPermissionFormService {
-  createDocumentPermissionFormGroup(documentPermission?: DocumentPermissionFormGroupInput): DocumentPermissionFormGroup {
+  createDocumentPermissionFormGroup(documentPermission: DocumentPermissionFormGroupInput = { id: null }): DocumentPermissionFormGroup {
     const documentPermissionRawValue = this.convertDocumentPermissionToDocumentPermissionRawValue({
       ...this.getFormDefaults(),
-      ...(documentPermission ?? { id: null }),
+      ...documentPermission,
     });
     return new FormGroup<DocumentPermissionFormGroupContent>({
       id: new FormControl(
@@ -95,10 +94,12 @@ export class DocumentPermissionFormService {
       ...this.getFormDefaults(),
       ...documentPermission,
     });
-    form.reset({
-      ...documentPermissionRawValue,
-      id: { value: documentPermissionRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentPermissionRawValue,
+        id: { value: documentPermissionRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentPermissionFormDefaults {

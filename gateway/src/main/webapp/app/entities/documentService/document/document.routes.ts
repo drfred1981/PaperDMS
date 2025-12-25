@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentResolve from './route/document-routing-resolve.service';
 
 const documentRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document').then(m => m.Document),
+    loadComponent: () => import('./list/document.component').then(m => m.DocumentComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-detail').then(m => m.DocumentDetail),
+    loadComponent: () => import('./detail/document-detail.component').then(m => m.DocumentDetailComponent),
     resolve: {
       document: DocumentResolve,
     },
@@ -24,7 +23,7 @@ const documentRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-update').then(m => m.DocumentUpdate),
+    loadComponent: () => import('./update/document-update.component').then(m => m.DocumentUpdateComponent),
     resolve: {
       document: DocumentResolve,
     },
@@ -32,7 +31,7 @@ const documentRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-update').then(m => m.DocumentUpdate),
+    loadComponent: () => import('./update/document-update.component').then(m => m.DocumentUpdateComponent),
     resolve: {
       document: DocumentResolve,
     },

@@ -1,7 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { SimilarityAlgorithm } from 'app/entities/enumerations/similarity-algorithm.model';
 import { ISimilarityJob } from 'app/entities/similarityService/similarity-job/similarity-job.model';
+import { SimilarityAlgorithm } from 'app/entities/enumerations/similarity-algorithm.model';
 
 export interface IDocumentSimilarity {
   id: number;

@@ -5,7 +5,7 @@ import { INotificationEvent, NewNotificationEvent } from './notification-event.m
 export const sampleWithRequiredData: INotificationEvent = {
   id: 8411,
   eventType: 'tedious',
-  eventDate: dayjs('2025-12-19T22:07'),
+  eventDate: dayjs('2025-12-24T17:06'),
   processed: false,
 };
 
@@ -13,9 +13,9 @@ export const sampleWithPartialData: INotificationEvent = {
   id: 15550,
   eventType: 'brilliant orientate whenever',
   userId: 'by quicker innocently',
-  eventDate: dayjs('2025-12-19T19:57'),
+  eventDate: dayjs('2025-12-24T14:56'),
   processed: true,
-  processedDate: dayjs('2025-12-20T15:01'),
+  processedDate: dayjs('2025-12-25T10:00'),
 };
 
 export const sampleWithFullData: INotificationEvent = {
@@ -25,14 +25,14 @@ export const sampleWithFullData: INotificationEvent = {
   entityId: 19346,
   userId: 'provided although expensive',
   eventData: '../fake-data/blob/hipster.txt',
-  eventDate: dayjs('2025-12-20T11:38'),
+  eventDate: dayjs('2025-12-25T06:37'),
   processed: true,
-  processedDate: dayjs('2025-12-20T13:06'),
+  processedDate: dayjs('2025-12-25T08:05'),
 };
 
 export const sampleWithNewData: NewNotificationEvent = {
   eventType: 'oh frenetically rightfully',
-  eventDate: dayjs('2025-12-19T20:42'),
+  eventDate: dayjs('2025-12-24T15:41'),
   processed: false,
   id: null,
 };

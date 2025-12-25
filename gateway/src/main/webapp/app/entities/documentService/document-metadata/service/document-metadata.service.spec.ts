@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentMetadata } from '../document-metadata.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-metadata.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentMetadata Service', () => {
       it('should add a DocumentMetadata to an empty array', () => {
         const documentMetadata: IDocumentMetadata = sampleWithRequiredData;
         expectedResult = service.addDocumentMetadataToCollectionIfMissing([], documentMetadata);
-        expect(expectedResult).toEqual([documentMetadata]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentMetadata);
       });
 
       it('should not add a DocumentMetadata to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentMetadata Service', () => {
         const documentMetadata: IDocumentMetadata = sampleWithRequiredData;
         const documentMetadata2: IDocumentMetadata = sampleWithPartialData;
         expectedResult = service.addDocumentMetadataToCollectionIfMissing([], documentMetadata, documentMetadata2);
-        expect(expectedResult).toEqual([documentMetadata, documentMetadata2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentMetadata);
+        expect(expectedResult).toContain(documentMetadata2);
       });
 
       it('should accept null and undefined values', () => {
         const documentMetadata: IDocumentMetadata = sampleWithRequiredData;
         expectedResult = service.addDocumentMetadataToCollectionIfMissing([], null, documentMetadata, undefined);
-        expect(expectedResult).toEqual([documentMetadata]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentMetadata);
       });
 
       it('should return initial array if no DocumentMetadata is added', () => {

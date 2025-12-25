@@ -5,7 +5,7 @@ import { ISystemMetric, NewSystemMetric } from './system-metric.model';
 export const sampleWithRequiredData: ISystemMetric = {
   id: 20012,
   metricName: 'misjudge humiliating until',
-  timestamp: dayjs('2025-12-19T22:43'),
+  timestamp: dayjs('2025-12-24T17:42'),
 };
 
 export const sampleWithPartialData: ISystemMetric = {
@@ -14,7 +14,7 @@ export const sampleWithPartialData: ISystemMetric = {
   memoryUsage: 3614.46,
   networkOut: 25689,
   activeConnections: 15562,
-  timestamp: dayjs('2025-12-20T13:00'),
+  timestamp: dayjs('2025-12-25T07:59'),
 };
 
 export const sampleWithFullData: ISystemMetric = {
@@ -26,12 +26,12 @@ export const sampleWithFullData: ISystemMetric = {
   networkIn: 17591,
   networkOut: 27975,
   activeConnections: 26456,
-  timestamp: dayjs('2025-12-20T03:58'),
+  timestamp: dayjs('2025-12-24T22:57'),
 };
 
 export const sampleWithNewData: NewSystemMetric = {
   metricName: 'conversation furthermore chip',
-  timestamp: dayjs('2025-12-20T08:22'),
+  timestamp: dayjs('2025-12-25T03:21'),
   id: null,
 };
 

@@ -22,7 +22,7 @@ public class RedisTestContainer implements InitializingBean, DisposableBean {
     @Override
     public void afterPropertiesSet() {
         if (null == redisContainer) {
-            redisContainer = new GenericContainer("redis:8.4.0")
+            redisContainer = new GenericContainer("redis:8.0.0")
                 .withExposedPorts(6379)
                 .withLogConsumer(new Slf4jLogConsumer(LOG))
                 .withReuse(true);

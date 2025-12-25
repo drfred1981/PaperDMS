@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IInvoiceLine } from '../invoice-line.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../invoice-line.test-samples';
@@ -100,7 +100,8 @@ describe('InvoiceLine Service', () => {
       it('should add a InvoiceLine to an empty array', () => {
         const invoiceLine: IInvoiceLine = sampleWithRequiredData;
         expectedResult = service.addInvoiceLineToCollectionIfMissing([], invoiceLine);
-        expect(expectedResult).toEqual([invoiceLine]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(invoiceLine);
       });
 
       it('should not add a InvoiceLine to an array that contains it', () => {
@@ -134,13 +135,16 @@ describe('InvoiceLine Service', () => {
         const invoiceLine: IInvoiceLine = sampleWithRequiredData;
         const invoiceLine2: IInvoiceLine = sampleWithPartialData;
         expectedResult = service.addInvoiceLineToCollectionIfMissing([], invoiceLine, invoiceLine2);
-        expect(expectedResult).toEqual([invoiceLine, invoiceLine2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(invoiceLine);
+        expect(expectedResult).toContain(invoiceLine2);
       });
 
       it('should accept null and undefined values', () => {
         const invoiceLine: IInvoiceLine = sampleWithRequiredData;
         expectedResult = service.addInvoiceLineToCollectionIfMissing([], null, invoiceLine, undefined);
-        expect(expectedResult).toEqual([invoiceLine]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(invoiceLine);
       });
 
       it('should return initial array if no InvoiceLine is added', () => {

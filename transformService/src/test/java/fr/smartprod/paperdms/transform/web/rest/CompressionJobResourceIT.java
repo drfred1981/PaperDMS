@@ -87,7 +87,7 @@ class CompressionJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -481,15 +481,14 @@ class CompressionJobResourceIT {
         partialUpdatedCompressionJob.setId(compressionJob.getId());
 
         partialUpdatedCompressionJob
-            .documentId(UPDATED_DOCUMENT_ID)
             .quality(UPDATED_QUALITY)
             .targetSizeKb(UPDATED_TARGET_SIZE_KB)
-            .originalSize(UPDATED_ORIGINAL_SIZE)
             .compressedSize(UPDATED_COMPRESSED_SIZE)
-            .compressionRatio(UPDATED_COMPRESSION_RATIO)
-            .outputS3Key(UPDATED_OUTPUT_S_3_KEY)
             .outputDocumentId(UPDATED_OUTPUT_DOCUMENT_ID)
-            .endDate(UPDATED_END_DATE);
+            .startDate(UPDATED_START_DATE)
+            .errorMessage(UPDATED_ERROR_MESSAGE)
+            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restCompressionJobMockMvc
             .perform(

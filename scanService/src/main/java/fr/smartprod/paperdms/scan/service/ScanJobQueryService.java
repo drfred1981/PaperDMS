@@ -68,7 +68,7 @@ public class ScanJobQueryService extends QueryService<ScanJob> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<ScanJob> createSpecification(ScanJobCriteria criteria) {
-        Specification<ScanJob> specification = Specification.unrestricted();
+        Specification<ScanJob> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

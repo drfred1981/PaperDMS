@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import EmailAttachmentResolve from './route/email-attachment-routing-resolve.service';
 
 const emailAttachmentRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/email-attachment').then(m => m.EmailAttachment),
+    loadComponent: () => import('./list/email-attachment.component').then(m => m.EmailAttachmentComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const emailAttachmentRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/email-attachment-detail').then(m => m.EmailAttachmentDetail),
+    loadComponent: () => import('./detail/email-attachment-detail.component').then(m => m.EmailAttachmentDetailComponent),
     resolve: {
       emailAttachment: EmailAttachmentResolve,
     },
@@ -24,7 +23,7 @@ const emailAttachmentRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/email-attachment-update').then(m => m.EmailAttachmentUpdate),
+    loadComponent: () => import('./update/email-attachment-update.component').then(m => m.EmailAttachmentUpdateComponent),
     resolve: {
       emailAttachment: EmailAttachmentResolve,
     },
@@ -32,7 +31,7 @@ const emailAttachmentRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/email-attachment-update').then(m => m.EmailAttachmentUpdate),
+    loadComponent: () => import('./update/email-attachment-update.component').then(m => m.EmailAttachmentUpdateComponent),
     resolve: {
       emailAttachment: EmailAttachmentResolve,
     },

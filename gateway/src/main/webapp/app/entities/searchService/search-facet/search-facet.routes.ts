@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import SearchFacetResolve from './route/search-facet-routing-resolve.service';
 
 const searchFacetRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/search-facet').then(m => m.SearchFacet),
+    loadComponent: () => import('./list/search-facet.component').then(m => m.SearchFacetComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const searchFacetRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/search-facet-detail').then(m => m.SearchFacetDetail),
+    loadComponent: () => import('./detail/search-facet-detail.component').then(m => m.SearchFacetDetailComponent),
     resolve: {
       searchFacet: SearchFacetResolve,
     },
@@ -24,7 +23,7 @@ const searchFacetRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/search-facet-update').then(m => m.SearchFacetUpdate),
+    loadComponent: () => import('./update/search-facet-update.component').then(m => m.SearchFacetUpdateComponent),
     resolve: {
       searchFacet: SearchFacetResolve,
     },
@@ -32,7 +31,7 @@ const searchFacetRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/search-facet-update').then(m => m.SearchFacetUpdate),
+    loadComponent: () => import('./update/search-facet-update.component').then(m => m.SearchFacetUpdateComponent),
     resolve: {
       searchFacet: SearchFacetResolve,
     },

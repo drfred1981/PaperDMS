@@ -1,5 +1,5 @@
-import { FacetType } from 'app/entities/enumerations/facet-type.model';
 import { ISearchQuery } from 'app/entities/searchService/search-query/search-query.model';
+import { FacetType } from 'app/entities/enumerations/facet-type.model';
 
 export interface ISearchFacet {
   id: number;

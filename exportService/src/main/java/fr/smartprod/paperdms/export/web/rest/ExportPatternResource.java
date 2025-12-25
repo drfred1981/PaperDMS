@@ -37,7 +37,7 @@ public class ExportPatternResource {
 
     private static final String ENTITY_NAME = "exportServiceExportPattern";
 
-    @Value("${jhipster.clientApp.name:exportService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ExportPatternService exportPatternService;

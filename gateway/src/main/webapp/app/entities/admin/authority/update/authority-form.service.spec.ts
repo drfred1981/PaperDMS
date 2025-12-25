@@ -8,6 +8,7 @@ describe('Authority Form Service', () => {
   let service: AuthorityFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(AuthorityFormService);
   });
 
@@ -38,7 +39,7 @@ describe('Authority Form Service', () => {
       it('should return NewAuthority for default Authority initial value', () => {
         const formGroup = service.createAuthorityFormGroup(sampleWithNewData);
 
-        const authority = service.getAuthority(formGroup);
+        const authority = service.getAuthority(formGroup) as any;
 
         expect(authority).toMatchObject(sampleWithNewData);
       });
@@ -46,7 +47,7 @@ describe('Authority Form Service', () => {
       it('should return NewAuthority for empty Authority initial value', () => {
         const formGroup = service.createAuthorityFormGroup();
 
-        const authority = service.getAuthority(formGroup);
+        const authority = service.getAuthority(formGroup) as any;
 
         expect(authority).toMatchObject({});
       });
@@ -54,7 +55,7 @@ describe('Authority Form Service', () => {
       it('should return IAuthority', () => {
         const formGroup = service.createAuthorityFormGroup(sampleWithRequiredData);
 
-        const authority = service.getAuthority(formGroup);
+        const authority = service.getAuthority(formGroup) as any;
 
         expect(authority).toMatchObject(sampleWithRequiredData);
       });

@@ -8,6 +8,7 @@ describe('DocumentComment Form Service', () => {
   let service: DocumentCommentFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentCommentFormService);
   });
 
@@ -52,7 +53,7 @@ describe('DocumentComment Form Service', () => {
       it('should return NewDocumentComment for default DocumentComment initial value', () => {
         const formGroup = service.createDocumentCommentFormGroup(sampleWithNewData);
 
-        const documentComment = service.getDocumentComment(formGroup);
+        const documentComment = service.getDocumentComment(formGroup) as any;
 
         expect(documentComment).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('DocumentComment Form Service', () => {
       it('should return NewDocumentComment for empty DocumentComment initial value', () => {
         const formGroup = service.createDocumentCommentFormGroup();
 
-        const documentComment = service.getDocumentComment(formGroup);
+        const documentComment = service.getDocumentComment(formGroup) as any;
 
         expect(documentComment).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('DocumentComment Form Service', () => {
       it('should return IDocumentComment', () => {
         const formGroup = service.createDocumentCommentFormGroup(sampleWithRequiredData);
 
-        const documentComment = service.getDocumentComment(formGroup);
+        const documentComment = service.getDocumentComment(formGroup) as any;
 
         expect(documentComment).toMatchObject(sampleWithRequiredData);
       });

@@ -67,7 +67,7 @@ public class ScheduledReportQueryService extends QueryService<ScheduledReport> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<ScheduledReport> createSpecification(ScheduledReportCriteria criteria) {
-        Specification<ScheduledReport> specification = Specification.unrestricted();
+        Specification<ScheduledReport> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

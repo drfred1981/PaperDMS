@@ -35,7 +35,7 @@ public class ScannerConfigurationResource {
 
     private static final String ENTITY_NAME = "scanServiceScannerConfiguration";
 
-    @Value("${jhipster.clientApp.name:scanService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ScannerConfigurationService scannerConfigurationService;

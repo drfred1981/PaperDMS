@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ILanguageDetection } from '../language-detection.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../language-detection.test-samples';
@@ -101,7 +101,8 @@ describe('LanguageDetection Service', () => {
       it('should add a LanguageDetection to an empty array', () => {
         const languageDetection: ILanguageDetection = sampleWithRequiredData;
         expectedResult = service.addLanguageDetectionToCollectionIfMissing([], languageDetection);
-        expect(expectedResult).toEqual([languageDetection]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(languageDetection);
       });
 
       it('should not add a LanguageDetection to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('LanguageDetection Service', () => {
         const languageDetection: ILanguageDetection = sampleWithRequiredData;
         const languageDetection2: ILanguageDetection = sampleWithPartialData;
         expectedResult = service.addLanguageDetectionToCollectionIfMissing([], languageDetection, languageDetection2);
-        expect(expectedResult).toEqual([languageDetection, languageDetection2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(languageDetection);
+        expect(expectedResult).toContain(languageDetection2);
       });
 
       it('should accept null and undefined values', () => {
         const languageDetection: ILanguageDetection = sampleWithRequiredData;
         expectedResult = service.addLanguageDetectionToCollectionIfMissing([], null, languageDetection, undefined);
-        expect(expectedResult).toEqual([languageDetection]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(languageDetection);
       });
 
       it('should return initial array if no LanguageDetection is added', () => {

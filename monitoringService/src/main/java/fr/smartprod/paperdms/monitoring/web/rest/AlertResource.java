@@ -37,7 +37,7 @@ public class AlertResource {
 
     private static final String ENTITY_NAME = "monitoringServiceAlert";
 
-    @Value("${jhipster.clientApp.name:monitoringService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final AlertService alertService;

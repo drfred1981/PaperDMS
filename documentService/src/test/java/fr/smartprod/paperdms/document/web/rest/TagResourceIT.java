@@ -71,7 +71,7 @@ class TagResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/tags/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -871,11 +871,7 @@ class TagResourceIT {
         Tag partialUpdatedTag = new Tag();
         partialUpdatedTag.setId(tag.getId());
 
-        partialUpdatedTag
-            .description(UPDATED_DESCRIPTION)
-            .usageCount(UPDATED_USAGE_COUNT)
-            .isSystem(UPDATED_IS_SYSTEM)
-            .createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedTag.name(UPDATED_NAME).color(UPDATED_COLOR).createdDate(UPDATED_CREATED_DATE);
 
         restTagMockMvc
             .perform(

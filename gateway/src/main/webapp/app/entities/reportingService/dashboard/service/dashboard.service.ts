@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDashboard, NewDashboard } from '../dashboard.model';
 
 export type PartialUpdateDashboard = Partial<IDashboard> & Pick<IDashboard, 'id'>;
@@ -41,24 +41,20 @@ export class DashboardService {
   update(dashboard: IDashboard): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(dashboard);
     return this.http
-      .put<RestDashboard>(`${this.resourceUrl}/${encodeURIComponent(this.getDashboardIdentifier(dashboard))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestDashboard>(`${this.resourceUrl}/${this.getDashboardIdentifier(dashboard)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(dashboard: PartialUpdateDashboard): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(dashboard);
     return this.http
-      .patch<RestDashboard>(`${this.resourceUrl}/${encodeURIComponent(this.getDashboardIdentifier(dashboard))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestDashboard>(`${this.resourceUrl}/${this.getDashboardIdentifier(dashboard)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDashboard>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDashboard>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class DashboardService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDashboardIdentifier(dashboard: Pick<IDashboard, 'id'>): number {

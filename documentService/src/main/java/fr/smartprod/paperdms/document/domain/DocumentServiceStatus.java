@@ -1,18 +1,17 @@
 package fr.smartprod.paperdms.document.domain;
 
-import fr.smartprod.paperdms.common.enumeration.ServiceStatus;
-import fr.smartprod.paperdms.common.enumeration.ServiceType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceStatus;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * NOUVELLE ENTIT�: Permet de tracker le statut d'un document pour chaque service
- * Chaque ligne repr�sente l'�tat du document dans un service sp�cifique
+ * A DocumentServiceStatus.
  */
 @Entity
 @Table(name = "document_service_status")
@@ -21,7 +20,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class DocumentServiceStatus implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -48,34 +46,12 @@ public class DocumentServiceStatus implements Serializable {
 
     @Lob
     @Column(name = "status_details")
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String statusDetails;
 
     @Lob
     @Column(name = "error_message")
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String errorMessage;
 
     @Column(name = "retry_count")
@@ -96,18 +72,7 @@ public class DocumentServiceStatus implements Serializable {
 
     @Size(max = 100)
     @Column(name = "job_id", length = 100)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String jobId;
 
     @Column(name = "priority")
@@ -116,23 +81,17 @@ public class DocumentServiceStatus implements Serializable {
 
     @Size(max = 50)
     @Column(name = "updated_by", length = 50)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String updatedBy;
 
     @NotNull
     @Column(name = "updated_date", nullable = false)
     private Instant updatedDate;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties(value = { "folder", "documentType" }, allowSetters = true)
+    private Document document;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -329,6 +288,19 @@ public class DocumentServiceStatus implements Serializable {
 
     public void setUpdatedDate(Instant updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public Document getDocument() {
+        return this.document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+
+    public DocumentServiceStatus document(Document document) {
+        this.setDocument(document);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

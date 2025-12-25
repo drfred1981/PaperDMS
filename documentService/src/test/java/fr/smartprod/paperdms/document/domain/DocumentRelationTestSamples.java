@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class DocumentRelationTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static DocumentRelation getDocumentRelationSample1() {
         return new DocumentRelation().id(1L).sourceDocumentId(1L).targetDocumentId(1L).createdBy("createdBy1");

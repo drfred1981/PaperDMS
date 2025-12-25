@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISystemHealth, NewSystemHealth } from '../system-health.model';
 
@@ -46,10 +45,10 @@ export type SystemHealthFormGroup = FormGroup<SystemHealthFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SystemHealthFormService {
-  createSystemHealthFormGroup(systemHealth?: SystemHealthFormGroupInput): SystemHealthFormGroup {
+  createSystemHealthFormGroup(systemHealth: SystemHealthFormGroupInput = { id: null }): SystemHealthFormGroup {
     const systemHealthRawValue = this.convertSystemHealthToSystemHealthRawValue({
       ...this.getFormDefaults(),
-      ...(systemHealth ?? { id: null }),
+      ...systemHealth,
     });
     return new FormGroup<SystemHealthFormGroupContent>({
       id: new FormControl(
@@ -84,10 +83,12 @@ export class SystemHealthFormService {
 
   resetForm(form: SystemHealthFormGroup, systemHealth: SystemHealthFormGroupInput): void {
     const systemHealthRawValue = this.convertSystemHealthToSystemHealthRawValue({ ...this.getFormDefaults(), ...systemHealth });
-    form.reset({
-      ...systemHealthRawValue,
-      id: { value: systemHealthRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...systemHealthRawValue,
+        id: { value: systemHealthRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SystemHealthFormDefaults {

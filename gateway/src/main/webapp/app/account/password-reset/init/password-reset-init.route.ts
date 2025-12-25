@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
 
-import PasswordResetInit from './password-reset-init';
+import PasswordResetInitComponent from './password-reset-init.component';
 
 const passwordResetInitRoute: Route = {
   path: 'reset/request',
-  component: PasswordResetInit,
+  component: PasswordResetInitComponent,
   title: 'global.menu.account.password',
 };
 

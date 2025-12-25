@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (maintenanceTask(); as maintenanceTaskRef) {
+      <div>
+        <h2 data-cy="maintenanceTaskDetailsHeading">
+          <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.detail.title">Maintenance Task</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.name">Name</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.description">Description</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.taskType">Task Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.MaintenanceType.' + (maintenanceTaskRef.taskType ?? 'null')">{{
+              {
+                null: '',
+                CLEANUP_DELETED: 'CLEANUP_DELETED',
+                REBUILD_INDEX: 'REBUILD_INDEX',
+                OPTIMIZE_STORAGE: 'OPTIMIZE_STORAGE',
+                VERIFY_CHECKSUMS: 'VERIFY_CHECKSUMS',
+                EXPIRE_TEMP_FILES: 'EXPIRE_TEMP_FILES',
+                PRUNE_AUDIT_LOGS: 'PRUNE_AUDIT_LOGS',
+                UPDATE_STATISTICS: 'UPDATE_STATISTICS',
+                VACUUM_DATABASE: 'VACUUM_DATABASE',
+                ROTATE_LOGS: 'ROTATE_LOGS',
+                BACKUP_DATABASE: 'BACKUP_DATABASE',
+              }[maintenanceTaskRef.taskType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.schedule">Schedule</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.schedule }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (maintenanceTaskRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                maintenanceTaskRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.lastRun">Last Run</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.lastRun | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.nextRun">Next Run</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.nextRun | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.duration">Duration</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.duration }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.recordsProcessed">Records Processed</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.recordsProcessed }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ maintenanceTaskRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/maintenance-task', maintenanceTaskRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

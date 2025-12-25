@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IDocumentServiceStatus = {
   documentId: 29512,
   serviceType: 'WORKFLOW_SERVICE',
   status: 'COMPLETED',
-  updatedDate: dayjs('2025-12-19T20:29'),
+  updatedDate: dayjs('2025-12-24T15:28'),
 };
 
 export const sampleWithPartialData: IDocumentServiceStatus = {
@@ -20,7 +20,7 @@ export const sampleWithPartialData: IDocumentServiceStatus = {
   processingDuration: 2628,
   priority: 21963,
   updatedBy: 'lyre digitize hence',
-  updatedDate: dayjs('2025-12-19T20:33'),
+  updatedDate: dayjs('2025-12-24T15:32'),
 };
 
 export const sampleWithFullData: IDocumentServiceStatus = {
@@ -31,21 +31,21 @@ export const sampleWithFullData: IDocumentServiceStatus = {
   statusDetails: '../fake-data/blob/hipster.txt',
   errorMessage: '../fake-data/blob/hipster.txt',
   retryCount: 24704,
-  lastProcessedDate: dayjs('2025-12-20T14:19'),
-  processingStartDate: dayjs('2025-12-20T08:12'),
-  processingEndDate: dayjs('2025-12-20T13:57'),
+  lastProcessedDate: dayjs('2025-12-25T09:18'),
+  processingStartDate: dayjs('2025-12-25T03:11'),
+  processingEndDate: dayjs('2025-12-25T08:56'),
   processingDuration: 22878,
   jobId: 'gadzooks where',
   priority: 17692,
   updatedBy: 'mediocre provision psst',
-  updatedDate: dayjs('2025-12-19T22:00'),
+  updatedDate: dayjs('2025-12-24T16:59'),
 };
 
 export const sampleWithNewData: NewDocumentServiceStatus = {
   documentId: 18601,
   serviceType: 'BUSINESS_SERVICE',
   status: 'IN_PROGRESS',
-  updatedDate: dayjs('2025-12-20T01:06'),
+  updatedDate: dayjs('2025-12-24T20:05'),
   id: null,
 };
 

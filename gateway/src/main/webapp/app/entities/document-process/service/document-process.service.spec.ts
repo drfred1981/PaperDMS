@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentProcess } from '../document-process.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-process.test-samples';
@@ -114,7 +114,8 @@ describe('DocumentProcess Service', () => {
       it('should add a DocumentProcess to an empty array', () => {
         const documentProcess: IDocumentProcess = sampleWithRequiredData;
         expectedResult = service.addDocumentProcessToCollectionIfMissing([], documentProcess);
-        expect(expectedResult).toEqual([documentProcess]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentProcess);
       });
 
       it('should not add a DocumentProcess to an array that contains it', () => {
@@ -148,13 +149,16 @@ describe('DocumentProcess Service', () => {
         const documentProcess: IDocumentProcess = sampleWithRequiredData;
         const documentProcess2: IDocumentProcess = sampleWithPartialData;
         expectedResult = service.addDocumentProcessToCollectionIfMissing([], documentProcess, documentProcess2);
-        expect(expectedResult).toEqual([documentProcess, documentProcess2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentProcess);
+        expect(expectedResult).toContain(documentProcess2);
       });
 
       it('should accept null and undefined values', () => {
         const documentProcess: IDocumentProcess = sampleWithRequiredData;
         expectedResult = service.addDocumentProcessToCollectionIfMissing([], null, documentProcess, undefined);
-        expect(expectedResult).toEqual([documentProcess]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentProcess);
       });
 
       it('should return initial array if no DocumentProcess is added', () => {

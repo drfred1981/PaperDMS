@@ -65,22 +65,20 @@ public class TransformServiceApp {
      * @param args the command line arguments.
      */
     public static void main(String[] args) {
-        var app = new SpringApplication(TransformServiceApp.class);
+        SpringApplication app = new SpringApplication(TransformServiceApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
     }
 
     private static void logApplicationStartup(Environment env) {
-        String protocol = Optional.ofNullable(env.getProperty("server.ssl.key-store"))
-            .map(key -> "https")
-            .orElse("http");
+        String protocol = Optional.ofNullable(env.getProperty("server.ssl.key-store")).map(key -> "https").orElse("http");
         String applicationName = env.getProperty("spring.application.name");
         String serverPort = env.getProperty("server.port");
         String contextPath = Optional.ofNullable(env.getProperty("server.servlet.context-path"))
             .filter(StringUtils::isNotBlank)
             .orElse("/");
-        var hostAddress = "localhost";
+        String hostAddress = "localhost";
         try {
             hostAddress = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
@@ -114,7 +112,7 @@ public class TransformServiceApp {
         LOG.info(
             CRLFLogConverter.CRLF_SAFE_MARKER,
             "\n----------------------------------------------------------\n\t" +
-                "Config Server: \t{}\n----------------------------------------------------------",
+            "Config Server: \t{}\n----------------------------------------------------------",
             configServerStatus
         );
     }

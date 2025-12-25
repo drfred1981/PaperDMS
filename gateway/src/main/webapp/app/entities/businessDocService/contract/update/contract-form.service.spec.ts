@@ -8,6 +8,7 @@ describe('Contract Form Service', () => {
   let service: ContractFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ContractFormService);
   });
 
@@ -64,7 +65,7 @@ describe('Contract Form Service', () => {
       it('should return NewContract for default Contract initial value', () => {
         const formGroup = service.createContractFormGroup(sampleWithNewData);
 
-        const contract = service.getContract(formGroup);
+        const contract = service.getContract(formGroup) as any;
 
         expect(contract).toMatchObject(sampleWithNewData);
       });
@@ -72,7 +73,7 @@ describe('Contract Form Service', () => {
       it('should return NewContract for empty Contract initial value', () => {
         const formGroup = service.createContractFormGroup();
 
-        const contract = service.getContract(formGroup);
+        const contract = service.getContract(formGroup) as any;
 
         expect(contract).toMatchObject({});
       });
@@ -80,7 +81,7 @@ describe('Contract Form Service', () => {
       it('should return IContract', () => {
         const formGroup = service.createContractFormGroup(sampleWithRequiredData);
 
-        const contract = service.getContract(formGroup);
+        const contract = service.getContract(formGroup) as any;
 
         expect(contract).toMatchObject(sampleWithRequiredData);
       });

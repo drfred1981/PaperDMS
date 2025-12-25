@@ -4,7 +4,6 @@ import fr.smartprod.paperdms.ai.domain.enumeration.CorrespondentRole;
 import fr.smartprod.paperdms.ai.domain.enumeration.CorrespondentType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import org.hibernate.annotations.Cache;
@@ -20,7 +19,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Correspondent implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -32,82 +30,27 @@ public class Correspondent implements Serializable {
     @NotNull
     @Size(max = 255)
     @Column(name = "name", length = 255, nullable = false)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String name;
 
     @Size(max = 255)
     @Column(name = "email", length = 255)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String email;
 
     @Size(max = 50)
     @Column(name = "phone", length = 50)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String phone;
 
     @Lob
     @Column(name = "address")
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String address;
 
     @Size(max = 255)
     @Column(name = "company", length = 255)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String company;
 
     @Enumerated(EnumType.STRING)
@@ -132,18 +75,7 @@ public class Correspondent implements Serializable {
 
     @Size(max = 50)
     @Column(name = "verified_by", length = 50)
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String verifiedBy;
 
     @Column(name = "verified_date")
@@ -151,18 +83,7 @@ public class Correspondent implements Serializable {
 
     @Lob
     @Column(name = "metadata")
-    @org.springframework.data.elasticsearch.annotations.MultiField(
-        mainField = @org.springframework.data.elasticsearch.annotations.Field(
-            type = org.springframework.data.elasticsearch.annotations.FieldType.Text
-        ),
-        otherFields = {
-            @org.springframework.data.elasticsearch.annotations.InnerField(
-                suffix = "keyword",
-                type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword,
-                ignoreAbove = 256
-            ),
-        }
-    )
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String metadata;
 
     @NotNull

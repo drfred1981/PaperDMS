@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IDocumentType } from 'app/entities/documentService/document-type/document-type.model';
 import { MetadataType } from 'app/entities/enumerations/metadata-type.model';
 

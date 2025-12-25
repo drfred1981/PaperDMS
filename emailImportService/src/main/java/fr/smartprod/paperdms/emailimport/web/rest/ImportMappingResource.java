@@ -35,7 +35,7 @@ public class ImportMappingResource {
 
     private static final String ENTITY_NAME = "emailImportServiceImportMapping";
 
-    @Value("${jhipster.clientApp.name:emailImportService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ImportMappingService importMappingService;

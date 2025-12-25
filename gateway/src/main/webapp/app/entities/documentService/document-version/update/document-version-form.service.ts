@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentVersion, NewDocumentVersion } from '../document-version.model';
 
@@ -46,10 +45,10 @@ export type DocumentVersionFormGroup = FormGroup<DocumentVersionFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class DocumentVersionFormService {
-  createDocumentVersionFormGroup(documentVersion?: DocumentVersionFormGroupInput): DocumentVersionFormGroup {
+  createDocumentVersionFormGroup(documentVersion: DocumentVersionFormGroupInput = { id: null }): DocumentVersionFormGroup {
     const documentVersionRawValue = this.convertDocumentVersionToDocumentVersionRawValue({
       ...this.getFormDefaults(),
-      ...(documentVersion ?? { id: null }),
+      ...documentVersion,
     });
     return new FormGroup<DocumentVersionFormGroupContent>({
       id: new FormControl(
@@ -94,10 +93,12 @@ export class DocumentVersionFormService {
 
   resetForm(form: DocumentVersionFormGroup, documentVersion: DocumentVersionFormGroupInput): void {
     const documentVersionRawValue = this.convertDocumentVersionToDocumentVersionRawValue({ ...this.getFormDefaults(), ...documentVersion });
-    form.reset({
-      ...documentVersionRawValue,
-      id: { value: documentVersionRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentVersionRawValue,
+        id: { value: documentVersionRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentVersionFormDefaults {

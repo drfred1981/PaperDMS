@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IAlertRule, NewAlertRule } from '../alert-rule.model';
 
 export type PartialUpdateAlertRule = Partial<IAlertRule> & Pick<IAlertRule, 'id'>;
@@ -42,24 +42,20 @@ export class AlertRuleService {
   update(alertRule: IAlertRule): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(alertRule);
     return this.http
-      .put<RestAlertRule>(`${this.resourceUrl}/${encodeURIComponent(this.getAlertRuleIdentifier(alertRule))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestAlertRule>(`${this.resourceUrl}/${this.getAlertRuleIdentifier(alertRule)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(alertRule: PartialUpdateAlertRule): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(alertRule);
     return this.http
-      .patch<RestAlertRule>(`${this.resourceUrl}/${encodeURIComponent(this.getAlertRuleIdentifier(alertRule))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestAlertRule>(`${this.resourceUrl}/${this.getAlertRuleIdentifier(alertRule)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestAlertRule>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestAlertRule>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +67,7 @@ export class AlertRuleService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getAlertRuleIdentifier(alertRule: Pick<IAlertRule, 'id'>): number {

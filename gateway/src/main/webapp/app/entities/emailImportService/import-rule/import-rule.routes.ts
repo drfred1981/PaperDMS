@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ImportRuleResolve from './route/import-rule-routing-resolve.service';
 
 const importRuleRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/import-rule').then(m => m.ImportRule),
+    loadComponent: () => import('./list/import-rule.component').then(m => m.ImportRuleComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const importRuleRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/import-rule-detail').then(m => m.ImportRuleDetail),
+    loadComponent: () => import('./detail/import-rule-detail.component').then(m => m.ImportRuleDetailComponent),
     resolve: {
       importRule: ImportRuleResolve,
     },
@@ -24,7 +23,7 @@ const importRuleRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/import-rule-update').then(m => m.ImportRuleUpdate),
+    loadComponent: () => import('./update/import-rule-update.component').then(m => m.ImportRuleUpdateComponent),
     resolve: {
       importRule: ImportRuleResolve,
     },
@@ -32,7 +31,7 @@ const importRuleRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/import-rule-update').then(m => m.ImportRuleUpdate),
+    loadComponent: () => import('./update/import-rule-update.component').then(m => m.ImportRuleUpdateComponent),
     resolve: {
       importRule: ImportRuleResolve,
     },

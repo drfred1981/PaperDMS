@@ -35,7 +35,7 @@ public class WebhookLogResource {
 
     private static final String ENTITY_NAME = "notificationServiceWebhookLog";
 
-    @Value("${jhipster.clientApp.name:notificationService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final WebhookLogService webhookLogService;

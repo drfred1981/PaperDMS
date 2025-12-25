@@ -1,4 +1,4 @@
-export interface MetricsModel {
+export interface Metrics {
   jvm: Record<string, JvmMetrics>;
   databases: Databases;
   'http.server.requests': HttpServerRequests;

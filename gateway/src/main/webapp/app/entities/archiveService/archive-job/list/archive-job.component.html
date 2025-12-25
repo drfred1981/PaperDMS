@@ -1,0 +1,258 @@
+<div>
+  <h2 id="page-heading" data-cy="ArchiveJobHeading">
+    <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.home.title">Archive Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-archive-job"
+        [routerLink]="['/archive-job/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.home.createLabel">Create a new Archive Job</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (archiveJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.home.notFound">No Archive Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentQuery">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.documentQuery">Document Query</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="archiveFormat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveFormat">Archive Format</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="compressionLevel">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.compressionLevel">Compression Level</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="encryptionEnabled">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.encryptionEnabled">Encryption Enabled</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="encryptionAlgorithm">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.encryptionAlgorithm">Encryption Algorithm</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="password">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.password">Password</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3ArchiveKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.s3ArchiveKey">S 3 Archive Key</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="archiveSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveSha256">Archive Sha 256</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="archiveSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveSize">Archive Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.documentCount">Document Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.errorMessage">Error Message</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.archiveServiceArchiveJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (archiveJob of archiveJobs(); track trackId(archiveJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/archive-job', archiveJob.id, 'view']">{{ archiveJob.id }}</a>
+              </td>
+              <td>{{ archiveJob.name }}</td>
+              <td>{{ archiveJob.description }}</td>
+              <td>{{ archiveJob.documentQuery }}</td>
+              <td [jhiTranslate]="'gatewayApp.ArchiveFormat.' + (archiveJob.archiveFormat ?? 'null')">
+                {{
+                  { null: '', ZIP: 'ZIP', TAR: 'TAR', TAR_GZ: 'TAR_GZ', TAR_BZ2: 'TAR_BZ2', TAR_XZ: 'TAR_XZ', SEVEN_ZIP: 'SEVEN_ZIP' }[
+                    archiveJob.archiveFormat ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ archiveJob.compressionLevel }}</td>
+              <td>{{ archiveJob.encryptionEnabled }}</td>
+              <td>{{ archiveJob.encryptionAlgorithm }}</td>
+              <td>{{ archiveJob.password }}</td>
+              <td>{{ archiveJob.s3ArchiveKey }}</td>
+              <td>{{ archiveJob.archiveSha256 }}</td>
+              <td>{{ archiveJob.archiveSize }}</td>
+              <td>{{ archiveJob.documentCount }}</td>
+              <td [jhiTranslate]="'gatewayApp.ArchiveStatus.' + (archiveJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    ARCHIVING: 'ARCHIVING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[archiveJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ archiveJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ archiveJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ archiveJob.errorMessage }}</td>
+              <td>{{ archiveJob.createdBy }}</td>
+              <td>{{ archiveJob.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/archive-job', archiveJob.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/archive-job', archiveJob.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(archiveJob)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (archiveJobs().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

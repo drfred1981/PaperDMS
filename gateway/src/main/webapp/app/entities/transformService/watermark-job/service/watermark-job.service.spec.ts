@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IWatermarkJob } from '../watermark-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../watermark-job.test-samples';
@@ -103,7 +103,8 @@ describe('WatermarkJob Service', () => {
       it('should add a WatermarkJob to an empty array', () => {
         const watermarkJob: IWatermarkJob = sampleWithRequiredData;
         expectedResult = service.addWatermarkJobToCollectionIfMissing([], watermarkJob);
-        expect(expectedResult).toEqual([watermarkJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(watermarkJob);
       });
 
       it('should not add a WatermarkJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('WatermarkJob Service', () => {
         const watermarkJob: IWatermarkJob = sampleWithRequiredData;
         const watermarkJob2: IWatermarkJob = sampleWithPartialData;
         expectedResult = service.addWatermarkJobToCollectionIfMissing([], watermarkJob, watermarkJob2);
-        expect(expectedResult).toEqual([watermarkJob, watermarkJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(watermarkJob);
+        expect(expectedResult).toContain(watermarkJob2);
       });
 
       it('should accept null and undefined values', () => {
         const watermarkJob: IWatermarkJob = sampleWithRequiredData;
         expectedResult = service.addWatermarkJobToCollectionIfMissing([], null, watermarkJob, undefined);
-        expect(expectedResult).toEqual([watermarkJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(watermarkJob);
       });
 
       it('should return initial array if no WatermarkJob is added', () => {

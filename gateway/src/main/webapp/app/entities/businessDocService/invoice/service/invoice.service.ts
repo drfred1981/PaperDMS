@@ -1,15 +1,16 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IInvoice, NewInvoice } from '../invoice.model';
 
 export type PartialUpdateInvoice = Partial<IInvoice> & Pick<IInvoice, 'id'>;
@@ -48,20 +49,20 @@ export class InvoiceService {
   update(invoice: IInvoice): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(invoice);
     return this.http
-      .put<RestInvoice>(`${this.resourceUrl}/${encodeURIComponent(this.getInvoiceIdentifier(invoice))}`, copy, { observe: 'response' })
+      .put<RestInvoice>(`${this.resourceUrl}/${this.getInvoiceIdentifier(invoice)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(invoice: PartialUpdateInvoice): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(invoice);
     return this.http
-      .patch<RestInvoice>(`${this.resourceUrl}/${encodeURIComponent(this.getInvoiceIdentifier(invoice))}`, copy, { observe: 'response' })
+      .patch<RestInvoice>(`${this.resourceUrl}/${this.getInvoiceIdentifier(invoice)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestInvoice>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestInvoice>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -73,7 +74,7 @@ export class InvoiceService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

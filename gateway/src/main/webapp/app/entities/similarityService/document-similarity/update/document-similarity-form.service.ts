@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentSimilarity, NewDocumentSimilarity } from '../document-similarity.model';
 
@@ -49,10 +48,10 @@ export type DocumentSimilarityFormGroup = FormGroup<DocumentSimilarityFormGroupC
 
 @Injectable({ providedIn: 'root' })
 export class DocumentSimilarityFormService {
-  createDocumentSimilarityFormGroup(documentSimilarity?: DocumentSimilarityFormGroupInput): DocumentSimilarityFormGroup {
+  createDocumentSimilarityFormGroup(documentSimilarity: DocumentSimilarityFormGroupInput = { id: null }): DocumentSimilarityFormGroup {
     const documentSimilarityRawValue = this.convertDocumentSimilarityToDocumentSimilarityRawValue({
       ...this.getFormDefaults(),
-      ...(documentSimilarity ?? { id: null }),
+      ...documentSimilarity,
     });
     return new FormGroup<DocumentSimilarityFormGroupContent>({
       id: new FormControl(
@@ -96,10 +95,12 @@ export class DocumentSimilarityFormService {
       ...this.getFormDefaults(),
       ...documentSimilarity,
     });
-    form.reset({
-      ...documentSimilarityRawValue,
-      id: { value: documentSimilarityRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentSimilarityRawValue,
+        id: { value: documentSimilarityRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentSimilarityFormDefaults {

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { ICorrespondentExtraction, NewCorrespondentExtraction } from '../correspondent-extraction.model';
 
 export type PartialUpdateCorrespondentExtraction = Partial<ICorrespondentExtraction> & Pick<ICorrespondentExtraction, 'id'>;
@@ -43,11 +43,9 @@ export class CorrespondentExtractionService {
   update(correspondentExtraction: ICorrespondentExtraction): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(correspondentExtraction);
     return this.http
-      .put<RestCorrespondentExtraction>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getCorrespondentExtractionIdentifier(correspondentExtraction))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestCorrespondentExtraction>(`${this.resourceUrl}/${this.getCorrespondentExtractionIdentifier(correspondentExtraction)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -55,7 +53,7 @@ export class CorrespondentExtractionService {
     const copy = this.convertDateFromClient(correspondentExtraction);
     return this.http
       .patch<RestCorrespondentExtraction>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getCorrespondentExtractionIdentifier(correspondentExtraction))}`,
+        `${this.resourceUrl}/${this.getCorrespondentExtractionIdentifier(correspondentExtraction)}`,
         copy,
         { observe: 'response' },
       )
@@ -64,7 +62,7 @@ export class CorrespondentExtractionService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestCorrespondentExtraction>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestCorrespondentExtraction>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -76,7 +74,7 @@ export class CorrespondentExtractionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getCorrespondentExtractionIdentifier(correspondentExtraction: Pick<ICorrespondentExtraction, 'id'>): number {

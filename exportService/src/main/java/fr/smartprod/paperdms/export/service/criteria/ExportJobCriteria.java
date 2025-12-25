@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.export.service.criteria;
 
 import fr.smartprod.paperdms.export.domain.enumeration.ExportFormat;
 import fr.smartprod.paperdms.export.domain.enumeration.ExportStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class ExportJobCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

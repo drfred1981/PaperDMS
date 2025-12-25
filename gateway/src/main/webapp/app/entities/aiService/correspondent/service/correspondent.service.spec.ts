@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ICorrespondent } from '../correspondent.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../correspondent.test-samples';
@@ -116,7 +116,8 @@ describe('Correspondent Service', () => {
       it('should add a Correspondent to an empty array', () => {
         const correspondent: ICorrespondent = sampleWithRequiredData;
         expectedResult = service.addCorrespondentToCollectionIfMissing([], correspondent);
-        expect(expectedResult).toEqual([correspondent]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(correspondent);
       });
 
       it('should not add a Correspondent to an array that contains it', () => {
@@ -150,13 +151,16 @@ describe('Correspondent Service', () => {
         const correspondent: ICorrespondent = sampleWithRequiredData;
         const correspondent2: ICorrespondent = sampleWithPartialData;
         expectedResult = service.addCorrespondentToCollectionIfMissing([], correspondent, correspondent2);
-        expect(expectedResult).toEqual([correspondent, correspondent2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(correspondent);
+        expect(expectedResult).toContain(correspondent2);
       });
 
       it('should accept null and undefined values', () => {
         const correspondent: ICorrespondent = sampleWithRequiredData;
         expectedResult = service.addCorrespondentToCollectionIfMissing([], null, correspondent, undefined);
-        expect(expectedResult).toEqual([correspondent]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(correspondent);
       });
 
       it('should return initial array if no Correspondent is added', () => {

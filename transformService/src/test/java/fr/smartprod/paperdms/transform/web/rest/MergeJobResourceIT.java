@@ -83,7 +83,7 @@ class MergeJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -454,12 +454,7 @@ class MergeJobResourceIT {
         MergeJob partialUpdatedMergeJob = new MergeJob();
         partialUpdatedMergeJob.setId(mergeJob.getId());
 
-        partialUpdatedMergeJob
-            .includeToc(UPDATED_INCLUDE_TOC)
-            .addPageNumbers(UPDATED_ADD_PAGE_NUMBERS)
-            .outputS3Key(UPDATED_OUTPUT_S_3_KEY)
-            .outputDocumentId(UPDATED_OUTPUT_DOCUMENT_ID)
-            .createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedMergeJob.outputDocumentId(UPDATED_OUTPUT_DOCUMENT_ID).endDate(UPDATED_END_DATE).errorMessage(UPDATED_ERROR_MESSAGE);
 
         restMergeJobMockMvc
             .perform(

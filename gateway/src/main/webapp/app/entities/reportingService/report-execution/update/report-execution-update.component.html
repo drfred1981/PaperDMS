@@ -1,0 +1,231 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-report-execution-heading"
+        data-cy="ReportExecutionCreateUpdateHeading"
+        jhiTranslate="gatewayApp.reportingServiceReportExecution.home.createOrEditLabel"
+      >
+        Create or edit a Report Execution
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.reportingServiceReportExecution.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let scheduledReportIdRef = editForm.get('scheduledReportId')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_scheduledReportId"
+            jhiTranslate="gatewayApp.reportingServiceReportExecution.scheduledReportId"
+            >Scheduled Report Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="scheduledReportId"
+            id="field_scheduledReportId"
+            data-cy="scheduledReportId"
+            formControlName="scheduledReportId"
+          />
+          @if (scheduledReportIdRef.invalid && (scheduledReportIdRef.dirty || scheduledReportIdRef.touched)) {
+            <div>
+              @if (editForm.get('scheduledReportId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('scheduledReportId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.reportingServiceReportExecution.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.ReportExecutionStatus.null' | translate }}</option>
+            @for (reportExecutionStatus of reportExecutionStatusValues; track $index) {
+              <option [value]="reportExecutionStatus">{{ 'gatewayApp.ReportExecutionStatus.' + reportExecutionStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let startDateRef = editForm.get('startDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" jhiTranslate="gatewayApp.reportingServiceReportExecution.startDate"
+            >Start Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (startDateRef.invalid && (startDateRef.dirty || startDateRef.touched)) {
+            <div>
+              @if (editForm.get('startDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('startDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="gatewayApp.reportingServiceReportExecution.endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_recordsProcessed" jhiTranslate="gatewayApp.reportingServiceReportExecution.recordsProcessed"
+            >Records Processed</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="recordsProcessed"
+            id="field_recordsProcessed"
+            data-cy="recordsProcessed"
+            formControlName="recordsProcessed"
+          />
+        </div>
+
+        @let outputS3KeyRef = editForm.get('outputS3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_outputS3Key" jhiTranslate="gatewayApp.reportingServiceReportExecution.outputS3Key"
+            >Output S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="outputS3Key"
+            id="field_outputS3Key"
+            data-cy="outputS3Key"
+            formControlName="outputS3Key"
+          />
+          @if (outputS3KeyRef.invalid && (outputS3KeyRef.dirty || outputS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('outputS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_outputSize" jhiTranslate="gatewayApp.reportingServiceReportExecution.outputSize"
+            >Output Size</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="outputSize"
+            id="field_outputSize"
+            data-cy="outputSize"
+            formControlName="outputSize"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_errorMessage" jhiTranslate="gatewayApp.reportingServiceReportExecution.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_scheduledReport" jhiTranslate="gatewayApp.reportingServiceReportExecution.scheduledReport"
+            >Scheduled Report</label
+          >
+          <select
+            class="form-control"
+            id="field_scheduledReport"
+            data-cy="scheduledReport"
+            name="scheduledReport"
+            formControlName="scheduledReport"
+            [compareWith]="compareScheduledReport"
+          >
+            @if (!editForm.get('scheduledReport')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (scheduledReportOption of scheduledReportsSharedCollection; track $index) {
+              <option [ngValue]="scheduledReportOption">{{ scheduledReportOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['scheduledReport'])!.invalid &&
+          (editForm.get(['scheduledReport'])!.dirty || editForm.get(['scheduledReport'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['scheduledReport'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

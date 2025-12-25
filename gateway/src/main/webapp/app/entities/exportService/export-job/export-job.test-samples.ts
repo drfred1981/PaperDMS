@@ -12,7 +12,7 @@ export const sampleWithRequiredData: IExportJob = {
   includeVersions: false,
   status: 'COMPLETED',
   createdBy: 'suffice although',
-  createdDate: dayjs('2025-12-20T01:06'),
+  createdDate: dayjs('2025-12-24T20:05'),
 };
 
 export const sampleWithPartialData: IExportJob = {
@@ -29,10 +29,10 @@ export const sampleWithPartialData: IExportJob = {
   documentCount: 25897,
   filesGenerated: 9299,
   status: 'CANCELLED',
-  startDate: dayjs('2025-12-20T10:22'),
-  endDate: dayjs('2025-12-19T23:18'),
+  startDate: dayjs('2025-12-25T05:21'),
+  endDate: dayjs('2025-12-24T18:17'),
   createdBy: 'excited',
-  createdDate: dayjs('2025-12-20T04:13'),
+  createdDate: dayjs('2025-12-24T23:12'),
 };
 
 export const sampleWithFullData: IExportJob = {
@@ -51,11 +51,11 @@ export const sampleWithFullData: IExportJob = {
   documentCount: 28369,
   filesGenerated: 14355,
   status: 'CANCELLED',
-  startDate: dayjs('2025-12-19T17:30'),
-  endDate: dayjs('2025-12-20T05:43'),
+  startDate: dayjs('2025-12-24T12:29'),
+  endDate: dayjs('2025-12-25T00:42'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'if soggy',
-  createdDate: dayjs('2025-12-20T03:34'),
+  createdDate: dayjs('2025-12-24T22:33'),
 };
 
 export const sampleWithNewData: NewExportJob = {
@@ -67,7 +67,7 @@ export const sampleWithNewData: NewExportJob = {
   includeVersions: true,
   status: 'FAILED',
   createdBy: 'huzzah unconscious wherever',
-  createdDate: dayjs('2025-12-20T05:41'),
+  createdDate: dayjs('2025-12-25T00:40'),
   id: null,
 };
 

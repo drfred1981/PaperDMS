@@ -8,6 +8,7 @@ describe('ExtractedField Form Service', () => {
   let service: ExtractedFieldFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ExtractedFieldFormService);
   });
 
@@ -52,7 +53,7 @@ describe('ExtractedField Form Service', () => {
       it('should return NewExtractedField for default ExtractedField initial value', () => {
         const formGroup = service.createExtractedFieldFormGroup(sampleWithNewData);
 
-        const extractedField = service.getExtractedField(formGroup);
+        const extractedField = service.getExtractedField(formGroup) as any;
 
         expect(extractedField).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('ExtractedField Form Service', () => {
       it('should return NewExtractedField for empty ExtractedField initial value', () => {
         const formGroup = service.createExtractedFieldFormGroup();
 
-        const extractedField = service.getExtractedField(formGroup);
+        const extractedField = service.getExtractedField(formGroup) as any;
 
         expect(extractedField).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('ExtractedField Form Service', () => {
       it('should return IExtractedField', () => {
         const formGroup = service.createExtractedFieldFormGroup(sampleWithRequiredData);
 
-        const extractedField = service.getExtractedField(formGroup);
+        const extractedField = service.getExtractedField(formGroup) as any;
 
         expect(extractedField).toMatchObject(sampleWithRequiredData);
       });

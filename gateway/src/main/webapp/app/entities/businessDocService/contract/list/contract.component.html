@@ -1,0 +1,269 @@
+<div>
+  <h2 id="page-heading" data-cy="ContractHeading">
+    <span jhiTranslate="gatewayApp.businessDocServiceContract.home.title">Contracts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.businessDocServiceContract.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-contract"
+        [routerLink]="['/contract/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.businessDocServiceContract.home.createLabel">Create a new Contract</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.businessDocServiceContract.home.search"
+          >Search for Contract</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.businessDocServiceContract.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  <jhi-filter [filters]="filters" />
+
+  @if (contracts().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.businessDocServiceContract.home.notFound">No Contracts found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.documentId">Document Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contractNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.contractNumber">Contract Number</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contractType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.contractType">Contract Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.title">Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="partyA">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.partyA">Party A</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="partyB">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.partyB">Party B</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="autoRenew">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.autoRenew">Auto Renew</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contractValue">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.contractValue">Contract Value</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="currency">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.currency">Currency</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.businessDocServiceContract.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (contract of contracts(); track trackId(contract)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/contract', contract.id, 'view']">{{ contract.id }}</a>
+              </td>
+              <td>{{ contract.documentId }}</td>
+              <td>{{ contract.contractNumber }}</td>
+              <td [jhiTranslate]="'gatewayApp.ContractType.' + (contract.contractType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    SERVICE_AGREEMENT: 'SERVICE_AGREEMENT',
+                    PURCHASE_CONTRACT: 'PURCHASE_CONTRACT',
+                    SALES_CONTRACT: 'SALES_CONTRACT',
+                    LEASE: 'LEASE',
+                    EMPLOYMENT: 'EMPLOYMENT',
+                    NDA: 'NDA',
+                    SLA: 'SLA',
+                    LICENSE: 'LICENSE',
+                    PARTNERSHIP: 'PARTNERSHIP',
+                    CONSULTING: 'CONSULTING',
+                    MAINTENANCE: 'MAINTENANCE',
+                    OTHER: 'OTHER',
+                  }[contract.contractType ?? 'null']
+                }}
+              </td>
+              <td>{{ contract.title }}</td>
+              <td>{{ contract.partyA }}</td>
+              <td>{{ contract.partyB }}</td>
+              <td>{{ contract.startDate | formatMediumDate }}</td>
+              <td>{{ contract.endDate | formatMediumDate }}</td>
+              <td>{{ contract.autoRenew }}</td>
+              <td>{{ contract.contractValue }}</td>
+              <td>{{ contract.currency }}</td>
+              <td [jhiTranslate]="'gatewayApp.ContractStatus.' + (contract.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DRAFT: 'DRAFT',
+                    UNDER_NEGOTIATION: 'UNDER_NEGOTIATION',
+                    PENDING_SIGNATURE: 'PENDING_SIGNATURE',
+                    ACTIVE: 'ACTIVE',
+                    SUSPENDED: 'SUSPENDED',
+                    EXPIRED: 'EXPIRED',
+                    TERMINATED: 'TERMINATED',
+                    RENEWED: 'RENEWED',
+                    ARCHIVED: 'ARCHIVED',
+                  }[contract.status ?? 'null']
+                }}
+              </td>
+              <td>{{ contract.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/contract', contract.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/contract', contract.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(contract)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (contracts().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

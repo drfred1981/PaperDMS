@@ -36,7 +36,7 @@ public class DocumentFingerprintResource {
 
     private static final String ENTITY_NAME = "similarityServiceDocumentFingerprint";
 
-    @Value("${jhipster.clientApp.name:similarityService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentFingerprintService documentFingerprintService;

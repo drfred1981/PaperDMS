@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { ICorrespondent, NewCorrespondent } from '../correspondent.model';
 
 export type PartialUpdateCorrespondent = Partial<ICorrespondent> & Pick<ICorrespondent, 'id'>;
@@ -45,24 +46,20 @@ export class CorrespondentService {
   update(correspondent: ICorrespondent): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(correspondent);
     return this.http
-      .put<RestCorrespondent>(`${this.resourceUrl}/${encodeURIComponent(this.getCorrespondentIdentifier(correspondent))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestCorrespondent>(`${this.resourceUrl}/${this.getCorrespondentIdentifier(correspondent)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(correspondent: PartialUpdateCorrespondent): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(correspondent);
     return this.http
-      .patch<RestCorrespondent>(`${this.resourceUrl}/${encodeURIComponent(this.getCorrespondentIdentifier(correspondent))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestCorrespondent>(`${this.resourceUrl}/${this.getCorrespondentIdentifier(correspondent)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestCorrespondent>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestCorrespondent>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -74,7 +71,7 @@ export class CorrespondentService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

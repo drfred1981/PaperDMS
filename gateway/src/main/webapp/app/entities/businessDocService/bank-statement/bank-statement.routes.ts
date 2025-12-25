@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import BankStatementResolve from './route/bank-statement-routing-resolve.service';
 
 const bankStatementRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/bank-statement').then(m => m.BankStatement),
+    loadComponent: () => import('./list/bank-statement.component').then(m => m.BankStatementComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const bankStatementRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/bank-statement-detail').then(m => m.BankStatementDetail),
+    loadComponent: () => import('./detail/bank-statement-detail.component').then(m => m.BankStatementDetailComponent),
     resolve: {
       bankStatement: BankStatementResolve,
     },
@@ -24,7 +23,7 @@ const bankStatementRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/bank-statement-update').then(m => m.BankStatementUpdate),
+    loadComponent: () => import('./update/bank-statement-update.component').then(m => m.BankStatementUpdateComponent),
     resolve: {
       bankStatement: BankStatementResolve,
     },
@@ -32,7 +31,7 @@ const bankStatementRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/bank-statement-update').then(m => m.BankStatementUpdate),
+    loadComponent: () => import('./update/bank-statement-update.component').then(m => m.BankStatementUpdateComponent),
     resolve: {
       bankStatement: BankStatementResolve,
     },

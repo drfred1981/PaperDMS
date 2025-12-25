@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISearchQuery } from '../search-query.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../search-query.test-samples';
@@ -101,7 +101,8 @@ describe('SearchQuery Service', () => {
       it('should add a SearchQuery to an empty array', () => {
         const searchQuery: ISearchQuery = sampleWithRequiredData;
         expectedResult = service.addSearchQueryToCollectionIfMissing([], searchQuery);
-        expect(expectedResult).toEqual([searchQuery]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(searchQuery);
       });
 
       it('should not add a SearchQuery to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('SearchQuery Service', () => {
         const searchQuery: ISearchQuery = sampleWithRequiredData;
         const searchQuery2: ISearchQuery = sampleWithPartialData;
         expectedResult = service.addSearchQueryToCollectionIfMissing([], searchQuery, searchQuery2);
-        expect(expectedResult).toEqual([searchQuery, searchQuery2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(searchQuery);
+        expect(expectedResult).toContain(searchQuery2);
       });
 
       it('should accept null and undefined values', () => {
         const searchQuery: ISearchQuery = sampleWithRequiredData;
         expectedResult = service.addSearchQueryToCollectionIfMissing([], null, searchQuery, undefined);
-        expect(expectedResult).toEqual([searchQuery]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(searchQuery);
       });
 
       it('should return initial array if no SearchQuery is added', () => {

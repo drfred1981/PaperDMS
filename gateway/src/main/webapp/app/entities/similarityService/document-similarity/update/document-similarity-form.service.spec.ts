@@ -8,6 +8,7 @@ describe('DocumentSimilarity Form Service', () => {
   let service: DocumentSimilarityFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentSimilarityFormService);
   });
 
@@ -58,7 +59,7 @@ describe('DocumentSimilarity Form Service', () => {
       it('should return NewDocumentSimilarity for default DocumentSimilarity initial value', () => {
         const formGroup = service.createDocumentSimilarityFormGroup(sampleWithNewData);
 
-        const documentSimilarity = service.getDocumentSimilarity(formGroup);
+        const documentSimilarity = service.getDocumentSimilarity(formGroup) as any;
 
         expect(documentSimilarity).toMatchObject(sampleWithNewData);
       });
@@ -66,7 +67,7 @@ describe('DocumentSimilarity Form Service', () => {
       it('should return NewDocumentSimilarity for empty DocumentSimilarity initial value', () => {
         const formGroup = service.createDocumentSimilarityFormGroup();
 
-        const documentSimilarity = service.getDocumentSimilarity(formGroup);
+        const documentSimilarity = service.getDocumentSimilarity(formGroup) as any;
 
         expect(documentSimilarity).toMatchObject({});
       });
@@ -74,7 +75,7 @@ describe('DocumentSimilarity Form Service', () => {
       it('should return IDocumentSimilarity', () => {
         const formGroup = service.createDocumentSimilarityFormGroup(sampleWithRequiredData);
 
-        const documentSimilarity = service.getDocumentSimilarity(formGroup);
+        const documentSimilarity = service.getDocumentSimilarity(formGroup) as any;
 
         expect(documentSimilarity).toMatchObject(sampleWithRequiredData);
       });

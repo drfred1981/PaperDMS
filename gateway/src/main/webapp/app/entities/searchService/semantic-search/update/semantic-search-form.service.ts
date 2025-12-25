@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISemanticSearch, NewSemanticSearch } from '../semantic-search.model';
 
@@ -46,10 +45,10 @@ export type SemanticSearchFormGroup = FormGroup<SemanticSearchFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SemanticSearchFormService {
-  createSemanticSearchFormGroup(semanticSearch?: SemanticSearchFormGroupInput): SemanticSearchFormGroup {
+  createSemanticSearchFormGroup(semanticSearch: SemanticSearchFormGroupInput = { id: null }): SemanticSearchFormGroup {
     const semanticSearchRawValue = this.convertSemanticSearchToSemanticSearchRawValue({
       ...this.getFormDefaults(),
-      ...(semanticSearch ?? { id: null }),
+      ...semanticSearch,
     });
     return new FormGroup<SemanticSearchFormGroupContent>({
       id: new FormControl(
@@ -90,10 +89,12 @@ export class SemanticSearchFormService {
 
   resetForm(form: SemanticSearchFormGroup, semanticSearch: SemanticSearchFormGroupInput): void {
     const semanticSearchRawValue = this.convertSemanticSearchToSemanticSearchRawValue({ ...this.getFormDefaults(), ...semanticSearch });
-    form.reset({
-      ...semanticSearchRawValue,
-      id: { value: semanticSearchRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...semanticSearchRawValue,
+        id: { value: semanticSearchRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SemanticSearchFormDefaults {

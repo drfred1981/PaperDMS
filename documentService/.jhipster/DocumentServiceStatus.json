@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251220152714"
+    "changelogDate": "20251225102516"
   },
   "applications": ["gateway", "documentService"],
   "clientRootFolder": "documentService",
   "databaseType": "sql",
-  "documentation": "NOUVELLE ENTIT�: Permet de tracker le statut d'un document pour chaque service\\nChaque ligne repr�sente l'�tat du document dans un service sp�cifique",
   "dto": "mapstruct",
   "fields": [
     {
@@ -79,7 +78,15 @@
   "microserviceName": "documentService",
   "name": "DocumentServiceStatus",
   "pagination": "pagination",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "document",
+      "relationshipName": "document",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
   "searchEngine": "elasticsearch",
   "service": "serviceImpl"
 }

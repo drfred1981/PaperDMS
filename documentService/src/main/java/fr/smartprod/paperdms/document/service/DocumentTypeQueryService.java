@@ -76,7 +76,7 @@ public class DocumentTypeQueryService extends QueryService<DocumentType> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<DocumentType> createSpecification(DocumentTypeCriteria criteria) {
-        Specification<DocumentType> specification = Specification.unrestricted();
+        Specification<DocumentType> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(
@@ -89,8 +89,7 @@ public class DocumentTypeQueryService extends QueryService<DocumentType> {
                 buildSpecification(criteria.getIsActive(), DocumentType_.isActive),
                 buildRangeSpecification(criteria.getCreatedDate(), DocumentType_.createdDate),
                 buildStringSpecification(criteria.getCreatedBy(), DocumentType_.createdBy),
-                buildSpecification(criteria.getFieldsId(), root ->
-                    root.join(DocumentType_.fields, JoinType.LEFT).get(DocumentTypeField_.id)
+                buildSpecification(criteria.getFieldsId(), root -> root.join(DocumentType_.fields, JoinType.LEFT).get(DocumentTypeField_.id)
                 )
             );
         }

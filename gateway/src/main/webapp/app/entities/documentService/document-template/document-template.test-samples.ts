@@ -9,7 +9,7 @@ export const sampleWithRequiredData: IDocumentTemplate = {
   templateS3Key: 'custody',
   isActive: true,
   createdBy: 'ack bidet stratify',
-  createdDate: dayjs('2025-12-19T17:39'),
+  createdDate: dayjs('2025-12-24T12:38'),
 };
 
 export const sampleWithPartialData: IDocumentTemplate = {
@@ -19,7 +19,7 @@ export const sampleWithPartialData: IDocumentTemplate = {
   templateS3Key: 'indeed upon pushy',
   isActive: false,
   createdBy: 'whereas afford',
-  createdDate: dayjs('2025-12-20T08:38'),
+  createdDate: dayjs('2025-12-25T03:37'),
 };
 
 export const sampleWithFullData: IDocumentTemplate = {
@@ -29,7 +29,7 @@ export const sampleWithFullData: IDocumentTemplate = {
   templateS3Key: 'able',
   isActive: false,
   createdBy: 'viciously metallic beret',
-  createdDate: dayjs('2025-12-20T08:11'),
+  createdDate: dayjs('2025-12-25T03:10'),
 };
 
 export const sampleWithNewData: NewDocumentTemplate = {
@@ -38,7 +38,7 @@ export const sampleWithNewData: NewDocumentTemplate = {
   templateS3Key: 'accountability reproachfully supposing',
   isActive: true,
   createdBy: 'hydrolyze',
-  createdDate: dayjs('2025-12-20T00:00'),
+  createdDate: dayjs('2025-12-24T18:59'),
   id: null,
 };
 

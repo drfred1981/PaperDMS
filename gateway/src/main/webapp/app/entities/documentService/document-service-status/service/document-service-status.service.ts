@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentServiceStatus, NewDocumentServiceStatus } from '../document-service-status.model';
 
 export type PartialUpdateDocumentServiceStatus = Partial<IDocumentServiceStatus> & Pick<IDocumentServiceStatus, 'id'>;
@@ -50,28 +51,24 @@ export class DocumentServiceStatusService {
   update(documentServiceStatus: IDocumentServiceStatus): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentServiceStatus);
     return this.http
-      .put<RestDocumentServiceStatus>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentServiceStatusIdentifier(documentServiceStatus))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestDocumentServiceStatus>(`${this.resourceUrl}/${this.getDocumentServiceStatusIdentifier(documentServiceStatus)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentServiceStatus: PartialUpdateDocumentServiceStatus): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentServiceStatus);
     return this.http
-      .patch<RestDocumentServiceStatus>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentServiceStatusIdentifier(documentServiceStatus))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentServiceStatus>(`${this.resourceUrl}/${this.getDocumentServiceStatusIdentifier(documentServiceStatus)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentServiceStatus>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentServiceStatus>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -83,7 +80,7 @@ export class DocumentServiceStatusService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { WorkflowTaskService } from '../service/workflow-task.service';
 import { IWorkflowTask } from '../workflow-task.model';
+import { WorkflowTaskService } from '../service/workflow-task.service';
 
 const workflowTaskResolve = (route: ActivatedRouteSnapshot): Observable<null | IWorkflowTask> => {
   const id = route.params.id;

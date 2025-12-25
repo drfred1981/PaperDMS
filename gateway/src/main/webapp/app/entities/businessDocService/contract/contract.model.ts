@@ -1,7 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { ContractStatus } from 'app/entities/enumerations/contract-status.model';
 import { ContractType } from 'app/entities/enumerations/contract-type.model';
+import { ContractStatus } from 'app/entities/enumerations/contract-status.model';
 
 export interface IContract {
   id: number;

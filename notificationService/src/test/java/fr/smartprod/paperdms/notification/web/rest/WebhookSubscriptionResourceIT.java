@@ -92,7 +92,7 @@ class WebhookSubscriptionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1279,11 +1279,11 @@ class WebhookSubscriptionResourceIT {
 
         partialUpdatedWebhookSubscription
             .name(UPDATED_NAME)
-            .headers(UPDATED_HEADERS)
-            .isActive(UPDATED_IS_ACTIVE)
-            .maxRetries(UPDATED_MAX_RETRIES)
             .retryDelay(UPDATED_RETRY_DELAY)
+            .lastSuccessDate(UPDATED_LAST_SUCCESS_DATE)
+            .lastErrorMessage(UPDATED_LAST_ERROR_MESSAGE)
             .failureCount(UPDATED_FAILURE_COUNT)
+            .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 

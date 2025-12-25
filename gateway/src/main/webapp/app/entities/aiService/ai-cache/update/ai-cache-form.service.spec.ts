@@ -8,6 +8,7 @@ describe('AiCache Form Service', () => {
   let service: AiCacheFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(AiCacheFormService);
   });
 
@@ -68,7 +69,7 @@ describe('AiCache Form Service', () => {
       it('should return NewAiCache for default AiCache initial value', () => {
         const formGroup = service.createAiCacheFormGroup(sampleWithNewData);
 
-        const aiCache = service.getAiCache(formGroup);
+        const aiCache = service.getAiCache(formGroup) as any;
 
         expect(aiCache).toMatchObject(sampleWithNewData);
       });
@@ -76,7 +77,7 @@ describe('AiCache Form Service', () => {
       it('should return NewAiCache for empty AiCache initial value', () => {
         const formGroup = service.createAiCacheFormGroup();
 
-        const aiCache = service.getAiCache(formGroup);
+        const aiCache = service.getAiCache(formGroup) as any;
 
         expect(aiCache).toMatchObject({});
       });
@@ -84,7 +85,7 @@ describe('AiCache Form Service', () => {
       it('should return IAiCache', () => {
         const formGroup = service.createAiCacheFormGroup(sampleWithRequiredData);
 
-        const aiCache = service.getAiCache(formGroup);
+        const aiCache = service.getAiCache(formGroup) as any;
 
         expect(aiCache).toMatchObject(sampleWithRequiredData);
       });

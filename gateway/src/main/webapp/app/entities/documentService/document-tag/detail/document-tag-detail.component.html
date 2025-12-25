@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentTag(); as documentTagRef) {
+      <div>
+        <h2 data-cy="documentTagDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceDocumentTag.detail.title">Document Tag</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentTagRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentTag.assignedDate">Assigned Date</span></dt>
+          <dd>
+            <span>{{ documentTagRef.assignedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentTag.assignedBy">Assigned By</span></dt>
+          <dd>
+            <span>{{ documentTagRef.assignedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentTag.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ documentTagRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentTag.isAutoTagged">Is Auto Tagged</span></dt>
+          <dd>
+            <span>{{ documentTagRef.isAutoTagged }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentTag.source">Source</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TagSource.' + (documentTagRef.source ?? 'null')">{{
+              {
+                null: '',
+                MANUAL: 'MANUAL',
+                AI_SUGGESTED: 'AI_SUGGESTED',
+                AI_CONFIRMED: 'AI_CONFIRMED',
+                RULE_BASED: 'RULE_BASED',
+                IMPORTED: 'IMPORTED',
+              }[documentTagRef.source ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentTag.document">Document</span></dt>
+          <dd>
+            @if (documentTag()!.document) {
+              <div>
+                <a [routerLink]="['/document', documentTag()!.document?.id, 'view']">{{ documentTagRef.document?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentTag.tag">Tag</span></dt>
+          <dd>
+            @if (documentTag()!.tag) {
+              <div>
+                <a [routerLink]="['/tag', documentTag()!.tag?.id, 'view']">{{ documentTagRef.tag?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-tag', documentTagRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

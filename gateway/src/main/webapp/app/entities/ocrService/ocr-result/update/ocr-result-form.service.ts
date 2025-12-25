@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IOcrResult, NewOcrResult } from '../ocr-result.model';
 
@@ -54,10 +53,10 @@ export type OcrResultFormGroup = FormGroup<OcrResultFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class OcrResultFormService {
-  createOcrResultFormGroup(ocrResult?: OcrResultFormGroupInput): OcrResultFormGroup {
+  createOcrResultFormGroup(ocrResult: OcrResultFormGroupInput = { id: null }): OcrResultFormGroup {
     const ocrResultRawValue = this.convertOcrResultToOcrResultRawValue({
       ...this.getFormDefaults(),
-      ...(ocrResult ?? { id: null }),
+      ...ocrResult,
     });
     return new FormGroup<OcrResultFormGroupContent>({
       id: new FormControl(
@@ -112,10 +111,12 @@ export class OcrResultFormService {
 
   resetForm(form: OcrResultFormGroup, ocrResult: OcrResultFormGroupInput): void {
     const ocrResultRawValue = this.convertOcrResultToOcrResultRawValue({ ...this.getFormDefaults(), ...ocrResult });
-    form.reset({
-      ...ocrResultRawValue,
-      id: { value: ocrResultRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...ocrResultRawValue,
+        id: { value: ocrResultRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): OcrResultFormDefaults {

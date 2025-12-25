@@ -8,6 +8,7 @@ describe('MaintenanceTask Form Service', () => {
   let service: MaintenanceTaskFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(MaintenanceTaskFormService);
   });
 
@@ -62,7 +63,7 @@ describe('MaintenanceTask Form Service', () => {
       it('should return NewMaintenanceTask for default MaintenanceTask initial value', () => {
         const formGroup = service.createMaintenanceTaskFormGroup(sampleWithNewData);
 
-        const maintenanceTask = service.getMaintenanceTask(formGroup);
+        const maintenanceTask = service.getMaintenanceTask(formGroup) as any;
 
         expect(maintenanceTask).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('MaintenanceTask Form Service', () => {
       it('should return NewMaintenanceTask for empty MaintenanceTask initial value', () => {
         const formGroup = service.createMaintenanceTaskFormGroup();
 
-        const maintenanceTask = service.getMaintenanceTask(formGroup);
+        const maintenanceTask = service.getMaintenanceTask(formGroup) as any;
 
         expect(maintenanceTask).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('MaintenanceTask Form Service', () => {
       it('should return IMaintenanceTask', () => {
         const formGroup = service.createMaintenanceTaskFormGroup(sampleWithRequiredData);
 
-        const maintenanceTask = service.getMaintenanceTask(formGroup);
+        const maintenanceTask = service.getMaintenanceTask(formGroup) as any;
 
         expect(maintenanceTask).toMatchObject(sampleWithRequiredData);
       });

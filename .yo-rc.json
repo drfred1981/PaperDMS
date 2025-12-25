@@ -19,6 +19,9 @@
       "monitoringService"
     ],
     "baseName": "workspaces",
-    "deploymentType": "none"
+    "deploymentType": "none",
+    "directoryPath": "./",
+    "entities": [],
+    "jhipsterVersion": "8.11.0"
   }
 }

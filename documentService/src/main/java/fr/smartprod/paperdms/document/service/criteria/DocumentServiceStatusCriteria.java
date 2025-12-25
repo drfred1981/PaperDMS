@@ -1,8 +1,7 @@
 package fr.smartprod.paperdms.document.service.criteria;
 
-import fr.smartprod.paperdms.common.enumeration.ServiceStatus;
-import fr.smartprod.paperdms.common.enumeration.ServiceType;
-import java.io.Serial;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceStatus;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceType;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class DocumentServiceStatusCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;
@@ -86,6 +84,8 @@ public class DocumentServiceStatusCriteria implements Serializable, Criteria {
 
     private InstantFilter updatedDate;
 
+    private LongFilter documentId;
+
     private Boolean distinct;
 
     public DocumentServiceStatusCriteria() {}
@@ -104,6 +104,7 @@ public class DocumentServiceStatusCriteria implements Serializable, Criteria {
         this.priority = other.optionalPriority().map(IntegerFilter::copy).orElse(null);
         this.updatedBy = other.optionalUpdatedBy().map(StringFilter::copy).orElse(null);
         this.updatedDate = other.optionalUpdatedDate().map(InstantFilter::copy).orElse(null);
+        this.documentId = other.optionalDocumentId().map(LongFilter::copy).orElse(null);
         this.distinct = other.distinct;
     }
 
@@ -359,6 +360,25 @@ public class DocumentServiceStatusCriteria implements Serializable, Criteria {
         this.updatedDate = updatedDate;
     }
 
+    public LongFilter getDocumentId() {
+        return documentId;
+    }
+
+    public Optional<LongFilter> optionalDocumentId() {
+        return Optional.ofNullable(documentId);
+    }
+
+    public LongFilter documentId() {
+        if (documentId == null) {
+            setDocumentId(new LongFilter());
+        }
+        return documentId;
+    }
+
+    public void setDocumentId(LongFilter documentId) {
+        this.documentId = documentId;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -401,6 +421,7 @@ public class DocumentServiceStatusCriteria implements Serializable, Criteria {
             Objects.equals(priority, that.priority) &&
             Objects.equals(updatedBy, that.updatedBy) &&
             Objects.equals(updatedDate, that.updatedDate) &&
+            Objects.equals(documentId, that.documentId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -421,6 +442,7 @@ public class DocumentServiceStatusCriteria implements Serializable, Criteria {
             priority,
             updatedBy,
             updatedDate,
+            documentId,
             distinct
         );
     }
@@ -442,6 +464,7 @@ public class DocumentServiceStatusCriteria implements Serializable, Criteria {
             optionalPriority().map(f -> "priority=" + f + ", ").orElse("") +
             optionalUpdatedBy().map(f -> "updatedBy=" + f + ", ").orElse("") +
             optionalUpdatedDate().map(f -> "updatedDate=" + f + ", ").orElse("") +
+            optionalDocumentId().map(f -> "documentId=" + f + ", ").orElse("") +
             optionalDistinct().map(f -> "distinct=" + f + ", ").orElse("") +
         "}";
     }

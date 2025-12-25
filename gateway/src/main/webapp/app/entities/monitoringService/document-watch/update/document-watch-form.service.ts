@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentWatch, NewDocumentWatch } from '../document-watch.model';
 
@@ -50,10 +49,10 @@ export type DocumentWatchFormGroup = FormGroup<DocumentWatchFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DocumentWatchFormService {
-  createDocumentWatchFormGroup(documentWatch?: DocumentWatchFormGroupInput): DocumentWatchFormGroup {
+  createDocumentWatchFormGroup(documentWatch: DocumentWatchFormGroupInput = { id: null }): DocumentWatchFormGroup {
     const documentWatchRawValue = this.convertDocumentWatchToDocumentWatchRawValue({
       ...this.getFormDefaults(),
-      ...(documentWatch ?? { id: null }),
+      ...documentWatch,
     });
     return new FormGroup<DocumentWatchFormGroupContent>({
       id: new FormControl(
@@ -99,10 +98,12 @@ export class DocumentWatchFormService {
 
   resetForm(form: DocumentWatchFormGroup, documentWatch: DocumentWatchFormGroupInput): void {
     const documentWatchRawValue = this.convertDocumentWatchToDocumentWatchRawValue({ ...this.getFormDefaults(), ...documentWatch });
-    form.reset({
-      ...documentWatchRawValue,
-      id: { value: documentWatchRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentWatchRawValue,
+        id: { value: documentWatchRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentWatchFormDefaults {

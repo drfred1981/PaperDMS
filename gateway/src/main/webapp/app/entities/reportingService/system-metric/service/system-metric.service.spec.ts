@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISystemMetric } from '../system-metric.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../system-metric.test-samples';
@@ -101,7 +101,8 @@ describe('SystemMetric Service', () => {
       it('should add a SystemMetric to an empty array', () => {
         const systemMetric: ISystemMetric = sampleWithRequiredData;
         expectedResult = service.addSystemMetricToCollectionIfMissing([], systemMetric);
-        expect(expectedResult).toEqual([systemMetric]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(systemMetric);
       });
 
       it('should not add a SystemMetric to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('SystemMetric Service', () => {
         const systemMetric: ISystemMetric = sampleWithRequiredData;
         const systemMetric2: ISystemMetric = sampleWithPartialData;
         expectedResult = service.addSystemMetricToCollectionIfMissing([], systemMetric, systemMetric2);
-        expect(expectedResult).toEqual([systemMetric, systemMetric2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(systemMetric);
+        expect(expectedResult).toContain(systemMetric2);
       });
 
       it('should accept null and undefined values', () => {
         const systemMetric: ISystemMetric = sampleWithRequiredData;
         expectedResult = service.addSystemMetricToCollectionIfMissing([], null, systemMetric, undefined);
-        expect(expectedResult).toEqual([systemMetric]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(systemMetric);
       });
 
       it('should return initial array if no SystemMetric is added', () => {

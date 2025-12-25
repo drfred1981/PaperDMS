@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ITag } from '../tag.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../tag.test-samples';
@@ -115,7 +115,8 @@ describe('Tag Service', () => {
       it('should add a Tag to an empty array', () => {
         const tag: ITag = sampleWithRequiredData;
         expectedResult = service.addTagToCollectionIfMissing([], tag);
-        expect(expectedResult).toEqual([tag]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(tag);
       });
 
       it('should not add a Tag to an array that contains it', () => {
@@ -149,13 +150,16 @@ describe('Tag Service', () => {
         const tag: ITag = sampleWithRequiredData;
         const tag2: ITag = sampleWithPartialData;
         expectedResult = service.addTagToCollectionIfMissing([], tag, tag2);
-        expect(expectedResult).toEqual([tag, tag2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(tag);
+        expect(expectedResult).toContain(tag2);
       });
 
       it('should accept null and undefined values', () => {
         const tag: ITag = sampleWithRequiredData;
         expectedResult = service.addTagToCollectionIfMissing([], null, tag, undefined);
-        expect(expectedResult).toEqual([tag]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(tag);
       });
 
       it('should return initial array if no Tag is added', () => {

@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (approvalHistory(); as approvalHistoryRef) {
+      <div>
+        <h2 data-cy="approvalHistoryDetailsHeading">
+          <span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.detail.title">Approval History</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.workflowInstanceId">Workflow Instance Id</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.workflowInstanceId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.stepNumber">Step Number</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.stepNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.action">Action</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TaskAction.' + (approvalHistoryRef.action ?? 'null')">{{
+              {
+                null: '',
+                APPROVE: 'APPROVE',
+                REJECT: 'REJECT',
+                REQUEST_CHANGES: 'REQUEST_CHANGES',
+                DELEGATE: 'DELEGATE',
+                CANCEL: 'CANCEL',
+                COMMENT: 'COMMENT',
+              }[approvalHistoryRef.action ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.comment">Comment</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.comment }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.actionDate">Action Date</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.actionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.actionBy">Action By</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.actionBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.previousAssignee">Previous Assignee</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.previousAssignee }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.workflowServiceApprovalHistory.timeTaken">Time Taken</span></dt>
+          <dd>
+            <span>{{ approvalHistoryRef.timeTaken }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/approval-history', approvalHistoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

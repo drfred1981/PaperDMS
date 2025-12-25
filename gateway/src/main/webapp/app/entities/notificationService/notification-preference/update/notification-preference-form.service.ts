@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { INotificationPreference, NewNotificationPreference } from '../notification-preference.model';
 
@@ -50,10 +49,12 @@ export type NotificationPreferenceFormGroup = FormGroup<NotificationPreferenceFo
 
 @Injectable({ providedIn: 'root' })
 export class NotificationPreferenceFormService {
-  createNotificationPreferenceFormGroup(notificationPreference?: NotificationPreferenceFormGroupInput): NotificationPreferenceFormGroup {
+  createNotificationPreferenceFormGroup(
+    notificationPreference: NotificationPreferenceFormGroupInput = { id: null },
+  ): NotificationPreferenceFormGroup {
     const notificationPreferenceRawValue = this.convertNotificationPreferenceToNotificationPreferenceRawValue({
       ...this.getFormDefaults(),
-      ...(notificationPreference ?? { id: null }),
+      ...notificationPreference,
     });
     return new FormGroup<NotificationPreferenceFormGroupContent>({
       id: new FormControl(
@@ -98,10 +99,12 @@ export class NotificationPreferenceFormService {
       ...this.getFormDefaults(),
       ...notificationPreference,
     });
-    form.reset({
-      ...notificationPreferenceRawValue,
-      id: { value: notificationPreferenceRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...notificationPreferenceRawValue,
+        id: { value: notificationPreferenceRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): NotificationPreferenceFormDefaults {

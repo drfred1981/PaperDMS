@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import InvoiceLineResolve from './route/invoice-line-routing-resolve.service';
 
 const invoiceLineRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/invoice-line').then(m => m.InvoiceLine),
+    loadComponent: () => import('./list/invoice-line.component').then(m => m.InvoiceLineComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const invoiceLineRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/invoice-line-detail').then(m => m.InvoiceLineDetail),
+    loadComponent: () => import('./detail/invoice-line-detail.component').then(m => m.InvoiceLineDetailComponent),
     resolve: {
       invoiceLine: InvoiceLineResolve,
     },
@@ -24,7 +23,7 @@ const invoiceLineRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/invoice-line-update').then(m => m.InvoiceLineUpdate),
+    loadComponent: () => import('./update/invoice-line-update.component').then(m => m.InvoiceLineUpdateComponent),
     resolve: {
       invoiceLine: InvoiceLineResolve,
     },
@@ -32,7 +31,7 @@ const invoiceLineRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/invoice-line-update').then(m => m.InvoiceLineUpdate),
+    loadComponent: () => import('./update/invoice-line-update.component').then(m => m.InvoiceLineUpdateComponent),
     resolve: {
       invoiceLine: InvoiceLineResolve,
     },

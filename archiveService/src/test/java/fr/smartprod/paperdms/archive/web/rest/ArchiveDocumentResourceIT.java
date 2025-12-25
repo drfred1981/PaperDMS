@@ -62,7 +62,7 @@ class ArchiveDocumentResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -420,7 +420,7 @@ class ArchiveDocumentResourceIT {
         ArchiveDocument partialUpdatedArchiveDocument = new ArchiveDocument();
         partialUpdatedArchiveDocument.setId(archiveDocument.getId());
 
-        partialUpdatedArchiveDocument.documentId(UPDATED_DOCUMENT_ID).originalPath(UPDATED_ORIGINAL_PATH).addedDate(UPDATED_ADDED_DATE);
+        partialUpdatedArchiveDocument.documentId(UPDATED_DOCUMENT_ID).documentSha256(UPDATED_DOCUMENT_SHA_256).fileSize(UPDATED_FILE_SIZE);
 
         restArchiveDocumentMockMvc
             .perform(

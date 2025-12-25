@@ -6,7 +6,7 @@ export const sampleWithRequiredData: ISearchIndex = {
   id: 13798,
   documentId: 399,
   indexedContent: '../fake-data/blob/hipster.txt',
-  indexedDate: dayjs('2025-12-19T17:22'),
+  indexedDate: dayjs('2025-12-24T12:21'),
 };
 
 export const sampleWithPartialData: ISearchIndex = {
@@ -15,7 +15,7 @@ export const sampleWithPartialData: ISearchIndex = {
   indexedContent: '../fake-data/blob/hipster.txt',
   metadata: '../fake-data/blob/hipster.txt',
   extractedEntities: '../fake-data/blob/hipster.txt',
-  indexedDate: dayjs('2025-12-19T16:04'),
+  indexedDate: dayjs('2025-12-24T11:03'),
 };
 
 export const sampleWithFullData: ISearchIndex = {
@@ -26,14 +26,14 @@ export const sampleWithFullData: ISearchIndex = {
   tags: 'who overreact',
   correspondents: 'hm negligible scrutinise',
   extractedEntities: '../fake-data/blob/hipster.txt',
-  indexedDate: dayjs('2025-12-20T04:56'),
-  lastUpdated: dayjs('2025-12-19T21:38'),
+  indexedDate: dayjs('2025-12-24T23:55'),
+  lastUpdated: dayjs('2025-12-24T16:37'),
 };
 
 export const sampleWithNewData: NewSearchIndex = {
   documentId: 23109,
   indexedContent: '../fake-data/blob/hipster.txt',
-  indexedDate: dayjs('2025-12-19T19:44'),
+  indexedDate: dayjs('2025-12-24T14:43'),
   id: null,
 };
 

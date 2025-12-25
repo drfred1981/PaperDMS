@@ -1,8 +1,7 @@
 import dayjs from 'dayjs/esm';
-
+import { ScannerType } from 'app/entities/enumerations/scanner-type.model';
 import { ColorMode } from 'app/entities/enumerations/color-mode.model';
 import { ScanFormat } from 'app/entities/enumerations/scan-format.model';
-import { ScannerType } from 'app/entities/enumerations/scanner-type.model';
 
 export interface IScannerConfiguration {
   id: number;

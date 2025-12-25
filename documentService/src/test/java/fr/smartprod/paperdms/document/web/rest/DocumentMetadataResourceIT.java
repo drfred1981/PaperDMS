@@ -57,7 +57,7 @@ class DocumentMetadataResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -388,7 +388,7 @@ class DocumentMetadataResourceIT {
         DocumentMetadata partialUpdatedDocumentMetadata = new DocumentMetadata();
         partialUpdatedDocumentMetadata.setId(documentMetadata.getId());
 
-        partialUpdatedDocumentMetadata.value(UPDATED_VALUE);
+        partialUpdatedDocumentMetadata.isSearchable(UPDATED_IS_SEARCHABLE).createdDate(UPDATED_CREATED_DATE);
 
         restDocumentMetadataMockMvc
             .perform(

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IArchiveDocument } from '../archive-document.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../archive-document.test-samples';
@@ -101,7 +101,8 @@ describe('ArchiveDocument Service', () => {
       it('should add a ArchiveDocument to an empty array', () => {
         const archiveDocument: IArchiveDocument = sampleWithRequiredData;
         expectedResult = service.addArchiveDocumentToCollectionIfMissing([], archiveDocument);
-        expect(expectedResult).toEqual([archiveDocument]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(archiveDocument);
       });
 
       it('should not add a ArchiveDocument to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('ArchiveDocument Service', () => {
         const archiveDocument: IArchiveDocument = sampleWithRequiredData;
         const archiveDocument2: IArchiveDocument = sampleWithPartialData;
         expectedResult = service.addArchiveDocumentToCollectionIfMissing([], archiveDocument, archiveDocument2);
-        expect(expectedResult).toEqual([archiveDocument, archiveDocument2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(archiveDocument);
+        expect(expectedResult).toContain(archiveDocument2);
       });
 
       it('should accept null and undefined values', () => {
         const archiveDocument: IArchiveDocument = sampleWithRequiredData;
         expectedResult = service.addArchiveDocumentToCollectionIfMissing([], null, archiveDocument, undefined);
-        expect(expectedResult).toEqual([archiveDocument]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(archiveDocument);
       });
 
       it('should return initial array if no ArchiveDocument is added', () => {

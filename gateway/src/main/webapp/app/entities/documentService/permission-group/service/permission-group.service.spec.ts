@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IPermissionGroup } from '../permission-group.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../permission-group.test-samples';
@@ -101,7 +101,8 @@ describe('PermissionGroup Service', () => {
       it('should add a PermissionGroup to an empty array', () => {
         const permissionGroup: IPermissionGroup = sampleWithRequiredData;
         expectedResult = service.addPermissionGroupToCollectionIfMissing([], permissionGroup);
-        expect(expectedResult).toEqual([permissionGroup]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(permissionGroup);
       });
 
       it('should not add a PermissionGroup to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('PermissionGroup Service', () => {
         const permissionGroup: IPermissionGroup = sampleWithRequiredData;
         const permissionGroup2: IPermissionGroup = sampleWithPartialData;
         expectedResult = service.addPermissionGroupToCollectionIfMissing([], permissionGroup, permissionGroup2);
-        expect(expectedResult).toEqual([permissionGroup, permissionGroup2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(permissionGroup);
+        expect(expectedResult).toContain(permissionGroup2);
       });
 
       it('should accept null and undefined values', () => {
         const permissionGroup: IPermissionGroup = sampleWithRequiredData;
         expectedResult = service.addPermissionGroupToCollectionIfMissing([], null, permissionGroup, undefined);
-        expect(expectedResult).toEqual([permissionGroup]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(permissionGroup);
       });
 
       it('should return initial array if no PermissionGroup is added', () => {

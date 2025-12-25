@@ -22,4 +22,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @EmbeddedElasticsearch
 @EmbeddedSQL
 @EmbeddedKafka
-public @interface IntegrationTest {}
+public @interface IntegrationTest {
+}

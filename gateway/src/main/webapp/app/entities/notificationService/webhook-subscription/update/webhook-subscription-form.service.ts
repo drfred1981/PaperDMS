@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IWebhookSubscription, NewWebhookSubscription } from '../webhook-subscription.model';
 
@@ -63,10 +62,10 @@ export type WebhookSubscriptionFormGroup = FormGroup<WebhookSubscriptionFormGrou
 
 @Injectable({ providedIn: 'root' })
 export class WebhookSubscriptionFormService {
-  createWebhookSubscriptionFormGroup(webhookSubscription?: WebhookSubscriptionFormGroupInput): WebhookSubscriptionFormGroup {
+  createWebhookSubscriptionFormGroup(webhookSubscription: WebhookSubscriptionFormGroupInput = { id: null }): WebhookSubscriptionFormGroup {
     const webhookSubscriptionRawValue = this.convertWebhookSubscriptionToWebhookSubscriptionRawValue({
       ...this.getFormDefaults(),
-      ...(webhookSubscription ?? { id: null }),
+      ...webhookSubscription,
     });
     return new FormGroup<WebhookSubscriptionFormGroupContent>({
       id: new FormControl(
@@ -120,10 +119,12 @@ export class WebhookSubscriptionFormService {
       ...this.getFormDefaults(),
       ...webhookSubscription,
     });
-    form.reset({
-      ...webhookSubscriptionRawValue,
-      id: { value: webhookSubscriptionRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...webhookSubscriptionRawValue,
+        id: { value: webhookSubscriptionRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): WebhookSubscriptionFormDefaults {

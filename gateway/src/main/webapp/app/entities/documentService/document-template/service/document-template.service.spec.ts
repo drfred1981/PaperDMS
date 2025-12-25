@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentTemplate } from '../document-template.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-template.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentTemplate Service', () => {
       it('should add a DocumentTemplate to an empty array', () => {
         const documentTemplate: IDocumentTemplate = sampleWithRequiredData;
         expectedResult = service.addDocumentTemplateToCollectionIfMissing([], documentTemplate);
-        expect(expectedResult).toEqual([documentTemplate]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentTemplate);
       });
 
       it('should not add a DocumentTemplate to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentTemplate Service', () => {
         const documentTemplate: IDocumentTemplate = sampleWithRequiredData;
         const documentTemplate2: IDocumentTemplate = sampleWithPartialData;
         expectedResult = service.addDocumentTemplateToCollectionIfMissing([], documentTemplate, documentTemplate2);
-        expect(expectedResult).toEqual([documentTemplate, documentTemplate2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentTemplate);
+        expect(expectedResult).toContain(documentTemplate2);
       });
 
       it('should accept null and undefined values', () => {
         const documentTemplate: IDocumentTemplate = sampleWithRequiredData;
         expectedResult = service.addDocumentTemplateToCollectionIfMissing([], null, documentTemplate, undefined);
-        expect(expectedResult).toEqual([documentTemplate]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentTemplate);
       });
 
       it('should return initial array if no DocumentTemplate is added', () => {

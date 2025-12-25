@@ -8,6 +8,7 @@ describe('LanguageDetection Form Service', () => {
   let service: LanguageDetectionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(LanguageDetectionFormService);
   });
 
@@ -60,7 +61,7 @@ describe('LanguageDetection Form Service', () => {
       it('should return NewLanguageDetection for default LanguageDetection initial value', () => {
         const formGroup = service.createLanguageDetectionFormGroup(sampleWithNewData);
 
-        const languageDetection = service.getLanguageDetection(formGroup);
+        const languageDetection = service.getLanguageDetection(formGroup) as any;
 
         expect(languageDetection).toMatchObject(sampleWithNewData);
       });
@@ -68,7 +69,7 @@ describe('LanguageDetection Form Service', () => {
       it('should return NewLanguageDetection for empty LanguageDetection initial value', () => {
         const formGroup = service.createLanguageDetectionFormGroup();
 
-        const languageDetection = service.getLanguageDetection(formGroup);
+        const languageDetection = service.getLanguageDetection(formGroup) as any;
 
         expect(languageDetection).toMatchObject({});
       });
@@ -76,7 +77,7 @@ describe('LanguageDetection Form Service', () => {
       it('should return ILanguageDetection', () => {
         const formGroup = service.createLanguageDetectionFormGroup(sampleWithRequiredData);
 
-        const languageDetection = service.getLanguageDetection(formGroup);
+        const languageDetection = service.getLanguageDetection(formGroup) as any;
 
         expect(languageDetection).toMatchObject(sampleWithRequiredData);
       });

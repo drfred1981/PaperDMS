@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentAudit } from '../document-audit.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-audit.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentAudit Service', () => {
       it('should add a DocumentAudit to an empty array', () => {
         const documentAudit: IDocumentAudit = sampleWithRequiredData;
         expectedResult = service.addDocumentAuditToCollectionIfMissing([], documentAudit);
-        expect(expectedResult).toEqual([documentAudit]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentAudit);
       });
 
       it('should not add a DocumentAudit to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentAudit Service', () => {
         const documentAudit: IDocumentAudit = sampleWithRequiredData;
         const documentAudit2: IDocumentAudit = sampleWithPartialData;
         expectedResult = service.addDocumentAuditToCollectionIfMissing([], documentAudit, documentAudit2);
-        expect(expectedResult).toEqual([documentAudit, documentAudit2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentAudit);
+        expect(expectedResult).toContain(documentAudit2);
       });
 
       it('should accept null and undefined values', () => {
         const documentAudit: IDocumentAudit = sampleWithRequiredData;
         expectedResult = service.addDocumentAuditToCollectionIfMissing([], null, documentAudit, undefined);
-        expect(expectedResult).toEqual([documentAudit]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentAudit);
       });
 
       it('should return initial array if no DocumentAudit is added', () => {

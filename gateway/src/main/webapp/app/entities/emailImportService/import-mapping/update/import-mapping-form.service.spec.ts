@@ -8,6 +8,7 @@ describe('ImportMapping Form Service', () => {
   let service: ImportMappingFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ImportMappingFormService);
   });
 
@@ -56,7 +57,7 @@ describe('ImportMapping Form Service', () => {
       it('should return NewImportMapping for default ImportMapping initial value', () => {
         const formGroup = service.createImportMappingFormGroup(sampleWithNewData);
 
-        const importMapping = service.getImportMapping(formGroup);
+        const importMapping = service.getImportMapping(formGroup) as any;
 
         expect(importMapping).toMatchObject(sampleWithNewData);
       });
@@ -64,7 +65,7 @@ describe('ImportMapping Form Service', () => {
       it('should return NewImportMapping for empty ImportMapping initial value', () => {
         const formGroup = service.createImportMappingFormGroup();
 
-        const importMapping = service.getImportMapping(formGroup);
+        const importMapping = service.getImportMapping(formGroup) as any;
 
         expect(importMapping).toMatchObject({});
       });
@@ -72,7 +73,7 @@ describe('ImportMapping Form Service', () => {
       it('should return IImportMapping', () => {
         const formGroup = service.createImportMappingFormGroup(sampleWithRequiredData);
 
-        const importMapping = service.getImportMapping(formGroup);
+        const importMapping = service.getImportMapping(formGroup) as any;
 
         expect(importMapping).toMatchObject(sampleWithRequiredData);
       });

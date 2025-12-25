@@ -38,7 +38,7 @@ public class DocumentTypeResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentType";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentTypeService documentTypeService;

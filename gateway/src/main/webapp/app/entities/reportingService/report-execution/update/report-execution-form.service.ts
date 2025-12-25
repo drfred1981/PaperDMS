@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IReportExecution, NewReportExecution } from '../report-execution.model';
 
@@ -48,10 +47,10 @@ export type ReportExecutionFormGroup = FormGroup<ReportExecutionFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class ReportExecutionFormService {
-  createReportExecutionFormGroup(reportExecution?: ReportExecutionFormGroupInput): ReportExecutionFormGroup {
+  createReportExecutionFormGroup(reportExecution: ReportExecutionFormGroupInput = { id: null }): ReportExecutionFormGroup {
     const reportExecutionRawValue = this.convertReportExecutionToReportExecutionRawValue({
       ...this.getFormDefaults(),
-      ...(reportExecution ?? { id: null }),
+      ...reportExecution,
     });
     return new FormGroup<ReportExecutionFormGroupContent>({
       id: new FormControl(
@@ -91,10 +90,12 @@ export class ReportExecutionFormService {
 
   resetForm(form: ReportExecutionFormGroup, reportExecution: ReportExecutionFormGroupInput): void {
     const reportExecutionRawValue = this.convertReportExecutionToReportExecutionRawValue({ ...this.getFormDefaults(), ...reportExecution });
-    form.reset({
-      ...reportExecutionRawValue,
-      id: { value: reportExecutionRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...reportExecutionRawValue,
+        id: { value: reportExecutionRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ReportExecutionFormDefaults {

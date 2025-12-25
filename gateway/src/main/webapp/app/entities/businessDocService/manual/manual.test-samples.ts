@@ -11,7 +11,7 @@ export const sampleWithRequiredData: IManual = {
   language: 'spook port',
   status: 'DRAFT',
   isPublic: false,
-  createdDate: dayjs('2025-12-20T09:28'),
+  createdDate: dayjs('2025-12-25T04:27'),
 };
 
 export const sampleWithPartialData: IManual = {
@@ -21,10 +21,10 @@ export const sampleWithPartialData: IManual = {
   manualType: 'USER_MANUAL',
   version: 'brr',
   language: 'vestment d',
-  publicationDate: dayjs('2025-12-20'),
+  publicationDate: dayjs('2025-12-25'),
   status: 'ARCHIVED',
   isPublic: false,
-  createdDate: dayjs('2025-12-20T08:16'),
+  createdDate: dayjs('2025-12-25T03:15'),
 };
 
 export const sampleWithFullData: IManual = {
@@ -34,11 +34,11 @@ export const sampleWithFullData: IManual = {
   manualType: 'MAINTENANCE_GUIDE',
   version: 'than shirk fuss',
   language: 'machine mu',
-  publicationDate: dayjs('2025-12-20'),
+  publicationDate: dayjs('2025-12-24'),
   pageCount: 21287,
   status: 'DRAFT',
   isPublic: false,
-  createdDate: dayjs('2025-12-20T03:22'),
+  createdDate: dayjs('2025-12-24T22:21'),
 };
 
 export const sampleWithNewData: NewManual = {
@@ -49,7 +49,7 @@ export const sampleWithNewData: NewManual = {
   language: 'than',
   status: 'PUBLISHED',
   isPublic: true,
-  createdDate: dayjs('2025-12-20T05:36'),
+  createdDate: dayjs('2025-12-25T00:35'),
   id: null,
 };
 

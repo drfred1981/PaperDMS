@@ -70,7 +70,7 @@ public class WebhookSubscriptionQueryService extends QueryService<WebhookSubscri
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<WebhookSubscription> createSpecification(WebhookSubscriptionCriteria criteria) {
-        Specification<WebhookSubscription> specification = Specification.unrestricted();
+        Specification<WebhookSubscription> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

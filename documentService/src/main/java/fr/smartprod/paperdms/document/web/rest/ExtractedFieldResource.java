@@ -36,7 +36,7 @@ public class ExtractedFieldResource {
 
     private static final String ENTITY_NAME = "documentServiceExtractedField";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ExtractedFieldService extractedFieldService;

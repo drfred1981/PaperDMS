@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IMaintenanceTask, NewMaintenanceTask } from '../maintenance-task.model';
 
@@ -52,10 +51,10 @@ export type MaintenanceTaskFormGroup = FormGroup<MaintenanceTaskFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class MaintenanceTaskFormService {
-  createMaintenanceTaskFormGroup(maintenanceTask?: MaintenanceTaskFormGroupInput): MaintenanceTaskFormGroup {
+  createMaintenanceTaskFormGroup(maintenanceTask: MaintenanceTaskFormGroupInput = { id: null }): MaintenanceTaskFormGroup {
     const maintenanceTaskRawValue = this.convertMaintenanceTaskToMaintenanceTaskRawValue({
       ...this.getFormDefaults(),
-      ...(maintenanceTask ?? { id: null }),
+      ...maintenanceTask,
     });
     return new FormGroup<MaintenanceTaskFormGroupContent>({
       id: new FormControl(
@@ -102,10 +101,12 @@ export class MaintenanceTaskFormService {
 
   resetForm(form: MaintenanceTaskFormGroup, maintenanceTask: MaintenanceTaskFormGroupInput): void {
     const maintenanceTaskRawValue = this.convertMaintenanceTaskToMaintenanceTaskRawValue({ ...this.getFormDefaults(), ...maintenanceTask });
-    form.reset({
-      ...maintenanceTaskRawValue,
-      id: { value: maintenanceTaskRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...maintenanceTaskRawValue,
+        id: { value: maintenanceTaskRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): MaintenanceTaskFormDefaults {

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocument, NewDocument } from '../document.model';
 
@@ -46,7 +45,6 @@ type DocumentFormGroupContent = {
   thumbnailSha256: FormControl<DocumentFormRawValue['thumbnailSha256']>;
   webpPreviewS3Key: FormControl<DocumentFormRawValue['webpPreviewS3Key']>;
   webpPreviewSha256: FormControl<DocumentFormRawValue['webpPreviewSha256']>;
-  status: FormControl<DocumentFormRawValue['status']>;
   uploadDate: FormControl<DocumentFormRawValue['uploadDate']>;
   isPublic: FormControl<DocumentFormRawValue['isPublic']>;
   downloadCount: FormControl<DocumentFormRawValue['downloadCount']>;
@@ -65,10 +63,10 @@ export type DocumentFormGroup = FormGroup<DocumentFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DocumentFormService {
-  createDocumentFormGroup(document?: DocumentFormGroupInput): DocumentFormGroup {
+  createDocumentFormGroup(document: DocumentFormGroupInput = { id: null }): DocumentFormGroup {
     const documentRawValue = this.convertDocumentToDocumentRawValue({
       ...this.getFormDefaults(),
-      ...(document ?? { id: null }),
+      ...document,
     });
     return new FormGroup<DocumentFormGroupContent>({
       id: new FormControl(
@@ -117,9 +115,6 @@ export class DocumentFormService {
       webpPreviewSha256: new FormControl(documentRawValue.webpPreviewSha256, {
         validators: [Validators.maxLength(64)],
       }),
-      status: new FormControl(documentRawValue.status, {
-        validators: [Validators.required],
-      }),
       uploadDate: new FormControl(documentRawValue.uploadDate, {
         validators: [Validators.required],
       }),
@@ -157,10 +152,12 @@ export class DocumentFormService {
 
   resetForm(form: DocumentFormGroup, document: DocumentFormGroupInput): void {
     const documentRawValue = this.convertDocumentToDocumentRawValue({ ...this.getFormDefaults(), ...document });
-    form.reset({
-      ...documentRawValue,
-      id: { value: documentRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentRawValue,
+        id: { value: documentRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentFormDefaults {

@@ -8,6 +8,7 @@ describe('CorrespondentExtraction Form Service', () => {
   let service: CorrespondentExtractionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(CorrespondentExtractionFormService);
   });
 
@@ -70,7 +71,7 @@ describe('CorrespondentExtraction Form Service', () => {
       it('should return NewCorrespondentExtraction for default CorrespondentExtraction initial value', () => {
         const formGroup = service.createCorrespondentExtractionFormGroup(sampleWithNewData);
 
-        const correspondentExtraction = service.getCorrespondentExtraction(formGroup);
+        const correspondentExtraction = service.getCorrespondentExtraction(formGroup) as any;
 
         expect(correspondentExtraction).toMatchObject(sampleWithNewData);
       });
@@ -78,7 +79,7 @@ describe('CorrespondentExtraction Form Service', () => {
       it('should return NewCorrespondentExtraction for empty CorrespondentExtraction initial value', () => {
         const formGroup = service.createCorrespondentExtractionFormGroup();
 
-        const correspondentExtraction = service.getCorrespondentExtraction(formGroup);
+        const correspondentExtraction = service.getCorrespondentExtraction(formGroup) as any;
 
         expect(correspondentExtraction).toMatchObject({});
       });
@@ -86,7 +87,7 @@ describe('CorrespondentExtraction Form Service', () => {
       it('should return ICorrespondentExtraction', () => {
         const formGroup = service.createCorrespondentExtractionFormGroup(sampleWithRequiredData);
 
-        const correspondentExtraction = service.getCorrespondentExtraction(formGroup);
+        const correspondentExtraction = service.getCorrespondentExtraction(formGroup) as any;
 
         expect(correspondentExtraction).toMatchObject(sampleWithRequiredData);
       });

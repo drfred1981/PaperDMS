@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentRelationResolve from './route/document-relation-routing-resolve.service';
 
 const documentRelationRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-relation').then(m => m.DocumentRelation),
+    loadComponent: () => import('./list/document-relation.component').then(m => m.DocumentRelationComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentRelationRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-relation-detail').then(m => m.DocumentRelationDetail),
+    loadComponent: () => import('./detail/document-relation-detail.component').then(m => m.DocumentRelationDetailComponent),
     resolve: {
       documentRelation: DocumentRelationResolve,
     },
@@ -24,7 +23,7 @@ const documentRelationRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-relation-update').then(m => m.DocumentRelationUpdate),
+    loadComponent: () => import('./update/document-relation-update.component').then(m => m.DocumentRelationUpdateComponent),
     resolve: {
       documentRelation: DocumentRelationResolve,
     },
@@ -32,7 +31,7 @@ const documentRelationRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-relation-update').then(m => m.DocumentRelationUpdate),
+    loadComponent: () => import('./update/document-relation-update.component').then(m => m.DocumentRelationUpdateComponent),
     resolve: {
       documentRelation: DocumentRelationResolve,
     },

@@ -1,7 +1,6 @@
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
-
 import { of } from 'rxjs';
 
 import { ILanguageDetection } from '../language-detection.model';
@@ -13,6 +12,7 @@ describe('LanguageDetection routing resolve service', () => {
   let mockRouter: Router;
   let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
   let service: LanguageDetectionService;
+  let resultLanguageDetection: ILanguageDetection | null | undefined;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,70 +29,69 @@ describe('LanguageDetection routing resolve service', () => {
       ],
     });
     mockRouter = TestBed.inject(Router);
-    jest.spyOn(mockRouter, 'navigate');
+    jest.spyOn(mockRouter, 'navigate').mockImplementation(() => Promise.resolve(true));
     mockActivatedRouteSnapshot = TestBed.inject(ActivatedRoute).snapshot;
     service = TestBed.inject(LanguageDetectionService);
+    resultLanguageDetection = undefined;
   });
 
   describe('resolve', () => {
-    it('should return ILanguageDetection returned by find', async () => {
+    it('should return ILanguageDetection returned by find', () => {
       // GIVEN
       service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          languageDetectionResolve(mockActivatedRouteSnapshot).subscribe({
-            next(result) {
-              // THEN
-              expect(service.find).toHaveBeenCalledWith(123);
-              expect(result).toEqual({ id: 123 });
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        languageDetectionResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultLanguageDetection = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).toHaveBeenCalledWith(123);
+      expect(resultLanguageDetection).toEqual({ id: 123 });
     });
 
-    it('should return null if id is not provided', async () => {
+    it('should return null if id is not provided', () => {
       // GIVEN
       service.find = jest.fn();
       mockActivatedRouteSnapshot.params = {};
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          languageDetectionResolve(mockActivatedRouteSnapshot).subscribe({
-            next(result) {
-              // THEN
-              expect(service.find).not.toHaveBeenCalled();
-              expect(result).toEqual(null);
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        languageDetectionResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultLanguageDetection = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).not.toHaveBeenCalled();
+      expect(resultLanguageDetection).toEqual(null);
     });
 
-    it('should route to 404 page if data not found in server', async () => {
+    it('should route to 404 page if data not found in server', () => {
       // GIVEN
       jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<ILanguageDetection>({ body: null })));
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          languageDetectionResolve(mockActivatedRouteSnapshot).subscribe({
-            complete() {
-              // THEN
-              expect(service.find).toHaveBeenCalledWith(123);
-              expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        languageDetectionResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultLanguageDetection = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).toHaveBeenCalledWith(123);
+      expect(resultLanguageDetection).toEqual(undefined);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });
   });
 });

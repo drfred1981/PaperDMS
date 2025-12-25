@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IArchiveDocument, NewArchiveDocument } from '../archive-document.model';
 
@@ -46,10 +45,10 @@ export type ArchiveDocumentFormGroup = FormGroup<ArchiveDocumentFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class ArchiveDocumentFormService {
-  createArchiveDocumentFormGroup(archiveDocument?: ArchiveDocumentFormGroupInput): ArchiveDocumentFormGroup {
+  createArchiveDocumentFormGroup(archiveDocument: ArchiveDocumentFormGroupInput = { id: null }): ArchiveDocumentFormGroup {
     const archiveDocumentRawValue = this.convertArchiveDocumentToArchiveDocumentRawValue({
       ...this.getFormDefaults(),
-      ...(archiveDocument ?? { id: null }),
+      ...archiveDocument,
     });
     return new FormGroup<ArchiveDocumentFormGroupContent>({
       id: new FormControl(
@@ -92,10 +91,12 @@ export class ArchiveDocumentFormService {
 
   resetForm(form: ArchiveDocumentFormGroup, archiveDocument: ArchiveDocumentFormGroupInput): void {
     const archiveDocumentRawValue = this.convertArchiveDocumentToArchiveDocumentRawValue({ ...this.getFormDefaults(), ...archiveDocument });
-    form.reset({
-      ...archiveDocumentRawValue,
-      id: { value: archiveDocumentRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...archiveDocumentRawValue,
+        id: { value: archiveDocumentRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ArchiveDocumentFormDefaults {

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import SimilarityClusterResolve from './route/similarity-cluster-routing-resolve.service';
 
 const similarityClusterRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/similarity-cluster').then(m => m.SimilarityCluster),
+    loadComponent: () => import('./list/similarity-cluster.component').then(m => m.SimilarityClusterComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const similarityClusterRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/similarity-cluster-detail').then(m => m.SimilarityClusterDetail),
+    loadComponent: () => import('./detail/similarity-cluster-detail.component').then(m => m.SimilarityClusterDetailComponent),
     resolve: {
       similarityCluster: SimilarityClusterResolve,
     },
@@ -24,7 +23,7 @@ const similarityClusterRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/similarity-cluster-update').then(m => m.SimilarityClusterUpdate),
+    loadComponent: () => import('./update/similarity-cluster-update.component').then(m => m.SimilarityClusterUpdateComponent),
     resolve: {
       similarityCluster: SimilarityClusterResolve,
     },
@@ -32,7 +31,7 @@ const similarityClusterRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/similarity-cluster-update').then(m => m.SimilarityClusterUpdate),
+    loadComponent: () => import('./update/similarity-cluster-update.component').then(m => m.SimilarityClusterUpdateComponent),
     resolve: {
       similarityCluster: SimilarityClusterResolve,
     },

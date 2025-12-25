@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IManual } from '../manual.model';
@@ -117,7 +117,8 @@ describe('Manual Service', () => {
       it('should add a Manual to an empty array', () => {
         const manual: IManual = sampleWithRequiredData;
         expectedResult = service.addManualToCollectionIfMissing([], manual);
-        expect(expectedResult).toEqual([manual]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(manual);
       });
 
       it('should not add a Manual to an array that contains it', () => {
@@ -151,13 +152,16 @@ describe('Manual Service', () => {
         const manual: IManual = sampleWithRequiredData;
         const manual2: IManual = sampleWithPartialData;
         expectedResult = service.addManualToCollectionIfMissing([], manual, manual2);
-        expect(expectedResult).toEqual([manual, manual2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(manual);
+        expect(expectedResult).toContain(manual2);
       });
 
       it('should accept null and undefined values', () => {
         const manual: IManual = sampleWithRequiredData;
         expectedResult = service.addManualToCollectionIfMissing([], null, manual, undefined);
-        expect(expectedResult).toEqual([manual]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(manual);
       });
 
       it('should return initial array if no Manual is added', () => {

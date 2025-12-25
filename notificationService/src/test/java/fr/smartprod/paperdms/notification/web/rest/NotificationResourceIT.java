@@ -90,7 +90,7 @@ class NotificationResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1134,14 +1134,10 @@ class NotificationResourceIT {
 
         partialUpdatedNotification
             .title(UPDATED_TITLE)
-            .type(UPDATED_TYPE)
-            .priority(UPDATED_PRIORITY)
-            .channel(UPDATED_CHANNEL)
-            .relatedEntityType(UPDATED_RELATED_ENTITY_TYPE)
-            .relatedEntityId(UPDATED_RELATED_ENTITY_ID)
-            .actionUrl(UPDATED_ACTION_URL)
+            .recipientId(UPDATED_RECIPIENT_ID)
+            .isRead(UPDATED_IS_READ)
             .metadata(UPDATED_METADATA)
-            .expirationDate(UPDATED_EXPIRATION_DATE);
+            .createdDate(UPDATED_CREATED_DATE);
 
         restNotificationMockMvc
             .perform(

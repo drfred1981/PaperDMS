@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IOcrCache, NewOcrCache } from '../ocr-cache.model';
 
@@ -53,10 +52,10 @@ export type OcrCacheFormGroup = FormGroup<OcrCacheFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class OcrCacheFormService {
-  createOcrCacheFormGroup(ocrCache?: OcrCacheFormGroupInput): OcrCacheFormGroup {
+  createOcrCacheFormGroup(ocrCache: OcrCacheFormGroupInput = { id: null }): OcrCacheFormGroup {
     const ocrCacheRawValue = this.convertOcrCacheToOcrCacheRawValue({
       ...this.getFormDefaults(),
-      ...(ocrCache ?? { id: null }),
+      ...ocrCache,
     });
     return new FormGroup<OcrCacheFormGroupContent>({
       id: new FormControl(
@@ -104,10 +103,12 @@ export class OcrCacheFormService {
 
   resetForm(form: OcrCacheFormGroup, ocrCache: OcrCacheFormGroupInput): void {
     const ocrCacheRawValue = this.convertOcrCacheToOcrCacheRawValue({ ...this.getFormDefaults(), ...ocrCache });
-    form.reset({
-      ...ocrCacheRawValue,
-      id: { value: ocrCacheRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...ocrCacheRawValue,
+        id: { value: ocrCacheRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): OcrCacheFormDefaults {

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IPerformanceMetric } from '../performance-metric.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../performance-metric.test-samples';
@@ -101,7 +101,8 @@ describe('PerformanceMetric Service', () => {
       it('should add a PerformanceMetric to an empty array', () => {
         const performanceMetric: IPerformanceMetric = sampleWithRequiredData;
         expectedResult = service.addPerformanceMetricToCollectionIfMissing([], performanceMetric);
-        expect(expectedResult).toEqual([performanceMetric]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(performanceMetric);
       });
 
       it('should not add a PerformanceMetric to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('PerformanceMetric Service', () => {
         const performanceMetric: IPerformanceMetric = sampleWithRequiredData;
         const performanceMetric2: IPerformanceMetric = sampleWithPartialData;
         expectedResult = service.addPerformanceMetricToCollectionIfMissing([], performanceMetric, performanceMetric2);
-        expect(expectedResult).toEqual([performanceMetric, performanceMetric2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(performanceMetric);
+        expect(expectedResult).toContain(performanceMetric2);
       });
 
       it('should accept null and undefined values', () => {
         const performanceMetric: IPerformanceMetric = sampleWithRequiredData;
         expectedResult = service.addPerformanceMetricToCollectionIfMissing([], null, performanceMetric, undefined);
-        expect(expectedResult).toEqual([performanceMetric]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(performanceMetric);
       });
 
       it('should return initial array if no PerformanceMetric is added', () => {

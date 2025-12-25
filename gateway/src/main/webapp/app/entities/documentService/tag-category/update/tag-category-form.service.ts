@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ITagCategory, NewTagCategory } from '../tag-category.model';
 
@@ -45,10 +44,10 @@ export type TagCategoryFormGroup = FormGroup<TagCategoryFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class TagCategoryFormService {
-  createTagCategoryFormGroup(tagCategory?: TagCategoryFormGroupInput): TagCategoryFormGroup {
+  createTagCategoryFormGroup(tagCategory: TagCategoryFormGroupInput = { id: null }): TagCategoryFormGroup {
     const tagCategoryRawValue = this.convertTagCategoryToTagCategoryRawValue({
       ...this.getFormDefaults(),
-      ...(tagCategory ?? { id: null }),
+      ...tagCategory,
     });
     return new FormGroup<TagCategoryFormGroupContent>({
       id: new FormControl(
@@ -84,10 +83,12 @@ export class TagCategoryFormService {
 
   resetForm(form: TagCategoryFormGroup, tagCategory: TagCategoryFormGroupInput): void {
     const tagCategoryRawValue = this.convertTagCategoryToTagCategoryRawValue({ ...this.getFormDefaults(), ...tagCategory });
-    form.reset({
-      ...tagCategoryRawValue,
-      id: { value: tagCategoryRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...tagCategoryRawValue,
+        id: { value: tagCategoryRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): TagCategoryFormDefaults {

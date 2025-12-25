@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISmartFolder, NewSmartFolder } from '../smart-folder.model';
 
@@ -44,10 +43,10 @@ export type SmartFolderFormGroup = FormGroup<SmartFolderFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SmartFolderFormService {
-  createSmartFolderFormGroup(smartFolder?: SmartFolderFormGroupInput): SmartFolderFormGroup {
+  createSmartFolderFormGroup(smartFolder: SmartFolderFormGroupInput = { id: null }): SmartFolderFormGroup {
     const smartFolderRawValue = this.convertSmartFolderToSmartFolderRawValue({
       ...this.getFormDefaults(),
-      ...(smartFolder ?? { id: null }),
+      ...smartFolder,
     });
     return new FormGroup<SmartFolderFormGroupContent>({
       id: new FormControl(
@@ -84,10 +83,12 @@ export class SmartFolderFormService {
 
   resetForm(form: SmartFolderFormGroup, smartFolder: SmartFolderFormGroupInput): void {
     const smartFolderRawValue = this.convertSmartFolderToSmartFolderRawValue({ ...this.getFormDefaults(), ...smartFolder });
-    form.reset({
-      ...smartFolderRawValue,
-      id: { value: smartFolderRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...smartFolderRawValue,
+        id: { value: smartFolderRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SmartFolderFormDefaults {

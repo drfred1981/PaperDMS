@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentSimilarity, NewDocumentSimilarity } from '../document-similarity.model';
 
 export type PartialUpdateDocumentSimilarity = Partial<IDocumentSimilarity> & Pick<IDocumentSimilarity, 'id'>;
@@ -42,28 +42,24 @@ export class DocumentSimilarityService {
   update(documentSimilarity: IDocumentSimilarity): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentSimilarity);
     return this.http
-      .put<RestDocumentSimilarity>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentSimilarityIdentifier(documentSimilarity))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestDocumentSimilarity>(`${this.resourceUrl}/${this.getDocumentSimilarityIdentifier(documentSimilarity)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentSimilarity: PartialUpdateDocumentSimilarity): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentSimilarity);
     return this.http
-      .patch<RestDocumentSimilarity>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentSimilarityIdentifier(documentSimilarity))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentSimilarity>(`${this.resourceUrl}/${this.getDocumentSimilarityIdentifier(documentSimilarity)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentSimilarity>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentSimilarity>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -75,7 +71,7 @@ export class DocumentSimilarityService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentSimilarityIdentifier(documentSimilarity: Pick<IDocumentSimilarity, 'id'>): number {

@@ -1,8 +1,7 @@
 import dayjs from 'dayjs/esm';
-
 import { ICorrespondentExtraction } from 'app/entities/aiService/correspondent-extraction/correspondent-extraction.model';
-import { CorrespondentRole } from 'app/entities/enumerations/correspondent-role.model';
 import { CorrespondentType } from 'app/entities/enumerations/correspondent-type.model';
+import { CorrespondentRole } from 'app/entities/enumerations/correspondent-role.model';
 
 export interface ICorrespondent {
   id: number;

@@ -77,7 +77,7 @@ class ExportPatternResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -988,11 +988,15 @@ class ExportPatternResourceIT {
         partialUpdatedExportPattern.setId(exportPattern.getId());
 
         partialUpdatedExportPattern
+            .description(UPDATED_DESCRIPTION)
+            .pathTemplate(UPDATED_PATH_TEMPLATE)
+            .fileNameTemplate(UPDATED_FILE_NAME_TEMPLATE)
             .variables(UPDATED_VARIABLES)
+            .examples(UPDATED_EXAMPLES)
             .isSystem(UPDATED_IS_SYSTEM)
             .isActive(UPDATED_IS_ACTIVE)
             .usageCount(UPDATED_USAGE_COUNT)
-            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restExportPatternMockMvc

@@ -86,7 +86,7 @@ class OcrComparisonResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -464,16 +464,11 @@ class OcrComparisonResourceIT {
 
         partialUpdatedOcrComparison
             .documentId(UPDATED_DOCUMENT_ID)
-            .documentSha256(UPDATED_DOCUMENT_SHA_256)
-            .pageNumber(UPDATED_PAGE_NUMBER)
             .tikaText(UPDATED_TIKA_TEXT)
-            .aiText(UPDATED_AI_TEXT)
-            .aiConfidence(UPDATED_AI_CONFIDENCE)
-            .similarity(UPDATED_SIMILARITY)
-            .differences(UPDATED_DIFFERENCES)
-            .differencesS3Key(UPDATED_DIFFERENCES_S_3_KEY)
-            .selectedBy(UPDATED_SELECTED_BY)
-            .comparisonDate(UPDATED_COMPARISON_DATE);
+            .tikaConfidence(UPDATED_TIKA_CONFIDENCE)
+            .selectedDate(UPDATED_SELECTED_DATE)
+            .comparisonDate(UPDATED_COMPARISON_DATE)
+            .metadata(UPDATED_METADATA);
 
         restOcrComparisonMockMvc
             .perform(

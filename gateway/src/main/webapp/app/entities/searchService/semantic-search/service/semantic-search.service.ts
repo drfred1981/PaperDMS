@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { ISemanticSearch, NewSemanticSearch } from '../semantic-search.model';
 
 export type PartialUpdateSemanticSearch = Partial<ISemanticSearch> & Pick<ISemanticSearch, 'id'>;
@@ -41,24 +41,20 @@ export class SemanticSearchService {
   update(semanticSearch: ISemanticSearch): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(semanticSearch);
     return this.http
-      .put<RestSemanticSearch>(`${this.resourceUrl}/${encodeURIComponent(this.getSemanticSearchIdentifier(semanticSearch))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestSemanticSearch>(`${this.resourceUrl}/${this.getSemanticSearchIdentifier(semanticSearch)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(semanticSearch: PartialUpdateSemanticSearch): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(semanticSearch);
     return this.http
-      .patch<RestSemanticSearch>(`${this.resourceUrl}/${encodeURIComponent(this.getSemanticSearchIdentifier(semanticSearch))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestSemanticSearch>(`${this.resourceUrl}/${this.getSemanticSearchIdentifier(semanticSearch)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestSemanticSearch>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestSemanticSearch>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class SemanticSearchService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getSemanticSearchIdentifier(semanticSearch: Pick<ISemanticSearch, 'id'>): number {

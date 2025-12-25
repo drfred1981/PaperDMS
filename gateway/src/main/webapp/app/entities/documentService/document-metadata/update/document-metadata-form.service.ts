@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentMetadata, NewDocumentMetadata } from '../document-metadata.model';
 
@@ -44,10 +43,10 @@ export type DocumentMetadataFormGroup = FormGroup<DocumentMetadataFormGroupConte
 
 @Injectable({ providedIn: 'root' })
 export class DocumentMetadataFormService {
-  createDocumentMetadataFormGroup(documentMetadata?: DocumentMetadataFormGroupInput): DocumentMetadataFormGroup {
+  createDocumentMetadataFormGroup(documentMetadata: DocumentMetadataFormGroupInput = { id: null }): DocumentMetadataFormGroup {
     const documentMetadataRawValue = this.convertDocumentMetadataToDocumentMetadataRawValue({
       ...this.getFormDefaults(),
-      ...(documentMetadata ?? { id: null }),
+      ...documentMetadata,
     });
     return new FormGroup<DocumentMetadataFormGroupContent>({
       id: new FormControl(
@@ -87,10 +86,12 @@ export class DocumentMetadataFormService {
       ...this.getFormDefaults(),
       ...documentMetadata,
     });
-    form.reset({
-      ...documentMetadataRawValue,
-      id: { value: documentMetadataRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentMetadataRawValue,
+        id: { value: documentMetadataRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentMetadataFormDefaults {

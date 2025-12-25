@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentStatistics } from '../document-statistics.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-statistics.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentStatistics Service', () => {
       it('should add a DocumentStatistics to an empty array', () => {
         const documentStatistics: IDocumentStatistics = sampleWithRequiredData;
         expectedResult = service.addDocumentStatisticsToCollectionIfMissing([], documentStatistics);
-        expect(expectedResult).toEqual([documentStatistics]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentStatistics);
       });
 
       it('should not add a DocumentStatistics to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentStatistics Service', () => {
         const documentStatistics: IDocumentStatistics = sampleWithRequiredData;
         const documentStatistics2: IDocumentStatistics = sampleWithPartialData;
         expectedResult = service.addDocumentStatisticsToCollectionIfMissing([], documentStatistics, documentStatistics2);
-        expect(expectedResult).toEqual([documentStatistics, documentStatistics2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentStatistics);
+        expect(expectedResult).toContain(documentStatistics2);
       });
 
       it('should accept null and undefined values', () => {
         const documentStatistics: IDocumentStatistics = sampleWithRequiredData;
         expectedResult = service.addDocumentStatisticsToCollectionIfMissing([], null, documentStatistics, undefined);
-        expect(expectedResult).toEqual([documentStatistics]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentStatistics);
       });
 
       it('should return initial array if no DocumentStatistics is added', () => {

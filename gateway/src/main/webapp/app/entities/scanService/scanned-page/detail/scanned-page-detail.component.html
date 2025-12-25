@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (scannedPage(); as scannedPageRef) {
+      <div>
+        <h2 data-cy="scannedPageDetailsHeading"><span jhiTranslate="gatewayApp.scanServiceScannedPage.detail.title">Scanned Page</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.scanJobId">Scan Job Id</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.scanJobId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.pageNumber">Page Number</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.pageNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.sha256">Sha 256</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.sha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.s3Key">S 3 Key</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.s3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.s3PreviewKey">S 3 Preview Key</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.s3PreviewKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.fileSize">File Size</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.fileSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.width">Width</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.width }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.height">Height</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.height }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.dpi">Dpi</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.dpi }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.scannedDate">Scanned Date</span></dt>
+          <dd>
+            <span>{{ scannedPageRef.scannedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.scanServiceScannedPage.scanJob">Scan Job</span></dt>
+          <dd>
+            @if (scannedPage()!.scanJob) {
+              <div>
+                <a [routerLink]="['/scan-job', scannedPage()!.scanJob?.id, 'view']">{{ scannedPageRef.scanJob?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/scanned-page', scannedPageRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

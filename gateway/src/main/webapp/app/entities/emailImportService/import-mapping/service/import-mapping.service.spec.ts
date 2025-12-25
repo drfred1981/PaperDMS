@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IImportMapping } from '../import-mapping.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../import-mapping.test-samples';
@@ -100,7 +100,8 @@ describe('ImportMapping Service', () => {
       it('should add a ImportMapping to an empty array', () => {
         const importMapping: IImportMapping = sampleWithRequiredData;
         expectedResult = service.addImportMappingToCollectionIfMissing([], importMapping);
-        expect(expectedResult).toEqual([importMapping]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(importMapping);
       });
 
       it('should not add a ImportMapping to an array that contains it', () => {
@@ -134,13 +135,16 @@ describe('ImportMapping Service', () => {
         const importMapping: IImportMapping = sampleWithRequiredData;
         const importMapping2: IImportMapping = sampleWithPartialData;
         expectedResult = service.addImportMappingToCollectionIfMissing([], importMapping, importMapping2);
-        expect(expectedResult).toEqual([importMapping, importMapping2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(importMapping);
+        expect(expectedResult).toContain(importMapping2);
       });
 
       it('should accept null and undefined values', () => {
         const importMapping: IImportMapping = sampleWithRequiredData;
         expectedResult = service.addImportMappingToCollectionIfMissing([], null, importMapping, undefined);
-        expect(expectedResult).toEqual([importMapping]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(importMapping);
       });
 
       it('should return initial array if no ImportMapping is added', () => {

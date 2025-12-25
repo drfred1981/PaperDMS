@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentRelation, NewDocumentRelation } from '../document-relation.model';
 
@@ -43,10 +42,10 @@ export type DocumentRelationFormGroup = FormGroup<DocumentRelationFormGroupConte
 
 @Injectable({ providedIn: 'root' })
 export class DocumentRelationFormService {
-  createDocumentRelationFormGroup(documentRelation?: DocumentRelationFormGroupInput): DocumentRelationFormGroup {
+  createDocumentRelationFormGroup(documentRelation: DocumentRelationFormGroupInput = { id: null }): DocumentRelationFormGroup {
     const documentRelationRawValue = this.convertDocumentRelationToDocumentRelationRawValue({
       ...this.getFormDefaults(),
-      ...(documentRelation ?? { id: null }),
+      ...documentRelation,
     });
     return new FormGroup<DocumentRelationFormGroupContent>({
       id: new FormControl(
@@ -85,10 +84,12 @@ export class DocumentRelationFormService {
       ...this.getFormDefaults(),
       ...documentRelation,
     });
-    form.reset({
-      ...documentRelationRawValue,
-      id: { value: documentRelationRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentRelationRawValue,
+        id: { value: documentRelationRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentRelationFormDefaults {

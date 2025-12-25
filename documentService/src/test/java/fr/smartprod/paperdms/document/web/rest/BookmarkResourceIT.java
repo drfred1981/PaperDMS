@@ -53,7 +53,7 @@ class BookmarkResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -374,7 +374,7 @@ class BookmarkResourceIT {
         Bookmark partialUpdatedBookmark = new Bookmark();
         partialUpdatedBookmark.setId(bookmark.getId());
 
-        partialUpdatedBookmark.userId(UPDATED_USER_ID);
+        partialUpdatedBookmark.createdDate(UPDATED_CREATED_DATE);
 
         restBookmarkMockMvc
             .perform(

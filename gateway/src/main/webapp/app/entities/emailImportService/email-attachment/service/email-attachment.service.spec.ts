@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IEmailAttachment } from '../email-attachment.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../email-attachment.test-samples';
@@ -100,7 +100,8 @@ describe('EmailAttachment Service', () => {
       it('should add a EmailAttachment to an empty array', () => {
         const emailAttachment: IEmailAttachment = sampleWithRequiredData;
         expectedResult = service.addEmailAttachmentToCollectionIfMissing([], emailAttachment);
-        expect(expectedResult).toEqual([emailAttachment]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(emailAttachment);
       });
 
       it('should not add a EmailAttachment to an array that contains it', () => {
@@ -134,13 +135,16 @@ describe('EmailAttachment Service', () => {
         const emailAttachment: IEmailAttachment = sampleWithRequiredData;
         const emailAttachment2: IEmailAttachment = sampleWithPartialData;
         expectedResult = service.addEmailAttachmentToCollectionIfMissing([], emailAttachment, emailAttachment2);
-        expect(expectedResult).toEqual([emailAttachment, emailAttachment2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(emailAttachment);
+        expect(expectedResult).toContain(emailAttachment2);
       });
 
       it('should accept null and undefined values', () => {
         const emailAttachment: IEmailAttachment = sampleWithRequiredData;
         expectedResult = service.addEmailAttachmentToCollectionIfMissing([], null, emailAttachment, undefined);
-        expect(expectedResult).toEqual([emailAttachment]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(emailAttachment);
       });
 
       it('should return initial array if no EmailAttachment is added', () => {

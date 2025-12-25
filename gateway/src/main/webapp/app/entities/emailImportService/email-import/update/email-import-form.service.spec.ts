@@ -8,6 +8,7 @@ describe('EmailImport Form Service', () => {
   let service: EmailImportFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(EmailImportFormService);
   });
 
@@ -70,7 +71,7 @@ describe('EmailImport Form Service', () => {
       it('should return NewEmailImport for default EmailImport initial value', () => {
         const formGroup = service.createEmailImportFormGroup(sampleWithNewData);
 
-        const emailImport = service.getEmailImport(formGroup);
+        const emailImport = service.getEmailImport(formGroup) as any;
 
         expect(emailImport).toMatchObject(sampleWithNewData);
       });
@@ -78,7 +79,7 @@ describe('EmailImport Form Service', () => {
       it('should return NewEmailImport for empty EmailImport initial value', () => {
         const formGroup = service.createEmailImportFormGroup();
 
-        const emailImport = service.getEmailImport(formGroup);
+        const emailImport = service.getEmailImport(formGroup) as any;
 
         expect(emailImport).toMatchObject({});
       });
@@ -86,7 +87,7 @@ describe('EmailImport Form Service', () => {
       it('should return IEmailImport', () => {
         const formGroup = service.createEmailImportFormGroup(sampleWithRequiredData);
 
-        const emailImport = service.getEmailImport(formGroup);
+        const emailImport = service.getEmailImport(formGroup) as any;
 
         expect(emailImport).toMatchObject(sampleWithRequiredData);
       });

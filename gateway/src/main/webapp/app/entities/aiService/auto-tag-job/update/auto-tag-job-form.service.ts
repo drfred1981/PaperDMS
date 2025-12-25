@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IAutoTagJob, NewAutoTagJob } from '../auto-tag-job.model';
 
@@ -56,10 +55,10 @@ export type AutoTagJobFormGroup = FormGroup<AutoTagJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class AutoTagJobFormService {
-  createAutoTagJobFormGroup(autoTagJob?: AutoTagJobFormGroupInput): AutoTagJobFormGroup {
+  createAutoTagJobFormGroup(autoTagJob: AutoTagJobFormGroupInput = { id: null }): AutoTagJobFormGroup {
     const autoTagJobRawValue = this.convertAutoTagJobToAutoTagJobRawValue({
       ...this.getFormDefaults(),
-      ...(autoTagJob ?? { id: null }),
+      ...autoTagJob,
     });
     return new FormGroup<AutoTagJobFormGroupContent>({
       id: new FormControl(
@@ -116,10 +115,12 @@ export class AutoTagJobFormService {
 
   resetForm(form: AutoTagJobFormGroup, autoTagJob: AutoTagJobFormGroupInput): void {
     const autoTagJobRawValue = this.convertAutoTagJobToAutoTagJobRawValue({ ...this.getFormDefaults(), ...autoTagJob });
-    form.reset({
-      ...autoTagJobRawValue,
-      id: { value: autoTagJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...autoTagJobRawValue,
+        id: { value: autoTagJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): AutoTagJobFormDefaults {

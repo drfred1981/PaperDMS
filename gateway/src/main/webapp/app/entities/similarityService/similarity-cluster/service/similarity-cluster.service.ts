@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { ISimilarityCluster, NewSimilarityCluster } from '../similarity-cluster.model';
 
 export type PartialUpdateSimilarityCluster = Partial<ISimilarityCluster> & Pick<ISimilarityCluster, 'id'>;
@@ -42,28 +42,24 @@ export class SimilarityClusterService {
   update(similarityCluster: ISimilarityCluster): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(similarityCluster);
     return this.http
-      .put<RestSimilarityCluster>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getSimilarityClusterIdentifier(similarityCluster))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestSimilarityCluster>(`${this.resourceUrl}/${this.getSimilarityClusterIdentifier(similarityCluster)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(similarityCluster: PartialUpdateSimilarityCluster): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(similarityCluster);
     return this.http
-      .patch<RestSimilarityCluster>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getSimilarityClusterIdentifier(similarityCluster))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestSimilarityCluster>(`${this.resourceUrl}/${this.getSimilarityClusterIdentifier(similarityCluster)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestSimilarityCluster>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestSimilarityCluster>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -75,7 +71,7 @@ export class SimilarityClusterService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getSimilarityClusterIdentifier(similarityCluster: Pick<ISimilarityCluster, 'id'>): number {

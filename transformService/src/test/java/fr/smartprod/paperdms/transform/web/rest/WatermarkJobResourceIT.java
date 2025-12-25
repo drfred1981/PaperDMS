@@ -102,7 +102,7 @@ class WatermarkJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1480,12 +1480,11 @@ class WatermarkJobResourceIT {
 
         partialUpdatedWatermarkJob
             .watermarkText(UPDATED_WATERMARK_TEXT)
-            .position(UPDATED_POSITION)
+            .opacity(UPDATED_OPACITY)
+            .fontSize(UPDATED_FONT_SIZE)
             .rotation(UPDATED_ROTATION)
-            .tiled(UPDATED_TILED)
-            .outputS3Key(UPDATED_OUTPUT_S_3_KEY)
-            .outputDocumentId(UPDATED_OUTPUT_DOCUMENT_ID)
-            .startDate(UPDATED_START_DATE)
+            .errorMessage(UPDATED_ERROR_MESSAGE)
+            .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE);
 
         restWatermarkJobMockMvc

@@ -68,7 +68,7 @@ class ApprovalHistoryResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -434,6 +434,9 @@ class ApprovalHistoryResourceIT {
         partialUpdatedApprovalHistory
             .documentId(UPDATED_DOCUMENT_ID)
             .workflowInstanceId(UPDATED_WORKFLOW_INSTANCE_ID)
+            .stepNumber(UPDATED_STEP_NUMBER)
+            .action(UPDATED_ACTION)
+            .comment(UPDATED_COMMENT)
             .actionBy(UPDATED_ACTION_BY)
             .timeTaken(UPDATED_TIME_TAKEN);
 

@@ -10,7 +10,7 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
 logging:
@@ -102,7 +102,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: NTNjYjJkMmU5ZWNkYzdiM2VmZTYyOWNiMjA5Y2I3NTU5NTc3ODY5ZDkwMjZiOTI3NDg3OWZlNmQyY2QxY2QwOWFhYzZmODEyM2MwMTAyNTY1OTM0OWExMDZmZTkxNzlkMzhkNGRjY2Y5MDkzNzlmY2Y5NmZlYmFlOTM3OGE0YTM=
+        base64-secret: NmMyODdhY2Y4MWQyYWIyZjBjZDdhYmI4YTA0OGU5YjJhMGU2NDRmNWIzNGM5MWJmY2E3NmZjZDUwNTE4NDQ0MDM0ZmY5ZjA1M2MzM2I0NzVjYTk5ODI2Y2IwMzVjNzMxOTgxYzM2YjRkZGRkMjYxNzI0YmFkNzZkMjBkYzhlY2E=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

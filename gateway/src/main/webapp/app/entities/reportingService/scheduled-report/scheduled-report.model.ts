@@ -1,7 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { ReportFormat } from 'app/entities/enumerations/report-format.model';
 import { ReportType } from 'app/entities/enumerations/report-type.model';
+import { ReportFormat } from 'app/entities/enumerations/report-format.model';
 
 export interface IScheduledReport {
   id: number;

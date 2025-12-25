@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ICorrespondentExtraction, NewCorrespondentExtraction } from '../correspondent-extraction.model';
 
@@ -57,11 +56,11 @@ export type CorrespondentExtractionFormGroup = FormGroup<CorrespondentExtraction
 @Injectable({ providedIn: 'root' })
 export class CorrespondentExtractionFormService {
   createCorrespondentExtractionFormGroup(
-    correspondentExtraction?: CorrespondentExtractionFormGroupInput,
+    correspondentExtraction: CorrespondentExtractionFormGroupInput = { id: null },
   ): CorrespondentExtractionFormGroup {
     const correspondentExtractionRawValue = this.convertCorrespondentExtractionToCorrespondentExtractionRawValue({
       ...this.getFormDefaults(),
-      ...(correspondentExtraction ?? { id: null }),
+      ...correspondentExtraction,
     });
     return new FormGroup<CorrespondentExtractionFormGroupContent>({
       id: new FormControl(
@@ -121,10 +120,12 @@ export class CorrespondentExtractionFormService {
       ...this.getFormDefaults(),
       ...correspondentExtraction,
     });
-    form.reset({
-      ...correspondentExtractionRawValue,
-      id: { value: correspondentExtractionRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...correspondentExtractionRawValue,
+        id: { value: correspondentExtractionRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): CorrespondentExtractionFormDefaults {

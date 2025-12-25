@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IExtractedField, NewExtractedField } from '../extracted-field.model';
 
@@ -45,10 +44,10 @@ export type ExtractedFieldFormGroup = FormGroup<ExtractedFieldFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ExtractedFieldFormService {
-  createExtractedFieldFormGroup(extractedField?: ExtractedFieldFormGroupInput): ExtractedFieldFormGroup {
+  createExtractedFieldFormGroup(extractedField: ExtractedFieldFormGroupInput = { id: null }): ExtractedFieldFormGroup {
     const extractedFieldRawValue = this.convertExtractedFieldToExtractedFieldRawValue({
       ...this.getFormDefaults(),
-      ...(extractedField ?? { id: null }),
+      ...extractedField,
     });
     return new FormGroup<ExtractedFieldFormGroupContent>({
       id: new FormControl(
@@ -88,10 +87,12 @@ export class ExtractedFieldFormService {
 
   resetForm(form: ExtractedFieldFormGroup, extractedField: ExtractedFieldFormGroupInput): void {
     const extractedFieldRawValue = this.convertExtractedFieldToExtractedFieldRawValue({ ...this.getFormDefaults(), ...extractedField });
-    form.reset({
-      ...extractedFieldRawValue,
-      id: { value: extractedFieldRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...extractedFieldRawValue,
+        id: { value: extractedFieldRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ExtractedFieldFormDefaults {

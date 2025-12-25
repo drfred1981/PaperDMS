@@ -32,7 +32,7 @@ export const sampleWithFullData: INotificationPreference = {
   quietHoursStart: 'in an',
   quietHoursEnd: 'aside',
   frequency: 'IMMEDIATELY',
-  lastModifiedDate: dayjs('2025-12-19T20:13'),
+  lastModifiedDate: dayjs('2025-12-24T15:12'),
 };
 
 export const sampleWithNewData: NewNotificationPreference = {

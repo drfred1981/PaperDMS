@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (bankStatement(); as bankStatementRef) {
+      <div>
+        <h2 data-cy="bankStatementDetailsHeading">
+          <span jhiTranslate="gatewayApp.businessDocServiceBankStatement.detail.title">Bank Statement</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.accountNumber">Account Number</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.accountNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.bankName">Bank Name</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.bankName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.statementDate">Statement Date</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.statementDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.statementPeriodStart">Statement Period Start</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.statementPeriodStart | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.statementPeriodEnd">Statement Period End</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.statementPeriodEnd | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.openingBalance">Opening Balance</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.openingBalance }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.closingBalance">Closing Balance</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.closingBalance }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.currency">Currency</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.StatementStatus.' + (bankStatementRef.status ?? 'null')">{{
+              { null: '', DRAFT: 'DRAFT', PENDING: 'PENDING', PROCESSED: 'PROCESSED', RECONCILED: 'RECONCILED', ARCHIVED: 'ARCHIVED' }[
+                bankStatementRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.isReconciled">Is Reconciled</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.isReconciled }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankStatement.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ bankStatementRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/bank-statement', bankStatementRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

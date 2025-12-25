@@ -11,10 +11,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.smartprod.paperdms.document.IntegrationTest;
+import fr.smartprod.paperdms.document.domain.Document;
 import fr.smartprod.paperdms.document.domain.DocumentServiceStatus;
-import fr.smartprod.paperdms.common.enumeration.ServiceStatus;
-import fr.smartprod.paperdms.common.enumeration.ServiceType;
-import fr.smartprod.paperdms.document.repository.DocumentServiceStatusUploadRepository;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceStatus;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceType;
+import fr.smartprod.paperdms.document.repository.DocumentServiceStatusRepository;
 import fr.smartprod.paperdms.document.repository.search.DocumentServiceStatusSearchRepository;
 import fr.smartprod.paperdms.document.service.dto.DocumentServiceStatusDTO;
 import fr.smartprod.paperdms.document.service.mapper.DocumentServiceStatusMapper;
@@ -96,13 +97,13 @@ class DocumentServiceStatusResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/document-service-statuses/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
 
     @Autowired
-    private DocumentServiceStatusUploadRepository documentServiceStatusRepository;
+    private DocumentServiceStatusRepository documentServiceStatusRepository;
 
     @Autowired
     private DocumentServiceStatusMapper documentServiceStatusMapper;
@@ -126,8 +127,8 @@ class DocumentServiceStatusResourceIT {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static DocumentServiceStatus createEntity() {
-        return new DocumentServiceStatus()
+    public static DocumentServiceStatus createEntity(EntityManager em) {
+        DocumentServiceStatus documentServiceStatus = new DocumentServiceStatus()
             .documentId(DEFAULT_DOCUMENT_ID)
             .serviceType(DEFAULT_SERVICE_TYPE)
             .status(DEFAULT_STATUS)
@@ -142,6 +143,17 @@ class DocumentServiceStatusResourceIT {
             .priority(DEFAULT_PRIORITY)
             .updatedBy(DEFAULT_UPDATED_BY)
             .updatedDate(DEFAULT_UPDATED_DATE);
+        // Add required entity
+        Document document;
+        if (TestUtil.findAll(em, Document.class).isEmpty()) {
+            document = DocumentResourceIT.createEntity(em);
+            em.persist(document);
+            em.flush();
+        } else {
+            document = TestUtil.findAll(em, Document.class).get(0);
+        }
+        documentServiceStatus.setDocument(document);
+        return documentServiceStatus;
     }
 
     /**
@@ -150,8 +162,8 @@ class DocumentServiceStatusResourceIT {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static DocumentServiceStatus createUpdatedEntity() {
-        return new DocumentServiceStatus()
+    public static DocumentServiceStatus createUpdatedEntity(EntityManager em) {
+        DocumentServiceStatus updatedDocumentServiceStatus = new DocumentServiceStatus()
             .documentId(UPDATED_DOCUMENT_ID)
             .serviceType(UPDATED_SERVICE_TYPE)
             .status(UPDATED_STATUS)
@@ -166,11 +178,22 @@ class DocumentServiceStatusResourceIT {
             .priority(UPDATED_PRIORITY)
             .updatedBy(UPDATED_UPDATED_BY)
             .updatedDate(UPDATED_UPDATED_DATE);
+        // Add required entity
+        Document document;
+        if (TestUtil.findAll(em, Document.class).isEmpty()) {
+            document = DocumentResourceIT.createUpdatedEntity(em);
+            em.persist(document);
+            em.flush();
+        } else {
+            document = TestUtil.findAll(em, Document.class).get(0);
+        }
+        updatedDocumentServiceStatus.setDocument(document);
+        return updatedDocumentServiceStatus;
     }
 
     @BeforeEach
     void initTest() {
-        documentServiceStatus = createEntity();
+        documentServiceStatus = createEntity(em);
     }
 
     @AfterEach
@@ -1036,6 +1059,28 @@ class DocumentServiceStatusResourceIT {
         defaultDocumentServiceStatusFiltering("updatedDate.specified=true", "updatedDate.specified=false");
     }
 
+    @Test
+    @Transactional
+    void getAllDocumentServiceStatusesByDocumentIsEqualToSomething() throws Exception {
+        Document document;
+        if (TestUtil.findAll(em, Document.class).isEmpty()) {
+            documentServiceStatusRepository.saveAndFlush(documentServiceStatus);
+            document = DocumentResourceIT.createEntity(em);
+        } else {
+            document = TestUtil.findAll(em, Document.class).get(0);
+        }
+        em.persist(document);
+        em.flush();
+        documentServiceStatus.setDocument(document);
+        documentServiceStatusRepository.saveAndFlush(documentServiceStatus);
+        Long documentId = document.getId();
+        // Get all the documentServiceStatusList where document equals to documentId
+        defaultDocumentServiceStatusShouldBeFound("documentId.equals=" + documentId);
+
+        // Get all the documentServiceStatusList where document equals to (documentId + 1)
+        defaultDocumentServiceStatusShouldNotBeFound("documentId.equals=" + (documentId + 1));
+    }
+
     private void defaultDocumentServiceStatusFiltering(String shouldBeFound, String shouldNotBeFound) throws Exception {
         defaultDocumentServiceStatusShouldBeFound(shouldBeFound);
         defaultDocumentServiceStatusShouldNotBeFound(shouldNotBeFound);
@@ -1242,12 +1287,10 @@ class DocumentServiceStatusResourceIT {
         partialUpdatedDocumentServiceStatus.setId(documentServiceStatus.getId());
 
         partialUpdatedDocumentServiceStatus
-            .status(UPDATED_STATUS)
-            .statusDetails(UPDATED_STATUS_DETAILS)
             .errorMessage(UPDATED_ERROR_MESSAGE)
-            .retryCount(UPDATED_RETRY_COUNT)
             .jobId(UPDATED_JOB_ID)
             .priority(UPDATED_PRIORITY)
+            .updatedBy(UPDATED_UPDATED_BY)
             .updatedDate(UPDATED_UPDATED_DATE);
 
         restDocumentServiceStatusMockMvc

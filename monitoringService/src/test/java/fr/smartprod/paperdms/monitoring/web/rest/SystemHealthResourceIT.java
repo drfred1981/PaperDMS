@@ -65,7 +65,7 @@ class SystemHealthResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -390,10 +390,10 @@ class SystemHealthResourceIT {
         partialUpdatedSystemHealth.setId(systemHealth.getId());
 
         partialUpdatedSystemHealth
-            .serviceName(UPDATED_SERVICE_NAME)
-            .version(UPDATED_VERSION)
-            .uptime(UPDATED_UPTIME)
-            .memoryUsage(UPDATED_MEMORY_USAGE);
+            .status(UPDATED_STATUS)
+            .memoryUsage(UPDATED_MEMORY_USAGE)
+            .errorRate(UPDATED_ERROR_RATE)
+            .lastCheck(UPDATED_LAST_CHECK);
 
         restSystemHealthMockMvc
             .perform(

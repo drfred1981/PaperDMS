@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import WorkflowInstanceResolve from './route/workflow-instance-routing-resolve.service';
 
 const workflowInstanceRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/workflow-instance').then(m => m.WorkflowInstance),
+    loadComponent: () => import('./list/workflow-instance.component').then(m => m.WorkflowInstanceComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const workflowInstanceRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/workflow-instance-detail').then(m => m.WorkflowInstanceDetail),
+    loadComponent: () => import('./detail/workflow-instance-detail.component').then(m => m.WorkflowInstanceDetailComponent),
     resolve: {
       workflowInstance: WorkflowInstanceResolve,
     },
@@ -24,7 +23,7 @@ const workflowInstanceRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/workflow-instance-update').then(m => m.WorkflowInstanceUpdate),
+    loadComponent: () => import('./update/workflow-instance-update.component').then(m => m.WorkflowInstanceUpdateComponent),
     resolve: {
       workflowInstance: WorkflowInstanceResolve,
     },
@@ -32,7 +31,7 @@ const workflowInstanceRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/workflow-instance-update').then(m => m.WorkflowInstanceUpdate),
+    loadComponent: () => import('./update/workflow-instance-update.component').then(m => m.WorkflowInstanceUpdateComponent),
     resolve: {
       workflowInstance: WorkflowInstanceResolve,
     },

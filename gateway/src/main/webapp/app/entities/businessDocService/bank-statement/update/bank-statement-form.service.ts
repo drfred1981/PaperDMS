@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IBankStatement, NewBankStatement } from '../bank-statement.model';
 
@@ -50,10 +49,10 @@ export type BankStatementFormGroup = FormGroup<BankStatementFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class BankStatementFormService {
-  createBankStatementFormGroup(bankStatement?: BankStatementFormGroupInput): BankStatementFormGroup {
+  createBankStatementFormGroup(bankStatement: BankStatementFormGroupInput = { id: null }): BankStatementFormGroup {
     const bankStatementRawValue = this.convertBankStatementToBankStatementRawValue({
       ...this.getFormDefaults(),
-      ...(bankStatement ?? { id: null }),
+      ...bankStatement,
     });
     return new FormGroup<BankStatementFormGroupContent>({
       id: new FormControl(
@@ -108,10 +107,12 @@ export class BankStatementFormService {
 
   resetForm(form: BankStatementFormGroup, bankStatement: BankStatementFormGroupInput): void {
     const bankStatementRawValue = this.convertBankStatementToBankStatementRawValue({ ...this.getFormDefaults(), ...bankStatement });
-    form.reset({
-      ...bankStatementRawValue,
-      id: { value: bankStatementRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...bankStatementRawValue,
+        id: { value: bankStatementRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): BankStatementFormDefaults {

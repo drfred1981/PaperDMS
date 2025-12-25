@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { AuditAction } from 'app/entities/enumerations/audit-action.model';
 
 export interface IDocumentAudit {

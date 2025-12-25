@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ICorrespondentExtraction } from '../correspondent-extraction.model';
 import {
@@ -108,7 +108,8 @@ describe('CorrespondentExtraction Service', () => {
       it('should add a CorrespondentExtraction to an empty array', () => {
         const correspondentExtraction: ICorrespondentExtraction = sampleWithRequiredData;
         expectedResult = service.addCorrespondentExtractionToCollectionIfMissing([], correspondentExtraction);
-        expect(expectedResult).toEqual([correspondentExtraction]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(correspondentExtraction);
       });
 
       it('should not add a CorrespondentExtraction to an array that contains it', () => {
@@ -155,13 +156,16 @@ describe('CorrespondentExtraction Service', () => {
         const correspondentExtraction: ICorrespondentExtraction = sampleWithRequiredData;
         const correspondentExtraction2: ICorrespondentExtraction = sampleWithPartialData;
         expectedResult = service.addCorrespondentExtractionToCollectionIfMissing([], correspondentExtraction, correspondentExtraction2);
-        expect(expectedResult).toEqual([correspondentExtraction, correspondentExtraction2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(correspondentExtraction);
+        expect(expectedResult).toContain(correspondentExtraction2);
       });
 
       it('should accept null and undefined values', () => {
         const correspondentExtraction: ICorrespondentExtraction = sampleWithRequiredData;
         expectedResult = service.addCorrespondentExtractionToCollectionIfMissing([], null, correspondentExtraction, undefined);
-        expect(expectedResult).toEqual([correspondentExtraction]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(correspondentExtraction);
       });
 
       it('should return initial array if no CorrespondentExtraction is added', () => {

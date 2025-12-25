@@ -29,7 +29,6 @@
       "thumbnailSha256": "Thumbnail Sha 256",
       "webpPreviewS3Key": "Webp Preview S 3 Key",
       "webpPreviewSha256": "Webp Preview Sha 256",
-      "status": "Status",
       "uploadDate": "Upload Date",
       "isPublic": "Is Public",
       "downloadCount": "Download Count",

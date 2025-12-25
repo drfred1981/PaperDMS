@@ -1,8 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { IDocumentType } from 'app/entities/documentService/document-type/document-type.model';
 import { IFolder } from 'app/entities/documentService/folder/folder.model';
-import { DocumentStatus } from 'app/entities/enumerations/document-status.model';
+import { IDocumentType } from 'app/entities/documentService/document-type/document-type.model';
 
 export interface IDocument {
   id: number;
@@ -19,7 +17,6 @@ export interface IDocument {
   thumbnailSha256?: string | null;
   webpPreviewS3Key?: string | null;
   webpPreviewSha256?: string | null;
-  status?: keyof typeof DocumentStatus | null;
   uploadDate?: dayjs.Dayjs | null;
   isPublic?: boolean | null;
   downloadCount?: number | null;

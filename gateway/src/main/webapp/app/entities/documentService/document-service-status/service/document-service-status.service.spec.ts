@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentServiceStatus } from '../document-service-status.model';
 import {
@@ -123,7 +123,8 @@ describe('DocumentServiceStatus Service', () => {
       it('should add a DocumentServiceStatus to an empty array', () => {
         const documentServiceStatus: IDocumentServiceStatus = sampleWithRequiredData;
         expectedResult = service.addDocumentServiceStatusToCollectionIfMissing([], documentServiceStatus);
-        expect(expectedResult).toEqual([documentServiceStatus]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentServiceStatus);
       });
 
       it('should not add a DocumentServiceStatus to an array that contains it', () => {
@@ -160,13 +161,16 @@ describe('DocumentServiceStatus Service', () => {
         const documentServiceStatus: IDocumentServiceStatus = sampleWithRequiredData;
         const documentServiceStatus2: IDocumentServiceStatus = sampleWithPartialData;
         expectedResult = service.addDocumentServiceStatusToCollectionIfMissing([], documentServiceStatus, documentServiceStatus2);
-        expect(expectedResult).toEqual([documentServiceStatus, documentServiceStatus2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentServiceStatus);
+        expect(expectedResult).toContain(documentServiceStatus2);
       });
 
       it('should accept null and undefined values', () => {
         const documentServiceStatus: IDocumentServiceStatus = sampleWithRequiredData;
         expectedResult = service.addDocumentServiceStatusToCollectionIfMissing([], null, documentServiceStatus, undefined);
-        expect(expectedResult).toEqual([documentServiceStatus]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentServiceStatus);
       });
 
       it('should return initial array if no DocumentServiceStatus is added', () => {

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IComparisonJob, NewComparisonJob } from '../comparison-job.model';
 
 export type PartialUpdateComparisonJob = Partial<IComparisonJob> & Pick<IComparisonJob, 'id'>;
@@ -41,24 +41,20 @@ export class ComparisonJobService {
   update(comparisonJob: IComparisonJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(comparisonJob);
     return this.http
-      .put<RestComparisonJob>(`${this.resourceUrl}/${encodeURIComponent(this.getComparisonJobIdentifier(comparisonJob))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestComparisonJob>(`${this.resourceUrl}/${this.getComparisonJobIdentifier(comparisonJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(comparisonJob: PartialUpdateComparisonJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(comparisonJob);
     return this.http
-      .patch<RestComparisonJob>(`${this.resourceUrl}/${encodeURIComponent(this.getComparisonJobIdentifier(comparisonJob))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestComparisonJob>(`${this.resourceUrl}/${this.getComparisonJobIdentifier(comparisonJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestComparisonJob>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestComparisonJob>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class ComparisonJobService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getComparisonJobIdentifier(comparisonJob: Pick<IComparisonJob, 'id'>): number {

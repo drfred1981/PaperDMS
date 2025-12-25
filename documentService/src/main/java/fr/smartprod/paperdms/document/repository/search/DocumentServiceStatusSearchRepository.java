@@ -2,7 +2,7 @@ package fr.smartprod.paperdms.document.repository.search;
 
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryStringQuery;
 import fr.smartprod.paperdms.document.domain.DocumentServiceStatus;
-import fr.smartprod.paperdms.document.repository.DocumentServiceStatusUploadRepository;
+import fr.smartprod.paperdms.document.repository.DocumentServiceStatusRepository;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -36,11 +36,11 @@ interface DocumentServiceStatusSearchRepositoryInternal {
 class DocumentServiceStatusSearchRepositoryInternalImpl implements DocumentServiceStatusSearchRepositoryInternal {
 
     private final ElasticsearchTemplate elasticsearchTemplate;
-    private final DocumentServiceStatusUploadRepository repository;
+    private final DocumentServiceStatusRepository repository;
 
     DocumentServiceStatusSearchRepositoryInternalImpl(
         ElasticsearchTemplate elasticsearchTemplate,
-        DocumentServiceStatusUploadRepository repository
+        DocumentServiceStatusRepository repository
     ) {
         this.elasticsearchTemplate = elasticsearchTemplate;
         this.repository = repository;

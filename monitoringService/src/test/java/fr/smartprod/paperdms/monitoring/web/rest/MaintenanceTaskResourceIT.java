@@ -80,7 +80,7 @@ class MaintenanceTaskResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1058,11 +1058,7 @@ class MaintenanceTaskResourceIT {
         MaintenanceTask partialUpdatedMaintenanceTask = new MaintenanceTask();
         partialUpdatedMaintenanceTask.setId(maintenanceTask.getId());
 
-        partialUpdatedMaintenanceTask
-            .taskType(UPDATED_TASK_TYPE)
-            .status(UPDATED_STATUS)
-            .lastRun(UPDATED_LAST_RUN)
-            .createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedMaintenanceTask.name(UPDATED_NAME).schedule(UPDATED_SCHEDULE).status(UPDATED_STATUS).isActive(UPDATED_IS_ACTIVE);
 
         restMaintenanceTaskMockMvc
             .perform(

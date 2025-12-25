@@ -35,7 +35,7 @@ public class OcrCacheResource {
 
     private static final String ENTITY_NAME = "ocrServiceOcrCache";
 
-    @Value("${jhipster.clientApp.name:ocrService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final OcrCacheService ocrCacheService;

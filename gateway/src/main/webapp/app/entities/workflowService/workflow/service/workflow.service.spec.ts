@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IWorkflow } from '../workflow.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../workflow.test-samples';
@@ -116,7 +116,8 @@ describe('Workflow Service', () => {
       it('should add a Workflow to an empty array', () => {
         const workflow: IWorkflow = sampleWithRequiredData;
         expectedResult = service.addWorkflowToCollectionIfMissing([], workflow);
-        expect(expectedResult).toEqual([workflow]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflow);
       });
 
       it('should not add a Workflow to an array that contains it', () => {
@@ -150,13 +151,16 @@ describe('Workflow Service', () => {
         const workflow: IWorkflow = sampleWithRequiredData;
         const workflow2: IWorkflow = sampleWithPartialData;
         expectedResult = service.addWorkflowToCollectionIfMissing([], workflow, workflow2);
-        expect(expectedResult).toEqual([workflow, workflow2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(workflow);
+        expect(expectedResult).toContain(workflow2);
       });
 
       it('should accept null and undefined values', () => {
         const workflow: IWorkflow = sampleWithRequiredData;
         expectedResult = service.addWorkflowToCollectionIfMissing([], null, workflow, undefined);
-        expect(expectedResult).toEqual([workflow]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflow);
       });
 
       it('should return initial array if no Workflow is added', () => {

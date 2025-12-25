@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentVersion, NewDocumentVersion } from '../document-version.model';
 
 export type PartialUpdateDocumentVersion = Partial<IDocumentVersion> & Pick<IDocumentVersion, 'id'>;
@@ -41,16 +41,14 @@ export class DocumentVersionService {
   update(documentVersion: IDocumentVersion): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentVersion);
     return this.http
-      .put<RestDocumentVersion>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentVersionIdentifier(documentVersion))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestDocumentVersion>(`${this.resourceUrl}/${this.getDocumentVersionIdentifier(documentVersion)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentVersion: PartialUpdateDocumentVersion): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentVersion);
     return this.http
-      .patch<RestDocumentVersion>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentVersionIdentifier(documentVersion))}`, copy, {
+      .patch<RestDocumentVersion>(`${this.resourceUrl}/${this.getDocumentVersionIdentifier(documentVersion)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -58,7 +56,7 @@ export class DocumentVersionService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentVersion>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentVersion>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +68,7 @@ export class DocumentVersionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentVersionIdentifier(documentVersion: Pick<IDocumentVersion, 'id'>): number {

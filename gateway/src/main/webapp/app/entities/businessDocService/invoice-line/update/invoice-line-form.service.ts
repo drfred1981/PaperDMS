@@ -32,10 +32,10 @@ export type InvoiceLineFormGroup = FormGroup<InvoiceLineFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceLineFormService {
-  createInvoiceLineFormGroup(invoiceLine?: InvoiceLineFormGroupInput): InvoiceLineFormGroup {
+  createInvoiceLineFormGroup(invoiceLine: InvoiceLineFormGroupInput = { id: null }): InvoiceLineFormGroup {
     const invoiceLineRawValue = {
       ...this.getFormDefaults(),
-      ...(invoiceLine ?? { id: null }),
+      ...invoiceLine,
     };
     return new FormGroup<InvoiceLineFormGroupContent>({
       id: new FormControl(
@@ -78,10 +78,12 @@ export class InvoiceLineFormService {
 
   resetForm(form: InvoiceLineFormGroup, invoiceLine: InvoiceLineFormGroupInput): void {
     const invoiceLineRawValue = { ...this.getFormDefaults(), ...invoiceLine };
-    form.reset({
-      ...invoiceLineRawValue,
-      id: { value: invoiceLineRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...invoiceLineRawValue,
+        id: { value: invoiceLineRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): InvoiceLineFormDefaults {

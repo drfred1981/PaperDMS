@@ -54,8 +54,7 @@ public class WorkflowInstanceAsserts {
             .satisfies(a -> assertThat(a.getDueDate()).as("check dueDate").isEqualTo(expected.getDueDate()))
             .satisfies(a -> assertThat(a.getCompletedDate()).as("check completedDate").isEqualTo(expected.getCompletedDate()))
             .satisfies(a -> assertThat(a.getCancelledDate()).as("check cancelledDate").isEqualTo(expected.getCancelledDate()))
-            .satisfies(a ->
-                assertThat(a.getCancellationReason()).as("check cancellationReason").isEqualTo(expected.getCancellationReason())
+            .satisfies(a -> assertThat(a.getCancellationReason()).as("check cancellationReason").isEqualTo(expected.getCancellationReason())
             )
             .satisfies(a -> assertThat(a.getPriority()).as("check priority").isEqualTo(expected.getPriority()))
             .satisfies(a -> assertThat(a.getMetadata()).as("check metadata").isEqualTo(expected.getMetadata()))

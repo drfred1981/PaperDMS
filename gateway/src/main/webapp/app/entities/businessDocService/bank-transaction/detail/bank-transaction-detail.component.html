@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (bankTransaction(); as bankTransactionRef) {
+      <div>
+        <h2 data-cy="bankTransactionDetailsHeading">
+          <span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.detail.title">Bank Transaction</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.statementId">Statement Id</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.statementId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.transactionDate">Transaction Date</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.transactionDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.description">Description</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.debitAmount">Debit Amount</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.debitAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.creditAmount">Credit Amount</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.creditAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.balance">Balance</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.balance }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.isReconciled">Is Reconciled</span></dt>
+          <dd>
+            <span>{{ bankTransactionRef.isReconciled }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceBankTransaction.statement">Statement</span></dt>
+          <dd>
+            @if (bankTransaction()!.statement) {
+              <div>
+                <a [routerLink]="['/bank-statement', bankTransaction()!.statement?.id, 'view']">{{ bankTransactionRef.statement?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/bank-transaction', bankTransactionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

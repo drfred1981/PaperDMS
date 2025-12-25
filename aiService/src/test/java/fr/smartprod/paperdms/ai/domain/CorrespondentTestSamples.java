@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class CorrespondentTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static Correspondent getCorrespondentSample1() {
         return new Correspondent().id(1L).name("name1").email("email1").phone("phone1").company("company1").verifiedBy("verifiedBy1");

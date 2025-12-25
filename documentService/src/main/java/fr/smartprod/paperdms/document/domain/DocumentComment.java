@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.document.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -20,7 +19,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class DocumentComment implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

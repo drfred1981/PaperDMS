@@ -12,15 +12,14 @@
     "enableSwaggerCodegen": true,
     "entities": [
       "Document",
-      "DocumentVersion",
       "DocumentServiceStatus",
       "Folder",
       "Tag",
-      "DocumentTag",
-      "DocumentMetadata",
-      "DocumentType",
       "TagCategory",
+      "DocumentTag",
+      "DocumentType",
       "DocumentTypeField",
+      "DocumentMetadata",
       "ExtractedField",
       "DocumentPermission",
       "PermissionGroup",
@@ -31,12 +30,13 @@
       "DocumentTemplate",
       "SavedSearch",
       "SmartFolder",
-      "Bookmark"
+      "Bookmark",
+      "DocumentVersion"
     ],
-    "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "MDg1NzY0YjdmY2I2NmQxOTM0M2UxNThiZTNjNjdmNWQ0NWZhYmE0OGZmMTgwMzIyYWMyY2RhNjFhOWI2YWFkNmI5YTdmODNjZDY1ZmJkNjM5Mzg4NjMwMGIzMGE3ZTY3Zjk0NTEyYTkzZDRjNTQ2NTU4ZDdhYmJlYzg2YzFiYzE=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1766245514000,
+    "lastLiquibaseTimestamp": 1766659455000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -47,6 +47,7 @@
     "serviceDiscoveryType": "consul",
     "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

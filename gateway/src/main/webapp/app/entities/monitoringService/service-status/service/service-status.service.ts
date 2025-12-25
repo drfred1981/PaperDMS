@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IServiceStatus, NewServiceStatus } from '../service-status.model';
 
 export type PartialUpdateServiceStatus = Partial<IServiceStatus> & Pick<IServiceStatus, 'id'>;
@@ -41,24 +41,20 @@ export class ServiceStatusService {
   update(serviceStatus: IServiceStatus): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(serviceStatus);
     return this.http
-      .put<RestServiceStatus>(`${this.resourceUrl}/${encodeURIComponent(this.getServiceStatusIdentifier(serviceStatus))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestServiceStatus>(`${this.resourceUrl}/${this.getServiceStatusIdentifier(serviceStatus)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(serviceStatus: PartialUpdateServiceStatus): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(serviceStatus);
     return this.http
-      .patch<RestServiceStatus>(`${this.resourceUrl}/${encodeURIComponent(this.getServiceStatusIdentifier(serviceStatus))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestServiceStatus>(`${this.resourceUrl}/${this.getServiceStatusIdentifier(serviceStatus)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestServiceStatus>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestServiceStatus>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class ServiceStatusService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getServiceStatusIdentifier(serviceStatus: Pick<IServiceStatus, 'id'>): number {

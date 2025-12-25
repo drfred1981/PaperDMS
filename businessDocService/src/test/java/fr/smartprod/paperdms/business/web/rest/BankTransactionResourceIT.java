@@ -62,7 +62,7 @@ class BankTransactionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -437,7 +437,11 @@ class BankTransactionResourceIT {
         BankTransaction partialUpdatedBankTransaction = new BankTransaction();
         partialUpdatedBankTransaction.setId(bankTransaction.getId());
 
-        partialUpdatedBankTransaction.creditAmount(UPDATED_CREDIT_AMOUNT).balance(UPDATED_BALANCE).isReconciled(UPDATED_IS_RECONCILED);
+        partialUpdatedBankTransaction
+            .description(UPDATED_DESCRIPTION)
+            .debitAmount(UPDATED_DEBIT_AMOUNT)
+            .balance(UPDATED_BALANCE)
+            .isReconciled(UPDATED_IS_RECONCILED);
 
         restBankTransactionMockMvc
             .perform(

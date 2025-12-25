@@ -1,11 +1,11 @@
 id;user_id;email_enabled;push_enabled;in_app_enabled;notification_types;quiet_hours_start;quiet_hours_end;frequency;last_modified_date
-1;though though personal;true;true;false;../fake-data/blob/hipster.txt;consi;a yuc;WEEKLY;2025-12-20T14:42:41
-2;whereas geez;false;true;true;../fake-data/blob/hipster.txt;astri;litte;NEVER;2025-12-20T03:00:31
-3;courageous;true;false;false;../fake-data/blob/hipster.txt;unexp;phew;IMMEDIATELY;2025-12-19T15:30:07
-4;dependent impressive;true;true;true;../fake-data/blob/hipster.txt;ack d;cork ;WEEKLY;2025-12-19T16:17:46
-5;grave;false;false;false;../fake-data/blob/hipster.txt;inste;nerve;DAILY;2025-12-19T16:05:31
-6;vice fathom;false;false;false;../fake-data/blob/hipster.txt;expan;after;WEEKLY;2025-12-20T08:54:17
-7;cop-out;true;false;false;../fake-data/blob/hipster.txt;overd;phew ;WEEKLY;2025-12-20T01:13:28
-8;hypothesise;false;true;true;../fake-data/blob/hipster.txt;booho;as in;WEEKLY;2025-12-19T19:34:34
-9;typewriter;false;true;false;../fake-data/blob/hipster.txt;debut;mmm;NEVER;2025-12-19T21:17:24
-10;quicker nippy;true;true;false;../fake-data/blob/hipster.txt;from ;aha m;DAILY;2025-12-20T13:31:32
+1;though though personal;true;true;false;../fake-data/blob/hipster.txt;consi;a yuc;WEEKLY;2025-12-25T09:41:42
+2;whereas geez;false;true;true;../fake-data/blob/hipster.txt;astri;litte;NEVER;2025-12-24T21:59:32
+3;courageous;true;false;false;../fake-data/blob/hipster.txt;unexp;phew;IMMEDIATELY;2025-12-24T10:29:08
+4;dependent impressive;true;true;true;../fake-data/blob/hipster.txt;ack d;cork ;WEEKLY;2025-12-24T11:16:47
+5;grave;false;false;false;../fake-data/blob/hipster.txt;inste;nerve;DAILY;2025-12-24T11:04:32
+6;vice fathom;false;false;false;../fake-data/blob/hipster.txt;expan;after;WEEKLY;2025-12-25T03:53:18
+7;cop-out;true;false;false;../fake-data/blob/hipster.txt;overd;phew ;WEEKLY;2025-12-24T20:12:29
+8;hypothesise;false;true;true;../fake-data/blob/hipster.txt;booho;as in;WEEKLY;2025-12-24T14:33:35
+9;typewriter;false;true;false;../fake-data/blob/hipster.txt;debut;mmm;NEVER;2025-12-24T16:16:25
+10;quicker nippy;true;true;false;../fake-data/blob/hipster.txt;from ;aha m;DAILY;2025-12-25T08:30:33

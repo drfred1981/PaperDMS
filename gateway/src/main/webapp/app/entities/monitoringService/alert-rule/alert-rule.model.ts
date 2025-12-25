@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { AlertType } from 'app/entities/enumerations/alert-type.model';
 import { Severity } from 'app/entities/enumerations/severity.model';
 

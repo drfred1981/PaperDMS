@@ -36,9 +36,9 @@ public class RedisTestContainersSpringContextCustomizerFactory implements Contex
                     }
                     testValues = testValues.and(
                         "jhipster.cache.redis.server=redis://" +
-                            redisBean.getRedisContainer().getContainerIpAddress() +
-                            ":" +
-                            redisBean.getRedisContainer().getMappedPort(6379)
+                        redisBean.getRedisContainer().getContainerIpAddress() +
+                        ":" +
+                        redisBean.getRedisContainer().getMappedPort(6379)
                     );
                 }
                 testValues.applyTo(context);

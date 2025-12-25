@@ -1,8 +1,7 @@
 import dayjs from 'dayjs/esm';
-
-import { TransformStatus } from 'app/entities/enumerations/transform-status.model';
-import { WatermarkPosition } from 'app/entities/enumerations/watermark-position.model';
 import { WatermarkType } from 'app/entities/enumerations/watermark-type.model';
+import { WatermarkPosition } from 'app/entities/enumerations/watermark-position.model';
+import { TransformStatus } from 'app/entities/enumerations/transform-status.model';
 
 export interface IWatermarkJob {
   id: number;

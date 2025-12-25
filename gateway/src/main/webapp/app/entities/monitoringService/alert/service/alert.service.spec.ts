@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IAlert } from '../alert.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../alert.test-samples';
@@ -103,7 +103,8 @@ describe('Alert Service', () => {
       it('should add a Alert to an empty array', () => {
         const alert: IAlert = sampleWithRequiredData;
         expectedResult = service.addAlertToCollectionIfMissing([], alert);
-        expect(expectedResult).toEqual([alert]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(alert);
       });
 
       it('should not add a Alert to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('Alert Service', () => {
         const alert: IAlert = sampleWithRequiredData;
         const alert2: IAlert = sampleWithPartialData;
         expectedResult = service.addAlertToCollectionIfMissing([], alert, alert2);
-        expect(expectedResult).toEqual([alert, alert2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(alert);
+        expect(expectedResult).toContain(alert2);
       });
 
       it('should accept null and undefined values', () => {
         const alert: IAlert = sampleWithRequiredData;
         expectedResult = service.addAlertToCollectionIfMissing([], null, alert, undefined);
-        expect(expectedResult).toEqual([alert]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(alert);
       });
 
       it('should return initial array if no Alert is added', () => {

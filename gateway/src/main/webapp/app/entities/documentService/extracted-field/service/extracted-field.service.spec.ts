@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IExtractedField } from '../extracted-field.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../extracted-field.test-samples';
@@ -115,7 +115,8 @@ describe('ExtractedField Service', () => {
       it('should add a ExtractedField to an empty array', () => {
         const extractedField: IExtractedField = sampleWithRequiredData;
         expectedResult = service.addExtractedFieldToCollectionIfMissing([], extractedField);
-        expect(expectedResult).toEqual([extractedField]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(extractedField);
       });
 
       it('should not add a ExtractedField to an array that contains it', () => {
@@ -149,13 +150,16 @@ describe('ExtractedField Service', () => {
         const extractedField: IExtractedField = sampleWithRequiredData;
         const extractedField2: IExtractedField = sampleWithPartialData;
         expectedResult = service.addExtractedFieldToCollectionIfMissing([], extractedField, extractedField2);
-        expect(expectedResult).toEqual([extractedField, extractedField2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(extractedField);
+        expect(expectedResult).toContain(extractedField2);
       });
 
       it('should accept null and undefined values', () => {
         const extractedField: IExtractedField = sampleWithRequiredData;
         expectedResult = service.addExtractedFieldToCollectionIfMissing([], null, extractedField, undefined);
-        expect(expectedResult).toEqual([extractedField]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(extractedField);
       });
 
       it('should return initial array if no ExtractedField is added', () => {

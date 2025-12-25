@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { RedactionType } from 'app/entities/enumerations/redaction-type.model';
 import { TransformStatus } from 'app/entities/enumerations/transform-status.model';
 

@@ -33,10 +33,10 @@ export type DashboardWidgetFormGroup = FormGroup<DashboardWidgetFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class DashboardWidgetFormService {
-  createDashboardWidgetFormGroup(dashboardWidget?: DashboardWidgetFormGroupInput): DashboardWidgetFormGroup {
+  createDashboardWidgetFormGroup(dashboardWidget: DashboardWidgetFormGroupInput = { id: null }): DashboardWidgetFormGroup {
     const dashboardWidgetRawValue = {
       ...this.getFormDefaults(),
-      ...(dashboardWidget ?? { id: null }),
+      ...dashboardWidget,
     };
     return new FormGroup<DashboardWidgetFormGroupContent>({
       id: new FormControl(
@@ -82,10 +82,12 @@ export class DashboardWidgetFormService {
 
   resetForm(form: DashboardWidgetFormGroup, dashboardWidget: DashboardWidgetFormGroupInput): void {
     const dashboardWidgetRawValue = { ...this.getFormDefaults(), ...dashboardWidget };
-    form.reset({
-      ...dashboardWidgetRawValue,
-      id: { value: dashboardWidgetRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...dashboardWidgetRawValue,
+        id: { value: dashboardWidgetRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DashboardWidgetFormDefaults {

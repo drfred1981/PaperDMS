@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { StatementStatus } from 'app/entities/enumerations/statement-status.model';
 
 export interface IBankStatement {

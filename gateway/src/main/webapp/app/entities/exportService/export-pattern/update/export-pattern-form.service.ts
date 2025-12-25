@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IExportPattern, NewExportPattern } from '../export-pattern.model';
 
@@ -51,10 +50,10 @@ export type ExportPatternFormGroup = FormGroup<ExportPatternFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ExportPatternFormService {
-  createExportPatternFormGroup(exportPattern?: ExportPatternFormGroupInput): ExportPatternFormGroup {
+  createExportPatternFormGroup(exportPattern: ExportPatternFormGroupInput = { id: null }): ExportPatternFormGroup {
     const exportPatternRawValue = this.convertExportPatternToExportPatternRawValue({
       ...this.getFormDefaults(),
-      ...(exportPattern ?? { id: null }),
+      ...exportPattern,
     });
     return new FormGroup<ExportPatternFormGroupContent>({
       id: new FormControl(
@@ -99,10 +98,12 @@ export class ExportPatternFormService {
 
   resetForm(form: ExportPatternFormGroup, exportPattern: ExportPatternFormGroupInput): void {
     const exportPatternRawValue = this.convertExportPatternToExportPatternRawValue({ ...this.getFormDefaults(), ...exportPattern });
-    form.reset({
-      ...exportPatternRawValue,
-      id: { value: exportPatternRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...exportPatternRawValue,
+        id: { value: exportPatternRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ExportPatternFormDefaults {

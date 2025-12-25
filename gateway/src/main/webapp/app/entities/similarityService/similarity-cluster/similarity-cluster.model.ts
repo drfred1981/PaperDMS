@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { SimilarityAlgorithm } from 'app/entities/enumerations/similarity-algorithm.model';
 
 export interface ISimilarityCluster {

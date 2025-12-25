@@ -8,6 +8,7 @@ describe('BankTransaction Form Service', () => {
   let service: BankTransactionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(BankTransactionFormService);
   });
 
@@ -54,7 +55,7 @@ describe('BankTransaction Form Service', () => {
       it('should return NewBankTransaction for default BankTransaction initial value', () => {
         const formGroup = service.createBankTransactionFormGroup(sampleWithNewData);
 
-        const bankTransaction = service.getBankTransaction(formGroup);
+        const bankTransaction = service.getBankTransaction(formGroup) as any;
 
         expect(bankTransaction).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('BankTransaction Form Service', () => {
       it('should return NewBankTransaction for empty BankTransaction initial value', () => {
         const formGroup = service.createBankTransactionFormGroup();
 
-        const bankTransaction = service.getBankTransaction(formGroup);
+        const bankTransaction = service.getBankTransaction(formGroup) as any;
 
         expect(bankTransaction).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('BankTransaction Form Service', () => {
       it('should return IBankTransaction', () => {
         const formGroup = service.createBankTransactionFormGroup(sampleWithRequiredData);
 
-        const bankTransaction = service.getBankTransaction(formGroup);
+        const bankTransaction = service.getBankTransaction(formGroup) as any;
 
         expect(bankTransaction).toMatchObject(sampleWithRequiredData);
       });

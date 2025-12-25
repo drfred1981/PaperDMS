@@ -35,7 +35,7 @@ public class ServiceStatusResource {
 
     private static final String ENTITY_NAME = "monitoringServiceServiceStatus";
 
-    @Value("${jhipster.clientApp.name:monitoringService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ServiceStatusService serviceStatusService;

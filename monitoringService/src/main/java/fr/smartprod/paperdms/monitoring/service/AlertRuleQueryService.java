@@ -67,7 +67,7 @@ public class AlertRuleQueryService extends QueryService<AlertRule> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<AlertRule> createSpecification(AlertRuleCriteria criteria) {
-        Specification<AlertRule> specification = Specification.unrestricted();
+        Specification<AlertRule> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

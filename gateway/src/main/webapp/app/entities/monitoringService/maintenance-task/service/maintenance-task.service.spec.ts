@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IMaintenanceTask } from '../maintenance-task.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../maintenance-task.test-samples';
@@ -103,7 +103,8 @@ describe('MaintenanceTask Service', () => {
       it('should add a MaintenanceTask to an empty array', () => {
         const maintenanceTask: IMaintenanceTask = sampleWithRequiredData;
         expectedResult = service.addMaintenanceTaskToCollectionIfMissing([], maintenanceTask);
-        expect(expectedResult).toEqual([maintenanceTask]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(maintenanceTask);
       });
 
       it('should not add a MaintenanceTask to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('MaintenanceTask Service', () => {
         const maintenanceTask: IMaintenanceTask = sampleWithRequiredData;
         const maintenanceTask2: IMaintenanceTask = sampleWithPartialData;
         expectedResult = service.addMaintenanceTaskToCollectionIfMissing([], maintenanceTask, maintenanceTask2);
-        expect(expectedResult).toEqual([maintenanceTask, maintenanceTask2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(maintenanceTask);
+        expect(expectedResult).toContain(maintenanceTask2);
       });
 
       it('should accept null and undefined values', () => {
         const maintenanceTask: IMaintenanceTask = sampleWithRequiredData;
         expectedResult = service.addMaintenanceTaskToCollectionIfMissing([], null, maintenanceTask, undefined);
-        expect(expectedResult).toEqual([maintenanceTask]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(maintenanceTask);
       });
 
       it('should return initial array if no MaintenanceTask is added', () => {

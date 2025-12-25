@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { ISystemHealth, NewSystemHealth } from '../system-health.model';
 
 export type PartialUpdateSystemHealth = Partial<ISystemHealth> & Pick<ISystemHealth, 'id'>;
@@ -41,24 +41,20 @@ export class SystemHealthService {
   update(systemHealth: ISystemHealth): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(systemHealth);
     return this.http
-      .put<RestSystemHealth>(`${this.resourceUrl}/${encodeURIComponent(this.getSystemHealthIdentifier(systemHealth))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestSystemHealth>(`${this.resourceUrl}/${this.getSystemHealthIdentifier(systemHealth)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(systemHealth: PartialUpdateSystemHealth): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(systemHealth);
     return this.http
-      .patch<RestSystemHealth>(`${this.resourceUrl}/${encodeURIComponent(this.getSystemHealthIdentifier(systemHealth))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestSystemHealth>(`${this.resourceUrl}/${this.getSystemHealthIdentifier(systemHealth)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestSystemHealth>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestSystemHealth>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class SystemHealthService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getSystemHealthIdentifier(systemHealth: Pick<ISystemHealth, 'id'>): number {

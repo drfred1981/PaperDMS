@@ -8,6 +8,7 @@ describe('Document Form Service', () => {
   let service: DocumentFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentFormService);
   });
 
@@ -32,7 +33,6 @@ describe('Document Form Service', () => {
             thumbnailSha256: expect.any(Object),
             webpPreviewS3Key: expect.any(Object),
             webpPreviewSha256: expect.any(Object),
-            status: expect.any(Object),
             uploadDate: expect.any(Object),
             isPublic: expect.any(Object),
             downloadCount: expect.any(Object),
@@ -68,7 +68,6 @@ describe('Document Form Service', () => {
             thumbnailSha256: expect.any(Object),
             webpPreviewS3Key: expect.any(Object),
             webpPreviewSha256: expect.any(Object),
-            status: expect.any(Object),
             uploadDate: expect.any(Object),
             isPublic: expect.any(Object),
             downloadCount: expect.any(Object),
@@ -90,7 +89,7 @@ describe('Document Form Service', () => {
       it('should return NewDocument for default Document initial value', () => {
         const formGroup = service.createDocumentFormGroup(sampleWithNewData);
 
-        const document = service.getDocument(formGroup);
+        const document = service.getDocument(formGroup) as any;
 
         expect(document).toMatchObject(sampleWithNewData);
       });
@@ -98,7 +97,7 @@ describe('Document Form Service', () => {
       it('should return NewDocument for empty Document initial value', () => {
         const formGroup = service.createDocumentFormGroup();
 
-        const document = service.getDocument(formGroup);
+        const document = service.getDocument(formGroup) as any;
 
         expect(document).toMatchObject({});
       });
@@ -106,7 +105,7 @@ describe('Document Form Service', () => {
       it('should return IDocument', () => {
         const formGroup = service.createDocumentFormGroup(sampleWithRequiredData);
 
-        const document = service.getDocument(formGroup);
+        const document = service.getDocument(formGroup) as any;
 
         expect(document).toMatchObject(sampleWithRequiredData);
       });

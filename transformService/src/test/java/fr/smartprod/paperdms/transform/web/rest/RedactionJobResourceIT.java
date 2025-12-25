@@ -81,7 +81,7 @@ class RedactionJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -465,13 +465,13 @@ class RedactionJobResourceIT {
         partialUpdatedRedactionJob.setId(redactionJob.getId());
 
         partialUpdatedRedactionJob
-            .documentId(UPDATED_DOCUMENT_ID)
             .redactionAreas(UPDATED_REDACTION_AREAS)
-            .redactionType(UPDATED_REDACTION_TYPE)
-            .replaceWith(UPDATED_REPLACE_WITH)
-            .outputS3Key(UPDATED_OUTPUT_S_3_KEY)
+            .redactionColor(UPDATED_REDACTION_COLOR)
             .outputDocumentId(UPDATED_OUTPUT_DOCUMENT_ID)
             .status(UPDATED_STATUS)
+            .endDate(UPDATED_END_DATE)
+            .errorMessage(UPDATED_ERROR_MESSAGE)
+            .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE);
 
         restRedactionJobMockMvc

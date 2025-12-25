@@ -9,7 +9,7 @@ export const sampleWithRequiredData: IWorkflow = {
   isActive: false,
   isParallel: false,
   autoStart: true,
-  createdDate: dayjs('2025-12-20T00:36'),
+  createdDate: dayjs('2025-12-24T19:35'),
   createdBy: 'first',
 };
 
@@ -22,8 +22,8 @@ export const sampleWithPartialData: IWorkflow = {
   isParallel: false,
   autoStart: true,
   triggerEvent: 'orange filthy exaggerate',
-  createdDate: dayjs('2025-12-19T23:44'),
-  lastModifiedDate: dayjs('2025-12-19T19:28'),
+  createdDate: dayjs('2025-12-24T18:43'),
+  lastModifiedDate: dayjs('2025-12-24T14:27'),
   createdBy: 'clonk harangue',
 };
 
@@ -37,8 +37,8 @@ export const sampleWithFullData: IWorkflow = {
   autoStart: true,
   triggerEvent: 'custom divert hospitable',
   configuration: '../fake-data/blob/hipster.txt',
-  createdDate: dayjs('2025-12-20T06:23'),
-  lastModifiedDate: dayjs('2025-12-20T15:58'),
+  createdDate: dayjs('2025-12-25T01:22'),
+  lastModifiedDate: dayjs('2025-12-25T10:57'),
   createdBy: 'so horde lashes',
 };
 
@@ -48,7 +48,7 @@ export const sampleWithNewData: NewWorkflow = {
   isActive: true,
   isParallel: true,
   autoStart: false,
-  createdDate: dayjs('2025-12-20T08:14'),
+  createdDate: dayjs('2025-12-25T03:13'),
   createdBy: 'break',
   id: null,
 };

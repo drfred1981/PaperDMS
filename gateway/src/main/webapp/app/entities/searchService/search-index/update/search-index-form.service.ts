@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISearchIndex, NewSearchIndex } from '../search-index.model';
 
@@ -47,10 +46,10 @@ export type SearchIndexFormGroup = FormGroup<SearchIndexFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SearchIndexFormService {
-  createSearchIndexFormGroup(searchIndex?: SearchIndexFormGroupInput): SearchIndexFormGroup {
+  createSearchIndexFormGroup(searchIndex: SearchIndexFormGroupInput = { id: null }): SearchIndexFormGroup {
     const searchIndexRawValue = this.convertSearchIndexToSearchIndexRawValue({
       ...this.getFormDefaults(),
-      ...(searchIndex ?? { id: null }),
+      ...searchIndex,
     });
     return new FormGroup<SearchIndexFormGroupContent>({
       id: new FormControl(
@@ -87,10 +86,12 @@ export class SearchIndexFormService {
 
   resetForm(form: SearchIndexFormGroup, searchIndex: SearchIndexFormGroupInput): void {
     const searchIndexRawValue = this.convertSearchIndexToSearchIndexRawValue({ ...this.getFormDefaults(), ...searchIndex });
-    form.reset({
-      ...searchIndexRawValue,
-      id: { value: searchIndexRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...searchIndexRawValue,
+        id: { value: searchIndexRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SearchIndexFormDefaults {

@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class NotificationEventTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static NotificationEvent getNotificationEventSample1() {
         return new NotificationEvent().id(1L).eventType("eventType1").entityType("entityType1").entityId(1L).userId("userId1");

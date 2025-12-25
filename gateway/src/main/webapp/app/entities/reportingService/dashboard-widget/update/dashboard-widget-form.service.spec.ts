@@ -8,6 +8,7 @@ describe('DashboardWidget Form Service', () => {
   let service: DashboardWidgetFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DashboardWidgetFormService);
   });
 
@@ -56,7 +57,7 @@ describe('DashboardWidget Form Service', () => {
       it('should return NewDashboardWidget for default DashboardWidget initial value', () => {
         const formGroup = service.createDashboardWidgetFormGroup(sampleWithNewData);
 
-        const dashboardWidget = service.getDashboardWidget(formGroup);
+        const dashboardWidget = service.getDashboardWidget(formGroup) as any;
 
         expect(dashboardWidget).toMatchObject(sampleWithNewData);
       });
@@ -64,7 +65,7 @@ describe('DashboardWidget Form Service', () => {
       it('should return NewDashboardWidget for empty DashboardWidget initial value', () => {
         const formGroup = service.createDashboardWidgetFormGroup();
 
-        const dashboardWidget = service.getDashboardWidget(formGroup);
+        const dashboardWidget = service.getDashboardWidget(formGroup) as any;
 
         expect(dashboardWidget).toMatchObject({});
       });
@@ -72,7 +73,7 @@ describe('DashboardWidget Form Service', () => {
       it('should return IDashboardWidget', () => {
         const formGroup = service.createDashboardWidgetFormGroup(sampleWithRequiredData);
 
-        const dashboardWidget = service.getDashboardWidget(formGroup);
+        const dashboardWidget = service.getDashboardWidget(formGroup) as any;
 
         expect(dashboardWidget).toMatchObject(sampleWithRequiredData);
       });

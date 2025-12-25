@@ -85,7 +85,7 @@ class ScannerConfigurationResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -465,9 +465,6 @@ class ScannerConfigurationResourceIT {
 
         partialUpdatedScannerConfiguration
             .name(UPDATED_NAME)
-            .scannerType(UPDATED_SCANNER_TYPE)
-            .ipAddress(UPDATED_IP_ADDRESS)
-            .port(UPDATED_PORT)
             .manufacturer(UPDATED_MANUFACTURER)
             .defaultColorMode(UPDATED_DEFAULT_COLOR_MODE)
             .defaultResolution(UPDATED_DEFAULT_RESOLUTION)

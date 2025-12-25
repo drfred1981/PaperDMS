@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (mergeJob(); as mergeJobRef) {
+      <div>
+        <h2 data-cy="mergeJobDetailsHeading"><span jhiTranslate="gatewayApp.transformServiceMergeJob.detail.title">Merge Job</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.name">Name</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.sourceDocumentIds">Source Document Ids</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.sourceDocumentIds }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.mergeOrder">Merge Order</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.mergeOrder }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.includeBookmarks">Include Bookmarks</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.includeBookmarks }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.includeToc">Include Toc</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.includeToc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.addPageNumbers">Add Page Numbers</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.addPageNumbers }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.outputDocumentId">Output Document Id</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.outputDocumentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (mergeJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                mergeJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceMergeJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ mergeJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/merge-job', mergeJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

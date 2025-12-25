@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ITagPrediction, NewTagPrediction } from '../tag-prediction.model';
 
@@ -49,10 +48,10 @@ export type TagPredictionFormGroup = FormGroup<TagPredictionFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class TagPredictionFormService {
-  createTagPredictionFormGroup(tagPrediction?: TagPredictionFormGroupInput): TagPredictionFormGroup {
+  createTagPredictionFormGroup(tagPrediction: TagPredictionFormGroupInput = { id: null }): TagPredictionFormGroup {
     const tagPredictionRawValue = this.convertTagPredictionToTagPredictionRawValue({
       ...this.getFormDefaults(),
-      ...(tagPrediction ?? { id: null }),
+      ...tagPrediction,
     });
     return new FormGroup<TagPredictionFormGroupContent>({
       id: new FormControl(
@@ -97,10 +96,12 @@ export class TagPredictionFormService {
 
   resetForm(form: TagPredictionFormGroup, tagPrediction: TagPredictionFormGroupInput): void {
     const tagPredictionRawValue = this.convertTagPredictionToTagPredictionRawValue({ ...this.getFormDefaults(), ...tagPrediction });
-    form.reset({
-      ...tagPredictionRawValue,
-      id: { value: tagPredictionRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...tagPredictionRawValue,
+        id: { value: tagPredictionRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): TagPredictionFormDefaults {

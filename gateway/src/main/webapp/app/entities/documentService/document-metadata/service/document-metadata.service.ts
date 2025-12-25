@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentMetadata, NewDocumentMetadata } from '../document-metadata.model';
 
 export type PartialUpdateDocumentMetadata = Partial<IDocumentMetadata> & Pick<IDocumentMetadata, 'id'>;
@@ -41,7 +41,7 @@ export class DocumentMetadataService {
   update(documentMetadata: IDocumentMetadata): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentMetadata);
     return this.http
-      .put<RestDocumentMetadata>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentMetadataIdentifier(documentMetadata))}`, copy, {
+      .put<RestDocumentMetadata>(`${this.resourceUrl}/${this.getDocumentMetadataIdentifier(documentMetadata)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -50,17 +50,15 @@ export class DocumentMetadataService {
   partialUpdate(documentMetadata: PartialUpdateDocumentMetadata): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentMetadata);
     return this.http
-      .patch<RestDocumentMetadata>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentMetadataIdentifier(documentMetadata))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentMetadata>(`${this.resourceUrl}/${this.getDocumentMetadataIdentifier(documentMetadata)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentMetadata>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentMetadata>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -72,7 +70,7 @@ export class DocumentMetadataService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentMetadataIdentifier(documentMetadata: Pick<IDocumentMetadata, 'id'>): number {

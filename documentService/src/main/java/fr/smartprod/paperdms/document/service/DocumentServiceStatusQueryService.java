@@ -1,11 +1,13 @@
 package fr.smartprod.paperdms.document.service;
 
 import fr.smartprod.paperdms.document.domain.*; // for static metamodels
-import fr.smartprod.paperdms.document.repository.DocumentServiceStatusUploadRepository;
+import fr.smartprod.paperdms.document.domain.DocumentServiceStatus;
+import fr.smartprod.paperdms.document.repository.DocumentServiceStatusRepository;
 import fr.smartprod.paperdms.document.repository.search.DocumentServiceStatusSearchRepository;
 import fr.smartprod.paperdms.document.service.criteria.DocumentServiceStatusCriteria;
 import fr.smartprod.paperdms.document.service.dto.DocumentServiceStatusDTO;
 import fr.smartprod.paperdms.document.service.mapper.DocumentServiceStatusMapper;
+import jakarta.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,14 +29,14 @@ public class DocumentServiceStatusQueryService extends QueryService<DocumentServ
 
     private static final Logger LOG = LoggerFactory.getLogger(DocumentServiceStatusQueryService.class);
 
-    private final DocumentServiceStatusUploadRepository documentServiceStatusRepository;
+    private final DocumentServiceStatusRepository documentServiceStatusRepository;
 
     private final DocumentServiceStatusMapper documentServiceStatusMapper;
 
     private final DocumentServiceStatusSearchRepository documentServiceStatusSearchRepository;
 
     public DocumentServiceStatusQueryService(
-        DocumentServiceStatusUploadRepository documentServiceStatusRepository,
+        DocumentServiceStatusRepository documentServiceStatusRepository,
         DocumentServiceStatusMapper documentServiceStatusMapper,
         DocumentServiceStatusSearchRepository documentServiceStatusSearchRepository
     ) {
@@ -74,7 +76,7 @@ public class DocumentServiceStatusQueryService extends QueryService<DocumentServ
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<DocumentServiceStatus> createSpecification(DocumentServiceStatusCriteria criteria) {
-        Specification<DocumentServiceStatus> specification = Specification.unrestricted();
+        Specification<DocumentServiceStatus> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(
@@ -91,7 +93,10 @@ public class DocumentServiceStatusQueryService extends QueryService<DocumentServ
                 buildStringSpecification(criteria.getJobId(), DocumentServiceStatus_.jobId),
                 buildRangeSpecification(criteria.getPriority(), DocumentServiceStatus_.priority),
                 buildStringSpecification(criteria.getUpdatedBy(), DocumentServiceStatus_.updatedBy),
-                buildRangeSpecification(criteria.getUpdatedDate(), DocumentServiceStatus_.updatedDate)
+                buildRangeSpecification(criteria.getUpdatedDate(), DocumentServiceStatus_.updatedDate),
+                buildSpecification(criteria.getDocumentId(), root ->
+                    root.join(DocumentServiceStatus_.document, JoinType.LEFT).get(Document_.id)
+                )
             );
         }
         return specification;

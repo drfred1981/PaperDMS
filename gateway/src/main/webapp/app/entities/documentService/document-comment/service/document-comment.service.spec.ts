@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentComment } from '../document-comment.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-comment.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentComment Service', () => {
       it('should add a DocumentComment to an empty array', () => {
         const documentComment: IDocumentComment = sampleWithRequiredData;
         expectedResult = service.addDocumentCommentToCollectionIfMissing([], documentComment);
-        expect(expectedResult).toEqual([documentComment]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentComment);
       });
 
       it('should not add a DocumentComment to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentComment Service', () => {
         const documentComment: IDocumentComment = sampleWithRequiredData;
         const documentComment2: IDocumentComment = sampleWithPartialData;
         expectedResult = service.addDocumentCommentToCollectionIfMissing([], documentComment, documentComment2);
-        expect(expectedResult).toEqual([documentComment, documentComment2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentComment);
+        expect(expectedResult).toContain(documentComment2);
       });
 
       it('should accept null and undefined values', () => {
         const documentComment: IDocumentComment = sampleWithRequiredData;
         expectedResult = service.addDocumentCommentToCollectionIfMissing([], null, documentComment, undefined);
-        expect(expectedResult).toEqual([documentComment]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentComment);
       });
 
       it('should return initial array if no DocumentComment is added', () => {

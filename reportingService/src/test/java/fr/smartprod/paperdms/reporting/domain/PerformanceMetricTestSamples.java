@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class PerformanceMetricTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static PerformanceMetric getPerformanceMetricSample1() {
         return new PerformanceMetric().id(1L).metricName("metricName1").unit("unit1").serviceName("serviceName1");

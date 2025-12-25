@@ -76,7 +76,7 @@ class AlertRuleResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -870,11 +870,11 @@ class AlertRuleResourceIT {
         partialUpdatedAlertRule.setId(alertRule.getId());
 
         partialUpdatedAlertRule
-            .alertType(UPDATED_ALERT_TYPE)
+            .name(UPDATED_NAME)
+            .conditions(UPDATED_CONDITIONS)
             .severity(UPDATED_SEVERITY)
             .isActive(UPDATED_IS_ACTIVE)
-            .triggerCount(UPDATED_TRIGGER_COUNT)
-            .createdDate(UPDATED_CREATED_DATE);
+            .lastTriggered(UPDATED_LAST_TRIGGERED);
 
         restAlertRuleMockMvc
             .perform(

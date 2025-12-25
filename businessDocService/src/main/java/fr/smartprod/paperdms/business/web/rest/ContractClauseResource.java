@@ -35,7 +35,7 @@ public class ContractClauseResource {
 
     private static final String ENTITY_NAME = "businessDocServiceContractClause";
 
-    @Value("${jhipster.clientApp.name:businessDocService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ContractClauseService contractClauseService;

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import OcrResultResolve from './route/ocr-result-routing-resolve.service';
 
 const ocrResultRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/ocr-result').then(m => m.OcrResult),
+    loadComponent: () => import('./list/ocr-result.component').then(m => m.OcrResultComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const ocrResultRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/ocr-result-detail').then(m => m.OcrResultDetail),
+    loadComponent: () => import('./detail/ocr-result-detail.component').then(m => m.OcrResultDetailComponent),
     resolve: {
       ocrResult: OcrResultResolve,
     },
@@ -24,7 +23,7 @@ const ocrResultRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/ocr-result-update').then(m => m.OcrResultUpdate),
+    loadComponent: () => import('./update/ocr-result-update.component').then(m => m.OcrResultUpdateComponent),
     resolve: {
       ocrResult: OcrResultResolve,
     },
@@ -32,7 +31,7 @@ const ocrResultRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/ocr-result-update').then(m => m.OcrResultUpdate),
+    loadComponent: () => import('./update/ocr-result-update.component').then(m => m.OcrResultUpdateComponent),
     resolve: {
       ocrResult: OcrResultResolve,
     },

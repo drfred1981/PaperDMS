@@ -11,7 +11,7 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
 ---
@@ -62,7 +62,7 @@ management:
         readiness:
           include: readinessState,db
     jhimetrics:
-      access: read-only
+      enabled: true
   info:
     git:
       mode: full
@@ -226,6 +226,16 @@ info:
 # ===================================================================
 
 jhipster:
+  clientApp:
+    name: 'workflowServiceApp'
+  # By default CORS is disabled. Uncomment to enable.
+  # cors:
+  #   allowed-origins: "http://localhost:8100,http://localhost:9000"
+  #   allowed-methods: "*"
+  #   allowed-headers: "*"
+  #   exposed-headers: "Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params"
+  #   allow-credentials: true
+  #   max-age: 1800
   mail:
     from: workflowService@localhost
   api-docs:
@@ -241,7 +251,6 @@ jhipster:
     license: unlicensed
     license-url:
   security:
-
 
 # jhipster-needle-add-application-yaml-document
 ---

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentFingerprint } from '../document-fingerprint.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-fingerprint.test-samples';
@@ -116,7 +116,8 @@ describe('DocumentFingerprint Service', () => {
       it('should add a DocumentFingerprint to an empty array', () => {
         const documentFingerprint: IDocumentFingerprint = sampleWithRequiredData;
         expectedResult = service.addDocumentFingerprintToCollectionIfMissing([], documentFingerprint);
-        expect(expectedResult).toEqual([documentFingerprint]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentFingerprint);
       });
 
       it('should not add a DocumentFingerprint to an array that contains it', () => {
@@ -150,13 +151,16 @@ describe('DocumentFingerprint Service', () => {
         const documentFingerprint: IDocumentFingerprint = sampleWithRequiredData;
         const documentFingerprint2: IDocumentFingerprint = sampleWithPartialData;
         expectedResult = service.addDocumentFingerprintToCollectionIfMissing([], documentFingerprint, documentFingerprint2);
-        expect(expectedResult).toEqual([documentFingerprint, documentFingerprint2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentFingerprint);
+        expect(expectedResult).toContain(documentFingerprint2);
       });
 
       it('should accept null and undefined values', () => {
         const documentFingerprint: IDocumentFingerprint = sampleWithRequiredData;
         expectedResult = service.addDocumentFingerprintToCollectionIfMissing([], null, documentFingerprint, undefined);
-        expect(expectedResult).toEqual([documentFingerprint]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentFingerprint);
       });
 
       it('should return initial array if no DocumentFingerprint is added', () => {

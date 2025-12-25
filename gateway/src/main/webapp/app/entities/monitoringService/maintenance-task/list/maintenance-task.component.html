@@ -1,0 +1,228 @@
+<div>
+  <h2 id="page-heading" data-cy="MaintenanceTaskHeading">
+    <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.home.title">Maintenance Tasks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-maintenance-task"
+        [routerLink]="['/maintenance-task/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.home.createLabel">Create a new Maintenance Task</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (maintenanceTasks().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.home.notFound">No Maintenance Tasks found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="taskType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.taskType">Task Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="schedule">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.schedule">Schedule</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastRun">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.lastRun">Last Run</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nextRun">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.nextRun">Next Run</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="duration">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.duration">Duration</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recordsProcessed">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.recordsProcessed">Records Processed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMaintenanceTask.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (maintenanceTask of maintenanceTasks(); track trackId(maintenanceTask)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/maintenance-task', maintenanceTask.id, 'view']">{{ maintenanceTask.id }}</a>
+              </td>
+              <td>{{ maintenanceTask.name }}</td>
+              <td>{{ maintenanceTask.description }}</td>
+              <td [jhiTranslate]="'gatewayApp.MaintenanceType.' + (maintenanceTask.taskType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    CLEANUP_DELETED: 'CLEANUP_DELETED',
+                    REBUILD_INDEX: 'REBUILD_INDEX',
+                    OPTIMIZE_STORAGE: 'OPTIMIZE_STORAGE',
+                    VERIFY_CHECKSUMS: 'VERIFY_CHECKSUMS',
+                    EXPIRE_TEMP_FILES: 'EXPIRE_TEMP_FILES',
+                    PRUNE_AUDIT_LOGS: 'PRUNE_AUDIT_LOGS',
+                    UPDATE_STATISTICS: 'UPDATE_STATISTICS',
+                    VACUUM_DATABASE: 'VACUUM_DATABASE',
+                    ROTATE_LOGS: 'ROTATE_LOGS',
+                    BACKUP_DATABASE: 'BACKUP_DATABASE',
+                  }[maintenanceTask.taskType ?? 'null']
+                }}
+              </td>
+              <td>{{ maintenanceTask.schedule }}</td>
+              <td [jhiTranslate]="'gatewayApp.TransformStatus.' + (maintenanceTask.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[maintenanceTask.status ?? 'null']
+                }}
+              </td>
+              <td>{{ maintenanceTask.isActive }}</td>
+              <td>{{ maintenanceTask.lastRun | formatMediumDatetime }}</td>
+              <td>{{ maintenanceTask.nextRun | formatMediumDatetime }}</td>
+              <td>{{ maintenanceTask.duration }}</td>
+              <td>{{ maintenanceTask.recordsProcessed }}</td>
+              <td>{{ maintenanceTask.createdBy }}</td>
+              <td>{{ maintenanceTask.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/maintenance-task', maintenanceTask.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/maintenance-task', maintenanceTask.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(maintenanceTask)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (maintenanceTasks().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

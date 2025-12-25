@@ -11,7 +11,7 @@ export const sampleWithRequiredData: IAlertRule = {
   recipients: '../fake-data/blob/hipster.txt',
   isActive: false,
   createdBy: 'midst',
-  createdDate: dayjs('2025-12-20T04:33'),
+  createdDate: dayjs('2025-12-24T23:32'),
 };
 
 export const sampleWithPartialData: IAlertRule = {
@@ -23,9 +23,9 @@ export const sampleWithPartialData: IAlertRule = {
   recipients: '../fake-data/blob/hipster.txt',
   isActive: true,
   triggerCount: 10285,
-  lastTriggered: dayjs('2025-12-20T08:30'),
+  lastTriggered: dayjs('2025-12-25T03:29'),
   createdBy: 'why',
-  createdDate: dayjs('2025-12-20T01:25'),
+  createdDate: dayjs('2025-12-24T20:24'),
 };
 
 export const sampleWithFullData: IAlertRule = {
@@ -38,9 +38,9 @@ export const sampleWithFullData: IAlertRule = {
   recipients: '../fake-data/blob/hipster.txt',
   isActive: true,
   triggerCount: 1384,
-  lastTriggered: dayjs('2025-12-20T10:53'),
+  lastTriggered: dayjs('2025-12-25T05:52'),
   createdBy: 'clearly atop pressure',
-  createdDate: dayjs('2025-12-20T15:17'),
+  createdDate: dayjs('2025-12-25T10:17'),
 };
 
 export const sampleWithNewData: NewAlertRule = {
@@ -51,7 +51,7 @@ export const sampleWithNewData: NewAlertRule = {
   recipients: '../fake-data/blob/hipster.txt',
   isActive: false,
   createdBy: 'mindless esteemed inside',
-  createdDate: dayjs('2025-12-20T00:56'),
+  createdDate: dayjs('2025-12-24T19:55'),
   id: null,
 };
 

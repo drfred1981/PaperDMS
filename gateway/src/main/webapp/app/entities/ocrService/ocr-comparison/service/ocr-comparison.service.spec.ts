@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IOcrComparison } from '../ocr-comparison.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../ocr-comparison.test-samples';
@@ -102,7 +102,8 @@ describe('OcrComparison Service', () => {
       it('should add a OcrComparison to an empty array', () => {
         const ocrComparison: IOcrComparison = sampleWithRequiredData;
         expectedResult = service.addOcrComparisonToCollectionIfMissing([], ocrComparison);
-        expect(expectedResult).toEqual([ocrComparison]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrComparison);
       });
 
       it('should not add a OcrComparison to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('OcrComparison Service', () => {
         const ocrComparison: IOcrComparison = sampleWithRequiredData;
         const ocrComparison2: IOcrComparison = sampleWithPartialData;
         expectedResult = service.addOcrComparisonToCollectionIfMissing([], ocrComparison, ocrComparison2);
-        expect(expectedResult).toEqual([ocrComparison, ocrComparison2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(ocrComparison);
+        expect(expectedResult).toContain(ocrComparison2);
       });
 
       it('should accept null and undefined values', () => {
         const ocrComparison: IOcrComparison = sampleWithRequiredData;
         expectedResult = service.addOcrComparisonToCollectionIfMissing([], null, ocrComparison, undefined);
-        expect(expectedResult).toEqual([ocrComparison]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrComparison);
       });
 
       it('should return initial array if no OcrComparison is added', () => {

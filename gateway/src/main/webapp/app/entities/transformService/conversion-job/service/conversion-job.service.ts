@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IConversionJob, NewConversionJob } from '../conversion-job.model';
 
 export type PartialUpdateConversionJob = Partial<IConversionJob> & Pick<IConversionJob, 'id'>;
@@ -43,24 +43,20 @@ export class ConversionJobService {
   update(conversionJob: IConversionJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(conversionJob);
     return this.http
-      .put<RestConversionJob>(`${this.resourceUrl}/${encodeURIComponent(this.getConversionJobIdentifier(conversionJob))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestConversionJob>(`${this.resourceUrl}/${this.getConversionJobIdentifier(conversionJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(conversionJob: PartialUpdateConversionJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(conversionJob);
     return this.http
-      .patch<RestConversionJob>(`${this.resourceUrl}/${encodeURIComponent(this.getConversionJobIdentifier(conversionJob))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestConversionJob>(`${this.resourceUrl}/${this.getConversionJobIdentifier(conversionJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestConversionJob>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestConversionJob>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -72,7 +68,7 @@ export class ConversionJobService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getConversionJobIdentifier(conversionJob: Pick<IConversionJob, 'id'>): number {

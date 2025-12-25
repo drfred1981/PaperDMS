@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ExportJobResolve from './route/export-job-routing-resolve.service';
 
 const exportJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/export-job').then(m => m.ExportJob),
+    loadComponent: () => import('./list/export-job.component').then(m => m.ExportJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const exportJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/export-job-detail').then(m => m.ExportJobDetail),
+    loadComponent: () => import('./detail/export-job-detail.component').then(m => m.ExportJobDetailComponent),
     resolve: {
       exportJob: ExportJobResolve,
     },
@@ -24,7 +23,7 @@ const exportJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/export-job-update').then(m => m.ExportJobUpdate),
+    loadComponent: () => import('./update/export-job-update.component').then(m => m.ExportJobUpdateComponent),
     resolve: {
       exportJob: ExportJobResolve,
     },
@@ -32,7 +31,7 @@ const exportJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/export-job-update').then(m => m.ExportJobUpdate),
+    loadComponent: () => import('./update/export-job-update.component').then(m => m.ExportJobUpdateComponent),
     resolve: {
       exportJob: ExportJobResolve,
     },

@@ -9,7 +9,7 @@ export const sampleWithRequiredData: ILanguageDetection = {
   detectedLanguage: 'which orie',
   confidence: 0.16,
   isCached: true,
-  detectedDate: dayjs('2025-12-20T01:13'),
+  detectedDate: dayjs('2025-12-24T20:12'),
 };
 
 export const sampleWithPartialData: ILanguageDetection = {
@@ -22,7 +22,7 @@ export const sampleWithPartialData: ILanguageDetection = {
   alternativeLanguages: '../fake-data/blob/hipster.txt',
   textSample: '../fake-data/blob/hipster.txt',
   isCached: true,
-  detectedDate: dayjs('2025-12-19T20:07'),
+  detectedDate: dayjs('2025-12-24T15:06'),
 };
 
 export const sampleWithFullData: ILanguageDetection = {
@@ -36,7 +36,7 @@ export const sampleWithFullData: ILanguageDetection = {
   textSample: '../fake-data/blob/hipster.txt',
   resultCacheKey: 'downright hm for',
   isCached: false,
-  detectedDate: dayjs('2025-12-19T22:58'),
+  detectedDate: dayjs('2025-12-24T17:57'),
   modelVersion: 'ape chairperson',
 };
 
@@ -46,7 +46,7 @@ export const sampleWithNewData: NewLanguageDetection = {
   detectedLanguage: 'think edge',
   confidence: 0.2,
   isCached: false,
-  detectedDate: dayjs('2025-12-20T03:49'),
+  detectedDate: dayjs('2025-12-24T22:48'),
   id: null,
 };
 

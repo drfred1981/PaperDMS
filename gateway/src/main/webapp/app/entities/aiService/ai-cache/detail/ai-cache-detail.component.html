@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (aiCache(); as aiCacheRef) {
+      <div>
+        <h2 data-cy="aiCacheDetailsHeading"><span jhiTranslate="gatewayApp.aiServiceAiCache.detail.title">Ai Cache</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.cacheKey">Cache Key</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.cacheKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.inputSha256">Input Sha 256</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.inputSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.aiProvider">Ai Provider</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.aiProvider }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.aiModel">Ai Model</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.aiModel }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.operation">Operation</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.operation }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.inputData">Input Data</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.inputData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.resultData">Result Data</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.resultData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.s3ResultKey">S 3 Result Key</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.s3ResultKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.hits">Hits</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.hits }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.cost">Cost</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.cost }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.lastAccessDate">Last Access Date</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.lastAccessDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAiCache.expirationDate">Expiration Date</span></dt>
+          <dd>
+            <span>{{ aiCacheRef.expirationDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ai-cache', aiCacheRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -8,6 +8,7 @@ describe('ExportJob Form Service', () => {
   let service: ExportJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ExportJobFormService);
   });
 
@@ -78,7 +79,7 @@ describe('ExportJob Form Service', () => {
       it('should return NewExportJob for default ExportJob initial value', () => {
         const formGroup = service.createExportJobFormGroup(sampleWithNewData);
 
-        const exportJob = service.getExportJob(formGroup);
+        const exportJob = service.getExportJob(formGroup) as any;
 
         expect(exportJob).toMatchObject(sampleWithNewData);
       });
@@ -86,7 +87,7 @@ describe('ExportJob Form Service', () => {
       it('should return NewExportJob for empty ExportJob initial value', () => {
         const formGroup = service.createExportJobFormGroup();
 
-        const exportJob = service.getExportJob(formGroup);
+        const exportJob = service.getExportJob(formGroup) as any;
 
         expect(exportJob).toMatchObject({});
       });
@@ -94,7 +95,7 @@ describe('ExportJob Form Service', () => {
       it('should return IExportJob', () => {
         const formGroup = service.createExportJobFormGroup(sampleWithRequiredData);
 
-        const exportJob = service.getExportJob(formGroup);
+        const exportJob = service.getExportJob(formGroup) as any;
 
         expect(exportJob).toMatchObject(sampleWithRequiredData);
       });

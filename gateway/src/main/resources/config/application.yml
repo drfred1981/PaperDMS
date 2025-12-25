@@ -11,7 +11,7 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
 ---
@@ -54,7 +54,7 @@ management:
         readiness:
           include: readinessState,db
     jhimetrics:
-      access: read-only
+      enabled: true
   info:
     git:
       mode: full
@@ -105,20 +105,14 @@ spring:
         watch:
           enabled: false
     gateway:
-      server:
-        webmvc:
-          discovery:
-            locator:
-              enabled: true
-              lower-case-service-id: true
-              predicates:
-                - name: Path
-                  args:
-                    pattern: "'/services/'+serviceId.toLowerCase()+'/**'"
-              filters:
-                - StripPrefix=2
-          # See alternatives in https://github.com/spring-cloud/spring-cloud-gateway/issues/3818
-          trusted-proxies: '.*'
+      mvc:
+        routes:
+          - id: gateway_route
+            uri: lb://gateway
+            predicates:
+              - Path=/services/gateway/**
+            filters:
+              - StripPrefix=2
     function:
       definition: kafkaConsumer;kafkaProducer
     stream:
@@ -259,7 +253,6 @@ jhipster:
     license-url:
   security:
     content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:"
-
 
 # jhipster-needle-add-application-yaml-document
 ---

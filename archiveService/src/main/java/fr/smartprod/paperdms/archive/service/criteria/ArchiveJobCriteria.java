@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.archive.service.criteria;
 
 import fr.smartprod.paperdms.archive.domain.enumeration.ArchiveFormat;
 import fr.smartprod.paperdms.archive.domain.enumeration.ArchiveStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class ArchiveJobCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

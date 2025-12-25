@@ -1,8 +1,7 @@
 package fr.smartprod.paperdms.document.service.dto;
 
-import fr.smartprod.paperdms.common.enumeration.ServiceStatus;
-import fr.smartprod.paperdms.common.enumeration.ServiceType;
-import io.swagger.v3.oas.annotations.media.Schema;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceStatus;
+import fr.smartprod.paperdms.document.domain.enumeration.ServiceType;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -12,9 +11,6 @@ import java.util.Objects;
 /**
  * A DTO for the {@link fr.smartprod.paperdms.document.domain.DocumentServiceStatus} entity.
  */
-@Schema(
-    description = "NOUVELLE ENTIT�: Permet de tracker le statut d'un document pour chaque service\nChaque ligne repr�sente l'�tat du document dans un service sp�cifique"
-)
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class DocumentServiceStatusDTO implements Serializable {
 
@@ -55,6 +51,9 @@ public class DocumentServiceStatusDTO implements Serializable {
 
     @NotNull
     private Instant updatedDate;
+
+    @NotNull
+    private DocumentDTO document;
 
     public Long getId() {
         return id;
@@ -176,6 +175,14 @@ public class DocumentServiceStatusDTO implements Serializable {
         this.updatedDate = updatedDate;
     }
 
+    public DocumentDTO getDocument() {
+        return document;
+    }
+
+    public void setDocument(DocumentDTO document) {
+        this.document = document;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -216,6 +223,7 @@ public class DocumentServiceStatusDTO implements Serializable {
             ", priority=" + getPriority() +
             ", updatedBy='" + getUpdatedBy() + "'" +
             ", updatedDate='" + getUpdatedDate() + "'" +
+            ", document=" + getDocument() +
             "}";
     }
 }

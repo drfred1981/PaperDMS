@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { WatermarkJobService } from '../service/watermark-job.service';
 import { IWatermarkJob } from '../watermark-job.model';
+import { WatermarkJobService } from '../service/watermark-job.service';
 
 const watermarkJobResolve = (route: ActivatedRouteSnapshot): Observable<null | IWatermarkJob> => {
   const id = route.params.id;

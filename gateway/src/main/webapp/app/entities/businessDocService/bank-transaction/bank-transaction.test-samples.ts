@@ -5,7 +5,7 @@ import { IBankTransaction, NewBankTransaction } from './bank-transaction.model';
 export const sampleWithRequiredData: IBankTransaction = {
   id: 29331,
   statementId: 19068,
-  transactionDate: dayjs('2025-12-19'),
+  transactionDate: dayjs('2025-12-24'),
   description: 'cheese fixed hmph',
   balance: 1894.97,
   isReconciled: false,
@@ -14,7 +14,7 @@ export const sampleWithRequiredData: IBankTransaction = {
 export const sampleWithPartialData: IBankTransaction = {
   id: 6251,
   statementId: 24229,
-  transactionDate: dayjs('2025-12-20'),
+  transactionDate: dayjs('2025-12-24'),
   description: 'following',
   balance: 12774.53,
   isReconciled: true,
@@ -23,7 +23,7 @@ export const sampleWithPartialData: IBankTransaction = {
 export const sampleWithFullData: IBankTransaction = {
   id: 3029,
   statementId: 8968,
-  transactionDate: dayjs('2025-12-19'),
+  transactionDate: dayjs('2025-12-24'),
   description: 'bend',
   debitAmount: 8853.66,
   creditAmount: 16115.72,
@@ -33,7 +33,7 @@ export const sampleWithFullData: IBankTransaction = {
 
 export const sampleWithNewData: NewBankTransaction = {
   statementId: 31995,
-  transactionDate: dayjs('2025-12-20'),
+  transactionDate: dayjs('2025-12-25'),
   description: 'straw aside unaccountably',
   balance: 14106.33,
   isReconciled: false,

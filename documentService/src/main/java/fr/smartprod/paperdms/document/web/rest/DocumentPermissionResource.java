@@ -37,7 +37,7 @@ public class DocumentPermissionResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentPermission";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentPermissionService documentPermissionService;

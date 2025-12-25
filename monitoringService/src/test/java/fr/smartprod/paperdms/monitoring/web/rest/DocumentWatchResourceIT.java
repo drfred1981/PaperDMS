@@ -69,7 +69,7 @@ class DocumentWatchResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -935,7 +935,12 @@ class DocumentWatchResourceIT {
         DocumentWatch partialUpdatedDocumentWatch = new DocumentWatch();
         partialUpdatedDocumentWatch.setId(documentWatch.getId());
 
-        partialUpdatedDocumentWatch.userId(UPDATED_USER_ID);
+        partialUpdatedDocumentWatch
+            .documentId(UPDATED_DOCUMENT_ID)
+            .userId(UPDATED_USER_ID)
+            .notifyOnView(UPDATED_NOTIFY_ON_VIEW)
+            .notifyOnModify(UPDATED_NOTIFY_ON_MODIFY)
+            .notifyOnShare(UPDATED_NOTIFY_ON_SHARE);
 
         restDocumentWatchMockMvc
             .perform(

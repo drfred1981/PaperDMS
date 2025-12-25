@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IMergeJob, NewMergeJob } from '../merge-job.model';
 
 export type PartialUpdateMergeJob = Partial<IMergeJob> & Pick<IMergeJob, 'id'>;
@@ -43,20 +43,20 @@ export class MergeJobService {
   update(mergeJob: IMergeJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(mergeJob);
     return this.http
-      .put<RestMergeJob>(`${this.resourceUrl}/${encodeURIComponent(this.getMergeJobIdentifier(mergeJob))}`, copy, { observe: 'response' })
+      .put<RestMergeJob>(`${this.resourceUrl}/${this.getMergeJobIdentifier(mergeJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(mergeJob: PartialUpdateMergeJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(mergeJob);
     return this.http
-      .patch<RestMergeJob>(`${this.resourceUrl}/${encodeURIComponent(this.getMergeJobIdentifier(mergeJob))}`, copy, { observe: 'response' })
+      .patch<RestMergeJob>(`${this.resourceUrl}/${this.getMergeJobIdentifier(mergeJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestMergeJob>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestMergeJob>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -68,7 +68,7 @@ export class MergeJobService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getMergeJobIdentifier(mergeJob: Pick<IMergeJob, 'id'>): number {

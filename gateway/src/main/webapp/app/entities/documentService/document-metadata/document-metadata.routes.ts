@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentMetadataResolve from './route/document-metadata-routing-resolve.service';
 
 const documentMetadataRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-metadata').then(m => m.DocumentMetadata),
+    loadComponent: () => import('./list/document-metadata.component').then(m => m.DocumentMetadataComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentMetadataRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-metadata-detail').then(m => m.DocumentMetadataDetail),
+    loadComponent: () => import('./detail/document-metadata-detail.component').then(m => m.DocumentMetadataDetailComponent),
     resolve: {
       documentMetadata: DocumentMetadataResolve,
     },
@@ -24,7 +23,7 @@ const documentMetadataRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-metadata-update').then(m => m.DocumentMetadataUpdate),
+    loadComponent: () => import('./update/document-metadata-update.component').then(m => m.DocumentMetadataUpdateComponent),
     resolve: {
       documentMetadata: DocumentMetadataResolve,
     },
@@ -32,7 +31,7 @@ const documentMetadataRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-metadata-update').then(m => m.DocumentMetadataUpdate),
+    loadComponent: () => import('./update/document-metadata-update.component').then(m => m.DocumentMetadataUpdateComponent),
     resolve: {
       documentMetadata: DocumentMetadataResolve,
     },

@@ -20,4 +20,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @EmbeddedRedis
 @EmbeddedSQL
 @EmbeddedKafka
-public @interface IntegrationTest {}
+public @interface IntegrationTest {
+}

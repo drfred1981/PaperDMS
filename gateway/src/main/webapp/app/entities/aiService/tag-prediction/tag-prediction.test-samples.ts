@@ -6,7 +6,7 @@ export const sampleWithRequiredData: ITagPrediction = {
   id: 14165,
   tagName: 'awkwardly though',
   confidence: 0.41,
-  predictionDate: dayjs('2025-12-19T19:24'),
+  predictionDate: dayjs('2025-12-24T14:23'),
 };
 
 export const sampleWithPartialData: ITagPrediction = {
@@ -14,8 +14,8 @@ export const sampleWithPartialData: ITagPrediction = {
   tagName: 'which',
   confidence: 0.33,
   acceptedBy: 'impostor assail gown',
-  acceptedDate: dayjs('2025-12-20T11:14'),
-  predictionDate: dayjs('2025-12-20T06:39'),
+  acceptedDate: dayjs('2025-12-25T06:13'),
+  predictionDate: dayjs('2025-12-25T01:38'),
 };
 
 export const sampleWithFullData: ITagPrediction = {
@@ -27,14 +27,14 @@ export const sampleWithFullData: ITagPrediction = {
   predictionS3Key: 'healthily',
   isAccepted: false,
   acceptedBy: 'vice towards smoothly',
-  acceptedDate: dayjs('2025-12-20T02:01'),
-  predictionDate: dayjs('2025-12-20T07:38'),
+  acceptedDate: dayjs('2025-12-24T21:00'),
+  predictionDate: dayjs('2025-12-25T02:37'),
 };
 
 export const sampleWithNewData: NewTagPrediction = {
   tagName: 'throughout er',
   confidence: 0.06,
-  predictionDate: dayjs('2025-12-20T14:58'),
+  predictionDate: dayjs('2025-12-25T09:57'),
   id: null,
 };
 

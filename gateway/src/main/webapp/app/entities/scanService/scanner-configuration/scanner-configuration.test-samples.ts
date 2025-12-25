@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IScannerConfiguration = {
   name: 'despite knowingly or',
   scannerType: 'LOCAL',
   isActive: true,
-  createdDate: dayjs('2025-12-20T08:32'),
+  createdDate: dayjs('2025-12-25T03:31'),
 };
 
 export const sampleWithPartialData: IScannerConfiguration = {
@@ -19,8 +19,8 @@ export const sampleWithPartialData: IScannerConfiguration = {
   defaultResolution: 32646,
   capabilities: '../fake-data/blob/hipster.txt',
   isActive: true,
-  createdDate: dayjs('2025-12-20T07:31'),
-  lastModifiedDate: dayjs('2025-12-19T20:49'),
+  createdDate: dayjs('2025-12-25T02:30'),
+  lastModifiedDate: dayjs('2025-12-24T15:48'),
 };
 
 export const sampleWithFullData: IScannerConfiguration = {
@@ -37,15 +37,15 @@ export const sampleWithFullData: IScannerConfiguration = {
   defaultFormat: 'TIFF',
   capabilities: '../fake-data/blob/hipster.txt',
   isActive: true,
-  createdDate: dayjs('2025-12-20T08:43'),
-  lastModifiedDate: dayjs('2025-12-20T01:33'),
+  createdDate: dayjs('2025-12-25T03:42'),
+  lastModifiedDate: dayjs('2025-12-24T20:32'),
 };
 
 export const sampleWithNewData: NewScannerConfiguration = {
   name: 'uh-huh role',
   scannerType: 'MOBILE',
   isActive: false,
-  createdDate: dayjs('2025-12-20T09:33'),
+  createdDate: dayjs('2025-12-25T04:32'),
   id: null,
 };
 

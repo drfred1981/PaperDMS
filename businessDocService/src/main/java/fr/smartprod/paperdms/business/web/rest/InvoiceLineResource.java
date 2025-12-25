@@ -35,7 +35,7 @@ public class InvoiceLineResource {
 
     private static final String ENTITY_NAME = "businessDocServiceInvoiceLine";
 
-    @Value("${jhipster.clientApp.name:businessDocService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final InvoiceLineService invoiceLineService;

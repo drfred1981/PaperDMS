@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IWebhookLog, NewWebhookLog } from '../webhook-log.model';
 
 export type PartialUpdateWebhookLog = Partial<IWebhookLog> & Pick<IWebhookLog, 'id'>;
@@ -41,24 +41,20 @@ export class WebhookLogService {
   update(webhookLog: IWebhookLog): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(webhookLog);
     return this.http
-      .put<RestWebhookLog>(`${this.resourceUrl}/${encodeURIComponent(this.getWebhookLogIdentifier(webhookLog))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestWebhookLog>(`${this.resourceUrl}/${this.getWebhookLogIdentifier(webhookLog)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(webhookLog: PartialUpdateWebhookLog): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(webhookLog);
     return this.http
-      .patch<RestWebhookLog>(`${this.resourceUrl}/${encodeURIComponent(this.getWebhookLogIdentifier(webhookLog))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestWebhookLog>(`${this.resourceUrl}/${this.getWebhookLogIdentifier(webhookLog)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestWebhookLog>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestWebhookLog>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class WebhookLogService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getWebhookLogIdentifier(webhookLog: Pick<IWebhookLog, 'id'>): number {

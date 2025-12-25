@@ -37,7 +37,7 @@ public class SmartFolderResource {
 
     private static final String ENTITY_NAME = "documentServiceSmartFolder";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SmartFolderService smartFolderService;

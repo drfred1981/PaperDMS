@@ -8,6 +8,7 @@ describe('ConversionJob Form Service', () => {
   let service: ConversionJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ConversionJobFormService);
   });
 
@@ -66,7 +67,7 @@ describe('ConversionJob Form Service', () => {
       it('should return NewConversionJob for default ConversionJob initial value', () => {
         const formGroup = service.createConversionJobFormGroup(sampleWithNewData);
 
-        const conversionJob = service.getConversionJob(formGroup);
+        const conversionJob = service.getConversionJob(formGroup) as any;
 
         expect(conversionJob).toMatchObject(sampleWithNewData);
       });
@@ -74,7 +75,7 @@ describe('ConversionJob Form Service', () => {
       it('should return NewConversionJob for empty ConversionJob initial value', () => {
         const formGroup = service.createConversionJobFormGroup();
 
-        const conversionJob = service.getConversionJob(formGroup);
+        const conversionJob = service.getConversionJob(formGroup) as any;
 
         expect(conversionJob).toMatchObject({});
       });
@@ -82,7 +83,7 @@ describe('ConversionJob Form Service', () => {
       it('should return IConversionJob', () => {
         const formGroup = service.createConversionJobFormGroup(sampleWithRequiredData);
 
-        const conversionJob = service.getConversionJob(formGroup);
+        const conversionJob = service.getConversionJob(formGroup) as any;
 
         expect(conversionJob).toMatchObject(sampleWithRequiredData);
       });

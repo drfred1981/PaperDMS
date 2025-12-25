@@ -10,10 +10,10 @@
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
     "entities": ["Alert", "AlertRule", "DocumentWatch", "MaintenanceTask", "SystemHealth", "ServiceStatus"],
-    "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "ODdhYmE3ZjJjYmU5NmZmMzIxOTgzMTQ4ODNiNGMzMDRiZTkxZWJiMTcyODhjOTU4ZDRiMDU5MzFmMWU2NDgwOTZhNWQ4ZmQwNmIxMmM1MjgxNWM2MDkwNDNjYWE5ZDhmZTM5MWUxOTczOGMxODZhZGFlZmM1N2MzMjk1NThmODM=",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "MDEwOTIwYmQ4ZGQzMzY4YTcyMGIyYTcyNmEwYTU3MDMzMWJjNDdmYTc4NGZhZWUxMjlmOWZkNDA3YzRlMWQ1ODY4M2I1YmE4OTUyMGI0MzFiYWUzMDczNzEwNTU2MTQ1ZjlkZDRlNWM0NGE1ZjQ4MmJjZmVkZGJmMzlkOGQ5OTA=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1766244614000,
+    "lastLiquibaseTimestamp": 1766658556000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -23,6 +23,7 @@
     "serviceDiscoveryType": "consul",
     "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

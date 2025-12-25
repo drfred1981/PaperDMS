@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ScheduledReportResolve from './route/scheduled-report-routing-resolve.service';
 
 const scheduledReportRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/scheduled-report').then(m => m.ScheduledReport),
+    loadComponent: () => import('./list/scheduled-report.component').then(m => m.ScheduledReportComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const scheduledReportRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/scheduled-report-detail').then(m => m.ScheduledReportDetail),
+    loadComponent: () => import('./detail/scheduled-report-detail.component').then(m => m.ScheduledReportDetailComponent),
     resolve: {
       scheduledReport: ScheduledReportResolve,
     },
@@ -24,7 +23,7 @@ const scheduledReportRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/scheduled-report-update').then(m => m.ScheduledReportUpdate),
+    loadComponent: () => import('./update/scheduled-report-update.component').then(m => m.ScheduledReportUpdateComponent),
     resolve: {
       scheduledReport: ScheduledReportResolve,
     },
@@ -32,7 +31,7 @@ const scheduledReportRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/scheduled-report-update').then(m => m.ScheduledReportUpdate),
+    loadComponent: () => import('./update/scheduled-report-update.component').then(m => m.ScheduledReportUpdateComponent),
     resolve: {
       scheduledReport: ScheduledReportResolve,
     },

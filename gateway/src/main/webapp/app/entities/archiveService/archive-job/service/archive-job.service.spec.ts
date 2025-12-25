@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IArchiveJob } from '../archive-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../archive-job.test-samples';
@@ -103,7 +103,8 @@ describe('ArchiveJob Service', () => {
       it('should add a ArchiveJob to an empty array', () => {
         const archiveJob: IArchiveJob = sampleWithRequiredData;
         expectedResult = service.addArchiveJobToCollectionIfMissing([], archiveJob);
-        expect(expectedResult).toEqual([archiveJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(archiveJob);
       });
 
       it('should not add a ArchiveJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('ArchiveJob Service', () => {
         const archiveJob: IArchiveJob = sampleWithRequiredData;
         const archiveJob2: IArchiveJob = sampleWithPartialData;
         expectedResult = service.addArchiveJobToCollectionIfMissing([], archiveJob, archiveJob2);
-        expect(expectedResult).toEqual([archiveJob, archiveJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(archiveJob);
+        expect(expectedResult).toContain(archiveJob2);
       });
 
       it('should accept null and undefined values', () => {
         const archiveJob: IArchiveJob = sampleWithRequiredData;
         expectedResult = service.addArchiveJobToCollectionIfMissing([], null, archiveJob, undefined);
-        expect(expectedResult).toEqual([archiveJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(archiveJob);
       });
 
       it('should return initial array if no ArchiveJob is added', () => {

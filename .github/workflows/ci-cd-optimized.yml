@@ -1,0 +1,323 @@
+name: PaperDMS CI/CD (Optimized)
+
+# =============================================================================
+# Workflow optimisé avec:
+# - Cache Maven et npm
+# - Build conditionnel (uniquement services modifiés)
+# - Docker layer caching
+# - Notifications Slack/Discord
+# =============================================================================
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '17'
+  NODE_VERSION: '18'
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ${{ github.repository_owner }}/paperdms
+
+# =============================================================================
+# Jobs
+# =============================================================================
+jobs:
+  # ===========================================================================
+  # Detect changes - Determine which services need to be built
+  # ===========================================================================
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      maven-packages: ${{ steps.filter.outputs.maven-packages }}
+      services: ${{ steps.filter.outputs.services }}
+      gateway: ${{ steps.filter.outputs.gateway }}
+      documentService: ${{ steps.filter.outputs.documentService }}
+      ocrService: ${{ steps.filter.outputs.ocrService }}
+      searchService: ${{ steps.filter.outputs.searchService }}
+      aiService: ${{ steps.filter.outputs.aiService }}
+      workflowService: ${{ steps.filter.outputs.workflowService }}
+      notificationService: ${{ steps.filter.outputs.notificationService }}
+      all-services: ${{ steps.services-list.outputs.all }}
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            maven-packages:
+              - 'paperdms-common/**'
+            services:
+              - '*/pom.xml'
+              - '*/src/**'
+            gateway:
+              - 'gateway/**'
+              - 'paperdms-common/**'
+            documentService:
+              - 'documentService/**'
+              - 'paperdms-common/**'
+            ocrService:
+              - 'ocrService/**'
+              - 'paperdms-common/**'
+            searchService:
+              - 'searchService/**'
+              - 'paperdms-common/**'
+            aiService:
+              - 'aiService/**'
+              - 'paperdms-common/**'
+            workflowService:
+              - 'workflowService/**'
+              - 'paperdms-common/**'
+            notificationService:
+              - 'notificationService/**'
+              - 'paperdms-common/**'
+      
+      - name: Generate services list
+        id: services-list
+        run: |
+          # Build all services if:
+          # - Tag push
+          # - maven-packages changed
+          # - workflow_dispatch
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/* ]] || \
+             [[ "${{ steps.filter.outputs.maven-packages }}" == "true" ]] || \
+             [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "all=true" >> $GITHUB_OUTPUT
+          else
+            echo "all=false" >> $GITHUB_OUTPUT
+          fi
+
+  # ===========================================================================
+  # Build Maven Packages
+  # ===========================================================================
+  build-maven-packages:
+    name: Build Maven Packages
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.maven-packages == 'true' || needs.detect-changes.outputs.all-services == 'true'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+      
+      # Cache Maven dependencies
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      
+      - name: Extract version
+        id: version
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION=${GITHUB_SHA::8}
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      
+      - name: Build paperdms-common
+        run: |
+          cd paperdms-common
+          mvn clean install -DskipTests -Drevision=${{ steps.version.outputs.version }}
+      
+      - name: Test paperdms-common
+        run: |
+          cd paperdms-common
+          mvn test
+      
+      - name: Upload Maven Repository
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-repository
+          path: ~/.m2/repository/fr/smartprod/paperdms/
+          retention-days: 1
+
+  # ===========================================================================
+  # Build Services Matrix
+  # ===========================================================================
+  build-services:
+    name: Build ${{ matrix.service }}
+    needs: [detect-changes, build-maven-packages]
+    runs-on: ubuntu-latest
+    if: always() && needs.build-maven-packages.result != 'failure'
+    
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        include:
+          - service: gateway
+            needs-node: true
+          - service: documentService
+            needs-node: false
+          - service: ocrService
+            needs-node: false
+          - service: searchService
+            needs-node: false
+          - service: aiService
+            needs-node: false
+          - service: workflowService
+            needs-node: false
+          - service: notificationService
+            needs-node: false
+          - service: emailService
+            needs-node: false
+          - service: invoiceService
+            needs-node: false
+          - service: receiptService
+            needs-node: false
+          - service: contractService
+            needs-node: false
+          - service: reportService
+            needs-node: false
+          - service: archiveService
+            needs-node: false
+          - service: auditService
+            needs-node: false
+          - service: backupService
+            needs-node: false
+    
+    # Build only if service changed OR building all
+    if: |
+      needs.detect-changes.outputs.all-services == 'true' ||
+      needs.detect-changes.outputs[matrix.service] == 'true'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+      
+      - name: Set up Node.js
+        if: matrix.needs-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      # Restore Maven cache
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      
+      # Cache npm dependencies
+      - name: Cache npm packages
+        if: matrix.needs-node
+        uses: actions/cache@v3
+        with:
+          path: ${{ matrix.service }}/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles(format('{0}/package-lock.json', matrix.service)) }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
+      - name: Download Maven Repository
+        uses: actions/download-artifact@v4
+        with:
+          name: maven-repository
+          path: ~/.m2/repository/fr/smartprod/paperdms/
+      
+      - name: Extract version
+        id: version
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION=${GITHUB_SHA::8}
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      
+      - name: Install frontend dependencies
+        if: matrix.needs-node
+        working-directory: ${{ matrix.service }}
+        run: npm ci
+      
+      - name: Build ${{ matrix.service }}
+        working-directory: ${{ matrix.service }}
+        run: mvn clean package -Pprod -DskipTests
+      
+      - name: Test ${{ matrix.service }}
+        working-directory: ${{ matrix.service }}
+        run: mvn test
+      
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.service }}-jar
+          path: ${{ matrix.service }}/target/*.jar
+          retention-days: 7
+      
+      # Docker build and push (only on tags or main)
+      - name: Set up Docker Buildx
+        if: github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main')
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Login to GitHub Container Registry
+        if: github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main')
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build and push Docker image
+        if: github.event_name == 'push' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main')
+        working-directory: ${{ matrix.service }}
+        run: |
+          mvn -Pprod compile jib:build \
+            -Djib.to.image=ghcr.io/${{ github.repository_owner }}/paperdms-${{ matrix.service }}:${{ steps.version.outputs.version }} \
+            -Djib.to.tags=latest \
+            -Djib.to.auth.username=${{ github.actor }} \
+            -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}
+
+  # ===========================================================================
+  # Create Release
+  # ===========================================================================
+  create-release:
+    name: Create Release
+    needs: build-services
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+          files: artifacts/**/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

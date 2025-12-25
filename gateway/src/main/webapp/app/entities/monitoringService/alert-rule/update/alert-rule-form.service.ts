@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IAlertRule, NewAlertRule } from '../alert-rule.model';
 
@@ -50,10 +49,10 @@ export type AlertRuleFormGroup = FormGroup<AlertRuleFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class AlertRuleFormService {
-  createAlertRuleFormGroup(alertRule?: AlertRuleFormGroupInput): AlertRuleFormGroup {
+  createAlertRuleFormGroup(alertRule: AlertRuleFormGroupInput = { id: null }): AlertRuleFormGroup {
     const alertRuleRawValue = this.convertAlertRuleToAlertRuleRawValue({
       ...this.getFormDefaults(),
-      ...(alertRule ?? { id: null }),
+      ...alertRule,
     });
     return new FormGroup<AlertRuleFormGroupContent>({
       id: new FormControl(
@@ -99,10 +98,12 @@ export class AlertRuleFormService {
 
   resetForm(form: AlertRuleFormGroup, alertRule: AlertRuleFormGroupInput): void {
     const alertRuleRawValue = this.convertAlertRuleToAlertRuleRawValue({ ...this.getFormDefaults(), ...alertRule });
-    form.reset({
-      ...alertRuleRawValue,
-      id: { value: alertRuleRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...alertRuleRawValue,
+        id: { value: alertRuleRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): AlertRuleFormDefaults {

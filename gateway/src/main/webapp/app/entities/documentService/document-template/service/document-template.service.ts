@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentTemplate, NewDocumentTemplate } from '../document-template.model';
 
 export type PartialUpdateDocumentTemplate = Partial<IDocumentTemplate> & Pick<IDocumentTemplate, 'id'>;
@@ -41,7 +41,7 @@ export class DocumentTemplateService {
   update(documentTemplate: IDocumentTemplate): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentTemplate);
     return this.http
-      .put<RestDocumentTemplate>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentTemplateIdentifier(documentTemplate))}`, copy, {
+      .put<RestDocumentTemplate>(`${this.resourceUrl}/${this.getDocumentTemplateIdentifier(documentTemplate)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -50,17 +50,15 @@ export class DocumentTemplateService {
   partialUpdate(documentTemplate: PartialUpdateDocumentTemplate): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentTemplate);
     return this.http
-      .patch<RestDocumentTemplate>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentTemplateIdentifier(documentTemplate))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentTemplate>(`${this.resourceUrl}/${this.getDocumentTemplateIdentifier(documentTemplate)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentTemplate>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentTemplate>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -72,7 +70,7 @@ export class DocumentTemplateService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentTemplateIdentifier(documentTemplate: Pick<IDocumentTemplate, 'id'>): number {

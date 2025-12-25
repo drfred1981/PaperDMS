@@ -1,0 +1,159 @@
+<div>
+  <h2 id="page-heading" data-cy="SearchFacetHeading">
+    <span jhiTranslate="gatewayApp.searchServiceSearchFacet.home.title">Search Facets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.searchServiceSearchFacet.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-search-facet"
+        [routerLink]="['/search-facet/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.searchServiceSearchFacet.home.createLabel">Create a new Search Facet</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (searchFacets().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.searchServiceSearchFacet.home.notFound">No Search Facets found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="searchQueryId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.searchServiceSearchFacet.searchQueryId">Search Query Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="facetName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.searchServiceSearchFacet.facetName">Facet Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="facetType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.searchServiceSearchFacet.facetType">Facet Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="values">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.searchServiceSearchFacet.values">Values</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="counts">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.searchServiceSearchFacet.counts">Counts</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="searchQuery.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.searchServiceSearchFacet.searchQuery">Search Query</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (searchFacet of searchFacets(); track trackId(searchFacet)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/search-facet', searchFacet.id, 'view']">{{ searchFacet.id }}</a>
+              </td>
+              <td>{{ searchFacet.searchQueryId }}</td>
+              <td>{{ searchFacet.facetName }}</td>
+              <td [jhiTranslate]="'gatewayApp.FacetType.' + (searchFacet.facetType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    TERMS: 'TERMS',
+                    DATE_RANGE: 'DATE_RANGE',
+                    NUMBER_RANGE: 'NUMBER_RANGE',
+                    HIERARCHY: 'HIERARCHY',
+                    NESTED: 'NESTED',
+                  }[searchFacet.facetType ?? 'null']
+                }}
+              </td>
+              <td>{{ searchFacet.values }}</td>
+              <td>{{ searchFacet.counts }}</td>
+              <td>
+                @if (searchFacet.searchQuery) {
+                  <div>
+                    <a [routerLink]="['/search-query', searchFacet.searchQuery.id, 'view']">{{ searchFacet.searchQuery.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/search-facet', searchFacet.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/search-facet', searchFacet.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(searchFacet)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (searchFacets().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

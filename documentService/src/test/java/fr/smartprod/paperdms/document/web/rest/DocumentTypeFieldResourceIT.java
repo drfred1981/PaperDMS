@@ -59,7 +59,7 @@ class DocumentTypeFieldResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -406,8 +406,6 @@ class DocumentTypeFieldResourceIT {
         // Update the documentTypeField using partial update
         DocumentTypeField partialUpdatedDocumentTypeField = new DocumentTypeField();
         partialUpdatedDocumentTypeField.setId(documentTypeField.getId());
-
-        partialUpdatedDocumentTypeField.fieldKey(UPDATED_FIELD_KEY).dataType(UPDATED_DATA_TYPE).isRequired(UPDATED_IS_REQUIRED);
 
         restDocumentTypeFieldMockMvc
             .perform(

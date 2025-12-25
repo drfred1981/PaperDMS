@@ -1,15 +1,16 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IManual, NewManual } from '../manual.model';
 
 export type PartialUpdateManual = Partial<IManual> & Pick<IManual, 'id'>;
@@ -46,20 +47,20 @@ export class ManualService {
   update(manual: IManual): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(manual);
     return this.http
-      .put<RestManual>(`${this.resourceUrl}/${encodeURIComponent(this.getManualIdentifier(manual))}`, copy, { observe: 'response' })
+      .put<RestManual>(`${this.resourceUrl}/${this.getManualIdentifier(manual)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(manual: PartialUpdateManual): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(manual);
     return this.http
-      .patch<RestManual>(`${this.resourceUrl}/${encodeURIComponent(this.getManualIdentifier(manual))}`, copy, { observe: 'response' })
+      .patch<RestManual>(`${this.resourceUrl}/${this.getManualIdentifier(manual)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestManual>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestManual>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +72,7 @@ export class ManualService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

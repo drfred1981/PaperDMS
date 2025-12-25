@@ -35,7 +35,7 @@ public class CompressionJobResource {
 
     private static final String ENTITY_NAME = "transformServiceCompressionJob";
 
-    @Value("${jhipster.clientApp.name:transformService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final CompressionJobService compressionJobService;

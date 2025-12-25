@@ -8,6 +8,7 @@ describe('SimilarityCluster Form Service', () => {
   let service: SimilarityClusterFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SimilarityClusterFormService);
   });
 
@@ -54,7 +55,7 @@ describe('SimilarityCluster Form Service', () => {
       it('should return NewSimilarityCluster for default SimilarityCluster initial value', () => {
         const formGroup = service.createSimilarityClusterFormGroup(sampleWithNewData);
 
-        const similarityCluster = service.getSimilarityCluster(formGroup);
+        const similarityCluster = service.getSimilarityCluster(formGroup) as any;
 
         expect(similarityCluster).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('SimilarityCluster Form Service', () => {
       it('should return NewSimilarityCluster for empty SimilarityCluster initial value', () => {
         const formGroup = service.createSimilarityClusterFormGroup();
 
-        const similarityCluster = service.getSimilarityCluster(formGroup);
+        const similarityCluster = service.getSimilarityCluster(formGroup) as any;
 
         expect(similarityCluster).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('SimilarityCluster Form Service', () => {
       it('should return ISimilarityCluster', () => {
         const formGroup = service.createSimilarityClusterFormGroup(sampleWithRequiredData);
 
-        const similarityCluster = service.getSimilarityCluster(formGroup);
+        const similarityCluster = service.getSimilarityCluster(formGroup) as any;
 
         expect(similarityCluster).toMatchObject(sampleWithRequiredData);
       });

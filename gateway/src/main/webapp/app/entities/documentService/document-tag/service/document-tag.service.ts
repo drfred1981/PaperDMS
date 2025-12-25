@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentTag, NewDocumentTag } from '../document-tag.model';
 
 export type PartialUpdateDocumentTag = Partial<IDocumentTag> & Pick<IDocumentTag, 'id'>;
@@ -41,24 +41,20 @@ export class DocumentTagService {
   update(documentTag: IDocumentTag): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentTag);
     return this.http
-      .put<RestDocumentTag>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentTagIdentifier(documentTag))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestDocumentTag>(`${this.resourceUrl}/${this.getDocumentTagIdentifier(documentTag)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentTag: PartialUpdateDocumentTag): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentTag);
     return this.http
-      .patch<RestDocumentTag>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentTagIdentifier(documentTag))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestDocumentTag>(`${this.resourceUrl}/${this.getDocumentTagIdentifier(documentTag)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentTag>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentTag>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class DocumentTagService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentTagIdentifier(documentTag: Pick<IDocumentTag, 'id'>): number {

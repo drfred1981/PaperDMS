@@ -68,7 +68,7 @@ public class DocumentCommentQueryService extends QueryService<DocumentComment> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<DocumentComment> createSpecification(DocumentCommentCriteria criteria) {
-        Specification<DocumentComment> specification = Specification.unrestricted();
+        Specification<DocumentComment> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

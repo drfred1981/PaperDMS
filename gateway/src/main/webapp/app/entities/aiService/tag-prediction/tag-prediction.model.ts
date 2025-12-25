@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IAutoTagJob } from 'app/entities/aiService/auto-tag-job/auto-tag-job.model';
 
 export interface ITagPrediction {

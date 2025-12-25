@@ -3,12 +3,12 @@ import { Routes } from '@angular/router';
 export const errorRoute: Routes = [
   {
     path: 'error',
-    loadComponent: () => import('./error'),
+    loadComponent: () => import('./error.component'),
     title: 'error.title',
   },
   {
     path: 'accessdenied',
-    loadComponent: () => import('./error'),
+    loadComponent: () => import('./error.component'),
     data: {
       errorMessage: 'error.http.403',
     },
@@ -16,7 +16,7 @@ export const errorRoute: Routes = [
   },
   {
     path: '404',
-    loadComponent: () => import('./error'),
+    loadComponent: () => import('./error.component'),
     data: {
       errorMessage: 'error.http.404',
     },

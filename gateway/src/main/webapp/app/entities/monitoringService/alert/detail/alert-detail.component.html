@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (alert(); as alertRef) {
+      <div>
+        <h2 data-cy="alertDetailsHeading"><span jhiTranslate="gatewayApp.monitoringServiceAlert.detail.title">Alert</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ alertRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.alertRuleId">Alert Rule Id</span></dt>
+          <dd>
+            <span>{{ alertRef.alertRuleId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.severity">Severity</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.Severity.' + (alertRef.severity ?? 'null')">{{
+              { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', CRITICAL: 'CRITICAL' }[alertRef.severity ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.title">Title</span></dt>
+          <dd>
+            <span>{{ alertRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.message">Message</span></dt>
+          <dd>
+            <span>{{ alertRef.message }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.entityType">Entity Type</span></dt>
+          <dd>
+            <span>{{ alertRef.entityType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.entityId">Entity Id</span></dt>
+          <dd>
+            <span>{{ alertRef.entityId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AlertStatus.' + (alertRef.status ?? 'null')">{{
+              {
+                null: '',
+                ACTIVE: 'ACTIVE',
+                ACKNOWLEDGED: 'ACKNOWLEDGED',
+                RESOLVED: 'RESOLVED',
+                DISMISSED: 'DISMISSED',
+                ESCALATED: 'ESCALATED',
+              }[alertRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.triggeredDate">Triggered Date</span></dt>
+          <dd>
+            <span>{{ alertRef.triggeredDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.acknowledgedBy">Acknowledged By</span></dt>
+          <dd>
+            <span>{{ alertRef.acknowledgedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.acknowledgedDate">Acknowledged Date</span></dt>
+          <dd>
+            <span>{{ alertRef.acknowledgedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.resolvedBy">Resolved By</span></dt>
+          <dd>
+            <span>{{ alertRef.resolvedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.resolvedDate">Resolved Date</span></dt>
+          <dd>
+            <span>{{ alertRef.resolvedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceAlert.alertRule">Alert Rule</span></dt>
+          <dd>
+            @if (alert()!.alertRule) {
+              <div>
+                <a [routerLink]="['/alert-rule', alert()!.alertRule?.id, 'view']">{{ alertRef.alertRule?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/alert', alertRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

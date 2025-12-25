@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IComparisonJob = {
   documentId2: 31980,
   comparisonType: 'CONTENT_HASH',
   status: 'PENDING',
-  comparedDate: dayjs('2025-12-20T02:52'),
+  comparedDate: dayjs('2025-12-24T21:52'),
   comparedBy: 'thoroughly cruelly uh-huh',
 };
 
@@ -20,7 +20,7 @@ export const sampleWithPartialData: IComparisonJob = {
   differences: '../fake-data/blob/hipster.txt',
   differenceCount: 28516,
   status: 'FAILED',
-  comparedDate: dayjs('2025-12-20T03:53'),
+  comparedDate: dayjs('2025-12-24T22:52'),
   comparedBy: 'concerning orchid neatly',
 };
 
@@ -35,7 +35,7 @@ export const sampleWithFullData: IComparisonJob = {
   diffReportS3Key: 'institute er unwieldy',
   diffVisualS3Key: 'mob soupy enroll',
   status: 'FAILED',
-  comparedDate: dayjs('2025-12-19T17:11'),
+  comparedDate: dayjs('2025-12-24T12:10'),
   comparedBy: 'print dimly than',
 };
 
@@ -44,7 +44,7 @@ export const sampleWithNewData: NewComparisonJob = {
   documentId2: 19902,
   comparisonType: 'PDF_VISUAL',
   status: 'COMPLETED',
-  comparedDate: dayjs('2025-12-20T10:24'),
+  comparedDate: dayjs('2025-12-25T05:23'),
   comparedBy: 'wrathful',
   id: null,
 };

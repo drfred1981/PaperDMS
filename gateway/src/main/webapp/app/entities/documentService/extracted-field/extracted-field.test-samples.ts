@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IExtractedField = {
   fieldKey: 'rowdy phooey who',
   fieldValue: '../fake-data/blob/hipster.txt',
   isVerified: true,
-  extractedDate: dayjs('2025-12-19T20:29'),
+  extractedDate: dayjs('2025-12-24T15:28'),
 };
 
 export const sampleWithPartialData: IExtractedField = {
@@ -19,7 +19,7 @@ export const sampleWithPartialData: IExtractedField = {
   confidence: 0.46,
   extractionMethod: 'MANUAL',
   isVerified: false,
-  extractedDate: dayjs('2025-12-19T23:13'),
+  extractedDate: dayjs('2025-12-24T18:12'),
 };
 
 export const sampleWithFullData: IExtractedField = {
@@ -30,7 +30,7 @@ export const sampleWithFullData: IExtractedField = {
   confidence: 0.36,
   extractionMethod: 'BARCODE',
   isVerified: true,
-  extractedDate: dayjs('2025-12-20T02:52'),
+  extractedDate: dayjs('2025-12-24T21:51'),
 };
 
 export const sampleWithNewData: NewExtractedField = {
@@ -38,7 +38,7 @@ export const sampleWithNewData: NewExtractedField = {
   fieldKey: 'while revitalise',
   fieldValue: '../fake-data/blob/hipster.txt',
   isVerified: false,
-  extractedDate: dayjs('2025-12-20T05:24'),
+  extractedDate: dayjs('2025-12-25T00:23'),
   id: null,
 };
 

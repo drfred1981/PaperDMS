@@ -35,7 +35,7 @@ public class DocumentTagResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentTag";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentTagService documentTagService;

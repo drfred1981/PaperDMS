@@ -8,6 +8,7 @@ describe('DocumentPermission Form Service', () => {
   let service: DocumentPermissionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentPermissionFormService);
   });
 
@@ -54,7 +55,7 @@ describe('DocumentPermission Form Service', () => {
       it('should return NewDocumentPermission for default DocumentPermission initial value', () => {
         const formGroup = service.createDocumentPermissionFormGroup(sampleWithNewData);
 
-        const documentPermission = service.getDocumentPermission(formGroup);
+        const documentPermission = service.getDocumentPermission(formGroup) as any;
 
         expect(documentPermission).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('DocumentPermission Form Service', () => {
       it('should return NewDocumentPermission for empty DocumentPermission initial value', () => {
         const formGroup = service.createDocumentPermissionFormGroup();
 
-        const documentPermission = service.getDocumentPermission(formGroup);
+        const documentPermission = service.getDocumentPermission(formGroup) as any;
 
         expect(documentPermission).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('DocumentPermission Form Service', () => {
       it('should return IDocumentPermission', () => {
         const formGroup = service.createDocumentPermissionFormGroup(sampleWithRequiredData);
 
-        const documentPermission = service.getDocumentPermission(formGroup);
+        const documentPermission = service.getDocumentPermission(formGroup) as any;
 
         expect(documentPermission).toMatchObject(sampleWithRequiredData);
       });

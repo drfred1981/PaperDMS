@@ -76,7 +76,7 @@ public class CorrespondentQueryService extends QueryService<Correspondent> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Correspondent> createSpecification(CorrespondentCriteria criteria) {
-        Specification<Correspondent> specification = Specification.unrestricted();
+        Specification<Correspondent> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

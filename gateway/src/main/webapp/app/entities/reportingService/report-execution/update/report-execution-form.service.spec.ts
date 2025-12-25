@@ -8,6 +8,7 @@ describe('ReportExecution Form Service', () => {
   let service: ReportExecutionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ReportExecutionFormService);
   });
 
@@ -56,7 +57,7 @@ describe('ReportExecution Form Service', () => {
       it('should return NewReportExecution for default ReportExecution initial value', () => {
         const formGroup = service.createReportExecutionFormGroup(sampleWithNewData);
 
-        const reportExecution = service.getReportExecution(formGroup);
+        const reportExecution = service.getReportExecution(formGroup) as any;
 
         expect(reportExecution).toMatchObject(sampleWithNewData);
       });
@@ -64,7 +65,7 @@ describe('ReportExecution Form Service', () => {
       it('should return NewReportExecution for empty ReportExecution initial value', () => {
         const formGroup = service.createReportExecutionFormGroup();
 
-        const reportExecution = service.getReportExecution(formGroup);
+        const reportExecution = service.getReportExecution(formGroup) as any;
 
         expect(reportExecution).toMatchObject({});
       });
@@ -72,7 +73,7 @@ describe('ReportExecution Form Service', () => {
       it('should return IReportExecution', () => {
         const formGroup = service.createReportExecutionFormGroup(sampleWithRequiredData);
 
-        const reportExecution = service.getReportExecution(formGroup);
+        const reportExecution = service.getReportExecution(formGroup) as any;
 
         expect(reportExecution).toMatchObject(sampleWithRequiredData);
       });

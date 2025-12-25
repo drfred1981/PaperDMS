@@ -75,7 +75,7 @@ public class ContractQueryService extends QueryService<Contract> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Contract> createSpecification(ContractCriteria criteria) {
-        Specification<Contract> specification = Specification.unrestricted();
+        Specification<Contract> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

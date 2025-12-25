@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IWorkflowInstance } from '../workflow-instance.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../workflow-instance.test-samples';
@@ -104,7 +104,8 @@ describe('WorkflowInstance Service', () => {
       it('should add a WorkflowInstance to an empty array', () => {
         const workflowInstance: IWorkflowInstance = sampleWithRequiredData;
         expectedResult = service.addWorkflowInstanceToCollectionIfMissing([], workflowInstance);
-        expect(expectedResult).toEqual([workflowInstance]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflowInstance);
       });
 
       it('should not add a WorkflowInstance to an array that contains it', () => {
@@ -138,13 +139,16 @@ describe('WorkflowInstance Service', () => {
         const workflowInstance: IWorkflowInstance = sampleWithRequiredData;
         const workflowInstance2: IWorkflowInstance = sampleWithPartialData;
         expectedResult = service.addWorkflowInstanceToCollectionIfMissing([], workflowInstance, workflowInstance2);
-        expect(expectedResult).toEqual([workflowInstance, workflowInstance2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(workflowInstance);
+        expect(expectedResult).toContain(workflowInstance2);
       });
 
       it('should accept null and undefined values', () => {
         const workflowInstance: IWorkflowInstance = sampleWithRequiredData;
         expectedResult = service.addWorkflowInstanceToCollectionIfMissing([], null, workflowInstance, undefined);
-        expect(expectedResult).toEqual([workflowInstance]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflowInstance);
       });
 
       it('should return initial array if no WorkflowInstance is added', () => {

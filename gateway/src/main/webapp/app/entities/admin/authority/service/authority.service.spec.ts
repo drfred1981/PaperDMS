@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IAuthority } from '../authority.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../authority.test-samples';
@@ -76,7 +76,8 @@ describe('Authority Service', () => {
       it('should add a Authority to an empty array', () => {
         const authority: IAuthority = sampleWithRequiredData;
         expectedResult = service.addAuthorityToCollectionIfMissing([], authority);
-        expect(expectedResult).toEqual([authority]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(authority);
       });
 
       it('should not add a Authority to an array that contains it', () => {
@@ -110,13 +111,16 @@ describe('Authority Service', () => {
         const authority: IAuthority = sampleWithRequiredData;
         const authority2: IAuthority = sampleWithPartialData;
         expectedResult = service.addAuthorityToCollectionIfMissing([], authority, authority2);
-        expect(expectedResult).toEqual([authority, authority2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(authority);
+        expect(expectedResult).toContain(authority2);
       });
 
       it('should accept null and undefined values', () => {
         const authority: IAuthority = sampleWithRequiredData;
         expectedResult = service.addAuthorityToCollectionIfMissing([], null, authority, undefined);
-        expect(expectedResult).toEqual([authority]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(authority);
       });
 
       it('should return initial array if no Authority is added', () => {

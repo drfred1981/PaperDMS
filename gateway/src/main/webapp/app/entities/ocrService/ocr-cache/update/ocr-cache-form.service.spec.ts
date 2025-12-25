@@ -8,6 +8,7 @@ describe('OcrCache Form Service', () => {
   let service: OcrCacheFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(OcrCacheFormService);
   });
 
@@ -64,7 +65,7 @@ describe('OcrCache Form Service', () => {
       it('should return NewOcrCache for default OcrCache initial value', () => {
         const formGroup = service.createOcrCacheFormGroup(sampleWithNewData);
 
-        const ocrCache = service.getOcrCache(formGroup);
+        const ocrCache = service.getOcrCache(formGroup) as any;
 
         expect(ocrCache).toMatchObject(sampleWithNewData);
       });
@@ -72,7 +73,7 @@ describe('OcrCache Form Service', () => {
       it('should return NewOcrCache for empty OcrCache initial value', () => {
         const formGroup = service.createOcrCacheFormGroup();
 
-        const ocrCache = service.getOcrCache(formGroup);
+        const ocrCache = service.getOcrCache(formGroup) as any;
 
         expect(ocrCache).toMatchObject({});
       });
@@ -80,7 +81,7 @@ describe('OcrCache Form Service', () => {
       it('should return IOcrCache', () => {
         const formGroup = service.createOcrCacheFormGroup(sampleWithRequiredData);
 
-        const ocrCache = service.getOcrCache(formGroup);
+        const ocrCache = service.getOcrCache(formGroup) as any;
 
         expect(ocrCache).toMatchObject(sampleWithRequiredData);
       });

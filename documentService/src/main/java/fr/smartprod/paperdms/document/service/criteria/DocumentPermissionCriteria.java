@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.document.service.criteria;
 
 import fr.smartprod.paperdms.document.domain.enumeration.PermissionType;
 import fr.smartprod.paperdms.document.domain.enumeration.PrincipalType;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class DocumentPermissionCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

@@ -10,7 +10,7 @@ export const sampleWithRequiredData: IExportPattern = {
   isSystem: false,
   isActive: true,
   createdBy: 'onto short',
-  createdDate: dayjs('2025-12-20T09:16'),
+  createdDate: dayjs('2025-12-25T04:15'),
 };
 
 export const sampleWithPartialData: IExportPattern = {
@@ -24,7 +24,7 @@ export const sampleWithPartialData: IExportPattern = {
   isActive: true,
   usageCount: 10482,
   createdBy: 'pity',
-  createdDate: dayjs('2025-12-20T09:48'),
+  createdDate: dayjs('2025-12-25T04:47'),
 };
 
 export const sampleWithFullData: IExportPattern = {
@@ -39,8 +39,8 @@ export const sampleWithFullData: IExportPattern = {
   isActive: true,
   usageCount: 4107,
   createdBy: 'following',
-  createdDate: dayjs('2025-12-20T06:50'),
-  lastModifiedDate: dayjs('2025-12-20T15:16'),
+  createdDate: dayjs('2025-12-25T01:49'),
+  lastModifiedDate: dayjs('2025-12-25T10:15'),
 };
 
 export const sampleWithNewData: NewExportPattern = {
@@ -50,7 +50,7 @@ export const sampleWithNewData: NewExportPattern = {
   isSystem: true,
   isActive: true,
   createdBy: 'even since vanadyl',
-  createdDate: dayjs('2025-12-20T04:32'),
+  createdDate: dayjs('2025-12-24T23:31'),
   id: null,
 };
 

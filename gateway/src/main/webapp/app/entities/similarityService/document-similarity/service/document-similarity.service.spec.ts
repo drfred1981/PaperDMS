@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentSimilarity } from '../document-similarity.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-similarity.test-samples';
@@ -102,7 +102,8 @@ describe('DocumentSimilarity Service', () => {
       it('should add a DocumentSimilarity to an empty array', () => {
         const documentSimilarity: IDocumentSimilarity = sampleWithRequiredData;
         expectedResult = service.addDocumentSimilarityToCollectionIfMissing([], documentSimilarity);
-        expect(expectedResult).toEqual([documentSimilarity]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentSimilarity);
       });
 
       it('should not add a DocumentSimilarity to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('DocumentSimilarity Service', () => {
         const documentSimilarity: IDocumentSimilarity = sampleWithRequiredData;
         const documentSimilarity2: IDocumentSimilarity = sampleWithPartialData;
         expectedResult = service.addDocumentSimilarityToCollectionIfMissing([], documentSimilarity, documentSimilarity2);
-        expect(expectedResult).toEqual([documentSimilarity, documentSimilarity2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentSimilarity);
+        expect(expectedResult).toContain(documentSimilarity2);
       });
 
       it('should accept null and undefined values', () => {
         const documentSimilarity: IDocumentSimilarity = sampleWithRequiredData;
         expectedResult = service.addDocumentSimilarityToCollectionIfMissing([], null, documentSimilarity, undefined);
-        expect(expectedResult).toEqual([documentSimilarity]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentSimilarity);
       });
 
       it('should return initial array if no DocumentSimilarity is added', () => {

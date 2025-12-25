@@ -82,7 +82,7 @@ class WorkflowResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/workflows/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1010,14 +1010,7 @@ class WorkflowResourceIT {
         Workflow partialUpdatedWorkflow = new Workflow();
         partialUpdatedWorkflow.setId(workflow.getId());
 
-        partialUpdatedWorkflow
-            .name(UPDATED_NAME)
-            .version(UPDATED_VERSION)
-            .isActive(UPDATED_IS_ACTIVE)
-            .isParallel(UPDATED_IS_PARALLEL)
-            .triggerEvent(UPDATED_TRIGGER_EVENT)
-            .createdDate(UPDATED_CREATED_DATE)
-            .createdBy(UPDATED_CREATED_BY);
+        partialUpdatedWorkflow.version(UPDATED_VERSION).createdDate(UPDATED_CREATED_DATE).lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restWorkflowMockMvc
             .perform(

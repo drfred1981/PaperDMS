@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IDocumentAudit = {
   documentSha256: 'own',
   action: 'RELATION_REMOVED',
   userId: 'next',
-  actionDate: dayjs('2025-12-20T05:19'),
+  actionDate: dayjs('2025-12-25T00:18'),
 };
 
 export const sampleWithPartialData: IDocumentAudit = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IDocumentAudit = {
   action: 'WORKFLOW_STARTED',
   userId: 'pish',
   userIp: 'beneath unlike psst',
-  actionDate: dayjs('2025-12-20T02:45'),
+  actionDate: dayjs('2025-12-24T21:44'),
 };
 
 export const sampleWithFullData: IDocumentAudit = {
@@ -28,7 +28,7 @@ export const sampleWithFullData: IDocumentAudit = {
   action: 'CREATED',
   userId: 'whereas rosin interestingly',
   userIp: 'but palatable',
-  actionDate: dayjs('2025-12-20T04:10'),
+  actionDate: dayjs('2025-12-24T23:09'),
   additionalInfo: '../fake-data/blob/hipster.txt',
 };
 
@@ -37,7 +37,7 @@ export const sampleWithNewData: NewDocumentAudit = {
   documentSha256: 'however',
   action: 'DELETED',
   userId: 'pfft',
-  actionDate: dayjs('2025-12-19T22:03'),
+  actionDate: dayjs('2025-12-24T17:02'),
   id: null,
 };
 

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentStatisticsResolve from './route/document-statistics-routing-resolve.service';
 
 const documentStatisticsRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-statistics').then(m => m.DocumentStatistics),
+    loadComponent: () => import('./list/document-statistics.component').then(m => m.DocumentStatisticsComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentStatisticsRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-statistics-detail').then(m => m.DocumentStatisticsDetail),
+    loadComponent: () => import('./detail/document-statistics-detail.component').then(m => m.DocumentStatisticsDetailComponent),
     resolve: {
       documentStatistics: DocumentStatisticsResolve,
     },
@@ -24,7 +23,7 @@ const documentStatisticsRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-statistics-update').then(m => m.DocumentStatisticsUpdate),
+    loadComponent: () => import('./update/document-statistics-update.component').then(m => m.DocumentStatisticsUpdateComponent),
     resolve: {
       documentStatistics: DocumentStatisticsResolve,
     },
@@ -32,7 +31,7 @@ const documentStatisticsRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-statistics-update').then(m => m.DocumentStatisticsUpdate),
+    loadComponent: () => import('./update/document-statistics-update.component').then(m => m.DocumentStatisticsUpdateComponent),
     resolve: {
       documentStatistics: DocumentStatisticsResolve,
     },

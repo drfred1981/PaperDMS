@@ -38,7 +38,7 @@ public class WorkflowResource {
 
     private static final String ENTITY_NAME = "workflowServiceWorkflow";
 
-    @Value("${jhipster.clientApp.name:workflowService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final WorkflowService workflowService;

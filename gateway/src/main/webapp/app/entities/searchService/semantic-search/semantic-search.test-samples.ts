@@ -7,7 +7,7 @@ export const sampleWithRequiredData: ISemanticSearch = {
   query: 'own inwardly eventually',
   queryEmbedding: '../fake-data/blob/hipster.txt',
   results: '../fake-data/blob/hipster.txt',
-  searchDate: dayjs('2025-12-20T13:11'),
+  searchDate: dayjs('2025-12-25T08:10'),
 };
 
 export const sampleWithPartialData: ISemanticSearch = {
@@ -15,7 +15,7 @@ export const sampleWithPartialData: ISemanticSearch = {
   query: 'improbable',
   queryEmbedding: '../fake-data/blob/hipster.txt',
   results: '../fake-data/blob/hipster.txt',
-  searchDate: dayjs('2025-12-20T14:09'),
+  searchDate: dayjs('2025-12-25T09:08'),
 };
 
 export const sampleWithFullData: ISemanticSearch = {
@@ -27,14 +27,14 @@ export const sampleWithFullData: ISemanticSearch = {
   modelUsed: 'penalise whether',
   executionTime: 13518,
   userId: 'meatloaf',
-  searchDate: dayjs('2025-12-20T04:05'),
+  searchDate: dayjs('2025-12-24T23:04'),
 };
 
 export const sampleWithNewData: NewSemanticSearch = {
   query: 'smoothly travel for',
   queryEmbedding: '../fake-data/blob/hipster.txt',
   results: '../fake-data/blob/hipster.txt',
-  searchDate: dayjs('2025-12-19T21:14'),
+  searchDate: dayjs('2025-12-24T16:13'),
   id: null,
 };
 

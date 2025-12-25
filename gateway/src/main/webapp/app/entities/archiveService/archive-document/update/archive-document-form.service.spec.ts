@@ -8,6 +8,7 @@ describe('ArchiveDocument Form Service', () => {
   let service: ArchiveDocumentFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ArchiveDocumentFormService);
   });
 
@@ -54,7 +55,7 @@ describe('ArchiveDocument Form Service', () => {
       it('should return NewArchiveDocument for default ArchiveDocument initial value', () => {
         const formGroup = service.createArchiveDocumentFormGroup(sampleWithNewData);
 
-        const archiveDocument = service.getArchiveDocument(formGroup);
+        const archiveDocument = service.getArchiveDocument(formGroup) as any;
 
         expect(archiveDocument).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('ArchiveDocument Form Service', () => {
       it('should return NewArchiveDocument for empty ArchiveDocument initial value', () => {
         const formGroup = service.createArchiveDocumentFormGroup();
 
-        const archiveDocument = service.getArchiveDocument(formGroup);
+        const archiveDocument = service.getArchiveDocument(formGroup) as any;
 
         expect(archiveDocument).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('ArchiveDocument Form Service', () => {
       it('should return IArchiveDocument', () => {
         const formGroup = service.createArchiveDocumentFormGroup(sampleWithRequiredData);
 
-        const archiveDocument = service.getArchiveDocument(formGroup);
+        const archiveDocument = service.getArchiveDocument(formGroup) as any;
 
         expect(archiveDocument).toMatchObject(sampleWithRequiredData);
       });

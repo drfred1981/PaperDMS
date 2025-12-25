@@ -59,7 +59,7 @@ class PerformanceMetricResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -407,7 +407,7 @@ class PerformanceMetricResourceIT {
         PerformanceMetric partialUpdatedPerformanceMetric = new PerformanceMetric();
         partialUpdatedPerformanceMetric.setId(performanceMetric.getId());
 
-        partialUpdatedPerformanceMetric.value(UPDATED_VALUE).timestamp(UPDATED_TIMESTAMP);
+        partialUpdatedPerformanceMetric.metricType(UPDATED_METRIC_TYPE).value(UPDATED_VALUE).serviceName(UPDATED_SERVICE_NAME);
 
         restPerformanceMetricMockMvc
             .perform(

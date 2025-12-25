@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { SortState } from './sort-state';
 
 @Injectable({ providedIn: 'root' })

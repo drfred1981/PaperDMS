@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IWorkflow, NewWorkflow } from '../workflow.model';
 
 export type PartialUpdateWorkflow = Partial<IWorkflow> & Pick<IWorkflow, 'id'>;
@@ -45,20 +46,20 @@ export class WorkflowService {
   update(workflow: IWorkflow): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(workflow);
     return this.http
-      .put<RestWorkflow>(`${this.resourceUrl}/${encodeURIComponent(this.getWorkflowIdentifier(workflow))}`, copy, { observe: 'response' })
+      .put<RestWorkflow>(`${this.resourceUrl}/${this.getWorkflowIdentifier(workflow)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(workflow: PartialUpdateWorkflow): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(workflow);
     return this.http
-      .patch<RestWorkflow>(`${this.resourceUrl}/${encodeURIComponent(this.getWorkflowIdentifier(workflow))}`, copy, { observe: 'response' })
+      .patch<RestWorkflow>(`${this.resourceUrl}/${this.getWorkflowIdentifier(workflow)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestWorkflow>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestWorkflow>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +71,7 @@ export class WorkflowService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

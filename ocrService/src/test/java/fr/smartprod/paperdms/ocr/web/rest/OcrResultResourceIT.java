@@ -87,7 +87,7 @@ class OcrResultResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -469,12 +469,9 @@ class OcrResultResourceIT {
         partialUpdatedOcrResult.setId(ocrResult.getId());
 
         partialUpdatedOcrResult
+            .pageNumber(UPDATED_PAGE_NUMBER)
             .s3ResultKey(UPDATED_S_3_RESULT_KEY)
-            .s3Bucket(UPDATED_S_3_BUCKET)
-            .boundingBoxes(UPDATED_BOUNDING_BOXES)
-            .metadata(UPDATED_METADATA)
-            .ocrEngine(UPDATED_OCR_ENGINE)
-            .processingTime(UPDATED_PROCESSING_TIME)
+            .language(UPDATED_LANGUAGE)
             .rawResponse(UPDATED_RAW_RESPONSE)
             .processedDate(UPDATED_PROCESSED_DATE);
 

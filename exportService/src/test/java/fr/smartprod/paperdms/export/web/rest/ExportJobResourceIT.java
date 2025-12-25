@@ -104,7 +104,7 @@ class ExportJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1476,16 +1476,16 @@ class ExportJobResourceIT {
         partialUpdatedExportJob.setId(exportJob.getId());
 
         partialUpdatedExportJob
-            .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .documentQuery(UPDATED_DOCUMENT_QUERY)
-            .exportFormat(UPDATED_EXPORT_FORMAT)
-            .includeMetadata(UPDATED_INCLUDE_METADATA)
             .includeVersions(UPDATED_INCLUDE_VERSIONS)
-            .includeAuditTrail(UPDATED_INCLUDE_AUDIT_TRAIL)
-            .status(UPDATED_STATUS)
+            .s3ExportKey(UPDATED_S_3_EXPORT_KEY)
+            .exportSize(UPDATED_EXPORT_SIZE)
+            .filesGenerated(UPDATED_FILES_GENERATED)
             .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE);
+            .errorMessage(UPDATED_ERROR_MESSAGE)
+            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restExportJobMockMvc
             .perform(

@@ -29,7 +29,8 @@
       "jobId": "Job Id",
       "priority": "Priority",
       "updatedBy": "Updated By",
-      "updatedDate": "Updated Date"
+      "updatedDate": "Updated Date",
+      "document": "Document"
     }
   },
   "documentServiceApp": {

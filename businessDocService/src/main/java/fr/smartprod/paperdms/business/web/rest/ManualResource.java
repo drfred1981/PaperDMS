@@ -38,7 +38,7 @@ public class ManualResource {
 
     private static final String ENTITY_NAME = "businessDocServiceManual";
 
-    @Value("${jhipster.clientApp.name:businessDocService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ManualService manualService;

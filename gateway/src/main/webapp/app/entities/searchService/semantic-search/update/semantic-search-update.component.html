@@ -1,0 +1,180 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-semantic-search-heading"
+        data-cy="SemanticSearchCreateUpdateHeading"
+        jhiTranslate="gatewayApp.searchServiceSemanticSearch.home.createOrEditLabel"
+      >
+        Create or edit a Semantic Search
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.searchServiceSemanticSearch.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let queryRef = editForm.get('query')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_query" jhiTranslate="gatewayApp.searchServiceSemanticSearch.query">Query</label>
+          <input type="text" class="form-control" name="query" id="field_query" data-cy="query" formControlName="query" />
+          @if (queryRef.invalid && (queryRef.dirty || queryRef.touched)) {
+            <div>
+              @if (editForm.get('query')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('query')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let queryEmbeddingRef = editForm.get('queryEmbedding')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_queryEmbedding" jhiTranslate="gatewayApp.searchServiceSemanticSearch.queryEmbedding"
+            >Query Embedding</label
+          >
+          <textarea
+            class="form-control"
+            name="queryEmbedding"
+            id="field_queryEmbedding"
+            data-cy="queryEmbedding"
+            formControlName="queryEmbedding"
+          ></textarea>
+          @if (queryEmbeddingRef.invalid && (queryEmbeddingRef.dirty || queryEmbeddingRef.touched)) {
+            <div>
+              @if (editForm.get('queryEmbedding')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let resultsRef = editForm.get('results')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_results" jhiTranslate="gatewayApp.searchServiceSemanticSearch.results">Results</label>
+          <textarea class="form-control" name="results" id="field_results" data-cy="results" formControlName="results"></textarea>
+          @if (resultsRef.invalid && (resultsRef.dirty || resultsRef.touched)) {
+            <div>
+              @if (editForm.get('results')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_relevanceScores" jhiTranslate="gatewayApp.searchServiceSemanticSearch.relevanceScores"
+            >Relevance Scores</label
+          >
+          <textarea
+            class="form-control"
+            name="relevanceScores"
+            id="field_relevanceScores"
+            data-cy="relevanceScores"
+            formControlName="relevanceScores"
+          ></textarea>
+        </div>
+
+        @let modelUsedRef = editForm.get('modelUsed')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_modelUsed" jhiTranslate="gatewayApp.searchServiceSemanticSearch.modelUsed">Model Used</label>
+          <input type="text" class="form-control" name="modelUsed" id="field_modelUsed" data-cy="modelUsed" formControlName="modelUsed" />
+          @if (modelUsedRef.invalid && (modelUsedRef.dirty || modelUsedRef.touched)) {
+            <div>
+              @if (editForm.get('modelUsed')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_executionTime" jhiTranslate="gatewayApp.searchServiceSemanticSearch.executionTime"
+            >Execution Time</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="executionTime"
+            id="field_executionTime"
+            data-cy="executionTime"
+            formControlName="executionTime"
+          />
+        </div>
+
+        @let userIdRef = editForm.get('userId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_userId" jhiTranslate="gatewayApp.searchServiceSemanticSearch.userId">User Id</label>
+          <input type="text" class="form-control" name="userId" id="field_userId" data-cy="userId" formControlName="userId" />
+          @if (userIdRef.invalid && (userIdRef.dirty || userIdRef.touched)) {
+            <div>
+              @if (editForm.get('userId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let searchDateRef = editForm.get('searchDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_searchDate" jhiTranslate="gatewayApp.searchServiceSemanticSearch.searchDate"
+            >Search Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_searchDate"
+              data-cy="searchDate"
+              type="datetime-local"
+              class="form-control"
+              name="searchDate"
+              formControlName="searchDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (searchDateRef.invalid && (searchDateRef.dirty || searchDateRef.touched)) {
+            <div>
+              @if (editForm.get('searchDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('searchDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

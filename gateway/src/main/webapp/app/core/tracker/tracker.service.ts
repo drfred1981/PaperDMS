@@ -1,16 +1,15 @@
-import { Location } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
+import { Location } from '@angular/common';
 import { Event, NavigationEnd, Router } from '@angular/router';
-
-import { RxStomp } from '@stomp/rx-stomp';
 import { Observer, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+
 import SockJS from 'sockjs-client';
+import { RxStomp } from '@stomp/rx-stomp';
 
 import { AuthServerProvider } from 'app/core/auth/auth-jwt.service';
-import { Account } from '../auth/account.model';
 import { AccountService } from '../auth/account.service';
-
+import { Account } from '../auth/account.model';
 import { TrackerActivity } from './tracker-activity.model';
 
 const DESTINATION_TRACKER = '/topic/tracker';

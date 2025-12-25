@@ -37,7 +37,7 @@ public class EmailImportResource {
 
     private static final String ENTITY_NAME = "emailImportServiceEmailImport";
 
-    @Value("${jhipster.clientApp.name:emailImportService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final EmailImportService emailImportService;

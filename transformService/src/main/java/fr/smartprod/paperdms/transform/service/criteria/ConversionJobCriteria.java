@@ -1,7 +1,6 @@
 package fr.smartprod.paperdms.transform.service.criteria;
 
 import fr.smartprod.paperdms.transform.domain.enumeration.TransformStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +38,6 @@ public class ConversionJobCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

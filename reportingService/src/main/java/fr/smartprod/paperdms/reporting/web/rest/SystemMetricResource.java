@@ -35,7 +35,7 @@ public class SystemMetricResource {
 
     private static final String ENTITY_NAME = "reportingServiceSystemMetric";
 
-    @Value("${jhipster.clientApp.name:reportingService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SystemMetricService systemMetricService;

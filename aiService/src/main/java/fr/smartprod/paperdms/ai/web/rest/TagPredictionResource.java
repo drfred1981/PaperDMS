@@ -35,7 +35,7 @@ public class TagPredictionResource {
 
     private static final String ENTITY_NAME = "aiServiceTagPrediction";
 
-    @Value("${jhipster.clientApp.name:aiService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final TagPredictionService tagPredictionService;

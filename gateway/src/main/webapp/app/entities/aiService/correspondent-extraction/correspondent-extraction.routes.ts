@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import CorrespondentExtractionResolve from './route/correspondent-extraction-routing-resolve.service';
 
 const correspondentExtractionRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/correspondent-extraction').then(m => m.CorrespondentExtraction),
+    loadComponent: () => import('./list/correspondent-extraction.component').then(m => m.CorrespondentExtractionComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const correspondentExtractionRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/correspondent-extraction-detail').then(m => m.CorrespondentExtractionDetail),
+    loadComponent: () => import('./detail/correspondent-extraction-detail.component').then(m => m.CorrespondentExtractionDetailComponent),
     resolve: {
       correspondentExtraction: CorrespondentExtractionResolve,
     },
@@ -24,7 +23,7 @@ const correspondentExtractionRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/correspondent-extraction-update').then(m => m.CorrespondentExtractionUpdate),
+    loadComponent: () => import('./update/correspondent-extraction-update.component').then(m => m.CorrespondentExtractionUpdateComponent),
     resolve: {
       correspondentExtraction: CorrespondentExtractionResolve,
     },
@@ -32,7 +31,7 @@ const correspondentExtractionRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/correspondent-extraction-update').then(m => m.CorrespondentExtractionUpdate),
+    loadComponent: () => import('./update/correspondent-extraction-update.component').then(m => m.CorrespondentExtractionUpdateComponent),
     resolve: {
       correspondentExtraction: CorrespondentExtractionResolve,
     },

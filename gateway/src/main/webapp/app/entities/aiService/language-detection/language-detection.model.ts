@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { LanguageDetectionMethod } from 'app/entities/enumerations/language-detection-method.model';
 
 export interface ILanguageDetection {

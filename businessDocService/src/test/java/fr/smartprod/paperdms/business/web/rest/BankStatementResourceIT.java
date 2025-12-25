@@ -85,7 +85,7 @@ class BankStatementResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1424,11 +1424,10 @@ class BankStatementResourceIT {
 
         partialUpdatedBankStatement
             .documentId(UPDATED_DOCUMENT_ID)
+            .accountNumber(UPDATED_ACCOUNT_NUMBER)
             .bankName(UPDATED_BANK_NAME)
-            .statementDate(UPDATED_STATEMENT_DATE)
-            .openingBalance(UPDATED_OPENING_BALANCE)
-            .currency(UPDATED_CURRENCY)
-            .isReconciled(UPDATED_IS_RECONCILED)
+            .statementPeriodStart(UPDATED_STATEMENT_PERIOD_START)
+            .status(UPDATED_STATUS)
             .createdDate(UPDATED_CREATED_DATE);
 
         restBankStatementMockMvc

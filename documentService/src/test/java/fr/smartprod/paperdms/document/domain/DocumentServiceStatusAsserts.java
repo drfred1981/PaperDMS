@@ -64,8 +64,7 @@ public class DocumentServiceStatusAsserts {
                 assertThat(a.getProcessingStartDate()).as("check processingStartDate").isEqualTo(expected.getProcessingStartDate())
             )
             .satisfies(a -> assertThat(a.getProcessingEndDate()).as("check processingEndDate").isEqualTo(expected.getProcessingEndDate()))
-            .satisfies(a ->
-                assertThat(a.getProcessingDuration()).as("check processingDuration").isEqualTo(expected.getProcessingDuration())
+            .satisfies(a -> assertThat(a.getProcessingDuration()).as("check processingDuration").isEqualTo(expected.getProcessingDuration())
             )
             .satisfies(a -> assertThat(a.getJobId()).as("check jobId").isEqualTo(expected.getJobId()))
             .satisfies(a -> assertThat(a.getPriority()).as("check priority").isEqualTo(expected.getPriority()))
@@ -83,6 +82,8 @@ public class DocumentServiceStatusAsserts {
         DocumentServiceStatus expected,
         DocumentServiceStatus actual
     ) {
-        // empty method
+        assertThat(actual)
+            .as("Verify DocumentServiceStatus relationships")
+            .satisfies(a -> assertThat(a.getDocument()).as("check document").isEqualTo(expected.getDocument()));
     }
 }

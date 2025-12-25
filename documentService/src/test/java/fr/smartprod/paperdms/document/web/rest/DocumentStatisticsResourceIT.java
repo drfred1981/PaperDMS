@@ -55,7 +55,7 @@ class DocumentStatisticsResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -350,7 +350,10 @@ class DocumentStatisticsResourceIT {
         DocumentStatistics partialUpdatedDocumentStatistics = new DocumentStatistics();
         partialUpdatedDocumentStatistics.setId(documentStatistics.getId());
 
-        partialUpdatedDocumentStatistics.viewsTotal(UPDATED_VIEWS_TOTAL).lastUpdated(UPDATED_LAST_UPDATED);
+        partialUpdatedDocumentStatistics
+            .documentId(UPDATED_DOCUMENT_ID)
+            .viewsTotal(UPDATED_VIEWS_TOTAL)
+            .uniqueViewers(UPDATED_UNIQUE_VIEWERS);
 
         restDocumentStatisticsMockMvc
             .perform(

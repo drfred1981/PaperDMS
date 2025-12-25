@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IExtractedText, NewExtractedText } from '../extracted-text.model';
 
 export type PartialUpdateExtractedText = Partial<IExtractedText> & Pick<IExtractedText, 'id'>;
@@ -44,24 +45,20 @@ export class ExtractedTextService {
   update(extractedText: IExtractedText): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(extractedText);
     return this.http
-      .put<RestExtractedText>(`${this.resourceUrl}/${encodeURIComponent(this.getExtractedTextIdentifier(extractedText))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestExtractedText>(`${this.resourceUrl}/${this.getExtractedTextIdentifier(extractedText)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(extractedText: PartialUpdateExtractedText): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(extractedText);
     return this.http
-      .patch<RestExtractedText>(`${this.resourceUrl}/${encodeURIComponent(this.getExtractedTextIdentifier(extractedText))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestExtractedText>(`${this.resourceUrl}/${this.getExtractedTextIdentifier(extractedText)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestExtractedText>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestExtractedText>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -73,7 +70,7 @@ export class ExtractedTextService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

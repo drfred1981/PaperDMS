@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IExportResult = {
   exportJobId: 3845,
   documentId: 24275,
   documentSha256: 'oof because',
-  exportedDate: dayjs('2025-12-19T18:33'),
+  exportedDate: dayjs('2025-12-24T13:32'),
 };
 
 export const sampleWithPartialData: IExportResult = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IExportResult = {
   exportedPath: 'whoa wriggler design',
   s3ExportKey: 'pfft',
   status: 'FAILED',
-  exportedDate: dayjs('2025-12-20T09:49'),
+  exportedDate: dayjs('2025-12-25T04:48'),
 };
 
 export const sampleWithFullData: IExportResult = {
@@ -33,14 +33,14 @@ export const sampleWithFullData: IExportResult = {
   fileSize: 21326,
   status: 'FAILED',
   errorMessage: '../fake-data/blob/hipster.txt',
-  exportedDate: dayjs('2025-12-20T10:25'),
+  exportedDate: dayjs('2025-12-25T05:24'),
 };
 
 export const sampleWithNewData: NewExportResult = {
   exportJobId: 26399,
   documentId: 15591,
   documentSha256: 'offensively barring triumphantly',
-  exportedDate: dayjs('2025-12-20T12:12'),
+  exportedDate: dayjs('2025-12-25T07:11'),
   id: null,
 };
 

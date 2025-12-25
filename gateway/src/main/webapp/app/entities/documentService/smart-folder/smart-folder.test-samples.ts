@@ -9,7 +9,7 @@ export const sampleWithRequiredData: ISmartFolder = {
   autoRefresh: true,
   isPublic: false,
   createdBy: 'editor',
-  createdDate: dayjs('2025-12-20T14:35'),
+  createdDate: dayjs('2025-12-25T09:34'),
 };
 
 export const sampleWithPartialData: ISmartFolder = {
@@ -19,7 +19,7 @@ export const sampleWithPartialData: ISmartFolder = {
   autoRefresh: true,
   isPublic: false,
   createdBy: 'uh-huh gloat',
-  createdDate: dayjs('2025-12-19T21:53'),
+  createdDate: dayjs('2025-12-24T16:52'),
 };
 
 export const sampleWithFullData: ISmartFolder = {
@@ -29,7 +29,7 @@ export const sampleWithFullData: ISmartFolder = {
   autoRefresh: true,
   isPublic: true,
   createdBy: 'creative',
-  createdDate: dayjs('2025-12-20T08:19'),
+  createdDate: dayjs('2025-12-25T03:18'),
 };
 
 export const sampleWithNewData: NewSmartFolder = {
@@ -38,7 +38,7 @@ export const sampleWithNewData: NewSmartFolder = {
   autoRefresh: true,
   isPublic: false,
   createdBy: 'disposer fooey',
-  createdDate: dayjs('2025-12-20T08:28'),
+  createdDate: dayjs('2025-12-25T03:27'),
   id: null,
 };
 

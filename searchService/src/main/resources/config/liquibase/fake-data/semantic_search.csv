@@ -1,11 +1,11 @@
 id;query;query_embedding;results;relevance_scores;model_used;execution_time;user_id;search_date
-1;ferociously heavy numeracy;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;beret unless mmm;29187;scoop;2025-12-19T18:33:42
-2;crocodile;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;remorseful joyously;20749;bludgeon justly;2025-12-20T04:22:47
-3;next sauerkraut yuck;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;entwine;9687;redound silent;2025-12-20T02:35:25
-4;untrue readjust baa;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;if;31088;meanwhile;2025-12-20T01:08:30
-5;translation off incidentally;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;to depend sonata;28110;mysteriously yesterday;2025-12-20T05:56:17
-6;though;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;yet;16875;tenement present;2025-12-19T23:23:31
-7;which heating meh;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;married;711;heartbeat solution;2025-12-19T16:40:46
-8;aha;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;whether furthermore simple;14836;however;2025-12-20T02:40:22
-9;ew;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;because magnetize adumbrate;14017;behind nutritious hence;2025-12-19T18:00:29
-10;what;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;accurate;13091;consistency tensely;2025-12-20T11:47:11
+1;ferociously heavy numeracy;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;beret unless mmm;29187;scoop;2025-12-24T13:32:43
+2;crocodile;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;remorseful joyously;20749;bludgeon justly;2025-12-24T23:21:48
+3;next sauerkraut yuck;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;entwine;9687;redound silent;2025-12-24T21:34:26
+4;untrue readjust baa;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;if;31088;meanwhile;2025-12-24T20:07:31
+5;translation off incidentally;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;to depend sonata;28110;mysteriously yesterday;2025-12-25T00:55:18
+6;though;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;yet;16875;tenement present;2025-12-24T18:22:32
+7;which heating meh;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;married;711;heartbeat solution;2025-12-24T11:39:47
+8;aha;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;whether furthermore simple;14836;however;2025-12-24T21:39:23
+9;ew;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;because magnetize adumbrate;14017;behind nutritious hence;2025-12-24T12:59:30
+10;what;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;accurate;13091;consistency tensely;2025-12-25T06:46:12

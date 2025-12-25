@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { ITagCategory } from 'app/entities/documentService/tag-category/tag-category.model';
 
 export interface ITag {

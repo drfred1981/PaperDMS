@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IContract, NewContract } from '../contract.model';
 
@@ -51,10 +50,10 @@ export type ContractFormGroup = FormGroup<ContractFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ContractFormService {
-  createContractFormGroup(contract?: ContractFormGroupInput): ContractFormGroup {
+  createContractFormGroup(contract: ContractFormGroupInput = { id: null }): ContractFormGroup {
     const contractRawValue = this.convertContractToContractRawValue({
       ...this.getFormDefaults(),
-      ...(contract ?? { id: null }),
+      ...contract,
     });
     return new FormGroup<ContractFormGroupContent>({
       id: new FormControl(
@@ -108,10 +107,12 @@ export class ContractFormService {
 
   resetForm(form: ContractFormGroup, contract: ContractFormGroupInput): void {
     const contractRawValue = this.convertContractToContractRawValue({ ...this.getFormDefaults(), ...contract });
-    form.reset({
-      ...contractRawValue,
-      id: { value: contractRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...contractRawValue,
+        id: { value: contractRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ContractFormDefaults {

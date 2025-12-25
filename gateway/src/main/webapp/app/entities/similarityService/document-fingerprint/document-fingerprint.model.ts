@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { FingerprintType } from 'app/entities/enumerations/fingerprint-type.model';
 
 export interface IDocumentFingerprint {

@@ -9,7 +9,7 @@ export const sampleWithRequiredData: IRedactionJob = {
   redactionType: 'WHITE_BOX',
   status: 'CANCELLED',
   createdBy: 'um design',
-  createdDate: dayjs('2025-12-20T09:18'),
+  createdDate: dayjs('2025-12-25T04:17'),
 };
 
 export const sampleWithPartialData: IRedactionJob = {
@@ -20,10 +20,10 @@ export const sampleWithPartialData: IRedactionJob = {
   redactionColor: 'turret ',
   outputDocumentId: 22695,
   status: 'COMPLETED',
-  endDate: dayjs('2025-12-20T13:37'),
+  endDate: dayjs('2025-12-25T08:36'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'huzzah',
-  createdDate: dayjs('2025-12-20T09:53'),
+  createdDate: dayjs('2025-12-25T04:52'),
 };
 
 export const sampleWithFullData: IRedactionJob = {
@@ -36,11 +36,11 @@ export const sampleWithFullData: IRedactionJob = {
   outputS3Key: 'properly notwithstanding',
   outputDocumentId: 31121,
   status: 'PROCESSING',
-  startDate: dayjs('2025-12-20T13:23'),
-  endDate: dayjs('2025-12-20T14:15'),
+  startDate: dayjs('2025-12-25T08:22'),
+  endDate: dayjs('2025-12-25T09:14'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'hoarse mechanically',
-  createdDate: dayjs('2025-12-19T20:17'),
+  createdDate: dayjs('2025-12-24T15:16'),
 };
 
 export const sampleWithNewData: NewRedactionJob = {
@@ -49,7 +49,7 @@ export const sampleWithNewData: NewRedactionJob = {
   redactionType: 'BLACK_BOX',
   status: 'PROCESSING',
   createdBy: 'before square inwardly',
-  createdDate: dayjs('2025-12-20T11:32'),
+  createdDate: dayjs('2025-12-25T06:31'),
   id: null,
 };
 

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IExtractedText, NewExtractedText } from '../extracted-text.model';
 
@@ -50,10 +49,10 @@ export type ExtractedTextFormGroup = FormGroup<ExtractedTextFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ExtractedTextFormService {
-  createExtractedTextFormGroup(extractedText?: ExtractedTextFormGroupInput): ExtractedTextFormGroup {
+  createExtractedTextFormGroup(extractedText: ExtractedTextFormGroupInput = { id: null }): ExtractedTextFormGroup {
     const extractedTextRawValue = this.convertExtractedTextToExtractedTextRawValue({
       ...this.getFormDefaults(),
-      ...(extractedText ?? { id: null }),
+      ...extractedText,
     });
     return new FormGroup<ExtractedTextFormGroupContent>({
       id: new FormControl(
@@ -102,10 +101,12 @@ export class ExtractedTextFormService {
 
   resetForm(form: ExtractedTextFormGroup, extractedText: ExtractedTextFormGroupInput): void {
     const extractedTextRawValue = this.convertExtractedTextToExtractedTextRawValue({ ...this.getFormDefaults(), ...extractedText });
-    form.reset({
-      ...extractedTextRawValue,
-      id: { value: extractedTextRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...extractedTextRawValue,
+        id: { value: extractedTextRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ExtractedTextFormDefaults {

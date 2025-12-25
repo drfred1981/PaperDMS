@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (dashboard(); as dashboardRef) {
+      <div>
+        <h2 data-cy="dashboardDetailsHeading"><span jhiTranslate="gatewayApp.reportingServiceDashboard.detail.title">Dashboard</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ dashboardRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.name">Name</span></dt>
+          <dd>
+            <span>{{ dashboardRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.description">Description</span></dt>
+          <dd>
+            <span>{{ dashboardRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.userId">User Id</span></dt>
+          <dd>
+            <span>{{ dashboardRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.isPublic">Is Public</span></dt>
+          <dd>
+            <span>{{ dashboardRef.isPublic }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.layout">Layout</span></dt>
+          <dd>
+            <span>{{ dashboardRef.layout }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.refreshInterval">Refresh Interval</span></dt>
+          <dd>
+            <span>{{ dashboardRef.refreshInterval }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.isDefault">Is Default</span></dt>
+          <dd>
+            <span>{{ dashboardRef.isDefault }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceDashboard.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ dashboardRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/dashboard', dashboardRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

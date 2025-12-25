@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.business.service.criteria;
 
 import fr.smartprod.paperdms.business.domain.enumeration.ManualStatus;
 import fr.smartprod.paperdms.business.domain.enumeration.ManualType;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class ManualCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

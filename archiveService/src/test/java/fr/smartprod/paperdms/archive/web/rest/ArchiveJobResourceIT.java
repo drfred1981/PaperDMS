@@ -99,7 +99,7 @@ class ArchiveJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1369,8 +1369,13 @@ class ArchiveJobResourceIT {
 
         partialUpdatedArchiveJob
             .name(UPDATED_NAME)
+            .archiveFormat(UPDATED_ARCHIVE_FORMAT)
             .encryptionEnabled(UPDATED_ENCRYPTION_ENABLED)
-            .archiveSize(UPDATED_ARCHIVE_SIZE)
+            .encryptionAlgorithm(UPDATED_ENCRYPTION_ALGORITHM)
+            .password(UPDATED_PASSWORD)
+            .s3ArchiveKey(UPDATED_S_3_ARCHIVE_KEY)
+            .archiveSha256(UPDATED_ARCHIVE_SHA_256)
+            .status(UPDATED_STATUS)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE);
 

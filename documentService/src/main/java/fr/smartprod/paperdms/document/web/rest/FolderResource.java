@@ -37,7 +37,7 @@ public class FolderResource {
 
     private static final String ENTITY_NAME = "documentServiceFolder";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final FolderService folderService;

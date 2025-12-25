@@ -35,7 +35,7 @@ public class OcrResultResource {
 
     private static final String ENTITY_NAME = "ocrServiceOcrResult";
 
-    @Value("${jhipster.clientApp.name:ocrService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final OcrResultService ocrResultService;

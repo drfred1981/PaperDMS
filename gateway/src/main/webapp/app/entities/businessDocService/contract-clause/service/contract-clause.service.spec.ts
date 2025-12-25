@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IContractClause } from '../contract-clause.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../contract-clause.test-samples';
@@ -100,7 +100,8 @@ describe('ContractClause Service', () => {
       it('should add a ContractClause to an empty array', () => {
         const contractClause: IContractClause = sampleWithRequiredData;
         expectedResult = service.addContractClauseToCollectionIfMissing([], contractClause);
-        expect(expectedResult).toEqual([contractClause]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(contractClause);
       });
 
       it('should not add a ContractClause to an array that contains it', () => {
@@ -134,13 +135,16 @@ describe('ContractClause Service', () => {
         const contractClause: IContractClause = sampleWithRequiredData;
         const contractClause2: IContractClause = sampleWithPartialData;
         expectedResult = service.addContractClauseToCollectionIfMissing([], contractClause, contractClause2);
-        expect(expectedResult).toEqual([contractClause, contractClause2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(contractClause);
+        expect(expectedResult).toContain(contractClause2);
       });
 
       it('should accept null and undefined values', () => {
         const contractClause: IContractClause = sampleWithRequiredData;
         expectedResult = service.addContractClauseToCollectionIfMissing([], null, contractClause, undefined);
-        expect(expectedResult).toEqual([contractClause]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(contractClause);
       });
 
       it('should return initial array if no ContractClause is added', () => {

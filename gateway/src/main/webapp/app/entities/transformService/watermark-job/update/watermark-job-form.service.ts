@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IWatermarkJob, NewWatermarkJob } from '../watermark-job.model';
 
@@ -58,10 +57,10 @@ export type WatermarkJobFormGroup = FormGroup<WatermarkJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class WatermarkJobFormService {
-  createWatermarkJobFormGroup(watermarkJob?: WatermarkJobFormGroupInput): WatermarkJobFormGroup {
+  createWatermarkJobFormGroup(watermarkJob: WatermarkJobFormGroupInput = { id: null }): WatermarkJobFormGroup {
     const watermarkJobRawValue = this.convertWatermarkJobToWatermarkJobRawValue({
       ...this.getFormDefaults(),
-      ...(watermarkJob ?? { id: null }),
+      ...watermarkJob,
     });
     return new FormGroup<WatermarkJobFormGroupContent>({
       id: new FormControl(
@@ -120,10 +119,12 @@ export class WatermarkJobFormService {
 
   resetForm(form: WatermarkJobFormGroup, watermarkJob: WatermarkJobFormGroupInput): void {
     const watermarkJobRawValue = this.convertWatermarkJobToWatermarkJobRawValue({ ...this.getFormDefaults(), ...watermarkJob });
-    form.reset({
-      ...watermarkJobRawValue,
-      id: { value: watermarkJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...watermarkJobRawValue,
+        id: { value: watermarkJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): WatermarkJobFormDefaults {

@@ -8,6 +8,7 @@ describe('DocumentVersion Form Service', () => {
   let service: DocumentVersionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentVersionFormService);
   });
 
@@ -54,7 +55,7 @@ describe('DocumentVersion Form Service', () => {
       it('should return NewDocumentVersion for default DocumentVersion initial value', () => {
         const formGroup = service.createDocumentVersionFormGroup(sampleWithNewData);
 
-        const documentVersion = service.getDocumentVersion(formGroup);
+        const documentVersion = service.getDocumentVersion(formGroup) as any;
 
         expect(documentVersion).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('DocumentVersion Form Service', () => {
       it('should return NewDocumentVersion for empty DocumentVersion initial value', () => {
         const formGroup = service.createDocumentVersionFormGroup();
 
-        const documentVersion = service.getDocumentVersion(formGroup);
+        const documentVersion = service.getDocumentVersion(formGroup) as any;
 
         expect(documentVersion).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('DocumentVersion Form Service', () => {
       it('should return IDocumentVersion', () => {
         const formGroup = service.createDocumentVersionFormGroup(sampleWithRequiredData);
 
-        const documentVersion = service.getDocumentVersion(formGroup);
+        const documentVersion = service.getDocumentVersion(formGroup) as any;
 
         expect(documentVersion).toMatchObject(sampleWithRequiredData);
       });

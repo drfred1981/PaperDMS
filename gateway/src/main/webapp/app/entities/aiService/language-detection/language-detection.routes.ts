@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import LanguageDetectionResolve from './route/language-detection-routing-resolve.service';
 
 const languageDetectionRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/language-detection').then(m => m.LanguageDetection),
+    loadComponent: () => import('./list/language-detection.component').then(m => m.LanguageDetectionComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const languageDetectionRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/language-detection-detail').then(m => m.LanguageDetectionDetail),
+    loadComponent: () => import('./detail/language-detection-detail.component').then(m => m.LanguageDetectionDetailComponent),
     resolve: {
       languageDetection: LanguageDetectionResolve,
     },
@@ -24,7 +23,7 @@ const languageDetectionRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/language-detection-update').then(m => m.LanguageDetectionUpdate),
+    loadComponent: () => import('./update/language-detection-update.component').then(m => m.LanguageDetectionUpdateComponent),
     resolve: {
       languageDetection: LanguageDetectionResolve,
     },
@@ -32,7 +31,7 @@ const languageDetectionRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/language-detection-update').then(m => m.LanguageDetectionUpdate),
+    loadComponent: () => import('./update/language-detection-update.component').then(m => m.LanguageDetectionUpdateComponent),
     resolve: {
       languageDetection: LanguageDetectionResolve,
     },

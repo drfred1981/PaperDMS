@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IScannedPage = {
   pageNumber: 12291,
   sha256: 'tremendously descendant digestive',
   s3Key: 'quietly zowie',
-  scannedDate: dayjs('2025-12-20T09:23'),
+  scannedDate: dayjs('2025-12-25T04:22'),
 };
 
 export const sampleWithPartialData: IScannedPage = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IScannedPage = {
   sha256: 'godfather',
   s3Key: 'kick',
   fileSize: 17127,
-  scannedDate: dayjs('2025-12-19T17:10'),
+  scannedDate: dayjs('2025-12-24T12:09'),
 };
 
 export const sampleWithFullData: IScannedPage = {
@@ -33,7 +33,7 @@ export const sampleWithFullData: IScannedPage = {
   height: 26905,
   dpi: 23082,
   documentId: 31842,
-  scannedDate: dayjs('2025-12-20T09:20'),
+  scannedDate: dayjs('2025-12-25T04:19'),
 };
 
 export const sampleWithNewData: NewScannedPage = {
@@ -41,7 +41,7 @@ export const sampleWithNewData: NewScannedPage = {
   pageNumber: 9562,
   sha256: 'gee indeed',
   s3Key: 'poetry excepting',
-  scannedDate: dayjs('2025-12-20T15:43'),
+  scannedDate: dayjs('2025-12-25T10:42'),
   id: null,
 };
 

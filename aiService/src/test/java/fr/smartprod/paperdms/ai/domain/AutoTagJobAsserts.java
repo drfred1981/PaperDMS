@@ -55,8 +55,7 @@ public class AutoTagJobAsserts {
                 assertThat(a.getExtractedTextSha256()).as("check extractedTextSha256").isEqualTo(expected.getExtractedTextSha256())
             )
             .satisfies(a -> assertThat(a.getDetectedLanguage()).as("check detectedLanguage").isEqualTo(expected.getDetectedLanguage()))
-            .satisfies(a ->
-                assertThat(a.getLanguageConfidence()).as("check languageConfidence").isEqualTo(expected.getLanguageConfidence())
+            .satisfies(a -> assertThat(a.getLanguageConfidence()).as("check languageConfidence").isEqualTo(expected.getLanguageConfidence())
             )
             .satisfies(a -> assertThat(a.getStatus()).as("check status").isEqualTo(expected.getStatus()))
             .satisfies(a -> assertThat(a.getModelVersion()).as("check modelVersion").isEqualTo(expected.getModelVersion()))

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { INotificationEvent } from '../notification-event.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../notification-event.test-samples';
@@ -102,7 +102,8 @@ describe('NotificationEvent Service', () => {
       it('should add a NotificationEvent to an empty array', () => {
         const notificationEvent: INotificationEvent = sampleWithRequiredData;
         expectedResult = service.addNotificationEventToCollectionIfMissing([], notificationEvent);
-        expect(expectedResult).toEqual([notificationEvent]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notificationEvent);
       });
 
       it('should not add a NotificationEvent to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('NotificationEvent Service', () => {
         const notificationEvent: INotificationEvent = sampleWithRequiredData;
         const notificationEvent2: INotificationEvent = sampleWithPartialData;
         expectedResult = service.addNotificationEventToCollectionIfMissing([], notificationEvent, notificationEvent2);
-        expect(expectedResult).toEqual([notificationEvent, notificationEvent2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(notificationEvent);
+        expect(expectedResult).toContain(notificationEvent2);
       });
 
       it('should accept null and undefined values', () => {
         const notificationEvent: INotificationEvent = sampleWithRequiredData;
         expectedResult = service.addNotificationEventToCollectionIfMissing([], null, notificationEvent, undefined);
-        expect(expectedResult).toEqual([notificationEvent]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notificationEvent);
       });
 
       it('should return initial array if no NotificationEvent is added', () => {

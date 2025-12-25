@@ -10,10 +10,10 @@
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
     "entities": ["EmailImport", "EmailAttachment", "ImportRule", "ImportMapping"],
-    "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "NGJiMTJkZWY4ZGE4ZmFiZGYyMWEwMWQwNmRlZTU1MGNmZWIzOWRlNmU4NzNhOGQ4MWZhOGIyMzY5MzhiNjUwODM2OWNkNDA5ZGQyOWQxYmVkNjcyMzc3MDQyOTI1MTliNWJmZmE3MTZiMWViZTBiM2IyMzQxOWUyMTY3MjJhYTY=",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "NmEzMWY4ZDNlYTRlNzg3YTJhOGQ2OTk2NGNmMzZjZTE1NjkyMjhlN2FhNjVhNGJmNGFiNjM4OWY5MDA0YjM3Mzk2ZDhhOTgyNjE4MGFkNmEwOGZlOGNhYTNkMThiYmY5NDZiNWI2OTVmMDc0NzVkNDg3YzdjYzE1MWY4OGQ3ZGI=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1766244494000,
+    "lastLiquibaseTimestamp": 1766658436000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -23,6 +23,7 @@
     "serviceDiscoveryType": "consul",
     "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

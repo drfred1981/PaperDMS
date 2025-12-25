@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { INotificationTemplate } from '../notification-template.model';
 import {
@@ -107,7 +107,8 @@ describe('NotificationTemplate Service', () => {
       it('should add a NotificationTemplate to an empty array', () => {
         const notificationTemplate: INotificationTemplate = sampleWithRequiredData;
         expectedResult = service.addNotificationTemplateToCollectionIfMissing([], notificationTemplate);
-        expect(expectedResult).toEqual([notificationTemplate]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notificationTemplate);
       });
 
       it('should not add a NotificationTemplate to an array that contains it', () => {
@@ -141,13 +142,16 @@ describe('NotificationTemplate Service', () => {
         const notificationTemplate: INotificationTemplate = sampleWithRequiredData;
         const notificationTemplate2: INotificationTemplate = sampleWithPartialData;
         expectedResult = service.addNotificationTemplateToCollectionIfMissing([], notificationTemplate, notificationTemplate2);
-        expect(expectedResult).toEqual([notificationTemplate, notificationTemplate2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(notificationTemplate);
+        expect(expectedResult).toContain(notificationTemplate2);
       });
 
       it('should accept null and undefined values', () => {
         const notificationTemplate: INotificationTemplate = sampleWithRequiredData;
         expectedResult = service.addNotificationTemplateToCollectionIfMissing([], null, notificationTemplate, undefined);
-        expect(expectedResult).toEqual([notificationTemplate]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notificationTemplate);
       });
 
       it('should return initial array if no NotificationTemplate is added', () => {

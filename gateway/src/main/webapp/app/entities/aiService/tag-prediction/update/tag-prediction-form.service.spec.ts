@@ -8,6 +8,7 @@ describe('TagPrediction Form Service', () => {
   let service: TagPredictionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(TagPredictionFormService);
   });
 
@@ -58,7 +59,7 @@ describe('TagPrediction Form Service', () => {
       it('should return NewTagPrediction for default TagPrediction initial value', () => {
         const formGroup = service.createTagPredictionFormGroup(sampleWithNewData);
 
-        const tagPrediction = service.getTagPrediction(formGroup);
+        const tagPrediction = service.getTagPrediction(formGroup) as any;
 
         expect(tagPrediction).toMatchObject(sampleWithNewData);
       });
@@ -66,7 +67,7 @@ describe('TagPrediction Form Service', () => {
       it('should return NewTagPrediction for empty TagPrediction initial value', () => {
         const formGroup = service.createTagPredictionFormGroup();
 
-        const tagPrediction = service.getTagPrediction(formGroup);
+        const tagPrediction = service.getTagPrediction(formGroup) as any;
 
         expect(tagPrediction).toMatchObject({});
       });
@@ -74,7 +75,7 @@ describe('TagPrediction Form Service', () => {
       it('should return ITagPrediction', () => {
         const formGroup = service.createTagPredictionFormGroup(sampleWithRequiredData);
 
-        const tagPrediction = service.getTagPrediction(formGroup);
+        const tagPrediction = service.getTagPrediction(formGroup) as any;
 
         expect(tagPrediction).toMatchObject(sampleWithRequiredData);
       });

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IPermissionGroup, NewPermissionGroup } from '../permission-group.model';
 
 export type PartialUpdatePermissionGroup = Partial<IPermissionGroup> & Pick<IPermissionGroup, 'id'>;
@@ -41,16 +41,14 @@ export class PermissionGroupService {
   update(permissionGroup: IPermissionGroup): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(permissionGroup);
     return this.http
-      .put<RestPermissionGroup>(`${this.resourceUrl}/${encodeURIComponent(this.getPermissionGroupIdentifier(permissionGroup))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestPermissionGroup>(`${this.resourceUrl}/${this.getPermissionGroupIdentifier(permissionGroup)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(permissionGroup: PartialUpdatePermissionGroup): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(permissionGroup);
     return this.http
-      .patch<RestPermissionGroup>(`${this.resourceUrl}/${encodeURIComponent(this.getPermissionGroupIdentifier(permissionGroup))}`, copy, {
+      .patch<RestPermissionGroup>(`${this.resourceUrl}/${this.getPermissionGroupIdentifier(permissionGroup)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -58,7 +56,7 @@ export class PermissionGroupService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestPermissionGroup>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestPermissionGroup>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +68,7 @@ export class PermissionGroupService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getPermissionGroupIdentifier(permissionGroup: Pick<IPermissionGroup, 'id'>): number {

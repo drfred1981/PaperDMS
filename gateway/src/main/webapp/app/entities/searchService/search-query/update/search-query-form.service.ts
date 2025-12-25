@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISearchQuery, NewSearchQuery } from '../search-query.model';
 
@@ -45,10 +44,10 @@ export type SearchQueryFormGroup = FormGroup<SearchQueryFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SearchQueryFormService {
-  createSearchQueryFormGroup(searchQuery?: SearchQueryFormGroupInput): SearchQueryFormGroup {
+  createSearchQueryFormGroup(searchQuery: SearchQueryFormGroupInput = { id: null }): SearchQueryFormGroup {
     const searchQueryRawValue = this.convertSearchQueryToSearchQueryRawValue({
       ...this.getFormDefaults(),
-      ...(searchQuery ?? { id: null }),
+      ...searchQuery,
     });
     return new FormGroup<SearchQueryFormGroupContent>({
       id: new FormControl(
@@ -80,10 +79,12 @@ export class SearchQueryFormService {
 
   resetForm(form: SearchQueryFormGroup, searchQuery: SearchQueryFormGroupInput): void {
     const searchQueryRawValue = this.convertSearchQueryToSearchQueryRawValue({ ...this.getFormDefaults(), ...searchQuery });
-    form.reset({
-      ...searchQueryRawValue,
-      id: { value: searchQueryRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...searchQueryRawValue,
+        id: { value: searchQueryRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SearchQueryFormDefaults {

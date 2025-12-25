@@ -1,0 +1,126 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (watermarkJob(); as watermarkJobRef) {
+      <div>
+        <h2 data-cy="watermarkJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceWatermarkJob.detail.title">Watermark Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.watermarkType">Watermark Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WatermarkType.' + (watermarkJobRef.watermarkType ?? 'null')">{{
+              { null: '', TEXT: 'TEXT', IMAGE: 'IMAGE', QR_CODE: 'QR_CODE', INVISIBLE: 'INVISIBLE' }[
+                watermarkJobRef.watermarkType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.watermarkText">Watermark Text</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.watermarkText }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.watermarkImageS3Key">Watermark Image S 3 Key</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.watermarkImageS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.position">Position</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WatermarkPosition.' + (watermarkJobRef.position ?? 'null')">{{
+              {
+                null: '',
+                TOP_LEFT: 'TOP_LEFT',
+                TOP_CENTER: 'TOP_CENTER',
+                TOP_RIGHT: 'TOP_RIGHT',
+                CENTER: 'CENTER',
+                DIAGONAL: 'DIAGONAL',
+                BOTTOM_LEFT: 'BOTTOM_LEFT',
+                BOTTOM_CENTER: 'BOTTOM_CENTER',
+                BOTTOM_RIGHT: 'BOTTOM_RIGHT',
+                TILED: 'TILED',
+                CUSTOM: 'CUSTOM',
+              }[watermarkJobRef.position ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.opacity">Opacity</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.opacity }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.fontSize">Font Size</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.fontSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.color">Color</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.color }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.rotation">Rotation</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.rotation }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.tiled">Tiled</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.tiled }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.outputDocumentId">Output Document Id</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.outputDocumentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (watermarkJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                watermarkJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceWatermarkJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ watermarkJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/watermark-job', watermarkJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

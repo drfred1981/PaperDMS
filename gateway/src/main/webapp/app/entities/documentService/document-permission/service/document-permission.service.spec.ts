@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentPermission } from '../document-permission.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-permission.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentPermission Service', () => {
       it('should add a DocumentPermission to an empty array', () => {
         const documentPermission: IDocumentPermission = sampleWithRequiredData;
         expectedResult = service.addDocumentPermissionToCollectionIfMissing([], documentPermission);
-        expect(expectedResult).toEqual([documentPermission]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentPermission);
       });
 
       it('should not add a DocumentPermission to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentPermission Service', () => {
         const documentPermission: IDocumentPermission = sampleWithRequiredData;
         const documentPermission2: IDocumentPermission = sampleWithPartialData;
         expectedResult = service.addDocumentPermissionToCollectionIfMissing([], documentPermission, documentPermission2);
-        expect(expectedResult).toEqual([documentPermission, documentPermission2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentPermission);
+        expect(expectedResult).toContain(documentPermission2);
       });
 
       it('should accept null and undefined values', () => {
         const documentPermission: IDocumentPermission = sampleWithRequiredData;
         expectedResult = service.addDocumentPermissionToCollectionIfMissing([], null, documentPermission, undefined);
-        expect(expectedResult).toEqual([documentPermission]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentPermission);
       });
 
       it('should return initial array if no DocumentPermission is added', () => {

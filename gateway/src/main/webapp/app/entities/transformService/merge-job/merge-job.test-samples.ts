@@ -9,7 +9,7 @@ export const sampleWithRequiredData: IMergeJob = {
   mergeOrder: '../fake-data/blob/hipster.txt',
   status: 'CANCELLED',
   createdBy: 'whether absolve inasmuch',
-  createdDate: dayjs('2025-12-20T02:16'),
+  createdDate: dayjs('2025-12-24T21:15'),
 };
 
 export const sampleWithPartialData: IMergeJob = {
@@ -22,10 +22,10 @@ export const sampleWithPartialData: IMergeJob = {
   outputS3Key: 'amidst',
   outputDocumentId: 6077,
   status: 'PENDING',
-  startDate: dayjs('2025-12-20T03:35'),
-  endDate: dayjs('2025-12-20T08:37'),
+  startDate: dayjs('2025-12-24T22:34'),
+  endDate: dayjs('2025-12-25T03:36'),
   createdBy: 'gosh terrorise now',
-  createdDate: dayjs('2025-12-19T23:41'),
+  createdDate: dayjs('2025-12-24T18:40'),
 };
 
 export const sampleWithFullData: IMergeJob = {
@@ -39,11 +39,11 @@ export const sampleWithFullData: IMergeJob = {
   outputS3Key: 'huzzah mobilise',
   outputDocumentId: 14639,
   status: 'PROCESSING',
-  startDate: dayjs('2025-12-19T20:10'),
-  endDate: dayjs('2025-12-19T19:19'),
+  startDate: dayjs('2025-12-24T15:09'),
+  endDate: dayjs('2025-12-24T14:18'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'very quip',
-  createdDate: dayjs('2025-12-20T10:24'),
+  createdDate: dayjs('2025-12-25T05:24'),
 };
 
 export const sampleWithNewData: NewMergeJob = {
@@ -52,7 +52,7 @@ export const sampleWithNewData: NewMergeJob = {
   mergeOrder: '../fake-data/blob/hipster.txt',
   status: 'FAILED',
   createdBy: 'thoroughly',
-  createdDate: dayjs('2025-12-20T13:30'),
+  createdDate: dayjs('2025-12-25T08:29'),
   id: null,
 };
 

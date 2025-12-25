@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import WebhookLogResolve from './route/webhook-log-routing-resolve.service';
 
 const webhookLogRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/webhook-log').then(m => m.WebhookLog),
+    loadComponent: () => import('./list/webhook-log.component').then(m => m.WebhookLogComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const webhookLogRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/webhook-log-detail').then(m => m.WebhookLogDetail),
+    loadComponent: () => import('./detail/webhook-log-detail.component').then(m => m.WebhookLogDetailComponent),
     resolve: {
       webhookLog: WebhookLogResolve,
     },
@@ -24,7 +23,7 @@ const webhookLogRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/webhook-log-update').then(m => m.WebhookLogUpdate),
+    loadComponent: () => import('./update/webhook-log-update.component').then(m => m.WebhookLogUpdateComponent),
     resolve: {
       webhookLog: WebhookLogResolve,
     },
@@ -32,7 +31,7 @@ const webhookLogRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/webhook-log-update').then(m => m.WebhookLogUpdate),
+    loadComponent: () => import('./update/webhook-log-update.component').then(m => m.WebhookLogUpdateComponent),
     resolve: {
       webhookLog: WebhookLogResolve,
     },

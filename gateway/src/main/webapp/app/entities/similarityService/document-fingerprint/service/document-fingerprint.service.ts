@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentFingerprint, NewDocumentFingerprint } from '../document-fingerprint.model';
 
 export type PartialUpdateDocumentFingerprint = Partial<IDocumentFingerprint> & Pick<IDocumentFingerprint, 'id'>;
@@ -45,28 +46,24 @@ export class DocumentFingerprintService {
   update(documentFingerprint: IDocumentFingerprint): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentFingerprint);
     return this.http
-      .put<RestDocumentFingerprint>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentFingerprintIdentifier(documentFingerprint))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestDocumentFingerprint>(`${this.resourceUrl}/${this.getDocumentFingerprintIdentifier(documentFingerprint)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentFingerprint: PartialUpdateDocumentFingerprint): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentFingerprint);
     return this.http
-      .patch<RestDocumentFingerprint>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentFingerprintIdentifier(documentFingerprint))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentFingerprint>(`${this.resourceUrl}/${this.getDocumentFingerprintIdentifier(documentFingerprint)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentFingerprint>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentFingerprint>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -78,7 +75,7 @@ export class DocumentFingerprintService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

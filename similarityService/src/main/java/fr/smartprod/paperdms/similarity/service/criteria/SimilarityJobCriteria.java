@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.similarity.service.criteria;
 import fr.smartprod.paperdms.similarity.domain.enumeration.AiJobStatus;
 import fr.smartprod.paperdms.similarity.domain.enumeration.SimilarityAlgorithm;
 import fr.smartprod.paperdms.similarity.domain.enumeration.SimilarityScope;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -75,7 +74,6 @@ public class SimilarityJobCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

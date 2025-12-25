@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ILanguageDetection, NewLanguageDetection } from '../language-detection.model';
 
@@ -49,10 +48,10 @@ export type LanguageDetectionFormGroup = FormGroup<LanguageDetectionFormGroupCon
 
 @Injectable({ providedIn: 'root' })
 export class LanguageDetectionFormService {
-  createLanguageDetectionFormGroup(languageDetection?: LanguageDetectionFormGroupInput): LanguageDetectionFormGroup {
+  createLanguageDetectionFormGroup(languageDetection: LanguageDetectionFormGroupInput = { id: null }): LanguageDetectionFormGroup {
     const languageDetectionRawValue = this.convertLanguageDetectionToLanguageDetectionRawValue({
       ...this.getFormDefaults(),
-      ...(languageDetection ?? { id: null }),
+      ...languageDetection,
     });
     return new FormGroup<LanguageDetectionFormGroupContent>({
       id: new FormControl(
@@ -103,10 +102,12 @@ export class LanguageDetectionFormService {
       ...this.getFormDefaults(),
       ...languageDetection,
     });
-    form.reset({
-      ...languageDetectionRawValue,
-      id: { value: languageDetectionRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...languageDetectionRawValue,
+        id: { value: languageDetectionRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): LanguageDetectionFormDefaults {

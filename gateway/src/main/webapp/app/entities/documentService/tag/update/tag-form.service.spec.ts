@@ -8,6 +8,7 @@ describe('Tag Form Service', () => {
   let service: TagFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(TagFormService);
   });
 
@@ -54,7 +55,7 @@ describe('Tag Form Service', () => {
       it('should return NewTag for default Tag initial value', () => {
         const formGroup = service.createTagFormGroup(sampleWithNewData);
 
-        const tag = service.getTag(formGroup);
+        const tag = service.getTag(formGroup) as any;
 
         expect(tag).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('Tag Form Service', () => {
       it('should return NewTag for empty Tag initial value', () => {
         const formGroup = service.createTagFormGroup();
 
-        const tag = service.getTag(formGroup);
+        const tag = service.getTag(formGroup) as any;
 
         expect(tag).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('Tag Form Service', () => {
       it('should return ITag', () => {
         const formGroup = service.createTagFormGroup(sampleWithRequiredData);
 
-        const tag = service.getTag(formGroup);
+        const tag = service.getTag(formGroup) as any;
 
         expect(tag).toMatchObject(sampleWithRequiredData);
       });

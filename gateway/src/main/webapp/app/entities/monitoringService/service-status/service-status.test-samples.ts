@@ -14,7 +14,7 @@ export const sampleWithPartialData: IServiceStatus = {
   serviceName: 'ouch ouch',
   status: 'STOPPED',
   port: 31911,
-  lastPing: dayjs('2025-12-20T13:57'),
+  lastPing: dayjs('2025-12-25T08:56'),
   isHealthy: false,
 };
 
@@ -26,7 +26,7 @@ export const sampleWithFullData: IServiceStatus = {
   endpoint: 'aw hmph',
   port: 23453,
   version: 'worldly behold',
-  lastPing: dayjs('2025-12-20T01:07'),
+  lastPing: dayjs('2025-12-24T20:06'),
   isHealthy: false,
 };
 

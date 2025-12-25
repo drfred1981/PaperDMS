@@ -8,7 +8,7 @@ export const sampleWithRequiredData: INotificationTemplate = {
   subject: 'tensely',
   bodyTemplate: '../fake-data/blob/hipster.txt',
   isActive: false,
-  createdDate: dayjs('2025-12-19T19:24'),
+  createdDate: dayjs('2025-12-24T14:23'),
 };
 
 export const sampleWithPartialData: INotificationTemplate = {
@@ -19,8 +19,8 @@ export const sampleWithPartialData: INotificationTemplate = {
   type: 'DOCUMENT_SHARED',
   variables: '../fake-data/blob/hipster.txt',
   isActive: false,
-  createdDate: dayjs('2025-12-20T14:38'),
-  lastModifiedDate: dayjs('2025-12-19T21:26'),
+  createdDate: dayjs('2025-12-25T09:37'),
+  lastModifiedDate: dayjs('2025-12-24T16:25'),
 };
 
 export const sampleWithFullData: INotificationTemplate = {
@@ -32,8 +32,8 @@ export const sampleWithFullData: INotificationTemplate = {
   channel: 'EMAIL',
   variables: '../fake-data/blob/hipster.txt',
   isActive: false,
-  createdDate: dayjs('2025-12-19T21:49'),
-  lastModifiedDate: dayjs('2025-12-20T08:45'),
+  createdDate: dayjs('2025-12-24T16:48'),
+  lastModifiedDate: dayjs('2025-12-25T03:44'),
 };
 
 export const sampleWithNewData: NewNotificationTemplate = {
@@ -41,7 +41,7 @@ export const sampleWithNewData: NewNotificationTemplate = {
   subject: 'tremendously',
   bodyTemplate: '../fake-data/blob/hipster.txt',
   isActive: false,
-  createdDate: dayjs('2025-12-20T08:12'),
+  createdDate: dayjs('2025-12-25T03:11'),
   id: null,
 };
 

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentCommentResolve from './route/document-comment-routing-resolve.service';
 
 const documentCommentRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-comment').then(m => m.DocumentComment),
+    loadComponent: () => import('./list/document-comment.component').then(m => m.DocumentCommentComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentCommentRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-comment-detail').then(m => m.DocumentCommentDetail),
+    loadComponent: () => import('./detail/document-comment-detail.component').then(m => m.DocumentCommentDetailComponent),
     resolve: {
       documentComment: DocumentCommentResolve,
     },
@@ -24,7 +23,7 @@ const documentCommentRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-comment-update').then(m => m.DocumentCommentUpdate),
+    loadComponent: () => import('./update/document-comment-update.component').then(m => m.DocumentCommentUpdateComponent),
     resolve: {
       documentComment: DocumentCommentResolve,
     },
@@ -32,7 +31,7 @@ const documentCommentRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-comment-update').then(m => m.DocumentCommentUpdate),
+    loadComponent: () => import('./update/document-comment-update.component').then(m => m.DocumentCommentUpdateComponent),
     resolve: {
       documentComment: DocumentCommentResolve,
     },

@@ -8,6 +8,7 @@ describe('Dashboard Form Service', () => {
   let service: DashboardFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DashboardFormService);
   });
 
@@ -54,7 +55,7 @@ describe('Dashboard Form Service', () => {
       it('should return NewDashboard for default Dashboard initial value', () => {
         const formGroup = service.createDashboardFormGroup(sampleWithNewData);
 
-        const dashboard = service.getDashboard(formGroup);
+        const dashboard = service.getDashboard(formGroup) as any;
 
         expect(dashboard).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('Dashboard Form Service', () => {
       it('should return NewDashboard for empty Dashboard initial value', () => {
         const formGroup = service.createDashboardFormGroup();
 
-        const dashboard = service.getDashboard(formGroup);
+        const dashboard = service.getDashboard(formGroup) as any;
 
         expect(dashboard).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('Dashboard Form Service', () => {
       it('should return IDashboard', () => {
         const formGroup = service.createDashboardFormGroup(sampleWithRequiredData);
 
-        const dashboard = service.getDashboard(formGroup);
+        const dashboard = service.getDashboard(formGroup) as any;
 
         expect(dashboard).toMatchObject(sampleWithRequiredData);
       });

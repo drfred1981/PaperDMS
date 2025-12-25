@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IBookmark, NewBookmark } from '../bookmark.model';
 
@@ -42,10 +41,10 @@ export type BookmarkFormGroup = FormGroup<BookmarkFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class BookmarkFormService {
-  createBookmarkFormGroup(bookmark?: BookmarkFormGroupInput): BookmarkFormGroup {
+  createBookmarkFormGroup(bookmark: BookmarkFormGroupInput = { id: null }): BookmarkFormGroup {
     const bookmarkRawValue = this.convertBookmarkToBookmarkRawValue({
       ...this.getFormDefaults(),
-      ...(bookmark ?? { id: null }),
+      ...bookmark,
     });
     return new FormGroup<BookmarkFormGroupContent>({
       id: new FormControl(
@@ -76,10 +75,12 @@ export class BookmarkFormService {
 
   resetForm(form: BookmarkFormGroup, bookmark: BookmarkFormGroupInput): void {
     const bookmarkRawValue = this.convertBookmarkToBookmarkRawValue({ ...this.getFormDefaults(), ...bookmark });
-    form.reset({
-      ...bookmarkRawValue,
-      id: { value: bookmarkRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...bookmarkRawValue,
+        id: { value: bookmarkRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): BookmarkFormDefaults {

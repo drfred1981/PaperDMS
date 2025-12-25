@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ExportResultResolve from './route/export-result-routing-resolve.service';
 
 const exportResultRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/export-result').then(m => m.ExportResult),
+    loadComponent: () => import('./list/export-result.component').then(m => m.ExportResultComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const exportResultRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/export-result-detail').then(m => m.ExportResultDetail),
+    loadComponent: () => import('./detail/export-result-detail.component').then(m => m.ExportResultDetailComponent),
     resolve: {
       exportResult: ExportResultResolve,
     },
@@ -24,7 +23,7 @@ const exportResultRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/export-result-update').then(m => m.ExportResultUpdate),
+    loadComponent: () => import('./update/export-result-update.component').then(m => m.ExportResultUpdateComponent),
     resolve: {
       exportResult: ExportResultResolve,
     },
@@ -32,7 +31,7 @@ const exportResultRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/export-result-update').then(m => m.ExportResultUpdate),
+    loadComponent: () => import('./update/export-result-update.component').then(m => m.ExportResultUpdateComponent),
     resolve: {
       exportResult: ExportResultResolve,
     },

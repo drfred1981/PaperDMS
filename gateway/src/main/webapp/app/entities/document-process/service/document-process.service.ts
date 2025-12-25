@@ -1,13 +1,13 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentProcess, NewDocumentProcess } from '../document-process.model';
 
 export type PartialUpdateDocumentProcess = Partial<IDocumentProcess> & Pick<IDocumentProcess, 'id'>;
@@ -28,23 +28,19 @@ export class DocumentProcessService {
   }
 
   update(documentProcess: IDocumentProcess): Observable<EntityResponseType> {
-    return this.http.put<IDocumentProcess>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getDocumentProcessIdentifier(documentProcess))}`,
-      documentProcess,
-      { observe: 'response' },
-    );
+    return this.http.put<IDocumentProcess>(`${this.resourceUrl}/${this.getDocumentProcessIdentifier(documentProcess)}`, documentProcess, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(documentProcess: PartialUpdateDocumentProcess): Observable<EntityResponseType> {
-    return this.http.patch<IDocumentProcess>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getDocumentProcessIdentifier(documentProcess))}`,
-      documentProcess,
-      { observe: 'response' },
-    );
+    return this.http.patch<IDocumentProcess>(`${this.resourceUrl}/${this.getDocumentProcessIdentifier(documentProcess)}`, documentProcess, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IDocumentProcess>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.get<IDocumentProcess>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -53,7 +49,7 @@ export class DocumentProcessService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

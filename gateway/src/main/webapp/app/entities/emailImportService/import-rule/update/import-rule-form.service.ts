@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IImportRule, NewImportRule } from '../import-rule.model';
 
@@ -55,10 +54,10 @@ export type ImportRuleFormGroup = FormGroup<ImportRuleFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ImportRuleFormService {
-  createImportRuleFormGroup(importRule?: ImportRuleFormGroupInput): ImportRuleFormGroup {
+  createImportRuleFormGroup(importRule: ImportRuleFormGroupInput = { id: null }): ImportRuleFormGroup {
     const importRuleRawValue = this.convertImportRuleToImportRuleRawValue({
       ...this.getFormDefaults(),
-      ...(importRule ?? { id: null }),
+      ...importRule,
     });
     return new FormGroup<ImportRuleFormGroupContent>({
       id: new FormControl(
@@ -106,10 +105,12 @@ export class ImportRuleFormService {
 
   resetForm(form: ImportRuleFormGroup, importRule: ImportRuleFormGroupInput): void {
     const importRuleRawValue = this.convertImportRuleToImportRuleRawValue({ ...this.getFormDefaults(), ...importRule });
-    form.reset({
-      ...importRuleRawValue,
-      id: { value: importRuleRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...importRuleRawValue,
+        id: { value: importRuleRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ImportRuleFormDefaults {

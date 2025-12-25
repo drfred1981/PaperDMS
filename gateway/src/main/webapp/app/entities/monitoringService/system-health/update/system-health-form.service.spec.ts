@@ -8,6 +8,7 @@ describe('SystemHealth Form Service', () => {
   let service: SystemHealthFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SystemHealthFormService);
   });
 
@@ -54,7 +55,7 @@ describe('SystemHealth Form Service', () => {
       it('should return NewSystemHealth for default SystemHealth initial value', () => {
         const formGroup = service.createSystemHealthFormGroup(sampleWithNewData);
 
-        const systemHealth = service.getSystemHealth(formGroup);
+        const systemHealth = service.getSystemHealth(formGroup) as any;
 
         expect(systemHealth).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('SystemHealth Form Service', () => {
       it('should return NewSystemHealth for empty SystemHealth initial value', () => {
         const formGroup = service.createSystemHealthFormGroup();
 
-        const systemHealth = service.getSystemHealth(formGroup);
+        const systemHealth = service.getSystemHealth(formGroup) as any;
 
         expect(systemHealth).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('SystemHealth Form Service', () => {
       it('should return ISystemHealth', () => {
         const formGroup = service.createSystemHealthFormGroup(sampleWithRequiredData);
 
-        const systemHealth = service.getSystemHealth(formGroup);
+        const systemHealth = service.getSystemHealth(formGroup) as any;
 
         expect(systemHealth).toMatchObject(sampleWithRequiredData);
       });

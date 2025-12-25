@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IImportRule } from '../import-rule.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../import-rule.test-samples';
@@ -103,7 +103,8 @@ describe('ImportRule Service', () => {
       it('should add a ImportRule to an empty array', () => {
         const importRule: IImportRule = sampleWithRequiredData;
         expectedResult = service.addImportRuleToCollectionIfMissing([], importRule);
-        expect(expectedResult).toEqual([importRule]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(importRule);
       });
 
       it('should not add a ImportRule to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('ImportRule Service', () => {
         const importRule: IImportRule = sampleWithRequiredData;
         const importRule2: IImportRule = sampleWithPartialData;
         expectedResult = service.addImportRuleToCollectionIfMissing([], importRule, importRule2);
-        expect(expectedResult).toEqual([importRule, importRule2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(importRule);
+        expect(expectedResult).toContain(importRule2);
       });
 
       it('should accept null and undefined values', () => {
         const importRule: IImportRule = sampleWithRequiredData;
         expectedResult = service.addImportRuleToCollectionIfMissing([], null, importRule, undefined);
-        expect(expectedResult).toEqual([importRule]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(importRule);
       });
 
       it('should return initial array if no ImportRule is added', () => {

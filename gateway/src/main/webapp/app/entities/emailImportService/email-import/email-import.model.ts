@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IImportRule } from 'app/entities/emailImportService/import-rule/import-rule.model';
 import { ImportStatus } from 'app/entities/enumerations/import-status.model';
 

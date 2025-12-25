@@ -6,7 +6,7 @@ export const sampleWithRequiredData: IEmailImport = {
   id: 9534,
   fromEmail: 'runny',
   toEmail: 'and',
-  receivedDate: dayjs('2025-12-19T16:57'),
+  receivedDate: dayjs('2025-12-24T11:56'),
   status: 'COMPLETED',
 };
 
@@ -14,8 +14,8 @@ export const sampleWithPartialData: IEmailImport = {
   id: 29177,
   fromEmail: 'considering courageous rekindle',
   toEmail: 'including bid so',
-  receivedDate: dayjs('2025-12-20T04:25'),
-  processedDate: dayjs('2025-12-19T21:19'),
+  receivedDate: dayjs('2025-12-24T23:24'),
+  processedDate: dayjs('2025-12-24T16:18'),
   status: 'PENDING',
   documentTypeId: 18960,
   attachmentCount: 31253,
@@ -30,8 +30,8 @@ export const sampleWithFullData: IEmailImport = {
   subject: 'true scarily since',
   body: '../fake-data/blob/hipster.txt',
   bodyHtml: '../fake-data/blob/hipster.txt',
-  receivedDate: dayjs('2025-12-20T10:44'),
-  processedDate: dayjs('2025-12-20T08:16'),
+  receivedDate: dayjs('2025-12-25T05:43'),
+  processedDate: dayjs('2025-12-25T03:15'),
   status: 'PARTIAL',
   folderId: 14953,
   documentTypeId: 16936,
@@ -45,7 +45,7 @@ export const sampleWithFullData: IEmailImport = {
 export const sampleWithNewData: NewEmailImport = {
   fromEmail: 'atop pulp turbulent',
   toEmail: 'shrilly',
-  receivedDate: dayjs('2025-12-20T15:20'),
+  receivedDate: dayjs('2025-12-25T10:19'),
   status: 'COMPLETED',
   id: null,
 };

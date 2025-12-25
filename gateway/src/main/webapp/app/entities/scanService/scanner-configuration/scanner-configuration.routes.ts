@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ScannerConfigurationResolve from './route/scanner-configuration-routing-resolve.service';
 
 const scannerConfigurationRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/scanner-configuration').then(m => m.ScannerConfiguration),
+    loadComponent: () => import('./list/scanner-configuration.component').then(m => m.ScannerConfigurationComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const scannerConfigurationRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/scanner-configuration-detail').then(m => m.ScannerConfigurationDetail),
+    loadComponent: () => import('./detail/scanner-configuration-detail.component').then(m => m.ScannerConfigurationDetailComponent),
     resolve: {
       scannerConfiguration: ScannerConfigurationResolve,
     },
@@ -24,7 +23,7 @@ const scannerConfigurationRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/scanner-configuration-update').then(m => m.ScannerConfigurationUpdate),
+    loadComponent: () => import('./update/scanner-configuration-update.component').then(m => m.ScannerConfigurationUpdateComponent),
     resolve: {
       scannerConfiguration: ScannerConfigurationResolve,
     },
@@ -32,7 +31,7 @@ const scannerConfigurationRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/scanner-configuration-update').then(m => m.ScannerConfigurationUpdate),
+    loadComponent: () => import('./update/scanner-configuration-update.component').then(m => m.ScannerConfigurationUpdateComponent),
     resolve: {
       scannerConfiguration: ScannerConfigurationResolve,
     },

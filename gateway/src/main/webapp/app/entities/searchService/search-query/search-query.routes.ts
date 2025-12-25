@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import SearchQueryResolve from './route/search-query-routing-resolve.service';
 
 const searchQueryRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/search-query').then(m => m.SearchQuery),
+    loadComponent: () => import('./list/search-query.component').then(m => m.SearchQueryComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const searchQueryRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/search-query-detail').then(m => m.SearchQueryDetail),
+    loadComponent: () => import('./detail/search-query-detail.component').then(m => m.SearchQueryDetailComponent),
     resolve: {
       searchQuery: SearchQueryResolve,
     },
@@ -24,7 +23,7 @@ const searchQueryRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/search-query-update').then(m => m.SearchQueryUpdate),
+    loadComponent: () => import('./update/search-query-update.component').then(m => m.SearchQueryUpdateComponent),
     resolve: {
       searchQuery: SearchQueryResolve,
     },
@@ -32,7 +31,7 @@ const searchQueryRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/search-query-update').then(m => m.SearchQueryUpdate),
+    loadComponent: () => import('./update/search-query-update.component').then(m => m.SearchQueryUpdateComponent),
     resolve: {
       searchQuery: SearchQueryResolve,
     },

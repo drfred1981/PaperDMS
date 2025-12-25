@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IScanJob, NewScanJob } from '../scan-job.model';
 
 export type PartialUpdateScanJob = Partial<IScanJob> & Pick<IScanJob, 'id'>;
@@ -43,20 +43,20 @@ export class ScanJobService {
   update(scanJob: IScanJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(scanJob);
     return this.http
-      .put<RestScanJob>(`${this.resourceUrl}/${encodeURIComponent(this.getScanJobIdentifier(scanJob))}`, copy, { observe: 'response' })
+      .put<RestScanJob>(`${this.resourceUrl}/${this.getScanJobIdentifier(scanJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(scanJob: PartialUpdateScanJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(scanJob);
     return this.http
-      .patch<RestScanJob>(`${this.resourceUrl}/${encodeURIComponent(this.getScanJobIdentifier(scanJob))}`, copy, { observe: 'response' })
+      .patch<RestScanJob>(`${this.resourceUrl}/${this.getScanJobIdentifier(scanJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestScanJob>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestScanJob>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -68,7 +68,7 @@ export class ScanJobService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getScanJobIdentifier(scanJob: Pick<IScanJob, 'id'>): number {

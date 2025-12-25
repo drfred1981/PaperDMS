@@ -1,11 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IInvoiceLine, NewInvoiceLine } from '../invoice-line.model';
 
 export type PartialUpdateInvoiceLine = Partial<IInvoiceLine> & Pick<IInvoiceLine, 'id'>;
@@ -25,23 +24,19 @@ export class InvoiceLineService {
   }
 
   update(invoiceLine: IInvoiceLine): Observable<EntityResponseType> {
-    return this.http.put<IInvoiceLine>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getInvoiceLineIdentifier(invoiceLine))}`,
-      invoiceLine,
-      { observe: 'response' },
-    );
+    return this.http.put<IInvoiceLine>(`${this.resourceUrl}/${this.getInvoiceLineIdentifier(invoiceLine)}`, invoiceLine, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(invoiceLine: PartialUpdateInvoiceLine): Observable<EntityResponseType> {
-    return this.http.patch<IInvoiceLine>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getInvoiceLineIdentifier(invoiceLine))}`,
-      invoiceLine,
-      { observe: 'response' },
-    );
+    return this.http.patch<IInvoiceLine>(`${this.resourceUrl}/${this.getInvoiceLineIdentifier(invoiceLine)}`, invoiceLine, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IInvoiceLine>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.get<IInvoiceLine>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -50,7 +45,7 @@ export class InvoiceLineService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getInvoiceLineIdentifier(invoiceLine: Pick<IInvoiceLine, 'id'>): number {

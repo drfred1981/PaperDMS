@@ -1,6 +1,6 @@
-import { AssigneeType } from 'app/entities/enumerations/assignee-type.model';
-import { WorkflowStepType } from 'app/entities/enumerations/workflow-step-type.model';
 import { IWorkflow } from 'app/entities/workflowService/workflow/workflow.model';
+import { WorkflowStepType } from 'app/entities/enumerations/workflow-step-type.model';
+import { AssigneeType } from 'app/entities/enumerations/assignee-type.model';
 
 export interface IWorkflowStep {
   id: number;

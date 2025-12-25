@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { NotificationFrequency } from 'app/entities/enumerations/notification-frequency.model';
 
 export interface INotificationPreference {

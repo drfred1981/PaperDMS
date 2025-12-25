@@ -31,10 +31,10 @@ export type ContractClauseFormGroup = FormGroup<ContractClauseFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ContractClauseFormService {
-  createContractClauseFormGroup(contractClause?: ContractClauseFormGroupInput): ContractClauseFormGroup {
+  createContractClauseFormGroup(contractClause: ContractClauseFormGroupInput = { id: null }): ContractClauseFormGroup {
     const contractClauseRawValue = {
       ...this.getFormDefaults(),
-      ...(contractClause ?? { id: null }),
+      ...contractClause,
     };
     return new FormGroup<ContractClauseFormGroupContent>({
       id: new FormControl(
@@ -72,10 +72,12 @@ export class ContractClauseFormService {
 
   resetForm(form: ContractClauseFormGroup, contractClause: ContractClauseFormGroupInput): void {
     const contractClauseRawValue = { ...this.getFormDefaults(), ...contractClause };
-    form.reset({
-      ...contractClauseRawValue,
-      id: { value: contractClauseRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...contractClauseRawValue,
+        id: { value: contractClauseRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ContractClauseFormDefaults {

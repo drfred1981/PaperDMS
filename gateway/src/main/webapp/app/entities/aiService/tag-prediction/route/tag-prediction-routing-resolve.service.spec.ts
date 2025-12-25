@@ -1,11 +1,10 @@
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
-
 import { of } from 'rxjs';
 
-import { TagPredictionService } from '../service/tag-prediction.service';
 import { ITagPrediction } from '../tag-prediction.model';
+import { TagPredictionService } from '../service/tag-prediction.service';
 
 import tagPredictionResolve from './tag-prediction-routing-resolve.service';
 
@@ -13,6 +12,7 @@ describe('TagPrediction routing resolve service', () => {
   let mockRouter: Router;
   let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
   let service: TagPredictionService;
+  let resultTagPrediction: ITagPrediction | null | undefined;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,70 +29,69 @@ describe('TagPrediction routing resolve service', () => {
       ],
     });
     mockRouter = TestBed.inject(Router);
-    jest.spyOn(mockRouter, 'navigate');
+    jest.spyOn(mockRouter, 'navigate').mockImplementation(() => Promise.resolve(true));
     mockActivatedRouteSnapshot = TestBed.inject(ActivatedRoute).snapshot;
     service = TestBed.inject(TagPredictionService);
+    resultTagPrediction = undefined;
   });
 
   describe('resolve', () => {
-    it('should return ITagPrediction returned by find', async () => {
+    it('should return ITagPrediction returned by find', () => {
       // GIVEN
       service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          tagPredictionResolve(mockActivatedRouteSnapshot).subscribe({
-            next(result) {
-              // THEN
-              expect(service.find).toHaveBeenCalledWith(123);
-              expect(result).toEqual({ id: 123 });
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        tagPredictionResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultTagPrediction = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).toHaveBeenCalledWith(123);
+      expect(resultTagPrediction).toEqual({ id: 123 });
     });
 
-    it('should return null if id is not provided', async () => {
+    it('should return null if id is not provided', () => {
       // GIVEN
       service.find = jest.fn();
       mockActivatedRouteSnapshot.params = {};
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          tagPredictionResolve(mockActivatedRouteSnapshot).subscribe({
-            next(result) {
-              // THEN
-              expect(service.find).not.toHaveBeenCalled();
-              expect(result).toEqual(null);
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        tagPredictionResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultTagPrediction = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).not.toHaveBeenCalled();
+      expect(resultTagPrediction).toEqual(null);
     });
 
-    it('should route to 404 page if data not found in server', async () => {
+    it('should route to 404 page if data not found in server', () => {
       // GIVEN
       jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<ITagPrediction>({ body: null })));
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          tagPredictionResolve(mockActivatedRouteSnapshot).subscribe({
-            complete() {
-              // THEN
-              expect(service.find).toHaveBeenCalledWith(123);
-              expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        tagPredictionResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultTagPrediction = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).toHaveBeenCalledWith(123);
+      expect(resultTagPrediction).toEqual(undefined);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });
   });
 });

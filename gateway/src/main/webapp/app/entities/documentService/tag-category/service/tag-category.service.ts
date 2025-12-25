@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { ITagCategory, NewTagCategory } from '../tag-category.model';
 
 export type PartialUpdateTagCategory = Partial<ITagCategory> & Pick<ITagCategory, 'id'>;
@@ -44,24 +45,20 @@ export class TagCategoryService {
   update(tagCategory: ITagCategory): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(tagCategory);
     return this.http
-      .put<RestTagCategory>(`${this.resourceUrl}/${encodeURIComponent(this.getTagCategoryIdentifier(tagCategory))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestTagCategory>(`${this.resourceUrl}/${this.getTagCategoryIdentifier(tagCategory)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(tagCategory: PartialUpdateTagCategory): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(tagCategory);
     return this.http
-      .patch<RestTagCategory>(`${this.resourceUrl}/${encodeURIComponent(this.getTagCategoryIdentifier(tagCategory))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestTagCategory>(`${this.resourceUrl}/${this.getTagCategoryIdentifier(tagCategory)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestTagCategory>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestTagCategory>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -73,7 +70,7 @@ export class TagCategoryService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

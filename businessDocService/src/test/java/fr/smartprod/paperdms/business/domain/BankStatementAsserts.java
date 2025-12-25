@@ -54,8 +54,7 @@ public class BankStatementAsserts {
             .satisfies(a ->
                 assertThat(a.getStatementPeriodStart()).as("check statementPeriodStart").isEqualTo(expected.getStatementPeriodStart())
             )
-            .satisfies(a ->
-                assertThat(a.getStatementPeriodEnd()).as("check statementPeriodEnd").isEqualTo(expected.getStatementPeriodEnd())
+            .satisfies(a -> assertThat(a.getStatementPeriodEnd()).as("check statementPeriodEnd").isEqualTo(expected.getStatementPeriodEnd())
             )
             .satisfies(a -> assertThat(a.getOpeningBalance()).as("check openingBalance").isEqualTo(expected.getOpeningBalance()))
             .satisfies(a -> assertThat(a.getClosingBalance()).as("check closingBalance").isEqualTo(expected.getClosingBalance()))

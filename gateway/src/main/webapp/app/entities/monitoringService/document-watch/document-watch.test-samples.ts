@@ -12,7 +12,7 @@ export const sampleWithRequiredData: IDocumentWatch = {
   notifyOnModify: false,
   notifyOnShare: true,
   notifyOnDelete: false,
-  createdDate: dayjs('2025-12-20T12:53'),
+  createdDate: dayjs('2025-12-25T07:52'),
 };
 
 export const sampleWithPartialData: IDocumentWatch = {
@@ -25,7 +25,7 @@ export const sampleWithPartialData: IDocumentWatch = {
   notifyOnModify: true,
   notifyOnShare: true,
   notifyOnDelete: true,
-  createdDate: dayjs('2025-12-19T21:46'),
+  createdDate: dayjs('2025-12-24T16:45'),
 };
 
 export const sampleWithFullData: IDocumentWatch = {
@@ -38,7 +38,7 @@ export const sampleWithFullData: IDocumentWatch = {
   notifyOnModify: true,
   notifyOnShare: true,
   notifyOnDelete: true,
-  createdDate: dayjs('2025-12-20T15:59'),
+  createdDate: dayjs('2025-12-25T10:58'),
 };
 
 export const sampleWithNewData: NewDocumentWatch = {
@@ -50,7 +50,7 @@ export const sampleWithNewData: NewDocumentWatch = {
   notifyOnModify: false,
   notifyOnShare: false,
   notifyOnDelete: true,
-  createdDate: dayjs('2025-12-20T08:35'),
+  createdDate: dayjs('2025-12-25T03:34'),
   id: null,
 };
 

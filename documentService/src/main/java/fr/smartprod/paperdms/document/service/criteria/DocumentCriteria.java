@@ -1,7 +1,5 @@
 package fr.smartprod.paperdms.document.service.criteria;
 
-import fr.smartprod.paperdms.document.domain.enumeration.DocumentStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,24 +20,6 @@ import tech.jhipster.service.filter.*;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class DocumentCriteria implements Serializable, Criteria {
 
-    /**
-     * Class for filtering DocumentStatus
-     */
-    public static class DocumentStatusFilter extends Filter<DocumentStatus> {
-
-        public DocumentStatusFilter() {}
-
-        public DocumentStatusFilter(DocumentStatusFilter filter) {
-            super(filter);
-        }
-
-        @Override
-        public DocumentStatusFilter copy() {
-            return new DocumentStatusFilter(this);
-        }
-    }
-
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;
@@ -69,8 +49,6 @@ public class DocumentCriteria implements Serializable, Criteria {
     private StringFilter webpPreviewS3Key;
 
     private StringFilter webpPreviewSha256;
-
-    private DocumentStatusFilter status;
 
     private InstantFilter uploadDate;
 
@@ -115,7 +93,6 @@ public class DocumentCriteria implements Serializable, Criteria {
         this.thumbnailSha256 = other.optionalThumbnailSha256().map(StringFilter::copy).orElse(null);
         this.webpPreviewS3Key = other.optionalWebpPreviewS3Key().map(StringFilter::copy).orElse(null);
         this.webpPreviewSha256 = other.optionalWebpPreviewSha256().map(StringFilter::copy).orElse(null);
-        this.status = other.optionalStatus().map(DocumentStatusFilter::copy).orElse(null);
         this.uploadDate = other.optionalUploadDate().map(InstantFilter::copy).orElse(null);
         this.isPublic = other.optionalIsPublic().map(BooleanFilter::copy).orElse(null);
         this.downloadCount = other.optionalDownloadCount().map(IntegerFilter::copy).orElse(null);
@@ -402,25 +379,6 @@ public class DocumentCriteria implements Serializable, Criteria {
         this.webpPreviewSha256 = webpPreviewSha256;
     }
 
-    public DocumentStatusFilter getStatus() {
-        return status;
-    }
-
-    public Optional<DocumentStatusFilter> optionalStatus() {
-        return Optional.ofNullable(status);
-    }
-
-    public DocumentStatusFilter status() {
-        if (status == null) {
-            setStatus(new DocumentStatusFilter());
-        }
-        return status;
-    }
-
-    public void setStatus(DocumentStatusFilter status) {
-        this.status = status;
-    }
-
     public InstantFilter getUploadDate() {
         return uploadDate;
     }
@@ -692,7 +650,6 @@ public class DocumentCriteria implements Serializable, Criteria {
             Objects.equals(thumbnailSha256, that.thumbnailSha256) &&
             Objects.equals(webpPreviewS3Key, that.webpPreviewS3Key) &&
             Objects.equals(webpPreviewSha256, that.webpPreviewSha256) &&
-            Objects.equals(status, that.status) &&
             Objects.equals(uploadDate, that.uploadDate) &&
             Objects.equals(isPublic, that.isPublic) &&
             Objects.equals(downloadCount, that.downloadCount) &&
@@ -726,7 +683,6 @@ public class DocumentCriteria implements Serializable, Criteria {
             thumbnailSha256,
             webpPreviewS3Key,
             webpPreviewSha256,
-            status,
             uploadDate,
             isPublic,
             downloadCount,
@@ -761,7 +717,6 @@ public class DocumentCriteria implements Serializable, Criteria {
             optionalThumbnailSha256().map(f -> "thumbnailSha256=" + f + ", ").orElse("") +
             optionalWebpPreviewS3Key().map(f -> "webpPreviewS3Key=" + f + ", ").orElse("") +
             optionalWebpPreviewSha256().map(f -> "webpPreviewSha256=" + f + ", ").orElse("") +
-            optionalStatus().map(f -> "status=" + f + ", ").orElse("") +
             optionalUploadDate().map(f -> "uploadDate=" + f + ", ").orElse("") +
             optionalIsPublic().map(f -> "isPublic=" + f + ", ").orElse("") +
             optionalDownloadCount().map(f -> "downloadCount=" + f + ", ").orElse("") +

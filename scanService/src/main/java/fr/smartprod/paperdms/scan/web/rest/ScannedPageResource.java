@@ -35,7 +35,7 @@ public class ScannedPageResource {
 
     private static final String ENTITY_NAME = "scanServiceScannedPage";
 
-    @Value("${jhipster.clientApp.name:scanService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ScannedPageService scannedPageService;

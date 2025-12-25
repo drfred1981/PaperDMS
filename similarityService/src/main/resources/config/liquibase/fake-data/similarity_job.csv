@@ -1,11 +1,11 @@
 id;document_id;document_sha_256;status;algorithm;scope;min_similarity_threshold;matches_found;start_date;end_date;error_message;created_date;created_by
-1;30973;freely handle;COMPLETED;DEEP_LEARNING;ALL_DOCUMENTS;0.96;10592;2025-12-19T23:53:41;2025-12-19T21:46:22;../fake-data/blob/hipster.txt;2025-12-20T14:34:40;treasure
-2;5351;holster;FAILED;LSH;ALL_DOCUMENTS;0.48;20192;2025-12-20T12:00:28;2025-12-20T14:48:49;../fake-data/blob/hipster.txt;2025-12-20T01:56:52;frankly
-3;16705;whoever through heavily;PENDING;JACCARD;SAME_TAGS;0.52;17412;2025-12-19T20:50:47;2025-12-19T20:46:37;../fake-data/blob/hipster.txt;2025-12-20T14:07:07;stained issue
-4;22079;fray;COMPLETED;COMBINED;CUSTOM;0.88;4589;2025-12-19T16:16:10;2025-12-20T07:14:27;../fake-data/blob/hipster.txt;2025-12-19T20:55:27;of including gurn
-5;2669;best to;COMPLETED;COMBINED;ALL_DOCUMENTS;0.42;27088;2025-12-20T13:01:25;2025-12-19T21:38:50;../fake-data/blob/hipster.txt;2025-12-19T18:36:21;compromise perfectly
-6;14544;rewrite dreamily;FAILED;LEVENSHTEIN;SAME_TYPE;0.06;1210;2025-12-20T13:10:09;2025-12-20T06:56:47;../fake-data/blob/hipster.txt;2025-12-20T06:02:58;wretched
-7;17644;waltz whoever;CANCELLED;JACCARD;SAME_TYPE;0.92;28385;2025-12-20T06:43:55;2025-12-20T08:24:19;../fake-data/blob/hipster.txt;2025-12-19T15:32:19;greedily than huzzah
-8;91;construe finally bashfully;PENDING;LEVENSHTEIN;SAME_TAGS;0.94;19408;2025-12-19T16:01:56;2025-12-20T10:29:27;../fake-data/blob/hipster.txt;2025-12-19T19:43:08;eek pleasing
-9;14389;while per phooey;PENDING;LEVENSHTEIN;SAME_TYPE;0.56;13731;2025-12-19T17:53:00;2025-12-19T21:25:32;../fake-data/blob/hipster.txt;2025-12-20T02:28:57;outlandish
-10;26724;snowplow;PENDING;LEVENSHTEIN;CUSTOM;0.19;17078;2025-12-20T10:00:59;2025-12-20T04:44:02;../fake-data/blob/hipster.txt;2025-12-20T06:11:19;pleasant bustling vice
+1;30973;freely handle;COMPLETED;DEEP_LEARNING;ALL_DOCUMENTS;0.96;10592;2025-12-24T18:52:43;2025-12-24T16:45:24;../fake-data/blob/hipster.txt;2025-12-25T09:33:42;treasure
+2;5351;holster;FAILED;LSH;ALL_DOCUMENTS;0.48;20192;2025-12-25T06:59:30;2025-12-25T09:47:51;../fake-data/blob/hipster.txt;2025-12-24T20:55:54;frankly
+3;16705;whoever through heavily;PENDING;JACCARD;SAME_TAGS;0.52;17412;2025-12-24T15:49:49;2025-12-24T15:45:39;../fake-data/blob/hipster.txt;2025-12-25T09:06:09;stained issue
+4;22079;fray;COMPLETED;COMBINED;CUSTOM;0.88;4589;2025-12-24T11:15:12;2025-12-25T02:13:29;../fake-data/blob/hipster.txt;2025-12-24T15:54:29;of including gurn
+5;2669;best to;COMPLETED;COMBINED;ALL_DOCUMENTS;0.42;27088;2025-12-25T08:00:27;2025-12-24T16:37:52;../fake-data/blob/hipster.txt;2025-12-24T13:35:23;compromise perfectly
+6;14544;rewrite dreamily;FAILED;LEVENSHTEIN;SAME_TYPE;0.06;1210;2025-12-25T08:09:11;2025-12-25T01:55:49;../fake-data/blob/hipster.txt;2025-12-25T01:02:00;wretched
+7;17644;waltz whoever;CANCELLED;JACCARD;SAME_TYPE;0.92;28385;2025-12-25T01:42:57;2025-12-25T03:23:21;../fake-data/blob/hipster.txt;2025-12-24T10:31:21;greedily than huzzah
+8;91;construe finally bashfully;PENDING;LEVENSHTEIN;SAME_TAGS;0.94;19408;2025-12-24T11:00:58;2025-12-25T05:28:29;../fake-data/blob/hipster.txt;2025-12-24T14:42:10;eek pleasing
+9;14389;while per phooey;PENDING;LEVENSHTEIN;SAME_TYPE;0.56;13731;2025-12-24T12:52:02;2025-12-24T16:24:34;../fake-data/blob/hipster.txt;2025-12-24T21:27:59;outlandish
+10;26724;snowplow;PENDING;LEVENSHTEIN;CUSTOM;0.19;17078;2025-12-25T05:00:01;2025-12-24T23:43:04;../fake-data/blob/hipster.txt;2025-12-25T01:10:21;pleasant bustling vice

@@ -80,7 +80,7 @@ class OcrCacheResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -464,12 +464,9 @@ class OcrCacheResourceIT {
         partialUpdatedOcrCache.setId(ocrCache.getId());
 
         partialUpdatedOcrCache
-            .ocrEngine(UPDATED_OCR_ENGINE)
             .pageCount(UPDATED_PAGE_COUNT)
-            .s3Bucket(UPDATED_S_3_BUCKET)
-            .extractedTextS3Key(UPDATED_EXTRACTED_TEXT_S_3_KEY)
-            .metadata(UPDATED_METADATA)
-            .lastAccessDate(UPDATED_LAST_ACCESS_DATE);
+            .totalConfidence(UPDATED_TOTAL_CONFIDENCE)
+            .extractedTextS3Key(UPDATED_EXTRACTED_TEXT_S_3_KEY);
 
         restOcrCacheMockMvc
             .perform(

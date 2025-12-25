@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISearchIndex } from '../search-index.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../search-index.test-samples';
@@ -116,7 +116,8 @@ describe('SearchIndex Service', () => {
       it('should add a SearchIndex to an empty array', () => {
         const searchIndex: ISearchIndex = sampleWithRequiredData;
         expectedResult = service.addSearchIndexToCollectionIfMissing([], searchIndex);
-        expect(expectedResult).toEqual([searchIndex]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(searchIndex);
       });
 
       it('should not add a SearchIndex to an array that contains it', () => {
@@ -150,13 +151,16 @@ describe('SearchIndex Service', () => {
         const searchIndex: ISearchIndex = sampleWithRequiredData;
         const searchIndex2: ISearchIndex = sampleWithPartialData;
         expectedResult = service.addSearchIndexToCollectionIfMissing([], searchIndex, searchIndex2);
-        expect(expectedResult).toEqual([searchIndex, searchIndex2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(searchIndex);
+        expect(expectedResult).toContain(searchIndex2);
       });
 
       it('should accept null and undefined values', () => {
         const searchIndex: ISearchIndex = sampleWithRequiredData;
         expectedResult = service.addSearchIndexToCollectionIfMissing([], null, searchIndex, undefined);
-        expect(expectedResult).toEqual([searchIndex]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(searchIndex);
       });
 
       it('should return initial array if no SearchIndex is added', () => {

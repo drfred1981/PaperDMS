@@ -68,7 +68,7 @@ public class ExportJobQueryService extends QueryService<ExportJob> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<ExportJob> createSpecification(ExportJobCriteria criteria) {
-        Specification<ExportJob> specification = Specification.unrestricted();
+        Specification<ExportJob> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

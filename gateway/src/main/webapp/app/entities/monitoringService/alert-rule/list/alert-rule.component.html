@@ -1,0 +1,207 @@
+<div>
+  <h2 id="page-heading" data-cy="AlertRuleHeading">
+    <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.home.title">Alert Rules</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-alert-rule"
+        [routerLink]="['/alert-rule/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.home.createLabel">Create a new Alert Rule</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (alertRules().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.home.notFound">No Alert Rules found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="alertType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.alertType">Alert Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="conditions">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.conditions">Conditions</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="severity">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.severity">Severity</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recipients">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.recipients">Recipients</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="triggerCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.triggerCount">Trigger Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastTriggered">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.lastTriggered">Last Triggered</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceAlertRule.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (alertRule of alertRules(); track trackId(alertRule)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/alert-rule', alertRule.id, 'view']">{{ alertRule.id }}</a>
+              </td>
+              <td>{{ alertRule.name }}</td>
+              <td>{{ alertRule.description }}</td>
+              <td [jhiTranslate]="'gatewayApp.AlertType.' + (alertRule.alertType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DOCUMENT_EXPIRATION: 'DOCUMENT_EXPIRATION',
+                    STORAGE_QUOTA: 'STORAGE_QUOTA',
+                    UNUSUAL_ACTIVITY: 'UNUSUAL_ACTIVITY',
+                    COMPLIANCE_VIOLATION: 'COMPLIANCE_VIOLATION',
+                    WORKFLOW_DELAYED: 'WORKFLOW_DELAYED',
+                    FAILED_OCR: 'FAILED_OCR',
+                    MISSING_METADATA: 'MISSING_METADATA',
+                    DUPLICATE_DETECTED: 'DUPLICATE_DETECTED',
+                    PERMISSION_CHANGED: 'PERMISSION_CHANGED',
+                    SERVICE_DOWN: 'SERVICE_DOWN',
+                    HIGH_ERROR_RATE: 'HIGH_ERROR_RATE',
+                    CONTRACT_EXPIRATION: 'CONTRACT_EXPIRATION',
+                    INVOICE_OVERDUE: 'INVOICE_OVERDUE',
+                    SYSTEM_OVERLOAD: 'SYSTEM_OVERLOAD',
+                  }[alertRule.alertType ?? 'null']
+                }}
+              </td>
+              <td>{{ alertRule.conditions }}</td>
+              <td [jhiTranslate]="'gatewayApp.Severity.' + (alertRule.severity ?? 'null')">
+                {{ { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', CRITICAL: 'CRITICAL' }[alertRule.severity ?? 'null'] }}
+              </td>
+              <td>{{ alertRule.recipients }}</td>
+              <td>{{ alertRule.isActive }}</td>
+              <td>{{ alertRule.triggerCount }}</td>
+              <td>{{ alertRule.lastTriggered | formatMediumDatetime }}</td>
+              <td>{{ alertRule.createdBy }}</td>
+              <td>{{ alertRule.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/alert-rule', alertRule.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/alert-rule', alertRule.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(alertRule)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (alertRules().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IAiCache, NewAiCache } from '../ai-cache.model';
 
 export type PartialUpdateAiCache = Partial<IAiCache> & Pick<IAiCache, 'id'>;
@@ -43,20 +43,20 @@ export class AiCacheService {
   update(aiCache: IAiCache): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(aiCache);
     return this.http
-      .put<RestAiCache>(`${this.resourceUrl}/${encodeURIComponent(this.getAiCacheIdentifier(aiCache))}`, copy, { observe: 'response' })
+      .put<RestAiCache>(`${this.resourceUrl}/${this.getAiCacheIdentifier(aiCache)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(aiCache: PartialUpdateAiCache): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(aiCache);
     return this.http
-      .patch<RestAiCache>(`${this.resourceUrl}/${encodeURIComponent(this.getAiCacheIdentifier(aiCache))}`, copy, { observe: 'response' })
+      .patch<RestAiCache>(`${this.resourceUrl}/${this.getAiCacheIdentifier(aiCache)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestAiCache>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestAiCache>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -68,7 +68,7 @@ export class AiCacheService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getAiCacheIdentifier(aiCache: Pick<IAiCache, 'id'>): number {

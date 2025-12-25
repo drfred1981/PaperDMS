@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentRelation } from '../document-relation.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-relation.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentRelation Service', () => {
       it('should add a DocumentRelation to an empty array', () => {
         const documentRelation: IDocumentRelation = sampleWithRequiredData;
         expectedResult = service.addDocumentRelationToCollectionIfMissing([], documentRelation);
-        expect(expectedResult).toEqual([documentRelation]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentRelation);
       });
 
       it('should not add a DocumentRelation to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentRelation Service', () => {
         const documentRelation: IDocumentRelation = sampleWithRequiredData;
         const documentRelation2: IDocumentRelation = sampleWithPartialData;
         expectedResult = service.addDocumentRelationToCollectionIfMissing([], documentRelation, documentRelation2);
-        expect(expectedResult).toEqual([documentRelation, documentRelation2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentRelation);
+        expect(expectedResult).toContain(documentRelation2);
       });
 
       it('should accept null and undefined values', () => {
         const documentRelation: IDocumentRelation = sampleWithRequiredData;
         expectedResult = service.addDocumentRelationToCollectionIfMissing([], null, documentRelation, undefined);
-        expect(expectedResult).toEqual([documentRelation]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentRelation);
       });
 
       it('should return initial array if no DocumentRelation is added', () => {

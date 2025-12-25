@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (conversionJob(); as conversionJobRef) {
+      <div>
+        <h2 data-cy="conversionJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceConversionJob.detail.title">Conversion Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.sourceFormat">Source Format</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.sourceFormat }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.targetFormat">Target Format</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.targetFormat }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.conversionEngine">Conversion Engine</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.conversionEngine }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.options">Options</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.options }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.outputDocumentId">Output Document Id</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.outputDocumentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (conversionJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                conversionJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceConversionJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ conversionJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/conversion-job', conversionJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

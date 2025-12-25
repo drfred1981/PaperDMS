@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IFolder } from '../folder.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../folder.test-samples';
@@ -101,7 +101,8 @@ describe('Folder Service', () => {
       it('should add a Folder to an empty array', () => {
         const folder: IFolder = sampleWithRequiredData;
         expectedResult = service.addFolderToCollectionIfMissing([], folder);
-        expect(expectedResult).toEqual([folder]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(folder);
       });
 
       it('should not add a Folder to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('Folder Service', () => {
         const folder: IFolder = sampleWithRequiredData;
         const folder2: IFolder = sampleWithPartialData;
         expectedResult = service.addFolderToCollectionIfMissing([], folder, folder2);
-        expect(expectedResult).toEqual([folder, folder2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(folder);
+        expect(expectedResult).toContain(folder2);
       });
 
       it('should accept null and undefined values', () => {
         const folder: IFolder = sampleWithRequiredData;
         expectedResult = service.addFolderToCollectionIfMissing([], null, folder, undefined);
-        expect(expectedResult).toEqual([folder]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(folder);
       });
 
       it('should return initial array if no Folder is added', () => {

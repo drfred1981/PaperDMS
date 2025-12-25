@@ -35,7 +35,7 @@ public class NotificationTemplateResource {
 
     private static final String ENTITY_NAME = "notificationServiceNotificationTemplate";
 
-    @Value("${jhipster.clientApp.name:notificationService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final NotificationTemplateService notificationTemplateService;

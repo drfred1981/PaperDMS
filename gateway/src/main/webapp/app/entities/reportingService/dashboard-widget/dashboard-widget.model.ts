@@ -1,5 +1,5 @@
-import { WidgetType } from 'app/entities/enumerations/widget-type.model';
 import { IDashboard } from 'app/entities/reportingService/dashboard/dashboard.model';
+import { WidgetType } from 'app/entities/enumerations/widget-type.model';
 
 export interface IDashboardWidget {
   id: number;

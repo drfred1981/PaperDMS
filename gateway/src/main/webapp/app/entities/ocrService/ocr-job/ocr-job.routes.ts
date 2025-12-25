@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import OcrJobResolve from './route/ocr-job-routing-resolve.service';
 
 const ocrJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/ocr-job').then(m => m.OcrJob),
+    loadComponent: () => import('./list/ocr-job.component').then(m => m.OcrJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const ocrJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/ocr-job-detail').then(m => m.OcrJobDetail),
+    loadComponent: () => import('./detail/ocr-job-detail.component').then(m => m.OcrJobDetailComponent),
     resolve: {
       ocrJob: OcrJobResolve,
     },
@@ -24,7 +23,7 @@ const ocrJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/ocr-job-update').then(m => m.OcrJobUpdate),
+    loadComponent: () => import('./update/ocr-job-update.component').then(m => m.OcrJobUpdateComponent),
     resolve: {
       ocrJob: OcrJobResolve,
     },
@@ -32,7 +31,7 @@ const ocrJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/ocr-job-update').then(m => m.OcrJobUpdate),
+    loadComponent: () => import('./update/ocr-job-update.component').then(m => m.OcrJobUpdateComponent),
     resolve: {
       ocrJob: OcrJobResolve,
     },

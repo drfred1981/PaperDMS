@@ -8,6 +8,7 @@ describe('CompressionJob Form Service', () => {
   let service: CompressionJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(CompressionJobFormService);
   });
 
@@ -68,7 +69,7 @@ describe('CompressionJob Form Service', () => {
       it('should return NewCompressionJob for default CompressionJob initial value', () => {
         const formGroup = service.createCompressionJobFormGroup(sampleWithNewData);
 
-        const compressionJob = service.getCompressionJob(formGroup);
+        const compressionJob = service.getCompressionJob(formGroup) as any;
 
         expect(compressionJob).toMatchObject(sampleWithNewData);
       });
@@ -76,7 +77,7 @@ describe('CompressionJob Form Service', () => {
       it('should return NewCompressionJob for empty CompressionJob initial value', () => {
         const formGroup = service.createCompressionJobFormGroup();
 
-        const compressionJob = service.getCompressionJob(formGroup);
+        const compressionJob = service.getCompressionJob(formGroup) as any;
 
         expect(compressionJob).toMatchObject({});
       });
@@ -84,7 +85,7 @@ describe('CompressionJob Form Service', () => {
       it('should return ICompressionJob', () => {
         const formGroup = service.createCompressionJobFormGroup(sampleWithRequiredData);
 
-        const compressionJob = service.getCompressionJob(formGroup);
+        const compressionJob = service.getCompressionJob(formGroup) as any;
 
         expect(compressionJob).toMatchObject(sampleWithRequiredData);
       });

@@ -1,8 +1,7 @@
 import dayjs from 'dayjs/esm';
-
-import { AlertStatus } from 'app/entities/enumerations/alert-status.model';
-import { Severity } from 'app/entities/enumerations/severity.model';
 import { IAlertRule } from 'app/entities/monitoringService/alert-rule/alert-rule.model';
+import { Severity } from 'app/entities/enumerations/severity.model';
+import { AlertStatus } from 'app/entities/enumerations/alert-status.model';
 
 export interface IAlert {
   id: number;

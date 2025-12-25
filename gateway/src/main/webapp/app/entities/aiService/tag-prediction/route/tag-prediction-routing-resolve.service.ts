@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { TagPredictionService } from '../service/tag-prediction.service';
 import { ITagPrediction } from '../tag-prediction.model';
+import { TagPredictionService } from '../service/tag-prediction.service';
 
 const tagPredictionResolve = (route: ActivatedRouteSnapshot): Observable<null | ITagPrediction> => {
   const id = route.params.id;

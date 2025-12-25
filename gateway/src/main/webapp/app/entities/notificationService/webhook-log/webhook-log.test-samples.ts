@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IWebhookLog = {
   subscriptionId: 16017,
   eventType: 'proselytise fooey',
   isSuccess: false,
-  sentDate: dayjs('2025-12-20T03:04'),
+  sentDate: dayjs('2025-12-24T22:03'),
 };
 
 export const sampleWithPartialData: IWebhookLog = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IWebhookLog = {
   responseBody: '../fake-data/blob/hipster.txt',
   responseTime: 11728,
   isSuccess: false,
-  sentDate: dayjs('2025-12-20T13:29'),
+  sentDate: dayjs('2025-12-25T08:28'),
 };
 
 export const sampleWithFullData: IWebhookLog = {
@@ -32,14 +32,14 @@ export const sampleWithFullData: IWebhookLog = {
   attemptNumber: 10104,
   isSuccess: false,
   errorMessage: '../fake-data/blob/hipster.txt',
-  sentDate: dayjs('2025-12-19T19:26'),
+  sentDate: dayjs('2025-12-24T14:25'),
 };
 
 export const sampleWithNewData: NewWebhookLog = {
   subscriptionId: 4750,
   eventType: 'huzzah opposite bloom',
   isSuccess: false,
-  sentDate: dayjs('2025-12-20T09:03'),
+  sentDate: dayjs('2025-12-25T04:02'),
   id: null,
 };
 

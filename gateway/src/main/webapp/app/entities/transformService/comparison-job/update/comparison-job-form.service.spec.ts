@@ -8,6 +8,7 @@ describe('ComparisonJob Form Service', () => {
   let service: ComparisonJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ComparisonJobFormService);
   });
 
@@ -60,7 +61,7 @@ describe('ComparisonJob Form Service', () => {
       it('should return NewComparisonJob for default ComparisonJob initial value', () => {
         const formGroup = service.createComparisonJobFormGroup(sampleWithNewData);
 
-        const comparisonJob = service.getComparisonJob(formGroup);
+        const comparisonJob = service.getComparisonJob(formGroup) as any;
 
         expect(comparisonJob).toMatchObject(sampleWithNewData);
       });
@@ -68,7 +69,7 @@ describe('ComparisonJob Form Service', () => {
       it('should return NewComparisonJob for empty ComparisonJob initial value', () => {
         const formGroup = service.createComparisonJobFormGroup();
 
-        const comparisonJob = service.getComparisonJob(formGroup);
+        const comparisonJob = service.getComparisonJob(formGroup) as any;
 
         expect(comparisonJob).toMatchObject({});
       });
@@ -76,7 +77,7 @@ describe('ComparisonJob Form Service', () => {
       it('should return IComparisonJob', () => {
         const formGroup = service.createComparisonJobFormGroup(sampleWithRequiredData);
 
-        const comparisonJob = service.getComparisonJob(formGroup);
+        const comparisonJob = service.getComparisonJob(formGroup) as any;
 
         expect(comparisonJob).toMatchObject(sampleWithRequiredData);
       });

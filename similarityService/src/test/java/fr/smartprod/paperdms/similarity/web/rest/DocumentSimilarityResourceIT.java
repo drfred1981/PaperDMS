@@ -72,7 +72,7 @@ class DocumentSimilarityResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -956,10 +956,10 @@ class DocumentSimilarityResourceIT {
         partialUpdatedDocumentSimilarity.setId(documentSimilarity.getId());
 
         partialUpdatedDocumentSimilarity
-            .documentId2(UPDATED_DOCUMENT_ID_2)
-            .algorithm(UPDATED_ALGORITHM)
             .computedDate(UPDATED_COMPUTED_DATE)
-            .isRelevant(UPDATED_IS_RELEVANT);
+            .isRelevant(UPDATED_IS_RELEVANT)
+            .reviewedBy(UPDATED_REVIEWED_BY)
+            .reviewedDate(UPDATED_REVIEWED_DATE);
 
         restDocumentSimilarityMockMvc
             .perform(

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IEmailImport } from '../email-import.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../email-import.test-samples';
@@ -102,7 +102,8 @@ describe('EmailImport Service', () => {
       it('should add a EmailImport to an empty array', () => {
         const emailImport: IEmailImport = sampleWithRequiredData;
         expectedResult = service.addEmailImportToCollectionIfMissing([], emailImport);
-        expect(expectedResult).toEqual([emailImport]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(emailImport);
       });
 
       it('should not add a EmailImport to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('EmailImport Service', () => {
         const emailImport: IEmailImport = sampleWithRequiredData;
         const emailImport2: IEmailImport = sampleWithPartialData;
         expectedResult = service.addEmailImportToCollectionIfMissing([], emailImport, emailImport2);
-        expect(expectedResult).toEqual([emailImport, emailImport2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(emailImport);
+        expect(expectedResult).toContain(emailImport2);
       });
 
       it('should accept null and undefined values', () => {
         const emailImport: IEmailImport = sampleWithRequiredData;
         expectedResult = service.addEmailImportToCollectionIfMissing([], null, emailImport, undefined);
-        expect(expectedResult).toEqual([emailImport]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(emailImport);
       });
 
       it('should return initial array if no EmailImport is added', () => {

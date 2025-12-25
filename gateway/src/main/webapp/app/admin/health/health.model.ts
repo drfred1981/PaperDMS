@@ -15,7 +15,7 @@ export type HealthKey =
   | 'elasticsearch'
   | 'db';
 
-export interface HealthModel {
+export interface Health {
   status: HealthStatus;
   components?: Partial<Record<HealthKey, HealthDetails>>;
 }

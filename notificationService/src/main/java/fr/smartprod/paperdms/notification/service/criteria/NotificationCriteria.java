@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.notification.service.criteria;
 import fr.smartprod.paperdms.notification.domain.enumeration.NotificationChannel;
 import fr.smartprod.paperdms.notification.domain.enumeration.NotificationPriority;
 import fr.smartprod.paperdms.notification.domain.enumeration.NotificationType;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -75,7 +74,6 @@ public class NotificationCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

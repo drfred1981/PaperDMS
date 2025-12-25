@@ -35,7 +35,7 @@ public class DashboardWidgetResource {
 
     private static final String ENTITY_NAME = "reportingServiceDashboardWidget";
 
-    @Value("${jhipster.clientApp.name:reportingService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DashboardWidgetService dashboardWidgetService;

@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { SimilarityJobService } from '../service/similarity-job.service';
 import { ISimilarityJob } from '../similarity-job.model';
+import { SimilarityJobService } from '../service/similarity-job.service';
 
 const similarityJobResolve = (route: ActivatedRouteSnapshot): Observable<null | ISimilarityJob> => {
   const id = route.params.id;

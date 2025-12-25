@@ -1,6 +1,5 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -24,7 +23,7 @@ export class UserManagementService {
   }
 
   find(login: string): Observable<IUser> {
-    return this.http.get<IUser>(`${this.resourceUrl}/${encodeURIComponent(login)}`);
+    return this.http.get<IUser>(`${this.resourceUrl}/${login}`);
   }
 
   query(req?: Pagination): Observable<HttpResponse<IUser[]>> {
@@ -33,7 +32,7 @@ export class UserManagementService {
   }
 
   delete(login: string): Observable<{}> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(login)}`);
+    return this.http.delete(`${this.resourceUrl}/${login}`);
   }
 
   authorities(): Observable<string[]> {

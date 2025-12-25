@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ManualChapterResolve from './route/manual-chapter-routing-resolve.service';
 
 const manualChapterRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/manual-chapter').then(m => m.ManualChapter),
+    loadComponent: () => import('./list/manual-chapter.component').then(m => m.ManualChapterComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const manualChapterRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/manual-chapter-detail').then(m => m.ManualChapterDetail),
+    loadComponent: () => import('./detail/manual-chapter-detail.component').then(m => m.ManualChapterDetailComponent),
     resolve: {
       manualChapter: ManualChapterResolve,
     },
@@ -24,7 +23,7 @@ const manualChapterRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/manual-chapter-update').then(m => m.ManualChapterUpdate),
+    loadComponent: () => import('./update/manual-chapter-update.component').then(m => m.ManualChapterUpdateComponent),
     resolve: {
       manualChapter: ManualChapterResolve,
     },
@@ -32,7 +31,7 @@ const manualChapterRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/manual-chapter-update').then(m => m.ManualChapterUpdate),
+    loadComponent: () => import('./update/manual-chapter-update.component').then(m => m.ManualChapterUpdateComponent),
     resolve: {
       manualChapter: ManualChapterResolve,
     },

@@ -8,6 +8,7 @@ describe('DocumentMetadata Form Service', () => {
   let service: DocumentMetadataFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentMetadataFormService);
   });
 
@@ -50,7 +51,7 @@ describe('DocumentMetadata Form Service', () => {
       it('should return NewDocumentMetadata for default DocumentMetadata initial value', () => {
         const formGroup = service.createDocumentMetadataFormGroup(sampleWithNewData);
 
-        const documentMetadata = service.getDocumentMetadata(formGroup);
+        const documentMetadata = service.getDocumentMetadata(formGroup) as any;
 
         expect(documentMetadata).toMatchObject(sampleWithNewData);
       });
@@ -58,7 +59,7 @@ describe('DocumentMetadata Form Service', () => {
       it('should return NewDocumentMetadata for empty DocumentMetadata initial value', () => {
         const formGroup = service.createDocumentMetadataFormGroup();
 
-        const documentMetadata = service.getDocumentMetadata(formGroup);
+        const documentMetadata = service.getDocumentMetadata(formGroup) as any;
 
         expect(documentMetadata).toMatchObject({});
       });
@@ -66,7 +67,7 @@ describe('DocumentMetadata Form Service', () => {
       it('should return IDocumentMetadata', () => {
         const formGroup = service.createDocumentMetadataFormGroup(sampleWithRequiredData);
 
-        const documentMetadata = service.getDocumentMetadata(formGroup);
+        const documentMetadata = service.getDocumentMetadata(formGroup) as any;
 
         expect(documentMetadata).toMatchObject(sampleWithRequiredData);
       });

@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IDocumentComment = {
   content: '../fake-data/blob/hipster.txt',
   isResolved: true,
   authorId: 'orchestrate agreeable co-producer',
-  createdDate: dayjs('2025-12-19T17:16'),
+  createdDate: dayjs('2025-12-24T12:15'),
 };
 
 export const sampleWithPartialData: IDocumentComment = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IDocumentComment = {
   pageNumber: 5441,
   isResolved: true,
   authorId: 'premier wear twist',
-  createdDate: dayjs('2025-12-20T15:20'),
+  createdDate: dayjs('2025-12-25T10:19'),
 };
 
 export const sampleWithFullData: IDocumentComment = {
@@ -28,7 +28,7 @@ export const sampleWithFullData: IDocumentComment = {
   pageNumber: 12977,
   isResolved: true,
   authorId: 'waterlogged',
-  createdDate: dayjs('2025-12-19T19:39'),
+  createdDate: dayjs('2025-12-24T14:38'),
 };
 
 export const sampleWithNewData: NewDocumentComment = {
@@ -36,7 +36,7 @@ export const sampleWithNewData: NewDocumentComment = {
   content: '../fake-data/blob/hipster.txt',
   isResolved: true,
   authorId: 'supposing',
-  createdDate: dayjs('2025-12-20T01:06'),
+  createdDate: dayjs('2025-12-24T20:05'),
   id: null,
 };
 

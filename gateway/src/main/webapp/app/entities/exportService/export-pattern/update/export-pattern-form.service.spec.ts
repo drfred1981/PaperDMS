@@ -8,6 +8,7 @@ describe('ExportPattern Form Service', () => {
   let service: ExportPatternFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ExportPatternFormService);
   });
 
@@ -62,7 +63,7 @@ describe('ExportPattern Form Service', () => {
       it('should return NewExportPattern for default ExportPattern initial value', () => {
         const formGroup = service.createExportPatternFormGroup(sampleWithNewData);
 
-        const exportPattern = service.getExportPattern(formGroup);
+        const exportPattern = service.getExportPattern(formGroup) as any;
 
         expect(exportPattern).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('ExportPattern Form Service', () => {
       it('should return NewExportPattern for empty ExportPattern initial value', () => {
         const formGroup = service.createExportPatternFormGroup();
 
-        const exportPattern = service.getExportPattern(formGroup);
+        const exportPattern = service.getExportPattern(formGroup) as any;
 
         expect(exportPattern).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('ExportPattern Form Service', () => {
       it('should return IExportPattern', () => {
         const formGroup = service.createExportPatternFormGroup(sampleWithRequiredData);
 
-        const exportPattern = service.getExportPattern(formGroup);
+        const exportPattern = service.getExportPattern(formGroup) as any;
 
         expect(exportPattern).toMatchObject(sampleWithRequiredData);
       });

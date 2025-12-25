@@ -75,7 +75,7 @@ public class InvoiceQueryService extends QueryService<Invoice> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Invoice> createSpecification(InvoiceCriteria criteria) {
-        Specification<Invoice> specification = Specification.unrestricted();
+        Specification<Invoice> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

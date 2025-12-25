@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentPermissionResolve from './route/document-permission-routing-resolve.service';
 
 const documentPermissionRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-permission').then(m => m.DocumentPermission),
+    loadComponent: () => import('./list/document-permission.component').then(m => m.DocumentPermissionComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentPermissionRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-permission-detail').then(m => m.DocumentPermissionDetail),
+    loadComponent: () => import('./detail/document-permission-detail.component').then(m => m.DocumentPermissionDetailComponent),
     resolve: {
       documentPermission: DocumentPermissionResolve,
     },
@@ -24,7 +23,7 @@ const documentPermissionRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-permission-update').then(m => m.DocumentPermissionUpdate),
+    loadComponent: () => import('./update/document-permission-update.component').then(m => m.DocumentPermissionUpdateComponent),
     resolve: {
       documentPermission: DocumentPermissionResolve,
     },
@@ -32,7 +31,7 @@ const documentPermissionRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-permission-update').then(m => m.DocumentPermissionUpdate),
+    loadComponent: () => import('./update/document-permission-update.component').then(m => m.DocumentPermissionUpdateComponent),
     resolve: {
       documentPermission: DocumentPermissionResolve,
     },

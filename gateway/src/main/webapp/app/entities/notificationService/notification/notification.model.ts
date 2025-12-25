@@ -1,9 +1,8 @@
 import dayjs from 'dayjs/esm';
-
-import { NotificationChannel } from 'app/entities/enumerations/notification-channel.model';
-import { NotificationPriority } from 'app/entities/enumerations/notification-priority.model';
-import { NotificationType } from 'app/entities/enumerations/notification-type.model';
 import { INotificationTemplate } from 'app/entities/notificationService/notification-template/notification-template.model';
+import { NotificationType } from 'app/entities/enumerations/notification-type.model';
+import { NotificationPriority } from 'app/entities/enumerations/notification-priority.model';
+import { NotificationChannel } from 'app/entities/enumerations/notification-channel.model';
 
 export interface INotification {
   id: number;

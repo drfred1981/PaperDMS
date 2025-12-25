@@ -1,6 +1,5 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -21,7 +20,7 @@ export class NotificationInterceptor implements HttpInterceptor {
             if (headerKey.toLowerCase().endsWith('app-alert')) {
               alert = event.headers.get(headerKey);
             } else if (headerKey.toLowerCase().endsWith('app-params')) {
-              alertParams = decodeURIComponent(event.headers.get(headerKey)!.replaceAll('+', ' '));
+              alertParams = decodeURIComponent(event.headers.get(headerKey)!.replace(/\+/g, ' '));
             }
           }
 

@@ -8,6 +8,7 @@ describe('ExportResult Form Service', () => {
   let service: ExportResultFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ExportResultFormService);
   });
 
@@ -62,7 +63,7 @@ describe('ExportResult Form Service', () => {
       it('should return NewExportResult for default ExportResult initial value', () => {
         const formGroup = service.createExportResultFormGroup(sampleWithNewData);
 
-        const exportResult = service.getExportResult(formGroup);
+        const exportResult = service.getExportResult(formGroup) as any;
 
         expect(exportResult).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('ExportResult Form Service', () => {
       it('should return NewExportResult for empty ExportResult initial value', () => {
         const formGroup = service.createExportResultFormGroup();
 
-        const exportResult = service.getExportResult(formGroup);
+        const exportResult = service.getExportResult(formGroup) as any;
 
         expect(exportResult).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('ExportResult Form Service', () => {
       it('should return IExportResult', () => {
         const formGroup = service.createExportResultFormGroup(sampleWithRequiredData);
 
-        const exportResult = service.getExportResult(formGroup);
+        const exportResult = service.getExportResult(formGroup) as any;
 
         expect(exportResult).toMatchObject(sampleWithRequiredData);
       });

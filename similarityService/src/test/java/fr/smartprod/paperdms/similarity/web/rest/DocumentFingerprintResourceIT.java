@@ -70,7 +70,7 @@ class DocumentFingerprintResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/document-fingerprints/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -422,7 +422,10 @@ class DocumentFingerprintResourceIT {
         DocumentFingerprint partialUpdatedDocumentFingerprint = new DocumentFingerprint();
         partialUpdatedDocumentFingerprint.setId(documentFingerprint.getId());
 
-        partialUpdatedDocumentFingerprint.documentId(UPDATED_DOCUMENT_ID).metadata(UPDATED_METADATA).lastUpdated(UPDATED_LAST_UPDATED);
+        partialUpdatedDocumentFingerprint
+            .fingerprint(UPDATED_FINGERPRINT)
+            .vectorEmbedding(UPDATED_VECTOR_EMBEDDING)
+            .metadata(UPDATED_METADATA);
 
         restDocumentFingerprintMockMvc
             .perform(

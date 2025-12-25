@@ -37,7 +37,7 @@ public class ScanJobResource {
 
     private static final String ENTITY_NAME = "scanServiceScanJob";
 
-    @Value("${jhipster.clientApp.name:scanService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ScanJobService scanJobService;

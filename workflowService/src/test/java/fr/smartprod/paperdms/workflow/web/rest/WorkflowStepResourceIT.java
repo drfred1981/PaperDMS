@@ -77,7 +77,7 @@ class WorkflowStepResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -478,12 +478,13 @@ class WorkflowStepResourceIT {
         partialUpdatedWorkflowStep.setId(workflowStep.getId());
 
         partialUpdatedWorkflowStep
-            .description(UPDATED_DESCRIPTION)
-            .assigneeType(UPDATED_ASSIGNEE_TYPE)
-            .assigneeId(UPDATED_ASSIGNEE_ID)
+            .stepNumber(UPDATED_STEP_NUMBER)
+            .stepType(UPDATED_STEP_TYPE)
+            .assigneeGroup(UPDATED_ASSIGNEE_GROUP)
             .dueInDays(UPDATED_DUE_IN_DAYS)
             .isRequired(UPDATED_IS_REQUIRED)
-            .canReject(UPDATED_CAN_REJECT);
+            .canReject(UPDATED_CAN_REJECT)
+            .configuration(UPDATED_CONFIGURATION);
 
         restWorkflowStepMockMvc
             .perform(

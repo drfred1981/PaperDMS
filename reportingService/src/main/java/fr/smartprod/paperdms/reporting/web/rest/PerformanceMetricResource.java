@@ -35,7 +35,7 @@ public class PerformanceMetricResource {
 
     private static final String ENTITY_NAME = "reportingServicePerformanceMetric";
 
-    @Value("${jhipster.clientApp.name:reportingService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final PerformanceMetricService performanceMetricService;

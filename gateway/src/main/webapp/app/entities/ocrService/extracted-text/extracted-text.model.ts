@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IOcrJob } from 'app/entities/ocrService/ocr-job/ocr-job.model';
 
 export interface IExtractedText {

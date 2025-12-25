@@ -10,7 +10,7 @@ export const sampleWithRequiredData: IArchiveJob = {
   encryptionEnabled: true,
   status: 'ARCHIVING',
   createdBy: 'finally hard-to-find',
-  createdDate: dayjs('2025-12-19T19:20'),
+  createdDate: dayjs('2025-12-24T14:19'),
 };
 
 export const sampleWithPartialData: IArchiveJob = {
@@ -25,9 +25,9 @@ export const sampleWithPartialData: IArchiveJob = {
   archiveSize: 26684,
   documentCount: 25324,
   status: 'COMPLETED',
-  endDate: dayjs('2025-12-20T14:26'),
+  endDate: dayjs('2025-12-25T09:25'),
   createdBy: 'phew',
-  createdDate: dayjs('2025-12-20T02:29'),
+  createdDate: dayjs('2025-12-24T21:28'),
 };
 
 export const sampleWithFullData: IArchiveJob = {
@@ -45,11 +45,11 @@ export const sampleWithFullData: IArchiveJob = {
   archiveSize: 26837,
   documentCount: 7382,
   status: 'COMPLETED',
-  startDate: dayjs('2025-12-19T23:34'),
-  endDate: dayjs('2025-12-19T22:11'),
+  startDate: dayjs('2025-12-24T18:33'),
+  endDate: dayjs('2025-12-24T17:10'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'sedately',
-  createdDate: dayjs('2025-12-20T01:49'),
+  createdDate: dayjs('2025-12-24T20:48'),
 };
 
 export const sampleWithNewData: NewArchiveJob = {
@@ -59,7 +59,7 @@ export const sampleWithNewData: NewArchiveJob = {
   encryptionEnabled: false,
   status: 'CANCELLED',
   createdBy: 'fireplace soulful',
-  createdDate: dayjs('2025-12-20T07:39'),
+  createdDate: dayjs('2025-12-25T02:38'),
   id: null,
 };
 

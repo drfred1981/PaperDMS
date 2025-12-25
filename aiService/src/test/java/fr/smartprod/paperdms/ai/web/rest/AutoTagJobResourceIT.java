@@ -92,7 +92,7 @@ class AutoTagJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1311,11 +1311,10 @@ class AutoTagJobResourceIT {
         partialUpdatedAutoTagJob.setId(autoTagJob.getId());
 
         partialUpdatedAutoTagJob
-            .documentSha256(UPDATED_DOCUMENT_SHA_256)
-            .languageConfidence(UPDATED_LANGUAGE_CONFIDENCE)
-            .status(UPDATED_STATUS)
+            .extractedText(UPDATED_EXTRACTED_TEXT)
+            .extractedTextSha256(UPDATED_EXTRACTED_TEXT_SHA_256)
             .modelVersion(UPDATED_MODEL_VERSION)
-            .errorMessage(UPDATED_ERROR_MESSAGE);
+            .confidence(UPDATED_CONFIDENCE);
 
         restAutoTagJobMockMvc
             .perform(

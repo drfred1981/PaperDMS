@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { SimilarityClusterService } from '../service/similarity-cluster.service';
 import { ISimilarityCluster } from '../similarity-cluster.model';
+import { SimilarityClusterService } from '../service/similarity-cluster.service';
 
 const similarityClusterResolve = (route: ActivatedRouteSnapshot): Observable<null | ISimilarityCluster> => {
   const id = route.params.id;

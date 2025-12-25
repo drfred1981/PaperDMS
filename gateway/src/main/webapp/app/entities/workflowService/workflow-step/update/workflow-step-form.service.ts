@@ -37,10 +37,10 @@ export type WorkflowStepFormGroup = FormGroup<WorkflowStepFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class WorkflowStepFormService {
-  createWorkflowStepFormGroup(workflowStep?: WorkflowStepFormGroupInput): WorkflowStepFormGroup {
+  createWorkflowStepFormGroup(workflowStep: WorkflowStepFormGroupInput = { id: null }): WorkflowStepFormGroup {
     const workflowStepRawValue = {
       ...this.getFormDefaults(),
-      ...(workflowStep ?? { id: null }),
+      ...workflowStep,
     };
     return new FormGroup<WorkflowStepFormGroupContent>({
       id: new FormControl(
@@ -88,10 +88,12 @@ export class WorkflowStepFormService {
 
   resetForm(form: WorkflowStepFormGroup, workflowStep: WorkflowStepFormGroupInput): void {
     const workflowStepRawValue = { ...this.getFormDefaults(), ...workflowStep };
-    form.reset({
-      ...workflowStepRawValue,
-      id: { value: workflowStepRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...workflowStepRawValue,
+        id: { value: workflowStepRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): WorkflowStepFormDefaults {

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISavedSearch, NewSavedSearch } from '../saved-search.model';
 
@@ -45,10 +44,10 @@ export type SavedSearchFormGroup = FormGroup<SavedSearchFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SavedSearchFormService {
-  createSavedSearchFormGroup(savedSearch?: SavedSearchFormGroupInput): SavedSearchFormGroup {
+  createSavedSearchFormGroup(savedSearch: SavedSearchFormGroupInput = { id: null }): SavedSearchFormGroup {
     const savedSearchRawValue = this.convertSavedSearchToSavedSearchRawValue({
       ...this.getFormDefaults(),
-      ...(savedSearch ?? { id: null }),
+      ...savedSearch,
     });
     return new FormGroup<SavedSearchFormGroupContent>({
       id: new FormControl(
@@ -86,10 +85,12 @@ export class SavedSearchFormService {
 
   resetForm(form: SavedSearchFormGroup, savedSearch: SavedSearchFormGroupInput): void {
     const savedSearchRawValue = this.convertSavedSearchToSavedSearchRawValue({ ...this.getFormDefaults(), ...savedSearch });
-    form.reset({
-      ...savedSearchRawValue,
-      id: { value: savedSearchRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...savedSearchRawValue,
+        id: { value: savedSearchRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SavedSearchFormDefaults {

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import CorrespondentResolve from './route/correspondent-routing-resolve.service';
 
 const correspondentRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/correspondent').then(m => m.Correspondent),
+    loadComponent: () => import('./list/correspondent.component').then(m => m.CorrespondentComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const correspondentRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/correspondent-detail').then(m => m.CorrespondentDetail),
+    loadComponent: () => import('./detail/correspondent-detail.component').then(m => m.CorrespondentDetailComponent),
     resolve: {
       correspondent: CorrespondentResolve,
     },
@@ -24,7 +23,7 @@ const correspondentRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/correspondent-update').then(m => m.CorrespondentUpdate),
+    loadComponent: () => import('./update/correspondent-update.component').then(m => m.CorrespondentUpdateComponent),
     resolve: {
       correspondent: CorrespondentResolve,
     },
@@ -32,7 +31,7 @@ const correspondentRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/correspondent-update').then(m => m.CorrespondentUpdate),
+    loadComponent: () => import('./update/correspondent-update.component').then(m => m.CorrespondentUpdateComponent),
     resolve: {
       correspondent: CorrespondentResolve,
     },

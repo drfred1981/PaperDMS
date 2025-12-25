@@ -1,6 +1,7 @@
 package fr.smartprod.paperdms.document.domain;
 
 import static fr.smartprod.paperdms.document.domain.DocumentServiceStatusTestSamples.*;
+import static fr.smartprod.paperdms.document.domain.DocumentTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import fr.smartprod.paperdms.document.web.rest.TestUtil;
@@ -20,5 +21,17 @@ class DocumentServiceStatusTest {
 
         documentServiceStatus2 = getDocumentServiceStatusSample2();
         assertThat(documentServiceStatus1).isNotEqualTo(documentServiceStatus2);
+    }
+
+    @Test
+    void documentTest() {
+        DocumentServiceStatus documentServiceStatus = getDocumentServiceStatusRandomSampleGenerator();
+        Document documentBack = getDocumentRandomSampleGenerator();
+
+        documentServiceStatus.setDocument(documentBack);
+        assertThat(documentServiceStatus.getDocument()).isEqualTo(documentBack);
+
+        documentServiceStatus.document(null);
+        assertThat(documentServiceStatus.getDocument()).isNull();
     }
 }

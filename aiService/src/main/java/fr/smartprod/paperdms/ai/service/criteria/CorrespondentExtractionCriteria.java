@@ -1,7 +1,6 @@
 package fr.smartprod.paperdms.ai.service.criteria;
 
 import fr.smartprod.paperdms.ai.domain.enumeration.AiJobStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +38,6 @@ public class CorrespondentExtractionCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IApprovalHistory = {
   documentId: 19862,
   workflowInstanceId: 14512,
   stepNumber: 12560,
-  actionDate: dayjs('2025-12-20T01:08'),
+  actionDate: dayjs('2025-12-24T20:07'),
   actionBy: 'inasmuch more',
 };
 
@@ -16,7 +16,7 @@ export const sampleWithPartialData: IApprovalHistory = {
   documentId: 27810,
   workflowInstanceId: 8753,
   stepNumber: 32237,
-  actionDate: dayjs('2025-12-20T07:44'),
+  actionDate: dayjs('2025-12-25T02:43'),
   actionBy: 'mainstream',
   previousAssignee: 'although nifty well-made',
   timeTaken: 670,
@@ -29,7 +29,7 @@ export const sampleWithFullData: IApprovalHistory = {
   stepNumber: 26251,
   action: 'REQUEST_CHANGES',
   comment: '../fake-data/blob/hipster.txt',
-  actionDate: dayjs('2025-12-20T05:22'),
+  actionDate: dayjs('2025-12-25T00:21'),
   actionBy: 'vamoose depute',
   previousAssignee: 'salty linseed',
   timeTaken: 32505,
@@ -39,7 +39,7 @@ export const sampleWithNewData: NewApprovalHistory = {
   documentId: 14867,
   workflowInstanceId: 21183,
   stepNumber: 21976,
-  actionDate: dayjs('2025-12-20T00:42'),
+  actionDate: dayjs('2025-12-24T19:41'),
   actionBy: 'sneak immediately',
   id: null,
 };

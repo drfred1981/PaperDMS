@@ -1,12 +1,11 @@
 import { Route } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
-import Settings from './settings';
+import SettingsComponent from './settings.component';
 
 const settingsRoute: Route = {
   path: 'settings',
-  component: Settings,
+  component: SettingsComponent,
   title: 'global.menu.account.settings',
   canActivate: [UserRouteAccessService],
 };

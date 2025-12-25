@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { ITagPrediction, NewTagPrediction } from '../tag-prediction.model';
 
 export type PartialUpdateTagPrediction = Partial<ITagPrediction> & Pick<ITagPrediction, 'id'>;
@@ -42,24 +42,20 @@ export class TagPredictionService {
   update(tagPrediction: ITagPrediction): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(tagPrediction);
     return this.http
-      .put<RestTagPrediction>(`${this.resourceUrl}/${encodeURIComponent(this.getTagPredictionIdentifier(tagPrediction))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestTagPrediction>(`${this.resourceUrl}/${this.getTagPredictionIdentifier(tagPrediction)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(tagPrediction: PartialUpdateTagPrediction): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(tagPrediction);
     return this.http
-      .patch<RestTagPrediction>(`${this.resourceUrl}/${encodeURIComponent(this.getTagPredictionIdentifier(tagPrediction))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestTagPrediction>(`${this.resourceUrl}/${this.getTagPredictionIdentifier(tagPrediction)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestTagPrediction>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestTagPrediction>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +67,7 @@ export class TagPredictionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getTagPredictionIdentifier(tagPrediction: Pick<ITagPrediction, 'id'>): number {

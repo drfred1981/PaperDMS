@@ -1,11 +1,10 @@
 {
   "annotations": {
-    "changelogDate": "20251220152514"
+    "changelogDate": "20251225102416"
   },
   "applications": ["gateway", "documentService"],
   "clientRootFolder": "documentService",
   "databaseType": "sql",
-  "documentation": "Document Service - 22 Entit�s (MODIFI�)\\nMODIFICATION: Ajout de DocumentServiceStatus pour tracker l'�tat par service",
   "dto": "mapstruct",
   "fields": [
     {
@@ -84,13 +83,6 @@
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
       "fieldValidateRulesMaxlength": "64"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "DocumentStatus",
-      "fieldTypeDocumentation": "PaperDMS - Toutes les �num�rations (MODIFI�)\\nFichier 2/20 - � inclure dans chaque fichier de service qui en a besoin\\nMODIFICATION: Ajout des statuts par service",
-      "fieldValidateRules": ["required"],
-      "fieldValues": "UPLOADING,UPLOADED,ACTIVE,ARCHIVED,DELETED,ERROR"
     },
     {
       "fieldName": "uploadDate",

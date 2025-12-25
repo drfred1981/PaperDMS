@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IBankStatement } from '../bank-statement.model';
@@ -105,7 +105,8 @@ describe('BankStatement Service', () => {
       it('should add a BankStatement to an empty array', () => {
         const bankStatement: IBankStatement = sampleWithRequiredData;
         expectedResult = service.addBankStatementToCollectionIfMissing([], bankStatement);
-        expect(expectedResult).toEqual([bankStatement]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(bankStatement);
       });
 
       it('should not add a BankStatement to an array that contains it', () => {
@@ -139,13 +140,16 @@ describe('BankStatement Service', () => {
         const bankStatement: IBankStatement = sampleWithRequiredData;
         const bankStatement2: IBankStatement = sampleWithPartialData;
         expectedResult = service.addBankStatementToCollectionIfMissing([], bankStatement, bankStatement2);
-        expect(expectedResult).toEqual([bankStatement, bankStatement2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(bankStatement);
+        expect(expectedResult).toContain(bankStatement2);
       });
 
       it('should accept null and undefined values', () => {
         const bankStatement: IBankStatement = sampleWithRequiredData;
         expectedResult = service.addBankStatementToCollectionIfMissing([], null, bankStatement, undefined);
-        expect(expectedResult).toEqual([bankStatement]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(bankStatement);
       });
 
       it('should return initial array if no BankStatement is added', () => {

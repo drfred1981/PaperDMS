@@ -36,7 +36,7 @@ public class DocumentProcessResource {
 
     private static final String ENTITY_NAME = "documentProcess";
 
-    @Value("${jhipster.clientApp.name:gateway}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentProcessService documentProcessService;

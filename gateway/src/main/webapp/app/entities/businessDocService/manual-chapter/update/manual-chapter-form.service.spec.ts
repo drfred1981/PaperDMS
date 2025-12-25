@@ -8,6 +8,7 @@ describe('ManualChapter Form Service', () => {
   let service: ManualChapterFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ManualChapterFormService);
   });
 
@@ -58,7 +59,7 @@ describe('ManualChapter Form Service', () => {
       it('should return NewManualChapter for default ManualChapter initial value', () => {
         const formGroup = service.createManualChapterFormGroup(sampleWithNewData);
 
-        const manualChapter = service.getManualChapter(formGroup);
+        const manualChapter = service.getManualChapter(formGroup) as any;
 
         expect(manualChapter).toMatchObject(sampleWithNewData);
       });
@@ -66,7 +67,7 @@ describe('ManualChapter Form Service', () => {
       it('should return NewManualChapter for empty ManualChapter initial value', () => {
         const formGroup = service.createManualChapterFormGroup();
 
-        const manualChapter = service.getManualChapter(formGroup);
+        const manualChapter = service.getManualChapter(formGroup) as any;
 
         expect(manualChapter).toMatchObject({});
       });
@@ -74,7 +75,7 @@ describe('ManualChapter Form Service', () => {
       it('should return IManualChapter', () => {
         const formGroup = service.createManualChapterFormGroup(sampleWithRequiredData);
 
-        const manualChapter = service.getManualChapter(formGroup);
+        const manualChapter = service.getManualChapter(formGroup) as any;
 
         expect(manualChapter).toMatchObject(sampleWithRequiredData);
       });

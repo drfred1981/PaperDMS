@@ -10,10 +10,10 @@ export const sampleWithRequiredData: IContract = {
   title: 'an',
   partyA: 'mosh',
   partyB: 'thoughtfully glossy',
-  startDate: dayjs('2025-12-19'),
+  startDate: dayjs('2025-12-24'),
   autoRenew: true,
   status: 'DRAFT',
-  createdDate: dayjs('2025-12-20T12:04'),
+  createdDate: dayjs('2025-12-25T07:03'),
 };
 
 export const sampleWithPartialData: IContract = {
@@ -24,11 +24,11 @@ export const sampleWithPartialData: IContract = {
   title: 'including or',
   partyA: 'excepting and once',
   partyB: 'whose',
-  startDate: dayjs('2025-12-20'),
+  startDate: dayjs('2025-12-25'),
   autoRenew: true,
   currency: 'ouc',
   status: 'ARCHIVED',
-  createdDate: dayjs('2025-12-20T15:23'),
+  createdDate: dayjs('2025-12-25T10:22'),
 };
 
 export const sampleWithFullData: IContract = {
@@ -39,13 +39,13 @@ export const sampleWithFullData: IContract = {
   title: 'smug before',
   partyA: 'functional',
   partyB: 'corral',
-  startDate: dayjs('2025-12-19'),
-  endDate: dayjs('2025-12-20'),
+  startDate: dayjs('2025-12-24'),
+  endDate: dayjs('2025-12-25'),
   autoRenew: false,
   contractValue: 29597.6,
   currency: 'gol',
   status: 'DRAFT',
-  createdDate: dayjs('2025-12-20T02:38'),
+  createdDate: dayjs('2025-12-24T21:37'),
 };
 
 export const sampleWithNewData: NewContract = {
@@ -55,10 +55,10 @@ export const sampleWithNewData: NewContract = {
   title: 'bad hospitalization limited',
   partyA: 'meanwhile zowie pish',
   partyB: 'braid yowza regarding',
-  startDate: dayjs('2025-12-20'),
+  startDate: dayjs('2025-12-25'),
   autoRenew: false,
   status: 'RENEWED',
-  createdDate: dayjs('2025-12-20T01:54'),
+  createdDate: dayjs('2025-12-24T20:53'),
   id: null,
 };
 

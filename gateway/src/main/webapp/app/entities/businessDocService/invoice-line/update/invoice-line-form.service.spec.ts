@@ -8,6 +8,7 @@ describe('InvoiceLine Form Service', () => {
   let service: InvoiceLineFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(InvoiceLineFormService);
   });
 
@@ -54,7 +55,7 @@ describe('InvoiceLine Form Service', () => {
       it('should return NewInvoiceLine for default InvoiceLine initial value', () => {
         const formGroup = service.createInvoiceLineFormGroup(sampleWithNewData);
 
-        const invoiceLine = service.getInvoiceLine(formGroup);
+        const invoiceLine = service.getInvoiceLine(formGroup) as any;
 
         expect(invoiceLine).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('InvoiceLine Form Service', () => {
       it('should return NewInvoiceLine for empty InvoiceLine initial value', () => {
         const formGroup = service.createInvoiceLineFormGroup();
 
-        const invoiceLine = service.getInvoiceLine(formGroup);
+        const invoiceLine = service.getInvoiceLine(formGroup) as any;
 
         expect(invoiceLine).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('InvoiceLine Form Service', () => {
       it('should return IInvoiceLine', () => {
         const formGroup = service.createInvoiceLineFormGroup(sampleWithRequiredData);
 
-        const invoiceLine = service.getInvoiceLine(formGroup);
+        const invoiceLine = service.getInvoiceLine(formGroup) as any;
 
         expect(invoiceLine).toMatchObject(sampleWithRequiredData);
       });

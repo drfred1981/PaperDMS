@@ -125,7 +125,7 @@ class OcrJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -2034,21 +2034,18 @@ class OcrJobResourceIT {
         partialUpdatedOcrJob.setId(ocrJob.getId());
 
         partialUpdatedOcrJob
-            .status(UPDATED_STATUS)
             .documentId(UPDATED_DOCUMENT_ID)
             .documentSha256(UPDATED_DOCUMENT_SHA_256)
+            .requestedLanguage(UPDATED_REQUESTED_LANGUAGE)
+            .languageConfidence(UPDATED_LANGUAGE_CONFIDENCE)
             .ocrEngine(UPDATED_OCR_ENGINE)
-            .aiProvider(UPDATED_AI_PROVIDER)
-            .aiModel(UPDATED_AI_MODEL)
+            .tikaEndpoint(UPDATED_TIKA_ENDPOINT)
             .resultCacheKey(UPDATED_RESULT_CACHE_KEY)
-            .isCached(UPDATED_IS_CACHED)
-            .startDate(UPDATED_START_DATE)
-            .errorMessage(UPDATED_ERROR_MESSAGE)
+            .endDate(UPDATED_END_DATE)
             .pageCount(UPDATED_PAGE_COUNT)
+            .progress(UPDATED_PROGRESS)
             .priority(UPDATED_PRIORITY)
-            .processingTime(UPDATED_PROCESSING_TIME)
             .costEstimate(UPDATED_COST_ESTIMATE)
-            .createdDate(UPDATED_CREATED_DATE)
             .createdBy(UPDATED_CREATED_BY);
 
         restOcrJobMockMvc

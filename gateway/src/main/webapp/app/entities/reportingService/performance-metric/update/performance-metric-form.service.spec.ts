@@ -8,6 +8,7 @@ describe('PerformanceMetric Form Service', () => {
   let service: PerformanceMetricFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(PerformanceMetricFormService);
   });
 
@@ -50,7 +51,7 @@ describe('PerformanceMetric Form Service', () => {
       it('should return NewPerformanceMetric for default PerformanceMetric initial value', () => {
         const formGroup = service.createPerformanceMetricFormGroup(sampleWithNewData);
 
-        const performanceMetric = service.getPerformanceMetric(formGroup);
+        const performanceMetric = service.getPerformanceMetric(formGroup) as any;
 
         expect(performanceMetric).toMatchObject(sampleWithNewData);
       });
@@ -58,7 +59,7 @@ describe('PerformanceMetric Form Service', () => {
       it('should return NewPerformanceMetric for empty PerformanceMetric initial value', () => {
         const formGroup = service.createPerformanceMetricFormGroup();
 
-        const performanceMetric = service.getPerformanceMetric(formGroup);
+        const performanceMetric = service.getPerformanceMetric(formGroup) as any;
 
         expect(performanceMetric).toMatchObject({});
       });
@@ -66,7 +67,7 @@ describe('PerformanceMetric Form Service', () => {
       it('should return IPerformanceMetric', () => {
         const formGroup = service.createPerformanceMetricFormGroup(sampleWithRequiredData);
 
-        const performanceMetric = service.getPerformanceMetric(formGroup);
+        const performanceMetric = service.getPerformanceMetric(formGroup) as any;
 
         expect(performanceMetric).toMatchObject(sampleWithRequiredData);
       });

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IServiceStatus, NewServiceStatus } from '../service-status.model';
 
@@ -46,10 +45,10 @@ export type ServiceStatusFormGroup = FormGroup<ServiceStatusFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ServiceStatusFormService {
-  createServiceStatusFormGroup(serviceStatus?: ServiceStatusFormGroupInput): ServiceStatusFormGroup {
+  createServiceStatusFormGroup(serviceStatus: ServiceStatusFormGroupInput = { id: null }): ServiceStatusFormGroup {
     const serviceStatusRawValue = this.convertServiceStatusToServiceStatusRawValue({
       ...this.getFormDefaults(),
-      ...(serviceStatus ?? { id: null }),
+      ...serviceStatus,
     });
     return new FormGroup<ServiceStatusFormGroupContent>({
       id: new FormControl(
@@ -88,10 +87,12 @@ export class ServiceStatusFormService {
 
   resetForm(form: ServiceStatusFormGroup, serviceStatus: ServiceStatusFormGroupInput): void {
     const serviceStatusRawValue = this.convertServiceStatusToServiceStatusRawValue({ ...this.getFormDefaults(), ...serviceStatus });
-    form.reset({
-      ...serviceStatusRawValue,
-      id: { value: serviceStatusRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...serviceStatusRawValue,
+        id: { value: serviceStatusRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ServiceStatusFormDefaults {

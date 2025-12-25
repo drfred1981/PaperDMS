@@ -59,7 +59,7 @@ class DocumentTemplateResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -446,7 +446,11 @@ class DocumentTemplateResourceIT {
         DocumentTemplate partialUpdatedDocumentTemplate = new DocumentTemplate();
         partialUpdatedDocumentTemplate.setId(documentTemplate.getId());
 
-        partialUpdatedDocumentTemplate.createdBy(UPDATED_CREATED_BY).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedDocumentTemplate
+            .templateS3Key(UPDATED_TEMPLATE_S_3_KEY)
+            .isActive(UPDATED_IS_ACTIVE)
+            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restDocumentTemplateMockMvc
             .perform(

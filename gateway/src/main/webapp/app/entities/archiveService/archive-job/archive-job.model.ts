@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { ArchiveFormat } from 'app/entities/enumerations/archive-format.model';
 import { ArchiveStatus } from 'app/entities/enumerations/archive-status.model';
 

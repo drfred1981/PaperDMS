@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { SystemHealthService } from '../service/system-health.service';
 import { ISystemHealth } from '../system-health.model';
+import { SystemHealthService } from '../service/system-health.service';
 
 const systemHealthResolve = (route: ActivatedRouteSnapshot): Observable<null | ISystemHealth> => {
   const id = route.params.id;

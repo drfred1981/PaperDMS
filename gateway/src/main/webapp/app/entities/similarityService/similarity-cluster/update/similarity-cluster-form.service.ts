@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISimilarityCluster, NewSimilarityCluster } from '../similarity-cluster.model';
 
@@ -47,10 +46,10 @@ export type SimilarityClusterFormGroup = FormGroup<SimilarityClusterFormGroupCon
 
 @Injectable({ providedIn: 'root' })
 export class SimilarityClusterFormService {
-  createSimilarityClusterFormGroup(similarityCluster?: SimilarityClusterFormGroupInput): SimilarityClusterFormGroup {
+  createSimilarityClusterFormGroup(similarityCluster: SimilarityClusterFormGroupInput = { id: null }): SimilarityClusterFormGroup {
     const similarityClusterRawValue = this.convertSimilarityClusterToSimilarityClusterRawValue({
       ...this.getFormDefaults(),
-      ...(similarityCluster ?? { id: null }),
+      ...similarityCluster,
     });
     return new FormGroup<SimilarityClusterFormGroupContent>({
       id: new FormControl(
@@ -88,10 +87,12 @@ export class SimilarityClusterFormService {
       ...this.getFormDefaults(),
       ...similarityCluster,
     });
-    form.reset({
-      ...similarityClusterRawValue,
-      id: { value: similarityClusterRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...similarityClusterRawValue,
+        id: { value: similarityClusterRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SimilarityClusterFormDefaults {

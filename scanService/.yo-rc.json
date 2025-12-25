@@ -10,10 +10,10 @@
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
     "entities": ["ScanJob", "ScanBatch", "ScannerConfiguration", "ScannedPage"],
-    "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "MTkwNTUxYjA3YmRlYzkxNjIzZTM4YTQwYzhlNzVjNjA1NGRhODg0OGZlYmU3ZGZkNjE3ZWY0OWQ5YjcwYjhhYWYwZWI2ZjdjNmVlZjBmMjlmY2MxZDQ2ZGI2MzQ4N2ZkN2YwNGY2MDk3MjJjMzk4OGVlZjc1MzIxMmU2YmRkMjk=",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "Y2U1NTdiZTZkMjJmZTFmNjNhMjYxZDhmMThhMTQ2ZmEyOTU1OTNjOWQ0Mzc3NTliZjcwY2UyM2IwMDlmNTM1YjViYjEzMGY2MDQzYTkwYTIxYzYxYTQ1OTQyYzQwZTc2ZmQyOTcxNmYzYTk3NmI2MTUyYTBlYjZjOGI0MTQ2OTA=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1766244494000,
+    "lastLiquibaseTimestamp": 1766658436000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -23,6 +23,7 @@
     "serviceDiscoveryType": "consul",
     "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

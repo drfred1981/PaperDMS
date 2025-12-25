@@ -1,10 +1,9 @@
 import dayjs from 'dayjs/esm';
-
+import { IScannerConfiguration } from 'app/entities/scanService/scanner-configuration/scanner-configuration.model';
+import { IScanBatch } from 'app/entities/scanService/scan-batch/scan-batch.model';
+import { ScanStatus } from 'app/entities/enumerations/scan-status.model';
 import { ColorMode } from 'app/entities/enumerations/color-mode.model';
 import { ScanFormat } from 'app/entities/enumerations/scan-format.model';
-import { ScanStatus } from 'app/entities/enumerations/scan-status.model';
-import { IScanBatch } from 'app/entities/scanService/scan-batch/scan-batch.model';
-import { IScannerConfiguration } from 'app/entities/scanService/scanner-configuration/scanner-configuration.model';
 
 export interface IScanJob {
   id: number;

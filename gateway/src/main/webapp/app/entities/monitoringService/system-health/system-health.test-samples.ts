@@ -6,7 +6,7 @@ export const sampleWithRequiredData: ISystemHealth = {
   id: 17088,
   serviceName: 'yawningly hype',
   status: 'UNKNOWN',
-  lastCheck: dayjs('2025-12-20T03:12'),
+  lastCheck: dayjs('2025-12-24T22:11'),
 };
 
 export const sampleWithPartialData: ISystemHealth = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: ISystemHealth = {
   cpuUsage: 8541.87,
   memoryUsage: 31075.35,
   errorRate: 8700.91,
-  lastCheck: dayjs('2025-12-19T23:24'),
+  lastCheck: dayjs('2025-12-24T18:23'),
 };
 
 export const sampleWithFullData: ISystemHealth = {
@@ -30,13 +30,13 @@ export const sampleWithFullData: ISystemHealth = {
   cpuUsage: 9117.49,
   memoryUsage: 7873.04,
   errorRate: 9881.82,
-  lastCheck: dayjs('2025-12-20T06:46'),
+  lastCheck: dayjs('2025-12-25T01:45'),
 };
 
 export const sampleWithNewData: NewSystemHealth = {
   serviceName: 'although unkempt',
   status: 'HEALTHY',
-  lastCheck: dayjs('2025-12-20T10:56'),
+  lastCheck: dayjs('2025-12-25T05:55'),
   id: null,
 };
 

@@ -56,7 +56,7 @@ class DocumentProcessResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/document-processes/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -374,7 +374,7 @@ class DocumentProcessResourceIT {
         DocumentProcess partialUpdatedDocumentProcess = new DocumentProcess();
         partialUpdatedDocumentProcess.setId(documentProcess.getId());
 
-        partialUpdatedDocumentProcess.status(UPDATED_STATUS);
+        partialUpdatedDocumentProcess.status(UPDATED_STATUS).documentSha256(UPDATED_DOCUMENT_SHA_256);
 
         restDocumentProcessMockMvc
             .perform(

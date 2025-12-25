@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
 
-import Register from './register';
+import RegisterComponent from './register.component';
 
 const registerRoute: Route = {
   path: 'register',
-  component: Register,
+  component: RegisterComponent,
   title: 'register.title',
 };
 

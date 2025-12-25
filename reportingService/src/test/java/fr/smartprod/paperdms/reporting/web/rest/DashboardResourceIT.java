@@ -65,7 +65,7 @@ class DashboardResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -736,10 +736,9 @@ class DashboardResourceIT {
         partialUpdatedDashboard.setId(dashboard.getId());
 
         partialUpdatedDashboard
-            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
             .isPublic(UPDATED_IS_PUBLIC)
-            .layout(UPDATED_LAYOUT)
-            .refreshInterval(UPDATED_REFRESH_INTERVAL)
+            .isDefault(UPDATED_IS_DEFAULT)
             .createdDate(UPDATED_CREATED_DATE);
 
         restDashboardMockMvc

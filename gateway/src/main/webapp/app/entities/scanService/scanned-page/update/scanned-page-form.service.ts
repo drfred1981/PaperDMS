@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IScannedPage, NewScannedPage } from '../scanned-page.model';
 
@@ -50,10 +49,10 @@ export type ScannedPageFormGroup = FormGroup<ScannedPageFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ScannedPageFormService {
-  createScannedPageFormGroup(scannedPage?: ScannedPageFormGroupInput): ScannedPageFormGroup {
+  createScannedPageFormGroup(scannedPage: ScannedPageFormGroupInput = { id: null }): ScannedPageFormGroup {
     const scannedPageRawValue = this.convertScannedPageToScannedPageRawValue({
       ...this.getFormDefaults(),
-      ...(scannedPage ?? { id: null }),
+      ...scannedPage,
     });
     return new FormGroup<ScannedPageFormGroupContent>({
       id: new FormControl(
@@ -98,10 +97,12 @@ export class ScannedPageFormService {
 
   resetForm(form: ScannedPageFormGroup, scannedPage: ScannedPageFormGroupInput): void {
     const scannedPageRawValue = this.convertScannedPageToScannedPageRawValue({ ...this.getFormDefaults(), ...scannedPage });
-    form.reset({
-      ...scannedPageRawValue,
-      id: { value: scannedPageRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...scannedPageRawValue,
+        id: { value: scannedPageRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ScannedPageFormDefaults {

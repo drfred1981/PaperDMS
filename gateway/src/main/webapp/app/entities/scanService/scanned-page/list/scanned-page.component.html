@@ -1,0 +1,196 @@
+<div>
+  <h2 id="page-heading" data-cy="ScannedPageHeading">
+    <span jhiTranslate="gatewayApp.scanServiceScannedPage.home.title">Scanned Pages</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.scanServiceScannedPage.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-scanned-page"
+        [routerLink]="['/scanned-page/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.scanServiceScannedPage.home.createLabel">Create a new Scanned Page</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (scannedPages().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.scanServiceScannedPage.home.notFound">No Scanned Pages found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="scanJobId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.scanJobId">Scan Job Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.pageNumber">Page Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.sha256">Sha 256</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.s3Key">S 3 Key</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3PreviewKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.s3PreviewKey">S 3 Preview Key</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fileSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.fileSize">File Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="width">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.width">Width</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="height">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.height">Height</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dpi">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.dpi">Dpi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.documentId">Document Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="scannedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.scannedDate">Scanned Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="scanJob.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannedPage.scanJob">Scan Job</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (scannedPage of scannedPages(); track trackId(scannedPage)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/scanned-page', scannedPage.id, 'view']">{{ scannedPage.id }}</a>
+              </td>
+              <td>{{ scannedPage.scanJobId }}</td>
+              <td>{{ scannedPage.pageNumber }}</td>
+              <td>{{ scannedPage.sha256 }}</td>
+              <td>{{ scannedPage.s3Key }}</td>
+              <td>{{ scannedPage.s3PreviewKey }}</td>
+              <td>{{ scannedPage.fileSize }}</td>
+              <td>{{ scannedPage.width }}</td>
+              <td>{{ scannedPage.height }}</td>
+              <td>{{ scannedPage.dpi }}</td>
+              <td>{{ scannedPage.documentId }}</td>
+              <td>{{ scannedPage.scannedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (scannedPage.scanJob) {
+                  <div>
+                    <a [routerLink]="['/scan-job', scannedPage.scanJob.id, 'view']">{{ scannedPage.scanJob.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/scanned-page', scannedPage.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/scanned-page', scannedPage.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(scannedPage)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (scannedPages().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import TagResolve from './route/tag-routing-resolve.service';
 
 const tagRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/tag').then(m => m.Tag),
+    loadComponent: () => import('./list/tag.component').then(m => m.TagComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const tagRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/tag-detail').then(m => m.TagDetail),
+    loadComponent: () => import('./detail/tag-detail.component').then(m => m.TagDetailComponent),
     resolve: {
       tag: TagResolve,
     },
@@ -24,7 +23,7 @@ const tagRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/tag-update').then(m => m.TagUpdate),
+    loadComponent: () => import('./update/tag-update.component').then(m => m.TagUpdateComponent),
     resolve: {
       tag: TagResolve,
     },
@@ -32,7 +31,7 @@ const tagRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/tag-update').then(m => m.TagUpdate),
+    loadComponent: () => import('./update/tag-update.component').then(m => m.TagUpdateComponent),
     resolve: {
       tag: TagResolve,
     },

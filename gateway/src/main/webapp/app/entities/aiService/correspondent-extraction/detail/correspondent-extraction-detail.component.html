@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (correspondentExtraction(); as correspondentExtractionRef) {
+      <div>
+        <h2 data-cy="correspondentExtractionDetailsHeading">
+          <span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.detail.title">Correspondent Extraction</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.extractedText">Extracted Text</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.extractedText }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.extractedTextSha256">Extracted Text Sha 256</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.extractedTextSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.detectedLanguage">Detected Language</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.detectedLanguage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.languageConfidence">Language Confidence</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.languageConfidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AiJobStatus.' + (correspondentExtractionRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                IN_PROGRESS: 'IN_PROGRESS',
+                COMPLETED: 'COMPLETED',
+                FAILED: 'FAILED',
+                CANCELLED: 'CANCELLED',
+              }[correspondentExtractionRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.resultCacheKey">Result Cache Key</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.resultCacheKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.isCached">Is Cached</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.isCached }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.resultS3Key">Result S 3 Key</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.resultS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.sendersCount">Senders Count</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.sendersCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.recipientsCount">Recipients Count</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.recipientsCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceCorrespondentExtraction.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ correspondentExtractionRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/correspondent-extraction', correspondentExtractionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

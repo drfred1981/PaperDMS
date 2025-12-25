@@ -8,6 +8,7 @@ describe('PermissionGroup Form Service', () => {
   let service: PermissionGroupFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(PermissionGroupFormService);
   });
 
@@ -48,7 +49,7 @@ describe('PermissionGroup Form Service', () => {
       it('should return NewPermissionGroup for default PermissionGroup initial value', () => {
         const formGroup = service.createPermissionGroupFormGroup(sampleWithNewData);
 
-        const permissionGroup = service.getPermissionGroup(formGroup);
+        const permissionGroup = service.getPermissionGroup(formGroup) as any;
 
         expect(permissionGroup).toMatchObject(sampleWithNewData);
       });
@@ -56,7 +57,7 @@ describe('PermissionGroup Form Service', () => {
       it('should return NewPermissionGroup for empty PermissionGroup initial value', () => {
         const formGroup = service.createPermissionGroupFormGroup();
 
-        const permissionGroup = service.getPermissionGroup(formGroup);
+        const permissionGroup = service.getPermissionGroup(formGroup) as any;
 
         expect(permissionGroup).toMatchObject({});
       });
@@ -64,7 +65,7 @@ describe('PermissionGroup Form Service', () => {
       it('should return IPermissionGroup', () => {
         const formGroup = service.createPermissionGroupFormGroup(sampleWithRequiredData);
 
-        const permissionGroup = service.getPermissionGroup(formGroup);
+        const permissionGroup = service.getPermissionGroup(formGroup) as any;
 
         expect(permissionGroup).toMatchObject(sampleWithRequiredData);
       });

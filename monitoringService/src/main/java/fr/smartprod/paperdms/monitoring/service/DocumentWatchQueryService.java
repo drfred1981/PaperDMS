@@ -67,7 +67,7 @@ public class DocumentWatchQueryService extends QueryService<DocumentWatch> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<DocumentWatch> createSpecification(DocumentWatchCriteria criteria) {
-        Specification<DocumentWatch> specification = Specification.unrestricted();
+        Specification<DocumentWatch> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

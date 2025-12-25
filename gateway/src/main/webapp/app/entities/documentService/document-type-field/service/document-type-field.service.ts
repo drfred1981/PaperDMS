@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentTypeField, NewDocumentTypeField } from '../document-type-field.model';
 
 export type PartialUpdateDocumentTypeField = Partial<IDocumentTypeField> & Pick<IDocumentTypeField, 'id'>;
@@ -41,28 +41,24 @@ export class DocumentTypeFieldService {
   update(documentTypeField: IDocumentTypeField): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentTypeField);
     return this.http
-      .put<RestDocumentTypeField>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentTypeFieldIdentifier(documentTypeField))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestDocumentTypeField>(`${this.resourceUrl}/${this.getDocumentTypeFieldIdentifier(documentTypeField)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentTypeField: PartialUpdateDocumentTypeField): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentTypeField);
     return this.http
-      .patch<RestDocumentTypeField>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentTypeFieldIdentifier(documentTypeField))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentTypeField>(`${this.resourceUrl}/${this.getDocumentTypeFieldIdentifier(documentTypeField)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentTypeField>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentTypeField>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -74,7 +70,7 @@ export class DocumentTypeFieldService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentTypeFieldIdentifier(documentTypeField: Pick<IDocumentTypeField, 'id'>): number {

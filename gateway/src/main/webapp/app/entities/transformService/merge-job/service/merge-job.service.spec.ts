@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IMergeJob } from '../merge-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../merge-job.test-samples';
@@ -103,7 +103,8 @@ describe('MergeJob Service', () => {
       it('should add a MergeJob to an empty array', () => {
         const mergeJob: IMergeJob = sampleWithRequiredData;
         expectedResult = service.addMergeJobToCollectionIfMissing([], mergeJob);
-        expect(expectedResult).toEqual([mergeJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(mergeJob);
       });
 
       it('should not add a MergeJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('MergeJob Service', () => {
         const mergeJob: IMergeJob = sampleWithRequiredData;
         const mergeJob2: IMergeJob = sampleWithPartialData;
         expectedResult = service.addMergeJobToCollectionIfMissing([], mergeJob, mergeJob2);
-        expect(expectedResult).toEqual([mergeJob, mergeJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(mergeJob);
+        expect(expectedResult).toContain(mergeJob2);
       });
 
       it('should accept null and undefined values', () => {
         const mergeJob: IMergeJob = sampleWithRequiredData;
         expectedResult = service.addMergeJobToCollectionIfMissing([], null, mergeJob, undefined);
-        expect(expectedResult).toEqual([mergeJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(mergeJob);
       });
 
       it('should return initial array if no MergeJob is added', () => {

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IAlertRule } from '../alert-rule.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../alert-rule.test-samples';
@@ -102,7 +102,8 @@ describe('AlertRule Service', () => {
       it('should add a AlertRule to an empty array', () => {
         const alertRule: IAlertRule = sampleWithRequiredData;
         expectedResult = service.addAlertRuleToCollectionIfMissing([], alertRule);
-        expect(expectedResult).toEqual([alertRule]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(alertRule);
       });
 
       it('should not add a AlertRule to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('AlertRule Service', () => {
         const alertRule: IAlertRule = sampleWithRequiredData;
         const alertRule2: IAlertRule = sampleWithPartialData;
         expectedResult = service.addAlertRuleToCollectionIfMissing([], alertRule, alertRule2);
-        expect(expectedResult).toEqual([alertRule, alertRule2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(alertRule);
+        expect(expectedResult).toContain(alertRule2);
       });
 
       it('should accept null and undefined values', () => {
         const alertRule: IAlertRule = sampleWithRequiredData;
         expectedResult = service.addAlertRuleToCollectionIfMissing([], null, alertRule, undefined);
-        expect(expectedResult).toEqual([alertRule]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(alertRule);
       });
 
       it('should return initial array if no AlertRule is added', () => {

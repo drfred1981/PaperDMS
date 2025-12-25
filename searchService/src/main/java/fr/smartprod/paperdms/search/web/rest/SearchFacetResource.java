@@ -35,7 +35,7 @@ public class SearchFacetResource {
 
     private static final String ENTITY_NAME = "searchServiceSearchFacet";
 
-    @Value("${jhipster.clientApp.name:searchService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SearchFacetService searchFacetService;

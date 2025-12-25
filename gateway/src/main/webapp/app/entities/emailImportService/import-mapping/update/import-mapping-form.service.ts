@@ -33,10 +33,10 @@ export type ImportMappingFormGroup = FormGroup<ImportMappingFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ImportMappingFormService {
-  createImportMappingFormGroup(importMapping?: ImportMappingFormGroupInput): ImportMappingFormGroup {
+  createImportMappingFormGroup(importMapping: ImportMappingFormGroupInput = { id: null }): ImportMappingFormGroup {
     const importMappingRawValue = {
       ...this.getFormDefaults(),
-      ...(importMapping ?? { id: null }),
+      ...importMapping,
     };
     return new FormGroup<ImportMappingFormGroupContent>({
       id: new FormControl(
@@ -78,10 +78,12 @@ export class ImportMappingFormService {
 
   resetForm(form: ImportMappingFormGroup, importMapping: ImportMappingFormGroupInput): void {
     const importMappingRawValue = { ...this.getFormDefaults(), ...importMapping };
-    form.reset({
-      ...importMappingRawValue,
-      id: { value: importMappingRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...importMappingRawValue,
+        id: { value: importMappingRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ImportMappingFormDefaults {

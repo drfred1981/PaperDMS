@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { ComparisonType } from 'app/entities/enumerations/comparison-type.model';
 import { TransformStatus } from 'app/entities/enumerations/transform-status.model';
 

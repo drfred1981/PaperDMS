@@ -95,7 +95,7 @@ class ContractResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/contracts/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1397,13 +1397,12 @@ class ContractResourceIT {
         partialUpdatedContract.setId(contract.getId());
 
         partialUpdatedContract
-            .contractNumber(UPDATED_CONTRACT_NUMBER)
+            .documentId(UPDATED_DOCUMENT_ID)
+            .contractType(UPDATED_CONTRACT_TYPE)
             .partyA(UPDATED_PARTY_A)
+            .endDate(UPDATED_END_DATE)
             .autoRenew(UPDATED_AUTO_RENEW)
-            .contractValue(UPDATED_CONTRACT_VALUE)
-            .currency(UPDATED_CURRENCY)
-            .status(UPDATED_STATUS)
-            .createdDate(UPDATED_CREATED_DATE);
+            .currency(UPDATED_CURRENCY);
 
         restContractMockMvc
             .perform(

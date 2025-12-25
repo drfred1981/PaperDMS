@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IArchiveDocument = {
   archiveJobId: 3454,
   documentId: 20759,
   documentSha256: 'rudely until',
-  addedDate: dayjs('2025-12-19T19:06'),
+  addedDate: dayjs('2025-12-24T14:05'),
 };
 
 export const sampleWithPartialData: IArchiveDocument = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IArchiveDocument = {
   originalPath: 'but',
   archivePath: 'for',
   fileSize: 31481,
-  addedDate: dayjs('2025-12-20T00:09'),
+  addedDate: dayjs('2025-12-24T19:08'),
 };
 
 export const sampleWithFullData: IArchiveDocument = {
@@ -29,14 +29,14 @@ export const sampleWithFullData: IArchiveDocument = {
   originalPath: 'fort tributary',
   archivePath: 'lifestyle lovingly',
   fileSize: 10058,
-  addedDate: dayjs('2025-12-19T20:50'),
+  addedDate: dayjs('2025-12-24T15:49'),
 };
 
 export const sampleWithNewData: NewArchiveDocument = {
   archiveJobId: 28509,
   documentId: 23448,
   documentSha256: 'coexist elevator drat',
-  addedDate: dayjs('2025-12-20T11:32'),
+  addedDate: dayjs('2025-12-25T06:31'),
   id: null,
 };
 

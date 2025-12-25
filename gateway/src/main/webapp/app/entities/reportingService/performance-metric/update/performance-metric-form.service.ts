@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IPerformanceMetric, NewPerformanceMetric } from '../performance-metric.model';
 
@@ -44,10 +43,10 @@ export type PerformanceMetricFormGroup = FormGroup<PerformanceMetricFormGroupCon
 
 @Injectable({ providedIn: 'root' })
 export class PerformanceMetricFormService {
-  createPerformanceMetricFormGroup(performanceMetric?: PerformanceMetricFormGroupInput): PerformanceMetricFormGroup {
+  createPerformanceMetricFormGroup(performanceMetric: PerformanceMetricFormGroupInput = { id: null }): PerformanceMetricFormGroup {
     const performanceMetricRawValue = this.convertPerformanceMetricToPerformanceMetricRawValue({
       ...this.getFormDefaults(),
-      ...(performanceMetric ?? { id: null }),
+      ...performanceMetric,
     });
     return new FormGroup<PerformanceMetricFormGroupContent>({
       id: new FormControl(
@@ -89,10 +88,12 @@ export class PerformanceMetricFormService {
       ...this.getFormDefaults(),
       ...performanceMetric,
     });
-    form.reset({
-      ...performanceMetricRawValue,
-      id: { value: performanceMetricRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...performanceMetricRawValue,
+        id: { value: performanceMetricRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): PerformanceMetricFormDefaults {

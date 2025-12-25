@@ -35,7 +35,7 @@ public class RedactionJobResource {
 
     private static final String ENTITY_NAME = "transformServiceRedactionJob";
 
-    @Value("${jhipster.clientApp.name:transformService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final RedactionJobService redactionJobService;

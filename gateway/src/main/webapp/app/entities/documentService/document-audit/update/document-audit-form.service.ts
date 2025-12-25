@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentAudit, NewDocumentAudit } from '../document-audit.model';
 
@@ -45,10 +44,10 @@ export type DocumentAuditFormGroup = FormGroup<DocumentAuditFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DocumentAuditFormService {
-  createDocumentAuditFormGroup(documentAudit?: DocumentAuditFormGroupInput): DocumentAuditFormGroup {
+  createDocumentAuditFormGroup(documentAudit: DocumentAuditFormGroupInput = { id: null }): DocumentAuditFormGroup {
     const documentAuditRawValue = this.convertDocumentAuditToDocumentAuditRawValue({
       ...this.getFormDefaults(),
-      ...(documentAudit ?? { id: null }),
+      ...documentAudit,
     });
     return new FormGroup<DocumentAuditFormGroupContent>({
       id: new FormControl(
@@ -86,10 +85,12 @@ export class DocumentAuditFormService {
 
   resetForm(form: DocumentAuditFormGroup, documentAudit: DocumentAuditFormGroupInput): void {
     const documentAuditRawValue = this.convertDocumentAuditToDocumentAuditRawValue({ ...this.getFormDefaults(), ...documentAudit });
-    form.reset({
-      ...documentAuditRawValue,
-      id: { value: documentAuditRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentAuditRawValue,
+        id: { value: documentAuditRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentAuditFormDefaults {

@@ -78,7 +78,7 @@ class WorkflowInstanceResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -949,6 +949,8 @@ class WorkflowInstanceResourceIT {
 
         partialUpdatedWorkflowInstance
             .currentStepNumber(UPDATED_CURRENT_STEP_NUMBER)
+            .dueDate(UPDATED_DUE_DATE)
+            .completedDate(UPDATED_COMPLETED_DATE)
             .cancelledDate(UPDATED_CANCELLED_DATE)
             .priority(UPDATED_PRIORITY)
             .metadata(UPDATED_METADATA)

@@ -8,6 +8,7 @@ describe('WebhookLog Form Service', () => {
   let service: WebhookLogFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(WebhookLogFormService);
   });
 
@@ -60,7 +61,7 @@ describe('WebhookLog Form Service', () => {
       it('should return NewWebhookLog for default WebhookLog initial value', () => {
         const formGroup = service.createWebhookLogFormGroup(sampleWithNewData);
 
-        const webhookLog = service.getWebhookLog(formGroup);
+        const webhookLog = service.getWebhookLog(formGroup) as any;
 
         expect(webhookLog).toMatchObject(sampleWithNewData);
       });
@@ -68,7 +69,7 @@ describe('WebhookLog Form Service', () => {
       it('should return NewWebhookLog for empty WebhookLog initial value', () => {
         const formGroup = service.createWebhookLogFormGroup();
 
-        const webhookLog = service.getWebhookLog(formGroup);
+        const webhookLog = service.getWebhookLog(formGroup) as any;
 
         expect(webhookLog).toMatchObject({});
       });
@@ -76,7 +77,7 @@ describe('WebhookLog Form Service', () => {
       it('should return IWebhookLog', () => {
         const formGroup = service.createWebhookLogFormGroup(sampleWithRequiredData);
 
-        const webhookLog = service.getWebhookLog(formGroup);
+        const webhookLog = service.getWebhookLog(formGroup) as any;
 
         expect(webhookLog).toMatchObject(sampleWithRequiredData);
       });

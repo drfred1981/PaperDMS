@@ -8,6 +8,7 @@ describe('AlertRule Form Service', () => {
   let service: AlertRuleFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(AlertRuleFormService);
   });
 
@@ -60,7 +61,7 @@ describe('AlertRule Form Service', () => {
       it('should return NewAlertRule for default AlertRule initial value', () => {
         const formGroup = service.createAlertRuleFormGroup(sampleWithNewData);
 
-        const alertRule = service.getAlertRule(formGroup);
+        const alertRule = service.getAlertRule(formGroup) as any;
 
         expect(alertRule).toMatchObject(sampleWithNewData);
       });
@@ -68,7 +69,7 @@ describe('AlertRule Form Service', () => {
       it('should return NewAlertRule for empty AlertRule initial value', () => {
         const formGroup = service.createAlertRuleFormGroup();
 
-        const alertRule = service.getAlertRule(formGroup);
+        const alertRule = service.getAlertRule(formGroup) as any;
 
         expect(alertRule).toMatchObject({});
       });
@@ -76,7 +77,7 @@ describe('AlertRule Form Service', () => {
       it('should return IAlertRule', () => {
         const formGroup = service.createAlertRuleFormGroup(sampleWithRequiredData);
 
-        const alertRule = service.getAlertRule(formGroup);
+        const alertRule = service.getAlertRule(formGroup) as any;
 
         expect(alertRule).toMatchObject(sampleWithRequiredData);
       });

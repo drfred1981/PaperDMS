@@ -36,7 +36,7 @@ public class SearchIndexResource {
 
     private static final String ENTITY_NAME = "searchServiceSearchIndex";
 
-    @Value("${jhipster.clientApp.name:searchService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SearchIndexService searchIndexService;

@@ -8,6 +8,7 @@ describe('SavedSearch Form Service', () => {
   let service: SavedSearchFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SavedSearchFormService);
   });
 
@@ -52,7 +53,7 @@ describe('SavedSearch Form Service', () => {
       it('should return NewSavedSearch for default SavedSearch initial value', () => {
         const formGroup = service.createSavedSearchFormGroup(sampleWithNewData);
 
-        const savedSearch = service.getSavedSearch(formGroup);
+        const savedSearch = service.getSavedSearch(formGroup) as any;
 
         expect(savedSearch).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('SavedSearch Form Service', () => {
       it('should return NewSavedSearch for empty SavedSearch initial value', () => {
         const formGroup = service.createSavedSearchFormGroup();
 
-        const savedSearch = service.getSavedSearch(formGroup);
+        const savedSearch = service.getSavedSearch(formGroup) as any;
 
         expect(savedSearch).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('SavedSearch Form Service', () => {
       it('should return ISavedSearch', () => {
         const formGroup = service.createSavedSearchFormGroup(sampleWithRequiredData);
 
-        const savedSearch = service.getSavedSearch(formGroup);
+        const savedSearch = service.getSavedSearch(formGroup) as any;
 
         expect(savedSearch).toMatchObject(sampleWithRequiredData);
       });

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IOcrComparison, NewOcrComparison } from '../ocr-comparison.model';
 
@@ -54,10 +53,10 @@ export type OcrComparisonFormGroup = FormGroup<OcrComparisonFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class OcrComparisonFormService {
-  createOcrComparisonFormGroup(ocrComparison?: OcrComparisonFormGroupInput): OcrComparisonFormGroup {
+  createOcrComparisonFormGroup(ocrComparison: OcrComparisonFormGroupInput = { id: null }): OcrComparisonFormGroup {
     const ocrComparisonRawValue = this.convertOcrComparisonToOcrComparisonRawValue({
       ...this.getFormDefaults(),
-      ...(ocrComparison ?? { id: null }),
+      ...ocrComparison,
     });
     return new FormGroup<OcrComparisonFormGroupContent>({
       id: new FormControl(
@@ -109,10 +108,12 @@ export class OcrComparisonFormService {
 
   resetForm(form: OcrComparisonFormGroup, ocrComparison: OcrComparisonFormGroupInput): void {
     const ocrComparisonRawValue = this.convertOcrComparisonToOcrComparisonRawValue({ ...this.getFormDefaults(), ...ocrComparison });
-    form.reset({
-      ...ocrComparisonRawValue,
-      id: { value: ocrComparisonRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...ocrComparisonRawValue,
+        id: { value: ocrComparisonRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): OcrComparisonFormDefaults {

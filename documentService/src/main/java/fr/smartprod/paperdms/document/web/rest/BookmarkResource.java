@@ -35,7 +35,7 @@ public class BookmarkResource {
 
     private static final String ENTITY_NAME = "documentServiceBookmark";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final BookmarkService bookmarkService;

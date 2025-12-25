@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ITagPrediction } from '../tag-prediction.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../tag-prediction.test-samples';
@@ -102,7 +102,8 @@ describe('TagPrediction Service', () => {
       it('should add a TagPrediction to an empty array', () => {
         const tagPrediction: ITagPrediction = sampleWithRequiredData;
         expectedResult = service.addTagPredictionToCollectionIfMissing([], tagPrediction);
-        expect(expectedResult).toEqual([tagPrediction]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(tagPrediction);
       });
 
       it('should not add a TagPrediction to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('TagPrediction Service', () => {
         const tagPrediction: ITagPrediction = sampleWithRequiredData;
         const tagPrediction2: ITagPrediction = sampleWithPartialData;
         expectedResult = service.addTagPredictionToCollectionIfMissing([], tagPrediction, tagPrediction2);
-        expect(expectedResult).toEqual([tagPrediction, tagPrediction2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(tagPrediction);
+        expect(expectedResult).toContain(tagPrediction2);
       });
 
       it('should accept null and undefined values', () => {
         const tagPrediction: ITagPrediction = sampleWithRequiredData;
         expectedResult = service.addTagPredictionToCollectionIfMissing([], null, tagPrediction, undefined);
-        expect(expectedResult).toEqual([tagPrediction]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(tagPrediction);
       });
 
       it('should return initial array if no TagPrediction is added', () => {

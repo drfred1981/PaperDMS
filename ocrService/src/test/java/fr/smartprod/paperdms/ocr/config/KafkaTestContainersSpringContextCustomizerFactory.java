@@ -35,9 +35,9 @@ public class KafkaTestContainersSpringContextCustomizerFactory implements Contex
                     }
                     testValues = testValues.and(
                         "spring.cloud.stream.kafka.binder.brokers=" +
-                            kafkaBean.getKafkaContainer().getHost() +
-                            ':' +
-                            kafkaBean.getKafkaContainer().getFirstMappedPort()
+                        kafkaBean.getKafkaContainer().getHost() +
+                        ':' +
+                        kafkaBean.getKafkaContainer().getFirstMappedPort()
                     );
                 }
                 testValues.applyTo(context);

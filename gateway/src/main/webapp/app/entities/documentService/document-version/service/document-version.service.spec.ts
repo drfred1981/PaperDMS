@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentVersion } from '../document-version.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-version.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentVersion Service', () => {
       it('should add a DocumentVersion to an empty array', () => {
         const documentVersion: IDocumentVersion = sampleWithRequiredData;
         expectedResult = service.addDocumentVersionToCollectionIfMissing([], documentVersion);
-        expect(expectedResult).toEqual([documentVersion]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentVersion);
       });
 
       it('should not add a DocumentVersion to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentVersion Service', () => {
         const documentVersion: IDocumentVersion = sampleWithRequiredData;
         const documentVersion2: IDocumentVersion = sampleWithPartialData;
         expectedResult = service.addDocumentVersionToCollectionIfMissing([], documentVersion, documentVersion2);
-        expect(expectedResult).toEqual([documentVersion, documentVersion2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentVersion);
+        expect(expectedResult).toContain(documentVersion2);
       });
 
       it('should accept null and undefined values', () => {
         const documentVersion: IDocumentVersion = sampleWithRequiredData;
         expectedResult = service.addDocumentVersionToCollectionIfMissing([], null, documentVersion, undefined);
-        expect(expectedResult).toEqual([documentVersion]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentVersion);
       });
 
       it('should return initial array if no DocumentVersion is added', () => {

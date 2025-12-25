@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { TransformStatus } from 'app/entities/enumerations/transform-status.model';
 
 export interface IConversionJob {

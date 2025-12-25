@@ -69,7 +69,7 @@ class DocumentTypeResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/document-types/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -860,7 +860,7 @@ class DocumentTypeResourceIT {
             .name(UPDATED_NAME)
             .code(UPDATED_CODE)
             .icon(UPDATED_ICON)
-            .color(UPDATED_COLOR)
+            .isActive(UPDATED_IS_ACTIVE)
             .createdDate(UPDATED_CREATED_DATE);
 
         restDocumentTypeMockMvc

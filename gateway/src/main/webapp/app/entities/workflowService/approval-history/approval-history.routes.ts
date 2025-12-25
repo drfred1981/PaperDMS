@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ApprovalHistoryResolve from './route/approval-history-routing-resolve.service';
 
 const approvalHistoryRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/approval-history').then(m => m.ApprovalHistory),
+    loadComponent: () => import('./list/approval-history.component').then(m => m.ApprovalHistoryComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const approvalHistoryRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/approval-history-detail').then(m => m.ApprovalHistoryDetail),
+    loadComponent: () => import('./detail/approval-history-detail.component').then(m => m.ApprovalHistoryDetailComponent),
     resolve: {
       approvalHistory: ApprovalHistoryResolve,
     },
@@ -24,7 +23,7 @@ const approvalHistoryRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/approval-history-update').then(m => m.ApprovalHistoryUpdate),
+    loadComponent: () => import('./update/approval-history-update.component').then(m => m.ApprovalHistoryUpdateComponent),
     resolve: {
       approvalHistory: ApprovalHistoryResolve,
     },
@@ -32,7 +31,7 @@ const approvalHistoryRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/approval-history-update').then(m => m.ApprovalHistoryUpdate),
+    loadComponent: () => import('./update/approval-history-update.component').then(m => m.ApprovalHistoryUpdateComponent),
     resolve: {
       approvalHistory: ApprovalHistoryResolve,
     },

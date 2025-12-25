@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IPerformanceMetric, NewPerformanceMetric } from '../performance-metric.model';
 
 export type PartialUpdatePerformanceMetric = Partial<IPerformanceMetric> & Pick<IPerformanceMetric, 'id'>;
@@ -41,28 +41,24 @@ export class PerformanceMetricService {
   update(performanceMetric: IPerformanceMetric): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(performanceMetric);
     return this.http
-      .put<RestPerformanceMetric>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getPerformanceMetricIdentifier(performanceMetric))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestPerformanceMetric>(`${this.resourceUrl}/${this.getPerformanceMetricIdentifier(performanceMetric)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(performanceMetric: PartialUpdatePerformanceMetric): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(performanceMetric);
     return this.http
-      .patch<RestPerformanceMetric>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getPerformanceMetricIdentifier(performanceMetric))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestPerformanceMetric>(`${this.resourceUrl}/${this.getPerformanceMetricIdentifier(performanceMetric)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestPerformanceMetric>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestPerformanceMetric>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -74,7 +70,7 @@ export class PerformanceMetricService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getPerformanceMetricIdentifier(performanceMetric: Pick<IPerformanceMetric, 'id'>): number {

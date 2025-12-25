@@ -1,0 +1,154 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ocrJob(); as ocrJobRef) {
+      <div>
+        <h2 data-cy="ocrJobDetailsHeading"><span jhiTranslate="gatewayApp.ocrServiceOcrJob.detail.title">Ocr Job</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.OcrStatus.' + (ocrJobRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                IN_PROGRESS: 'IN_PROGRESS',
+                COMPLETED: 'COMPLETED',
+                FAILED: 'FAILED',
+                CANCELLED: 'CANCELLED',
+                RETRYING: 'RETRYING',
+                COMPARING: 'COMPARING',
+              }[ocrJobRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.s3Key">S 3 Key</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.s3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.s3Bucket">S 3 Bucket</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.s3Bucket }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.requestedLanguage">Requested Language</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.requestedLanguage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.detectedLanguage">Detected Language</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.detectedLanguage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.languageConfidence">Language Confidence</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.languageConfidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.ocrEngine">Ocr Engine</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.OcrEngine.' + (ocrJobRef.ocrEngine ?? 'null')">{{
+              {
+                null: '',
+                TIKA_TESSERACT: 'TIKA_TESSERACT',
+                TIKA_NATIVE: 'TIKA_NATIVE',
+                OPENAI_VISION: 'OPENAI_VISION',
+                GOOGLE_VISION: 'GOOGLE_VISION',
+                AWS_TEXTRACT: 'AWS_TEXTRACT',
+                AZURE_VISION: 'AZURE_VISION',
+                ANTHROPIC_CLAUDE: 'ANTHROPIC_CLAUDE',
+                CUSTOM: 'CUSTOM',
+                HYBRID: 'HYBRID',
+              }[ocrJobRef.ocrEngine ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.tikaEndpoint">Tika Endpoint</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.tikaEndpoint }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.aiProvider">Ai Provider</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.aiProvider }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.aiModel">Ai Model</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.aiModel }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.resultCacheKey">Result Cache Key</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.resultCacheKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.isCached">Is Cached</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.isCached }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.pageCount">Page Count</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.pageCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.progress">Progress</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.progress }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.retryCount">Retry Count</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.retryCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.priority">Priority</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.priority }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.processingTime">Processing Time</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.processingTime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.costEstimate">Cost Estimate</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.costEstimate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ ocrJobRef.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ocr-job', ocrJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

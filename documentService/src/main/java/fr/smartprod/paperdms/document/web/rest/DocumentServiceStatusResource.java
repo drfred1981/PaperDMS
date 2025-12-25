@@ -1,6 +1,6 @@
 package fr.smartprod.paperdms.document.web.rest;
 
-import fr.smartprod.paperdms.document.repository.DocumentServiceStatusUploadRepository;
+import fr.smartprod.paperdms.document.repository.DocumentServiceStatusRepository;
 import fr.smartprod.paperdms.document.service.DocumentServiceStatusQueryService;
 import fr.smartprod.paperdms.document.service.DocumentServiceStatusService;
 import fr.smartprod.paperdms.document.service.criteria.DocumentServiceStatusCriteria;
@@ -38,18 +38,18 @@ public class DocumentServiceStatusResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentServiceStatus";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentServiceStatusService documentServiceStatusService;
 
-    private final DocumentServiceStatusUploadRepository documentServiceStatusRepository;
+    private final DocumentServiceStatusRepository documentServiceStatusRepository;
 
     private final DocumentServiceStatusQueryService documentServiceStatusQueryService;
 
     public DocumentServiceStatusResource(
         DocumentServiceStatusService documentServiceStatusService,
-        DocumentServiceStatusUploadRepository documentServiceStatusRepository,
+        DocumentServiceStatusRepository documentServiceStatusRepository,
         DocumentServiceStatusQueryService documentServiceStatusQueryService
     ) {
         this.documentServiceStatusService = documentServiceStatusService;

@@ -58,7 +58,7 @@ class ContractClauseResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -411,11 +411,7 @@ class ContractClauseResourceIT {
         ContractClause partialUpdatedContractClause = new ContractClause();
         partialUpdatedContractClause.setId(contractClause.getId());
 
-        partialUpdatedContractClause
-            .contractId(UPDATED_CONTRACT_ID)
-            .title(UPDATED_TITLE)
-            .content(UPDATED_CONTENT)
-            .clauseType(UPDATED_CLAUSE_TYPE);
+        partialUpdatedContractClause.contractId(UPDATED_CONTRACT_ID).title(UPDATED_TITLE).content(UPDATED_CONTENT);
 
         restContractClauseMockMvc
             .perform(

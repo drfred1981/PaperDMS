@@ -8,6 +8,7 @@ describe('NotificationPreference Form Service', () => {
   let service: NotificationPreferenceFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(NotificationPreferenceFormService);
   });
 
@@ -56,7 +57,7 @@ describe('NotificationPreference Form Service', () => {
       it('should return NewNotificationPreference for default NotificationPreference initial value', () => {
         const formGroup = service.createNotificationPreferenceFormGroup(sampleWithNewData);
 
-        const notificationPreference = service.getNotificationPreference(formGroup);
+        const notificationPreference = service.getNotificationPreference(formGroup) as any;
 
         expect(notificationPreference).toMatchObject(sampleWithNewData);
       });
@@ -64,7 +65,7 @@ describe('NotificationPreference Form Service', () => {
       it('should return NewNotificationPreference for empty NotificationPreference initial value', () => {
         const formGroup = service.createNotificationPreferenceFormGroup();
 
-        const notificationPreference = service.getNotificationPreference(formGroup);
+        const notificationPreference = service.getNotificationPreference(formGroup) as any;
 
         expect(notificationPreference).toMatchObject({});
       });
@@ -72,7 +73,7 @@ describe('NotificationPreference Form Service', () => {
       it('should return INotificationPreference', () => {
         const formGroup = service.createNotificationPreferenceFormGroup(sampleWithRequiredData);
 
-        const notificationPreference = service.getNotificationPreference(formGroup);
+        const notificationPreference = service.getNotificationPreference(formGroup) as any;
 
         expect(notificationPreference).toMatchObject(sampleWithRequiredData);
       });

@@ -8,6 +8,7 @@ describe('ScanJob Form Service', () => {
   let service: ScanJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ScanJobFormService);
   });
 
@@ -74,7 +75,7 @@ describe('ScanJob Form Service', () => {
       it('should return NewScanJob for default ScanJob initial value', () => {
         const formGroup = service.createScanJobFormGroup(sampleWithNewData);
 
-        const scanJob = service.getScanJob(formGroup);
+        const scanJob = service.getScanJob(formGroup) as any;
 
         expect(scanJob).toMatchObject(sampleWithNewData);
       });
@@ -82,7 +83,7 @@ describe('ScanJob Form Service', () => {
       it('should return NewScanJob for empty ScanJob initial value', () => {
         const formGroup = service.createScanJobFormGroup();
 
-        const scanJob = service.getScanJob(formGroup);
+        const scanJob = service.getScanJob(formGroup) as any;
 
         expect(scanJob).toMatchObject({});
       });
@@ -90,7 +91,7 @@ describe('ScanJob Form Service', () => {
       it('should return IScanJob', () => {
         const formGroup = service.createScanJobFormGroup(sampleWithRequiredData);
 
-        const scanJob = service.getScanJob(formGroup);
+        const scanJob = service.getScanJob(formGroup) as any;
 
         expect(scanJob).toMatchObject(sampleWithRequiredData);
       });

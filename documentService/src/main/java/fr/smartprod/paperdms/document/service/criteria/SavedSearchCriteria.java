@@ -1,7 +1,6 @@
 package fr.smartprod.paperdms.document.service.criteria;
 
 import fr.smartprod.paperdms.document.domain.enumeration.AlertFrequency;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +38,6 @@ public class SavedSearchCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

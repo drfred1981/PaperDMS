@@ -37,7 +37,7 @@ public class DocumentSimilarityResource {
 
     private static final String ENTITY_NAME = "similarityServiceDocumentSimilarity";
 
-    @Value("${jhipster.clientApp.name:similarityService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentSimilarityService documentSimilarityService;

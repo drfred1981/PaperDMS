@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { MetricType } from 'app/entities/enumerations/metric-type.model';
 
 export interface IPerformanceMetric {

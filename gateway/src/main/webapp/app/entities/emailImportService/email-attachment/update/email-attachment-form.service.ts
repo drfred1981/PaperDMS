@@ -34,10 +34,10 @@ export type EmailAttachmentFormGroup = FormGroup<EmailAttachmentFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class EmailAttachmentFormService {
-  createEmailAttachmentFormGroup(emailAttachment?: EmailAttachmentFormGroupInput): EmailAttachmentFormGroup {
+  createEmailAttachmentFormGroup(emailAttachment: EmailAttachmentFormGroupInput = { id: null }): EmailAttachmentFormGroup {
     const emailAttachmentRawValue = {
       ...this.getFormDefaults(),
-      ...(emailAttachment ?? { id: null }),
+      ...emailAttachment,
     };
     return new FormGroup<EmailAttachmentFormGroupContent>({
       id: new FormControl(
@@ -82,10 +82,12 @@ export class EmailAttachmentFormService {
 
   resetForm(form: EmailAttachmentFormGroup, emailAttachment: EmailAttachmentFormGroupInput): void {
     const emailAttachmentRawValue = { ...this.getFormDefaults(), ...emailAttachment };
-    form.reset({
-      ...emailAttachmentRawValue,
-      id: { value: emailAttachmentRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...emailAttachmentRawValue,
+        id: { value: emailAttachmentRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): EmailAttachmentFormDefaults {

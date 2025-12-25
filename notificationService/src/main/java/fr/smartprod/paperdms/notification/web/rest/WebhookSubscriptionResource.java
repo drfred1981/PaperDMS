@@ -37,7 +37,7 @@ public class WebhookSubscriptionResource {
 
     private static final String ENTITY_NAME = "notificationServiceWebhookSubscription";
 
-    @Value("${jhipster.clientApp.name:notificationService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final WebhookSubscriptionService webhookSubscriptionService;

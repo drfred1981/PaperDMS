@@ -1,14 +1,15 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, asapScheduler, map, scheduled } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { SearchWithPagination } from 'app/core/request/request.model';
-import { isPresent } from 'app/core/util/operators';
 import { ISearchIndex, NewSearchIndex } from '../search-index.model';
 
 export type PartialUpdateSearchIndex = Partial<ISearchIndex> & Pick<ISearchIndex, 'id'>;
@@ -45,24 +46,20 @@ export class SearchIndexService {
   update(searchIndex: ISearchIndex): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(searchIndex);
     return this.http
-      .put<RestSearchIndex>(`${this.resourceUrl}/${encodeURIComponent(this.getSearchIndexIdentifier(searchIndex))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestSearchIndex>(`${this.resourceUrl}/${this.getSearchIndexIdentifier(searchIndex)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(searchIndex: PartialUpdateSearchIndex): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(searchIndex);
     return this.http
-      .patch<RestSearchIndex>(`${this.resourceUrl}/${encodeURIComponent(this.getSearchIndexIdentifier(searchIndex))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestSearchIndex>(`${this.resourceUrl}/${this.getSearchIndexIdentifier(searchIndex)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestSearchIndex>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestSearchIndex>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -74,7 +71,7 @@ export class SearchIndexService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   search(req: SearchWithPagination): Observable<EntityArrayResponseType> {

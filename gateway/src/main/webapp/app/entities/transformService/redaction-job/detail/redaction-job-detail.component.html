@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (redactionJob(); as redactionJobRef) {
+      <div>
+        <h2 data-cy="redactionJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceRedactionJob.detail.title">Redaction Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.redactionAreas">Redaction Areas</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.redactionAreas }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.redactionType">Redaction Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.RedactionType.' + (redactionJobRef.redactionType ?? 'null')">{{
+              { null: '', BLACK_BOX: 'BLACK_BOX', WHITE_BOX: 'WHITE_BOX', PATTERN: 'PATTERN', PIXELATE: 'PIXELATE', BLUR: 'BLUR' }[
+                redactionJobRef.redactionType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.redactionColor">Redaction Color</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.redactionColor }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.replaceWith">Replace With</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.replaceWith }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.outputDocumentId">Output Document Id</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.outputDocumentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (redactionJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                redactionJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceRedactionJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ redactionJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/redaction-job', redactionJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

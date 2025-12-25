@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentWatch, NewDocumentWatch } from '../document-watch.model';
 
 export type PartialUpdateDocumentWatch = Partial<IDocumentWatch> & Pick<IDocumentWatch, 'id'>;
@@ -41,24 +41,20 @@ export class DocumentWatchService {
   update(documentWatch: IDocumentWatch): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentWatch);
     return this.http
-      .put<RestDocumentWatch>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentWatchIdentifier(documentWatch))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestDocumentWatch>(`${this.resourceUrl}/${this.getDocumentWatchIdentifier(documentWatch)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentWatch: PartialUpdateDocumentWatch): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentWatch);
     return this.http
-      .patch<RestDocumentWatch>(`${this.resourceUrl}/${encodeURIComponent(this.getDocumentWatchIdentifier(documentWatch))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestDocumentWatch>(`${this.resourceUrl}/${this.getDocumentWatchIdentifier(documentWatch)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentWatch>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentWatch>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -70,7 +66,7 @@ export class DocumentWatchService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentWatchIdentifier(documentWatch: Pick<IDocumentWatch, 'id'>): number {

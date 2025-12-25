@@ -1,7 +1,6 @@
 package fr.smartprod.paperdms.similarity.repository.timezone;
 
 import jakarta.persistence.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
 import java.util.Objects;
@@ -10,7 +9,6 @@ import java.util.Objects;
 @Table(name = "jhi_date_time_wrapper")
 public class DateTimeWrapper implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

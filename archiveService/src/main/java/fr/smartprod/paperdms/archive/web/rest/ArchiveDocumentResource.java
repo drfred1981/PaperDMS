@@ -35,7 +35,7 @@ public class ArchiveDocumentResource {
 
     private static final String ENTITY_NAME = "archiveServiceArchiveDocument";
 
-    @Value("${jhipster.clientApp.name:archiveService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ArchiveDocumentService archiveDocumentService;

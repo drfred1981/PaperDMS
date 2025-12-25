@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ServiceStatusResolve from './route/service-status-routing-resolve.service';
 
 const serviceStatusRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/service-status').then(m => m.ServiceStatus),
+    loadComponent: () => import('./list/service-status.component').then(m => m.ServiceStatusComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const serviceStatusRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/service-status-detail').then(m => m.ServiceStatusDetail),
+    loadComponent: () => import('./detail/service-status-detail.component').then(m => m.ServiceStatusDetailComponent),
     resolve: {
       serviceStatus: ServiceStatusResolve,
     },
@@ -24,7 +23,7 @@ const serviceStatusRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/service-status-update').then(m => m.ServiceStatusUpdate),
+    loadComponent: () => import('./update/service-status-update.component').then(m => m.ServiceStatusUpdateComponent),
     resolve: {
       serviceStatus: ServiceStatusResolve,
     },
@@ -32,7 +31,7 @@ const serviceStatusRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/service-status-update').then(m => m.ServiceStatusUpdate),
+    loadComponent: () => import('./update/service-status-update.component').then(m => m.ServiceStatusUpdateComponent),
     resolve: {
       serviceStatus: ServiceStatusResolve,
     },

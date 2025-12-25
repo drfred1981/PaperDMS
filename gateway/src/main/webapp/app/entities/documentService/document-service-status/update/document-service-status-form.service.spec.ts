@@ -8,6 +8,7 @@ describe('DocumentServiceStatus Form Service', () => {
   let service: DocumentServiceStatusFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentServiceStatusFormService);
   });
 
@@ -33,6 +34,7 @@ describe('DocumentServiceStatus Form Service', () => {
             priority: expect.any(Object),
             updatedBy: expect.any(Object),
             updatedDate: expect.any(Object),
+            document: expect.any(Object),
           }),
         );
       });
@@ -57,6 +59,7 @@ describe('DocumentServiceStatus Form Service', () => {
             priority: expect.any(Object),
             updatedBy: expect.any(Object),
             updatedDate: expect.any(Object),
+            document: expect.any(Object),
           }),
         );
       });
@@ -66,7 +69,7 @@ describe('DocumentServiceStatus Form Service', () => {
       it('should return NewDocumentServiceStatus for default DocumentServiceStatus initial value', () => {
         const formGroup = service.createDocumentServiceStatusFormGroup(sampleWithNewData);
 
-        const documentServiceStatus = service.getDocumentServiceStatus(formGroup);
+        const documentServiceStatus = service.getDocumentServiceStatus(formGroup) as any;
 
         expect(documentServiceStatus).toMatchObject(sampleWithNewData);
       });
@@ -74,7 +77,7 @@ describe('DocumentServiceStatus Form Service', () => {
       it('should return NewDocumentServiceStatus for empty DocumentServiceStatus initial value', () => {
         const formGroup = service.createDocumentServiceStatusFormGroup();
 
-        const documentServiceStatus = service.getDocumentServiceStatus(formGroup);
+        const documentServiceStatus = service.getDocumentServiceStatus(formGroup) as any;
 
         expect(documentServiceStatus).toMatchObject({});
       });
@@ -82,7 +85,7 @@ describe('DocumentServiceStatus Form Service', () => {
       it('should return IDocumentServiceStatus', () => {
         const formGroup = service.createDocumentServiceStatusFormGroup(sampleWithRequiredData);
 
-        const documentServiceStatus = service.getDocumentServiceStatus(formGroup);
+        const documentServiceStatus = service.getDocumentServiceStatus(formGroup) as any;
 
         expect(documentServiceStatus).toMatchObject(sampleWithRequiredData);
       });

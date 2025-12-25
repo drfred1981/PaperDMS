@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IFolder, NewFolder } from '../folder.model';
 
@@ -45,10 +44,10 @@ export type FolderFormGroup = FormGroup<FolderFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class FolderFormService {
-  createFolderFormGroup(folder?: FolderFormGroupInput): FolderFormGroup {
+  createFolderFormGroup(folder: FolderFormGroupInput = { id: null }): FolderFormGroup {
     const folderRawValue = this.convertFolderToFolderRawValue({
       ...this.getFormDefaults(),
-      ...(folder ?? { id: null }),
+      ...folder,
     });
     return new FormGroup<FolderFormGroupContent>({
       id: new FormControl(
@@ -84,10 +83,12 @@ export class FolderFormService {
 
   resetForm(form: FolderFormGroup, folder: FolderFormGroupInput): void {
     const folderRawValue = this.convertFolderToFolderRawValue({ ...this.getFormDefaults(), ...folder });
-    form.reset({
-      ...folderRawValue,
-      id: { value: folderRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...folderRawValue,
+        id: { value: folderRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): FolderFormDefaults {

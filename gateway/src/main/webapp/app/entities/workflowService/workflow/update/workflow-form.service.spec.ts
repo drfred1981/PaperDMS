@@ -8,6 +8,7 @@ describe('Workflow Form Service', () => {
   let service: WorkflowFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(WorkflowFormService);
   });
 
@@ -60,7 +61,7 @@ describe('Workflow Form Service', () => {
       it('should return NewWorkflow for default Workflow initial value', () => {
         const formGroup = service.createWorkflowFormGroup(sampleWithNewData);
 
-        const workflow = service.getWorkflow(formGroup);
+        const workflow = service.getWorkflow(formGroup) as any;
 
         expect(workflow).toMatchObject(sampleWithNewData);
       });
@@ -68,7 +69,7 @@ describe('Workflow Form Service', () => {
       it('should return NewWorkflow for empty Workflow initial value', () => {
         const formGroup = service.createWorkflowFormGroup();
 
-        const workflow = service.getWorkflow(formGroup);
+        const workflow = service.getWorkflow(formGroup) as any;
 
         expect(workflow).toMatchObject({});
       });
@@ -76,7 +77,7 @@ describe('Workflow Form Service', () => {
       it('should return IWorkflow', () => {
         const formGroup = service.createWorkflowFormGroup(sampleWithRequiredData);
 
-        const workflow = service.getWorkflow(formGroup);
+        const workflow = service.getWorkflow(formGroup) as any;
 
         expect(workflow).toMatchObject(sampleWithRequiredData);
       });

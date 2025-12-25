@@ -8,6 +8,7 @@ describe('ExtractedText Form Service', () => {
   let service: ExtractedTextFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ExtractedTextFormService);
   });
 
@@ -62,7 +63,7 @@ describe('ExtractedText Form Service', () => {
       it('should return NewExtractedText for default ExtractedText initial value', () => {
         const formGroup = service.createExtractedTextFormGroup(sampleWithNewData);
 
-        const extractedText = service.getExtractedText(formGroup);
+        const extractedText = service.getExtractedText(formGroup) as any;
 
         expect(extractedText).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('ExtractedText Form Service', () => {
       it('should return NewExtractedText for empty ExtractedText initial value', () => {
         const formGroup = service.createExtractedTextFormGroup();
 
-        const extractedText = service.getExtractedText(formGroup);
+        const extractedText = service.getExtractedText(formGroup) as any;
 
         expect(extractedText).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('ExtractedText Form Service', () => {
       it('should return IExtractedText', () => {
         const formGroup = service.createExtractedTextFormGroup(sampleWithRequiredData);
 
-        const extractedText = service.getExtractedText(formGroup);
+        const extractedText = service.getExtractedText(formGroup) as any;
 
         expect(extractedText).toMatchObject(sampleWithRequiredData);
       });

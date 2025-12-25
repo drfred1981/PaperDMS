@@ -8,6 +8,7 @@ describe('SemanticSearch Form Service', () => {
   let service: SemanticSearchFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SemanticSearchFormService);
   });
 
@@ -54,7 +55,7 @@ describe('SemanticSearch Form Service', () => {
       it('should return NewSemanticSearch for default SemanticSearch initial value', () => {
         const formGroup = service.createSemanticSearchFormGroup(sampleWithNewData);
 
-        const semanticSearch = service.getSemanticSearch(formGroup);
+        const semanticSearch = service.getSemanticSearch(formGroup) as any;
 
         expect(semanticSearch).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('SemanticSearch Form Service', () => {
       it('should return NewSemanticSearch for empty SemanticSearch initial value', () => {
         const formGroup = service.createSemanticSearchFormGroup();
 
-        const semanticSearch = service.getSemanticSearch(formGroup);
+        const semanticSearch = service.getSemanticSearch(formGroup) as any;
 
         expect(semanticSearch).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('SemanticSearch Form Service', () => {
       it('should return ISemanticSearch', () => {
         const formGroup = service.createSemanticSearchFormGroup(sampleWithRequiredData);
 
-        const semanticSearch = service.getSemanticSearch(formGroup);
+        const semanticSearch = service.getSemanticSearch(formGroup) as any;
 
         expect(semanticSearch).toMatchObject(sampleWithRequiredData);
       });

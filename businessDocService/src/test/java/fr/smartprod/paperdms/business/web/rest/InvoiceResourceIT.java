@@ -105,7 +105,7 @@ class InvoiceResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/invoices/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1616,13 +1616,11 @@ class InvoiceResourceIT {
         partialUpdatedInvoice
             .documentId(UPDATED_DOCUMENT_ID)
             .invoiceNumber(UPDATED_INVOICE_NUMBER)
+            .supplierName(UPDATED_SUPPLIER_NAME)
             .customerName(UPDATED_CUSTOMER_NAME)
-            .issueDate(UPDATED_ISSUE_DATE)
-            .dueDate(UPDATED_DUE_DATE)
-            .totalAmountExclTax(UPDATED_TOTAL_AMOUNT_EXCL_TAX)
-            .totalAmountInclTax(UPDATED_TOTAL_AMOUNT_INCL_TAX)
-            .paymentMethod(UPDATED_PAYMENT_METHOD)
-            .createdDate(UPDATED_CREATED_DATE);
+            .paymentDate(UPDATED_PAYMENT_DATE)
+            .status(UPDATED_STATUS)
+            .paymentMethod(UPDATED_PAYMENT_METHOD);
 
         restInvoiceMockMvc
             .perform(

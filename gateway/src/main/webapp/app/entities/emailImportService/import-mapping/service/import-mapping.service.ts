@@ -1,11 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IImportMapping, NewImportMapping } from '../import-mapping.model';
 
 export type PartialUpdateImportMapping = Partial<IImportMapping> & Pick<IImportMapping, 'id'>;
@@ -25,23 +24,19 @@ export class ImportMappingService {
   }
 
   update(importMapping: IImportMapping): Observable<EntityResponseType> {
-    return this.http.put<IImportMapping>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getImportMappingIdentifier(importMapping))}`,
-      importMapping,
-      { observe: 'response' },
-    );
+    return this.http.put<IImportMapping>(`${this.resourceUrl}/${this.getImportMappingIdentifier(importMapping)}`, importMapping, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(importMapping: PartialUpdateImportMapping): Observable<EntityResponseType> {
-    return this.http.patch<IImportMapping>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getImportMappingIdentifier(importMapping))}`,
-      importMapping,
-      { observe: 'response' },
-    );
+    return this.http.patch<IImportMapping>(`${this.resourceUrl}/${this.getImportMappingIdentifier(importMapping)}`, importMapping, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IImportMapping>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.get<IImportMapping>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -50,7 +45,7 @@ export class ImportMappingService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getImportMappingIdentifier(importMapping: Pick<IImportMapping, 'id'>): number {

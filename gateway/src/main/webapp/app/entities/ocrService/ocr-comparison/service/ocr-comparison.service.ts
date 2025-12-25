@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IOcrComparison, NewOcrComparison } from '../ocr-comparison.model';
 
 export type PartialUpdateOcrComparison = Partial<IOcrComparison> & Pick<IOcrComparison, 'id'>;
@@ -42,24 +42,20 @@ export class OcrComparisonService {
   update(ocrComparison: IOcrComparison): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(ocrComparison);
     return this.http
-      .put<RestOcrComparison>(`${this.resourceUrl}/${encodeURIComponent(this.getOcrComparisonIdentifier(ocrComparison))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestOcrComparison>(`${this.resourceUrl}/${this.getOcrComparisonIdentifier(ocrComparison)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(ocrComparison: PartialUpdateOcrComparison): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(ocrComparison);
     return this.http
-      .patch<RestOcrComparison>(`${this.resourceUrl}/${encodeURIComponent(this.getOcrComparisonIdentifier(ocrComparison))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestOcrComparison>(`${this.resourceUrl}/${this.getOcrComparisonIdentifier(ocrComparison)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestOcrComparison>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestOcrComparison>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +67,7 @@ export class OcrComparisonService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getOcrComparisonIdentifier(ocrComparison: Pick<IOcrComparison, 'id'>): number {

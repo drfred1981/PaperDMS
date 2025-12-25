@@ -10,10 +10,10 @@
     "devDatabaseType": "postgresql",
     "enableSwaggerCodegen": true,
     "entities": ["Workflow", "WorkflowStep", "WorkflowInstance", "WorkflowTask", "ApprovalHistory"],
-    "jhipsterVersion": "9.0.0-beta.0",
-    "jwtSecretKey": "ZmMwYzE2ZjUwZDM4OGM1ZDlkMjAwMjgwYzY2ZmNjNWVjY2MzYzUyNWNjMzM2MTA0OTc4NTBlNjA2NzMxNTE3MTVhYWFkMmM3ZWE0ODA2MDljYjM0ZDllMjBiYWI0MWJjNWM4YTUyMGU4YTE4ZDBjMjAwODU2NjZjODM0OGExMWI=",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "NzE1NTNkZWMzZGEzZjBlZTc5NDVlNTE1ZmQwMTIzYzliZjU3ODllZjY1MDA2MDNhZmQ0N2EzNmFkZmU5ZGI4Y2JmMzJkYmZhNDM5MDcwNjczODZhZDYxMTg4ZmUxNGEzZTk5ZDM3YzkwNGI5N2UwNmQ5ZGYyOTg0MGZlOTNmM2Y=",
     "languages": ["en"],
-    "lastLiquibaseTimestamp": 1766244555000,
+    "lastLiquibaseTimestamp": 1766658495000,
     "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
@@ -24,6 +24,7 @@
     "serviceDiscoveryType": "consul",
     "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

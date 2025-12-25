@@ -37,7 +37,7 @@ public class WatermarkJobResource {
 
     private static final String ENTITY_NAME = "transformServiceWatermarkJob";
 
-    @Value("${jhipster.clientApp.name:transformService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final WatermarkJobService watermarkJobService;

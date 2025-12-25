@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IScannerConfiguration } from '../scanner-configuration.model';
 import {
@@ -107,7 +107,8 @@ describe('ScannerConfiguration Service', () => {
       it('should add a ScannerConfiguration to an empty array', () => {
         const scannerConfiguration: IScannerConfiguration = sampleWithRequiredData;
         expectedResult = service.addScannerConfigurationToCollectionIfMissing([], scannerConfiguration);
-        expect(expectedResult).toEqual([scannerConfiguration]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scannerConfiguration);
       });
 
       it('should not add a ScannerConfiguration to an array that contains it', () => {
@@ -141,13 +142,16 @@ describe('ScannerConfiguration Service', () => {
         const scannerConfiguration: IScannerConfiguration = sampleWithRequiredData;
         const scannerConfiguration2: IScannerConfiguration = sampleWithPartialData;
         expectedResult = service.addScannerConfigurationToCollectionIfMissing([], scannerConfiguration, scannerConfiguration2);
-        expect(expectedResult).toEqual([scannerConfiguration, scannerConfiguration2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(scannerConfiguration);
+        expect(expectedResult).toContain(scannerConfiguration2);
       });
 
       it('should accept null and undefined values', () => {
         const scannerConfiguration: IScannerConfiguration = sampleWithRequiredData;
         expectedResult = service.addScannerConfigurationToCollectionIfMissing([], null, scannerConfiguration, undefined);
-        expect(expectedResult).toEqual([scannerConfiguration]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scannerConfiguration);
       });
 
       it('should return initial array if no ScannerConfiguration is added', () => {

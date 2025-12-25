@@ -55,7 +55,7 @@ class PermissionGroupResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -381,7 +381,11 @@ class PermissionGroupResourceIT {
         PermissionGroup partialUpdatedPermissionGroup = new PermissionGroup();
         partialUpdatedPermissionGroup.setId(permissionGroup.getId());
 
-        partialUpdatedPermissionGroup.permissions(UPDATED_PERMISSIONS).createdBy(UPDATED_CREATED_BY);
+        partialUpdatedPermissionGroup
+            .name(UPDATED_NAME)
+            .permissions(UPDATED_PERMISSIONS)
+            .createdDate(UPDATED_CREATED_DATE)
+            .createdBy(UPDATED_CREATED_BY);
 
         restPermissionGroupMockMvc
             .perform(

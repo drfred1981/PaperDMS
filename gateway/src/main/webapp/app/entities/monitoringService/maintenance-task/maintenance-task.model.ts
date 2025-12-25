@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { MaintenanceType } from 'app/entities/enumerations/maintenance-type.model';
 import { TransformStatus } from 'app/entities/enumerations/transform-status.model';
 

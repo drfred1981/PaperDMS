@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISemanticSearch } from '../semantic-search.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../semantic-search.test-samples';
@@ -101,7 +101,8 @@ describe('SemanticSearch Service', () => {
       it('should add a SemanticSearch to an empty array', () => {
         const semanticSearch: ISemanticSearch = sampleWithRequiredData;
         expectedResult = service.addSemanticSearchToCollectionIfMissing([], semanticSearch);
-        expect(expectedResult).toEqual([semanticSearch]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(semanticSearch);
       });
 
       it('should not add a SemanticSearch to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('SemanticSearch Service', () => {
         const semanticSearch: ISemanticSearch = sampleWithRequiredData;
         const semanticSearch2: ISemanticSearch = sampleWithPartialData;
         expectedResult = service.addSemanticSearchToCollectionIfMissing([], semanticSearch, semanticSearch2);
-        expect(expectedResult).toEqual([semanticSearch, semanticSearch2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(semanticSearch);
+        expect(expectedResult).toContain(semanticSearch2);
       });
 
       it('should accept null and undefined values', () => {
         const semanticSearch: ISemanticSearch = sampleWithRequiredData;
         expectedResult = service.addSemanticSearchToCollectionIfMissing([], null, semanticSearch, undefined);
-        expect(expectedResult).toEqual([semanticSearch]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(semanticSearch);
       });
 
       it('should return initial array if no SemanticSearch is added', () => {

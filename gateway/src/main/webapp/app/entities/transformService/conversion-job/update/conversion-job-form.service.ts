@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IConversionJob, NewConversionJob } from '../conversion-job.model';
 
@@ -54,10 +53,10 @@ export type ConversionJobFormGroup = FormGroup<ConversionJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ConversionJobFormService {
-  createConversionJobFormGroup(conversionJob?: ConversionJobFormGroupInput): ConversionJobFormGroup {
+  createConversionJobFormGroup(conversionJob: ConversionJobFormGroupInput = { id: null }): ConversionJobFormGroup {
     const conversionJobRawValue = this.convertConversionJobToConversionJobRawValue({
       ...this.getFormDefaults(),
-      ...(conversionJob ?? { id: null }),
+      ...conversionJob,
     });
     return new FormGroup<ConversionJobFormGroupContent>({
       id: new FormControl(
@@ -108,10 +107,12 @@ export class ConversionJobFormService {
 
   resetForm(form: ConversionJobFormGroup, conversionJob: ConversionJobFormGroupInput): void {
     const conversionJobRawValue = this.convertConversionJobToConversionJobRawValue({ ...this.getFormDefaults(), ...conversionJob });
-    form.reset({
-      ...conversionJobRawValue,
-      id: { value: conversionJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...conversionJobRawValue,
+        id: { value: conversionJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ConversionJobFormDefaults {

@@ -8,8 +8,8 @@ export const sampleWithRequiredData: INotification = {
   message: '../fake-data/blob/hipster.txt',
   recipientId: 'muscat',
   isRead: true,
-  sentDate: dayjs('2025-12-19T17:50'),
-  createdDate: dayjs('2025-12-20T03:26'),
+  sentDate: dayjs('2025-12-24T12:49'),
+  createdDate: dayjs('2025-12-24T22:25'),
 };
 
 export const sampleWithPartialData: INotification = {
@@ -18,12 +18,12 @@ export const sampleWithPartialData: INotification = {
   message: '../fake-data/blob/hipster.txt',
   recipientId: 'elver ouch hidden',
   isRead: false,
-  readDate: dayjs('2025-12-20T06:06'),
+  readDate: dayjs('2025-12-25T01:05'),
   relatedEntityType: 'boohoo since',
   relatedEntityId: 3890,
-  expirationDate: dayjs('2025-12-20T06:37'),
-  sentDate: dayjs('2025-12-19T18:27'),
-  createdDate: dayjs('2025-12-20T07:04'),
+  expirationDate: dayjs('2025-12-25T01:36'),
+  sentDate: dayjs('2025-12-24T13:26'),
+  createdDate: dayjs('2025-12-25T02:03'),
 };
 
 export const sampleWithFullData: INotification = {
@@ -34,15 +34,15 @@ export const sampleWithFullData: INotification = {
   priority: 'NORMAL',
   recipientId: 'cinema once keel',
   isRead: false,
-  readDate: dayjs('2025-12-20T05:20'),
+  readDate: dayjs('2025-12-25T00:19'),
   channel: 'PUSH',
   relatedEntityType: 'bowler fiercely',
   relatedEntityId: 22507,
   actionUrl: 'evenly',
   metadata: '../fake-data/blob/hipster.txt',
-  expirationDate: dayjs('2025-12-20T03:35'),
-  sentDate: dayjs('2025-12-20T03:50'),
-  createdDate: dayjs('2025-12-19T20:10'),
+  expirationDate: dayjs('2025-12-24T22:34'),
+  sentDate: dayjs('2025-12-24T22:49'),
+  createdDate: dayjs('2025-12-24T15:09'),
 };
 
 export const sampleWithNewData: NewNotification = {
@@ -50,8 +50,8 @@ export const sampleWithNewData: NewNotification = {
   message: '../fake-data/blob/hipster.txt',
   recipientId: 'honesty depart acquaintance',
   isRead: false,
-  sentDate: dayjs('2025-12-19T19:27'),
-  createdDate: dayjs('2025-12-20T09:40'),
+  sentDate: dayjs('2025-12-24T14:26'),
+  createdDate: dayjs('2025-12-25T04:39'),
   id: null,
 };
 

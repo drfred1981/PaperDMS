@@ -1,7 +1,6 @@
-import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
-
 import { of } from 'rxjs';
 
 import { IConversionJob } from '../conversion-job.model';
@@ -13,6 +12,7 @@ describe('ConversionJob routing resolve service', () => {
   let mockRouter: Router;
   let mockActivatedRouteSnapshot: ActivatedRouteSnapshot;
   let service: ConversionJobService;
+  let resultConversionJob: IConversionJob | null | undefined;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,70 +29,69 @@ describe('ConversionJob routing resolve service', () => {
       ],
     });
     mockRouter = TestBed.inject(Router);
-    jest.spyOn(mockRouter, 'navigate');
+    jest.spyOn(mockRouter, 'navigate').mockImplementation(() => Promise.resolve(true));
     mockActivatedRouteSnapshot = TestBed.inject(ActivatedRoute).snapshot;
     service = TestBed.inject(ConversionJobService);
+    resultConversionJob = undefined;
   });
 
   describe('resolve', () => {
-    it('should return IConversionJob returned by find', async () => {
+    it('should return IConversionJob returned by find', () => {
       // GIVEN
       service.find = jest.fn(id => of(new HttpResponse({ body: { id } })));
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          conversionJobResolve(mockActivatedRouteSnapshot).subscribe({
-            next(result) {
-              // THEN
-              expect(service.find).toHaveBeenCalledWith(123);
-              expect(result).toEqual({ id: 123 });
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        conversionJobResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultConversionJob = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).toHaveBeenCalledWith(123);
+      expect(resultConversionJob).toEqual({ id: 123 });
     });
 
-    it('should return null if id is not provided', async () => {
+    it('should return null if id is not provided', () => {
       // GIVEN
       service.find = jest.fn();
       mockActivatedRouteSnapshot.params = {};
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          conversionJobResolve(mockActivatedRouteSnapshot).subscribe({
-            next(result) {
-              // THEN
-              expect(service.find).not.toHaveBeenCalled();
-              expect(result).toEqual(null);
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        conversionJobResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultConversionJob = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).not.toHaveBeenCalled();
+      expect(resultConversionJob).toEqual(null);
     });
 
-    it('should route to 404 page if data not found in server', async () => {
+    it('should route to 404 page if data not found in server', () => {
       // GIVEN
       jest.spyOn(service, 'find').mockReturnValue(of(new HttpResponse<IConversionJob>({ body: null })));
       mockActivatedRouteSnapshot.params = { id: 123 };
 
       // WHEN
-      await new Promise<void>(resolve => {
-        TestBed.runInInjectionContext(() => {
-          conversionJobResolve(mockActivatedRouteSnapshot).subscribe({
-            complete() {
-              // THEN
-              expect(service.find).toHaveBeenCalledWith(123);
-              expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
-              resolve();
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        conversionJobResolve(mockActivatedRouteSnapshot).subscribe({
+          next(result) {
+            resultConversionJob = result;
+          },
         });
       });
+
+      // THEN
+      expect(service.find).toHaveBeenCalledWith(123);
+      expect(resultConversionJob).toEqual(undefined);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['404']);
     });
   });
 });

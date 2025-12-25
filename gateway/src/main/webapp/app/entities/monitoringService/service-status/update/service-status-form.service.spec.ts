@@ -8,6 +8,7 @@ describe('ServiceStatus Form Service', () => {
   let service: ServiceStatusFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ServiceStatusFormService);
   });
 
@@ -54,7 +55,7 @@ describe('ServiceStatus Form Service', () => {
       it('should return NewServiceStatus for default ServiceStatus initial value', () => {
         const formGroup = service.createServiceStatusFormGroup(sampleWithNewData);
 
-        const serviceStatus = service.getServiceStatus(formGroup);
+        const serviceStatus = service.getServiceStatus(formGroup) as any;
 
         expect(serviceStatus).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('ServiceStatus Form Service', () => {
       it('should return NewServiceStatus for empty ServiceStatus initial value', () => {
         const formGroup = service.createServiceStatusFormGroup();
 
-        const serviceStatus = service.getServiceStatus(formGroup);
+        const serviceStatus = service.getServiceStatus(formGroup) as any;
 
         expect(serviceStatus).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('ServiceStatus Form Service', () => {
       it('should return IServiceStatus', () => {
         const formGroup = service.createServiceStatusFormGroup(sampleWithRequiredData);
 
-        const serviceStatus = service.getServiceStatus(formGroup);
+        const serviceStatus = service.getServiceStatus(formGroup) as any;
 
         expect(serviceStatus).toMatchObject(sampleWithRequiredData);
       });

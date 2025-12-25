@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISimilarityCluster } from '../similarity-cluster.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../similarity-cluster.test-samples';
@@ -102,7 +102,8 @@ describe('SimilarityCluster Service', () => {
       it('should add a SimilarityCluster to an empty array', () => {
         const similarityCluster: ISimilarityCluster = sampleWithRequiredData;
         expectedResult = service.addSimilarityClusterToCollectionIfMissing([], similarityCluster);
-        expect(expectedResult).toEqual([similarityCluster]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(similarityCluster);
       });
 
       it('should not add a SimilarityCluster to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('SimilarityCluster Service', () => {
         const similarityCluster: ISimilarityCluster = sampleWithRequiredData;
         const similarityCluster2: ISimilarityCluster = sampleWithPartialData;
         expectedResult = service.addSimilarityClusterToCollectionIfMissing([], similarityCluster, similarityCluster2);
-        expect(expectedResult).toEqual([similarityCluster, similarityCluster2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(similarityCluster);
+        expect(expectedResult).toContain(similarityCluster2);
       });
 
       it('should accept null and undefined values', () => {
         const similarityCluster: ISimilarityCluster = sampleWithRequiredData;
         expectedResult = service.addSimilarityClusterToCollectionIfMissing([], null, similarityCluster, undefined);
-        expect(expectedResult).toEqual([similarityCluster]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(similarityCluster);
       });
 
       it('should return initial array if no SimilarityCluster is added', () => {

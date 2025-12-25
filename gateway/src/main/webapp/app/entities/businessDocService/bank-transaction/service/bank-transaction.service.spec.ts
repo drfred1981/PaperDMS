@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IBankTransaction } from '../bank-transaction.model';
@@ -102,7 +102,8 @@ describe('BankTransaction Service', () => {
       it('should add a BankTransaction to an empty array', () => {
         const bankTransaction: IBankTransaction = sampleWithRequiredData;
         expectedResult = service.addBankTransactionToCollectionIfMissing([], bankTransaction);
-        expect(expectedResult).toEqual([bankTransaction]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(bankTransaction);
       });
 
       it('should not add a BankTransaction to an array that contains it', () => {
@@ -136,13 +137,16 @@ describe('BankTransaction Service', () => {
         const bankTransaction: IBankTransaction = sampleWithRequiredData;
         const bankTransaction2: IBankTransaction = sampleWithPartialData;
         expectedResult = service.addBankTransactionToCollectionIfMissing([], bankTransaction, bankTransaction2);
-        expect(expectedResult).toEqual([bankTransaction, bankTransaction2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(bankTransaction);
+        expect(expectedResult).toContain(bankTransaction2);
       });
 
       it('should accept null and undefined values', () => {
         const bankTransaction: IBankTransaction = sampleWithRequiredData;
         expectedResult = service.addBankTransactionToCollectionIfMissing([], null, bankTransaction, undefined);
-        expect(expectedResult).toEqual([bankTransaction]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(bankTransaction);
       });
 
       it('should return initial array if no BankTransaction is added', () => {

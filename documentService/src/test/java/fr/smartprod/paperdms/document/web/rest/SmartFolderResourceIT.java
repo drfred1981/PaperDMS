@@ -58,7 +58,7 @@ class SmartFolderResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -665,11 +665,7 @@ class SmartFolderResourceIT {
         SmartFolder partialUpdatedSmartFolder = new SmartFolder();
         partialUpdatedSmartFolder.setId(smartFolder.getId());
 
-        partialUpdatedSmartFolder
-            .autoRefresh(UPDATED_AUTO_REFRESH)
-            .isPublic(UPDATED_IS_PUBLIC)
-            .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedSmartFolder.name(UPDATED_NAME).isPublic(UPDATED_IS_PUBLIC).createdDate(UPDATED_CREATED_DATE);
 
         restSmartFolderMockMvc
             .perform(

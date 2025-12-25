@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IPerformanceMetric = {
   metricType: 'STORAGE_IOPS',
   value: 22768.13,
   unit: 'snoopy mid',
-  timestamp: dayjs('2025-12-20T02:07'),
+  timestamp: dayjs('2025-12-24T21:06'),
 };
 
 export const sampleWithPartialData: IPerformanceMetric = {
@@ -17,7 +17,7 @@ export const sampleWithPartialData: IPerformanceMetric = {
   metricType: 'CONCURRENT_USERS',
   value: 20741.65,
   unit: 'questionable oof pac',
-  timestamp: dayjs('2025-12-20T16:25'),
+  timestamp: dayjs('2025-12-25T11:24'),
 };
 
 export const sampleWithFullData: IPerformanceMetric = {
@@ -27,7 +27,7 @@ export const sampleWithFullData: IPerformanceMetric = {
   value: 14196.77,
   unit: 'fictionalize',
   serviceName: 'numeric casement aw',
-  timestamp: dayjs('2025-12-20T04:02'),
+  timestamp: dayjs('2025-12-24T23:01'),
 };
 
 export const sampleWithNewData: NewPerformanceMetric = {
@@ -35,7 +35,7 @@ export const sampleWithNewData: NewPerformanceMetric = {
   metricType: 'CACHE_HIT_RATE',
   value: 1279.54,
   unit: 'however humidity sma',
-  timestamp: dayjs('2025-12-20T01:30'),
+  timestamp: dayjs('2025-12-24T20:30'),
   id: null,
 };
 

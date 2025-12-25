@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ImportMappingResolve from './route/import-mapping-routing-resolve.service';
 
 const importMappingRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/import-mapping').then(m => m.ImportMapping),
+    loadComponent: () => import('./list/import-mapping.component').then(m => m.ImportMappingComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const importMappingRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/import-mapping-detail').then(m => m.ImportMappingDetail),
+    loadComponent: () => import('./detail/import-mapping-detail.component').then(m => m.ImportMappingDetailComponent),
     resolve: {
       importMapping: ImportMappingResolve,
     },
@@ -24,7 +23,7 @@ const importMappingRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/import-mapping-update').then(m => m.ImportMappingUpdate),
+    loadComponent: () => import('./update/import-mapping-update.component').then(m => m.ImportMappingUpdateComponent),
     resolve: {
       importMapping: ImportMappingResolve,
     },
@@ -32,7 +31,7 @@ const importMappingRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/import-mapping-update').then(m => m.ImportMappingUpdate),
+    loadComponent: () => import('./update/import-mapping-update.component').then(m => m.ImportMappingUpdateComponent),
     resolve: {
       importMapping: ImportMappingResolve,
     },

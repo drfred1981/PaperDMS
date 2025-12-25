@@ -62,7 +62,7 @@ class DocumentVersionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -471,11 +471,7 @@ class DocumentVersionResourceIT {
         DocumentVersion partialUpdatedDocumentVersion = new DocumentVersion();
         partialUpdatedDocumentVersion.setId(documentVersion.getId());
 
-        partialUpdatedDocumentVersion
-            .versionNumber(UPDATED_VERSION_NUMBER)
-            .fileSize(UPDATED_FILE_SIZE)
-            .uploadDate(UPDATED_UPLOAD_DATE)
-            .isActive(UPDATED_IS_ACTIVE);
+        partialUpdatedDocumentVersion.sha256(UPDATED_SHA_256).s3Key(UPDATED_S_3_KEY).createdBy(UPDATED_CREATED_BY);
 
         restDocumentVersionMockMvc
             .perform(

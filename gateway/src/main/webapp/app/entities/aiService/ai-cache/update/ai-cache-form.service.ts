@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IAiCache, NewAiCache } from '../ai-cache.model';
 
@@ -55,10 +54,10 @@ export type AiCacheFormGroup = FormGroup<AiCacheFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class AiCacheFormService {
-  createAiCacheFormGroup(aiCache?: AiCacheFormGroupInput): AiCacheFormGroup {
+  createAiCacheFormGroup(aiCache: AiCacheFormGroupInput = { id: null }): AiCacheFormGroup {
     const aiCacheRawValue = this.convertAiCacheToAiCacheRawValue({
       ...this.getFormDefaults(),
-      ...(aiCache ?? { id: null }),
+      ...aiCache,
     });
     return new FormGroup<AiCacheFormGroupContent>({
       id: new FormControl(
@@ -108,10 +107,12 @@ export class AiCacheFormService {
 
   resetForm(form: AiCacheFormGroup, aiCache: AiCacheFormGroupInput): void {
     const aiCacheRawValue = this.convertAiCacheToAiCacheRawValue({ ...this.getFormDefaults(), ...aiCache });
-    form.reset({
-      ...aiCacheRawValue,
-      id: { value: aiCacheRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...aiCacheRawValue,
+        id: { value: aiCacheRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): AiCacheFormDefaults {

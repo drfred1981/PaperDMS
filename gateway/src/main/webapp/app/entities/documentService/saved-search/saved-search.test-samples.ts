@@ -9,7 +9,7 @@ export const sampleWithRequiredData: ISavedSearch = {
   isPublic: false,
   isAlert: false,
   userId: 'drug vein obnoxiously',
-  createdDate: dayjs('2025-12-20T01:12'),
+  createdDate: dayjs('2025-12-24T20:11'),
 };
 
 export const sampleWithPartialData: ISavedSearch = {
@@ -20,7 +20,7 @@ export const sampleWithPartialData: ISavedSearch = {
   isAlert: false,
   alertFrequency: 'IMMEDIATELY',
   userId: 'yak frail',
-  createdDate: dayjs('2025-12-20T12:16'),
+  createdDate: dayjs('2025-12-25T07:15'),
 };
 
 export const sampleWithFullData: ISavedSearch = {
@@ -31,7 +31,7 @@ export const sampleWithFullData: ISavedSearch = {
   isAlert: false,
   alertFrequency: 'MONTHLY',
   userId: 'fiercely louse',
-  createdDate: dayjs('2025-12-19T22:31'),
+  createdDate: dayjs('2025-12-24T17:30'),
 };
 
 export const sampleWithNewData: NewSavedSearch = {
@@ -40,7 +40,7 @@ export const sampleWithNewData: NewSavedSearch = {
   isPublic: false,
   isAlert: false,
   userId: 'elastic',
-  createdDate: dayjs('2025-12-20T04:20'),
+  createdDate: dayjs('2025-12-24T23:19'),
   id: null,
 };
 

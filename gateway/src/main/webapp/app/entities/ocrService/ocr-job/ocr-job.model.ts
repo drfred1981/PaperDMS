@@ -1,7 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { OcrEngine } from 'app/entities/enumerations/ocr-engine.model';
 import { OcrStatus } from 'app/entities/enumerations/ocr-status.model';
+import { OcrEngine } from 'app/entities/enumerations/ocr-engine.model';
 
 export interface IOcrJob {
   id: number;

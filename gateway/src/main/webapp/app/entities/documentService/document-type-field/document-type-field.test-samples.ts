@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IDocumentTypeField = {
   fieldLabel: 'now',
   isRequired: false,
   isSearchable: true,
-  createdDate: dayjs('2025-12-20T14:56'),
+  createdDate: dayjs('2025-12-25T09:55'),
 };
 
 export const sampleWithPartialData: IDocumentTypeField = {
@@ -17,7 +17,7 @@ export const sampleWithPartialData: IDocumentTypeField = {
   fieldLabel: 'qua',
   isRequired: true,
   isSearchable: false,
-  createdDate: dayjs('2025-12-20T10:01'),
+  createdDate: dayjs('2025-12-25T05:01'),
 };
 
 export const sampleWithFullData: IDocumentTypeField = {
@@ -27,7 +27,7 @@ export const sampleWithFullData: IDocumentTypeField = {
   dataType: 'ARRAY',
   isRequired: true,
   isSearchable: true,
-  createdDate: dayjs('2025-12-20T13:19'),
+  createdDate: dayjs('2025-12-25T08:18'),
 };
 
 export const sampleWithNewData: NewDocumentTypeField = {
@@ -35,7 +35,7 @@ export const sampleWithNewData: NewDocumentTypeField = {
   fieldLabel: 'swiftly zowie',
   isRequired: true,
   isSearchable: true,
-  createdDate: dayjs('2025-12-19T17:48'),
+  createdDate: dayjs('2025-12-24T12:47'),
   id: null,
 };
 

@@ -8,6 +8,7 @@ describe('Invoice Form Service', () => {
   let service: InvoiceFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(InvoiceFormService);
   });
 
@@ -68,7 +69,7 @@ describe('Invoice Form Service', () => {
       it('should return NewInvoice for default Invoice initial value', () => {
         const formGroup = service.createInvoiceFormGroup(sampleWithNewData);
 
-        const invoice = service.getInvoice(formGroup);
+        const invoice = service.getInvoice(formGroup) as any;
 
         expect(invoice).toMatchObject(sampleWithNewData);
       });
@@ -76,7 +77,7 @@ describe('Invoice Form Service', () => {
       it('should return NewInvoice for empty Invoice initial value', () => {
         const formGroup = service.createInvoiceFormGroup();
 
-        const invoice = service.getInvoice(formGroup);
+        const invoice = service.getInvoice(formGroup) as any;
 
         expect(invoice).toMatchObject({});
       });
@@ -84,7 +85,7 @@ describe('Invoice Form Service', () => {
       it('should return IInvoice', () => {
         const formGroup = service.createInvoiceFormGroup(sampleWithRequiredData);
 
-        const invoice = service.getInvoice(formGroup);
+        const invoice = service.getInvoice(formGroup) as any;
 
         expect(invoice).toMatchObject(sampleWithRequiredData);
       });

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IScanJob } from '../scan-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../scan-job.test-samples';
@@ -103,7 +103,8 @@ describe('ScanJob Service', () => {
       it('should add a ScanJob to an empty array', () => {
         const scanJob: IScanJob = sampleWithRequiredData;
         expectedResult = service.addScanJobToCollectionIfMissing([], scanJob);
-        expect(expectedResult).toEqual([scanJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scanJob);
       });
 
       it('should not add a ScanJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('ScanJob Service', () => {
         const scanJob: IScanJob = sampleWithRequiredData;
         const scanJob2: IScanJob = sampleWithPartialData;
         expectedResult = service.addScanJobToCollectionIfMissing([], scanJob, scanJob2);
-        expect(expectedResult).toEqual([scanJob, scanJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(scanJob);
+        expect(expectedResult).toContain(scanJob2);
       });
 
       it('should accept null and undefined values', () => {
         const scanJob: IScanJob = sampleWithRequiredData;
         expectedResult = service.addScanJobToCollectionIfMissing([], null, scanJob, undefined);
-        expect(expectedResult).toEqual([scanJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scanJob);
       });
 
       it('should return initial array if no ScanJob is added', () => {

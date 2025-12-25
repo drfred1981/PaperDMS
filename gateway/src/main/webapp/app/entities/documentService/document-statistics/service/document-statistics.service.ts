@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentStatistics, NewDocumentStatistics } from '../document-statistics.model';
 
 export type PartialUpdateDocumentStatistics = Partial<IDocumentStatistics> & Pick<IDocumentStatistics, 'id'>;
@@ -41,28 +41,24 @@ export class DocumentStatisticsService {
   update(documentStatistics: IDocumentStatistics): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentStatistics);
     return this.http
-      .put<RestDocumentStatistics>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentStatisticsIdentifier(documentStatistics))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestDocumentStatistics>(`${this.resourceUrl}/${this.getDocumentStatisticsIdentifier(documentStatistics)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentStatistics: PartialUpdateDocumentStatistics): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentStatistics);
     return this.http
-      .patch<RestDocumentStatistics>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentStatisticsIdentifier(documentStatistics))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentStatistics>(`${this.resourceUrl}/${this.getDocumentStatisticsIdentifier(documentStatistics)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentStatistics>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentStatistics>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -74,7 +70,7 @@ export class DocumentStatisticsService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentStatisticsIdentifier(documentStatistics: Pick<IDocumentStatistics, 'id'>): number {

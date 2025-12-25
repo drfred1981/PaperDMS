@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import NotificationResolve from './route/notification-routing-resolve.service';
 
 const notificationRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/notification').then(m => m.Notification),
+    loadComponent: () => import('./list/notification.component').then(m => m.NotificationComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const notificationRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/notification-detail').then(m => m.NotificationDetail),
+    loadComponent: () => import('./detail/notification-detail.component').then(m => m.NotificationDetailComponent),
     resolve: {
       notification: NotificationResolve,
     },
@@ -24,7 +23,7 @@ const notificationRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/notification-update').then(m => m.NotificationUpdate),
+    loadComponent: () => import('./update/notification-update.component').then(m => m.NotificationUpdateComponent),
     resolve: {
       notification: NotificationResolve,
     },
@@ -32,7 +31,7 @@ const notificationRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/notification-update').then(m => m.NotificationUpdate),
+    loadComponent: () => import('./update/notification-update.component').then(m => m.NotificationUpdateComponent),
     resolve: {
       notification: NotificationResolve,
     },

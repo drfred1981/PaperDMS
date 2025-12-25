@@ -1,11 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IWorkflowStep, NewWorkflowStep } from '../workflow-step.model';
 
 export type PartialUpdateWorkflowStep = Partial<IWorkflowStep> & Pick<IWorkflowStep, 'id'>;
@@ -25,23 +24,19 @@ export class WorkflowStepService {
   }
 
   update(workflowStep: IWorkflowStep): Observable<EntityResponseType> {
-    return this.http.put<IWorkflowStep>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getWorkflowStepIdentifier(workflowStep))}`,
-      workflowStep,
-      { observe: 'response' },
-    );
+    return this.http.put<IWorkflowStep>(`${this.resourceUrl}/${this.getWorkflowStepIdentifier(workflowStep)}`, workflowStep, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(workflowStep: PartialUpdateWorkflowStep): Observable<EntityResponseType> {
-    return this.http.patch<IWorkflowStep>(
-      `${this.resourceUrl}/${encodeURIComponent(this.getWorkflowStepIdentifier(workflowStep))}`,
-      workflowStep,
-      { observe: 'response' },
-    );
+    return this.http.patch<IWorkflowStep>(`${this.resourceUrl}/${this.getWorkflowStepIdentifier(workflowStep)}`, workflowStep, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IWorkflowStep>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.get<IWorkflowStep>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -50,7 +45,7 @@ export class WorkflowStepService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getWorkflowStepIdentifier(workflowStep: Pick<IWorkflowStep, 'id'>): number {

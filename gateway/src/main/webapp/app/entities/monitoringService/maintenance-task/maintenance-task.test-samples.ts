@@ -10,7 +10,7 @@ export const sampleWithRequiredData: IMaintenanceTask = {
   status: 'PENDING',
   isActive: true,
   createdBy: 'embarrassment headline majestic',
-  createdDate: dayjs('2025-12-20T13:24'),
+  createdDate: dayjs('2025-12-25T08:23'),
 };
 
 export const sampleWithPartialData: IMaintenanceTask = {
@@ -20,11 +20,11 @@ export const sampleWithPartialData: IMaintenanceTask = {
   schedule: 'nectarine helpfully',
   status: 'FAILED',
   isActive: false,
-  lastRun: dayjs('2025-12-20T11:22'),
+  lastRun: dayjs('2025-12-25T06:21'),
   duration: 9731,
   recordsProcessed: 15907,
   createdBy: 'norm',
-  createdDate: dayjs('2025-12-19T17:10'),
+  createdDate: dayjs('2025-12-24T12:09'),
 };
 
 export const sampleWithFullData: IMaintenanceTask = {
@@ -35,12 +35,12 @@ export const sampleWithFullData: IMaintenanceTask = {
   schedule: 'tremendously',
   status: 'FAILED',
   isActive: false,
-  lastRun: dayjs('2025-12-19T17:31'),
-  nextRun: dayjs('2025-12-20T10:26'),
+  lastRun: dayjs('2025-12-24T12:31'),
+  nextRun: dayjs('2025-12-25T05:25'),
   duration: 31861,
   recordsProcessed: 25555,
   createdBy: 'if damaged happily',
-  createdDate: dayjs('2025-12-20T15:26'),
+  createdDate: dayjs('2025-12-25T10:25'),
 };
 
 export const sampleWithNewData: NewMaintenanceTask = {
@@ -50,7 +50,7 @@ export const sampleWithNewData: NewMaintenanceTask = {
   status: 'PENDING',
   isActive: true,
   createdBy: 'meatloaf ectoderm',
-  createdDate: dayjs('2025-12-20T11:19'),
+  createdDate: dayjs('2025-12-25T06:18'),
   id: null,
 };
 

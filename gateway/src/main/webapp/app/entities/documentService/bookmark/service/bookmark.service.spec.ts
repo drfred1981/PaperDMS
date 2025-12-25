@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IBookmark } from '../bookmark.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../bookmark.test-samples';
@@ -101,7 +101,8 @@ describe('Bookmark Service', () => {
       it('should add a Bookmark to an empty array', () => {
         const bookmark: IBookmark = sampleWithRequiredData;
         expectedResult = service.addBookmarkToCollectionIfMissing([], bookmark);
-        expect(expectedResult).toEqual([bookmark]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(bookmark);
       });
 
       it('should not add a Bookmark to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('Bookmark Service', () => {
         const bookmark: IBookmark = sampleWithRequiredData;
         const bookmark2: IBookmark = sampleWithPartialData;
         expectedResult = service.addBookmarkToCollectionIfMissing([], bookmark, bookmark2);
-        expect(expectedResult).toEqual([bookmark, bookmark2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(bookmark);
+        expect(expectedResult).toContain(bookmark2);
       });
 
       it('should accept null and undefined values', () => {
         const bookmark: IBookmark = sampleWithRequiredData;
         expectedResult = service.addBookmarkToCollectionIfMissing([], null, bookmark, undefined);
-        expect(expectedResult).toEqual([bookmark]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(bookmark);
       });
 
       it('should return initial array if no Bookmark is added', () => {

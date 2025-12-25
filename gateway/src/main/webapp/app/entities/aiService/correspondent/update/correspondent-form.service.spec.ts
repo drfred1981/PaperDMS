@@ -8,6 +8,7 @@ describe('Correspondent Form Service', () => {
   let service: CorrespondentFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(CorrespondentFormService);
   });
 
@@ -66,7 +67,7 @@ describe('Correspondent Form Service', () => {
       it('should return NewCorrespondent for default Correspondent initial value', () => {
         const formGroup = service.createCorrespondentFormGroup(sampleWithNewData);
 
-        const correspondent = service.getCorrespondent(formGroup);
+        const correspondent = service.getCorrespondent(formGroup) as any;
 
         expect(correspondent).toMatchObject(sampleWithNewData);
       });
@@ -74,7 +75,7 @@ describe('Correspondent Form Service', () => {
       it('should return NewCorrespondent for empty Correspondent initial value', () => {
         const formGroup = service.createCorrespondentFormGroup();
 
-        const correspondent = service.getCorrespondent(formGroup);
+        const correspondent = service.getCorrespondent(formGroup) as any;
 
         expect(correspondent).toMatchObject({});
       });
@@ -82,7 +83,7 @@ describe('Correspondent Form Service', () => {
       it('should return ICorrespondent', () => {
         const formGroup = service.createCorrespondentFormGroup(sampleWithRequiredData);
 
-        const correspondent = service.getCorrespondent(formGroup);
+        const correspondent = service.getCorrespondent(formGroup) as any;
 
         expect(correspondent).toMatchObject(sampleWithRequiredData);
       });

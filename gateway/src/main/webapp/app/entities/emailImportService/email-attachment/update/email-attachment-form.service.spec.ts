@@ -8,6 +8,7 @@ describe('EmailAttachment Form Service', () => {
   let service: EmailAttachmentFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(EmailAttachmentFormService);
   });
 
@@ -58,7 +59,7 @@ describe('EmailAttachment Form Service', () => {
       it('should return NewEmailAttachment for default EmailAttachment initial value', () => {
         const formGroup = service.createEmailAttachmentFormGroup(sampleWithNewData);
 
-        const emailAttachment = service.getEmailAttachment(formGroup);
+        const emailAttachment = service.getEmailAttachment(formGroup) as any;
 
         expect(emailAttachment).toMatchObject(sampleWithNewData);
       });
@@ -66,7 +67,7 @@ describe('EmailAttachment Form Service', () => {
       it('should return NewEmailAttachment for empty EmailAttachment initial value', () => {
         const formGroup = service.createEmailAttachmentFormGroup();
 
-        const emailAttachment = service.getEmailAttachment(formGroup);
+        const emailAttachment = service.getEmailAttachment(formGroup) as any;
 
         expect(emailAttachment).toMatchObject({});
       });
@@ -74,7 +75,7 @@ describe('EmailAttachment Form Service', () => {
       it('should return IEmailAttachment', () => {
         const formGroup = service.createEmailAttachmentFormGroup(sampleWithRequiredData);
 
-        const emailAttachment = service.getEmailAttachment(formGroup);
+        const emailAttachment = service.getEmailAttachment(formGroup) as any;
 
         expect(emailAttachment).toMatchObject(sampleWithRequiredData);
       });

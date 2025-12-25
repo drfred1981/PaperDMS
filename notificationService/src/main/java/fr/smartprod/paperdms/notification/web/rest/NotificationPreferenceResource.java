@@ -35,7 +35,7 @@ public class NotificationPreferenceResource {
 
     private static final String ENTITY_NAME = "notificationServiceNotificationPreference";
 
-    @Value("${jhipster.clientApp.name:notificationService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final NotificationPreferenceService notificationPreferenceService;

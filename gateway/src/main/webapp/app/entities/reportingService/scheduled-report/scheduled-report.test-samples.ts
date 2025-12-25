@@ -11,7 +11,7 @@ export const sampleWithRequiredData: IScheduledReport = {
   recipients: '../fake-data/blob/hipster.txt',
   isActive: false,
   createdBy: 'past reprimand offensively',
-  createdDate: dayjs('2025-12-19T18:01'),
+  createdDate: dayjs('2025-12-24T13:00'),
 };
 
 export const sampleWithPartialData: IScheduledReport = {
@@ -25,7 +25,7 @@ export const sampleWithPartialData: IScheduledReport = {
   recipients: '../fake-data/blob/hipster.txt',
   isActive: false,
   createdBy: 'likewise likewise rim',
-  createdDate: dayjs('2025-12-20T06:56'),
+  createdDate: dayjs('2025-12-25T01:56'),
 };
 
 export const sampleWithFullData: IScheduledReport = {
@@ -38,10 +38,10 @@ export const sampleWithFullData: IScheduledReport = {
   format: 'JSON',
   recipients: '../fake-data/blob/hipster.txt',
   isActive: false,
-  lastRun: dayjs('2025-12-20T07:01'),
-  nextRun: dayjs('2025-12-20T08:53'),
+  lastRun: dayjs('2025-12-25T02:00'),
+  nextRun: dayjs('2025-12-25T03:52'),
   createdBy: 'puny meh oof',
-  createdDate: dayjs('2025-12-19T23:15'),
+  createdDate: dayjs('2025-12-24T18:14'),
 };
 
 export const sampleWithNewData: NewScheduledReport = {
@@ -52,7 +52,7 @@ export const sampleWithNewData: NewScheduledReport = {
   recipients: '../fake-data/blob/hipster.txt',
   isActive: true,
   createdBy: 'intermix sternly',
-  createdDate: dayjs('2025-12-20T12:51'),
+  createdDate: dayjs('2025-12-25T07:50'),
   id: null,
 };
 

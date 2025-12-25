@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IEmailImport, NewEmailImport } from '../email-import.model';
 
 export type PartialUpdateEmailImport = Partial<IEmailImport> & Pick<IEmailImport, 'id'>;
@@ -42,24 +42,20 @@ export class EmailImportService {
   update(emailImport: IEmailImport): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(emailImport);
     return this.http
-      .put<RestEmailImport>(`${this.resourceUrl}/${encodeURIComponent(this.getEmailImportIdentifier(emailImport))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestEmailImport>(`${this.resourceUrl}/${this.getEmailImportIdentifier(emailImport)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(emailImport: PartialUpdateEmailImport): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(emailImport);
     return this.http
-      .patch<RestEmailImport>(`${this.resourceUrl}/${encodeURIComponent(this.getEmailImportIdentifier(emailImport))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestEmailImport>(`${this.resourceUrl}/${this.getEmailImportIdentifier(emailImport)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestEmailImport>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestEmailImport>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +67,7 @@ export class EmailImportService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getEmailImportIdentifier(emailImport: Pick<IEmailImport, 'id'>): number {

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IScanBatch, NewScanBatch } from '../scan-batch.model';
 
@@ -46,10 +45,10 @@ export type ScanBatchFormGroup = FormGroup<ScanBatchFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ScanBatchFormService {
-  createScanBatchFormGroup(scanBatch?: ScanBatchFormGroupInput): ScanBatchFormGroup {
+  createScanBatchFormGroup(scanBatch: ScanBatchFormGroupInput = { id: null }): ScanBatchFormGroup {
     const scanBatchRawValue = this.convertScanBatchToScanBatchRawValue({
       ...this.getFormDefaults(),
-      ...(scanBatch ?? { id: null }),
+      ...scanBatch,
     });
     return new FormGroup<ScanBatchFormGroupContent>({
       id: new FormControl(
@@ -84,10 +83,12 @@ export class ScanBatchFormService {
 
   resetForm(form: ScanBatchFormGroup, scanBatch: ScanBatchFormGroupInput): void {
     const scanBatchRawValue = this.convertScanBatchToScanBatchRawValue({ ...this.getFormDefaults(), ...scanBatch });
-    form.reset({
-      ...scanBatchRawValue,
-      id: { value: scanBatchRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...scanBatchRawValue,
+        id: { value: scanBatchRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ScanBatchFormDefaults {

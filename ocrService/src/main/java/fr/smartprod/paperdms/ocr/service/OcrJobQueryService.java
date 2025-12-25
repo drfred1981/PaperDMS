@@ -67,7 +67,7 @@ public class OcrJobQueryService extends QueryService<OcrJob> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<OcrJob> createSpecification(OcrJobCriteria criteria) {
-        Specification<OcrJob> specification = Specification.unrestricted();
+        Specification<OcrJob> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

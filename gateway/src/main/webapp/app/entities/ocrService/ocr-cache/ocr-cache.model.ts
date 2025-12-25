@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { OcrEngine } from 'app/entities/enumerations/ocr-engine.model';
 
 export interface IOcrCache {

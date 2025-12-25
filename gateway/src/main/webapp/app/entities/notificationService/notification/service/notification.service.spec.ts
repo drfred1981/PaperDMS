@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { INotification } from '../notification.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../notification.test-samples';
@@ -104,7 +104,8 @@ describe('Notification Service', () => {
       it('should add a Notification to an empty array', () => {
         const notification: INotification = sampleWithRequiredData;
         expectedResult = service.addNotificationToCollectionIfMissing([], notification);
-        expect(expectedResult).toEqual([notification]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notification);
       });
 
       it('should not add a Notification to an array that contains it', () => {
@@ -138,13 +139,16 @@ describe('Notification Service', () => {
         const notification: INotification = sampleWithRequiredData;
         const notification2: INotification = sampleWithPartialData;
         expectedResult = service.addNotificationToCollectionIfMissing([], notification, notification2);
-        expect(expectedResult).toEqual([notification, notification2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(notification);
+        expect(expectedResult).toContain(notification2);
       });
 
       it('should accept null and undefined values', () => {
         const notification: INotification = sampleWithRequiredData;
         expectedResult = service.addNotificationToCollectionIfMissing([], null, notification, undefined);
-        expect(expectedResult).toEqual([notification]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notification);
       });
 
       it('should return initial array if no Notification is added', () => {

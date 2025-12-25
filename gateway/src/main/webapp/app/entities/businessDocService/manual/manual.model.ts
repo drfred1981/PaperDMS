@@ -1,7 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { ManualStatus } from 'app/entities/enumerations/manual-status.model';
 import { ManualType } from 'app/entities/enumerations/manual-type.model';
+import { ManualStatus } from 'app/entities/enumerations/manual-status.model';
 
 export interface IManual {
   id: number;

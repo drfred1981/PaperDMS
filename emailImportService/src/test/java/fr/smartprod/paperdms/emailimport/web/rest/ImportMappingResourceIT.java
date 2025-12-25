@@ -65,7 +65,7 @@ class ImportMappingResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -430,9 +430,11 @@ class ImportMappingResourceIT {
 
         partialUpdatedImportMapping
             .ruleId(UPDATED_RULE_ID)
+            .emailField(UPDATED_EMAIL_FIELD)
             .documentField(UPDATED_DOCUMENT_FIELD)
             .transformation(UPDATED_TRANSFORMATION)
             .transformationConfig(UPDATED_TRANSFORMATION_CONFIG)
+            .defaultValue(UPDATED_DEFAULT_VALUE)
             .validationRegex(UPDATED_VALIDATION_REGEX);
 
         restImportMappingMockMvc

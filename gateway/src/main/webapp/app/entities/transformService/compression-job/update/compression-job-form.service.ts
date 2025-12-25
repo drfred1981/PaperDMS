@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ICompressionJob, NewCompressionJob } from '../compression-job.model';
 
@@ -55,10 +54,10 @@ export type CompressionJobFormGroup = FormGroup<CompressionJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class CompressionJobFormService {
-  createCompressionJobFormGroup(compressionJob?: CompressionJobFormGroupInput): CompressionJobFormGroup {
+  createCompressionJobFormGroup(compressionJob: CompressionJobFormGroupInput = { id: null }): CompressionJobFormGroup {
     const compressionJobRawValue = this.convertCompressionJobToCompressionJobRawValue({
       ...this.getFormDefaults(),
-      ...(compressionJob ?? { id: null }),
+      ...compressionJob,
     });
     return new FormGroup<CompressionJobFormGroupContent>({
       id: new FormControl(
@@ -108,10 +107,12 @@ export class CompressionJobFormService {
 
   resetForm(form: CompressionJobFormGroup, compressionJob: CompressionJobFormGroupInput): void {
     const compressionJobRawValue = this.convertCompressionJobToCompressionJobRawValue({ ...this.getFormDefaults(), ...compressionJob });
-    form.reset({
-      ...compressionJobRawValue,
-      id: { value: compressionJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...compressionJobRawValue,
+        id: { value: compressionJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): CompressionJobFormDefaults {

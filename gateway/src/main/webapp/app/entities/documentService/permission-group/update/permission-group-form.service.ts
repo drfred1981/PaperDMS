@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IPermissionGroup, NewPermissionGroup } from '../permission-group.model';
 
@@ -43,10 +42,10 @@ export type PermissionGroupFormGroup = FormGroup<PermissionGroupFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class PermissionGroupFormService {
-  createPermissionGroupFormGroup(permissionGroup?: PermissionGroupFormGroupInput): PermissionGroupFormGroup {
+  createPermissionGroupFormGroup(permissionGroup: PermissionGroupFormGroupInput = { id: null }): PermissionGroupFormGroup {
     const permissionGroupRawValue = this.convertPermissionGroupToPermissionGroupRawValue({
       ...this.getFormDefaults(),
-      ...(permissionGroup ?? { id: null }),
+      ...permissionGroup,
     });
     return new FormGroup<PermissionGroupFormGroupContent>({
       id: new FormControl(
@@ -82,10 +81,12 @@ export class PermissionGroupFormService {
 
   resetForm(form: PermissionGroupFormGroup, permissionGroup: PermissionGroupFormGroupInput): void {
     const permissionGroupRawValue = this.convertPermissionGroupToPermissionGroupRawValue({ ...this.getFormDefaults(), ...permissionGroup });
-    form.reset({
-      ...permissionGroupRawValue,
-      id: { value: permissionGroupRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...permissionGroupRawValue,
+        id: { value: permissionGroupRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): PermissionGroupFormDefaults {

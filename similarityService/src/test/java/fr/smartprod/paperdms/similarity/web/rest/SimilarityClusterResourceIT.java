@@ -65,7 +65,7 @@ class SimilarityClusterResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -355,7 +355,10 @@ class SimilarityClusterResourceIT {
         SimilarityCluster partialUpdatedSimilarityCluster = new SimilarityCluster();
         partialUpdatedSimilarityCluster.setId(similarityCluster.getId());
 
-        partialUpdatedSimilarityCluster.centroid(UPDATED_CENTROID).documentCount(UPDATED_DOCUMENT_COUNT).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedSimilarityCluster
+            .description(UPDATED_DESCRIPTION)
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastUpdated(UPDATED_LAST_UPDATED);
 
         restSimilarityClusterMockMvc
             .perform(

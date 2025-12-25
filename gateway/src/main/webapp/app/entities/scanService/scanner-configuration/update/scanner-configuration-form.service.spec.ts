@@ -8,6 +8,7 @@ describe('ScannerConfiguration Form Service', () => {
   let service: ScannerConfigurationFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ScannerConfigurationFormService);
   });
 
@@ -66,7 +67,7 @@ describe('ScannerConfiguration Form Service', () => {
       it('should return NewScannerConfiguration for default ScannerConfiguration initial value', () => {
         const formGroup = service.createScannerConfigurationFormGroup(sampleWithNewData);
 
-        const scannerConfiguration = service.getScannerConfiguration(formGroup);
+        const scannerConfiguration = service.getScannerConfiguration(formGroup) as any;
 
         expect(scannerConfiguration).toMatchObject(sampleWithNewData);
       });
@@ -74,7 +75,7 @@ describe('ScannerConfiguration Form Service', () => {
       it('should return NewScannerConfiguration for empty ScannerConfiguration initial value', () => {
         const formGroup = service.createScannerConfigurationFormGroup();
 
-        const scannerConfiguration = service.getScannerConfiguration(formGroup);
+        const scannerConfiguration = service.getScannerConfiguration(formGroup) as any;
 
         expect(scannerConfiguration).toMatchObject({});
       });
@@ -82,7 +83,7 @@ describe('ScannerConfiguration Form Service', () => {
       it('should return IScannerConfiguration', () => {
         const formGroup = service.createScannerConfigurationFormGroup(sampleWithRequiredData);
 
-        const scannerConfiguration = service.getScannerConfiguration(formGroup);
+        const scannerConfiguration = service.getScannerConfiguration(formGroup) as any;
 
         expect(scannerConfiguration).toMatchObject(sampleWithRequiredData);
       });

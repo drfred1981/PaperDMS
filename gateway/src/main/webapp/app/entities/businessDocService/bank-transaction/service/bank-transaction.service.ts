@@ -1,13 +1,13 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IBankTransaction, NewBankTransaction } from '../bank-transaction.model';
 
 export type PartialUpdateBankTransaction = Partial<IBankTransaction> & Pick<IBankTransaction, 'id'>;
@@ -42,16 +42,14 @@ export class BankTransactionService {
   update(bankTransaction: IBankTransaction): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(bankTransaction);
     return this.http
-      .put<RestBankTransaction>(`${this.resourceUrl}/${encodeURIComponent(this.getBankTransactionIdentifier(bankTransaction))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestBankTransaction>(`${this.resourceUrl}/${this.getBankTransactionIdentifier(bankTransaction)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(bankTransaction: PartialUpdateBankTransaction): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(bankTransaction);
     return this.http
-      .patch<RestBankTransaction>(`${this.resourceUrl}/${encodeURIComponent(this.getBankTransactionIdentifier(bankTransaction))}`, copy, {
+      .patch<RestBankTransaction>(`${this.resourceUrl}/${this.getBankTransactionIdentifier(bankTransaction)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -59,7 +57,7 @@ export class BankTransactionService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestBankTransaction>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestBankTransaction>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -71,7 +69,7 @@ export class BankTransactionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getBankTransactionIdentifier(bankTransaction: Pick<IBankTransaction, 'id'>): number {

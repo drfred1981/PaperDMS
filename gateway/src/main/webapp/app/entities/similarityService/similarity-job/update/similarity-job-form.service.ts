@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISimilarityJob, NewSimilarityJob } from '../similarity-job.model';
 
@@ -52,10 +51,10 @@ export type SimilarityJobFormGroup = FormGroup<SimilarityJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SimilarityJobFormService {
-  createSimilarityJobFormGroup(similarityJob?: SimilarityJobFormGroupInput): SimilarityJobFormGroup {
+  createSimilarityJobFormGroup(similarityJob: SimilarityJobFormGroupInput = { id: null }): SimilarityJobFormGroup {
     const similarityJobRawValue = this.convertSimilarityJobToSimilarityJobRawValue({
       ...this.getFormDefaults(),
-      ...(similarityJob ?? { id: null }),
+      ...similarityJob,
     });
     return new FormGroup<SimilarityJobFormGroupContent>({
       id: new FormControl(
@@ -96,10 +95,12 @@ export class SimilarityJobFormService {
 
   resetForm(form: SimilarityJobFormGroup, similarityJob: SimilarityJobFormGroupInput): void {
     const similarityJobRawValue = this.convertSimilarityJobToSimilarityJobRawValue({ ...this.getFormDefaults(), ...similarityJob });
-    form.reset({
-      ...similarityJobRawValue,
-      id: { value: similarityJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...similarityJobRawValue,
+        id: { value: similarityJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SimilarityJobFormDefaults {

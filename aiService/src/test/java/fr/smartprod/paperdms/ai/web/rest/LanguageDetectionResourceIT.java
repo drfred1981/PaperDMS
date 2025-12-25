@@ -74,7 +74,7 @@ class LanguageDetectionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -465,14 +465,10 @@ class LanguageDetectionResourceIT {
         partialUpdatedLanguageDetection.setId(languageDetection.getId());
 
         partialUpdatedLanguageDetection
-            .documentSha256(UPDATED_DOCUMENT_SHA_256)
             .detectedLanguage(UPDATED_DETECTED_LANGUAGE)
             .confidence(UPDATED_CONFIDENCE)
-            .detectionMethod(UPDATED_DETECTION_METHOD)
-            .alternativeLanguages(UPDATED_ALTERNATIVE_LANGUAGES)
-            .textSample(UPDATED_TEXT_SAMPLE)
-            .resultCacheKey(UPDATED_RESULT_CACHE_KEY)
-            .modelVersion(UPDATED_MODEL_VERSION);
+            .isCached(UPDATED_IS_CACHED)
+            .detectedDate(UPDATED_DETECTED_DATE);
 
         restLanguageDetectionMockMvc
             .perform(

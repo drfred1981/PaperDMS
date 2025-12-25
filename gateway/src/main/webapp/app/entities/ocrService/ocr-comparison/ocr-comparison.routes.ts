@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import OcrComparisonResolve from './route/ocr-comparison-routing-resolve.service';
 
 const ocrComparisonRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/ocr-comparison').then(m => m.OcrComparison),
+    loadComponent: () => import('./list/ocr-comparison.component').then(m => m.OcrComparisonComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const ocrComparisonRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/ocr-comparison-detail').then(m => m.OcrComparisonDetail),
+    loadComponent: () => import('./detail/ocr-comparison-detail.component').then(m => m.OcrComparisonDetailComponent),
     resolve: {
       ocrComparison: OcrComparisonResolve,
     },
@@ -24,7 +23,7 @@ const ocrComparisonRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/ocr-comparison-update').then(m => m.OcrComparisonUpdate),
+    loadComponent: () => import('./update/ocr-comparison-update.component').then(m => m.OcrComparisonUpdateComponent),
     resolve: {
       ocrComparison: OcrComparisonResolve,
     },
@@ -32,7 +31,7 @@ const ocrComparisonRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/ocr-comparison-update').then(m => m.OcrComparisonUpdate),
+    loadComponent: () => import('./update/ocr-comparison-update.component').then(m => m.OcrComparisonUpdateComponent),
     resolve: {
       ocrComparison: OcrComparisonResolve,
     },

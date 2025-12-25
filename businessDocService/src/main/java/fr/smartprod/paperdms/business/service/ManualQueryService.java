@@ -71,7 +71,7 @@ public class ManualQueryService extends QueryService<Manual> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Manual> createSpecification(ManualCriteria criteria) {
-        Specification<Manual> specification = Specification.unrestricted();
+        Specification<Manual> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

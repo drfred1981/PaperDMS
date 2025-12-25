@@ -48,8 +48,7 @@ public class ApprovalHistoryAsserts {
         assertThat(actual)
             .as("Verify ApprovalHistory relevant properties")
             .satisfies(a -> assertThat(a.getDocumentId()).as("check documentId").isEqualTo(expected.getDocumentId()))
-            .satisfies(a ->
-                assertThat(a.getWorkflowInstanceId()).as("check workflowInstanceId").isEqualTo(expected.getWorkflowInstanceId())
+            .satisfies(a -> assertThat(a.getWorkflowInstanceId()).as("check workflowInstanceId").isEqualTo(expected.getWorkflowInstanceId())
             )
             .satisfies(a -> assertThat(a.getStepNumber()).as("check stepNumber").isEqualTo(expected.getStepNumber()))
             .satisfies(a -> assertThat(a.getAction()).as("check action").isEqualTo(expected.getAction()))

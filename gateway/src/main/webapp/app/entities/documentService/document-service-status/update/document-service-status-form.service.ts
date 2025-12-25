@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentServiceStatus, NewDocumentServiceStatus } from '../document-service-status.model';
 
@@ -55,16 +54,19 @@ type DocumentServiceStatusFormGroupContent = {
   priority: FormControl<DocumentServiceStatusFormRawValue['priority']>;
   updatedBy: FormControl<DocumentServiceStatusFormRawValue['updatedBy']>;
   updatedDate: FormControl<DocumentServiceStatusFormRawValue['updatedDate']>;
+  document: FormControl<DocumentServiceStatusFormRawValue['document']>;
 };
 
 export type DocumentServiceStatusFormGroup = FormGroup<DocumentServiceStatusFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class DocumentServiceStatusFormService {
-  createDocumentServiceStatusFormGroup(documentServiceStatus?: DocumentServiceStatusFormGroupInput): DocumentServiceStatusFormGroup {
+  createDocumentServiceStatusFormGroup(
+    documentServiceStatus: DocumentServiceStatusFormGroupInput = { id: null },
+  ): DocumentServiceStatusFormGroup {
     const documentServiceStatusRawValue = this.convertDocumentServiceStatusToDocumentServiceStatusRawValue({
       ...this.getFormDefaults(),
-      ...(documentServiceStatus ?? { id: null }),
+      ...documentServiceStatus,
     });
     return new FormGroup<DocumentServiceStatusFormGroupContent>({
       id: new FormControl(
@@ -100,6 +102,9 @@ export class DocumentServiceStatusFormService {
       updatedDate: new FormControl(documentServiceStatusRawValue.updatedDate, {
         validators: [Validators.required],
       }),
+      document: new FormControl(documentServiceStatusRawValue.document, {
+        validators: [Validators.required],
+      }),
     });
   }
 
@@ -114,10 +119,12 @@ export class DocumentServiceStatusFormService {
       ...this.getFormDefaults(),
       ...documentServiceStatus,
     });
-    form.reset({
-      ...documentServiceStatusRawValue,
-      id: { value: documentServiceStatusRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentServiceStatusRawValue,
+        id: { value: documentServiceStatusRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentServiceStatusFormDefaults {

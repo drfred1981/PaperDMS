@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IWebhookLog, NewWebhookLog } from '../webhook-log.model';
 
@@ -49,10 +48,10 @@ export type WebhookLogFormGroup = FormGroup<WebhookLogFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class WebhookLogFormService {
-  createWebhookLogFormGroup(webhookLog?: WebhookLogFormGroupInput): WebhookLogFormGroup {
+  createWebhookLogFormGroup(webhookLog: WebhookLogFormGroupInput = { id: null }): WebhookLogFormGroup {
     const webhookLogRawValue = this.convertWebhookLogToWebhookLogRawValue({
       ...this.getFormDefaults(),
-      ...(webhookLog ?? { id: null }),
+      ...webhookLog,
     });
     return new FormGroup<WebhookLogFormGroupContent>({
       id: new FormControl(
@@ -92,10 +91,12 @@ export class WebhookLogFormService {
 
   resetForm(form: WebhookLogFormGroup, webhookLog: WebhookLogFormGroupInput): void {
     const webhookLogRawValue = this.convertWebhookLogToWebhookLogRawValue({ ...this.getFormDefaults(), ...webhookLog });
-    form.reset({
-      ...webhookLogRawValue,
-      id: { value: webhookLogRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...webhookLogRawValue,
+        id: { value: webhookLogRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): WebhookLogFormDefaults {

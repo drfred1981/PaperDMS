@@ -37,7 +37,7 @@ public class SimilarityJobResource {
 
     private static final String ENTITY_NAME = "similarityServiceSimilarityJob";
 
-    @Value("${jhipster.clientApp.name:similarityService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final SimilarityJobService similarityJobService;

@@ -1,0 +1,229 @@
+<div>
+  <h2 id="page-heading" data-cy="ScannerConfigurationHeading">
+    <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.home.title">Scanner Configurations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-scanner-configuration"
+        [routerLink]="['/scanner-configuration/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.home.createLabel">Create a new Scanner Configuration</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (scannerConfigurations().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.home.notFound">No Scanner Configurations found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="scannerType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.scannerType">Scanner Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ipAddress">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.ipAddress">Ip Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="port">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.port">Port</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="protocol">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.protocol">Protocol</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="manufacturer">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.manufacturer">Manufacturer</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="model">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.model">Model</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultColorMode">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.defaultColorMode">Default Color Mode</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultResolution">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.defaultResolution">Default Resolution</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultFormat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.defaultFormat">Default Format</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="capabilities">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.capabilities">Capabilities</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.scanServiceScannerConfiguration.lastModifiedDate">Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (scannerConfiguration of scannerConfigurations(); track trackId(scannerConfiguration)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/scanner-configuration', scannerConfiguration.id, 'view']">{{ scannerConfiguration.id }}</a>
+              </td>
+              <td>{{ scannerConfiguration.name }}</td>
+              <td [jhiTranslate]="'gatewayApp.ScannerType.' + (scannerConfiguration.scannerType ?? 'null')">
+                {{
+                  { null: '', NETWORK: 'NETWORK', LOCAL: 'LOCAL', MOBILE: 'MOBILE', MULTIFUNCTION: 'MULTIFUNCTION' }[
+                    scannerConfiguration.scannerType ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ scannerConfiguration.ipAddress }}</td>
+              <td>{{ scannerConfiguration.port }}</td>
+              <td>{{ scannerConfiguration.protocol }}</td>
+              <td>{{ scannerConfiguration.manufacturer }}</td>
+              <td>{{ scannerConfiguration.model }}</td>
+              <td [jhiTranslate]="'gatewayApp.ColorMode.' + (scannerConfiguration.defaultColorMode ?? 'null')">
+                {{
+                  { null: '', BLACK_WHITE: 'BLACK_WHITE', GRAYSCALE: 'GRAYSCALE', COLOR: 'COLOR', AUTO: 'AUTO' }[
+                    scannerConfiguration.defaultColorMode ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ scannerConfiguration.defaultResolution }}</td>
+              <td [jhiTranslate]="'gatewayApp.ScanFormat.' + (scannerConfiguration.defaultFormat ?? 'null')">
+                {{ { null: '', PDF: 'PDF', TIFF: 'TIFF', JPEG: 'JPEG', PNG: 'PNG' }[scannerConfiguration.defaultFormat ?? 'null'] }}
+              </td>
+              <td>{{ scannerConfiguration.capabilities }}</td>
+              <td>{{ scannerConfiguration.isActive }}</td>
+              <td>{{ scannerConfiguration.createdDate | formatMediumDatetime }}</td>
+              <td>{{ scannerConfiguration.lastModifiedDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/scanner-configuration', scannerConfiguration.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/scanner-configuration', scannerConfiguration.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(scannerConfiguration)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (scannerConfigurations().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

@@ -68,7 +68,7 @@ class TagCategoryResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/tag-categories/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -832,7 +832,7 @@ class TagCategoryResourceIT {
         TagCategory partialUpdatedTagCategory = new TagCategory();
         partialUpdatedTagCategory.setId(tagCategory.getId());
 
-        partialUpdatedTagCategory.name(UPDATED_NAME).isSystem(UPDATED_IS_SYSTEM).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedTagCategory.displayOrder(UPDATED_DISPLAY_ORDER).isSystem(UPDATED_IS_SYSTEM).createdBy(UPDATED_CREATED_BY);
 
         restTagCategoryMockMvc
             .perform(

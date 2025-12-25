@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentWatchResolve from './route/document-watch-routing-resolve.service';
 
 const documentWatchRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-watch').then(m => m.DocumentWatch),
+    loadComponent: () => import('./list/document-watch.component').then(m => m.DocumentWatchComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentWatchRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-watch-detail').then(m => m.DocumentWatchDetail),
+    loadComponent: () => import('./detail/document-watch-detail.component').then(m => m.DocumentWatchDetailComponent),
     resolve: {
       documentWatch: DocumentWatchResolve,
     },
@@ -24,7 +23,7 @@ const documentWatchRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-watch-update').then(m => m.DocumentWatchUpdate),
+    loadComponent: () => import('./update/document-watch-update.component').then(m => m.DocumentWatchUpdateComponent),
     resolve: {
       documentWatch: DocumentWatchResolve,
     },
@@ -32,7 +31,7 @@ const documentWatchRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-watch-update').then(m => m.DocumentWatchUpdate),
+    loadComponent: () => import('./update/document-watch-update.component').then(m => m.DocumentWatchUpdateComponent),
     resolve: {
       documentWatch: DocumentWatchResolve,
     },

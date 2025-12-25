@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { INotificationPreference } from '../notification-preference.model';
 import {
@@ -106,7 +106,8 @@ describe('NotificationPreference Service', () => {
       it('should add a NotificationPreference to an empty array', () => {
         const notificationPreference: INotificationPreference = sampleWithRequiredData;
         expectedResult = service.addNotificationPreferenceToCollectionIfMissing([], notificationPreference);
-        expect(expectedResult).toEqual([notificationPreference]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notificationPreference);
       });
 
       it('should not add a NotificationPreference to an array that contains it', () => {
@@ -143,13 +144,16 @@ describe('NotificationPreference Service', () => {
         const notificationPreference: INotificationPreference = sampleWithRequiredData;
         const notificationPreference2: INotificationPreference = sampleWithPartialData;
         expectedResult = service.addNotificationPreferenceToCollectionIfMissing([], notificationPreference, notificationPreference2);
-        expect(expectedResult).toEqual([notificationPreference, notificationPreference2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(notificationPreference);
+        expect(expectedResult).toContain(notificationPreference2);
       });
 
       it('should accept null and undefined values', () => {
         const notificationPreference: INotificationPreference = sampleWithRequiredData;
         expectedResult = service.addNotificationPreferenceToCollectionIfMissing([], null, notificationPreference, undefined);
-        expect(expectedResult).toEqual([notificationPreference]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(notificationPreference);
       });
 
       it('should return initial array if no NotificationPreference is added', () => {

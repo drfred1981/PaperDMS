@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IAiCache = {
   inputSha256: 'so unnecessarily',
   aiProvider: 'reschedule frightfully',
   operation: 'legend stack mid',
-  createdDate: dayjs('2025-12-19T23:14'),
+  createdDate: dayjs('2025-12-24T18:13'),
 };
 
 export const sampleWithPartialData: IAiCache = {
@@ -21,8 +21,8 @@ export const sampleWithPartialData: IAiCache = {
   inputData: '../fake-data/blob/hipster.txt',
   hits: 16485,
   cost: 489.11,
-  createdDate: dayjs('2025-12-19T17:15'),
-  expirationDate: dayjs('2025-12-20T05:04'),
+  createdDate: dayjs('2025-12-24T12:14'),
+  expirationDate: dayjs('2025-12-25T00:03'),
 };
 
 export const sampleWithFullData: IAiCache = {
@@ -39,9 +39,9 @@ export const sampleWithFullData: IAiCache = {
   metadata: '../fake-data/blob/hipster.txt',
   hits: 24327,
   cost: 21022.57,
-  lastAccessDate: dayjs('2025-12-20T00:59'),
-  createdDate: dayjs('2025-12-20T07:13'),
-  expirationDate: dayjs('2025-12-20T03:41'),
+  lastAccessDate: dayjs('2025-12-24T19:58'),
+  createdDate: dayjs('2025-12-25T02:12'),
+  expirationDate: dayjs('2025-12-24T22:40'),
 };
 
 export const sampleWithNewData: NewAiCache = {
@@ -49,7 +49,7 @@ export const sampleWithNewData: NewAiCache = {
   inputSha256: 'scaffold oh gee',
   aiProvider: 'ham',
   operation: 'beneficial elderly',
-  createdDate: dayjs('2025-12-20T00:49'),
+  createdDate: dayjs('2025-12-24T19:48'),
   id: null,
 };
 

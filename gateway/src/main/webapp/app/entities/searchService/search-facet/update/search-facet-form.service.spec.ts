@@ -8,6 +8,7 @@ describe('SearchFacet Form Service', () => {
   let service: SearchFacetFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SearchFacetFormService);
   });
 
@@ -50,7 +51,7 @@ describe('SearchFacet Form Service', () => {
       it('should return NewSearchFacet for default SearchFacet initial value', () => {
         const formGroup = service.createSearchFacetFormGroup(sampleWithNewData);
 
-        const searchFacet = service.getSearchFacet(formGroup);
+        const searchFacet = service.getSearchFacet(formGroup) as any;
 
         expect(searchFacet).toMatchObject(sampleWithNewData);
       });
@@ -58,7 +59,7 @@ describe('SearchFacet Form Service', () => {
       it('should return NewSearchFacet for empty SearchFacet initial value', () => {
         const formGroup = service.createSearchFacetFormGroup();
 
-        const searchFacet = service.getSearchFacet(formGroup);
+        const searchFacet = service.getSearchFacet(formGroup) as any;
 
         expect(searchFacet).toMatchObject({});
       });
@@ -66,7 +67,7 @@ describe('SearchFacet Form Service', () => {
       it('should return ISearchFacet', () => {
         const formGroup = service.createSearchFacetFormGroup(sampleWithRequiredData);
 
-        const searchFacet = service.getSearchFacet(formGroup);
+        const searchFacet = service.getSearchFacet(formGroup) as any;
 
         expect(searchFacet).toMatchObject(sampleWithRequiredData);
       });

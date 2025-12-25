@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IInvoice, NewInvoice } from '../invoice.model';
 
@@ -53,10 +52,10 @@ export type InvoiceFormGroup = FormGroup<InvoiceFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceFormService {
-  createInvoiceFormGroup(invoice?: InvoiceFormGroupInput): InvoiceFormGroup {
+  createInvoiceFormGroup(invoice: InvoiceFormGroupInput = { id: null }): InvoiceFormGroup {
     const invoiceRawValue = this.convertInvoiceToInvoiceRawValue({
       ...this.getFormDefaults(),
-      ...(invoice ?? { id: null }),
+      ...invoice,
     });
     return new FormGroup<InvoiceFormGroupContent>({
       id: new FormControl(
@@ -114,10 +113,12 @@ export class InvoiceFormService {
 
   resetForm(form: InvoiceFormGroup, invoice: InvoiceFormGroupInput): void {
     const invoiceRawValue = this.convertInvoiceToInvoiceRawValue({ ...this.getFormDefaults(), ...invoice });
-    form.reset({
-      ...invoiceRawValue,
-      id: { value: invoiceRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...invoiceRawValue,
+        id: { value: invoiceRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): InvoiceFormDefaults {

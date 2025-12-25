@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IAlert, NewAlert } from '../alert.model';
 
@@ -53,10 +52,10 @@ export type AlertFormGroup = FormGroup<AlertFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class AlertFormService {
-  createAlertFormGroup(alert?: AlertFormGroupInput): AlertFormGroup {
+  createAlertFormGroup(alert: AlertFormGroupInput = { id: null }): AlertFormGroup {
     const alertRawValue = this.convertAlertToAlertRawValue({
       ...this.getFormDefaults(),
-      ...(alert ?? { id: null }),
+      ...alert,
     });
     return new FormGroup<AlertFormGroupContent>({
       id: new FormControl(
@@ -108,10 +107,12 @@ export class AlertFormService {
 
   resetForm(form: AlertFormGroup, alert: AlertFormGroupInput): void {
     const alertRawValue = this.convertAlertToAlertRawValue({ ...this.getFormDefaults(), ...alert });
-    form.reset({
-      ...alertRawValue,
-      id: { value: alertRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...alertRawValue,
+        id: { value: alertRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): AlertFormDefaults {

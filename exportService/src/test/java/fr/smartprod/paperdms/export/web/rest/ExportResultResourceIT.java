@@ -75,7 +75,7 @@ class ExportResultResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -453,7 +453,17 @@ class ExportResultResourceIT {
         ExportResult partialUpdatedExportResult = new ExportResult();
         partialUpdatedExportResult.setId(exportResult.getId());
 
-        partialUpdatedExportResult.originalFileName(UPDATED_ORIGINAL_FILE_NAME).exportedPath(UPDATED_EXPORTED_PATH).status(UPDATED_STATUS);
+        partialUpdatedExportResult
+            .exportJobId(UPDATED_EXPORT_JOB_ID)
+            .documentId(UPDATED_DOCUMENT_ID)
+            .documentSha256(UPDATED_DOCUMENT_SHA_256)
+            .originalFileName(UPDATED_ORIGINAL_FILE_NAME)
+            .exportedPath(UPDATED_EXPORTED_PATH)
+            .exportedFileName(UPDATED_EXPORTED_FILE_NAME)
+            .s3ExportKey(UPDATED_S_3_EXPORT_KEY)
+            .fileSize(UPDATED_FILE_SIZE)
+            .status(UPDATED_STATUS)
+            .exportedDate(UPDATED_EXPORTED_DATE);
 
         restExportResultMockMvc
             .perform(

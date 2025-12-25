@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IComparisonJob } from '../comparison-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../comparison-job.test-samples';
@@ -101,7 +101,8 @@ describe('ComparisonJob Service', () => {
       it('should add a ComparisonJob to an empty array', () => {
         const comparisonJob: IComparisonJob = sampleWithRequiredData;
         expectedResult = service.addComparisonJobToCollectionIfMissing([], comparisonJob);
-        expect(expectedResult).toEqual([comparisonJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(comparisonJob);
       });
 
       it('should not add a ComparisonJob to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('ComparisonJob Service', () => {
         const comparisonJob: IComparisonJob = sampleWithRequiredData;
         const comparisonJob2: IComparisonJob = sampleWithPartialData;
         expectedResult = service.addComparisonJobToCollectionIfMissing([], comparisonJob, comparisonJob2);
-        expect(expectedResult).toEqual([comparisonJob, comparisonJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(comparisonJob);
+        expect(expectedResult).toContain(comparisonJob2);
       });
 
       it('should accept null and undefined values', () => {
         const comparisonJob: IComparisonJob = sampleWithRequiredData;
         expectedResult = service.addComparisonJobToCollectionIfMissing([], null, comparisonJob, undefined);
-        expect(expectedResult).toEqual([comparisonJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(comparisonJob);
       });
 
       it('should return initial array if no ComparisonJob is added', () => {

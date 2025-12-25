@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IDocument } from 'app/entities/documentService/document/document.model';
 import { ITag } from 'app/entities/documentService/tag/tag.model';
 import { TagSource } from 'app/entities/enumerations/tag-source.model';

@@ -6,7 +6,7 @@ export const sampleWithRequiredData: ITag = {
   id: 17364,
   name: 'perp loosely into',
   isSystem: false,
-  createdDate: dayjs('2025-12-20T15:23'),
+  createdDate: dayjs('2025-12-25T10:22'),
   createdBy: 'quarrelsomely merrily avalanche',
 };
 
@@ -14,7 +14,7 @@ export const sampleWithPartialData: ITag = {
   id: 26165,
   name: 'private times',
   isSystem: false,
-  createdDate: dayjs('2025-12-20T12:44'),
+  createdDate: dayjs('2025-12-25T07:43'),
   createdBy: 'barring',
 };
 
@@ -25,14 +25,14 @@ export const sampleWithFullData: ITag = {
   description: 'aw however',
   usageCount: 877,
   isSystem: false,
-  createdDate: dayjs('2025-12-20T06:03'),
+  createdDate: dayjs('2025-12-25T01:02'),
   createdBy: 'whoa',
 };
 
 export const sampleWithNewData: NewTag = {
   name: 'silk eek so',
   isSystem: false,
-  createdDate: dayjs('2025-12-19T18:34'),
+  createdDate: dayjs('2025-12-24T13:33'),
   createdBy: 'where warm',
   id: null,
 };

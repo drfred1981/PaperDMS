@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { AlertFrequency } from 'app/entities/enumerations/alert-frequency.model';
 
 export interface ISavedSearch {

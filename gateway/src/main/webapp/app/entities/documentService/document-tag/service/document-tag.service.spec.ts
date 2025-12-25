@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IDocumentTag } from '../document-tag.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../document-tag.test-samples';
@@ -101,7 +101,8 @@ describe('DocumentTag Service', () => {
       it('should add a DocumentTag to an empty array', () => {
         const documentTag: IDocumentTag = sampleWithRequiredData;
         expectedResult = service.addDocumentTagToCollectionIfMissing([], documentTag);
-        expect(expectedResult).toEqual([documentTag]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentTag);
       });
 
       it('should not add a DocumentTag to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('DocumentTag Service', () => {
         const documentTag: IDocumentTag = sampleWithRequiredData;
         const documentTag2: IDocumentTag = sampleWithPartialData;
         expectedResult = service.addDocumentTagToCollectionIfMissing([], documentTag, documentTag2);
-        expect(expectedResult).toEqual([documentTag, documentTag2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(documentTag);
+        expect(expectedResult).toContain(documentTag2);
       });
 
       it('should accept null and undefined values', () => {
         const documentTag: IDocumentTag = sampleWithRequiredData;
         expectedResult = service.addDocumentTagToCollectionIfMissing([], null, documentTag, undefined);
-        expect(expectedResult).toEqual([documentTag]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(documentTag);
       });
 
       it('should return initial array if no DocumentTag is added', () => {

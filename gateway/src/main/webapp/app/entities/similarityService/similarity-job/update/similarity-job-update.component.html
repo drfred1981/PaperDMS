@@ -1,0 +1,275 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-similarity-job-heading"
+        data-cy="SimilarityJobCreateUpdateHeading"
+        jhiTranslate="gatewayApp.similarityServiceSimilarityJob.home.createOrEditLabel"
+      >
+        Create or edit a Similarity Job
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let documentIdRef = editForm.get('documentId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentId" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.documentId"
+            >Document Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentId"
+            id="field_documentId"
+            data-cy="documentId"
+            formControlName="documentId"
+          />
+          @if (documentIdRef.invalid && (documentIdRef.dirty || documentIdRef.touched)) {
+            <div>
+              @if (editForm.get('documentId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('documentId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let documentSha256Ref = editForm.get('documentSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentSha256" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.documentSha256"
+            >Document Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="documentSha256"
+            id="field_documentSha256"
+            data-cy="documentSha256"
+            formControlName="documentSha256"
+          />
+          @if (documentSha256Ref.invalid && (documentSha256Ref.dirty || documentSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('documentSha256')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('documentSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.AiJobStatus.null' | translate }}</option>
+            @for (aiJobStatus of aiJobStatusValues; track $index) {
+              <option [value]="aiJobStatus">{{ 'gatewayApp.AiJobStatus.' + aiJobStatus | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_algorithm" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.algorithm"
+            >Algorithm</label
+          >
+          <select class="form-control" name="algorithm" formControlName="algorithm" id="field_algorithm" data-cy="algorithm">
+            <option [ngValue]="null">{{ 'gatewayApp.SimilarityAlgorithm.null' | translate }}</option>
+            @for (similarityAlgorithm of similarityAlgorithmValues; track $index) {
+              <option [value]="similarityAlgorithm">{{ 'gatewayApp.SimilarityAlgorithm.' + similarityAlgorithm | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_scope" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.scope">Scope</label>
+          <select class="form-control" name="scope" formControlName="scope" id="field_scope" data-cy="scope">
+            <option [ngValue]="null">{{ 'gatewayApp.SimilarityScope.null' | translate }}</option>
+            @for (similarityScope of similarityScopeValues; track $index) {
+              <option [value]="similarityScope">{{ 'gatewayApp.SimilarityScope.' + similarityScope | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let minSimilarityThresholdRef = editForm.get('minSimilarityThreshold')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_minSimilarityThreshold"
+            jhiTranslate="gatewayApp.similarityServiceSimilarityJob.minSimilarityThreshold"
+            >Min Similarity Threshold</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="minSimilarityThreshold"
+            id="field_minSimilarityThreshold"
+            data-cy="minSimilarityThreshold"
+            formControlName="minSimilarityThreshold"
+          />
+          @if (minSimilarityThresholdRef.invalid && (minSimilarityThresholdRef.dirty || minSimilarityThresholdRef.touched)) {
+            <div>
+              @if (editForm.get('minSimilarityThreshold')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('minSimilarityThreshold')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >This field cannot be more than 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('minSimilarityThreshold')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_matchesFound" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.matchesFound"
+            >Matches Found</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="matchesFound"
+            id="field_matchesFound"
+            data-cy="matchesFound"
+            formControlName="matchesFound"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.startDate"
+            >Start Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_errorMessage" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let createdByRef = editForm.get('createdBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="gatewayApp.similarityServiceSimilarityJob.createdBy"
+            >Created By</label
+          >
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+          @if (createdByRef.invalid && (createdByRef.dirty || createdByRef.touched)) {
+            <div>
+              @if (editForm.get('createdBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('createdBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

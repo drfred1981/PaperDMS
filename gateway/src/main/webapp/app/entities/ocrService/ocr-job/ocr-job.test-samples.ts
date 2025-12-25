@@ -10,7 +10,7 @@ export const sampleWithRequiredData: IOcrJob = {
   s3Key: 'bob',
   s3Bucket: 'so',
   isCached: true,
-  createdDate: dayjs('2025-12-20T10:42'),
+  createdDate: dayjs('2025-12-25T05:41'),
   createdBy: 'and skyscraper than',
 };
 
@@ -25,10 +25,10 @@ export const sampleWithPartialData: IOcrJob = {
   aiModel: 'pity abscond fall',
   resultCacheKey: 'nor lest guard',
   isCached: true,
-  startDate: dayjs('2025-12-19T23:01'),
-  endDate: dayjs('2025-12-20T12:04'),
+  startDate: dayjs('2025-12-24T18:00'),
+  endDate: dayjs('2025-12-25T07:03'),
   progress: 64,
-  createdDate: dayjs('2025-12-19T21:04'),
+  createdDate: dayjs('2025-12-24T16:03'),
   createdBy: 'feather joyful',
 };
 
@@ -48,8 +48,8 @@ export const sampleWithFullData: IOcrJob = {
   aiModel: 'daintily topsail',
   resultCacheKey: 'unto',
   isCached: true,
-  startDate: dayjs('2025-12-20T01:23'),
-  endDate: dayjs('2025-12-20T14:46'),
+  startDate: dayjs('2025-12-24T20:22'),
+  endDate: dayjs('2025-12-25T09:45'),
   errorMessage: '../fake-data/blob/hipster.txt',
   pageCount: 24811,
   progress: 22,
@@ -57,7 +57,7 @@ export const sampleWithFullData: IOcrJob = {
   priority: 12036,
   processingTime: 27245,
   costEstimate: 25853.9,
-  createdDate: dayjs('2025-12-20T14:39'),
+  createdDate: dayjs('2025-12-25T09:38'),
   createdBy: 'molasses remark',
 };
 
@@ -68,7 +68,7 @@ export const sampleWithNewData: NewOcrJob = {
   s3Key: 'vice nor',
   s3Bucket: 'acidly in boohoo',
   isCached: false,
-  createdDate: dayjs('2025-12-20T10:19'),
+  createdDate: dayjs('2025-12-25T05:19'),
   createdBy: 'strict properly',
   id: null,
 };

@@ -75,7 +75,7 @@ public class WorkflowQueryService extends QueryService<Workflow> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Workflow> createSpecification(WorkflowCriteria criteria) {
-        Specification<Workflow> specification = Specification.unrestricted();
+        Specification<Workflow> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

@@ -70,7 +70,7 @@ class ExtractedFieldResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/extracted-fields/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -459,7 +459,13 @@ class ExtractedFieldResourceIT {
         ExtractedField partialUpdatedExtractedField = new ExtractedField();
         partialUpdatedExtractedField.setId(extractedField.getId());
 
-        partialUpdatedExtractedField.documentId(UPDATED_DOCUMENT_ID).extractionMethod(UPDATED_EXTRACTION_METHOD);
+        partialUpdatedExtractedField
+            .documentId(UPDATED_DOCUMENT_ID)
+            .fieldKey(UPDATED_FIELD_KEY)
+            .fieldValue(UPDATED_FIELD_VALUE)
+            .confidence(UPDATED_CONFIDENCE)
+            .extractionMethod(UPDATED_EXTRACTION_METHOD)
+            .extractedDate(UPDATED_EXTRACTED_DATE);
 
         restExtractedFieldMockMvc
             .perform(

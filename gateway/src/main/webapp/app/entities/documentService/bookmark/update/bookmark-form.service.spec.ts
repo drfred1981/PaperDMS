@@ -8,6 +8,7 @@ describe('Bookmark Form Service', () => {
   let service: BookmarkFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(BookmarkFormService);
   });
 
@@ -46,7 +47,7 @@ describe('Bookmark Form Service', () => {
       it('should return NewBookmark for default Bookmark initial value', () => {
         const formGroup = service.createBookmarkFormGroup(sampleWithNewData);
 
-        const bookmark = service.getBookmark(formGroup);
+        const bookmark = service.getBookmark(formGroup) as any;
 
         expect(bookmark).toMatchObject(sampleWithNewData);
       });
@@ -54,7 +55,7 @@ describe('Bookmark Form Service', () => {
       it('should return NewBookmark for empty Bookmark initial value', () => {
         const formGroup = service.createBookmarkFormGroup();
 
-        const bookmark = service.getBookmark(formGroup);
+        const bookmark = service.getBookmark(formGroup) as any;
 
         expect(bookmark).toMatchObject({});
       });
@@ -62,7 +63,7 @@ describe('Bookmark Form Service', () => {
       it('should return IBookmark', () => {
         const formGroup = service.createBookmarkFormGroup(sampleWithRequiredData);
 
-        const bookmark = service.getBookmark(formGroup);
+        const bookmark = service.getBookmark(formGroup) as any;
 
         expect(bookmark).toMatchObject(sampleWithRequiredData);
       });

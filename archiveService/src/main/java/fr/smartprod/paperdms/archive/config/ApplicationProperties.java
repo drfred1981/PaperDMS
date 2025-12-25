@@ -33,6 +33,5 @@ public class ApplicationProperties {
             this.asyncStart = asyncStart;
         }
     }
-
     // jhipster-needle-application-properties-property-class
 }

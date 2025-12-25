@@ -8,6 +8,7 @@ describe('SearchQuery Form Service', () => {
   let service: SearchQueryFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SearchQueryFormService);
   });
 
@@ -52,7 +53,7 @@ describe('SearchQuery Form Service', () => {
       it('should return NewSearchQuery for default SearchQuery initial value', () => {
         const formGroup = service.createSearchQueryFormGroup(sampleWithNewData);
 
-        const searchQuery = service.getSearchQuery(formGroup);
+        const searchQuery = service.getSearchQuery(formGroup) as any;
 
         expect(searchQuery).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('SearchQuery Form Service', () => {
       it('should return NewSearchQuery for empty SearchQuery initial value', () => {
         const formGroup = service.createSearchQueryFormGroup();
 
-        const searchQuery = service.getSearchQuery(formGroup);
+        const searchQuery = service.getSearchQuery(formGroup) as any;
 
         expect(searchQuery).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('SearchQuery Form Service', () => {
       it('should return ISearchQuery', () => {
         const formGroup = service.createSearchQueryFormGroup(sampleWithRequiredData);
 
-        const searchQuery = service.getSearchQuery(formGroup);
+        const searchQuery = service.getSearchQuery(formGroup) as any;
 
         expect(searchQuery).toMatchObject(sampleWithRequiredData);
       });

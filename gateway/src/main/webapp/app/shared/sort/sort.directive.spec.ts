@@ -2,8 +2,8 @@ import { Component, DebugElement, Type } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { SortState, sortStateSignal } from './sort-state';
 import { SortDirective } from './sort.directive';
+import { SortState, sortStateSignal } from './sort-state';
 
 @Component({
   imports: [SortDirective],
@@ -15,7 +15,7 @@ import { SortDirective } from './sort.directive';
     </table>
   `,
 })
-class TestSortDirective {
+class TestSortDirectiveComponent {
   sortState = sortStateSignal({ predicate: 'ID' });
   transition = jest.fn().mockImplementation((sortState: SortState) => {
     this.sortState.set(sortState);
@@ -23,12 +23,15 @@ class TestSortDirective {
 }
 
 describe('Directive: SortDirective', () => {
-  let component: TestSortDirective;
-  let fixture: ComponentFixture<TestSortDirective>;
+  let component: TestSortDirectiveComponent;
+  let fixture: ComponentFixture<TestSortDirectiveComponent>;
   let tableRow: DebugElement;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestSortDirective);
+    TestBed.configureTestingModule({
+      imports: [TestSortDirectiveComponent],
+    });
+    fixture = TestBed.createComponent(TestSortDirectiveComponent);
     component = fixture.componentInstance;
     tableRow = fixture.debugElement.query(By.directive(SortDirective));
   });

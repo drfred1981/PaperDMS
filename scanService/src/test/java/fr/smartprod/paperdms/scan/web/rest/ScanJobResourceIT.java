@@ -99,7 +99,7 @@ class ScanJobResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1372,13 +1372,12 @@ class ScanJobResourceIT {
         partialUpdatedScanJob.setId(scanJob.getId());
 
         partialUpdatedScanJob
-            .scannerConfigId(UPDATED_SCANNER_CONFIG_ID)
+            .description(UPDATED_DESCRIPTION)
+            .batchId(UPDATED_BATCH_ID)
             .documentTypeId(UPDATED_DOCUMENT_TYPE_ID)
-            .pageCount(UPDATED_PAGE_COUNT)
-            .status(UPDATED_STATUS)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .createdBy(UPDATED_CREATED_BY);
+            .folderId(UPDATED_FOLDER_ID)
+            .fileFormat(UPDATED_FILE_FORMAT)
+            .errorMessage(UPDATED_ERROR_MESSAGE);
 
         restScanJobMockMvc
             .perform(

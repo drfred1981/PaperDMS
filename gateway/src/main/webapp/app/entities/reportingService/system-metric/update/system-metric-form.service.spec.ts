@@ -8,6 +8,7 @@ describe('SystemMetric Form Service', () => {
   let service: SystemMetricFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SystemMetricFormService);
   });
 
@@ -54,7 +55,7 @@ describe('SystemMetric Form Service', () => {
       it('should return NewSystemMetric for default SystemMetric initial value', () => {
         const formGroup = service.createSystemMetricFormGroup(sampleWithNewData);
 
-        const systemMetric = service.getSystemMetric(formGroup);
+        const systemMetric = service.getSystemMetric(formGroup) as any;
 
         expect(systemMetric).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('SystemMetric Form Service', () => {
       it('should return NewSystemMetric for empty SystemMetric initial value', () => {
         const formGroup = service.createSystemMetricFormGroup();
 
-        const systemMetric = service.getSystemMetric(formGroup);
+        const systemMetric = service.getSystemMetric(formGroup) as any;
 
         expect(systemMetric).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('SystemMetric Form Service', () => {
       it('should return ISystemMetric', () => {
         const formGroup = service.createSystemMetricFormGroup(sampleWithRequiredData);
 
-        const systemMetric = service.getSystemMetric(formGroup);
+        const systemMetric = service.getSystemMetric(formGroup) as any;
 
         expect(systemMetric).toMatchObject(sampleWithRequiredData);
       });

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { INotificationEvent, NewNotificationEvent } from '../notification-event.model';
 
 export type PartialUpdateNotificationEvent = Partial<INotificationEvent> & Pick<INotificationEvent, 'id'>;
@@ -42,28 +42,24 @@ export class NotificationEventService {
   update(notificationEvent: INotificationEvent): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(notificationEvent);
     return this.http
-      .put<RestNotificationEvent>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getNotificationEventIdentifier(notificationEvent))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestNotificationEvent>(`${this.resourceUrl}/${this.getNotificationEventIdentifier(notificationEvent)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(notificationEvent: PartialUpdateNotificationEvent): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(notificationEvent);
     return this.http
-      .patch<RestNotificationEvent>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getNotificationEventIdentifier(notificationEvent))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestNotificationEvent>(`${this.resourceUrl}/${this.getNotificationEventIdentifier(notificationEvent)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestNotificationEvent>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestNotificationEvent>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -75,7 +71,7 @@ export class NotificationEventService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getNotificationEventIdentifier(notificationEvent: Pick<INotificationEvent, 'id'>): number {

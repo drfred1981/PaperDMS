@@ -8,6 +8,7 @@ describe('WebhookSubscription Form Service', () => {
   let service: WebhookSubscriptionFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(WebhookSubscriptionFormService);
   });
 
@@ -70,7 +71,7 @@ describe('WebhookSubscription Form Service', () => {
       it('should return NewWebhookSubscription for default WebhookSubscription initial value', () => {
         const formGroup = service.createWebhookSubscriptionFormGroup(sampleWithNewData);
 
-        const webhookSubscription = service.getWebhookSubscription(formGroup);
+        const webhookSubscription = service.getWebhookSubscription(formGroup) as any;
 
         expect(webhookSubscription).toMatchObject(sampleWithNewData);
       });
@@ -78,7 +79,7 @@ describe('WebhookSubscription Form Service', () => {
       it('should return NewWebhookSubscription for empty WebhookSubscription initial value', () => {
         const formGroup = service.createWebhookSubscriptionFormGroup();
 
-        const webhookSubscription = service.getWebhookSubscription(formGroup);
+        const webhookSubscription = service.getWebhookSubscription(formGroup) as any;
 
         expect(webhookSubscription).toMatchObject({});
       });
@@ -86,7 +87,7 @@ describe('WebhookSubscription Form Service', () => {
       it('should return IWebhookSubscription', () => {
         const formGroup = service.createWebhookSubscriptionFormGroup(sampleWithRequiredData);
 
-        const webhookSubscription = service.getWebhookSubscription(formGroup);
+        const webhookSubscription = service.getWebhookSubscription(formGroup) as any;
 
         expect(webhookSubscription).toMatchObject(sampleWithRequiredData);
       });

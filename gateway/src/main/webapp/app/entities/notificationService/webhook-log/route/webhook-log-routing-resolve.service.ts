@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { WebhookLogService } from '../service/webhook-log.service';
 import { IWebhookLog } from '../webhook-log.model';
+import { WebhookLogService } from '../service/webhook-log.service';
 
 const webhookLogResolve = (route: ActivatedRouteSnapshot): Observable<null | IWebhookLog> => {
   const id = route.params.id;

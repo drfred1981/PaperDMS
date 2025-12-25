@@ -8,6 +8,7 @@ describe('SmartFolder Form Service', () => {
   let service: SmartFolderFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SmartFolderFormService);
   });
 
@@ -50,7 +51,7 @@ describe('SmartFolder Form Service', () => {
       it('should return NewSmartFolder for default SmartFolder initial value', () => {
         const formGroup = service.createSmartFolderFormGroup(sampleWithNewData);
 
-        const smartFolder = service.getSmartFolder(formGroup);
+        const smartFolder = service.getSmartFolder(formGroup) as any;
 
         expect(smartFolder).toMatchObject(sampleWithNewData);
       });
@@ -58,7 +59,7 @@ describe('SmartFolder Form Service', () => {
       it('should return NewSmartFolder for empty SmartFolder initial value', () => {
         const formGroup = service.createSmartFolderFormGroup();
 
-        const smartFolder = service.getSmartFolder(formGroup);
+        const smartFolder = service.getSmartFolder(formGroup) as any;
 
         expect(smartFolder).toMatchObject({});
       });
@@ -66,7 +67,7 @@ describe('SmartFolder Form Service', () => {
       it('should return ISmartFolder', () => {
         const formGroup = service.createSmartFolderFormGroup(sampleWithRequiredData);
 
-        const smartFolder = service.getSmartFolder(formGroup);
+        const smartFolder = service.getSmartFolder(formGroup) as any;
 
         expect(smartFolder).toMatchObject(sampleWithRequiredData);
       });

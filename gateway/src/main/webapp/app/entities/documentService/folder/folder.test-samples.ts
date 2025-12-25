@@ -6,7 +6,7 @@ export const sampleWithRequiredData: IFolder = {
   id: 13315,
   name: 'frightfully closely',
   isShared: false,
-  createdDate: dayjs('2025-12-19T15:36'),
+  createdDate: dayjs('2025-12-24T10:35'),
   createdBy: 'yellow loftily',
 };
 
@@ -16,7 +16,7 @@ export const sampleWithPartialData: IFolder = {
   description: '../fake-data/blob/hipster.txt',
   path: 'drain frenetically definitive',
   isShared: false,
-  createdDate: dayjs('2025-12-20T15:02'),
+  createdDate: dayjs('2025-12-25T10:01'),
   createdBy: 'jeopardise',
 };
 
@@ -26,14 +26,14 @@ export const sampleWithFullData: IFolder = {
   description: '../fake-data/blob/hipster.txt',
   path: 'willow however bruised',
   isShared: true,
-  createdDate: dayjs('2025-12-20T09:24'),
+  createdDate: dayjs('2025-12-25T04:23'),
   createdBy: 'carelessly sans though',
 };
 
 export const sampleWithNewData: NewFolder = {
   name: 'where recklessly',
   isShared: true,
-  createdDate: dayjs('2025-12-20T11:15'),
+  createdDate: dayjs('2025-12-25T06:14'),
   createdBy: 'aw',
   id: null,
 };

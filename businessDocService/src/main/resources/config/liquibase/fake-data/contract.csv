@@ -1,11 +1,11 @@
 id;document_id;contract_number;contract_type;title;party_a;party_b;start_date;end_date;auto_renew;contract_value;currency;status;created_date
-1;12474;briefly anti doubtfully;OTHER;tray eek;menacing since once;frightfully atop in;2025-12-20;2025-12-19;false;6407.93;sha;SUSPENDED;2025-12-19T17:52:54
-2;25198;versus gestate cautious;NDA;qua yum inquisitively;crest safeguard frail;mysteriously enormously;2025-12-19;2025-12-20;false;4060.92;ste;EXPIRED;2025-12-20T01:47:29
-3;9675;punctual impact tempting;LEASE;lazily so;louse before ferociously;naturally frightfully aw;2025-12-20;2025-12-19;true;12489.15;sto;RENEWED;2025-12-20T07:16:15
-4;10224;per never chunter;PURCHASE_CONTRACT;busily;through whether guacamole;before;2025-12-20;2025-12-20;true;22863.92;brr;TERMINATED;2025-12-20T12:25:25
-5;28326;remorseful very er;SLA;pfft whereas;duh meh on;within alongside;2025-12-20;2025-12-20;true;20202.11;hun;DRAFT;2025-12-20T09:52:30
-6;11147;pfft hmph;OTHER;yet giving;modulo better throughout;unlike;2025-12-20;2025-12-20;false;28051.15;pro;RENEWED;2025-12-20T09:03:28
-7;2829;ew;LICENSE;rosin;schedule yum;yuck appropriate;2025-12-20;2025-12-20;true;25005.91;bea;PENDING_SIGNATURE;2025-12-20T06:22:13
-8;32116;efface;MAINTENANCE;upliftingly hourly reboot;ew sniveling;ick apud;2025-12-20;2025-12-19;false;21602.82;wit;ACTIVE;2025-12-20T11:37:37
-9;1292;secularize wisely;NDA;brightly;conceptualize pulp;testify gosh gosh;2025-12-20;2025-12-19;true;24194.18;bit;TERMINATED;2025-12-19T15:40:20
-10;18428;oof rationalise;LEASE;ugh vaguely brr;cheerfully gah;roasted huzzah regarding;2025-12-20;2025-12-20;true;3889.06;bir;DRAFT;2025-12-19T22:55:57
+1;12474;briefly anti doubtfully;OTHER;tray eek;menacing since once;frightfully atop in;2025-12-25;2025-12-24;false;6407.93;sha;SUSPENDED;2025-12-24T12:51:56
+2;25198;versus gestate cautious;NDA;qua yum inquisitively;crest safeguard frail;mysteriously enormously;2025-12-24;2025-12-25;false;4060.92;ste;EXPIRED;2025-12-24T20:46:31
+3;9675;punctual impact tempting;LEASE;lazily so;louse before ferociously;naturally frightfully aw;2025-12-25;2025-12-24;true;12489.15;sto;RENEWED;2025-12-25T02:15:17
+4;10224;per never chunter;PURCHASE_CONTRACT;busily;through whether guacamole;before;2025-12-25;2025-12-25;true;22863.92;brr;TERMINATED;2025-12-25T07:24:27
+5;28326;remorseful very er;SLA;pfft whereas;duh meh on;within alongside;2025-12-24;2025-12-25;true;20202.11;hun;DRAFT;2025-12-25T04:51:32
+6;11147;pfft hmph;OTHER;yet giving;modulo better throughout;unlike;2025-12-25;2025-12-24;false;28051.15;pro;RENEWED;2025-12-25T04:02:30
+7;2829;ew;LICENSE;rosin;schedule yum;yuck appropriate;2025-12-25;2025-12-24;true;25005.91;bea;PENDING_SIGNATURE;2025-12-25T01:21:15
+8;32116;efface;MAINTENANCE;upliftingly hourly reboot;ew sniveling;ick apud;2025-12-25;2025-12-24;false;21602.82;wit;ACTIVE;2025-12-25T06:36:39
+9;1292;secularize wisely;NDA;brightly;conceptualize pulp;testify gosh gosh;2025-12-25;2025-12-24;true;24194.18;bit;TERMINATED;2025-12-24T10:39:22
+10;18428;oof rationalise;LEASE;ugh vaguely brr;cheerfully gah;roasted huzzah regarding;2025-12-25;2025-12-25;true;3889.06;bir;DRAFT;2025-12-24T17:54:59

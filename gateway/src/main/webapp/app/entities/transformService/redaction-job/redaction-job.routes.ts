@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import RedactionJobResolve from './route/redaction-job-routing-resolve.service';
 
 const redactionJobRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/redaction-job').then(m => m.RedactionJob),
+    loadComponent: () => import('./list/redaction-job.component').then(m => m.RedactionJobComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const redactionJobRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/redaction-job-detail').then(m => m.RedactionJobDetail),
+    loadComponent: () => import('./detail/redaction-job-detail.component').then(m => m.RedactionJobDetailComponent),
     resolve: {
       redactionJob: RedactionJobResolve,
     },
@@ -24,7 +23,7 @@ const redactionJobRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/redaction-job-update').then(m => m.RedactionJobUpdate),
+    loadComponent: () => import('./update/redaction-job-update.component').then(m => m.RedactionJobUpdateComponent),
     resolve: {
       redactionJob: RedactionJobResolve,
     },
@@ -32,7 +31,7 @@ const redactionJobRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/redaction-job-update').then(m => m.RedactionJobUpdate),
+    loadComponent: () => import('./update/redaction-job-update.component').then(m => m.RedactionJobUpdateComponent),
     resolve: {
       redactionJob: RedactionJobResolve,
     },

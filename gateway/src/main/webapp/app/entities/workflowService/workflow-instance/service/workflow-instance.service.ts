@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IWorkflowInstance, NewWorkflowInstance } from '../workflow-instance.model';
 
 export type PartialUpdateWorkflowInstance = Partial<IWorkflowInstance> & Pick<IWorkflowInstance, 'id'>;
@@ -44,7 +44,7 @@ export class WorkflowInstanceService {
   update(workflowInstance: IWorkflowInstance): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(workflowInstance);
     return this.http
-      .put<RestWorkflowInstance>(`${this.resourceUrl}/${encodeURIComponent(this.getWorkflowInstanceIdentifier(workflowInstance))}`, copy, {
+      .put<RestWorkflowInstance>(`${this.resourceUrl}/${this.getWorkflowInstanceIdentifier(workflowInstance)}`, copy, {
         observe: 'response',
       })
       .pipe(map(res => this.convertResponseFromServer(res)));
@@ -53,17 +53,15 @@ export class WorkflowInstanceService {
   partialUpdate(workflowInstance: PartialUpdateWorkflowInstance): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(workflowInstance);
     return this.http
-      .patch<RestWorkflowInstance>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getWorkflowInstanceIdentifier(workflowInstance))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestWorkflowInstance>(`${this.resourceUrl}/${this.getWorkflowInstanceIdentifier(workflowInstance)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestWorkflowInstance>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestWorkflowInstance>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -75,7 +73,7 @@ export class WorkflowInstanceService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getWorkflowInstanceIdentifier(workflowInstance: Pick<IWorkflowInstance, 'id'>): number {

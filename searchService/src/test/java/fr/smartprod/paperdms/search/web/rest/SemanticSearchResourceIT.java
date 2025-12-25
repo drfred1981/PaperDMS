@@ -65,7 +65,7 @@ class SemanticSearchResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -710,10 +710,11 @@ class SemanticSearchResourceIT {
 
         partialUpdatedSemanticSearch
             .query(UPDATED_QUERY)
+            .queryEmbedding(UPDATED_QUERY_EMBEDDING)
+            .results(UPDATED_RESULTS)
             .modelUsed(UPDATED_MODEL_USED)
             .executionTime(UPDATED_EXECUTION_TIME)
-            .userId(UPDATED_USER_ID)
-            .searchDate(UPDATED_SEARCH_DATE);
+            .userId(UPDATED_USER_ID);
 
         restSemanticSearchMockMvc
             .perform(

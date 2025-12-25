@@ -1,7 +1,6 @@
 import dayjs from 'dayjs/esm';
-
-import { ReportExecutionStatus } from 'app/entities/enumerations/report-execution-status.model';
 import { IScheduledReport } from 'app/entities/reportingService/scheduled-report/scheduled-report.model';
+import { ReportExecutionStatus } from 'app/entities/enumerations/report-execution-status.model';
 
 export interface IReportExecution {
   id: number;

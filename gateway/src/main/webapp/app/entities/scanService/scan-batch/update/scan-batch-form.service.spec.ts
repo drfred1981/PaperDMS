@@ -8,6 +8,7 @@ describe('ScanBatch Form Service', () => {
   let service: ScanBatchFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ScanBatchFormService);
   });
 
@@ -54,7 +55,7 @@ describe('ScanBatch Form Service', () => {
       it('should return NewScanBatch for default ScanBatch initial value', () => {
         const formGroup = service.createScanBatchFormGroup(sampleWithNewData);
 
-        const scanBatch = service.getScanBatch(formGroup);
+        const scanBatch = service.getScanBatch(formGroup) as any;
 
         expect(scanBatch).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('ScanBatch Form Service', () => {
       it('should return NewScanBatch for empty ScanBatch initial value', () => {
         const formGroup = service.createScanBatchFormGroup();
 
-        const scanBatch = service.getScanBatch(formGroup);
+        const scanBatch = service.getScanBatch(formGroup) as any;
 
         expect(scanBatch).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('ScanBatch Form Service', () => {
       it('should return IScanBatch', () => {
         const formGroup = service.createScanBatchFormGroup(sampleWithRequiredData);
 
-        const scanBatch = service.getScanBatch(formGroup);
+        const scanBatch = service.getScanBatch(formGroup) as any;
 
         expect(scanBatch).toMatchObject(sampleWithRequiredData);
       });

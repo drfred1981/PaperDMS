@@ -8,6 +8,7 @@ describe('ApprovalHistory Form Service', () => {
   let service: ApprovalHistoryFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ApprovalHistoryFormService);
   });
 
@@ -56,7 +57,7 @@ describe('ApprovalHistory Form Service', () => {
       it('should return NewApprovalHistory for default ApprovalHistory initial value', () => {
         const formGroup = service.createApprovalHistoryFormGroup(sampleWithNewData);
 
-        const approvalHistory = service.getApprovalHistory(formGroup);
+        const approvalHistory = service.getApprovalHistory(formGroup) as any;
 
         expect(approvalHistory).toMatchObject(sampleWithNewData);
       });
@@ -64,7 +65,7 @@ describe('ApprovalHistory Form Service', () => {
       it('should return NewApprovalHistory for empty ApprovalHistory initial value', () => {
         const formGroup = service.createApprovalHistoryFormGroup();
 
-        const approvalHistory = service.getApprovalHistory(formGroup);
+        const approvalHistory = service.getApprovalHistory(formGroup) as any;
 
         expect(approvalHistory).toMatchObject({});
       });
@@ -72,7 +73,7 @@ describe('ApprovalHistory Form Service', () => {
       it('should return IApprovalHistory', () => {
         const formGroup = service.createApprovalHistoryFormGroup(sampleWithRequiredData);
 
-        const approvalHistory = service.getApprovalHistory(formGroup);
+        const approvalHistory = service.getApprovalHistory(formGroup) as any;
 
         expect(approvalHistory).toMatchObject(sampleWithRequiredData);
       });

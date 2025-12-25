@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentTypeField, NewDocumentTypeField } from '../document-type-field.model';
 
@@ -45,10 +44,10 @@ export type DocumentTypeFieldFormGroup = FormGroup<DocumentTypeFieldFormGroupCon
 
 @Injectable({ providedIn: 'root' })
 export class DocumentTypeFieldFormService {
-  createDocumentTypeFieldFormGroup(documentTypeField?: DocumentTypeFieldFormGroupInput): DocumentTypeFieldFormGroup {
+  createDocumentTypeFieldFormGroup(documentTypeField: DocumentTypeFieldFormGroupInput = { id: null }): DocumentTypeFieldFormGroup {
     const documentTypeFieldRawValue = this.convertDocumentTypeFieldToDocumentTypeFieldRawValue({
       ...this.getFormDefaults(),
-      ...(documentTypeField ?? { id: null }),
+      ...documentTypeField,
     });
     return new FormGroup<DocumentTypeFieldFormGroupContent>({
       id: new FormControl(
@@ -89,10 +88,12 @@ export class DocumentTypeFieldFormService {
       ...this.getFormDefaults(),
       ...documentTypeField,
     });
-    form.reset({
-      ...documentTypeFieldRawValue,
-      id: { value: documentTypeFieldRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentTypeFieldRawValue,
+        id: { value: documentTypeFieldRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentTypeFieldFormDefaults {

@@ -89,7 +89,7 @@ class ImportRuleResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1094,11 +1094,12 @@ class ImportRuleResourceIT {
         partialUpdatedImportRule.setId(importRule.getId());
 
         partialUpdatedImportRule
-            .isActive(UPDATED_IS_ACTIVE)
+            .name(UPDATED_NAME)
+            .conditions(UPDATED_CONDITIONS)
             .actions(UPDATED_ACTIONS)
             .applyTags(UPDATED_APPLY_TAGS)
-            .notifyUsers(UPDATED_NOTIFY_USERS)
-            .createdBy(UPDATED_CREATED_BY);
+            .matchCount(UPDATED_MATCH_COUNT)
+            .lastMatchDate(UPDATED_LAST_MATCH_DATE);
 
         restImportRuleMockMvc
             .perform(

@@ -1,0 +1,242 @@
+<div>
+  <h2 id="page-heading" data-cy="EmailImportHeading">
+    <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.home.title">Email Imports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-email-import"
+        [routerLink]="['/email-import/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.home.createLabel">Create a new Email Import</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (emailImports().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.home.notFound">No Email Imports found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fromEmail">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.fromEmail">From Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toEmail">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.toEmail">To Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subject">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.subject">Subject</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="body">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.body">Body</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bodyHtml">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.bodyHtml">Body Html</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="receivedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.receivedDate">Received Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.processedDate">Processed Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="folderId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.folderId">Folder Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentTypeId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.documentTypeId">Document Type Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="attachmentCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.attachmentCount">Attachment Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentsCreated">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.documentsCreated">Documents Created</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="appliedRuleId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.appliedRuleId">Applied Rule Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.errorMessage">Error Message</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metadata">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.metadata">Metadata</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="appliedRule.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportServiceEmailImport.appliedRule">Applied Rule</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (emailImport of emailImports(); track trackId(emailImport)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/email-import', emailImport.id, 'view']">{{ emailImport.id }}</a>
+              </td>
+              <td>{{ emailImport.fromEmail }}</td>
+              <td>{{ emailImport.toEmail }}</td>
+              <td>{{ emailImport.subject }}</td>
+              <td>{{ emailImport.body }}</td>
+              <td>{{ emailImport.bodyHtml }}</td>
+              <td>{{ emailImport.receivedDate | formatMediumDatetime }}</td>
+              <td>{{ emailImport.processedDate | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'gatewayApp.ImportStatus.' + (emailImport.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    PARTIAL: 'PARTIAL',
+                    FAILED: 'FAILED',
+                    IGNORED: 'IGNORED',
+                  }[emailImport.status ?? 'null']
+                }}
+              </td>
+              <td>{{ emailImport.folderId }}</td>
+              <td>{{ emailImport.documentTypeId }}</td>
+              <td>{{ emailImport.attachmentCount }}</td>
+              <td>{{ emailImport.documentsCreated }}</td>
+              <td>{{ emailImport.appliedRuleId }}</td>
+              <td>{{ emailImport.errorMessage }}</td>
+              <td>{{ emailImport.metadata }}</td>
+              <td>
+                @if (emailImport.appliedRule) {
+                  <div>
+                    <a [routerLink]="['/import-rule', emailImport.appliedRule.id, 'view']">{{ emailImport.appliedRule.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/email-import', emailImport.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/email-import', emailImport.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(emailImport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (emailImports().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

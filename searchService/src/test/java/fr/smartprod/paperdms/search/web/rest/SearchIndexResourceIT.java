@@ -72,7 +72,7 @@ class SearchIndexResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/search-indices/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -425,9 +425,11 @@ class SearchIndexResourceIT {
         partialUpdatedSearchIndex.setId(searchIndex.getId());
 
         partialUpdatedSearchIndex
+            .documentId(UPDATED_DOCUMENT_ID)
+            .indexedContent(UPDATED_INDEXED_CONTENT)
             .metadata(UPDATED_METADATA)
             .correspondents(UPDATED_CORRESPONDENTS)
-            .extractedEntities(UPDATED_EXTRACTED_ENTITIES)
+            .indexedDate(UPDATED_INDEXED_DATE)
             .lastUpdated(UPDATED_LAST_UPDATED);
 
         restSearchIndexMockMvc

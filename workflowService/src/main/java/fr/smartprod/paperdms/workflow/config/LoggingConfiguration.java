@@ -38,10 +38,10 @@ public class LoggingConfiguration {
         map.put("app_port", serverPort);
         buildProperties.ifAvailable(it -> map.put("version", it.getVersion()));
         consulRegistration.ifAvailable(it -> map.put("instance_id", it.getInstanceId()));
-        var customFields = mapper.writeValueAsString(map);
+        String customFields = mapper.writeValueAsString(map);
 
-        var loggingProperties = jHipsterProperties.getLogging();
-        var logstashProperties = loggingProperties.getLogstash();
+        JHipsterProperties.Logging loggingProperties = jHipsterProperties.getLogging();
+        JHipsterProperties.Logging.Logstash logstashProperties = loggingProperties.getLogstash();
 
         if (loggingProperties.isUseJsonFormat()) {
             addJsonConsoleAppender(context, customFields);

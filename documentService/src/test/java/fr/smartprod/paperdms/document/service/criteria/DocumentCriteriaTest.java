@@ -89,7 +89,6 @@ class DocumentCriteriaTest {
         documentCriteria.thumbnailSha256();
         documentCriteria.webpPreviewS3Key();
         documentCriteria.webpPreviewSha256();
-        documentCriteria.status();
         documentCriteria.uploadDate();
         documentCriteria.isPublic();
         documentCriteria.downloadCount();
@@ -122,7 +121,6 @@ class DocumentCriteriaTest {
                 condition.apply(criteria.getThumbnailSha256()) &&
                 condition.apply(criteria.getWebpPreviewS3Key()) &&
                 condition.apply(criteria.getWebpPreviewSha256()) &&
-                condition.apply(criteria.getStatus()) &&
                 condition.apply(criteria.getUploadDate()) &&
                 condition.apply(criteria.getIsPublic()) &&
                 condition.apply(criteria.getDownloadCount()) &&
@@ -157,7 +155,6 @@ class DocumentCriteriaTest {
                 condition.apply(criteria.getThumbnailSha256(), copy.getThumbnailSha256()) &&
                 condition.apply(criteria.getWebpPreviewS3Key(), copy.getWebpPreviewS3Key()) &&
                 condition.apply(criteria.getWebpPreviewSha256(), copy.getWebpPreviewSha256()) &&
-                condition.apply(criteria.getStatus(), copy.getStatus()) &&
                 condition.apply(criteria.getUploadDate(), copy.getUploadDate()) &&
                 condition.apply(criteria.getIsPublic(), copy.getIsPublic()) &&
                 condition.apply(criteria.getDownloadCount(), copy.getDownloadCount()) &&

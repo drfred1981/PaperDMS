@@ -8,6 +8,7 @@ describe('SimilarityJob Form Service', () => {
   let service: SimilarityJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SimilarityJobFormService);
   });
 
@@ -62,7 +63,7 @@ describe('SimilarityJob Form Service', () => {
       it('should return NewSimilarityJob for default SimilarityJob initial value', () => {
         const formGroup = service.createSimilarityJobFormGroup(sampleWithNewData);
 
-        const similarityJob = service.getSimilarityJob(formGroup);
+        const similarityJob = service.getSimilarityJob(formGroup) as any;
 
         expect(similarityJob).toMatchObject(sampleWithNewData);
       });
@@ -70,7 +71,7 @@ describe('SimilarityJob Form Service', () => {
       it('should return NewSimilarityJob for empty SimilarityJob initial value', () => {
         const formGroup = service.createSimilarityJobFormGroup();
 
-        const similarityJob = service.getSimilarityJob(formGroup);
+        const similarityJob = service.getSimilarityJob(formGroup) as any;
 
         expect(similarityJob).toMatchObject({});
       });
@@ -78,7 +79,7 @@ describe('SimilarityJob Form Service', () => {
       it('should return ISimilarityJob', () => {
         const formGroup = service.createSimilarityJobFormGroup(sampleWithRequiredData);
 
-        const similarityJob = service.getSimilarityJob(formGroup);
+        const similarityJob = service.getSimilarityJob(formGroup) as any;
 
         expect(similarityJob).toMatchObject(sampleWithRequiredData);
       });

@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import FolderResolve from './route/folder-routing-resolve.service';
 
 const folderRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/folder').then(m => m.Folder),
+    loadComponent: () => import('./list/folder.component').then(m => m.FolderComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const folderRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/folder-detail').then(m => m.FolderDetail),
+    loadComponent: () => import('./detail/folder-detail.component').then(m => m.FolderDetailComponent),
     resolve: {
       folder: FolderResolve,
     },
@@ -24,7 +23,7 @@ const folderRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/folder-update').then(m => m.FolderUpdate),
+    loadComponent: () => import('./update/folder-update.component').then(m => m.FolderUpdateComponent),
     resolve: {
       folder: FolderResolve,
     },
@@ -32,7 +31,7 @@ const folderRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/folder-update').then(m => m.FolderUpdate),
+    loadComponent: () => import('./update/folder-update.component').then(m => m.FolderUpdateComponent),
     resolve: {
       folder: FolderResolve,
     },

@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IOcrCache = {
   pageCount: 5482,
   s3ResultKey: 'buttery yet',
   s3Bucket: 'jot',
-  createdDate: dayjs('2025-12-20T10:37'),
+  createdDate: dayjs('2025-12-25T05:36'),
 };
 
 export const sampleWithPartialData: IOcrCache = {
@@ -22,8 +22,8 @@ export const sampleWithPartialData: IOcrCache = {
   extractedTextS3Key: 'ha gadzooks',
   metadata: '../fake-data/blob/hipster.txt',
   hits: 12714,
-  createdDate: dayjs('2025-12-20T10:19'),
-  expirationDate: dayjs('2025-12-20T02:21'),
+  createdDate: dayjs('2025-12-25T05:18'),
+  expirationDate: dayjs('2025-12-24T21:20'),
 };
 
 export const sampleWithFullData: IOcrCache = {
@@ -38,9 +38,9 @@ export const sampleWithFullData: IOcrCache = {
   extractedTextS3Key: 'parsnip baa defiantly',
   metadata: '../fake-data/blob/hipster.txt',
   hits: 4488,
-  lastAccessDate: dayjs('2025-12-20T14:21'),
-  createdDate: dayjs('2025-12-19T17:48'),
-  expirationDate: dayjs('2025-12-20T15:42'),
+  lastAccessDate: dayjs('2025-12-25T09:20'),
+  createdDate: dayjs('2025-12-24T12:47'),
+  expirationDate: dayjs('2025-12-25T10:41'),
 };
 
 export const sampleWithNewData: NewOcrCache = {
@@ -48,7 +48,7 @@ export const sampleWithNewData: NewOcrCache = {
   pageCount: 30618,
   s3ResultKey: 'why uh-huh',
   s3Bucket: 'pivot underneath rebuke',
-  createdDate: dayjs('2025-12-20T04:42'),
+  createdDate: dayjs('2025-12-24T23:41'),
   id: null,
 };
 

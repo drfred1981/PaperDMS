@@ -6,7 +6,7 @@ export const sampleWithRequiredData: IDocumentFingerprint = {
   id: 10584,
   documentId: 8360,
   fingerprint: '../fake-data/blob/hipster.txt',
-  computedDate: dayjs('2025-12-20T04:10'),
+  computedDate: dayjs('2025-12-24T23:09'),
 };
 
 export const sampleWithPartialData: IDocumentFingerprint = {
@@ -15,8 +15,8 @@ export const sampleWithPartialData: IDocumentFingerprint = {
   fingerprint: '../fake-data/blob/hipster.txt',
   vectorEmbedding: '../fake-data/blob/hipster.txt',
   metadata: '../fake-data/blob/hipster.txt',
-  computedDate: dayjs('2025-12-19T19:36'),
-  lastUpdated: dayjs('2025-12-20T15:06'),
+  computedDate: dayjs('2025-12-24T14:35'),
+  lastUpdated: dayjs('2025-12-25T10:05'),
 };
 
 export const sampleWithFullData: IDocumentFingerprint = {
@@ -26,14 +26,14 @@ export const sampleWithFullData: IDocumentFingerprint = {
   fingerprint: '../fake-data/blob/hipster.txt',
   vectorEmbedding: '../fake-data/blob/hipster.txt',
   metadata: '../fake-data/blob/hipster.txt',
-  computedDate: dayjs('2025-12-20T03:16'),
-  lastUpdated: dayjs('2025-12-19T20:33'),
+  computedDate: dayjs('2025-12-24T22:15'),
+  lastUpdated: dayjs('2025-12-24T15:32'),
 };
 
 export const sampleWithNewData: NewDocumentFingerprint = {
   documentId: 16819,
   fingerprint: '../fake-data/blob/hipster.txt',
-  computedDate: dayjs('2025-12-20T07:39'),
+  computedDate: dayjs('2025-12-25T02:38'),
   id: null,
 };
 

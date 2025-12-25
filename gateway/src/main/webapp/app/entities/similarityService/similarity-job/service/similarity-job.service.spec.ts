@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ISimilarityJob } from '../similarity-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../similarity-job.test-samples';
@@ -103,7 +103,8 @@ describe('SimilarityJob Service', () => {
       it('should add a SimilarityJob to an empty array', () => {
         const similarityJob: ISimilarityJob = sampleWithRequiredData;
         expectedResult = service.addSimilarityJobToCollectionIfMissing([], similarityJob);
-        expect(expectedResult).toEqual([similarityJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(similarityJob);
       });
 
       it('should not add a SimilarityJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('SimilarityJob Service', () => {
         const similarityJob: ISimilarityJob = sampleWithRequiredData;
         const similarityJob2: ISimilarityJob = sampleWithPartialData;
         expectedResult = service.addSimilarityJobToCollectionIfMissing([], similarityJob, similarityJob2);
-        expect(expectedResult).toEqual([similarityJob, similarityJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(similarityJob);
+        expect(expectedResult).toContain(similarityJob2);
       });
 
       it('should accept null and undefined values', () => {
         const similarityJob: ISimilarityJob = sampleWithRequiredData;
         expectedResult = service.addSimilarityJobToCollectionIfMissing([], null, similarityJob, undefined);
-        expect(expectedResult).toEqual([similarityJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(similarityJob);
       });
 
       it('should return initial array if no SimilarityJob is added', () => {

@@ -1,12 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { WebhookSubscriptionService } from '../service/webhook-subscription.service';
 import { IWebhookSubscription } from '../webhook-subscription.model';
+import { WebhookSubscriptionService } from '../service/webhook-subscription.service';
 
 const webhookSubscriptionResolve = (route: ActivatedRouteSnapshot): Observable<null | IWebhookSubscription> => {
   const id = route.params.id;

@@ -30,10 +30,10 @@ export type SearchFacetFormGroup = FormGroup<SearchFacetFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SearchFacetFormService {
-  createSearchFacetFormGroup(searchFacet?: SearchFacetFormGroupInput): SearchFacetFormGroup {
+  createSearchFacetFormGroup(searchFacet: SearchFacetFormGroupInput = { id: null }): SearchFacetFormGroup {
     const searchFacetRawValue = {
       ...this.getFormDefaults(),
-      ...(searchFacet ?? { id: null }),
+      ...searchFacet,
     };
     return new FormGroup<SearchFacetFormGroupContent>({
       id: new FormControl(
@@ -66,10 +66,12 @@ export class SearchFacetFormService {
 
   resetForm(form: SearchFacetFormGroup, searchFacet: SearchFacetFormGroupInput): void {
     const searchFacetRawValue = { ...this.getFormDefaults(), ...searchFacet };
-    form.reset({
-      ...searchFacetRawValue,
-      id: { value: searchFacetRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...searchFacetRawValue,
+        id: { value: searchFacetRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SearchFacetFormDefaults {

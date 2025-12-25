@@ -69,7 +69,7 @@ class NotificationTemplateResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -423,13 +423,9 @@ class NotificationTemplateResourceIT {
         partialUpdatedNotificationTemplate.setId(notificationTemplate.getId());
 
         partialUpdatedNotificationTemplate
-            .subject(UPDATED_SUBJECT)
             .bodyTemplate(UPDATED_BODY_TEMPLATE)
             .type(UPDATED_TYPE)
             .channel(UPDATED_CHANNEL)
-            .variables(UPDATED_VARIABLES)
-            .isActive(UPDATED_IS_ACTIVE)
-            .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restNotificationTemplateMockMvc

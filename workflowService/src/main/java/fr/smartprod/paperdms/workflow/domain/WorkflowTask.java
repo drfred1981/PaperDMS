@@ -5,7 +5,6 @@ import fr.smartprod.paperdms.workflow.domain.enumeration.TaskAction;
 import fr.smartprod.paperdms.workflow.domain.enumeration.TaskStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import org.hibernate.annotations.Cache;
@@ -20,7 +19,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class WorkflowTask implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

@@ -8,6 +8,7 @@ describe('DocumentProcess Form Service', () => {
   let service: DocumentProcessFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentProcessFormService);
   });
 
@@ -44,7 +45,7 @@ describe('DocumentProcess Form Service', () => {
       it('should return NewDocumentProcess for default DocumentProcess initial value', () => {
         const formGroup = service.createDocumentProcessFormGroup(sampleWithNewData);
 
-        const documentProcess = service.getDocumentProcess(formGroup);
+        const documentProcess = service.getDocumentProcess(formGroup) as any;
 
         expect(documentProcess).toMatchObject(sampleWithNewData);
       });
@@ -52,7 +53,7 @@ describe('DocumentProcess Form Service', () => {
       it('should return NewDocumentProcess for empty DocumentProcess initial value', () => {
         const formGroup = service.createDocumentProcessFormGroup();
 
-        const documentProcess = service.getDocumentProcess(formGroup);
+        const documentProcess = service.getDocumentProcess(formGroup) as any;
 
         expect(documentProcess).toMatchObject({});
       });
@@ -60,7 +61,7 @@ describe('DocumentProcess Form Service', () => {
       it('should return IDocumentProcess', () => {
         const formGroup = service.createDocumentProcessFormGroup(sampleWithRequiredData);
 
-        const documentProcess = service.getDocumentProcess(formGroup);
+        const documentProcess = service.getDocumentProcess(formGroup) as any;
 
         expect(documentProcess).toMatchObject(sampleWithRequiredData);
       });

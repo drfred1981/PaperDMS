@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IScanJob, NewScanJob } from '../scan-job.model';
 
@@ -58,10 +57,10 @@ export type ScanJobFormGroup = FormGroup<ScanJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class ScanJobFormService {
-  createScanJobFormGroup(scanJob?: ScanJobFormGroupInput): ScanJobFormGroup {
+  createScanJobFormGroup(scanJob: ScanJobFormGroupInput = { id: null }): ScanJobFormGroup {
     const scanJobRawValue = this.convertScanJobToScanJobRawValue({
       ...this.getFormDefaults(),
-      ...(scanJob ?? { id: null }),
+      ...scanJob,
     });
     return new FormGroup<ScanJobFormGroupContent>({
       id: new FormControl(
@@ -110,10 +109,12 @@ export class ScanJobFormService {
 
   resetForm(form: ScanJobFormGroup, scanJob: ScanJobFormGroupInput): void {
     const scanJobRawValue = this.convertScanJobToScanJobRawValue({ ...this.getFormDefaults(), ...scanJob });
-    form.reset({
-      ...scanJobRawValue,
-      id: { value: scanJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...scanJobRawValue,
+        id: { value: scanJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): ScanJobFormDefaults {

@@ -35,7 +35,7 @@ public class DocumentStatisticsResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentStatistics";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentStatisticsService documentStatisticsService;

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IWebhookLog } from '../webhook-log.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../webhook-log.test-samples';
@@ -101,7 +101,8 @@ describe('WebhookLog Service', () => {
       it('should add a WebhookLog to an empty array', () => {
         const webhookLog: IWebhookLog = sampleWithRequiredData;
         expectedResult = service.addWebhookLogToCollectionIfMissing([], webhookLog);
-        expect(expectedResult).toEqual([webhookLog]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(webhookLog);
       });
 
       it('should not add a WebhookLog to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('WebhookLog Service', () => {
         const webhookLog: IWebhookLog = sampleWithRequiredData;
         const webhookLog2: IWebhookLog = sampleWithPartialData;
         expectedResult = service.addWebhookLogToCollectionIfMissing([], webhookLog, webhookLog2);
-        expect(expectedResult).toEqual([webhookLog, webhookLog2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(webhookLog);
+        expect(expectedResult).toContain(webhookLog2);
       });
 
       it('should accept null and undefined values', () => {
         const webhookLog: IWebhookLog = sampleWithRequiredData;
         expectedResult = service.addWebhookLogToCollectionIfMissing([], null, webhookLog, undefined);
-        expect(expectedResult).toEqual([webhookLog]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(webhookLog);
       });
 
       it('should return initial array if no WebhookLog is added', () => {

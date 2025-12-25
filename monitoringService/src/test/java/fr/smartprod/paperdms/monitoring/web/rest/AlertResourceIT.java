@@ -81,7 +81,7 @@ class AlertResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1088,10 +1088,11 @@ class AlertResourceIT {
         partialUpdatedAlert
             .severity(UPDATED_SEVERITY)
             .message(UPDATED_MESSAGE)
+            .entityType(UPDATED_ENTITY_TYPE)
+            .entityId(UPDATED_ENTITY_ID)
             .triggeredDate(UPDATED_TRIGGERED_DATE)
             .acknowledgedBy(UPDATED_ACKNOWLEDGED_BY)
-            .acknowledgedDate(UPDATED_ACKNOWLEDGED_DATE)
-            .resolvedBy(UPDATED_RESOLVED_BY);
+            .resolvedDate(UPDATED_RESOLVED_DATE);
 
         restAlertMockMvc
             .perform(

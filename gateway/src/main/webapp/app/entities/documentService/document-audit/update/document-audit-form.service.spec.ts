@@ -8,6 +8,7 @@ describe('DocumentAudit Form Service', () => {
   let service: DocumentAuditFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentAuditFormService);
   });
 
@@ -52,7 +53,7 @@ describe('DocumentAudit Form Service', () => {
       it('should return NewDocumentAudit for default DocumentAudit initial value', () => {
         const formGroup = service.createDocumentAuditFormGroup(sampleWithNewData);
 
-        const documentAudit = service.getDocumentAudit(formGroup);
+        const documentAudit = service.getDocumentAudit(formGroup) as any;
 
         expect(documentAudit).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('DocumentAudit Form Service', () => {
       it('should return NewDocumentAudit for empty DocumentAudit initial value', () => {
         const formGroup = service.createDocumentAuditFormGroup();
 
-        const documentAudit = service.getDocumentAudit(formGroup);
+        const documentAudit = service.getDocumentAudit(formGroup) as any;
 
         expect(documentAudit).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('DocumentAudit Form Service', () => {
       it('should return IDocumentAudit', () => {
         const formGroup = service.createDocumentAuditFormGroup(sampleWithRequiredData);
 
-        const documentAudit = service.getDocumentAudit(formGroup);
+        const documentAudit = service.getDocumentAudit(formGroup) as any;
 
         expect(documentAudit).toMatchObject(sampleWithRequiredData);
       });

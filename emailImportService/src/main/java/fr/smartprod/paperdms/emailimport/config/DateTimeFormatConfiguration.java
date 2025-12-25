@@ -13,7 +13,7 @@ public class DateTimeFormatConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        var registrar = new DateTimeFormatterRegistrar();
+        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
         registrar.setUseIsoFormat(true);
         registrar.registerFormatters(registry);
     }

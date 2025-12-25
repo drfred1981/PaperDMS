@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ExtractedFieldResolve from './route/extracted-field-routing-resolve.service';
 
 const extractedFieldRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/extracted-field').then(m => m.ExtractedField),
+    loadComponent: () => import('./list/extracted-field.component').then(m => m.ExtractedFieldComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const extractedFieldRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/extracted-field-detail').then(m => m.ExtractedFieldDetail),
+    loadComponent: () => import('./detail/extracted-field-detail.component').then(m => m.ExtractedFieldDetailComponent),
     resolve: {
       extractedField: ExtractedFieldResolve,
     },
@@ -24,7 +23,7 @@ const extractedFieldRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/extracted-field-update').then(m => m.ExtractedFieldUpdate),
+    loadComponent: () => import('./update/extracted-field-update.component').then(m => m.ExtractedFieldUpdateComponent),
     resolve: {
       extractedField: ExtractedFieldResolve,
     },
@@ -32,7 +31,7 @@ const extractedFieldRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/extracted-field-update').then(m => m.ExtractedFieldUpdate),
+    loadComponent: () => import('./update/extracted-field-update.component').then(m => m.ExtractedFieldUpdateComponent),
     resolve: {
       extractedField: ExtractedFieldResolve,
     },

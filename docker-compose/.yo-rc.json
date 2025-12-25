@@ -18,10 +18,10 @@
       "transformService",
       "workflowService"
     ],
-    "deploymentType": "docker-compose",
     "directoryPath": "../",
-    "jwtSecretKey": "YjAwZmI2OTc4MjlkYTgzYzQ0ZmY3ZmYxZGY2ZWE1NTA1YjY2MzBlYTliYTE3MmI0M2E3YTJjNGMzMGZiNTlmNjAzMmY3M2U0YjZhNzZlYzViYTcyNWYxMTA5OWFjY2E2YzIxYg==",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "YTA5MzllOTAxZjEwOWViMWE4ZmZmZTUyZDEwYTkzMzUyODkwOThjMWM4MGFjNDE5OWI3NzkwYTlkODFkMDc3N2ZhNmIzODBhMzdlYTYzOGJmZDY0YjA0ZWM3ZjEzOWE2YjFiZA==",
     "monitoring": "prometheus",
-    "serviceDiscoveryType": "no"
+    "serviceDiscoveryType": "consul"
   }
 }

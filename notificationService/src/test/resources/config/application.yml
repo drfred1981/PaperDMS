@@ -10,7 +10,7 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
 spring:
@@ -84,6 +84,8 @@ server:
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 jhipster:
+  clientApp:
+    name: 'notificationServiceApp'
   mail:
     from: notificationService@localhost.com
     base-url: http://127.0.0.1:8080
@@ -99,7 +101,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: NWVlMDFjNjVmN2FlOGYwOGExNjY5MjlmOGFjMzUxNjkxYzUxZDczMGFhYmY2Mzg5NGIzN2FmM2YwNjQyZTJkMjc1YzNhMThlYzVkYWZjOTE0ZjdlZWJlNTllZTU4YzRkZjU0YTE5MWNiNzllYTBmN2YzOTdjZTFhZDMyMWFkMDA=
+        base64-secret: YzUzMTViNWE3Yjc0YzhmZDVhOGZmYjRjOGZjNGJiMDI0MWNmOWQ3ZjFhMWFjYWU3MGNlYWI2ZTk2MWFiYWEwODcwOWFiYzRlNmFhNDA1MGJkN2YwZTZmNmRhOWM0NmY0MzNhZmIwZjg1MWEyYzg1YTFkZGQ2ZDg5NTViODMwMjk=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 86400

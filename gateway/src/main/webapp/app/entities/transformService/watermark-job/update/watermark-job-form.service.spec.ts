@@ -8,6 +8,7 @@ describe('WatermarkJob Form Service', () => {
   let service: WatermarkJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(WatermarkJobFormService);
   });
 
@@ -74,7 +75,7 @@ describe('WatermarkJob Form Service', () => {
       it('should return NewWatermarkJob for default WatermarkJob initial value', () => {
         const formGroup = service.createWatermarkJobFormGroup(sampleWithNewData);
 
-        const watermarkJob = service.getWatermarkJob(formGroup);
+        const watermarkJob = service.getWatermarkJob(formGroup) as any;
 
         expect(watermarkJob).toMatchObject(sampleWithNewData);
       });
@@ -82,7 +83,7 @@ describe('WatermarkJob Form Service', () => {
       it('should return NewWatermarkJob for empty WatermarkJob initial value', () => {
         const formGroup = service.createWatermarkJobFormGroup();
 
-        const watermarkJob = service.getWatermarkJob(formGroup);
+        const watermarkJob = service.getWatermarkJob(formGroup) as any;
 
         expect(watermarkJob).toMatchObject({});
       });
@@ -90,7 +91,7 @@ describe('WatermarkJob Form Service', () => {
       it('should return IWatermarkJob', () => {
         const formGroup = service.createWatermarkJobFormGroup(sampleWithRequiredData);
 
-        const watermarkJob = service.getWatermarkJob(formGroup);
+        const watermarkJob = service.getWatermarkJob(formGroup) as any;
 
         expect(watermarkJob).toMatchObject(sampleWithRequiredData);
       });

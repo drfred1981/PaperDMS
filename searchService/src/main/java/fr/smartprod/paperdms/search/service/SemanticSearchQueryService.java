@@ -67,7 +67,7 @@ public class SemanticSearchQueryService extends QueryService<SemanticSearch> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<SemanticSearch> createSpecification(SemanticSearchCriteria criteria) {
-        Specification<SemanticSearch> specification = Specification.unrestricted();
+        Specification<SemanticSearch> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

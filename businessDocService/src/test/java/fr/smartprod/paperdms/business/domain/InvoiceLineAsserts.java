@@ -53,8 +53,7 @@ public class InvoiceLineAsserts {
             .satisfies(a -> assertThat(a.getQuantity()).as("check quantity").isEqualTo(expected.getQuantity()))
             .satisfies(a -> assertThat(a.getUnitPrice()).as("check unitPrice").isEqualTo(expected.getUnitPrice()))
             .satisfies(a -> assertThat(a.getTaxRate()).as("check taxRate").isEqualTo(expected.getTaxRate()))
-            .satisfies(a ->
-                assertThat(a.getTotalAmountExclTax()).as("check totalAmountExclTax").isEqualTo(expected.getTotalAmountExclTax())
+            .satisfies(a -> assertThat(a.getTotalAmountExclTax()).as("check totalAmountExclTax").isEqualTo(expected.getTotalAmountExclTax())
             );
     }
 

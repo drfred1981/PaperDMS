@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IScannerConfiguration, NewScannerConfiguration } from '../scanner-configuration.model';
 
 export type PartialUpdateScannerConfiguration = Partial<IScannerConfiguration> & Pick<IScannerConfiguration, 'id'>;
@@ -42,28 +42,24 @@ export class ScannerConfigurationService {
   update(scannerConfiguration: IScannerConfiguration): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(scannerConfiguration);
     return this.http
-      .put<RestScannerConfiguration>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getScannerConfigurationIdentifier(scannerConfiguration))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestScannerConfiguration>(`${this.resourceUrl}/${this.getScannerConfigurationIdentifier(scannerConfiguration)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(scannerConfiguration: PartialUpdateScannerConfiguration): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(scannerConfiguration);
     return this.http
-      .patch<RestScannerConfiguration>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getScannerConfigurationIdentifier(scannerConfiguration))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestScannerConfiguration>(`${this.resourceUrl}/${this.getScannerConfigurationIdentifier(scannerConfiguration)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestScannerConfiguration>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestScannerConfiguration>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -75,7 +71,7 @@ export class ScannerConfigurationService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getScannerConfigurationIdentifier(scannerConfiguration: Pick<IScannerConfiguration, 'id'>): number {

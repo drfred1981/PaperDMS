@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IArchiveJob } from 'app/entities/archiveService/archive-job/archive-job.model';
 
 export interface IArchiveDocument {

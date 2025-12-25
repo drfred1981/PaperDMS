@@ -88,6 +88,7 @@ class DocumentServiceStatusCriteriaTest {
         documentServiceStatusCriteria.priority();
         documentServiceStatusCriteria.updatedBy();
         documentServiceStatusCriteria.updatedDate();
+        documentServiceStatusCriteria.documentId();
         documentServiceStatusCriteria.distinct();
     }
 
@@ -107,6 +108,7 @@ class DocumentServiceStatusCriteriaTest {
                 condition.apply(criteria.getPriority()) &&
                 condition.apply(criteria.getUpdatedBy()) &&
                 condition.apply(criteria.getUpdatedDate()) &&
+                condition.apply(criteria.getDocumentId()) &&
                 condition.apply(criteria.getDistinct()),
             "every filter matches"
         );
@@ -131,6 +133,7 @@ class DocumentServiceStatusCriteriaTest {
                 condition.apply(criteria.getPriority(), copy.getPriority()) &&
                 condition.apply(criteria.getUpdatedBy(), copy.getUpdatedBy()) &&
                 condition.apply(criteria.getUpdatedDate(), copy.getUpdatedDate()) &&
+                condition.apply(criteria.getDocumentId(), copy.getDocumentId()) &&
                 condition.apply(criteria.getDistinct(), copy.getDistinct()),
             "every filter matches"
         );

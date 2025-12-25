@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IWorkflowTask } from '../workflow-task.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../workflow-task.test-samples';
@@ -104,7 +104,8 @@ describe('WorkflowTask Service', () => {
       it('should add a WorkflowTask to an empty array', () => {
         const workflowTask: IWorkflowTask = sampleWithRequiredData;
         expectedResult = service.addWorkflowTaskToCollectionIfMissing([], workflowTask);
-        expect(expectedResult).toEqual([workflowTask]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflowTask);
       });
 
       it('should not add a WorkflowTask to an array that contains it', () => {
@@ -138,13 +139,16 @@ describe('WorkflowTask Service', () => {
         const workflowTask: IWorkflowTask = sampleWithRequiredData;
         const workflowTask2: IWorkflowTask = sampleWithPartialData;
         expectedResult = service.addWorkflowTaskToCollectionIfMissing([], workflowTask, workflowTask2);
-        expect(expectedResult).toEqual([workflowTask, workflowTask2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(workflowTask);
+        expect(expectedResult).toContain(workflowTask2);
       });
 
       it('should accept null and undefined values', () => {
         const workflowTask: IWorkflowTask = sampleWithRequiredData;
         expectedResult = service.addWorkflowTaskToCollectionIfMissing([], null, workflowTask, undefined);
-        expect(expectedResult).toEqual([workflowTask]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(workflowTask);
       });
 
       it('should return initial array if no WorkflowTask is added', () => {

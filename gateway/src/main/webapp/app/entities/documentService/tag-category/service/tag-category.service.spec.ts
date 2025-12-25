@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ITagCategory } from '../tag-category.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../tag-category.test-samples';
@@ -115,7 +115,8 @@ describe('TagCategory Service', () => {
       it('should add a TagCategory to an empty array', () => {
         const tagCategory: ITagCategory = sampleWithRequiredData;
         expectedResult = service.addTagCategoryToCollectionIfMissing([], tagCategory);
-        expect(expectedResult).toEqual([tagCategory]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(tagCategory);
       });
 
       it('should not add a TagCategory to an array that contains it', () => {
@@ -149,13 +150,16 @@ describe('TagCategory Service', () => {
         const tagCategory: ITagCategory = sampleWithRequiredData;
         const tagCategory2: ITagCategory = sampleWithPartialData;
         expectedResult = service.addTagCategoryToCollectionIfMissing([], tagCategory, tagCategory2);
-        expect(expectedResult).toEqual([tagCategory, tagCategory2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(tagCategory);
+        expect(expectedResult).toContain(tagCategory2);
       });
 
       it('should accept null and undefined values', () => {
         const tagCategory: ITagCategory = sampleWithRequiredData;
         expectedResult = service.addTagCategoryToCollectionIfMissing([], null, tagCategory, undefined);
-        expect(expectedResult).toEqual([tagCategory]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(tagCategory);
       });
 
       it('should return initial array if no TagCategory is added', () => {

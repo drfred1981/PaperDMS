@@ -82,7 +82,7 @@ class ExtractedTextResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/extracted-texts/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -493,9 +493,11 @@ class ExtractedTextResourceIT {
         partialUpdatedExtractedText.setId(extractedText.getId());
 
         partialUpdatedExtractedText
+            .s3ContentKey(UPDATED_S_3_CONTENT_KEY)
             .pageNumber(UPDATED_PAGE_NUMBER)
+            .language(UPDATED_LANGUAGE)
             .wordCount(UPDATED_WORD_COUNT)
-            .structuredDataS3Key(UPDATED_STRUCTURED_DATA_S_3_KEY);
+            .extractedDate(UPDATED_EXTRACTED_DATE);
 
         restExtractedTextMockMvc
             .perform(

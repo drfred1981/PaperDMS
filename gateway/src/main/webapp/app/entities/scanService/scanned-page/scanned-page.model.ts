@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IScanJob } from 'app/entities/scanService/scan-job/scan-job.model';
 
 export interface IScannedPage {

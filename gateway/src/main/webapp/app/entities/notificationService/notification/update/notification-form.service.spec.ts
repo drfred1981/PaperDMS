@@ -8,6 +8,7 @@ describe('Notification Form Service', () => {
   let service: NotificationFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(NotificationFormService);
   });
 
@@ -70,7 +71,7 @@ describe('Notification Form Service', () => {
       it('should return NewNotification for default Notification initial value', () => {
         const formGroup = service.createNotificationFormGroup(sampleWithNewData);
 
-        const notification = service.getNotification(formGroup);
+        const notification = service.getNotification(formGroup) as any;
 
         expect(notification).toMatchObject(sampleWithNewData);
       });
@@ -78,7 +79,7 @@ describe('Notification Form Service', () => {
       it('should return NewNotification for empty Notification initial value', () => {
         const formGroup = service.createNotificationFormGroup();
 
-        const notification = service.getNotification(formGroup);
+        const notification = service.getNotification(formGroup) as any;
 
         expect(notification).toMatchObject({});
       });
@@ -86,7 +87,7 @@ describe('Notification Form Service', () => {
       it('should return INotification', () => {
         const formGroup = service.createNotificationFormGroup(sampleWithRequiredData);
 
-        const notification = service.getNotification(formGroup);
+        const notification = service.getNotification(formGroup) as any;
 
         expect(notification).toMatchObject(sampleWithRequiredData);
       });

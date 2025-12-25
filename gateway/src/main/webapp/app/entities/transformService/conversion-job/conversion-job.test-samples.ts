@@ -10,7 +10,7 @@ export const sampleWithRequiredData: IConversionJob = {
   targetFormat: 'vice boohoo forenenst',
   status: 'PENDING',
   createdBy: 'above energetic quit',
-  createdDate: dayjs('2025-12-20T10:59'),
+  createdDate: dayjs('2025-12-25T05:58'),
 };
 
 export const sampleWithPartialData: IConversionJob = {
@@ -22,7 +22,7 @@ export const sampleWithPartialData: IConversionJob = {
   options: '../fake-data/blob/hipster.txt',
   status: 'FAILED',
   createdBy: 'density',
-  createdDate: dayjs('2025-12-20T07:32'),
+  createdDate: dayjs('2025-12-25T02:31'),
 };
 
 export const sampleWithFullData: IConversionJob = {
@@ -36,11 +36,11 @@ export const sampleWithFullData: IConversionJob = {
   outputS3Key: 'spotless gadzooks depot',
   outputDocumentId: 7600,
   status: 'PROCESSING',
-  startDate: dayjs('2025-12-20T04:05'),
-  endDate: dayjs('2025-12-20T05:55'),
+  startDate: dayjs('2025-12-24T23:04'),
+  endDate: dayjs('2025-12-25T00:54'),
   errorMessage: '../fake-data/blob/hipster.txt',
   createdBy: 'flawed',
-  createdDate: dayjs('2025-12-19T22:14'),
+  createdDate: dayjs('2025-12-24T17:13'),
 };
 
 export const sampleWithNewData: NewConversionJob = {
@@ -50,7 +50,7 @@ export const sampleWithNewData: NewConversionJob = {
   targetFormat: 'admonish spirited',
   status: 'PROCESSING',
   createdBy: 'conclude',
-  createdDate: dayjs('2025-12-20T06:27'),
+  createdDate: dayjs('2025-12-25T01:27'),
   id: null,
 };
 

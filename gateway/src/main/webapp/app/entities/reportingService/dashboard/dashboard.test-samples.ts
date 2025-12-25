@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IDashboard = {
   name: 'whose apud bouncy',
   isPublic: false,
   layout: '../fake-data/blob/hipster.txt',
-  createdDate: dayjs('2025-12-19T18:19'),
+  createdDate: dayjs('2025-12-24T13:18'),
 };
 
 export const sampleWithPartialData: IDashboard = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IDashboard = {
   layout: '../fake-data/blob/hipster.txt',
   refreshInterval: 20047,
   isDefault: false,
-  createdDate: dayjs('2025-12-19T17:15'),
+  createdDate: dayjs('2025-12-24T12:14'),
 };
 
 export const sampleWithFullData: IDashboard = {
@@ -30,14 +30,14 @@ export const sampleWithFullData: IDashboard = {
   layout: '../fake-data/blob/hipster.txt',
   refreshInterval: 8516,
   isDefault: true,
-  createdDate: dayjs('2025-12-20T05:37'),
+  createdDate: dayjs('2025-12-25T00:36'),
 };
 
 export const sampleWithNewData: NewDashboard = {
   name: 'excluding underneath however',
   isPublic: false,
   layout: '../fake-data/blob/hipster.txt',
-  createdDate: dayjs('2025-12-20T06:55'),
+  createdDate: dayjs('2025-12-25T01:54'),
   id: null,
 };
 

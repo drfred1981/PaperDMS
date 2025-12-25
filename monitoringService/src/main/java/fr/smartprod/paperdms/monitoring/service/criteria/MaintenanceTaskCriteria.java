@@ -2,7 +2,6 @@ package fr.smartprod.paperdms.monitoring.service.criteria;
 
 import fr.smartprod.paperdms.monitoring.domain.enumeration.MaintenanceType;
 import fr.smartprod.paperdms.monitoring.domain.enumeration.TransformStatus;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -57,7 +56,6 @@ public class MaintenanceTaskCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

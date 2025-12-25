@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IMergeJob, NewMergeJob } from '../merge-job.model';
 
@@ -57,10 +56,10 @@ export type MergeJobFormGroup = FormGroup<MergeJobFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class MergeJobFormService {
-  createMergeJobFormGroup(mergeJob?: MergeJobFormGroupInput): MergeJobFormGroup {
+  createMergeJobFormGroup(mergeJob: MergeJobFormGroupInput = { id: null }): MergeJobFormGroup {
     const mergeJobRawValue = this.convertMergeJobToMergeJobRawValue({
       ...this.getFormDefaults(),
-      ...(mergeJob ?? { id: null }),
+      ...mergeJob,
     });
     return new FormGroup<MergeJobFormGroupContent>({
       id: new FormControl(
@@ -107,10 +106,12 @@ export class MergeJobFormService {
 
   resetForm(form: MergeJobFormGroup, mergeJob: MergeJobFormGroupInput): void {
     const mergeJobRawValue = this.convertMergeJobToMergeJobRawValue({ ...this.getFormDefaults(), ...mergeJob });
-    form.reset({
-      ...mergeJobRawValue,
-      id: { value: mergeJobRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...mergeJobRawValue,
+        id: { value: mergeJobRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): MergeJobFormDefaults {

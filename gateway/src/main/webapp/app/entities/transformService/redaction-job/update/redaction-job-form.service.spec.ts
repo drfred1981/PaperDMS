@@ -8,6 +8,7 @@ describe('RedactionJob Form Service', () => {
   let service: RedactionJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(RedactionJobFormService);
   });
 
@@ -64,7 +65,7 @@ describe('RedactionJob Form Service', () => {
       it('should return NewRedactionJob for default RedactionJob initial value', () => {
         const formGroup = service.createRedactionJobFormGroup(sampleWithNewData);
 
-        const redactionJob = service.getRedactionJob(formGroup);
+        const redactionJob = service.getRedactionJob(formGroup) as any;
 
         expect(redactionJob).toMatchObject(sampleWithNewData);
       });
@@ -72,7 +73,7 @@ describe('RedactionJob Form Service', () => {
       it('should return NewRedactionJob for empty RedactionJob initial value', () => {
         const formGroup = service.createRedactionJobFormGroup();
 
-        const redactionJob = service.getRedactionJob(formGroup);
+        const redactionJob = service.getRedactionJob(formGroup) as any;
 
         expect(redactionJob).toMatchObject({});
       });
@@ -80,7 +81,7 @@ describe('RedactionJob Form Service', () => {
       it('should return IRedactionJob', () => {
         const formGroup = service.createRedactionJobFormGroup(sampleWithRequiredData);
 
-        const redactionJob = service.getRedactionJob(formGroup);
+        const redactionJob = service.getRedactionJob(formGroup) as any;
 
         expect(redactionJob).toMatchObject(sampleWithRequiredData);
       });

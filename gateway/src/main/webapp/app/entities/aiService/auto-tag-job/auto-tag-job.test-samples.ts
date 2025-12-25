@@ -8,7 +8,7 @@ export const sampleWithRequiredData: IAutoTagJob = {
   documentSha256: 'geez',
   s3Key: 'wicked safely',
   isCached: false,
-  createdDate: dayjs('2025-12-20T06:20'),
+  createdDate: dayjs('2025-12-25T01:19'),
 };
 
 export const sampleWithPartialData: IAutoTagJob = {
@@ -21,10 +21,10 @@ export const sampleWithPartialData: IAutoTagJob = {
   detectedLanguage: 'though bec',
   resultCacheKey: 'splash highly',
   isCached: false,
-  endDate: dayjs('2025-12-20T09:58'),
+  endDate: dayjs('2025-12-25T04:57'),
   errorMessage: '../fake-data/blob/hipster.txt',
   confidence: 0.86,
-  createdDate: dayjs('2025-12-19T22:30'),
+  createdDate: dayjs('2025-12-24T17:29'),
 };
 
 export const sampleWithFullData: IAutoTagJob = {
@@ -40,11 +40,11 @@ export const sampleWithFullData: IAutoTagJob = {
   modelVersion: 'pfft',
   resultCacheKey: 'ugh',
   isCached: false,
-  startDate: dayjs('2025-12-19T22:23'),
-  endDate: dayjs('2025-12-20T14:06'),
+  startDate: dayjs('2025-12-24T17:22'),
+  endDate: dayjs('2025-12-25T09:05'),
   errorMessage: '../fake-data/blob/hipster.txt',
   confidence: 0.79,
-  createdDate: dayjs('2025-12-20T06:07'),
+  createdDate: dayjs('2025-12-25T01:06'),
 };
 
 export const sampleWithNewData: NewAutoTagJob = {
@@ -52,7 +52,7 @@ export const sampleWithNewData: NewAutoTagJob = {
   documentSha256: 'within afore above',
   s3Key: 'expostulate hornet throughout',
   isCached: false,
-  createdDate: dayjs('2025-12-20T13:16'),
+  createdDate: dayjs('2025-12-25T08:15'),
   id: null,
 };
 

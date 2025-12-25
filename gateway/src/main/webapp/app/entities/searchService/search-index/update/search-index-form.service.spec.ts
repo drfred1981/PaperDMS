@@ -8,6 +8,7 @@ describe('SearchIndex Form Service', () => {
   let service: SearchIndexFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(SearchIndexFormService);
   });
 
@@ -54,7 +55,7 @@ describe('SearchIndex Form Service', () => {
       it('should return NewSearchIndex for default SearchIndex initial value', () => {
         const formGroup = service.createSearchIndexFormGroup(sampleWithNewData);
 
-        const searchIndex = service.getSearchIndex(formGroup);
+        const searchIndex = service.getSearchIndex(formGroup) as any;
 
         expect(searchIndex).toMatchObject(sampleWithNewData);
       });
@@ -62,7 +63,7 @@ describe('SearchIndex Form Service', () => {
       it('should return NewSearchIndex for empty SearchIndex initial value', () => {
         const formGroup = service.createSearchIndexFormGroup();
 
-        const searchIndex = service.getSearchIndex(formGroup);
+        const searchIndex = service.getSearchIndex(formGroup) as any;
 
         expect(searchIndex).toMatchObject({});
       });
@@ -70,7 +71,7 @@ describe('SearchIndex Form Service', () => {
       it('should return ISearchIndex', () => {
         const formGroup = service.createSearchIndexFormGroup(sampleWithRequiredData);
 
-        const searchIndex = service.getSearchIndex(formGroup);
+        const searchIndex = service.getSearchIndex(formGroup) as any;
 
         expect(searchIndex).toMatchObject(sampleWithRequiredData);
       });

@@ -64,7 +64,7 @@ class NotificationEventResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -389,8 +389,10 @@ class NotificationEventResourceIT {
         partialUpdatedNotificationEvent.setId(notificationEvent.getId());
 
         partialUpdatedNotificationEvent
+            .eventType(UPDATED_EVENT_TYPE)
             .entityType(UPDATED_ENTITY_TYPE)
-            .entityId(UPDATED_ENTITY_ID)
+            .userId(UPDATED_USER_ID)
+            .eventDate(UPDATED_EVENT_DATE)
             .processed(UPDATED_PROCESSED)
             .processedDate(UPDATED_PROCESSED_DATE);
 

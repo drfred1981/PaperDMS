@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import AlertResolve from './route/alert-routing-resolve.service';
 
 const alertRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/alert').then(m => m.Alert),
+    loadComponent: () => import('./list/alert.component').then(m => m.AlertComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const alertRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/alert-detail').then(m => m.AlertDetail),
+    loadComponent: () => import('./detail/alert-detail.component').then(m => m.AlertDetailComponent),
     resolve: {
       alert: AlertResolve,
     },
@@ -24,7 +23,7 @@ const alertRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/alert-update').then(m => m.AlertUpdate),
+    loadComponent: () => import('./update/alert-update.component').then(m => m.AlertUpdateComponent),
     resolve: {
       alert: AlertResolve,
     },
@@ -32,7 +31,7 @@ const alertRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/alert-update').then(m => m.AlertUpdate),
+    loadComponent: () => import('./update/alert-update.component').then(m => m.AlertUpdateComponent),
     resolve: {
       alert: AlertResolve,
     },

@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { IContract } from '../contract.model';
@@ -118,7 +118,8 @@ describe('Contract Service', () => {
       it('should add a Contract to an empty array', () => {
         const contract: IContract = sampleWithRequiredData;
         expectedResult = service.addContractToCollectionIfMissing([], contract);
-        expect(expectedResult).toEqual([contract]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(contract);
       });
 
       it('should not add a Contract to an array that contains it', () => {
@@ -152,13 +153,16 @@ describe('Contract Service', () => {
         const contract: IContract = sampleWithRequiredData;
         const contract2: IContract = sampleWithPartialData;
         expectedResult = service.addContractToCollectionIfMissing([], contract, contract2);
-        expect(expectedResult).toEqual([contract, contract2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(contract);
+        expect(expectedResult).toContain(contract2);
       });
 
       it('should accept null and undefined values', () => {
         const contract: IContract = sampleWithRequiredData;
         expectedResult = service.addContractToCollectionIfMissing([], null, contract, undefined);
-        expect(expectedResult).toEqual([contract]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(contract);
       });
 
       it('should return initial array if no Contract is added', () => {

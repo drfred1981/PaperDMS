@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import BookmarkResolve from './route/bookmark-routing-resolve.service';
 
 const bookmarkRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/bookmark').then(m => m.Bookmark),
+    loadComponent: () => import('./list/bookmark.component').then(m => m.BookmarkComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const bookmarkRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/bookmark-detail').then(m => m.BookmarkDetail),
+    loadComponent: () => import('./detail/bookmark-detail.component').then(m => m.BookmarkDetailComponent),
     resolve: {
       bookmark: BookmarkResolve,
     },
@@ -24,7 +23,7 @@ const bookmarkRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/bookmark-update').then(m => m.BookmarkUpdate),
+    loadComponent: () => import('./update/bookmark-update.component').then(m => m.BookmarkUpdateComponent),
     resolve: {
       bookmark: BookmarkResolve,
     },
@@ -32,7 +31,7 @@ const bookmarkRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/bookmark-update').then(m => m.BookmarkUpdate),
+    loadComponent: () => import('./update/bookmark-update.component').then(m => m.BookmarkUpdateComponent),
     resolve: {
       bookmark: BookmarkResolve,
     },

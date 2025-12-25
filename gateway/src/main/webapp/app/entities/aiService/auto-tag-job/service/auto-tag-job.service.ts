@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IAutoTagJob, NewAutoTagJob } from '../auto-tag-job.model';
 
 export type PartialUpdateAutoTagJob = Partial<IAutoTagJob> & Pick<IAutoTagJob, 'id'>;
@@ -43,24 +43,20 @@ export class AutoTagJobService {
   update(autoTagJob: IAutoTagJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(autoTagJob);
     return this.http
-      .put<RestAutoTagJob>(`${this.resourceUrl}/${encodeURIComponent(this.getAutoTagJobIdentifier(autoTagJob))}`, copy, {
-        observe: 'response',
-      })
+      .put<RestAutoTagJob>(`${this.resourceUrl}/${this.getAutoTagJobIdentifier(autoTagJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(autoTagJob: PartialUpdateAutoTagJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(autoTagJob);
     return this.http
-      .patch<RestAutoTagJob>(`${this.resourceUrl}/${encodeURIComponent(this.getAutoTagJobIdentifier(autoTagJob))}`, copy, {
-        observe: 'response',
-      })
+      .patch<RestAutoTagJob>(`${this.resourceUrl}/${this.getAutoTagJobIdentifier(autoTagJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestAutoTagJob>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestAutoTagJob>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -72,7 +68,7 @@ export class AutoTagJobService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getAutoTagJobIdentifier(autoTagJob: Pick<IAutoTagJob, 'id'>): number {

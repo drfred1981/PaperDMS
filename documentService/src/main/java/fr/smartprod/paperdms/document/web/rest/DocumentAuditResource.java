@@ -37,7 +37,7 @@ public class DocumentAuditResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentAudit";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentAuditService documentAuditService;

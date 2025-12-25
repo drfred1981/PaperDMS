@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ExtractedTextResolve from './route/extracted-text-routing-resolve.service';
 
 const extractedTextRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/extracted-text').then(m => m.ExtractedText),
+    loadComponent: () => import('./list/extracted-text.component').then(m => m.ExtractedTextComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const extractedTextRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/extracted-text-detail').then(m => m.ExtractedTextDetail),
+    loadComponent: () => import('./detail/extracted-text-detail.component').then(m => m.ExtractedTextDetailComponent),
     resolve: {
       extractedText: ExtractedTextResolve,
     },
@@ -24,7 +23,7 @@ const extractedTextRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/extracted-text-update').then(m => m.ExtractedTextUpdate),
+    loadComponent: () => import('./update/extracted-text-update.component').then(m => m.ExtractedTextUpdateComponent),
     resolve: {
       extractedText: ExtractedTextResolve,
     },
@@ -32,7 +31,7 @@ const extractedTextRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/extracted-text-update').then(m => m.ExtractedTextUpdate),
+    loadComponent: () => import('./update/extracted-text-update.component').then(m => m.ExtractedTextUpdateComponent),
     resolve: {
       extractedText: ExtractedTextResolve,
     },

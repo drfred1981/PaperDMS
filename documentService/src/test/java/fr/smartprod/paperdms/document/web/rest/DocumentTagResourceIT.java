@@ -58,7 +58,7 @@ class DocumentTagResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -409,11 +409,7 @@ class DocumentTagResourceIT {
         DocumentTag partialUpdatedDocumentTag = new DocumentTag();
         partialUpdatedDocumentTag.setId(documentTag.getId());
 
-        partialUpdatedDocumentTag
-            .assignedDate(UPDATED_ASSIGNED_DATE)
-            .confidence(UPDATED_CONFIDENCE)
-            .isAutoTagged(UPDATED_IS_AUTO_TAGGED)
-            .source(UPDATED_SOURCE);
+        partialUpdatedDocumentTag.source(UPDATED_SOURCE);
 
         restDocumentTagMockMvc
             .perform(

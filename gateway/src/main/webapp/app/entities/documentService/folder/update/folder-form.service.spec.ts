@@ -8,6 +8,7 @@ describe('Folder Form Service', () => {
   let service: FolderFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(FolderFormService);
   });
 
@@ -52,7 +53,7 @@ describe('Folder Form Service', () => {
       it('should return NewFolder for default Folder initial value', () => {
         const formGroup = service.createFolderFormGroup(sampleWithNewData);
 
-        const folder = service.getFolder(formGroup);
+        const folder = service.getFolder(formGroup) as any;
 
         expect(folder).toMatchObject(sampleWithNewData);
       });
@@ -60,7 +61,7 @@ describe('Folder Form Service', () => {
       it('should return NewFolder for empty Folder initial value', () => {
         const formGroup = service.createFolderFormGroup();
 
-        const folder = service.getFolder(formGroup);
+        const folder = service.getFolder(formGroup) as any;
 
         expect(folder).toMatchObject({});
       });
@@ -68,7 +69,7 @@ describe('Folder Form Service', () => {
       it('should return IFolder', () => {
         const formGroup = service.createFolderFormGroup(sampleWithRequiredData);
 
-        const folder = service.getFolder(formGroup);
+        const folder = service.getFolder(formGroup) as any;
 
         expect(folder).toMatchObject(sampleWithRequiredData);
       });

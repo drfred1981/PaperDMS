@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { CompressionType } from 'app/entities/enumerations/compression-type.model';
 import { TransformStatus } from 'app/entities/enumerations/transform-status.model';
 

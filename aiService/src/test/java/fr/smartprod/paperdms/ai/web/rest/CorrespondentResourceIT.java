@@ -91,7 +91,7 @@ class CorrespondentResourceIT {
     private static final String ENTITY_SEARCH_API_URL = "/api/correspondents/_search";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1100,10 +1100,12 @@ class CorrespondentResourceIT {
         partialUpdatedCorrespondent
             .name(UPDATED_NAME)
             .email(UPDATED_EMAIL)
-            .address(UPDATED_ADDRESS)
             .company(UPDATED_COMPANY)
+            .type(UPDATED_TYPE)
             .role(UPDATED_ROLE)
-            .isVerified(UPDATED_IS_VERIFIED)
+            .verifiedBy(UPDATED_VERIFIED_BY)
+            .verifiedDate(UPDATED_VERIFIED_DATE)
+            .metadata(UPDATED_METADATA)
             .extractedDate(UPDATED_EXTRACTED_DATE);
 
         restCorrespondentMockMvc

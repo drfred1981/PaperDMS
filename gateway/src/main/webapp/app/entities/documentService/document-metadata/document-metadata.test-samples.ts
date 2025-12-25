@@ -7,7 +7,7 @@ export const sampleWithRequiredData: IDocumentMetadata = {
   key: 'only unexpectedly though',
   value: '../fake-data/blob/hipster.txt',
   isSearchable: true,
-  createdDate: dayjs('2025-12-20T09:51'),
+  createdDate: dayjs('2025-12-25T04:50'),
 };
 
 export const sampleWithPartialData: IDocumentMetadata = {
@@ -15,7 +15,7 @@ export const sampleWithPartialData: IDocumentMetadata = {
   key: 'actual phew',
   value: '../fake-data/blob/hipster.txt',
   isSearchable: false,
-  createdDate: dayjs('2025-12-19T21:13'),
+  createdDate: dayjs('2025-12-24T16:12'),
 };
 
 export const sampleWithFullData: IDocumentMetadata = {
@@ -24,14 +24,14 @@ export const sampleWithFullData: IDocumentMetadata = {
   value: '../fake-data/blob/hipster.txt',
   dataType: 'DECIMAL',
   isSearchable: true,
-  createdDate: dayjs('2025-12-20T09:09'),
+  createdDate: dayjs('2025-12-25T04:08'),
 };
 
 export const sampleWithNewData: NewDocumentMetadata = {
   key: 'yet miserably how',
   value: '../fake-data/blob/hipster.txt',
   isSearchable: true,
-  createdDate: dayjs('2025-12-19T20:11'),
+  createdDate: dayjs('2025-12-24T15:10'),
   id: null,
 };
 

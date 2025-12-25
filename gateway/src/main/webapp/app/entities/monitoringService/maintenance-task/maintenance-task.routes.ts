@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import MaintenanceTaskResolve from './route/maintenance-task-routing-resolve.service';
 
 const maintenanceTaskRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/maintenance-task').then(m => m.MaintenanceTask),
+    loadComponent: () => import('./list/maintenance-task.component').then(m => m.MaintenanceTaskComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const maintenanceTaskRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/maintenance-task-detail').then(m => m.MaintenanceTaskDetail),
+    loadComponent: () => import('./detail/maintenance-task-detail.component').then(m => m.MaintenanceTaskDetailComponent),
     resolve: {
       maintenanceTask: MaintenanceTaskResolve,
     },
@@ -24,7 +23,7 @@ const maintenanceTaskRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/maintenance-task-update').then(m => m.MaintenanceTaskUpdate),
+    loadComponent: () => import('./update/maintenance-task-update.component').then(m => m.MaintenanceTaskUpdateComponent),
     resolve: {
       maintenanceTask: MaintenanceTaskResolve,
     },
@@ -32,7 +31,7 @@ const maintenanceTaskRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/maintenance-task-update').then(m => m.MaintenanceTaskUpdate),
+    loadComponent: () => import('./update/maintenance-task-update.component').then(m => m.MaintenanceTaskUpdateComponent),
     resolve: {
       maintenanceTask: MaintenanceTaskResolve,
     },

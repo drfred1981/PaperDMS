@@ -24,10 +24,10 @@ export type AuthorityFormGroup = FormGroup<AuthorityFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class AuthorityFormService {
-  createAuthorityFormGroup(authority?: AuthorityFormGroupInput): AuthorityFormGroup {
+  createAuthorityFormGroup(authority: AuthorityFormGroupInput = { name: null }): AuthorityFormGroup {
     const authorityRawValue = {
       ...this.getFormDefaults(),
-      ...(authority ?? { name: null }),
+      ...authority,
     };
     return new FormGroup<AuthorityFormGroupContent>({
       name: new FormControl(
@@ -46,10 +46,12 @@ export class AuthorityFormService {
 
   resetForm(form: AuthorityFormGroup, authority: AuthorityFormGroupInput): void {
     const authorityRawValue = { ...this.getFormDefaults(), ...authority };
-    form.reset({
-      ...authorityRawValue,
-      name: { value: authorityRawValue.name, disabled: authorityRawValue.name !== null },
-    });
+    form.reset(
+      {
+        ...authorityRawValue,
+        name: { value: authorityRawValue.name, disabled: authorityRawValue.name !== null },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): AuthorityFormDefaults {

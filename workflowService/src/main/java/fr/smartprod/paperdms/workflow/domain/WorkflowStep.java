@@ -4,7 +4,6 @@ import fr.smartprod.paperdms.workflow.domain.enumeration.AssigneeType;
 import fr.smartprod.paperdms.workflow.domain.enumeration.WorkflowStepType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.io.Serial;
 import java.io.Serializable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -18,7 +17,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class WorkflowStep implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

@@ -35,7 +35,7 @@ public class LanguageDetectionResource {
 
     private static final String ENTITY_NAME = "aiServiceLanguageDetection";
 
-    @Value("${jhipster.clientApp.name:aiService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final LanguageDetectionService languageDetectionService;

@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { ServiceStatusType } from 'app/entities/enumerations/service-status-type.model';
 
 export interface IServiceStatus {

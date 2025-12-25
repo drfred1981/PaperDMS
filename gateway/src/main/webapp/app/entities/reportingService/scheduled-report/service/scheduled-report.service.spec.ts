@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IScheduledReport } from '../scheduled-report.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../scheduled-report.test-samples';
@@ -103,7 +103,8 @@ describe('ScheduledReport Service', () => {
       it('should add a ScheduledReport to an empty array', () => {
         const scheduledReport: IScheduledReport = sampleWithRequiredData;
         expectedResult = service.addScheduledReportToCollectionIfMissing([], scheduledReport);
-        expect(expectedResult).toEqual([scheduledReport]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scheduledReport);
       });
 
       it('should not add a ScheduledReport to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('ScheduledReport Service', () => {
         const scheduledReport: IScheduledReport = sampleWithRequiredData;
         const scheduledReport2: IScheduledReport = sampleWithPartialData;
         expectedResult = service.addScheduledReportToCollectionIfMissing([], scheduledReport, scheduledReport2);
-        expect(expectedResult).toEqual([scheduledReport, scheduledReport2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(scheduledReport);
+        expect(expectedResult).toContain(scheduledReport2);
       });
 
       it('should accept null and undefined values', () => {
         const scheduledReport: IScheduledReport = sampleWithRequiredData;
         expectedResult = service.addScheduledReportToCollectionIfMissing([], null, scheduledReport, undefined);
-        expect(expectedResult).toEqual([scheduledReport]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scheduledReport);
       });
 
       it('should return initial array if no ScheduledReport is added', () => {

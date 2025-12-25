@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { ISystemMetric, NewSystemMetric } from '../system-metric.model';
 
@@ -46,10 +45,10 @@ export type SystemMetricFormGroup = FormGroup<SystemMetricFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
 export class SystemMetricFormService {
-  createSystemMetricFormGroup(systemMetric?: SystemMetricFormGroupInput): SystemMetricFormGroup {
+  createSystemMetricFormGroup(systemMetric: SystemMetricFormGroupInput = { id: null }): SystemMetricFormGroup {
     const systemMetricRawValue = this.convertSystemMetricToSystemMetricRawValue({
       ...this.getFormDefaults(),
-      ...(systemMetric ?? { id: null }),
+      ...systemMetric,
     });
     return new FormGroup<SystemMetricFormGroupContent>({
       id: new FormControl(
@@ -80,10 +79,12 @@ export class SystemMetricFormService {
 
   resetForm(form: SystemMetricFormGroup, systemMetric: SystemMetricFormGroupInput): void {
     const systemMetricRawValue = this.convertSystemMetricToSystemMetricRawValue({ ...this.getFormDefaults(), ...systemMetric });
-    form.reset({
-      ...systemMetricRawValue,
-      id: { value: systemMetricRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...systemMetricRawValue,
+        id: { value: systemMetricRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): SystemMetricFormDefaults {

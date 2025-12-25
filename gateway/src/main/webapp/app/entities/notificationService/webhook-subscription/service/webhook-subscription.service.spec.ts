@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IWebhookSubscription } from '../webhook-subscription.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../webhook-subscription.test-samples';
@@ -104,7 +104,8 @@ describe('WebhookSubscription Service', () => {
       it('should add a WebhookSubscription to an empty array', () => {
         const webhookSubscription: IWebhookSubscription = sampleWithRequiredData;
         expectedResult = service.addWebhookSubscriptionToCollectionIfMissing([], webhookSubscription);
-        expect(expectedResult).toEqual([webhookSubscription]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(webhookSubscription);
       });
 
       it('should not add a WebhookSubscription to an array that contains it', () => {
@@ -138,13 +139,16 @@ describe('WebhookSubscription Service', () => {
         const webhookSubscription: IWebhookSubscription = sampleWithRequiredData;
         const webhookSubscription2: IWebhookSubscription = sampleWithPartialData;
         expectedResult = service.addWebhookSubscriptionToCollectionIfMissing([], webhookSubscription, webhookSubscription2);
-        expect(expectedResult).toEqual([webhookSubscription, webhookSubscription2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(webhookSubscription);
+        expect(expectedResult).toContain(webhookSubscription2);
       });
 
       it('should accept null and undefined values', () => {
         const webhookSubscription: IWebhookSubscription = sampleWithRequiredData;
         expectedResult = service.addWebhookSubscriptionToCollectionIfMissing([], null, webhookSubscription, undefined);
-        expect(expectedResult).toEqual([webhookSubscription]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(webhookSubscription);
       });
 
       it('should return initial array if no WebhookSubscription is added', () => {

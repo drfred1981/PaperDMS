@@ -67,7 +67,7 @@ public class DashboardQueryService extends QueryService<Dashboard> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Dashboard> createSpecification(DashboardCriteria criteria) {
-        Specification<Dashboard> specification = Specification.unrestricted();
+        Specification<Dashboard> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(

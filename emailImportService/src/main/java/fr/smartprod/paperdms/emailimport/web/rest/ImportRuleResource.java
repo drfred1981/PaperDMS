@@ -37,7 +37,7 @@ public class ImportRuleResource {
 
     private static final String ENTITY_NAME = "emailImportServiceImportRule";
 
-    @Value("${jhipster.clientApp.name:emailImportService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final ImportRuleService importRuleService;

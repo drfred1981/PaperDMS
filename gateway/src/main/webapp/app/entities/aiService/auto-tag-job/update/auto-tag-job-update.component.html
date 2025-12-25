@@ -1,0 +1,383 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-auto-tag-job-heading"
+        data-cy="AutoTagJobCreateUpdateHeading"
+        jhiTranslate="gatewayApp.aiServiceAutoTagJob.home.createOrEditLabel"
+      >
+        Create or edit a Auto Tag Job
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.aiServiceAutoTagJob.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let documentIdRef = editForm.get('documentId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentId" jhiTranslate="gatewayApp.aiServiceAutoTagJob.documentId">Document Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="documentId"
+            id="field_documentId"
+            data-cy="documentId"
+            formControlName="documentId"
+          />
+          @if (documentIdRef.invalid && (documentIdRef.dirty || documentIdRef.touched)) {
+            <div>
+              @if (editForm.get('documentId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('documentId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let documentSha256Ref = editForm.get('documentSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentSha256" jhiTranslate="gatewayApp.aiServiceAutoTagJob.documentSha256"
+            >Document Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="documentSha256"
+            id="field_documentSha256"
+            data-cy="documentSha256"
+            formControlName="documentSha256"
+          />
+          @if (documentSha256Ref.invalid && (documentSha256Ref.dirty || documentSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('documentSha256')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('documentSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let s3KeyRef = editForm.get('s3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3Key" jhiTranslate="gatewayApp.aiServiceAutoTagJob.s3Key">S 3 Key</label>
+          <input type="text" class="form-control" name="s3Key" id="field_s3Key" data-cy="s3Key" formControlName="s3Key" />
+          @if (s3KeyRef.invalid && (s3KeyRef.dirty || s3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('s3Key')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('s3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_extractedText" jhiTranslate="gatewayApp.aiServiceAutoTagJob.extractedText"
+            >Extracted Text</label
+          >
+          <textarea
+            class="form-control"
+            name="extractedText"
+            id="field_extractedText"
+            data-cy="extractedText"
+            formControlName="extractedText"
+          ></textarea>
+        </div>
+
+        @let extractedTextSha256Ref = editForm.get('extractedTextSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_extractedTextSha256" jhiTranslate="gatewayApp.aiServiceAutoTagJob.extractedTextSha256"
+            >Extracted Text Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="extractedTextSha256"
+            id="field_extractedTextSha256"
+            data-cy="extractedTextSha256"
+            formControlName="extractedTextSha256"
+          />
+          @if (extractedTextSha256Ref.invalid && (extractedTextSha256Ref.dirty || extractedTextSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('extractedTextSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let detectedLanguageRef = editForm.get('detectedLanguage')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_detectedLanguage" jhiTranslate="gatewayApp.aiServiceAutoTagJob.detectedLanguage"
+            >Detected Language</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="detectedLanguage"
+            id="field_detectedLanguage"
+            data-cy="detectedLanguage"
+            formControlName="detectedLanguage"
+          />
+          @if (detectedLanguageRef.invalid && (detectedLanguageRef.dirty || detectedLanguageRef.touched)) {
+            <div>
+              @if (editForm.get('detectedLanguage')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '10' }"
+                  >This field cannot be longer than 10 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let languageConfidenceRef = editForm.get('languageConfidence')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_languageConfidence" jhiTranslate="gatewayApp.aiServiceAutoTagJob.languageConfidence"
+            >Language Confidence</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="languageConfidence"
+            id="field_languageConfidence"
+            data-cy="languageConfidence"
+            formControlName="languageConfidence"
+          />
+          @if (languageConfidenceRef.invalid && (languageConfidenceRef.dirty || languageConfidenceRef.touched)) {
+            <div>
+              @if (editForm.get('languageConfidence')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('languageConfidence')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >This field cannot be more than 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('languageConfidence')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.aiServiceAutoTagJob.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.AiJobStatus.null' | translate }}</option>
+            @for (aiJobStatus of aiJobStatusValues; track $index) {
+              <option [value]="aiJobStatus">{{ 'gatewayApp.AiJobStatus.' + aiJobStatus | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let modelVersionRef = editForm.get('modelVersion')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_modelVersion" jhiTranslate="gatewayApp.aiServiceAutoTagJob.modelVersion"
+            >Model Version</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="modelVersion"
+            id="field_modelVersion"
+            data-cy="modelVersion"
+            formControlName="modelVersion"
+          />
+          @if (modelVersionRef.invalid && (modelVersionRef.dirty || modelVersionRef.touched)) {
+            <div>
+              @if (editForm.get('modelVersion')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let resultCacheKeyRef = editForm.get('resultCacheKey')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_resultCacheKey" jhiTranslate="gatewayApp.aiServiceAutoTagJob.resultCacheKey"
+            >Result Cache Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="resultCacheKey"
+            id="field_resultCacheKey"
+            data-cy="resultCacheKey"
+            formControlName="resultCacheKey"
+          />
+          @if (resultCacheKeyRef.invalid && (resultCacheKeyRef.dirty || resultCacheKeyRef.touched)) {
+            <div>
+              @if (editForm.get('resultCacheKey')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '128' }"
+                  >This field cannot be longer than 128 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let isCachedRef = editForm.get('isCached')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isCached" jhiTranslate="gatewayApp.aiServiceAutoTagJob.isCached">Is Cached</label>
+          <input type="checkbox" class="form-check" name="isCached" id="field_isCached" data-cy="isCached" formControlName="isCached" />
+          @if (isCachedRef.invalid && (isCachedRef.dirty || isCachedRef.touched)) {
+            <div>
+              @if (editForm.get('isCached')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" jhiTranslate="gatewayApp.aiServiceAutoTagJob.startDate">Start Date</label>
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="gatewayApp.aiServiceAutoTagJob.endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_errorMessage" jhiTranslate="gatewayApp.aiServiceAutoTagJob.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        @let confidenceRef = editForm.get('confidence')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_confidence" jhiTranslate="gatewayApp.aiServiceAutoTagJob.confidence">Confidence</label>
+          <input
+            type="number"
+            class="form-control"
+            name="confidence"
+            id="field_confidence"
+            data-cy="confidence"
+            formControlName="confidence"
+          />
+          @if (confidenceRef.invalid && (confidenceRef.dirty || confidenceRef.touched)) {
+            <div>
+              @if (editForm.get('confidence')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('confidence')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >This field cannot be more than 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('confidence')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.aiServiceAutoTagJob.createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

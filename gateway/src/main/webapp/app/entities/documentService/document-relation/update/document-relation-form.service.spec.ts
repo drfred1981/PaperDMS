@@ -8,6 +8,7 @@ describe('DocumentRelation Form Service', () => {
   let service: DocumentRelationFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(DocumentRelationFormService);
   });
 
@@ -48,7 +49,7 @@ describe('DocumentRelation Form Service', () => {
       it('should return NewDocumentRelation for default DocumentRelation initial value', () => {
         const formGroup = service.createDocumentRelationFormGroup(sampleWithNewData);
 
-        const documentRelation = service.getDocumentRelation(formGroup);
+        const documentRelation = service.getDocumentRelation(formGroup) as any;
 
         expect(documentRelation).toMatchObject(sampleWithNewData);
       });
@@ -56,7 +57,7 @@ describe('DocumentRelation Form Service', () => {
       it('should return NewDocumentRelation for empty DocumentRelation initial value', () => {
         const formGroup = service.createDocumentRelationFormGroup();
 
-        const documentRelation = service.getDocumentRelation(formGroup);
+        const documentRelation = service.getDocumentRelation(formGroup) as any;
 
         expect(documentRelation).toMatchObject({});
       });
@@ -64,7 +65,7 @@ describe('DocumentRelation Form Service', () => {
       it('should return IDocumentRelation', () => {
         const formGroup = service.createDocumentRelationFormGroup(sampleWithRequiredData);
 
-        const documentRelation = service.getDocumentRelation(formGroup);
+        const documentRelation = service.getDocumentRelation(formGroup) as any;
 
         expect(documentRelation).toMatchObject(sampleWithRequiredData);
       });

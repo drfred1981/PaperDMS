@@ -8,6 +8,7 @@ describe('MergeJob Form Service', () => {
   let service: MergeJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(MergeJobFormService);
   });
 
@@ -66,7 +67,7 @@ describe('MergeJob Form Service', () => {
       it('should return NewMergeJob for default MergeJob initial value', () => {
         const formGroup = service.createMergeJobFormGroup(sampleWithNewData);
 
-        const mergeJob = service.getMergeJob(formGroup);
+        const mergeJob = service.getMergeJob(formGroup) as any;
 
         expect(mergeJob).toMatchObject(sampleWithNewData);
       });
@@ -74,7 +75,7 @@ describe('MergeJob Form Service', () => {
       it('should return NewMergeJob for empty MergeJob initial value', () => {
         const formGroup = service.createMergeJobFormGroup();
 
-        const mergeJob = service.getMergeJob(formGroup);
+        const mergeJob = service.getMergeJob(formGroup) as any;
 
         expect(mergeJob).toMatchObject({});
       });
@@ -82,7 +83,7 @@ describe('MergeJob Form Service', () => {
       it('should return IMergeJob', () => {
         const formGroup = service.createMergeJobFormGroup(sampleWithRequiredData);
 
-        const mergeJob = service.getMergeJob(formGroup);
+        const mergeJob = service.getMergeJob(formGroup) as any;
 
         expect(mergeJob).toMatchObject(sampleWithRequiredData);
       });

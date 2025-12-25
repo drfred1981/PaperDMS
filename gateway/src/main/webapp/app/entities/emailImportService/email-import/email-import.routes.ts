@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import EmailImportResolve from './route/email-import-routing-resolve.service';
 
 const emailImportRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/email-import').then(m => m.EmailImport),
+    loadComponent: () => import('./list/email-import.component').then(m => m.EmailImportComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const emailImportRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/email-import-detail').then(m => m.EmailImportDetail),
+    loadComponent: () => import('./detail/email-import-detail.component').then(m => m.EmailImportDetailComponent),
     resolve: {
       emailImport: EmailImportResolve,
     },
@@ -24,7 +23,7 @@ const emailImportRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/email-import-update').then(m => m.EmailImportUpdate),
+    loadComponent: () => import('./update/email-import-update.component').then(m => m.EmailImportUpdateComponent),
     resolve: {
       emailImport: EmailImportResolve,
     },
@@ -32,7 +31,7 @@ const emailImportRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/email-import-update').then(m => m.EmailImportUpdate),
+    loadComponent: () => import('./update/email-import-update.component').then(m => m.EmailImportUpdateComponent),
     resolve: {
       emailImport: EmailImportResolve,
     },

@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IDocumentPermission, NewDocumentPermission } from '../document-permission.model';
 
 export type PartialUpdateDocumentPermission = Partial<IDocumentPermission> & Pick<IDocumentPermission, 'id'>;
@@ -41,28 +41,24 @@ export class DocumentPermissionService {
   update(documentPermission: IDocumentPermission): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentPermission);
     return this.http
-      .put<RestDocumentPermission>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentPermissionIdentifier(documentPermission))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .put<RestDocumentPermission>(`${this.resourceUrl}/${this.getDocumentPermissionIdentifier(documentPermission)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(documentPermission: PartialUpdateDocumentPermission): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(documentPermission);
     return this.http
-      .patch<RestDocumentPermission>(
-        `${this.resourceUrl}/${encodeURIComponent(this.getDocumentPermissionIdentifier(documentPermission))}`,
-        copy,
-        { observe: 'response' },
-      )
+      .patch<RestDocumentPermission>(`${this.resourceUrl}/${this.getDocumentPermissionIdentifier(documentPermission)}`, copy, {
+        observe: 'response',
+      })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestDocumentPermission>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestDocumentPermission>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -74,7 +70,7 @@ export class DocumentPermissionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getDocumentPermissionIdentifier(documentPermission: Pick<IDocumentPermission, 'id'>): number {

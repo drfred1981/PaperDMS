@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import DocumentVersionResolve from './route/document-version-routing-resolve.service';
 
 const documentVersionRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/document-version').then(m => m.DocumentVersion),
+    loadComponent: () => import('./list/document-version.component').then(m => m.DocumentVersionComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const documentVersionRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/document-version-detail').then(m => m.DocumentVersionDetail),
+    loadComponent: () => import('./detail/document-version-detail.component').then(m => m.DocumentVersionDetailComponent),
     resolve: {
       documentVersion: DocumentVersionResolve,
     },
@@ -24,7 +23,7 @@ const documentVersionRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/document-version-update').then(m => m.DocumentVersionUpdate),
+    loadComponent: () => import('./update/document-version-update.component').then(m => m.DocumentVersionUpdateComponent),
     resolve: {
       documentVersion: DocumentVersionResolve,
     },
@@ -32,7 +31,7 @@ const documentVersionRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/document-version-update').then(m => m.DocumentVersionUpdate),
+    loadComponent: () => import('./update/document-version-update.component').then(m => m.DocumentVersionUpdateComponent),
     resolve: {
       documentVersion: DocumentVersionResolve,
     },

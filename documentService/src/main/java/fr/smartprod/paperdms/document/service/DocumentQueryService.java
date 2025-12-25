@@ -76,7 +76,7 @@ public class DocumentQueryService extends QueryService<Document> {
      * @return the matching {@link Specification} of the entity.
      */
     protected Specification<Document> createSpecification(DocumentCriteria criteria) {
-        Specification<Document> specification = Specification.unrestricted();
+        Specification<Document> specification = Specification.where(null);
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             specification = Specification.allOf(
@@ -95,7 +95,6 @@ public class DocumentQueryService extends QueryService<Document> {
                 buildStringSpecification(criteria.getThumbnailSha256(), Document_.thumbnailSha256),
                 buildStringSpecification(criteria.getWebpPreviewS3Key(), Document_.webpPreviewS3Key),
                 buildStringSpecification(criteria.getWebpPreviewSha256(), Document_.webpPreviewSha256),
-                buildSpecification(criteria.getStatus(), Document_.status),
                 buildRangeSpecification(criteria.getUploadDate(), Document_.uploadDate),
                 buildSpecification(criteria.getIsPublic(), Document_.isPublic),
                 buildRangeSpecification(criteria.getDownloadCount(), Document_.downloadCount),

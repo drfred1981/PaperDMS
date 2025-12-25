@@ -1,0 +1,184 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-similarity-cluster-heading"
+        data-cy="SimilarityClusterCreateUpdateHeading"
+        jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.home.createOrEditLabel"
+      >
+        Create or edit a Similarity Cluster
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.description"
+            >Description</label
+          >
+          <textarea
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_algorithm" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.algorithm"
+            >Algorithm</label
+          >
+          <select class="form-control" name="algorithm" formControlName="algorithm" id="field_algorithm" data-cy="algorithm">
+            <option [ngValue]="null">{{ 'gatewayApp.SimilarityAlgorithm.null' | translate }}</option>
+            @for (similarityAlgorithm of similarityAlgorithmValues; track $index) {
+              <option [value]="similarityAlgorithm">{{ 'gatewayApp.SimilarityAlgorithm.' + similarityAlgorithm | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_centroid" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.centroid"
+            >Centroid</label
+          >
+          <textarea class="form-control" name="centroid" id="field_centroid" data-cy="centroid" formControlName="centroid"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_documentCount" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.documentCount"
+            >Document Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentCount"
+            id="field_documentCount"
+            data-cy="documentCount"
+            formControlName="documentCount"
+          />
+        </div>
+
+        @let avgSimilarityRef = editForm.get('avgSimilarity')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_avgSimilarity" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.avgSimilarity"
+            >Avg Similarity</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="avgSimilarity"
+            id="field_avgSimilarity"
+            data-cy="avgSimilarity"
+            formControlName="avgSimilarity"
+          />
+          @if (avgSimilarityRef.invalid && (avgSimilarityRef.dirty || avgSimilarityRef.touched)) {
+            <div>
+              @if (editForm.get('avgSimilarity')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('avgSimilarity')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >This field cannot be more than 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('avgSimilarity')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastUpdated" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.lastUpdated"
+            >Last Updated</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastUpdated"
+              data-cy="lastUpdated"
+              type="datetime-local"
+              class="form-control"
+              name="lastUpdated"
+              formControlName="lastUpdated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

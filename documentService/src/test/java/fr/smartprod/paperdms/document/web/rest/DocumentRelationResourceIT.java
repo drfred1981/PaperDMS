@@ -58,7 +58,7 @@ class DocumentRelationResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -763,7 +763,8 @@ class DocumentRelationResourceIT {
 
         partialUpdatedDocumentRelation
             .sourceDocumentId(UPDATED_SOURCE_DOCUMENT_ID)
-            .createdBy(UPDATED_CREATED_BY)
+            .targetDocumentId(UPDATED_TARGET_DOCUMENT_ID)
+            .relationType(UPDATED_RELATION_TYPE)
             .createdDate(UPDATED_CREATED_DATE);
 
         restDocumentRelationMockMvc

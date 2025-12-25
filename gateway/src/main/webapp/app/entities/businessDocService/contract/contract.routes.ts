@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import ContractResolve from './route/contract-routing-resolve.service';
 
 const contractRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/contract').then(m => m.Contract),
+    loadComponent: () => import('./list/contract.component').then(m => m.ContractComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const contractRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/contract-detail').then(m => m.ContractDetail),
+    loadComponent: () => import('./detail/contract-detail.component').then(m => m.ContractDetailComponent),
     resolve: {
       contract: ContractResolve,
     },
@@ -24,7 +23,7 @@ const contractRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/contract-update').then(m => m.ContractUpdate),
+    loadComponent: () => import('./update/contract-update.component').then(m => m.ContractUpdateComponent),
     resolve: {
       contract: ContractResolve,
     },
@@ -32,7 +31,7 @@ const contractRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/contract-update').then(m => m.ContractUpdate),
+    loadComponent: () => import('./update/contract-update.component').then(m => m.ContractUpdateComponent),
     resolve: {
       contract: ContractResolve,
     },

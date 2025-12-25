@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { ICompressionJob } from '../compression-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../compression-job.test-samples';
@@ -103,7 +103,8 @@ describe('CompressionJob Service', () => {
       it('should add a CompressionJob to an empty array', () => {
         const compressionJob: ICompressionJob = sampleWithRequiredData;
         expectedResult = service.addCompressionJobToCollectionIfMissing([], compressionJob);
-        expect(expectedResult).toEqual([compressionJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(compressionJob);
       });
 
       it('should not add a CompressionJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('CompressionJob Service', () => {
         const compressionJob: ICompressionJob = sampleWithRequiredData;
         const compressionJob2: ICompressionJob = sampleWithPartialData;
         expectedResult = service.addCompressionJobToCollectionIfMissing([], compressionJob, compressionJob2);
-        expect(expectedResult).toEqual([compressionJob, compressionJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(compressionJob);
+        expect(expectedResult).toContain(compressionJob2);
       });
 
       it('should accept null and undefined values', () => {
         const compressionJob: ICompressionJob = sampleWithRequiredData;
         expectedResult = service.addCompressionJobToCollectionIfMissing([], null, compressionJob, undefined);
-        expect(expectedResult).toEqual([compressionJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(compressionJob);
       });
 
       it('should return initial array if no CompressionJob is added', () => {

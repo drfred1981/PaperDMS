@@ -6,7 +6,7 @@ export const sampleWithRequiredData: IOcrResult = {
   id: 8149,
   pageNumber: 1363,
   s3Bucket: 'till',
-  processedDate: dayjs('2025-12-20T04:25'),
+  processedDate: dayjs('2025-12-24T23:24'),
 };
 
 export const sampleWithPartialData: IOcrResult = {
@@ -18,7 +18,7 @@ export const sampleWithPartialData: IOcrResult = {
   s3BoundingBoxKey: 'cope international',
   metadata: '../fake-data/blob/hipster.txt',
   rawResponseS3Key: 'confused',
-  processedDate: dayjs('2025-12-20T09:59'),
+  processedDate: dayjs('2025-12-25T04:58'),
 };
 
 export const sampleWithFullData: IOcrResult = {
@@ -37,13 +37,13 @@ export const sampleWithFullData: IOcrResult = {
   processingTime: 13606,
   rawResponse: '../fake-data/blob/hipster.txt',
   rawResponseS3Key: 'ah off among',
-  processedDate: dayjs('2025-12-19T18:14'),
+  processedDate: dayjs('2025-12-24T13:13'),
 };
 
 export const sampleWithNewData: NewOcrResult = {
   pageNumber: 4233,
   s3Bucket: 'developmental mature instead',
-  processedDate: dayjs('2025-12-19T23:34'),
+  processedDate: dayjs('2025-12-24T18:33'),
   id: null,
 };
 

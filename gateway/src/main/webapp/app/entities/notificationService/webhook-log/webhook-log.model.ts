@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { IWebhookSubscription } from 'app/entities/notificationService/webhook-subscription/webhook-subscription.model';
 
 export interface IWebhookLog {

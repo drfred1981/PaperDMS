@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IOcrJob } from '../ocr-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../ocr-job.test-samples';
@@ -103,7 +103,8 @@ describe('OcrJob Service', () => {
       it('should add a OcrJob to an empty array', () => {
         const ocrJob: IOcrJob = sampleWithRequiredData;
         expectedResult = service.addOcrJobToCollectionIfMissing([], ocrJob);
-        expect(expectedResult).toEqual([ocrJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrJob);
       });
 
       it('should not add a OcrJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('OcrJob Service', () => {
         const ocrJob: IOcrJob = sampleWithRequiredData;
         const ocrJob2: IOcrJob = sampleWithPartialData;
         expectedResult = service.addOcrJobToCollectionIfMissing([], ocrJob, ocrJob2);
-        expect(expectedResult).toEqual([ocrJob, ocrJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(ocrJob);
+        expect(expectedResult).toContain(ocrJob2);
       });
 
       it('should accept null and undefined values', () => {
         const ocrJob: IOcrJob = sampleWithRequiredData;
         expectedResult = service.addOcrJobToCollectionIfMissing([], null, ocrJob, undefined);
-        expect(expectedResult).toEqual([ocrJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(ocrJob);
       });
 
       it('should return initial array if no OcrJob is added', () => {

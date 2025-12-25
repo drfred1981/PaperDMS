@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (invoice(); as invoiceRef) {
+      <div>
+        <h2 data-cy="invoiceDetailsHeading"><span jhiTranslate="gatewayApp.businessDocServiceInvoice.detail.title">Invoice</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ invoiceRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.documentId">Document Id</span></dt>
+          <dd>
+            <span>{{ invoiceRef.documentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.invoiceNumber">Invoice Number</span></dt>
+          <dd>
+            <span>{{ invoiceRef.invoiceNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.invoiceType">Invoice Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.InvoiceType.' + (invoiceRef.invoiceType ?? 'null')">{{
+              {
+                null: '',
+                PURCHASE: 'PURCHASE',
+                SALES: 'SALES',
+                CREDIT_NOTE: 'CREDIT_NOTE',
+                DEBIT_NOTE: 'DEBIT_NOTE',
+                PROFORMA: 'PROFORMA',
+              }[invoiceRef.invoiceType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.supplierName">Supplier Name</span></dt>
+          <dd>
+            <span>{{ invoiceRef.supplierName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.customerName">Customer Name</span></dt>
+          <dd>
+            <span>{{ invoiceRef.customerName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.issueDate">Issue Date</span></dt>
+          <dd>
+            <span>{{ invoiceRef.issueDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.dueDate">Due Date</span></dt>
+          <dd>
+            <span>{{ invoiceRef.dueDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.paymentDate">Payment Date</span></dt>
+          <dd>
+            <span>{{ invoiceRef.paymentDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.totalAmountExclTax">Total Amount Excl Tax</span></dt>
+          <dd>
+            <span>{{ invoiceRef.totalAmountExclTax }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.taxAmount">Tax Amount</span></dt>
+          <dd>
+            <span>{{ invoiceRef.taxAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.totalAmountInclTax">Total Amount Incl Tax</span></dt>
+          <dd>
+            <span>{{ invoiceRef.totalAmountInclTax }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.currency">Currency</span></dt>
+          <dd>
+            <span>{{ invoiceRef.currency }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.InvoiceStatus.' + (invoiceRef.status ?? 'null')">{{
+              {
+                null: '',
+                DRAFT: 'DRAFT',
+                PENDING_APPROVAL: 'PENDING_APPROVAL',
+                APPROVED: 'APPROVED',
+                SENT: 'SENT',
+                PAID: 'PAID',
+                PARTIALLY_PAID: 'PARTIALLY_PAID',
+                OVERDUE: 'OVERDUE',
+                CANCELLED: 'CANCELLED',
+                DISPUTED: 'DISPUTED',
+              }[invoiceRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.paymentMethod">Payment Method</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.PaymentMethod.' + (invoiceRef.paymentMethod ?? 'null')">{{
+              {
+                null: '',
+                WIRE_TRANSFER: 'WIRE_TRANSFER',
+                CHECK: 'CHECK',
+                CASH: 'CASH',
+                CREDIT_CARD: 'CREDIT_CARD',
+                DEBIT_CARD: 'DEBIT_CARD',
+                PAYPAL: 'PAYPAL',
+                DIRECT_DEBIT: 'DIRECT_DEBIT',
+                OTHER: 'OTHER',
+              }[invoiceRef.paymentMethod ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.businessDocServiceInvoice.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ invoiceRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/invoice', invoiceRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

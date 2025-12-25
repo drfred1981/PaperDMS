@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IScannedPage } from '../scanned-page.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../scanned-page.test-samples';
@@ -101,7 +101,8 @@ describe('ScannedPage Service', () => {
       it('should add a ScannedPage to an empty array', () => {
         const scannedPage: IScannedPage = sampleWithRequiredData;
         expectedResult = service.addScannedPageToCollectionIfMissing([], scannedPage);
-        expect(expectedResult).toEqual([scannedPage]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scannedPage);
       });
 
       it('should not add a ScannedPage to an array that contains it', () => {
@@ -135,13 +136,16 @@ describe('ScannedPage Service', () => {
         const scannedPage: IScannedPage = sampleWithRequiredData;
         const scannedPage2: IScannedPage = sampleWithPartialData;
         expectedResult = service.addScannedPageToCollectionIfMissing([], scannedPage, scannedPage2);
-        expect(expectedResult).toEqual([scannedPage, scannedPage2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(scannedPage);
+        expect(expectedResult).toContain(scannedPage2);
       });
 
       it('should accept null and undefined values', () => {
         const scannedPage: IScannedPage = sampleWithRequiredData;
         expectedResult = service.addScannedPageToCollectionIfMissing([], null, scannedPage, undefined);
-        expect(expectedResult).toEqual([scannedPage]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(scannedPage);
       });
 
       it('should return initial array if no ScannedPage is added', () => {

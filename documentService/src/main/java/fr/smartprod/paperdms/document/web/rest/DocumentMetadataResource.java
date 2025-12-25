@@ -35,7 +35,7 @@ public class DocumentMetadataResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentMetadata";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentMetadataService documentMetadataService;

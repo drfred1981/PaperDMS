@@ -5,7 +5,7 @@ import { ISearchQuery, NewSearchQuery } from './search-query.model';
 export const sampleWithRequiredData: ISearchQuery = {
   id: 7284,
   query: 'when kettledrum attest',
-  searchDate: dayjs('2025-12-19T22:21'),
+  searchDate: dayjs('2025-12-24T17:20'),
 };
 
 export const sampleWithPartialData: ISearchQuery = {
@@ -13,7 +13,7 @@ export const sampleWithPartialData: ISearchQuery = {
   query: 'hmph',
   filters: '../fake-data/blob/hipster.txt',
   executionTime: 26633,
-  searchDate: dayjs('2025-12-19T16:43'),
+  searchDate: dayjs('2025-12-24T11:42'),
   isRelevant: true,
 };
 
@@ -24,13 +24,13 @@ export const sampleWithFullData: ISearchQuery = {
   resultCount: 29920,
   executionTime: 31733,
   userId: 'atop',
-  searchDate: dayjs('2025-12-20T01:35'),
+  searchDate: dayjs('2025-12-24T20:34'),
   isRelevant: true,
 };
 
 export const sampleWithNewData: NewSearchQuery = {
   query: 'lobster aboard athwart',
-  searchDate: dayjs('2025-12-19T18:21'),
+  searchDate: dayjs('2025-12-24T13:20'),
   id: null,
 };
 

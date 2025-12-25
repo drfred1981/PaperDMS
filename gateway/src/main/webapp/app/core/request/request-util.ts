@@ -4,13 +4,13 @@ export const createRequestOption = (req?: any): HttpParams => {
   let options: HttpParams = new HttpParams();
 
   if (req) {
-    for (const [key, val] of Object.entries(req)) {
+    Object.entries(req).forEach(([key, val]) => {
       if (val !== undefined && val !== null) {
-        for (const value of [req[key]].flat().filter(v => v !== '')) {
+        for (const value of [].concat(req[key]).filter(v => v !== '')) {
           options = options.append(key, value);
         }
       }
-    }
+    });
   }
 
   return options;

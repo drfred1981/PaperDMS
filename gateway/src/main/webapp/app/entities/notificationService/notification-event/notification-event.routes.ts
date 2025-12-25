@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { ASC } from 'app/config/navigation.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-
+import { ASC } from 'app/config/navigation.constants';
 import NotificationEventResolve from './route/notification-event-routing-resolve.service';
 
 const notificationEventRoute: Routes = [
   {
     path: '',
-    loadComponent: () => import('./list/notification-event').then(m => m.NotificationEvent),
+    loadComponent: () => import('./list/notification-event.component').then(m => m.NotificationEventComponent),
     data: {
       defaultSort: `id,${ASC}`,
     },
@@ -16,7 +15,7 @@ const notificationEventRoute: Routes = [
   },
   {
     path: ':id/view',
-    loadComponent: () => import('./detail/notification-event-detail').then(m => m.NotificationEventDetail),
+    loadComponent: () => import('./detail/notification-event-detail.component').then(m => m.NotificationEventDetailComponent),
     resolve: {
       notificationEvent: NotificationEventResolve,
     },
@@ -24,7 +23,7 @@ const notificationEventRoute: Routes = [
   },
   {
     path: 'new',
-    loadComponent: () => import('./update/notification-event-update').then(m => m.NotificationEventUpdate),
+    loadComponent: () => import('./update/notification-event-update.component').then(m => m.NotificationEventUpdateComponent),
     resolve: {
       notificationEvent: NotificationEventResolve,
     },
@@ -32,7 +31,7 @@ const notificationEventRoute: Routes = [
   },
   {
     path: ':id/edit',
-    loadComponent: () => import('./update/notification-event-update').then(m => m.NotificationEventUpdate),
+    loadComponent: () => import('./update/notification-event-update.component').then(m => m.NotificationEventUpdateComponent),
     resolve: {
       notificationEvent: NotificationEventResolve,
     },

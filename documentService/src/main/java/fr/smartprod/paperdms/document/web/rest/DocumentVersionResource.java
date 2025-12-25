@@ -35,7 +35,7 @@ public class DocumentVersionResource {
 
     private static final String ENTITY_NAME = "documentServiceDocumentVersion";
 
-    @Value("${jhipster.clientApp.name:documentService}")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final DocumentVersionService documentVersionService;

@@ -54,8 +54,7 @@ public class OcrCacheAsserts {
             .satisfies(a -> assertThat(a.getTotalConfidence()).as("check totalConfidence").isEqualTo(expected.getTotalConfidence()))
             .satisfies(a -> assertThat(a.gets3ResultKey()).as("check s3ResultKey").isEqualTo(expected.gets3ResultKey()))
             .satisfies(a -> assertThat(a.gets3Bucket()).as("check s3Bucket").isEqualTo(expected.gets3Bucket()))
-            .satisfies(a ->
-                assertThat(a.getExtractedTextS3Key()).as("check extractedTextS3Key").isEqualTo(expected.getExtractedTextS3Key())
+            .satisfies(a -> assertThat(a.getExtractedTextS3Key()).as("check extractedTextS3Key").isEqualTo(expected.getExtractedTextS3Key())
             )
             .satisfies(a -> assertThat(a.getMetadata()).as("check metadata").isEqualTo(expected.getMetadata()))
             .satisfies(a -> assertThat(a.getHits()).as("check hits").isEqualTo(expected.getHits()))

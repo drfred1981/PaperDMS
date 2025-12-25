@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IRedactionJob } from '../redaction-job.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../redaction-job.test-samples';
@@ -103,7 +103,8 @@ describe('RedactionJob Service', () => {
       it('should add a RedactionJob to an empty array', () => {
         const redactionJob: IRedactionJob = sampleWithRequiredData;
         expectedResult = service.addRedactionJobToCollectionIfMissing([], redactionJob);
-        expect(expectedResult).toEqual([redactionJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(redactionJob);
       });
 
       it('should not add a RedactionJob to an array that contains it', () => {
@@ -137,13 +138,16 @@ describe('RedactionJob Service', () => {
         const redactionJob: IRedactionJob = sampleWithRequiredData;
         const redactionJob2: IRedactionJob = sampleWithPartialData;
         expectedResult = service.addRedactionJobToCollectionIfMissing([], redactionJob, redactionJob2);
-        expect(expectedResult).toEqual([redactionJob, redactionJob2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(redactionJob);
+        expect(expectedResult).toContain(redactionJob2);
       });
 
       it('should accept null and undefined values', () => {
         const redactionJob: IRedactionJob = sampleWithRequiredData;
         expectedResult = service.addRedactionJobToCollectionIfMissing([], null, redactionJob, undefined);
-        expect(expectedResult).toEqual([redactionJob]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(redactionJob);
       });
 
       it('should return initial array if no RedactionJob is added', () => {

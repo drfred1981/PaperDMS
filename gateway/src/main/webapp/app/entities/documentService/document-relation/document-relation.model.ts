@@ -1,5 +1,4 @@
 import dayjs from 'dayjs/esm';
-
 import { RelationType } from 'app/entities/enumerations/relation-type.model';
 
 export interface IDocumentRelation {

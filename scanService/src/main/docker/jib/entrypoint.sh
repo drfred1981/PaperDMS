@@ -8,25 +8,24 @@ echo "The application will start in ${JHIPSTER_SLEEP}s..." && sleep ${JHIPSTER_S
 #  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
 file_env() {
     local var="$1"
-    local file_var="${var}_FILE"
+    local fileVar="${var}_FILE"
     local def="${2:-}"
-    if [[ ${!var:-} && ${!file_var:-} ]]; then
-        echo >&2 "error: both $var and $file_var are set (but are exclusive)"
+    if [[ ${!var:-} && ${!fileVar:-} ]]; then
+        echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
         exit 1
     fi
     local val="$def"
     if [[ ${!var:-} ]]; then
         val="${!var}"
-    elif [[ ${!file_var:-} ]]; then
-        val="$(< "${!file_var}")"
+    elif [[ ${!fileVar:-} ]]; then
+        val="$(< "${!fileVar}")"
     fi
 
     if [[ -n $val ]]; then
         export "$var"="$val"
     fi
 
-    unset "$file_var"
-    return 0
+    unset "$fileVar"
 }
 
 file_env 'SPRING_DATASOURCE_URL'
@@ -37,4 +36,4 @@ file_env 'SPRING_LIQUIBASE_USER'
 file_env 'SPRING_LIQUIBASE_PASSWORD'
 file_env 'JHIPSTER_REGISTRY_PASSWORD'
 
-exec java ${JAVA_OPTS} -noverify -XX:+AlwaysPreTouch -cp /app/resources/:/app/classes/:/app/libs/* "fr.smartprod.paperdms.scan.ScanServiceApp"  "$@"
+exec java ${JAVA_OPTS} -noverify -XX:+AlwaysPreTouch -Djava.security.egd=file:/dev/./urandom -cp /app/resources/:/app/classes/:/app/libs/* "fr.smartprod.paperdms.scan.ScanServiceApp"  "$@"

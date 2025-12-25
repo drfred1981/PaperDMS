@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class DocumentAuditTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static DocumentAudit getDocumentAuditSample1() {
         return new DocumentAudit().id(1L).documentId(1L).documentSha256("documentSha2561").userId("userId1").userIp("userIp1");

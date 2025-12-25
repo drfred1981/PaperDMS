@@ -71,7 +71,7 @@ class WebhookLogResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -445,13 +445,11 @@ class WebhookLogResourceIT {
         partialUpdatedWebhookLog.setId(webhookLog.getId());
 
         partialUpdatedWebhookLog
-            .subscriptionId(UPDATED_SUBSCRIPTION_ID)
             .eventType(UPDATED_EVENT_TYPE)
             .payload(UPDATED_PAYLOAD)
             .responseStatus(UPDATED_RESPONSE_STATUS)
-            .responseTime(UPDATED_RESPONSE_TIME)
-            .isSuccess(UPDATED_IS_SUCCESS)
-            .errorMessage(UPDATED_ERROR_MESSAGE);
+            .attemptNumber(UPDATED_ATTEMPT_NUMBER)
+            .isSuccess(UPDATED_IS_SUCCESS);
 
         restWebhookLogMockMvc
             .perform(

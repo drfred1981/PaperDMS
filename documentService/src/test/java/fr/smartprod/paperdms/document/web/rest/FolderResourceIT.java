@@ -59,7 +59,7 @@ class FolderResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -683,8 +683,6 @@ class FolderResourceIT {
         // Update the folder using partial update
         Folder partialUpdatedFolder = new Folder();
         partialUpdatedFolder.setId(folder.getId());
-
-        partialUpdatedFolder.description(UPDATED_DESCRIPTION).path(UPDATED_PATH).createdDate(UPDATED_CREATED_DATE);
 
         restFolderMockMvc
             .perform(

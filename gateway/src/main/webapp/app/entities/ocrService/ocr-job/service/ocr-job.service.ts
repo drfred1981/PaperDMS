@@ -1,12 +1,12 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-
-import dayjs from 'dayjs/esm';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+import dayjs from 'dayjs/esm';
+
+import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { isPresent } from 'app/core/util/operators';
 import { IOcrJob, NewOcrJob } from '../ocr-job.model';
 
 export type PartialUpdateOcrJob = Partial<IOcrJob> & Pick<IOcrJob, 'id'>;
@@ -43,20 +43,20 @@ export class OcrJobService {
   update(ocrJob: IOcrJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(ocrJob);
     return this.http
-      .put<RestOcrJob>(`${this.resourceUrl}/${encodeURIComponent(this.getOcrJobIdentifier(ocrJob))}`, copy, { observe: 'response' })
+      .put<RestOcrJob>(`${this.resourceUrl}/${this.getOcrJobIdentifier(ocrJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   partialUpdate(ocrJob: PartialUpdateOcrJob): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(ocrJob);
     return this.http
-      .patch<RestOcrJob>(`${this.resourceUrl}/${encodeURIComponent(this.getOcrJobIdentifier(ocrJob))}`, copy, { observe: 'response' })
+      .patch<RestOcrJob>(`${this.resourceUrl}/${this.getOcrJobIdentifier(ocrJob)}`, copy, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<RestOcrJob>(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' })
+      .get<RestOcrJob>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
@@ -68,7 +68,7 @@ export class OcrJobService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${encodeURIComponent(id)}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   getOcrJobIdentifier(ocrJob: Pick<IOcrJob, 'id'>): number {

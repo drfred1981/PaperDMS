@@ -1,6 +1,6 @@
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { IExtractedText } from '../extracted-text.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../extracted-text.test-samples';
@@ -115,7 +115,8 @@ describe('ExtractedText Service', () => {
       it('should add a ExtractedText to an empty array', () => {
         const extractedText: IExtractedText = sampleWithRequiredData;
         expectedResult = service.addExtractedTextToCollectionIfMissing([], extractedText);
-        expect(expectedResult).toEqual([extractedText]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(extractedText);
       });
 
       it('should not add a ExtractedText to an array that contains it', () => {
@@ -149,13 +150,16 @@ describe('ExtractedText Service', () => {
         const extractedText: IExtractedText = sampleWithRequiredData;
         const extractedText2: IExtractedText = sampleWithPartialData;
         expectedResult = service.addExtractedTextToCollectionIfMissing([], extractedText, extractedText2);
-        expect(expectedResult).toEqual([extractedText, extractedText2]);
+        expect(expectedResult).toHaveLength(2);
+        expect(expectedResult).toContain(extractedText);
+        expect(expectedResult).toContain(extractedText2);
       });
 
       it('should accept null and undefined values', () => {
         const extractedText: IExtractedText = sampleWithRequiredData;
         expectedResult = service.addExtractedTextToCollectionIfMissing([], null, extractedText, undefined);
-        expect(expectedResult).toEqual([extractedText]);
+        expect(expectedResult).toHaveLength(1);
+        expect(expectedResult).toContain(extractedText);
       });
 
       it('should return initial array if no ExtractedText is added', () => {

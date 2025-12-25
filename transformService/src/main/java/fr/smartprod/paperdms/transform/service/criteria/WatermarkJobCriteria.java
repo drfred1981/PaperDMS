@@ -3,7 +3,6 @@ package fr.smartprod.paperdms.transform.service.criteria;
 import fr.smartprod.paperdms.transform.domain.enumeration.TransformStatus;
 import fr.smartprod.paperdms.transform.domain.enumeration.WatermarkPosition;
 import fr.smartprod.paperdms.transform.domain.enumeration.WatermarkType;
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
@@ -75,7 +74,6 @@ public class WatermarkJobCriteria implements Serializable, Criteria {
         }
     }
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;

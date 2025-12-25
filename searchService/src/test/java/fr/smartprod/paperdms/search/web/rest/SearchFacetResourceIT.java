@@ -54,7 +54,7 @@ class SearchFacetResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -346,11 +346,7 @@ class SearchFacetResourceIT {
         SearchFacet partialUpdatedSearchFacet = new SearchFacet();
         partialUpdatedSearchFacet.setId(searchFacet.getId());
 
-        partialUpdatedSearchFacet
-            .searchQueryId(UPDATED_SEARCH_QUERY_ID)
-            .facetName(UPDATED_FACET_NAME)
-            .facetType(UPDATED_FACET_TYPE)
-            .values(UPDATED_VALUES);
+        partialUpdatedSearchFacet.facetName(UPDATED_FACET_NAME).facetType(UPDATED_FACET_TYPE);
 
         restSearchFacetMockMvc
             .perform(

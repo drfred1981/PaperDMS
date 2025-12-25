@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import dayjs from 'dayjs/esm';
-
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { IDocumentComment, NewDocumentComment } from '../document-comment.model';
 
@@ -45,10 +44,10 @@ export type DocumentCommentFormGroup = FormGroup<DocumentCommentFormGroupContent
 
 @Injectable({ providedIn: 'root' })
 export class DocumentCommentFormService {
-  createDocumentCommentFormGroup(documentComment?: DocumentCommentFormGroupInput): DocumentCommentFormGroup {
+  createDocumentCommentFormGroup(documentComment: DocumentCommentFormGroupInput = { id: null }): DocumentCommentFormGroup {
     const documentCommentRawValue = this.convertDocumentCommentToDocumentCommentRawValue({
       ...this.getFormDefaults(),
-      ...(documentComment ?? { id: null }),
+      ...documentComment,
     });
     return new FormGroup<DocumentCommentFormGroupContent>({
       id: new FormControl(
@@ -86,10 +85,12 @@ export class DocumentCommentFormService {
 
   resetForm(form: DocumentCommentFormGroup, documentComment: DocumentCommentFormGroupInput): void {
     const documentCommentRawValue = this.convertDocumentCommentToDocumentCommentRawValue({ ...this.getFormDefaults(), ...documentComment });
-    form.reset({
-      ...documentCommentRawValue,
-      id: { value: documentCommentRawValue.id, disabled: true },
-    });
+    form.reset(
+      {
+        ...documentCommentRawValue,
+        id: { value: documentCommentRawValue.id, disabled: true },
+      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
+    );
   }
 
   private getFormDefaults(): DocumentCommentFormDefaults {

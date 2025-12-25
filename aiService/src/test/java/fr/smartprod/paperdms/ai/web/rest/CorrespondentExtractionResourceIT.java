@@ -93,7 +93,7 @@ class CorrespondentExtractionResourceIT {
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
     private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2L * Integer.MAX_VALUE));
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -1390,13 +1390,12 @@ class CorrespondentExtractionResourceIT {
         partialUpdatedCorrespondentExtraction.setId(correspondentExtraction.getId());
 
         partialUpdatedCorrespondentExtraction
-            .detectedLanguage(UPDATED_DETECTED_LANGUAGE)
             .languageConfidence(UPDATED_LANGUAGE_CONFIDENCE)
-            .isCached(UPDATED_IS_CACHED)
+            .status(UPDATED_STATUS)
+            .resultCacheKey(UPDATED_RESULT_CACHE_KEY)
             .resultS3Key(UPDATED_RESULT_S_3_KEY)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .errorMessage(UPDATED_ERROR_MESSAGE)
+            .sendersCount(UPDATED_SENDERS_COUNT)
+            .recipientsCount(UPDATED_RECIPIENTS_COUNT)
             .createdDate(UPDATED_CREATED_DATE);
 
         restCorrespondentExtractionMockMvc

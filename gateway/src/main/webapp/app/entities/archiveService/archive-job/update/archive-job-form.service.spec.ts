@@ -8,6 +8,7 @@ describe('ArchiveJob Form Service', () => {
   let service: ArchiveJobFormService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ArchiveJobFormService);
   });
 
@@ -74,7 +75,7 @@ describe('ArchiveJob Form Service', () => {
       it('should return NewArchiveJob for default ArchiveJob initial value', () => {
         const formGroup = service.createArchiveJobFormGroup(sampleWithNewData);
 
-        const archiveJob = service.getArchiveJob(formGroup);
+        const archiveJob = service.getArchiveJob(formGroup) as any;
 
         expect(archiveJob).toMatchObject(sampleWithNewData);
       });
@@ -82,7 +83,7 @@ describe('ArchiveJob Form Service', () => {
       it('should return NewArchiveJob for empty ArchiveJob initial value', () => {
         const formGroup = service.createArchiveJobFormGroup();
 
-        const archiveJob = service.getArchiveJob(formGroup);
+        const archiveJob = service.getArchiveJob(formGroup) as any;
 
         expect(archiveJob).toMatchObject({});
       });
@@ -90,7 +91,7 @@ describe('ArchiveJob Form Service', () => {
       it('should return IArchiveJob', () => {
         const formGroup = service.createArchiveJobFormGroup(sampleWithRequiredData);
 
-        const archiveJob = service.getArchiveJob(formGroup);
+        const archiveJob = service.getArchiveJob(formGroup) as any;
 
         expect(archiveJob).toMatchObject(sampleWithRequiredData);
       });
