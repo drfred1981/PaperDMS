@@ -131,8 +131,6 @@ jobs:
             needs-node: false
           - service: businessDocService
             needs-node: false
-          - service: backupService
-            needs-node: false
           - service: monitoringService
             needs-node: false
     
