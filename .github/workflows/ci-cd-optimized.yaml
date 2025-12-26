@@ -203,40 +203,27 @@ jobs:
             needs-node: false
     
     steps:
-      # Check if this specific service should be built
-      - name: Check if service should be built
-        id: should-build
-        run: |
-          ALL_SERVICES="${{ needs.detect-changes.outputs.all-services }}"
-          SERVICE_CHANGED="${{ needs.detect-changes.outputs[matrix.service] }}"
-          
-          if [[ "$ALL_SERVICES" == "true" ]] || [[ "$SERVICE_CHANGED" == "true" ]]; then
-            echo "should-build=true" >> $GITHUB_OUTPUT
-            echo "? Building ${{ matrix.service }}"
-          else
-            echo "should-build=false" >> $GITHUB_OUTPUT
-            echo "??  Skipping ${{ matrix.service }} (no changes detected)"
-          fi
+      
       
       - uses: actions/checkout@v4
-        if: steps.should-build.outputs.should-build == 'true'
+        
       
       - name: Set up JDK
-        if: steps.should-build.outputs.should-build == 'true'
+        
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
       
       - name: Set up Node.js
-        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
+        if:  matrix.needs-node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       
       # Restore Maven cache
       - name: Cache Maven packages
-        if: steps.should-build.outputs.should-build == 'true'
+        
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
@@ -246,7 +233,7 @@ jobs:
       
       # Cache npm dependencies
       - name: Cache npm packages
-        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
+        if:  matrix.needs-node
         uses: actions/cache@v3
         with:
           path: ${{ matrix.service }}/node_modules
@@ -255,14 +242,12 @@ jobs:
             ${{ runner.os }}-node-
       
       - name: Download Maven Repository
-        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/download-artifact@v4
         with:
           name: maven-repository
           path: ~/.m2/repository/fr/smartprod/paperdms/
       
       - name: Extract version
-        if: steps.should-build.outputs.should-build == 'true'
         id: version
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
@@ -273,22 +258,19 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
       
       - name: Install frontend dependencies
-        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
+        if:  matrix.needs-node
         working-directory: ${{ matrix.service }}
         run: npm ci
       
       - name: Build ${{ matrix.service }}
-        if: steps.should-build.outputs.should-build == 'true'
         working-directory: ${{ matrix.service }}
         run: mvn clean package -Pprod -DskipTests
       
       - name: Test ${{ matrix.service }}
-        if: steps.should-build.outputs.should-build == 'true'
         working-directory: ${{ matrix.service }}
         run: mvn test
       
       - name: Upload JAR
-        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.service }}-jar
@@ -297,11 +279,11 @@ jobs:
       
       # Docker build and push (ONLY on tags AND if service was built)
       - name: Set up Docker Buildx
-        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         uses: docker/setup-buildx-action@v3
       
       - name: Login to GitHub Container Registry
-        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
@@ -309,7 +291,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build and push Docker image
-        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         working-directory: ${{ matrix.service }}
         run: |
           echo "?? Building and pushing Docker image for tag ${GITHUB_REF#refs/tags/}"
