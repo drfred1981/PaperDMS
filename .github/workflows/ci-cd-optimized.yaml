@@ -31,7 +31,74 @@ env:
 # Jobs
 # =============================================================================
 jobs:
- 
+  # ===========================================================================
+  # Detect changes - Determine which services need to be built
+  # ===========================================================================
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      maven-packages: ${{ steps.filter.outputs.maven-packages }}
+      services: ${{ steps.filter.outputs.services }}
+      gateway: ${{ steps.filter.outputs.gateway }}
+      documentService: ${{ steps.filter.outputs.documentService }}
+      ocrService: ${{ steps.filter.outputs.ocrService }}
+      searchService: ${{ steps.filter.outputs.searchService }}
+      aiService: ${{ steps.filter.outputs.aiService }}
+      workflowService: ${{ steps.filter.outputs.workflowService }}
+      notificationService: ${{ steps.filter.outputs.notificationService }}
+      all-services: ${{ steps.services-list.outputs.all }}
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            maven-packages:
+              - 'paperdms-common/**'
+            services:
+              - '*/pom.xml'
+              - '*/src/**'
+            gateway:
+              - 'gateway/**'
+              - 'paperdms-common/**'
+            documentService:
+              - 'documentService/**'
+              - 'paperdms-common/**'
+            ocrService:
+              - 'ocrService/**'
+              - 'paperdms-common/**'
+            searchService:
+              - 'searchService/**'
+              - 'paperdms-common/**'
+            aiService:
+              - 'aiService/**'
+              - 'paperdms-common/**'
+            workflowService:
+              - 'workflowService/**'
+              - 'paperdms-common/**'
+            notificationService:
+              - 'notificationService/**'
+              - 'paperdms-common/**'
+      
+      - name: Generate services list
+        id: services-list
+        run: |
+          # Build all services if:
+          # - Tag push
+          # - maven-packages changed
+          # - workflow_dispatch
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/* ]] || \
+             [[ "${{ steps.filter.outputs.maven-packages }}" == "true" ]] || \
+             [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "all=true" >> $GITHUB_OUTPUT
+          else
+            echo "all=false" >> $GITHUB_OUTPUT
+          fi
 
   # ===========================================================================
   # Build Maven Packages
@@ -39,7 +106,8 @@ jobs:
   build-maven-packages:
     name: Build Maven Packages
     runs-on: ubuntu-latest
-       
+    needs: detect-changes
+    if: needs.detect-changes.outputs.maven-packages == 'true' || needs.detect-changes.outputs.all-services == 'true'
     
     steps:
       - uses: actions/checkout@v4
@@ -91,7 +159,7 @@ jobs:
   # ===========================================================================
   build-services:
     name: Build ${{ matrix.service }}
-    needs: [build-maven-packages]
+    needs: [detect-changes, build-maven-packages]
     runs-on: ubuntu-latest
     
     # Build only if Maven packages built successfully (or skipped)
@@ -111,51 +179,64 @@ jobs:
             needs-node: false
           - service: searchService
             needs-node: false
-          - service: scanService
-            needs-node: false
-          - service: similarityService
-            needs-node: false
           - service: aiService
             needs-node: false
           - service: workflowService
             needs-node: false
-          - service: transformService
-            needs-node: false
           - service: notificationService
             needs-node: false
-          - service: emailImportService
+          - service: emailService
             needs-node: false
-          - service: reportingService
+          - service: invoiceService
+            needs-node: false
+          - service: receiptService
+            needs-node: false
+          - service: contractService
+            needs-node: false
+          - service: reportService
             needs-node: false
           - service: archiveService
             needs-node: false
-          - service: businessDocService
+          - service: auditService
             needs-node: false
-          - service: monitoringService
+          - service: backupService
             needs-node: false
     
     steps:
-      
+      # Check if this specific service should be built
+      - name: Check if service should be built
+        id: should-build
+        run: |
+          ALL_SERVICES="${{ needs.detect-changes.outputs.all-services }}"
+          SERVICE_CHANGED="${{ needs.detect-changes.outputs[matrix.service] }}"
+          
+          if [[ "$ALL_SERVICES" == "true" ]] || [[ "$SERVICE_CHANGED" == "true" ]]; then
+            echo "should-build=true" >> $GITHUB_OUTPUT
+            echo "? Building ${{ matrix.service }}"
+          else
+            echo "should-build=false" >> $GITHUB_OUTPUT
+            echo "??  Skipping ${{ matrix.service }} (no changes detected)"
+          fi
       
       - uses: actions/checkout@v4
-        
+        if: steps.should-build.outputs.should-build == 'true'
       
       - name: Set up JDK
-        
+        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
       
       - name: Set up Node.js
-        if:  matrix.needs-node
+        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       
       # Restore Maven cache
       - name: Cache Maven packages
-        
+        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
@@ -165,7 +246,7 @@ jobs:
       
       # Cache npm dependencies
       - name: Cache npm packages
-        if:  matrix.needs-node
+        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
         uses: actions/cache@v3
         with:
           path: ${{ matrix.service }}/node_modules
@@ -174,12 +255,14 @@ jobs:
             ${{ runner.os }}-node-
       
       - name: Download Maven Repository
+        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/download-artifact@v4
         with:
           name: maven-repository
           path: ~/.m2/repository/fr/smartprod/paperdms/
       
       - name: Extract version
+        if: steps.should-build.outputs.should-build == 'true'
         id: version
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
@@ -190,19 +273,22 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
       
       - name: Install frontend dependencies
-        if:  matrix.needs-node
+        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
         working-directory: ${{ matrix.service }}
         run: npm ci
       
       - name: Build ${{ matrix.service }}
+        if: steps.should-build.outputs.should-build == 'true'
         working-directory: ${{ matrix.service }}
         run: mvn clean package -Pprod -DskipTests
       
       - name: Test ${{ matrix.service }}
+        if: steps.should-build.outputs.should-build == 'true'
         working-directory: ${{ matrix.service }}
         run: mvn test
       
       - name: Upload JAR
+        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.service }}-jar
@@ -211,11 +297,11 @@ jobs:
       
       # Docker build and push (ONLY on tags AND if service was built)
       - name: Set up Docker Buildx
-        if: startsWith(github.ref, 'refs/tags/')
+        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
         uses: docker/setup-buildx-action@v3
       
       - name: Login to GitHub Container Registry
-        if: startsWith(github.ref, 'refs/tags/')
+        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
@@ -223,12 +309,16 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build and push Docker image
-        if: startsWith(github.ref, 'refs/tags/')
+        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
         working-directory: ${{ matrix.service }}
         run: |
           echo "?? Building and pushing Docker image for tag ${GITHUB_REF#refs/tags/}"
+          
+          # Convert service name to lowercase for Docker image name
+          SERVICE_LOWER=$(echo "${{ matrix.service }}" | tr '[:upper:]' '[:lower:]')
+          
           mvn -Pprod compile jib:build \
-            -Djib.to.image=ghcr.io/${{ github.repository_owner }}/paperdms-${{ matrix.service }}:${{ steps.version.outputs.version }} \
+            -Djib.to.image=ghcr.io/${{ github.repository_owner }}/paperdms-${SERVICE_LOWER}:${{ steps.version.outputs.version }} \
             -Djib.to.tags=latest \
             -Djib.to.auth.username=${{ github.actor }} \
             -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}

@@ -20,7 +20,7 @@
     ],
     "directoryPath": "../",
     "jhipsterVersion": "8.11.0",
-    "jwtSecretKey": "YTA5MzllOTAxZjEwOWViMWE4ZmZmZTUyZDEwYTkzMzUyODkwOThjMWM4MGFjNDE5OWI3NzkwYTlkODFkMDc3N2ZhNmIzODBhMzdlYTYzOGJmZDY0YjA0ZWM3ZjEzOWE2YjFiZA==",
+    "jwtSecretKey": "MDgzMTg1MDI2ZTEzNmQyMzAwMTlkNGFmZjZmYTY4YTNiZTViODg2MWUxZDAzNTJlOTI5MTgzODQ3Y2VmOWQ2YjA2NTBlNzBlNGJkYjg0OTg5Mzk5YmMxY2U2MzVmYTM0NDlkNA==",
     "monitoring": "prometheus",
     "serviceDiscoveryType": "consul"
   }
