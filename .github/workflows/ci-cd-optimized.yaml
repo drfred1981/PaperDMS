@@ -111,27 +111,29 @@ jobs:
             needs-node: false
           - service: searchService
             needs-node: false
+          - service: scanService
+            needs-node: false
+          - service: similarityService
+            needs-node: false
           - service: aiService
             needs-node: false
           - service: workflowService
             needs-node: false
+          - service: transformService
+            needs-node: false
           - service: notificationService
             needs-node: false
-          - service: emailService
+          - service: emailImportService
             needs-node: false
-          - service: invoiceService
-            needs-node: false
-          - service: receiptService
-            needs-node: false
-          - service: contractService
-            needs-node: false
-          - service: reportService
+          - service: reportingService
             needs-node: false
           - service: archiveService
             needs-node: false
-          - service: auditService
+          - service: businessDocService
             needs-node: false
           - service: backupService
+            needs-node: false
+          - service: monitoringService
             needs-node: false
     
     steps:
