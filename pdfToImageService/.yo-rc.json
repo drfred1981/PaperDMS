@@ -1,0 +1,14 @@
+{
+  "generator-jhipster": {
+    "baseName": "paperdms",
+    "creationTimestamp": 1767038184306,
+    "entities": [],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "NWRiMzRiMzhhZjFiYWNmNzg3OTBjNzc2Yzg0NDI4MTJiNTBhMGVhZWZmOTUwYjY5NDQwM2YxNDU4YmI3YTA0M2NmODM0OTM5YzU2NjBjZWI2ZDM2M2Q3NzQ1YjNhNjZkYjgwMTNjNWNjNmM0NjQ0NGM0ZjkzNTllMWI5NjEwODY=",
+    "languages": ["en"],
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "skipCommitHook": true,
+    "withAdminUi": true
+  }
+}
