@@ -200,27 +200,7 @@ enum MappingTransformation {
   NONE, UPPERCASE, LOWERCASE, TRIM, EXTRACT_DATE, EXTRACT_NUMBER,
   EXTRACT_EMAIL, REGEX_EXTRACT, REPLACE, SPLIT, CONCAT, CUSTOM
 }
-
-// Scan Service
-enum ScanStatus {
-  PENDING, SCANNING, COMPLETED, FAILED, CANCELLED
-}
-
-enum ColorMode {
-  BLACK_WHITE, GRAYSCALE, COLOR, AUTO
-}
-
-enum ScanFormat {
-  PDF, TIFF, JPEG, PNG
-}
-
-enum ScannerType {
-  NETWORK, LOCAL, MOBILE, MULTIFUNCTION
-}
-
-enum BatchStatus {
-  PENDING, IN_PROGRESS, COMPLETED, PARTIAL, FAILED
-}
+ 
 
 // Transform Service
 enum TransformStatus {

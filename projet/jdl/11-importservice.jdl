@@ -21,6 +21,7 @@ enum MappingTransformation {
 }
 
 entity EmailImport {
+  sha256 String required maxlength(64)
   fromEmail String required maxlength(255)
   toEmail String required maxlength(255)
   subject String maxlength(1000)
@@ -29,25 +30,22 @@ entity EmailImport {
   receivedDate Instant required
   processedDate Instant
   status ImportStatus required
-  folderId Long
-  documentTypeId Long
   attachmentCount Integer
   documentsCreated Integer
-  appliedRuleId Long
   errorMessage TextBlob
   metadata TextBlob
+  documentSha256 String maxlength(64)
 }
 
 entity EmailAttachment {
-  emailImportId Long required
   fileName String required maxlength(500)
   fileSize Long required
   mimeType String required maxlength(100)
   sha256 String required maxlength(64)
   s3Key String maxlength(1000)
-  documentId Long
   status AttachmentStatus required
   errorMessage TextBlob
+  documentSha256 String maxlength(64)
 }
 
 entity ImportRule {
@@ -57,9 +55,6 @@ entity ImportRule {
   isActive Boolean required
   conditions TextBlob required
   actions TextBlob required
-  folderId Long
-  documentTypeId Long
-  applyTags TextBlob
   notifyUsers TextBlob
   matchCount Integer
   lastMatchDate Instant
@@ -69,7 +64,6 @@ entity ImportRule {
 }
 
 entity ImportMapping {
-  ruleId Long required
   emailField EmailField required
   documentField String required maxlength(100)
   transformation MappingTransformation
@@ -79,10 +73,11 @@ entity ImportMapping {
   validationRegex String maxlength(500)
 }
 
-relationship ManyToOne {
-  EmailAttachment{emailImport required} to EmailImport
-  ImportMapping{rule required} to ImportRule
-  EmailImport{appliedRule} to ImportRule
+relationship OneToMany {
+  
+  EmailImport{emailAttachments} to EmailAttachment{emailImport}
+  ImportRule{importMappings} to ImportMapping{rule} 
+  ImportRule{emailImports} to EmailImport{appliedRule}
 }
 
 microservice EmailImport, EmailAttachment, ImportRule, 

@@ -32,7 +32,7 @@ entity Notification {
   readDate Instant
   channel NotificationChannel
   relatedEntityType String maxlength(100)
-  relatedEntityId Long
+  relatedEntityName String 
   actionUrl String maxlength(500)
   metadata TextBlob
   expirationDate Instant
@@ -67,7 +67,7 @@ entity NotificationPreference {
 entity NotificationEvent {
   eventType String required maxlength(100)
   entityType String maxlength(100)
-  entityId Long
+  entityName String
   userId String maxlength(50)
   eventData TextBlob
   eventDate Instant required
@@ -95,7 +95,6 @@ entity WebhookSubscription {
 }
 
 entity WebhookLog {
-  subscriptionId Long required
   eventType String required maxlength(100)
   payload TextBlob
   responseStatus Integer
@@ -108,16 +107,12 @@ entity WebhookLog {
 }
 
 // Relations
-relationship ManyToOne {
-  Notification{template} to NotificationTemplate
-  WebhookLog{subscription required} to WebhookSubscription
+relationship OneToMany {
+  NotificationTemplate{notifications} to Notification{template}
+  WebhookSubscription{webhooklogs} to WebhookLog{subscription}
 }
 
-// Options
-paginate all with pagination
-filter Notification, WebhookSubscription
-service all with serviceImpl
-dto all with mapstruct
+ 
 
 microservice Notification, NotificationTemplate, NotificationPreference, 
              NotificationEvent, WebhookSubscription, WebhookLog with notificationService

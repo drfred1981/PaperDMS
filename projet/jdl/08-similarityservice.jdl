@@ -15,8 +15,8 @@ enum FingerprintType {
 }
 
 entity DocumentSimilarity {
-  documentId1 Long required
-  documentId2 Long required
+  sourceDocumentSha256 String required maxlength(64)
+  targetDocumentSha256 String required maxlength(64)
   similarityScore Double required min(0) max(1)
   algorithm SimilarityAlgorithm
   features TextBlob
@@ -27,7 +27,7 @@ entity DocumentSimilarity {
 }
 
 entity SimilarityJob {
-  documentId Long required
+  
   documentSha256 String required maxlength(64)
   status AiJobStatus
   algorithm SimilarityAlgorithm
@@ -42,7 +42,7 @@ entity SimilarityJob {
 }
 
 entity DocumentFingerprint {
-  documentId Long required unique
+  
   fingerprintType FingerprintType
   fingerprint TextBlob required
   vectorEmbedding TextBlob
@@ -62,8 +62,8 @@ entity SimilarityCluster {
   lastUpdated Instant
 }
 
-relationship ManyToOne {
-  DocumentSimilarity{job} to SimilarityJob
+relationship OneToMany {
+  SimilarityJob{similarities} to DocumentSimilarity{job}
 }
 
 microservice DocumentSimilarity, SimilarityJob, DocumentFingerprint, 

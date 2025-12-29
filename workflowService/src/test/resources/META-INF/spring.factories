@@ -1,7 +1,0 @@
-org.springframework.test.context.ContextCustomizerFactory = \
-    fr.smartprod.paperdms.workflow.config.\
-    SqlTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
-    workflow.config.TestContainersSpringContextCustomizerFactory,fr.smartprod.\
-    paperdms.workflow.config.\
-    RedisTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
-    workflow.config.KafkaTestContainersSpringContextCustomizerFactory

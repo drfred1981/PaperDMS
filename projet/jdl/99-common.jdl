@@ -1,36 +1,10 @@
-paginate AutoTagJob, CorrespondentExtraction, DocumentSimilarity, SimilarityJob,
-         ArchiveJob, ExportJob, EmailImport, ImportRule with pagination
 
-filter AutoTagJob, CorrespondentExtraction, Correspondent, DocumentSimilarity,
-       SimilarityJob, ArchiveJob, ExportJob, ExportPattern, EmailImport, ImportRule
 
-service AutoTagJob, TagPrediction, CorrespondentExtraction, Correspondent,
-        LanguageDetection, AiCache, DocumentSimilarity, SimilarityJob,
-        DocumentFingerprint, SimilarityCluster, ArchiveJob, ArchiveDocument,
-        ExportJob, ExportPattern, ExportResult, EmailImport, EmailAttachment,
-        ImportRule, ImportMapping with serviceImpl
 
-dto AutoTagJob, TagPrediction, CorrespondentExtraction, Correspondent,
-    LanguageDetection, AiCache, DocumentSimilarity, SimilarityJob,
-    DocumentFingerprint, SimilarityCluster, ArchiveJob, ArchiveDocument,
-    ExportJob, ExportPattern, ExportResult, EmailImport, EmailAttachment,
-    ImportRule, ImportMapping with mapstruct
+search all with elasticsearch
 
-search Correspondent, DocumentFingerprint with elasticsearch
+filter  all
 
-// ============================================================================
-// Options communes pour services 12-16
-// ============================================================================
+service  all with serviceClass
 
-paginate ScanJob, ScanBatch, ConversionJob, WatermarkJob, Invoice, Contract,
-         BankStatement, Manual, Dashboard, ScheduledReport, Alert, AlertRule,
-         DocumentWatch, MaintenanceTask with pagination
-
-filter ScanJob, ScanBatch, ConversionJob, WatermarkJob, Invoice, Contract,
-       BankStatement, Manual, Dashboard, ScheduledReport, Alert, AlertRule,
-       DocumentWatch, MaintenanceTask
-
-service all with serviceImpl
 dto all with mapstruct
-
-search Invoice, Contract, Manual with elasticsearch

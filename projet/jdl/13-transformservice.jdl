@@ -28,14 +28,13 @@ enum ComparisonType {
 }
 
 entity ConversionJob {
-  documentId Long required
   documentSha256 String required maxlength(64)
   sourceFormat String required maxlength(50)
   targetFormat String required maxlength(50)
   conversionEngine String maxlength(100)
   options TextBlob
   outputS3Key String maxlength(1000)
-  outputDocumentId Long
+  outputDocumentSha256 String maxlength(64)
   status TransformStatus required
   startDate Instant
   endDate Instant
@@ -45,7 +44,7 @@ entity ConversionJob {
 }
 
 entity WatermarkJob {
-  documentId Long required
+  documentSha256 String required maxlength(64)
   watermarkType WatermarkType required
   watermarkText String maxlength(500)
   watermarkImageS3Key String maxlength(1000)
@@ -56,7 +55,7 @@ entity WatermarkJob {
   rotation Integer
   tiled Boolean
   outputS3Key String maxlength(1000)
-  outputDocumentId Long
+  outputDocumentSha256 String maxlength(64)
   status TransformStatus required
   startDate Instant
   endDate Instant
@@ -66,13 +65,13 @@ entity WatermarkJob {
 }
 
 entity RedactionJob {
-  documentId Long required
+  documentSha256 String required maxlength(64)
   redactionAreas TextBlob required
   redactionType RedactionType required
   redactionColor String maxlength(7)
   replaceWith String maxlength(500)
   outputS3Key String maxlength(1000)
-  outputDocumentId Long
+  outputDocumentSha256 String maxlength(64)
   status TransformStatus required
   startDate Instant
   endDate Instant
@@ -82,7 +81,7 @@ entity RedactionJob {
 }
 
 entity CompressionJob {
-  documentId Long required
+  documentSha256 String required maxlength(64)
   compressionType CompressionType required
   quality Integer min(0) max(100)
   targetSizeKb Long
@@ -90,7 +89,7 @@ entity CompressionJob {
   compressedSize Long
   compressionRatio Double
   outputS3Key String maxlength(1000)
-  outputDocumentId Long
+  outputDocumentSha256 String maxlength(64)
   status TransformStatus required
   startDate Instant
   endDate Instant
@@ -101,13 +100,13 @@ entity CompressionJob {
 
 entity MergeJob {
   name String required maxlength(255)
-  sourceDocumentIds TextBlob required
+  sourceDocumentSha256 TextBlob required
   mergeOrder TextBlob required
   includeBookmarks Boolean
   includeToc Boolean
   addPageNumbers Boolean
   outputS3Key String maxlength(1000)
-  outputDocumentId Long
+  outputDocumentSha256 String maxlength(64)
   status TransformStatus required
   startDate Instant
   endDate Instant
@@ -116,19 +115,6 @@ entity MergeJob {
   createdDate Instant required
 }
 
-entity ComparisonJob {
-  documentId1 Long required
-  documentId2 Long required
-  comparisonType ComparisonType required
-  differences TextBlob
-  differenceCount Integer
-  similarityPercentage Double min(0) max(100)
-  diffReportS3Key String maxlength(1000)
-  diffVisualS3Key String maxlength(1000)
-  status TransformStatus required
-  comparedDate Instant required
-  comparedBy String required maxlength(50)
-}
 
 microservice ConversionJob, WatermarkJob, RedactionJob, CompressionJob, 
-             MergeJob, ComparisonJob with transformService
+             MergeJob with transformService

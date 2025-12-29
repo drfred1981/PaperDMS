@@ -9,7 +9,7 @@ enum FacetType {
 
 // Entités
 entity SearchIndex {
-  documentId Long required
+  documentSha256 String required maxlength(64)
   indexedContent TextBlob required
   metadata TextBlob
   tags String maxlength(2000)
@@ -41,7 +41,7 @@ entity SemanticSearch {
 }
 
 entity SearchFacet {
-  searchQueryId Long
+  
   facetName String required maxlength(100)
   facetType FacetType required
   values TextBlob required
@@ -49,15 +49,9 @@ entity SearchFacet {
 }
 
 // Relations
-relationship ManyToOne {
-  SearchFacet{searchQuery} to SearchQuery
+relationship OneToMany {
+  SearchQuery{facets} to SearchFacet{searchQuery}
 }
-
-// Options
-paginate all with pagination
-filter SearchQuery, SemanticSearch
-service all with serviceImpl
-dto all with mapstruct
-search SearchIndex with elasticsearch
+ 
 
 microservice SearchIndex, SearchQuery, SemanticSearch, SearchFacet with searchService

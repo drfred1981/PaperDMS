@@ -32,8 +32,7 @@ entity ArchiveJob {
 }
 
 entity ArchiveDocument {
-  archiveJobId Long required
-  documentId Long required
+  
   documentSha256 String required maxlength(64)
   originalPath String maxlength(1000)
   archivePath String maxlength(1000)
@@ -41,8 +40,8 @@ entity ArchiveDocument {
   addedDate Instant required
 }
 
-relationship ManyToOne {
-  ArchiveDocument{archiveJob required} to ArchiveJob
+relationship OneToMany {
+  ArchiveJob{archivesDocuments} to ArchiveDocument{archiveJob}
 }
 
 microservice ArchiveJob, ArchiveDocument with archiveService

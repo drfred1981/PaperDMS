@@ -1,7 +1,0 @@
-org.springframework.test.context.ContextCustomizerFactory = \
-    fr.smartprod.paperdms.similarity.config.\
-    SqlTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
-    similarity.config.TestContainersSpringContextCustomizerFactory,fr.smartprod.\
-    paperdms.similarity.config.\
-    RedisTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
-    similarity.config.KafkaTestContainersSpringContextCustomizerFactory

@@ -10,14 +10,14 @@
 # ===================================================================
 # Standard Spring Boot properties.
 # Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# https://docs.spring.io/spring-boot/appendix/application-properties/index.html
 # ===================================================================
 
 logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    fr.smartprod.paperdms.gateway: INFO
+    fr.smartprod.paperdms.document: INFO
 
 management:
   prometheus:
@@ -32,8 +32,6 @@ management:
       probability: 1.0 # report 100% of traces
 
 spring:
-  application:
-    name: gateway
   devtools:
     restart:
       enabled: false
@@ -41,91 +39,44 @@ spring:
       enabled: false
   cloud:
     consul:
-      host: ${SPRING_CLOUD_CONSUL_HOST:consul}
-      port: ${SPRING_CLOUD_CONSUL_PORT:8500}
       discovery:
         prefer-ip-address: true
-        healthCheckPath: /management/health
-        instanceId: gateway:${spring.application.instance-id:${random.value}}
-        service-name: gateway
-      config:
-        watch:
-          enabled: false
-    gateway:
-      default-filters:
-        - JWTRelay
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-          predicates:
-            - name: Path
-              args:
-                pattern: "'/services/'+serviceId.toLowerCase()+'/**'"
-          filters:
-            - name: RewritePath
-              args:
-                regexp: "'/services/' + serviceId.toLowerCase() + '/(?<remaining>.*)'"
-                replacement: "'/${remaining}'"
-      httpclient:
-        pool:
-          max-connections: 1000
+      host: ${SPRING_CLOUD_CONSUL_HOST:localhost}
+      port: ${SPRING_CLOUD_CONSUL_PORT:8500}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:paperdms}
-    username: ${DB_USERNAME:paperdms}
-    password: ${DB_PASSWORD:paperdms}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/documentService}
+    username: ${SPRING_DATASOURCE_USERNAME:documentService}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     hikari:
-      pool-name: ${spring.application.name}-pool
-      
-      
-      
-      # Pool de connexions
-      maximum-pool-size: 5
-      minimum-idle: 2
-      
-      # Timeouts
-      connection-timeout: 30000      # 30 secondes
-      idle-timeout: 600000           # 10 minutes
-      max-lifetime: 1800000          # 30 minutes
-      
-      # Optimisations
-      leak-detection-threshold: 60000
-      connection-test-query: SELECT 1
-      validation-timeout: 5000
-  
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: false
-    open-in-view: false
-    properties:
-      hibernate:
-        jdbc:
-          time_zone: UTC
-        connection:
-          provider_disables_autocommit: false 
-  
+      poolName: Hikari
+      auto-commit: false
+  elasticsearch:
+    uris: ${SPRING_ELASTICSEARCH_URIS:http://localhost:9200}
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
-    enabled: true
-    change-log: classpath:config/liquibase/master.xml
-    database-change-log-table: DATABASECHANGELOG_${spring.application.name}
-    database-change-log-lock-table: DATABASECHANGELOGLOCK_${spring.application.name}
-    clear-checksums: true 
-  elasticsearch:
-    uris: ${SPRING_ELASTICSEARCH_URIS:http://elasticsearch:9200}
-  mail:
-    host: localhost
-    port: 25
-    username:
-    password:
   thymeleaf:
     cache: true
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: documentService
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  redis:
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
+    password: ${SPRING_REDIS_PASSWORD:}
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
-# keytool -genkey -alias gateway -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias documentservice -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # See details in topic "Create a Java Keystore (.JKS) from Let's Encrypt Certificates" on https://maximilian-boehm.com/en-gb/blog
@@ -143,8 +94,8 @@ spring:
 #     ciphers: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
 # ===================================================================
 server:
-  port: 8080
-  shutdown: graceful # see https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-graceful-shutdown
+  port: 8081
+  shutdown: graceful # see https://docs.spring.io/spring-boot/reference/web/graceful-shutdown.html#web.graceful-shutdown
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json,image/svg+xml
@@ -160,6 +111,13 @@ jhipster:
   http:
     cache: # Used by the CachingHttpHeadersFilter
       timeToLiveInDays: 1461
+  cache: # Cache configuration
+    redis: # Redis configuration
+      expiration: 3600 # By default objects stay 1 hour (in seconds) in the cache
+      server: ${JHIPSTER_CACHE_REDIS_SERVER:redis://localhost:6379}
+      cluster: false
+      # server: redis://localhost:6379,redis://localhost:16379,redis://localhost:26379
+      # cluster: true
   security:
     authentication:
       jwt:
@@ -168,12 +126,10 @@ jhipster:
         # - In the Consul configserver
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: ZDQ4NGI0YjY1ZWYyOTcxNzkzNWJiNjI0MDE3MGVkYjg5MjUzZTdhMDRkN2ExOWJlYTAxODQ5NGM1MDZmNGZhZTIyNGYxOTQ3ZDM4MThlN2NjOTA1M2YyZGNiMjhhYjFhZTYxMTc2OWJlYTI0MzY5YmRkMzlkNDJiNGIwN2FmN2Q=
+        base64-secret: ${JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET:NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
-  mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://my-server-url-to-change # Modify according to your server's URL
   logging:
     use-json-format: false # By default, logs are not in Json format
     logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
@@ -181,6 +137,7 @@ jhipster:
       host: localhost
       port: 5000
       ring-buffer-size: 512
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
@@ -190,4 +147,15 @@ jhipster:
 # https://www.jhipster.tech/common-application-properties/
 # ===================================================================
 
-# application:
+# S3 / MinIO Configuration
+paperdms:
+  s3:
+    bucket: ${S3_BUCKET:paperdms-documents}
+    region: ${S3_REGION:us-east-1}
+    endpoint: ${S3_ENDPOINT:}
+    access-key: ${S3_ACCESS_KEY:}
+    secret-key: ${S3_SECRET_KEY:}
+  kafka:
+    topics:
+      document-events: ${KAFKA_DOCUMENT_EVENTS_TOPIC:paperdms.document.events}
+      service-status: ${KAFKA_SERVICE_STATUS_TOPIC:paperdms.document.service-status}

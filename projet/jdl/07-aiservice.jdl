@@ -21,7 +21,7 @@ enum LanguageDetectionMethod {
 }
 
 entity AutoTagJob {
-  documentId Long required
+  
   documentSha256 String required maxlength(64)
   s3Key String required maxlength(1000)
   extractedText TextBlob
@@ -50,27 +50,20 @@ entity TagPrediction {
   acceptedDate Instant
   predictionDate Instant required
 }
-
-entity CorrespondentExtraction {
-  documentId Long required
-  documentSha256 String required maxlength(64)
-  extractedText TextBlob required
-  extractedTextSha256 String required maxlength(64)
-  detectedLanguage String maxlength(10)
-  languageConfidence Double min(0) max(1)
-  status AiJobStatus
-  resultCacheKey String maxlength(128)
-  isCached Boolean required
-  resultS3Key String maxlength(1000)
-  startDate Instant
-  endDate Instant
-  errorMessage TextBlob
-  sendersCount Integer
-  recipientsCount Integer
-  createdDate Instant required
+entity TypePrediction {
+  documentTypeName String required maxlength(100)
+  confidence Double required min(0) max(1)
+  reason String maxlength(500)
+  modelVersion String maxlength(50)
+  predictionS3Key String maxlength(1000)
+  isAccepted Boolean
+  acceptedBy String maxlength(50)
+  acceptedDate Instant
+  predictionDate Instant required
 }
 
-entity Correspondent {
+entity CorrespondentPrediction {
+  correspondentName String required maxlength(100)
   name String required maxlength(255)
   email String maxlength(255)
   phone String maxlength(50)
@@ -78,16 +71,17 @@ entity Correspondent {
   company String maxlength(255)
   type CorrespondentType
   role CorrespondentRole
-  confidence Double min(0) max(1)
-  isVerified Boolean required
-  verifiedBy String maxlength(50)
-  verifiedDate Instant
-  metadata TextBlob
-  extractedDate Instant required
+  confidence Double required min(0) max(1)
+  reason String maxlength(500)
+  modelVersion String maxlength(50)
+  predictionS3Key String maxlength(1000)
+  isAccepted Boolean
+  acceptedBy String maxlength(50)
+  acceptedDate Instant
+  predictionDate Instant required
 }
 
 entity LanguageDetection {
-  documentId Long required
   documentSha256 String required maxlength(64)
   detectedLanguage String required maxlength(10)
   confidence Double required min(0) max(1)
@@ -118,10 +112,14 @@ entity AiCache {
   expirationDate Instant
 }
 
-relationship ManyToOne {
-  TagPrediction{job required} to AutoTagJob
-  Correspondent{extraction required} to CorrespondentExtraction
+relationship OneToMany {
+
+  AutoTagJob{tagPredictions} to TagPrediction{job}   
+  AutoTagJob{correspondentPredictions} to CorrespondentPrediction{job}
+}
+relationship OneToOne {
+  AutoTagJob{typePrediction} to TypePrediction{job} 
+  AutoTagJob{languagePrediction} to LanguageDetection{job}
 }
 
-microservice AutoTagJob, TagPrediction, CorrespondentExtraction, 
-             Correspondent, LanguageDetection, AiCache with aiService
+microservice AutoTagJob, TagPrediction, TypePrediction, CorrespondentPrediction, LanguageDetection, AiCache with aiService

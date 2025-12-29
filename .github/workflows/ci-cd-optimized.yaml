@@ -2,10 +2,11 @@ name: PaperDMS CI/CD (Optimized)
 
 # =============================================================================
 # Workflow optimisé avec:
+# - Matrice Maven pour packages communs
+# - Gestion intelligente des dépendances Maven
 # - Cache Maven et npm
-# - Build conditionnel (uniquement services modifiés)
+# - Build conditionnel avec retry
 # - Docker layer caching
-# - Notifications Slack/Discord
 # =============================================================================
 
 on:
@@ -21,6 +22,14 @@ on:
       - develop
   workflow_dispatch:
 
+# =============================================================================
+# Permissions (required for GHCR push)
+# =============================================================================
+permissions:
+  contents: read      # For checkout
+  packages: write     # For pushing Docker images to GHCR
+  actions: read       # For downloading artifacts
+
 env:
   JAVA_VERSION: '17'
   NODE_VERSION: '18'
@@ -32,82 +41,19 @@ env:
 # =============================================================================
 jobs:
   # ===========================================================================
-  # Detect changes - Determine which services need to be built
+  # Build Maven Packages - Phase 1 (No dependencies)
   # ===========================================================================
-  detect-changes:
-    name: Detect Changes
+  build-maven-base:
+    name: Build Maven Base (${{ matrix.package }})
     runs-on: ubuntu-latest
-    outputs:
-      maven-packages: ${{ steps.filter.outputs.maven-packages }}
-      services: ${{ steps.filter.outputs.services }}
-      gateway: ${{ steps.filter.outputs.gateway }}
-      documentService: ${{ steps.filter.outputs.documentService }}
-      ocrService: ${{ steps.filter.outputs.ocrService }}
-      searchService: ${{ steps.filter.outputs.searchService }}
-      aiService: ${{ steps.filter.outputs.aiService }}
-      workflowService: ${{ steps.filter.outputs.workflowService }}
-      notificationService: ${{ steps.filter.outputs.notificationService }}
-      all-services: ${{ steps.services-list.outputs.all }}
     
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            maven-packages:
-              - 'paperdms-common/**'
-            services:
-              - '*/pom.xml'
-              - '*/src/**'
-            gateway:
-              - 'gateway/**'
-              - 'paperdms-common/**'
-            documentService:
-              - 'documentService/**'
-              - 'paperdms-common/**'
-            ocrService:
-              - 'ocrService/**'
-              - 'paperdms-common/**'
-            searchService:
-              - 'searchService/**'
-              - 'paperdms-common/**'
-            aiService:
-              - 'aiService/**'
-              - 'paperdms-common/**'
-            workflowService:
-              - 'workflowService/**'
-              - 'paperdms-common/**'
-            notificationService:
-              - 'notificationService/**'
-              - 'paperdms-common/**'
-      
-      - name: Generate services list
-        id: services-list
-        run: |
-          # Build all services if:
-          # - Tag push
-          # - maven-packages changed
-          # - workflow_dispatch
-          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/* ]] || \
-             [[ "${{ steps.filter.outputs.maven-packages }}" == "true" ]] || \
-             [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo "all=true" >> $GITHUB_OUTPUT
-          else
-            echo "all=false" >> $GITHUB_OUTPUT
-          fi
-
-  # ===========================================================================
-  # Build Maven Packages
-  # ===========================================================================
-  build-maven-packages:
-    name: Build Maven Packages
-    runs-on: ubuntu-latest
-    needs: detect-changes
-    if: needs.detect-changes.outputs.maven-packages == 'true' || needs.detect-changes.outputs.all-services == 'true'
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        package:
+          - paperdms-common      # Base package (no dependencies)
+          # Add more base packages here (packages with no internal dependencies)
     
     steps:
       - uses: actions/checkout@v4
@@ -137,20 +83,155 @@ jobs:
           fi
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
       
-      - name: Build paperdms-common
+      - name: Build ${{ matrix.package }}
+        id: build
         run: |
-          cd paperdms-common
+          cd ${{ matrix.package }}
+          echo "Building ${{ matrix.package }}..."
           mvn clean install -DskipTests -Drevision=${{ steps.version.outputs.version }}
       
-      - name: Test paperdms-common
+      # Retry on failure
+      - name: Retry build on failure
+        if: failure() && steps.build.outcome == 'failure'
         run: |
-          cd paperdms-common
+          echo "Retrying build for ${{ matrix.package }}..."
+          cd ${{ matrix.package }}
+          mvn clean install -DskipTests -Drevision=${{ steps.version.outputs.version }}
+      
+      - name: Test ${{ matrix.package }}
+        run: |
+          cd ${{ matrix.package }}
           mvn test
       
-      - name: Upload Maven Repository
+      # Upload artifacts for this specific package
+      - name: Upload ${{ matrix.package }} artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: maven-repository
+          name: maven-${{ matrix.package }}
+          path: ~/.m2/repository/fr/smartprod/paperdms/
+          retention-days: 1
+
+  # ===========================================================================
+  # Build Maven Packages - Phase 2 (Depends on Phase 1)
+  # ===========================================================================
+  build-maven-dependent:
+    name: Build Maven Dependent (${{ matrix.package }})
+    runs-on: ubuntu-latest
+    needs: build-maven-base
+    if: always() && needs.build-maven-base.result != 'failure'
+    
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        package:
+          # Add packages that depend on paperdms-common here
+          # Example:
+          # - paperdms-shared
+          # - paperdms-dto
+          # - paperdms-domain
+        include: []  # Empty for now, add when you have dependent packages
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+      
+      # Cache Maven dependencies
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      
+      # Download all base packages
+      - name: Download base Maven packages
+        uses: actions/download-artifact@v4
+        with:
+          pattern: maven-*
+          path: ~/.m2/repository/fr/smartprod/paperdms/
+          merge-multiple: true
+      
+      - name: Extract version
+        id: version
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION=${GITHUB_SHA::8}
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+      
+      - name: Build ${{ matrix.package }}
+        id: build
+        run: |
+          cd ${{ matrix.package }}
+          echo "Building ${{ matrix.package }} (depends on base packages)..."
+          mvn clean install -DskipTests -Drevision=${{ steps.version.outputs.version }}
+      
+      # Retry on failure
+      - name: Retry build on failure
+        if: failure() && steps.build.outcome == 'failure'
+        run: |
+          echo "Retrying build for ${{ matrix.package }}..."
+          cd ${{ matrix.package }}
+          mvn clean install -DskipTests -Drevision=${{ steps.version.outputs.version }}
+      
+      - name: Test ${{ matrix.package }}
+        run: |
+          cd ${{ matrix.package }}
+          mvn test
+      
+      # Upload artifacts
+      - name: Upload ${{ matrix.package }} artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-${{ matrix.package }}
+          path: ~/.m2/repository/fr/smartprod/paperdms/
+          retention-days: 1
+
+  # ===========================================================================
+  # Consolidate Maven Artifacts
+  # ===========================================================================
+  consolidate-maven:
+    name: Consolidate Maven Artifacts
+    runs-on: ubuntu-latest
+    needs: [build-maven-base, build-maven-dependent]
+    if: always() && (needs.build-maven-base.result == 'success' || needs.build-maven-dependent.result == 'success')
+    
+    steps:
+      - name: Download all Maven artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: maven-*
+          path: maven-temp/
+      
+      - name: Consolidate artifacts
+        run: |
+          mkdir -p ~/.m2/repository/fr/smartprod/paperdms/
+          
+          # Merge all maven artifacts into one
+          if [ -d "maven-temp" ]; then
+            find maven-temp -type f -exec cp --parents {} ~/.m2/repository/fr/smartprod/paperdms/ \; 2>/dev/null || true
+            
+            # Alternative: use rsync if available
+            rsync -av maven-temp/ ~/.m2/repository/fr/smartprod/paperdms/ 2>/dev/null || \
+              cp -r maven-temp/* ~/.m2/repository/fr/smartprod/paperdms/ 2>/dev/null || true
+          fi
+          
+          echo "Consolidated Maven repository:"
+          find ~/.m2/repository/fr/smartprod/paperdms/ -type f | head -20
+      
+      - name: Upload consolidated Maven repository
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-repository-complete
           path: ~/.m2/repository/fr/smartprod/paperdms/
           retention-days: 1
 
@@ -159,12 +240,11 @@ jobs:
   # ===========================================================================
   build-services:
     name: Build ${{ matrix.service }}
-    needs: [detect-changes, build-maven-packages]
+    needs: consolidate-maven
     runs-on: ubuntu-latest
     
-    # Build only if Maven packages built successfully (or skipped)
-    # Service-specific filtering is done via matrix conditions
-    if: always() && needs.build-maven-packages.result != 'failure'
+    # Build if Maven consolidation succeeded
+    if: always() && needs.consolidate-maven.result == 'success'
     
     strategy:
       fail-fast: false
@@ -173,70 +253,50 @@ jobs:
         include:
           - service: gateway
             needs-node: true
-          - service: documentService
-            needs-node: false
-          - service: ocrService
-            needs-node: false
-          - service: searchService
-            needs-node: false
           - service: aiService
-            needs-node: false
-          - service: workflowService
-            needs-node: false
-          - service: notificationService
-            needs-node: false
-          - service: emailService
-            needs-node: false
-          - service: invoiceService
-            needs-node: false
-          - service: receiptService
-            needs-node: false
-          - service: contractService
-            needs-node: false
-          - service: reportService
             needs-node: false
           - service: archiveService
             needs-node: false
-          - service: auditService
+          - service: documentService
             needs-node: false
-          - service: backupService
+          - service: emailImportService
+            needs-node: false
+          - service: exportService
+            needs-node: false
+          - service: monitoringService
+            needs-node: false
+          - service: notificationService
+            needs-node: false
+          - service: ocrService
+            needs-node: false
+          - service: reportingService
+            needs-node: false
+          - service: searchService
+            needs-node: false
+          - service: similarityService
+            needs-node: false
+          - service: transformService
+            needs-node: false
+          - service: workflowService
             needs-node: false
     
     steps:
-      # Check if this specific service should be built
-      - name: Check if service should be built
-        id: should-build
-        run: |
-          ALL_SERVICES="${{ needs.detect-changes.outputs.all-services }}"
-          SERVICE_CHANGED="${{ needs.detect-changes.outputs[matrix.service] }}"
-          
-          if [[ "$ALL_SERVICES" == "true" ]] || [[ "$SERVICE_CHANGED" == "true" ]]; then
-            echo "should-build=true" >> $GITHUB_OUTPUT
-            echo "? Building ${{ matrix.service }}"
-          else
-            echo "should-build=false" >> $GITHUB_OUTPUT
-            echo "??  Skipping ${{ matrix.service }} (no changes detected)"
-          fi
-      
       - uses: actions/checkout@v4
-        if: steps.should-build.outputs.should-build == 'true'
       
       - name: Set up JDK
-        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
       
       - name: Set up Node.js
-        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
+        if: matrix.needs-node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       
       # Restore Maven cache
       - name: Cache Maven packages
-        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
@@ -246,7 +306,7 @@ jobs:
       
       # Cache npm dependencies
       - name: Cache npm packages
-        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
+        if: matrix.needs-node
         uses: actions/cache@v3
         with:
           path: ${{ matrix.service }}/node_modules
@@ -254,15 +314,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       
+      # Download consolidated Maven repository
       - name: Download Maven Repository
-        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/download-artifact@v4
         with:
-          name: maven-repository
+          name: maven-repository-complete
           path: ~/.m2/repository/fr/smartprod/paperdms/
       
       - name: Extract version
-        if: steps.should-build.outputs.should-build == 'true'
         id: version
         run: |
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
@@ -273,35 +332,41 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
       
       - name: Install frontend dependencies
-        if: steps.should-build.outputs.should-build == 'true' && matrix.needs-node
+        if: matrix.needs-node
         working-directory: ${{ matrix.service }}
         run: npm ci
       
       - name: Build ${{ matrix.service }}
-        if: steps.should-build.outputs.should-build == 'true'
+        id: build
         working-directory: ${{ matrix.service }}
         run: mvn clean package -Pprod -DskipTests
       
+      # Retry build on failure
+      - name: Retry build on failure
+        if: failure() && steps.build.outcome == 'failure'
+        working-directory: ${{ matrix.service }}
+        run: |
+          echo "Retrying build for ${{ matrix.service }}..."
+          mvn clean package -Pprod -DskipTests
+      
       - name: Test ${{ matrix.service }}
-        if: steps.should-build.outputs.should-build == 'true'
         working-directory: ${{ matrix.service }}
         run: mvn test
       
       - name: Upload JAR
-        if: steps.should-build.outputs.should-build == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.service }}-jar
           path: ${{ matrix.service }}/target/*.jar
           retention-days: 7
       
-      # Docker build and push (ONLY on tags AND if service was built)
+      # Docker build and push (ONLY on tags)
       - name: Set up Docker Buildx
-        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         uses: docker/setup-buildx-action@v3
       
       - name: Login to GitHub Container Registry
-        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
@@ -309,7 +374,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build and push Docker image
-        if: steps.should-build.outputs.should-build == 'true' && startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         working-directory: ${{ matrix.service }}
         run: |
           echo "?? Building and pushing Docker image for tag ${GITHUB_REF#refs/tags/}"

@@ -18,7 +18,6 @@ entity ExportJob {
   name String required maxlength(255)
   description TextBlob
   documentQuery TextBlob required
-  exportPatternId Long required
   exportFormat ExportFormat required
   includeMetadata Boolean required
   includeVersions Boolean required
@@ -52,8 +51,6 @@ entity ExportPattern {
 }
 
 entity ExportResult {
-  exportJobId Long required
-  documentId Long required
   documentSha256 String required maxlength(64)
   originalFileName String maxlength(500)
   exportedPath String maxlength(1000)
@@ -65,9 +62,10 @@ entity ExportResult {
   exportedDate Instant required
 }
 
-relationship ManyToOne {
-  ExportJob{exportPattern required} to ExportPattern
-  ExportResult{exportJob required} to ExportJob
+relationship OneToMany {
+  ExportPattern{exportJobs} to ExportJob{exportPattern} 
+  ExportJob{exportResults} to ExportResult{exportJob}
+
 }
 
 microservice ExportJob, ExportPattern, ExportResult with exportService

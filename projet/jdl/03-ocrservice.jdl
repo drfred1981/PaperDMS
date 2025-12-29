@@ -1,12 +1,7 @@
-/**
- * OCR Service - 7 Entit�s
- */
-
 // Enums
 enum OcrStatus {
   PENDING, IN_PROGRESS, COMPLETED, FAILED, CANCELLED, RETRYING, COMPARING
 }
-
 enum OcrEngine {
   TIKA_TESSERACT, TIKA_NATIVE, OPENAI_VISION, GOOGLE_VISION,
   AWS_TEXTRACT, AZURE_VISION, ANTHROPIC_CLAUDE, CUSTOM, HYBRID
@@ -17,12 +12,11 @@ enum AiOcrProvider {
 }
 entity DocumentProcess {
   status WorkflowInstanceStatus
-  documentId Long required
   documentSha256 String required maxlength(64)
 }
 entity OcrJob {
+
   status OcrStatus required
-  documentId Long required
   documentSha256 String required maxlength(64)
   s3Key String required maxlength(1000)
   s3Bucket String required maxlength(255)
@@ -49,6 +43,7 @@ entity OcrJob {
 }
 
 entity OcrResult {
+  
   pageNumber Integer required
   pageSha256 String maxlength(64)
   confidence Double min(0) max(1)
@@ -83,7 +78,6 @@ entity ExtractedText {
   
 
 entity OcrComparison {
-  documentId Long required
   documentSha256 String required maxlength(64)
   pageNumber Integer required
   tikaText TextBlob
@@ -117,17 +111,11 @@ entity OcrCache {
 }
 
 // Relations
-relationship ManyToOne {
-  OcrResult{job required} to OcrJob
-  ExtractedText{job required} to OcrJob
+relationship OneToMany {
+  OcrJob{results} to OcrResult{job}
+  OcrJob{extracted} to ExtractedText{job}
 }
-
-// Options
-paginate all with pagination
-filter OcrJob
-service all with serviceImpl
-dto all with mapstruct
-search ExtractedText with elasticsearch
+ 
 
 microservice OcrJob, OcrResult, ExtractedText, 
  OcrComparison, OcrCache with ocrService

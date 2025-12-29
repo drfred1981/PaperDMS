@@ -1,27 +1,7 @@
 {
   "generator-jhipster": {
-    "appsFolders": [
-      "gateway",
-      "documentService",
-      "ocrService",
-      "searchService",
-      "notificationService",
-      "workflowService",
-      "aiService",
-      "similarityService",
-      "archiveService",
-      "exportService",
-      "emailImportService",
-      "scanService",
-      "transformService",
-      "businessDocService",
-      "reportingService",
-      "monitoringService"
-    ],
     "baseName": "workspaces",
-    "deploymentType": "none",
     "directoryPath": "./",
-    "entities": [],
     "jhipsterVersion": "8.11.0"
   }
 }

@@ -58,7 +58,7 @@ entity WorkflowStep {
 }
 
 entity WorkflowInstance {
-  documentId Long required
+  documentSha256 String required maxlength(64)
   status WorkflowInstanceStatus
   currentStepNumber Integer
   startDate Instant required
@@ -85,8 +85,7 @@ entity WorkflowTask {
 }
 
 entity ApprovalHistory {
-  documentId Long required
-  workflowInstanceId Long required
+  documentSha256 String required maxlength(64)
   stepNumber Integer required
   action TaskAction
   comment TextBlob
@@ -97,19 +96,14 @@ entity ApprovalHistory {
 }
 
 // Relations
-relationship ManyToOne {
-  WorkflowStep{workflow required} to Workflow
-  WorkflowInstance{workflow required} to Workflow
-  WorkflowTask{instance required} to WorkflowInstance
-  WorkflowTask{step required} to WorkflowStep
+relationship OneToMany {
+  WorkflowInstance{ApprovalHistories} to ApprovalHistory{workflowInstance}
+
+  Workflow{workflowStpes} to  WorkflowStep{workflow} 
+  Workflow{workflowInstances} to WorkflowInstance{workflow}
+  WorkflowInstance{workflowTasks} to WorkflowTask{instance}
+  WorkflowStep{workflowTasks} to WorkflowTask{step}
 }
-
-// Options
-paginate all with pagination
-filter Workflow, WorkflowInstance, WorkflowTask
-service all with serviceImpl
-dto all with mapstruct
-search Workflow with elasticsearch
-
+ 
 microservice Workflow, WorkflowStep, WorkflowInstance, WorkflowTask, 
              ApprovalHistory with workflowService

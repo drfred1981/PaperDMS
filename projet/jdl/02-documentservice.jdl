@@ -27,7 +27,6 @@ entity Document {
 }
 
 entity DocumentServiceStatus {
-  documentId Long required
   serviceType ServiceType required
   status ServiceStatus required
   statusDetails TextBlob
@@ -107,7 +106,6 @@ entity DocumentMetadata {
 }
 
 entity ExtractedField {
-  documentId Long required
   fieldKey String required maxlength(100)
   fieldValue TextBlob required
   confidence Double min(0) max(1)
@@ -118,7 +116,7 @@ entity ExtractedField {
 
 
 entity DocumentPermission {
-  documentId Long required
+  
   principalType PrincipalType required
   principalId String required maxlength(100)
   permission PermissionType required
@@ -135,8 +133,7 @@ entity PermissionGroup {
   createdBy String required maxlength(50)
 }
 
-entity DocumentAudit {
-  documentId Long required
+entity DocumentAudit { 
   documentSha256 String required maxlength(64)
   action AuditAction required
   userId String required maxlength(50)
@@ -145,8 +142,7 @@ entity DocumentAudit {
   additionalInfo TextBlob
 }
 
-entity DocumentComment {
-  documentId Long required
+entity DocumentComment { 
   content TextBlob required
   pageNumber Integer
   isResolved Boolean required
@@ -162,8 +158,7 @@ entity DocumentRelation {
   createdDate Instant required
 }
 
-entity DocumentStatistics {
-  documentId Long required unique
+entity DocumentStatistics { 
   viewsTotal Integer
   downloadsTotal Integer
   uniqueViewers Integer
@@ -201,7 +196,7 @@ entity SmartFolder {
 entity Bookmark {
   userId String required maxlength(50)
   entityType BookmarkType required
-  entityId Long required
+  entityName String required
   createdDate Instant required
 }
 
@@ -215,35 +210,31 @@ entity DocumentVersion {
   createdBy String required maxlength(50)
 }
 
-// Relations
-relationship ManyToOne {
-  Document{folder} to Folder
-  Document{documentType required} to DocumentType
-  DocumentVersion{document required} to Document
-  DocumentTag{document required} to Document
-  DocumentServiceStatus{document required} to Document
-  DocumentTag{tag required} to Tag
-  DocumentMetadata{document required} to Document
-  DocumentPermission{permissionGroup} to PermissionGroup 
-  DocumentTemplate{documentType required} to DocumentType
-}
-
 relationship OneToMany {
+  DocumentType{documents} to Document{documentType}
+  Document{documentVersions} to DocumentVersion{document}
+  Document{documentTags} to DocumentTag{document}
+  Document{statuses} to DocumentServiceStatus{document}
+  Document{extractedFields} to ExtractedField{document}
+  Document{permissions} to DocumentPermission{document}
+  Document{audits} to DocumentAudit{document} 
+  Document{comments} to DocumentComment{document}
+  Document{metadatas} to DocumentMetadata{document}
+  Document{statistics} to DocumentStatistics{document} 
+
+  PermissionGroup{documentPermissions} to DocumentPermission{permissionGroup} 
+  Tag{documentTags} to DocumentTag{tag}
+  DocumentType{documentTemplates} to DocumentTemplate{documentType}
+  
   Folder{children} to Folder{parent}
   TagCategory{children} to TagCategory{parent}
   TagCategory{tags} to Tag{tagCategory}
   DocumentType{fields} to DocumentTypeField{documentType}
   DocumentComment{replies} to DocumentComment{parentComment}
-}
 
-// Options
-paginate all with pagination
-filter Document, Folder, Tag, TagCategory, DocumentType, DocumentPermission,
-       DocumentAudit, DocumentComment, DocumentRelation, SavedSearch, SmartFolder,
-       DocumentServiceStatus
-service all with serviceImpl
-dto all with mapstruct
-search Document, Tag, TagCategory, DocumentType, ExtractedField, DocumentServiceStatus with elasticsearch
+  Folder{documents} to Document{folder}
+
+}
 
 microservice Document, DocumentVersion, Folder, Tag, DocumentTag, DocumentMetadata,
              DocumentType, TagCategory, DocumentTypeField, ExtractedField,

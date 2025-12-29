@@ -144,7 +144,7 @@ application {
     searchEngine elasticsearch
     serviceDiscoveryType consul
   }
-  entities AutoTagJob, TagPrediction, CorrespondentExtraction,  Correspondent, LanguageDetection, AiCache
+  entities AutoTagJob, TagPrediction,  TypePrediction,  CorrespondentPrediction, LanguageDetection, AiCache
 }
 
 application {
@@ -224,24 +224,6 @@ application {
   entities EmailImport, EmailAttachment, ImportRule, ImportMapping 
 }
 
-application {
-  config {
-    baseName scanService
-    applicationType microservice
-    packageName fr.smartprod.paperdms.scan
-    authenticationType jwt
-    databaseType sql
-    devDatabaseType postgresql
-    prodDatabaseType postgresql
-    serverPort 8091
-    cacheProvider redis
-    buildTool maven
-    enableSwaggerCodegen true
-    messageBroker kafka
-    serviceDiscoveryType consul
-  }
-  entities ScanJob, ScanBatch, ScannerConfiguration, ScannedPage 
-}
 
 application {
   config {
@@ -259,27 +241,7 @@ application {
     messageBroker kafka
     serviceDiscoveryType consul
   }
-  entities ConversionJob, WatermarkJob, RedactionJob, CompressionJob,  MergeJob, ComparisonJob
-}
-
-application {
-  config {
-    baseName businessDocService
-    applicationType microservice
-    packageName fr.smartprod.paperdms.business
-    authenticationType jwt
-    databaseType sql
-    devDatabaseType postgresql
-    prodDatabaseType postgresql
-    serverPort 8093
-    cacheProvider redis
-    buildTool maven
-    enableSwaggerCodegen true
-    messageBroker kafka
-    searchEngine elasticsearch
-    serviceDiscoveryType consul
-  }
-  entities Invoice, InvoiceLine, Contract, ContractClause,  BankStatement, BankTransaction, Manual, ManualChapter
+  entities ConversionJob, WatermarkJob, RedactionJob, CompressionJob,  MergeJob
 }
 
 application {
@@ -320,9 +282,6 @@ application {
   entities Alert, AlertRule, DocumentWatch, MaintenanceTask,  SystemHealth, ServiceStatus
 }
 
-/**
- * Configuration Docker Compose pour JHipster
- */
 deployment {
   deploymentType docker-compose
   
