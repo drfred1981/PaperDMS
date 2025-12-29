@@ -1,4 +1,45 @@
 
+application {
+  config {
+    baseName documentService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.document
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8081
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+    enableHibernateCache true
+  }
+  
+  entities Document, 
+  DocumentVersion, 
+  DocumentServiceStatus, 
+  DocumentMetadata,  
+  DocumentType, 
+  DocumentTypeField,
+  DocumentPermission,
+  DocumentAudit, 
+  DocumentComment, 
+  DocumentRelation, 
+  DocumentStatistics, 
+  DocumentTemplate,  
+  DocumentExtractedField,
+  DocumentTag, 
+  MetaPermissionGroup,  
+  MetaSavedSearch,
+  MetaSmartFolder, 
+  MetaBookmark,
+  MetaMetaTagCategory, 
+  MetaFolder, 
+  MetaTag
+}
 
 entity Document {
   title String required maxlength(500)
@@ -9,7 +50,7 @@ entity Document {
   s3Key String required maxlength(1000)
   s3Bucket String required maxlength(255)
   s3Region String maxlength(50)
-  s3Etag String maxlength(100)
+  s3EMetaTag String maxlength(100)
   thumbnailS3Key String maxlength(1000)
   thumbnailSha256 String maxlength(64)
   webpPreviewS3Key String maxlength(1000)
@@ -42,7 +83,7 @@ entity DocumentServiceStatus {
   updatedDate Instant required
 }
 
-entity Folder {
+entity MetaFolder {
   name String required maxlength(255)
   description TextBlob
   path String maxlength(1000)
@@ -51,7 +92,7 @@ entity Folder {
   createdBy String required maxlength(50)
 }
 
-entity Tag {
+entity MetaTag {
   name String required maxlength(100) unique
   color String maxlength(7)
   description String maxlength(500)
@@ -61,7 +102,7 @@ entity Tag {
   createdBy String required maxlength(50)
 }
 
-entity TagCategory {
+entity MetaMetaTagCategory {
   name String required maxlength(100) unique
   color String maxlength(7)
   displayOrder Integer
@@ -74,8 +115,8 @@ entity DocumentTag {
   assignedDate Instant required
   assignedBy String required maxlength(50)
   confidence Double min(0) max(1)
-  isAutoTagged Boolean required
-  source TagSource
+  isAutoMetaTagged Boolean required
+  source MetaTagSource
 }
 
 entity DocumentType {
@@ -105,7 +146,7 @@ entity DocumentMetadata {
   createdDate Instant required
 }
 
-entity ExtractedField {
+entity DocumentExtractedField {
   fieldKey String required maxlength(100)
   fieldValue TextBlob required
   confidence Double min(0) max(1)
@@ -125,7 +166,7 @@ entity DocumentPermission {
   grantedDate Instant required
 }
 
-entity PermissionGroup {
+entity MetaPermissionGroup {
   name String required maxlength(100) unique
   permissions TextBlob required
   isSystem Boolean required
@@ -174,7 +215,7 @@ entity DocumentTemplate {
   createdDate Instant required
 }
 
-entity SavedSearch {
+entity MetaSavedSearch {
   name String required maxlength(255)
   query TextBlob required
   isPublic Boolean required
@@ -184,7 +225,7 @@ entity SavedSearch {
   createdDate Instant required
 }
 
-entity SmartFolder {
+entity MetaSmartFolder {
   name String required maxlength(255)
   queryJson TextBlob required
   autoRefresh Boolean required
@@ -193,9 +234,9 @@ entity SmartFolder {
   createdDate Instant required
 }
 
-entity Bookmark {
+entity MetaBookmark {
   userId String required maxlength(50)
-  entityType BookmarkType required
+  entityType MetaBookmarkType required
   entityName String required
   createdDate Instant required
 }
@@ -215,29 +256,29 @@ relationship OneToMany {
   Document{documentVersions} to DocumentVersion{document}
   Document{documentTags} to DocumentTag{document}
   Document{statuses} to DocumentServiceStatus{document}
-  Document{extractedFields} to ExtractedField{document}
+  Document{DocumentExtractedFields} to DocumentExtractedField{document}
   Document{permissions} to DocumentPermission{document}
   Document{audits} to DocumentAudit{document} 
   Document{comments} to DocumentComment{document}
   Document{metadatas} to DocumentMetadata{document}
   Document{statistics} to DocumentStatistics{document} 
 
-  PermissionGroup{documentPermissions} to DocumentPermission{permissionGroup} 
-  Tag{documentTags} to DocumentTag{tag}
+  MetaPermissionGroup{documentPermissions} to DocumentPermission{MetaPermissionGroup} 
+  MetaTag{DocumentTags} to DocumentTag{MetaTag}
   DocumentType{documentTemplates} to DocumentTemplate{documentType}
   
-  Folder{children} to Folder{parent}
-  TagCategory{children} to TagCategory{parent}
-  TagCategory{tags} to Tag{tagCategory}
+  MetaFolder{children} to MetaFolder{parent}
+  MetaMetaTagCategory{children} to MetaMetaTagCategory{parent}
+  MetaMetaTagCategory{MetaTags} to MetaTag{MetaMetaTagCategory}
   DocumentType{fields} to DocumentTypeField{documentType}
   DocumentComment{replies} to DocumentComment{parentComment}
 
-  Folder{documents} to Document{folder}
+  MetaFolder{documents} to Document{folder}
 
 }
 
-microservice Document, DocumentVersion, Folder, Tag, DocumentTag, DocumentMetadata,
-             DocumentType, TagCategory, DocumentTypeField, ExtractedField,
-             DocumentPermission, PermissionGroup, DocumentAudit, DocumentComment,
-             DocumentRelation, DocumentStatistics, DocumentTemplate, SavedSearch,
-             SmartFolder, Bookmark, DocumentServiceStatus with documentService
+microservice Document, DocumentVersion, MetaFolder, MetaTag, DocumentTag, DocumentMetadata,
+             DocumentType, MetaMetaTagCategory, DocumentTypeField, DocumentExtractedField,
+             DocumentPermission, MetaPermissionGroup, DocumentAudit, DocumentComment,
+             DocumentRelation, DocumentStatistics, DocumentTemplate, MetaSavedSearch,
+             MetaSmartFolder, MetaBookmark, DocumentServiceStatus with documentService

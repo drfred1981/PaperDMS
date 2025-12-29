@@ -1,6 +1,27 @@
 /**
- * Workflow Service - 5 Entités
+ * Workflow Service
  */
+
+application {
+  config {
+    baseName workflowService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.workflow
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8085
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities Workflow, WorkflowStep, WorkflowInstance, WorkflowTask, WorkflowApprovalHistory
+} 
+
 
 // Enums
 enum WorkflowStepType {
@@ -27,7 +48,6 @@ enum TaskAction {
   APPROVE, REJECT, REQUEST_CHANGES, DELEGATE, CANCEL, COMMENT
 }
 
-// Entités
 entity Workflow {
   name String required maxlength(255)
   description TextBlob
@@ -84,7 +104,7 @@ entity WorkflowTask {
   delegatedDate Instant
 }
 
-entity ApprovalHistory {
+entity WorkflowApprovalHistory {
   documentSha256 String required maxlength(64)
   stepNumber Integer required
   action TaskAction
@@ -97,7 +117,7 @@ entity ApprovalHistory {
 
 // Relations
 relationship OneToMany {
-  WorkflowInstance{ApprovalHistories} to ApprovalHistory{workflowInstance}
+  WorkflowInstance{approvalHistories} to WorkflowApprovalHistory{workflowInstance}
 
   Workflow{workflowStpes} to  WorkflowStep{workflow} 
   Workflow{workflowInstances} to WorkflowInstance{workflow}
@@ -106,4 +126,4 @@ relationship OneToMany {
 }
  
 microservice Workflow, WorkflowStep, WorkflowInstance, WorkflowTask, 
-             ApprovalHistory with workflowService
+             WorkflowApprovalHistory with workflowService

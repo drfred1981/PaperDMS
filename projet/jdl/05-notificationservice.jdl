@@ -1,7 +1,25 @@
 /**
- * Notification Service - 6 Entités
+ * Notification Service - 6 Entitï¿½s
  */
 
+application {
+  config {
+    baseName notificationService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.notification
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8084
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities Notification, NotificationTemplate, NotificationPreference, NotificationEvent, WebhookSubscription, NotificationWebhookLog
+}
 // Enums
 enum NotificationType {
   DOCUMENT_UPLOADED, DOCUMENT_PROCESSED, DOCUMENT_SHARED, WORKFLOW_ASSIGNED,
@@ -20,8 +38,7 @@ enum NotificationChannel {
 enum NotificationFrequency {
   IMMEDIATELY, HOURLY, DAILY, WEEKLY, NEVER
 }
-
-// Entités
+ 
 entity Notification {
   title String required maxlength(255)
   message TextBlob required
@@ -75,7 +92,7 @@ entity NotificationEvent {
   processedDate Instant
 }
 
-entity WebhookSubscription {
+entity NotificationWebhookSubscription {
   name String required maxlength(255)
   url String required maxlength(1000)
   secret String maxlength(255)
@@ -94,7 +111,7 @@ entity WebhookSubscription {
   lastModifiedDate Instant
 }
 
-entity WebhookLog {
+entity NotificationWebhookLog {
   eventType String required maxlength(100)
   payload TextBlob
   responseStatus Integer
@@ -109,10 +126,10 @@ entity WebhookLog {
 // Relations
 relationship OneToMany {
   NotificationTemplate{notifications} to Notification{template}
-  WebhookSubscription{webhooklogs} to WebhookLog{subscription}
+  WebhookSubscription{NotificationWebhookLogs} to NotificationWebhookLog{subscription}
 }
 
  
 
 microservice Notification, NotificationTemplate, NotificationPreference, 
-             NotificationEvent, WebhookSubscription, WebhookLog with notificationService
+             NotificationEvent, WebhookSubscription, NotificationWebhookLog with notificationService

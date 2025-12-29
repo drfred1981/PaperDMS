@@ -1,7 +1,24 @@
-// ============================================================================
-// 08 - SIMILARITY SERVICE (4 entités)
-// ============================================================================
 
+
+application {
+  config {
+    baseName similarityService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.similarity
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8087
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities  SimilarityDocumentComparison, SimilarityJob, SimilarityDocumentFingerprint,  SimilarityCluster 
+}
 enum SimilarityAlgorithm {
   COSINE, JACCARD, LEVENSHTEIN, LSH, DEEP_LEARNING, COMBINED
 }
@@ -14,7 +31,7 @@ enum FingerprintType {
   HASH, PERCEPTUAL, VECTOR_EMBEDDING, TF_IDF, BERT
 }
 
-entity DocumentSimilarity {
+entity SimilarityDocumentComparison {
   sourceDocumentSha256 String required maxlength(64)
   targetDocumentSha256 String required maxlength(64)
   similarityScore Double required min(0) max(1)
@@ -41,7 +58,7 @@ entity SimilarityJob {
   createdBy String required maxlength(50)
 }
 
-entity DocumentFingerprint {
+entity SimilarityDocumentFingerprint {
   
   fingerprintType FingerprintType
   fingerprint TextBlob required
@@ -63,8 +80,8 @@ entity SimilarityCluster {
 }
 
 relationship OneToMany {
-  SimilarityJob{similarities} to DocumentSimilarity{job}
+  SimilarityJob{similarities} to SimilarityDocumentComparison{job}
 }
 
-microservice DocumentSimilarity, SimilarityJob, DocumentFingerprint, 
+microservice SimilarityDocumentComparison, SimilarityJob, SimilarityDocumentFingerprint, 
              SimilarityCluster with similarityService

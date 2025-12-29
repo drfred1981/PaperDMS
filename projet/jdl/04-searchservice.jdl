@@ -1,13 +1,32 @@
 /**
- * Search Service - 4 Entités
+ * Search Service - 4 Entitï¿½s
  */
 
+
+application {
+  config {
+    baseName searchService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.search
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8083
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities SearchIndex, SearchQuery, SearchSemantic, SearchFacet
+}
 // Enums
 enum FacetType {
   TERMS, DATE_RANGE, NUMBER_RANGE, HIERARCHY, NESTED
 }
 
-// Entités
 entity SearchIndex {
   documentSha256 String required maxlength(64)
   indexedContent TextBlob required
@@ -29,7 +48,7 @@ entity SearchQuery {
   isRelevant Boolean
 }
 
-entity SemanticSearch {
+entity SearchSemantic {
   query String required maxlength(1000)
   queryEmbedding TextBlob required
   results TextBlob required
@@ -54,4 +73,4 @@ relationship OneToMany {
 }
  
 
-microservice SearchIndex, SearchQuery, SemanticSearch, SearchFacet with searchService
+microservice SearchIndex, SearchQuery, SearchSemantic, SearchFacet with searchService

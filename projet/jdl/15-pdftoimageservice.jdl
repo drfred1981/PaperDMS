@@ -1,0 +1,346 @@
+/**
+ * PdfToImageService - Microservice de transformation PDF vers images
+ * 
+ * Fonctionnalités :
+ * - Transforme des PDFs en images (PNG/JPG)
+ * - Supporte plusieurs qualités d'image (LOW, MEDIUM, HIGH, ULTRA)
+ * - Stocke les images dans S3
+ * - Gère les conversions par lot (batch)
+ * - Conserve l'historique des conversions
+ * - Intégration avec documentService via Kafka
+ */
+
+application {
+  config {
+    baseName pdfToImageService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.pdftoimage
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8096
+    serviceDiscoveryType consul
+    messageBroker kafka
+    buildTool maven
+    enableSwaggerCodegen true
+    clientFramework no
+    cacheProvider redis
+    enableHibernateCache true
+    searchEngine elasticsearch
+
+  }
+  entities ImagePdfConversionRequest, ImageGeneratedImage, ImageConversionBatch, ImageConversionHistory , ImageConversionStatistics 
+}
+
+/**
+ * Enum - Qualité de l'image de sortie
+ */
+enum ImageQuality {
+  LOW (72, "Basse qualité - 72 DPI - Prévisualisation rapide"),
+  MEDIUM (150, "Qualité moyenne - 150 DPI - Visualisation web"),
+  HIGH (300, "Haute qualité - 300 DPI - Impression standard"),
+  ULTRA (600, "Qualité ultra - 600 DPI - Impression professionnelle")
+}
+
+/**
+ * Enum - Format d'image de sortie
+ */
+enum ImageFormat {
+  PNG ("PNG - Sans perte, meilleure qualité"),
+  JPEG ("JPEG - Avec compression, fichier plus léger"),
+  WEBP ("WEBP - Format moderne, compression optimale")
+}
+
+/**
+ * Enum - Statut de la conversion
+ */
+enum ConversionStatus {
+  PENDING ("En attente de traitement"),
+  PROCESSING ("Conversion en cours"),
+  COMPLETED ("Conversion terminée avec succès"),
+  FAILED ("Échec de la conversion"),
+  CANCELLED ("Conversion annulée")
+}
+
+/**
+ * Enum - Type de conversion
+ */
+enum ConversionType {
+  SINGLE_PAGE ("Conversion d'une seule page"),
+  ALL_PAGES ("Conversion de toutes les pages"),
+  PAGE_RANGE ("Conversion d'une plage de pages"),
+  FIRST_PAGE_ONLY ("Conversion première page uniquement - thumbnail")
+}
+
+/**
+ * Entité principale - Demande de conversion PDF vers image(s)
+ */
+entity ImagePdfConversionRequest {
+  /** ID du document source dans documentService */
+  sourceDocumentId Long required
+  
+  /** Nom du fichier PDF source */
+  sourceFileName String required maxlength(255)
+  
+  /** Clé S3 du PDF source */
+  sourcePdfS3Key String required maxlength(500)
+  
+  /** Qualité des images de sortie */
+  imageQuality ImageQuality required
+  
+  /** Format des images de sortie */
+  imageFormat ImageFormat required
+  
+  /** Type de conversion */
+  conversionType ConversionType required
+  
+  /** Page de début (pour PAGE_RANGE) */
+  startPage Integer min(1)
+  
+  /** Page de fin (pour PAGE_RANGE) */
+  endPage Integer min(1)
+  
+  /** Nombre total de pages du PDF */
+  totalPages Integer min(1)
+  
+  /** Statut de la conversion */
+  status ConversionStatus required
+  
+  /** Message d'erreur si échec */
+  errorMessage String maxlength(2000)
+  
+  /** Date/heure de création de la demande */
+  requestedAt Instant required
+  
+  /** Date/heure de début de traitement */
+  startedAt Instant
+  
+  /** Date/heure de fin de traitement */
+  completedAt Instant
+  
+  /** Durée de traitement en millisecondes */
+  processingDuration Long
+  
+  /** Taille totale des images générées (en octets) */
+  totalImagesSize Long
+  
+  /** Nombre d'images générées */
+  imagesGenerated Integer min(0)
+  
+  /** DPI utilisé pour la conversion */
+  dpi Integer min(72) max(1200)
+  
+  /** ID utilisateur ayant demandé la conversion */
+  requestedByUserId Long
+  
+  /** Priorité de la conversion (1=haute, 5=basse) */
+  priority Integer min(1) max(5)
+  
+  /** Options supplémentaires (JSON) */
+  additionalOptions TextBlob
+}
+
+/**
+ * Entité - Image générée depuis un PDF
+ */
+entity ImageGeneratedImage {
+  /** Numéro de page du PDF d'origine */
+  pageNumber Integer required min(1)
+  
+  /** Nom du fichier image */
+  fileName String required maxlength(255)
+  
+  /** Clé S3 de l'image */
+  s3Key String required maxlength(500)
+  
+  /** URL S3 préSignée (temporaire) */
+  preSignedUrl String maxlength(1000)
+  
+  /** Date d'expiration de l'URL préSignée */
+  urlExpiresAt Instant
+  
+  /** Format de l'image */
+  format ImageFormat required
+  
+  /** Qualité de l'image */
+  quality ImageQuality required
+  
+  /** Largeur de l'image en pixels */
+  width Integer required min(1)
+  
+  /** Hauteur de l'image en pixels */
+  height Integer required min(1)
+  
+  /** Taille du fichier en octets */
+  fileSize Long required min(0)
+  
+  /** DPI de l'image */
+  dpi Integer required min(72)
+  
+  /** Hash SHA-256 de l'image */
+  sha256Hash String maxlength(64)
+  
+  /** Date de génération */
+  generatedAt Instant required
+  
+  /** Métadonnées supplémentaires (JSON) */
+  metadata TextBlob
+}
+
+/**
+ * Entité - Lot de conversions (batch processing)
+ */
+entity ImageConversionBatch {
+  /** Nom du lot */
+  batchName String required maxlength(255)
+  
+  /** Description du lot */
+  description String maxlength(1000)
+  
+  /** Date de création du lot */
+  createdAt Instant required
+  
+  /** Statut global du lot */
+  status ConversionStatus required
+  
+  /** Nombre total de conversions dans le lot */
+  totalConversions Integer min(0)
+  
+  /** Nombre de conversions terminées */
+  completedConversions Integer min(0)
+  
+  /** Nombre de conversions échouées */
+  failedConversions Integer min(0)
+  
+  /** Date de début du traitement */
+  startedAt Instant
+  
+  /** Date de fin du traitement */
+  completedAt Instant
+  
+  /** Durée totale de traitement (ms) */
+  totalProcessingDuration Long
+  
+  /** ID utilisateur ayant créé le lot */
+  createdByUserId Long
+}
+
+/**
+ * Entité - Configuration de conversion par défaut
+ */
+entity  {
+  /** Nom de la configuration */
+  configName String required unique maxlength(100)
+  
+  /** Description */
+  description String maxlength(500)
+  
+  /** Qualité par défaut */
+  defaultQuality ImageQuality required
+  
+  /** Format par défaut */
+  defaultFormat ImageFormat required
+  
+  /** DPI par défaut */
+  defaultDpi Integer required min(72) max(1200)
+  
+  /** Type de conversion par défaut */
+  defaultConversionType ConversionType required
+  
+  /** Priorité par défaut */
+  defaultPriority Integer min(1) max(5)
+  
+  /** Actif ou non */
+  isActive Boolean required
+  
+  /** Configuration par défaut du système */
+  isDefault Boolean required
+  
+  /** Date de création */
+  createdAt Instant required
+  
+  /** Date de dernière modification */
+  updatedAt Instant
+}
+
+/**
+ * Entité - Historique des conversions (archivage)
+ */
+entity ImageConversionHistory {
+  /** ID de la conversion originale */
+  originalRequestId Long required
+  
+  /** Date d'archivage */
+  archivedAt Instant required
+  
+  /** Données de la conversion (JSON) */
+  conversionData TextBlob required
+  
+  /** Nombre d'images générées */
+  imagesCount Integer min(0)
+  
+  /** Taille totale (octets) */
+  totalSize Long min(0)
+  
+  /** Statut final */
+  finalStatus ConversionStatus required
+  
+  /** Durée de traitement (ms) */
+  processingDuration Long
+}
+
+/**
+ * Entité - Statistiques de conversion (agrégées par jour)
+ */
+entity ImageConversionStatistics {
+  /** Date des statistiques */
+  statisticsDate LocalDate required unique
+  
+  /** Nombre total de conversions */
+  totalConversions Integer min(0)
+  
+  /** Nombre de conversions réussies */
+  successfulConversions Integer min(0)
+  
+  /** Nombre de conversions échouées */
+  failedConversions Integer min(0)
+  
+  /** Nombre total de pages converties */
+  totalPagesConverted Integer min(0)
+  
+  /** Nombre total d'images générées */
+  totalImagesGenerated Integer min(0)
+  
+  /** Taille totale des images (octets) */
+  totalImagesSize Long min(0)
+  
+  /** Durée moyenne de conversion (ms) */
+  averageProcessingDuration Long
+  
+  /** Durée maximale de conversion (ms) */
+  maxProcessingDuration Long
+  
+  /** Durée minimale de conversion (ms) */
+  minProcessingDuration Long
+  
+  /** Calculé automatiquement */
+  calculatedAt Instant required
+}
+
+/**
+ * Relations
+ */
+relationship OneToMany {
+  /** Une demande de conversion génère plusieurs images */
+  ImagePdfConversionRequest{generatedImages} to ImageGeneratedImage{conversionRequest required}
+  
+  /** Un lot contient plusieurs conversions */
+  ImageConversionBatch{conversions} to ImagePdfConversionRequest{batch}
+}
+
+  
+/**
+ * Microservice options
+ */
+microservice ImagePdfConversionRequest, ImageGeneratedImage, ImageConversionBatch, ImageConversionHistory , ImageConversionStatistics with pdfToImageService

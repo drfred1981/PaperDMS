@@ -1,7 +1,22 @@
-// ============================================================================
-// 11 - EMAIL IMPORT SERVICE (4 entités)
-// ============================================================================
 
+application {
+  config {
+    baseName EmailImportDocumentService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.EmailImportDocument
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8090
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities EmailImportDocument, EmailImportEmailAttachment, EmailImportImportRule, EmailImportImportMapping 
+}
 enum ImportStatus {
   PENDING, PROCESSING, COMPLETED, PARTIAL, FAILED, IGNORED
 }
@@ -20,7 +35,7 @@ enum MappingTransformation {
   EXTRACT_EMAIL, REGEX_EXTRACT, REPLACE, SPLIT, CONCAT, CUSTOM
 }
 
-entity EmailImport {
+entity EmailImportDocument {
   sha256 String required maxlength(64)
   fromEmail String required maxlength(255)
   toEmail String required maxlength(255)
@@ -37,7 +52,7 @@ entity EmailImport {
   documentSha256 String maxlength(64)
 }
 
-entity EmailAttachment {
+entity EmailImportEmailAttachment {
   fileName String required maxlength(500)
   fileSize Long required
   mimeType String required maxlength(100)
@@ -48,7 +63,7 @@ entity EmailAttachment {
   documentSha256 String maxlength(64)
 }
 
-entity ImportRule {
+entity EmailImportImportRule {
   name String required maxlength(255) unique
   description TextBlob
   priority Integer required
@@ -63,7 +78,7 @@ entity ImportRule {
   lastModifiedDate Instant
 }
 
-entity ImportMapping {
+entity EmailImportImportMapping {
   emailField EmailField required
   documentField String required maxlength(100)
   transformation MappingTransformation
@@ -75,10 +90,10 @@ entity ImportMapping {
 
 relationship OneToMany {
   
-  EmailImport{emailAttachments} to EmailAttachment{emailImport}
-  ImportRule{importMappings} to ImportMapping{rule} 
-  ImportRule{emailImports} to EmailImport{appliedRule}
+  EmailImportDocument{emailImportEmailAttachments} to EmailImportEmailAttachment{emailImportDocument}
+  EmailImportImportRule{emailImportImportMappings} to EmailImportImportMapping{rule} 
+  EmailImportImportRule{emailImportDocuments} to EmailImportDocument{appliedRule}
 }
 
-microservice EmailImport, EmailAttachment, ImportRule, 
-             ImportMapping with emailImportService
+microservice EmailImportDocument, EmailImportEmailAttachment, EmailImportImportRule, 
+             EmailImportImportMapping with EmailImportDocumentService

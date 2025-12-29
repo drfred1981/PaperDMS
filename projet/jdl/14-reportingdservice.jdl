@@ -1,6 +1,22 @@
-// ============================================================================
-// 15 - REPORTING SERVICE (6 entités)
-// ============================================================================
+
+application {
+  config {
+    baseName reportingService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.reporting
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8094
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities ReportingDashboard, ReportingDashboardWidget, ReportingScheduledReport, ReportingExecution, ReportingPerformanceMetric, ReportingSystemMetric 
+}
 
 enum WidgetType {
   DOCUMENT_COUNT, STORAGE_USAGE, RECENT_UPLOADS, TOP_TAGS,
@@ -20,7 +36,7 @@ enum ReportFormat {
   PDF, EXCEL, CSV, JSON, HTML, XML
 }
 
-enum ReportExecutionStatus {
+enum ReportingExecutionStatus {
   PENDING, RUNNING, COMPLETED, FAILED, CANCELLED
 }
 
@@ -30,7 +46,7 @@ enum MetricType {
   THROUGHPUT, CONCURRENT_USERS
 }
 
-entity Dashboard {
+entity ReportingDashboard {
   name String required maxlength(255)
   description TextBlob
   userId String maxlength(50)
@@ -41,7 +57,7 @@ entity Dashboard {
   createdDate Instant required
 }
 
-entity DashboardWidget { 
+entity ReportingDashboardWidget { 
   widgetType WidgetType required
   title String required maxlength(255)
   configuration TextBlob required
@@ -51,7 +67,7 @@ entity DashboardWidget {
   sizeY Integer required
 }
 
-entity ScheduledReport {
+entity ReportingScheduledReport {
   name String required maxlength(255)
   description TextBlob
   reportType ReportType required
@@ -66,8 +82,8 @@ entity ScheduledReport {
   createdDate Instant required
 }
 
-entity ReportExecution { 
-  status ReportExecutionStatus required
+entity ReportingExecution { 
+  status ReportingExecutionStatus required
   startDate Instant required
   endDate Instant
   recordsProcessed Integer
@@ -76,7 +92,7 @@ entity ReportExecution {
   errorMessage TextBlob
 }
 
-entity SystemMetric {
+entity ReportingSystemMetric {
   metricName String required maxlength(100)
   cpuUsage Double
   memoryUsage Double
@@ -88,7 +104,7 @@ entity SystemMetric {
 }
 
 
-entity PerformanceMetric {
+entity ReportingPerformanceMetric {
   metricName String required maxlength(100)
   metricType MetricType required
   value Double required
@@ -97,9 +113,9 @@ entity PerformanceMetric {
   timestamp Instant required
 }
 relationship OneToMany {
-  Dashboard{widgets} to DashboardWidget{dashboar}
-  ScheduledReport{reportsExecutions} to ReportExecution{scheduledReport}
+  ReportingDashboard{widgets} to ReportingDashboardWidget{dashboar}
+  ReportingScheduledReport{reportsExecutions} to ReportingExecution{scheduledReport}
 }
 
-microservice Dashboard, DashboardWidget, ScheduledReport, ReportExecution, 
-             PerformanceMetric, SystemMetric with reportingService
+microservice ReportingDashboard, ReportingDashboardWidget, ReportingScheduledReport, ReportingExecution, 
+             ReportingPerformanceMetric, ReportingSystemMetric with reportingService

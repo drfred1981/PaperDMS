@@ -1,7 +1,22 @@
-// ============================================================================
-// 13 - TRANSFORM SERVICE (6 entités)
-// ============================================================================
 
+application {
+  config {
+    baseName transformService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.transform
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8092
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities TransformConversionJob, TransformWatermarkJob, TransformRedactionJob, TransformCompressionJob,  TransformMergeJob
+}
 enum TransformStatus {
   PENDING, PROCESSING, COMPLETED, FAILED, CANCELLED
 }
@@ -27,7 +42,7 @@ enum ComparisonType {
   TEXT_DIFF, PDF_VISUAL, METADATA, CONTENT_HASH, SEMANTIC, SIDE_BY_SIDE
 }
 
-entity ConversionJob {
+entity TransformConversionJob {
   documentSha256 String required maxlength(64)
   sourceFormat String required maxlength(50)
   targetFormat String required maxlength(50)
@@ -43,7 +58,7 @@ entity ConversionJob {
   createdDate Instant required
 }
 
-entity WatermarkJob {
+entity TransformWatermarkJob {
   documentSha256 String required maxlength(64)
   watermarkType WatermarkType required
   watermarkText String maxlength(500)
@@ -64,7 +79,7 @@ entity WatermarkJob {
   createdDate Instant required
 }
 
-entity RedactionJob {
+entity TransformRedactionJob {
   documentSha256 String required maxlength(64)
   redactionAreas TextBlob required
   redactionType RedactionType required
@@ -80,7 +95,7 @@ entity RedactionJob {
   createdDate Instant required
 }
 
-entity CompressionJob {
+entity TransformCompressionJob {
   documentSha256 String required maxlength(64)
   compressionType CompressionType required
   quality Integer min(0) max(100)
@@ -98,7 +113,7 @@ entity CompressionJob {
   createdDate Instant required
 }
 
-entity MergeJob {
+entity TransformMergeJob {
   name String required maxlength(255)
   sourceDocumentSha256 TextBlob required
   mergeOrder TextBlob required
@@ -116,5 +131,5 @@ entity MergeJob {
 }
 
 
-microservice ConversionJob, WatermarkJob, RedactionJob, CompressionJob, 
-             MergeJob with transformService
+microservice TransformConversionJob, TransformWatermarkJob, TransformRedactionJob, TransformCompressionJob, 
+             TransformMergeJob with transformService

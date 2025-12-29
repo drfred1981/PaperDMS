@@ -1,6 +1,25 @@
-// ============================================================================
-// 10 - EXPORT SERVICE (3 entités)
-// ============================================================================
+
+
+
+
+application {
+  config {
+    baseName exportService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.export
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8089
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities ExportJob, ExportPattern, ExportResult 
+}
 
 enum ExportFormat {
   ORIGINAL, PDF, PDF_A, ZIP, FOLDER, CSV_INDEX, JSON_METADATA

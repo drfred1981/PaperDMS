@@ -1,4 +1,26 @@
 // Enums
+
+
+
+application {
+  config {
+    baseName ocrService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.ocr
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8082
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities OcrJob, OcrResult, OrcExtractedText,  OcrComparison, OcrCache
+}
 enum OcrStatus {
   PENDING, IN_PROGRESS, COMPLETED, FAILED, CANCELLED, RETRYING, COMPARING
 }
@@ -61,7 +83,7 @@ entity OcrResult {
   processedDate Instant required
 }
 
-entity ExtractedText {
+entity OrcExtractedText {
   content TextBlob required
   contentSha256 String maxlength(64)
   s3ContentKey String maxlength(1000)
@@ -102,7 +124,7 @@ entity OcrCache {
   totalConfidence Double min(0) max(1)
   s3ResultKey String required maxlength(1000)
   s3Bucket String required maxlength(255)
-  extractedTextS3Key String maxlength(1000)
+  OrcExtractedTextS3Key String maxlength(1000)
   metadata TextBlob
   hits Integer
   lastAccessDate Instant
@@ -113,9 +135,9 @@ entity OcrCache {
 // Relations
 relationship OneToMany {
   OcrJob{results} to OcrResult{job}
-  OcrJob{extracted} to ExtractedText{job}
+  OcrJob{extracted} to OrcExtractedText{job}
 }
  
 
-microservice OcrJob, OcrResult, ExtractedText, 
+microservice OcrJob, OcrResult, OrcExtractedText, 
  OcrComparison, OcrCache with ocrService

@@ -1,9 +1,28 @@
 
-// ============================================================================
-// 07 - AI SERVICE (6 entités)
-// ============================================================================
 
-// Enums AI Service
+
+
+application {
+  config {
+    baseName aiService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.ai
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8086
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    searchEngine elasticsearch
+    serviceDiscoveryType consul
+  }
+  entities AIAutoTagJob, AITagPrediction,  AITypePrediction,  AICorrespondentPrediction, AILanguageDetection, AICache
+}
+
+
 enum AiJobStatus {
   PENDING, IN_PROGRESS, COMPLETED, FAILED, CANCELLED
 }
@@ -16,18 +35,16 @@ enum CorrespondentRole {
   SENDER, RECIPIENT, CC, BCC, BOTH
 }
 
-enum LanguageDetectionMethod {
+enum AILanguageDetectionMethod {
   TIKA, LANGDETECT, FASTTEXT, BERT_MULTILINGUAL, MANUAL, COMBINED
 }
 
-entity AutoTagJob {
+entity AIAutoTagJob {
   
   documentSha256 String required maxlength(64)
   s3Key String required maxlength(1000)
   extractedText TextBlob
   extractedTextSha256 String maxlength(64)
-  detectedLanguage String maxlength(10)
-  languageConfidence Double min(0) max(1)
   status AiJobStatus
   modelVersion String maxlength(50)
   resultCacheKey String maxlength(128)
@@ -35,11 +52,10 @@ entity AutoTagJob {
   startDate Instant
   endDate Instant
   errorMessage TextBlob
-  confidence Double min(0) max(1)
   createdDate Instant required
 }
 
-entity TagPrediction {
+entity AITagPrediction {
   tagName String required maxlength(100)
   confidence Double required min(0) max(1)
   reason String maxlength(500)
@@ -50,7 +66,7 @@ entity TagPrediction {
   acceptedDate Instant
   predictionDate Instant required
 }
-entity TypePrediction {
+entity AITypePrediction {
   documentTypeName String required maxlength(100)
   confidence Double required min(0) max(1)
   reason String maxlength(500)
@@ -62,7 +78,7 @@ entity TypePrediction {
   predictionDate Instant required
 }
 
-entity CorrespondentPrediction {
+entity AICorrespondentPrediction {
   correspondentName String required maxlength(100)
   name String required maxlength(255)
   email String maxlength(255)
@@ -81,11 +97,11 @@ entity CorrespondentPrediction {
   predictionDate Instant required
 }
 
-entity LanguageDetection {
+entity AILanguageDetection {
   documentSha256 String required maxlength(64)
   detectedLanguage String required maxlength(10)
   confidence Double required min(0) max(1)
-  detectionMethod LanguageDetectionMethod
+  detectionMethod AILanguageDetectionMethod
   alternativeLanguages TextBlob
   textSample TextBlob
   resultCacheKey String maxlength(128)
@@ -94,7 +110,7 @@ entity LanguageDetection {
   modelVersion String maxlength(50)
 }
 
-entity AiCache {
+entity AICache {
   cacheKey String required maxlength(128) unique
   inputSha256 String required maxlength(64)
   aiProvider String required maxlength(100)
@@ -114,12 +130,12 @@ entity AiCache {
 
 relationship OneToMany {
 
-  AutoTagJob{tagPredictions} to TagPrediction{job}   
-  AutoTagJob{correspondentPredictions} to CorrespondentPrediction{job}
+  AIAutoTagJob{aITagPredictions} to AITagPrediction{job}   
+  AIAutoTagJob{AICorrespondentPredictions} to AICorrespondentPrediction{job}
 }
 relationship OneToOne {
-  AutoTagJob{typePrediction} to TypePrediction{job} 
-  AutoTagJob{languagePrediction} to LanguageDetection{job}
+  AIAutoTagJob{AITypePrediction} to AITypePrediction{job} 
+  AIAutoTagJob{languagePrediction} to AILanguageDetection{job}
 }
 
-microservice AutoTagJob, TagPrediction, TypePrediction, CorrespondentPrediction, LanguageDetection, AiCache with aiService
+microservice AIAutoTagJob, AITagPrediction, AITypePrediction, AICorrespondentPrediction, AILanguageDetection, AICache with aiService

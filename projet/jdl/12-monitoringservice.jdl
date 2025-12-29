@@ -1,8 +1,23 @@
-// ============================================================================
-// 16 - MONITORING SERVICE (6 entités)
-// ============================================================================
 
-enum AlertType {
+application {
+  config {
+    baseName monitoringService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.monitoring
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8095
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities MonitoringAlert, MonitoringAlertRule, MonitoringDocumentWatch, MonitoringMaintenanceTask,  MonitoringSystemHealth, MonitoringServiceStatus
+}
+enum MonitoringAlertType {
   DOCUMENT_EXPIRATION, STORAGE_QUOTA, UNUSUAL_ACTIVITY,
   COMPLIANCE_VIOLATION, WORKFLOW_DELAYED, FAILED_OCR,
   MISSING_METADATA, DUPLICATE_DETECTED, PERMISSION_CHANGED,
@@ -10,7 +25,7 @@ enum AlertType {
   INVOICE_OVERDUE, SYSTEM_OVERLOAD
 }
 
-enum AlertStatus {
+enum MonitoringAlertStatus {
   ACTIVE, ACKNOWLEDGED, RESOLVED, DISMISSED, ESCALATED
 }
 
@@ -32,17 +47,17 @@ enum HealthStatus {
   HEALTHY, DEGRADED, UNHEALTHY, UNKNOWN
 }
 
-enum ServiceStatusType {
+enum MonitoringServiceStatusType {
   RUNNING, STARTING, STOPPING, STOPPED, ERROR, MAINTENANCE
 }
 
-entity Alert {
+entity MonitoringAlert {
   severity Severity required
   title String required maxlength(255)
   message TextBlob required
   entityType String maxlength(100)
   entityName String
-  status AlertStatus required
+  status MonitoringAlertStatus required
   triggeredDate Instant required
   acknowledgedBy String maxlength(50)
   acknowledgedDate Instant
@@ -50,10 +65,10 @@ entity Alert {
   resolvedDate Instant
 }
 
-entity AlertRule {
+entity MonitoringAlertRule {
   name String required maxlength(255)
   description TextBlob
-  alertType AlertType required
+  alertType MonitoringAlertType required
   conditions TextBlob required
   severity Severity required
   recipients TextBlob required
@@ -64,7 +79,7 @@ entity AlertRule {
   createdDate Instant required
 }
 
-entity DocumentWatch {
+entity MonitoringDocumentWatch {
   documentSha256 String maxlength(64)
   userId String required maxlength(50)
   watchType WatchType required
@@ -76,7 +91,7 @@ entity DocumentWatch {
   createdDate Instant required
 }
 
-entity MaintenanceTask {
+entity MonitoringMaintenanceTask {
   name String required maxlength(255)
   description TextBlob
   taskType MaintenanceType required
@@ -91,7 +106,7 @@ entity MaintenanceTask {
   createdDate Instant required
 }
 
-entity SystemHealth {
+entity MonitoringSystemHealth {
   serviceName String required maxlength(100)
   status HealthStatus required
   version String maxlength(50)
@@ -102,10 +117,10 @@ entity SystemHealth {
   lastCheck Instant required
 }
 
-entity ServiceStatus {
+entity MonitoringServiceStatus {
   serviceName String required maxlength(100) unique
   serviceType String maxlength(50)
-  status ServiceStatusType required
+  status MonitoringServiceStatusType required
   endpoint String maxlength(500)
   port Integer
   version String maxlength(50)
@@ -114,8 +129,8 @@ entity ServiceStatus {
 }
 
 relationship OneToMany {
-  AlertRule{alerts} to  Alert{alertRule} 
+  MonitoringAlertRule{alerts} to  MonitoringAlert{alertRule} 
 }
 
-microservice Alert, AlertRule, DocumentWatch, MaintenanceTask, 
-             SystemHealth, ServiceStatus with monitoringService
+microservice MonitoringAlert, MonitoringAlertRule, MonitoringDocumentWatch, MonitoringMaintenanceTask, 
+             MonitoringSystemHealth, MonitoringServiceStatus with monitoringService

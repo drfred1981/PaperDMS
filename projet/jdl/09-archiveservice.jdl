@@ -1,6 +1,22 @@
-// ============================================================================
-// 09 - ARCHIVE SERVICE (2 entités)
-// ============================================================================
+
+application {
+  config {
+    baseName archiveService
+    applicationType microservice
+    packageName fr.smartprod.paperdms.archive
+    authenticationType jwt
+    databaseType sql
+    devDatabaseType postgresql
+    prodDatabaseType postgresql
+    serverPort 8088
+    cacheProvider redis
+    buildTool maven
+    enableSwaggerCodegen true
+    messageBroker kafka
+    serviceDiscoveryType consul
+  }
+  entities ArchiveJob, ArchiveDocument
+}
 
 enum ArchiveFormat {
   ZIP, TAR, TAR_GZ, TAR_BZ2, TAR_XZ, SEVEN_ZIP
