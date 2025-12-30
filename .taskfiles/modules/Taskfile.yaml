@@ -1,0 +1,26 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+
+vars:
+  INIT_DIR: "{{.MODULES_DIR}}/init"
+MODULES_DIR
+tasks:
+
+  init:
+    desc: Copy init files into jhispter bootstraped files 
+    vars:
+      PROJECTS:
+        sh: ls -l "{{.INIT_DIR}}"
+    cmds:
+      - for: { var: PROJECTS }
+        cmds: 
+          - cp -r {{.INIT_DIR}}/{{.ITEM}}/copy/*  {{.MICROSERVICES_DIR}}/{{.ITEM}}/
+    preconditions:
+      - msg: Missing INIT_DIR Project directory {{.INIT_DIR}}
+        sh: test -f {{.INIT_DIR}}
+      - msg: Missing microservices Project directory {{.MICROSERVICES_DIR}}
+        sh: test -f {{.MICROSERVICES_DIR}}
+    
+

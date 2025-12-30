@@ -1,0 +1,40 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+
+  clean-all:
+    desc: Clean all docker images
+
+    prompt: This will destroy your docker images and reset them to zero... continue?
+    cmds:
+      - task: down-all
+      - docker system prune -a
+      - docker volume prune -a
+
+  stop-all:
+    desc: stop all docker microservices
+    dir: {{.DOCKERCOMPOSE_DIR}}
+    cmds:
+      - docker compose -f {{.DOCKERCOMPOSE_FILE}} stop
+    preconditions:
+      - test -f {{.DOCKERCOMPOSE_FILE}}
+      - which docker
+  down-all:
+    desc: stop all docker microservices
+    dir: {{.DOCKERCOMPOSE_DIR}}
+    cmds:
+      - docker compose -f {{.DOCKERCOMPOSE_FILE}} down
+    preconditions:
+      - test -f {{.DOCKERCOMPOSE_FILE}}
+      - which docker
+  start-all:
+    desc: Start all docker microservices
+    dir: {{.DOCKERCOMPOSE_DIR}}
+    cmds:
+      - docker compose -f {{.DOCKERCOMPOSE_FILE}} run -d
+    preconditions:
+      - test -f {{.DOCKERCOMPOSE_FILE}}
+      - which docker
+

@@ -1,0 +1,39 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+set: [pipefail]
+shopt: [globstar]
+
+vars:
+  MAVEN_DIR: '{{.ROOT_DIR}}/maven'
+  MICROSERVICES_DIR: '{{.ROOT_DIR}}/microservices'
+  PROJECT_DIR: '{{.ROOT_DIR}}/project'
+  MODULES_DIR: '{{.ROOT_DIR}}/modules'
+  JDL_DIR: '{{.PROJECT_DIR}}/jdl'
+  SCRIPTS_DIR: '{{.ROOT_DIR}}/scripts'
+  DOCKERCOMPOSE_DIR: '{{.ROOT_DIR}}/docker-compose'
+  DOCKERCOMPOSE_FILE: '{{.DOCKERCOMPOSE_DIR}}/docker-compose.yaml'
+
+env:
+  KUBECONFIG: '{{.ROOT_DIR}}/kubeconfig'
+  
+
+includes:
+  jhispter: .taskfiles/jhispter
+  build: .taskfiles/build
+  docker: .taskfiles/docker
+  modules: .taskfiles/modules
+   
+
+tasks:
+
+  default: task --list
+
+
+  rebuild-all:
+    desc: ReGenerate all microservices with a hard reset
+    cmds:
+      - task: docker:clean-all
+      - task: build:all
+      - task: docker:start-all

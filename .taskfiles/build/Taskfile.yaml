@@ -1,0 +1,41 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+
+  all-maven:
+    desc: Build all maven projects
+    
+    vars:
+      PROJECTS:
+        sh: ls -l "{{.MAVEN_DIR}}"
+    cmds:
+      - for: { var: PROJECTS }
+        cmds: 
+          - echo "Starting build maven project {{.ITEM}}"
+          - cd {{.MAVEN_DIR}}/{{.ITEM}} && mvn clean install 
+    preconditions:
+      - msg: Missing Maven Project directory {{.MAVEN_DIR}}
+        sh: test -f {{.MAVEN_DIR}}
+
+  all-microservices:
+    desc: Build all microservices projects
+    vars:
+      PROJECTS:
+        sh: ls  "{{.MICROSERVICES_DIR}}"
+    cmds:
+      - for: { var: PROJECTS }
+        cmds: 
+          - echo "Starting build microservice {{.ITEM}}"
+          - cd {{.MICROSERVICES_DIR}}/{{.ITEM}} && ./mvnw -DskipTests -Pprod package jib:dockerBuild
+    preconditions:
+      - msg: Missing microservices Project directory {{.MICROSERVICES_DIR}}
+        sh: test -f {{.MICROSERVICES_DIR}}
+
+
+  all:
+    desc: Generate all microservices with a hard reset
+    cmds:
+      - task: all-maven
+      - task: all-microservices

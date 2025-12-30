@@ -129,341 +129,857 @@ services:
       timeout: 5s
       retries: 40
       
-  # aiservice:
-  #   image: aiservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/aiService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/aiService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/aiService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_ELASTICSEARCH_URIS=http://aiservice-elasticsearch:9200
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8086/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
 
-  # archiveservice:
-  #   image: archiveservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/archiveService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/archiveService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/archiveService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8088/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
-
-  # businessdocservice:
-  #   image: businessdocservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/businessDocService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/businessDocService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/businessDocService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8093/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
-
-
-
-  # emailimportservice:
-  #   image: emailimportservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/emailImportService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/emailImportService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/emailImportService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8090/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
-      
-
-  # exportservice:
-  #   image: exportservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/exportService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/exportService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/exportService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8089/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
-      
-
-      
+  aiservice:
+    image: aiservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
  
-
-  # monitoringservice:
-  #   image: monitoringservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/monitoringService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/monitoringService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/monitoringService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8095/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/aiservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${AISERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${AISERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${AISERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_AISERVICE_EVENTS_TOPIC:-paperdms.aiservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_AISERVICE_STATUS_TOPIC:-paperdms.aiservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
       
 
-  # notificationservice:
-  #   image: notificationservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/notificationService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/notificationService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/notificationservice
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8084/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40 
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
 
-  # ocrservice:
-  #   image: ocrservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/ocrService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/ocrService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/ocrService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8082/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
+  archiveservice:
+    image: archiveservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/archiveservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${ARCHIVESERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${ARCHIVESERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${ARCHIVESERVICE_DB_PASSWORD:-paperdms}
       
-  # reportingservice:
-  #   image: reportingservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/reportingService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/reportingService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/reportingservice
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8094/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
-
-  # scanservice:
-  #   image: scanservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/scanService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/scanService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/scanService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8091/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
-
-  # searchservice:
-  #   image: searchservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/searchService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/searchService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/searchService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8083/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
-  # similarityservice:
-  #   image: similarityservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/similarityService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/similarityService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/similarityService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8087/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_ARCHIVESERVICE_EVENTS_TOPIC:-paperdms.archiveservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_ARCHIVESERVICE_STATUS_TOPIC:-paperdms.archiveservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
       
 
-  # transformservice:
-  #   image: transformservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/transformService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/transformService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/transformService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8092/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40 
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
 
-  # workflowservice:
-  #   image: workflowservice
-  #   environment:
-  #     - _JAVA_OPTIONS=-Xmx512m -Xms256m
-  #     - SPRING_PROFILES_ACTIVE=prod,api-docs
-  #     - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-  #     - SPRING_CLOUD_CONSUL_HOST=consul
-  #     - SPRING_CLOUD_CONSUL_PORT=8500
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/workflowService
-  #     - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/workflowService
-  #     - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/workflowService
-  #     - JHIPSTER_CACHE_REDIS_CLUSTER=false
-  #     - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
-  #     - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - curl
-  #       - -f
-  #       - http://localhost:8085/management/health
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 40 
+  emailimportservice:
+    image: emailimportservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/emailimportservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${EMAILIMPORTSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${EMAILIMPORTSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${EMAILIMPORTSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_EMAILIMPORTSERVICE_EVENTS_TOPIC:-paperdms.emailimportservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_EMAILIMPORTSERVICE_STATUS_TOPIC:-paperdms.emailimportservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+
+
+  exportservice:
+    image: exportservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/exportservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${EXPORTSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${EXPORTSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${EXPORTSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_EXPORTSERVICE_EVENTS_TOPIC:-paperdms.exportservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_EXPORTSERVICE_STATUS_TOPIC:-paperdms.exportservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+
+  monitoringservice:
+    image: monitoringservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/monitoringservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${MONITORINGSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${MONITORINGSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${MONITORINGSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_MONITORINGSERVICE_EVENTS_TOPIC:-paperdms.monitoringservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_MONITORINGSERVICE_STATUS_TOPIC:-paperdms.monitoringservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  ocrservice:
+    image: ocrservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/ocrservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${OCRSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${OCRSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${OCRSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_OCRSERVICE_EVENTS_TOPIC:-paperdms.ocrservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_OCRSERVICE_STATUS_TOPIC:-paperdms.ocrservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  reportingservice:
+    image: reportingservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/reportingservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${REPORTINGSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${REPORTINGSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${REPORTINGSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_REPORTINGSERVICE_EVENTS_TOPIC:-paperdms.reportingservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_REPORTINGSERVICE_STATUS_TOPIC:-paperdms.reportingservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  similarityservice:
+    image: similarityservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/similarityservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${SIMILARITYSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${SIMILARITYSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${SIMILARITYSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_SIMILARITYSERVICE_EVENTS_TOPIC:-paperdms.similarityservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_SIMILARITYSERVICE_STATUS_TOPIC:-paperdms.similarityservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  workflowservice:
+    image: workflowservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/workflowservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${WORKFLOWSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${WORKFLOWSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${WORKFLOWSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_WORKFLOWSERVICE_EVENTS_TOPIC:-paperdms.workflowservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_WORKFLOWSERVICE_STATUS_TOPIC:-paperdms.workflowservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  archiveservice:
+    image: archiveservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/archiveservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${ARCHIVESERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${ARCHIVESERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${ARCHIVESERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_ARCHIVESERVICE_EVENTS_TOPIC:-paperdms.archiveservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_ARCHIVESERVICE_STATUS_TOPIC:-paperdms.archiveservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  emailimportservice:
+    image: emailimportservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/emailimportservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${EMAILIMPORTSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${EMAILIMPORTSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${EMAILIMPORTSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_EMAILIMPORTSERVICE_EVENTS_TOPIC:-paperdms.emailimportservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_EMAILIMPORTSERVICE_STATUS_TOPIC:-paperdms.emailimportservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  notificationservice:
+    image: notificationservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/notificationservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${NOTIFICATIONSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${NOTIFICATIONSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${NOTIFICATIONSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_NOTIFICATIONSERVICE_EVENTS_TOPIC:-paperdms.notificationservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_NOTIFICATIONSERVICE_STATUS_TOPIC:-paperdms.notificationservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  pdftoimageservice:
+    image: pdftoimageservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/pdftoimageservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${PDFTOIMAGESERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${PDFTOIMAGESERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${PDFTOIMAGESERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_PDFTOIMAGESERVICE_EVENTS_TOPIC:-paperdms.pdftoimageservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_PDFTOIMAGESERVICE_STATUS_TOPIC:-paperdms.pdftoimageservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  searchservice:
+    image: searchservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/searchservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${SEARCHSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${SEARCHSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${SEARCHSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_SEARCHSERVICE_EVENTS_TOPIC:-paperdms.searchservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_SEARCHSERVICE_STATUS_TOPIC:-paperdms.searchservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      
+
+  transformservice:
+    image: transformservice
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+ 
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgresql:5432/paperdms
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379/transformservice
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS=kafka:9092# Database Configuration
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/${TRANSFORMSERVICE_DB_NAME:-paperdms}
+      - SPRING_DATASOURCE_USERNAME=${TRANSFORMSERVICE_DB_USER:-paperdms}
+      - SPRING_DATASOURCE_PASSWORD=${TRANSFORMSERVICE_DB_PASSWORD:-paperdms}
+      
+      # Redis Configuration
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # Kafka Configuration
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      
+      # Elasticsearch Configuration
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
+      
+      # Consul Configuration
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      
+      # S3/MinIO Configuration
+      - S3_BUCKET=${S3_BUCKET:-paperdms-documents}
+      - S3_REGION=${S3_REGION:-us-east-1}
+      - S3_ENDPOINT=${S3_ENDPOINT:-http://minio:9000}
+      - S3_ACCESS_KEY=${S3_ACCESS_KEY:-minioadmin}
+      - S3_SECRET_KEY=${S3_SECRET_KEY:-minioadmin}
+      
+      # Kafka Topics
+      - KAFKA_DOCUMENT_EVENTS_TOPIC=${KAFKA_TRANSFORMSERVICE_EVENTS_TOPIC:-paperdms.transformservice.events}
+      - KAFKA_SERVICE_STATUS_TOPIC=${KAFKA_TRANSFORMSERVICE_STATUS_TOPIC:-paperdms.transformservice.service-status}
+      
+      # JHipster Configuration
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://redis:6379
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=${JWT_SECRET:-NzhiYTRhNzdiNjc5ZDIzODNmMmYxODMyYTlhY2U4MWFkYTc0MmE0YmJlM2QyZTcyZTE0Y2UwODA4YjhmM2YwMTBjMjgxMTVhZjY4YjA1ODU5YWU3ZjMwNjNkZDM4NjkzMzQ2OWI1NDYzZGU2NTI5MjExNzhlNjEwYzUwY2NkYWM=}
+      
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://localhost:8081/management/health
+      interval: 5s
+      timeout: 5s
+      retries: 40
 
   prometheus:
     image: prom/prometheus:v3.8.0

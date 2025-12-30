@@ -1,0 +1,34 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+
+tasks:
+
+  clean-all:
+    desc: Delete all microservices
+
+    prompt: This will destroy your microservices and reset them to zero... continue?
+    cmds:
+      - rm -r {{.MICROSERVICES_DIR}}/*
+    preconditions:
+      - msg: Missing microservices directory {{.MICROSERVICES_DIR}}
+        sh: test -f {{.MICROSERVICES_DIR}}
+
+
+  generate:
+    desc: Generate all microservices
+    dir: '{{.MICROSERVICES_DIR}}'
+    cmds :
+      - jhipster import-jdl {{.JDL_DIR}}/*.jdl --with-admin-ui --experimental
+    preconditions:
+      - msg: Missing microservices directory {{.MICROSERVICES_DIR}}
+        sh: test -f {{.MICROSERVICES_DIR}}
+      - msg: Missing jdl directory {{.JDL_DIR}}
+        sh: test -f {{.JDL_DIR}}
+  
+  regenerate:
+    desc: Generate all microservices with a hard reset
+    cmds:
+      - task: clean-all
+      - task: generate

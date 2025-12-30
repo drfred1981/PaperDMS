@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    fr.smartprod.paperdms.gateway: INFO
+    fr.smartprod.paperdms.reporting: INFO
 
 management:
   prometheus:
@@ -33,7 +33,7 @@ management:
 
 spring:
   application:
-    name: gateway
+    name: pdttoimageservice
   devtools:
     restart:
       enabled: false
@@ -41,35 +41,10 @@ spring:
       enabled: false
   cloud:
     consul:
-      host: ${SPRING_CLOUD_CONSUL_HOST:consul}
-      port: ${SPRING_CLOUD_CONSUL_PORT:8500}
       discovery:
         prefer-ip-address: true
-        healthCheckPath: /management/health
-        instanceId: gateway:${spring.application.instance-id:${random.value}}
-        service-name: gateway
-      config:
-        watch:
-          enabled: false
-    gateway:
-      default-filters:
-        - JWTRelay
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-          predicates:
-            - name: Path
-              args:
-                pattern: "'/services/'+serviceId.toLowerCase()+'/**'"
-          filters:
-            - name: RewritePath
-              args:
-                regexp: "'/services/' + serviceId.toLowerCase() + '/(?<remaining>.*)'"
-                replacement: "'/${remaining}'"
-      httpclient:
-        pool:
-          max-connections: 1000
+      host: ${SPRING_CLOUD_CONSUL_HOST:consul}
+      port: ${SPRING_CLOUD_CONSUL_PORT:8500}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:paperdms}
@@ -104,7 +79,6 @@ spring:
           time_zone: UTC
         connection:
           provider_disables_autocommit: false 
-  
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
@@ -115,17 +89,12 @@ spring:
     clear-checksums: true 
   elasticsearch:
     uris: ${SPRING_ELASTICSEARCH_URIS:http://elasticsearch:9200}
-  mail:
-    host: localhost
-    port: 25
-    username:
-    password:
   thymeleaf:
     cache: true
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
-# keytool -genkey -alias gateway -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias reportingservice -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # See details in topic "Create a Java Keystore (.JKS) from Let's Encrypt Certificates" on https://maximilian-boehm.com/en-gb/blog
@@ -143,7 +112,7 @@ spring:
 #     ciphers: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
 # ===================================================================
 server:
-  port: 8080
+  port: 8094
   shutdown: graceful # see https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-graceful-shutdown
   compression:
     enabled: true
@@ -160,6 +129,13 @@ jhipster:
   http:
     cache: # Used by the CachingHttpHeadersFilter
       timeToLiveInDays: 1461
+  cache: # Cache configuration
+    redis: # Redis configuration
+      expiration: 3600 # By default objects stay 1 hour (in seconds) in the cache
+      server: redis://localhost:6379
+      cluster: false
+      # server: redis://localhost:6379,redis://localhost:16379,redis://localhost:26379
+      # cluster: true
   security:
     authentication:
       jwt:
@@ -168,12 +144,10 @@ jhipster:
         # - In the Consul configserver
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: ZDQ4NGI0YjY1ZWYyOTcxNzkzNWJiNjI0MDE3MGVkYjg5MjUzZTdhMDRkN2ExOWJlYTAxODQ5NGM1MDZmNGZhZTIyNGYxOTQ3ZDM4MThlN2NjOTA1M2YyZGNiMjhhYjFhZTYxMTc2OWJlYTI0MzY5YmRkMzlkNDJiNGIwN2FmN2Q=
+        base64-secret: ZTM5MzJhYjk3ZGMzNWYyMGU5YzlhZWNjMDlmYTBiMWJmZTUxNzNhZTVhY2JjNmIwNDVjMzFkY2E1ZDgzYzA4NmUzYjMxN2M5ZDk4YTA2YTcwMDBlNjE1MjFjY2I5OGQ3NGUwYjYzN2YyYTA4MDJjOTZkNjVlMTIzY2ZjNjExNWY=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
-  mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://my-server-url-to-change # Modify according to your server's URL
   logging:
     use-json-format: false # By default, logs are not in Json format
     logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
