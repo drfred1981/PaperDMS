@@ -1,0 +1,11 @@
+id;name;description;report_type;query;schedule;format;recipients;is_active;last_run;next_run;created_by;created_date
+1;sandbar terribly by;../fake-data/blob/hipster.txt;WORKFLOW_PERFORMANCE;../fake-data/blob/hipster.txt;aside;PDF;../fake-data/blob/hipster.txt;false;2025-12-29T20:10:24;2025-12-29T21:00:07;boohoo;2025-12-29T08:19:06
+2;especially soft;../fake-data/blob/hipster.txt;DOCUMENT_INVENTORY;../fake-data/blob/hipster.txt;wing woefully;PDF;../fake-data/blob/hipster.txt;false;2025-12-29T23:50:03;2025-12-29T14:04:08;versus;2025-12-29T14:26:27
+3;across reapply happy-go-lucky;../fake-data/blob/hipster.txt;SYSTEM_HEALTH;../fake-data/blob/hipster.txt;community as;CSV;../fake-data/blob/hipster.txt;false;2025-12-30T01:35:52;2025-12-29T22:31:04;precedent brr;2025-12-30T02:36:59
+4;rigidly orientate;../fake-data/blob/hipster.txt;TAG_USAGE;../fake-data/blob/hipster.txt;midst unnaturally;CSV;../fake-data/blob/hipster.txt;false;2025-12-30T05:46:25;2025-12-30T04:55:35;jealous reckless;2025-12-29T08:21:36
+5;foretell nor;../fake-data/blob/hipster.txt;TAG_USAGE;../fake-data/blob/hipster.txt;thread yearly;XML;../fake-data/blob/hipster.txt;false;2025-12-29T18:10:59;2025-12-29T13:27:22;gee;2025-12-29T20:45:04
+6;awareness;../fake-data/blob/hipster.txt;STORAGE_ANALYSIS;../fake-data/blob/hipster.txt;ack who;EXCEL;../fake-data/blob/hipster.txt;false;2025-12-29T08:47:32;2025-12-30T01:51:54;ferociously discrete yellow;2025-12-29T15:34:02
+7;despite;../fake-data/blob/hipster.txt;STORAGE_ANALYSIS;../fake-data/blob/hipster.txt;officially coexist;JSON;../fake-data/blob/hipster.txt;false;2025-12-29T19:38:26;2025-12-29T17:42:49;shred ugh;2025-12-30T00:50:00
+8;nor woefully;../fake-data/blob/hipster.txt;DOCUMENT_INVENTORY;../fake-data/blob/hipster.txt;knottily since mid;CSV;../fake-data/blob/hipster.txt;false;2025-12-29T12:11:28;2025-12-29T22:35:45;tragic besides;2025-12-29T20:14:49
+9;exploration cycle helpless;../fake-data/blob/hipster.txt;BANK_RECONCILIATION;../fake-data/blob/hipster.txt;shyly;EXCEL;../fake-data/blob/hipster.txt;false;2025-12-29T22:47:35;2025-12-29T08:22:47;woot amidst;2025-12-29T23:02:07
+10;armoire up;../fake-data/blob/hipster.txt;TAG_USAGE;../fake-data/blob/hipster.txt;hence;PDF;../fake-data/blob/hipster.txt;false;2025-12-29T11:31:20;2025-12-29T16:07:04;er implode;2025-12-30T01:22:37

@@ -1,0 +1,205 @@
+<div>
+  <h2 id="page-heading" data-cy="NotificationWebhookLogHeading">
+    <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.home.title">Notification Webhook Logs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-notification-webhook-log"
+        [routerLink]="['/notification-webhook-log/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.home.createLabel"
+          >Create a new Notification Webhook Log</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.home.search"
+          >Search for Notification Webhook Log</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.notificationServiceNotificationWebhookLog.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (notificationWebhookLogs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.home.notFound">No Notification Webhook Logs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="eventType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.eventType">Event Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="payload">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.payload">Payload</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="responseStatus">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.responseStatus">Response Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="responseBody">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.responseBody">Response Body</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="responseTime">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.responseTime">Response Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="attemptNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.attemptNumber">Attempt Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isSuccess">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.isSuccess">Is Success</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sentDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.sentDate">Sent Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subscription.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.subscription">Subscription</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (notificationWebhookLog of notificationWebhookLogs(); track trackId(notificationWebhookLog)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/notification-webhook-log', notificationWebhookLog.id, 'view']">{{ notificationWebhookLog.id }}</a>
+              </td>
+              <td>{{ notificationWebhookLog.eventType }}</td>
+              <td>{{ notificationWebhookLog.payload }}</td>
+              <td>{{ notificationWebhookLog.responseStatus }}</td>
+              <td>{{ notificationWebhookLog.responseBody }}</td>
+              <td>{{ notificationWebhookLog.responseTime }}</td>
+              <td>{{ notificationWebhookLog.attemptNumber }}</td>
+              <td>{{ notificationWebhookLog.isSuccess }}</td>
+              <td>{{ notificationWebhookLog.errorMessage }}</td>
+              <td>{{ notificationWebhookLog.sentDate | formatMediumDatetime }}</td>
+              <td>
+                @if (notificationWebhookLog.subscription) {
+                  <div>
+                    <a [routerLink]="['/notification-webhook-subscription', notificationWebhookLog.subscription.id, 'view']">{{
+                      notificationWebhookLog.subscription.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/notification-webhook-log', notificationWebhookLog.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/notification-webhook-log', notificationWebhookLog.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(notificationWebhookLog)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

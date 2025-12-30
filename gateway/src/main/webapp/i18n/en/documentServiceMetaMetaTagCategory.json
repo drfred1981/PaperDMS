@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "documentServiceMetaMetaTagCategory": {
+      "home": {
+        "title": "Meta Meta Tag Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meta Meta Tag Category",
+        "createOrEditLabel": "Create or edit a Meta Meta Tag Category",
+        "search": "Search for Meta Meta Tag Category",
+        "notFound": "No Meta Meta Tag Categories found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Meta Meta Tag Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Meta Meta Tag Category"
+      },
+      "id": "ID",
+      "name": "Name",
+      "color": "Color",
+      "displayOrder": "Display Order",
+      "isSystem": "Is System",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "children": "Children",
+      "metaTags": "Meta Tags",
+      "parent": "Parent"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceMetaMetaTagCategory": {
+      "created": "A new Meta Meta Tag Category is created with identifier {{ param }}",
+      "updated": "A Meta Meta Tag Category is updated with identifier {{ param }}",
+      "deleted": "A Meta Meta Tag Category is deleted with identifier {{ param }}"
+    }
+  }
+}

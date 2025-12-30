@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "searchServiceSearchSemantic": {
+      "home": {
+        "title": "Search Semantics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Search Semantic",
+        "createOrEditLabel": "Create or edit a Search Semantic",
+        "search": "Search for Search Semantic",
+        "notFound": "No Search Semantics found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Search Semantic {{ id }}?"
+      },
+      "detail": {
+        "title": "Search Semantic"
+      },
+      "id": "ID",
+      "query": "Query",
+      "queryEmbedding": "Query Embedding",
+      "results": "Results",
+      "relevanceScores": "Relevance Scores",
+      "modelUsed": "Model Used",
+      "executionTime": "Execution Time",
+      "userId": "User Id",
+      "searchDate": "Search Date"
+    }
+  },
+  "searchServiceApp": {
+    "searchServiceSearchSemantic": {
+      "created": "A new Search Semantic is created with identifier {{ param }}",
+      "updated": "A Search Semantic is updated with identifier {{ param }}",
+      "deleted": "A Search Semantic is deleted with identifier {{ param }}"
+    }
+  }
+}

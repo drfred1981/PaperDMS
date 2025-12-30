@@ -1,0 +1,67 @@
+{
+  "annotations": {
+    "changelogDate": "20251230064016"
+  },
+  "applications": ["documentService", "gateway"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "principalType",
+      "fieldType": "PrincipalType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "USER,GROUP,ROLE,PUBLIC,DEPARTMENT"
+    },
+    {
+      "fieldName": "principalId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "permission",
+      "fieldType": "PermissionType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "VIEW,DOWNLOAD,EDIT,DELETE,SHARE,APPROVE,PRINT,EXPORT,COMMENT,MANAGE_PERMISSIONS,FULL_CONTROL"
+    },
+    {
+      "fieldName": "canDelegate",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "grantedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "grantedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "documentService",
+  "name": "DocumentPermission",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "document",
+      "otherEntityRelationshipName": "permissions",
+      "relationshipName": "document",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "metaPermissionGroup",
+      "otherEntityRelationshipName": "documentPermissions",
+      "relationshipName": "metaPermissionGroup",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

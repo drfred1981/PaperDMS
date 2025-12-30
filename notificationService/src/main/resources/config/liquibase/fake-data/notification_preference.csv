@@ -1,0 +1,11 @@
+id;user_id;email_enabled;push_enabled;in_app_enabled;notification_types;quiet_hours_start;quiet_hours_end;frequency;last_modified_date
+1;though though personal;true;true;false;../fake-data/blob/hipster.txt;consi;a yuc;WEEKLY;2025-12-30T05:47:42
+2;whereas geez;false;true;true;../fake-data/blob/hipster.txt;astri;litte;NEVER;2025-12-29T18:05:32
+3;courageous;true;false;false;../fake-data/blob/hipster.txt;unexp;phew;IMMEDIATELY;2025-12-29T06:35:08
+4;dependent impressive;true;true;true;../fake-data/blob/hipster.txt;ack d;cork ;WEEKLY;2025-12-29T07:22:47
+5;grave;false;false;false;../fake-data/blob/hipster.txt;inste;nerve;DAILY;2025-12-29T07:10:32
+6;vice fathom;false;false;false;../fake-data/blob/hipster.txt;expan;after;WEEKLY;2025-12-29T23:59:18
+7;cop-out;true;false;false;../fake-data/blob/hipster.txt;overd;phew ;WEEKLY;2025-12-29T16:18:29
+8;hypothesise;false;true;true;../fake-data/blob/hipster.txt;booho;as in;WEEKLY;2025-12-29T10:39:35
+9;typewriter;false;true;false;../fake-data/blob/hipster.txt;debut;mmm;NEVER;2025-12-29T12:22:25
+10;quicker nippy;true;true;false;../fake-data/blob/hipster.txt;from ;aha m;DAILY;2025-12-30T04:36:33

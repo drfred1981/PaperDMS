@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaFolder(); as metaFolderRef) {
+      <div>
+        <h2 data-cy="metaFolderDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceMetaFolder.detail.title">Meta Folder</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ metaFolderRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaFolder.name">Name</span></dt>
+          <dd>
+            <span>{{ metaFolderRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaFolder.description">Description</span></dt>
+          <dd>
+            <span>{{ metaFolderRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaFolder.path">Path</span></dt>
+          <dd>
+            <span>{{ metaFolderRef.path }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaFolder.isShared">Is Shared</span></dt>
+          <dd>
+            <span>{{ metaFolderRef.isShared }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaFolder.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ metaFolderRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaFolder.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ metaFolderRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaFolder.parent">Parent</span></dt>
+          <dd>
+            @if (metaFolder()!.parent) {
+              <div>
+                <a [routerLink]="['/meta-folder', metaFolder()!.parent?.id, 'view']">{{ metaFolderRef.parent?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/meta-folder', metaFolderRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transformConversionJob(); as transformConversionJobRef) {
+      <div>
+        <h2 data-cy="transformConversionJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.detail.title">Transform Conversion Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.sourceFormat">Source Format</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.sourceFormat }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.targetFormat">Target Format</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.targetFormat }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.conversionEngine">Conversion Engine</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.conversionEngine }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.options">Options</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.options }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.outputS3Key }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.outputDocumentSha256">Output Document Sha 256</span>
+          </dt>
+          <dd>
+            <span>{{ transformConversionJobRef.outputDocumentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformConversionJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                transformConversionJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ transformConversionJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transform-conversion-job', transformConversionJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

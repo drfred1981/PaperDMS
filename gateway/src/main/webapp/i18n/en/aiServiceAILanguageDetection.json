@@ -1,0 +1,39 @@
+{
+  "gatewayApp": {
+    "aiServiceAILanguageDetection": {
+      "home": {
+        "title": "AI Language Detections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new AI Language Detection",
+        "createOrEditLabel": "Create or edit a AI Language Detection",
+        "search": "Search for AI Language Detection",
+        "notFound": "No AI Language Detections found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete AI Language Detection {{ id }}?"
+      },
+      "detail": {
+        "title": "AI Language Detection"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "detectedLanguage": "Detected Language",
+      "confidence": "Confidence",
+      "detectionMethod": "Detection Method",
+      "alternativeLanguages": "Alternative Languages",
+      "textSample": "Text Sample",
+      "resultCacheKey": "Result Cache Key",
+      "isCached": "Is Cached",
+      "detectedDate": "Detected Date",
+      "modelVersion": "Model Version",
+      "job": "Job"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceAILanguageDetection": {
+      "created": "A new AI Language Detection is created with identifier {{ param }}",
+      "updated": "A AI Language Detection is updated with identifier {{ param }}",
+      "deleted": "A AI Language Detection is deleted with identifier {{ param }}"
+    }
+  }
+}

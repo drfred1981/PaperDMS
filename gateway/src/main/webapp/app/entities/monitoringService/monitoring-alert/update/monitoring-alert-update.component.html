@@ -1,0 +1,279 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-monitoring-alert-heading"
+        data-cy="MonitoringAlertCreateUpdateHeading"
+        jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.home.createOrEditLabel"
+      >
+        Create or edit a Monitoring Alert
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let severityRef = editForm.get('severity')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_severity" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.severity"
+            >Severity</label
+          >
+          <select class="form-control" name="severity" formControlName="severity" id="field_severity" data-cy="severity">
+            <option [ngValue]="null">{{ 'gatewayApp.Severity.null' | translate }}</option>
+            @for (severity of severityValues; track $index) {
+              <option [value]="severity">{{ 'gatewayApp.Severity.' + severity | translate }}</option>
+            }
+          </select>
+          @if (severityRef.invalid && (severityRef.dirty || severityRef.touched)) {
+            <div>
+              @if (editForm.get('severity')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let titleRef = editForm.get('title')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_title" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          @if (titleRef.invalid && (titleRef.dirty || titleRef.touched)) {
+            <div>
+              @if (editForm.get('title')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('title')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let messageRef = editForm.get('message')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_message" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.message">Message</label>
+          <textarea class="form-control" name="message" id="field_message" data-cy="message" formControlName="message"></textarea>
+          @if (messageRef.invalid && (messageRef.dirty || messageRef.touched)) {
+            <div>
+              @if (editForm.get('message')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let entityTypeRef = editForm.get('entityType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_entityType" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.entityType"
+            >Entity Type</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="entityType"
+            id="field_entityType"
+            data-cy="entityType"
+            formControlName="entityType"
+          />
+          @if (entityTypeRef.invalid && (entityTypeRef.dirty || entityTypeRef.touched)) {
+            <div>
+              @if (editForm.get('entityType')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_entityName" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.entityName"
+            >Entity Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="entityName"
+            id="field_entityName"
+            data-cy="entityName"
+            formControlName="entityName"
+          />
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.MonitoringAlertStatus.null' | translate }}</option>
+            @for (monitoringAlertStatus of monitoringAlertStatusValues; track $index) {
+              <option [value]="monitoringAlertStatus">{{ 'gatewayApp.MonitoringAlertStatus.' + monitoringAlertStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let triggeredDateRef = editForm.get('triggeredDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_triggeredDate" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.triggeredDate"
+            >Triggered Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_triggeredDate"
+              data-cy="triggeredDate"
+              type="datetime-local"
+              class="form-control"
+              name="triggeredDate"
+              formControlName="triggeredDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (triggeredDateRef.invalid && (triggeredDateRef.dirty || triggeredDateRef.touched)) {
+            <div>
+              @if (editForm.get('triggeredDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('triggeredDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let acknowledgedByRef = editForm.get('acknowledgedBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_acknowledgedBy" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.acknowledgedBy"
+            >Acknowledged By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="acknowledgedBy"
+            id="field_acknowledgedBy"
+            data-cy="acknowledgedBy"
+            formControlName="acknowledgedBy"
+          />
+          @if (acknowledgedByRef.invalid && (acknowledgedByRef.dirty || acknowledgedByRef.touched)) {
+            <div>
+              @if (editForm.get('acknowledgedBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_acknowledgedDate" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.acknowledgedDate"
+            >Acknowledged Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_acknowledgedDate"
+              data-cy="acknowledgedDate"
+              type="datetime-local"
+              class="form-control"
+              name="acknowledgedDate"
+              formControlName="acknowledgedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let resolvedByRef = editForm.get('resolvedBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_resolvedBy" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.resolvedBy"
+            >Resolved By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="resolvedBy"
+            id="field_resolvedBy"
+            data-cy="resolvedBy"
+            formControlName="resolvedBy"
+          />
+          @if (resolvedByRef.invalid && (resolvedByRef.dirty || resolvedByRef.touched)) {
+            <div>
+              @if (editForm.get('resolvedBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_resolvedDate" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.resolvedDate"
+            >Resolved Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_resolvedDate"
+              data-cy="resolvedDate"
+              type="datetime-local"
+              class="form-control"
+              name="resolvedDate"
+              formControlName="resolvedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_alertRule" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.alertRule"
+            >Alert Rule</label
+          >
+          <select
+            class="form-control"
+            id="field_alertRule"
+            data-cy="alertRule"
+            name="alertRule"
+            formControlName="alertRule"
+            [compareWith]="compareMonitoringAlertRule"
+          >
+            <option [ngValue]="null"></option>
+            @for (monitoringAlertRuleOption of monitoringAlertRulesSharedCollection; track $index) {
+              <option [ngValue]="monitoringAlertRuleOption">{{ monitoringAlertRuleOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

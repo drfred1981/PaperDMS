@@ -1,0 +1,11 @@
+id;principal_type;principal_id;permission;can_delegate;granted_by;granted_date
+1;USER;woot;VIEW;true;throbbing phooey attraction;2025-12-29T08:55:26
+2;PUBLIC;scratch worthy oddball;SHARE;false;charlatan;2025-12-29T06:58:59
+3;PUBLIC;abacus bin stranger;VIEW;true;provision sans;2025-12-29T13:54:56
+4;DEPARTMENT;conservative though;FULL_CONTROL;false;chairperson;2025-12-30T02:42:05
+5;PUBLIC;best-seller;MANAGE_PERMISSIONS;false;till;2025-12-29T07:50:12
+6;USER;anticodon outside briskly;APPROVE;true;truly youthfully unless;2025-12-30T01:15:58
+7;USER;worth;DOWNLOAD;true;as prestigious;2025-12-30T01:16:25
+8;ROLE;singing rubbery;APPROVE;false;adjudge;2025-12-29T23:16:45
+9;PUBLIC;yawningly;APPROVE;false;whereas;2025-12-29T16:41:55
+10;GROUP;affectionate positively though;PRINT;true;gurn drat;2025-12-29T07:00:53

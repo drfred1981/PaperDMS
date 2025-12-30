@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "monitoringServiceMonitoringAlert": {
+      "home": {
+        "title": "Monitoring Alerts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Monitoring Alert",
+        "createOrEditLabel": "Create or edit a Monitoring Alert",
+        "search": "Search for Monitoring Alert",
+        "notFound": "No Monitoring Alerts found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Monitoring Alert {{ id }}?"
+      },
+      "detail": {
+        "title": "Monitoring Alert"
+      },
+      "id": "ID",
+      "severity": "Severity",
+      "title": "Title",
+      "message": "Message",
+      "entityType": "Entity Type",
+      "entityName": "Entity Name",
+      "status": "Status",
+      "triggeredDate": "Triggered Date",
+      "acknowledgedBy": "Acknowledged By",
+      "acknowledgedDate": "Acknowledged Date",
+      "resolvedBy": "Resolved By",
+      "resolvedDate": "Resolved Date",
+      "alertRule": "Alert Rule"
+    }
+  },
+  "monitoringServiceApp": {
+    "monitoringServiceMonitoringAlert": {
+      "created": "A new Monitoring Alert is created with identifier {{ param }}",
+      "updated": "A Monitoring Alert is updated with identifier {{ param }}",
+      "deleted": "A Monitoring Alert is deleted with identifier {{ param }}"
+    }
+  }
+}

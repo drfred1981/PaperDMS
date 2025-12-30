@@ -1,0 +1,51 @@
+{
+  "gatewayApp": {
+    "pdfToImageServiceImagePdfConversionRequest": {
+      "home": {
+        "title": "Image Pdf Conversion Requests",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image Pdf Conversion Request",
+        "createOrEditLabel": "Create or edit a Image Pdf Conversion Request",
+        "search": "Search for Image Pdf Conversion Request",
+        "notFound": "No Image Pdf Conversion Requests found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Image Pdf Conversion Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Pdf Conversion Request"
+      },
+      "id": "ID",
+      "sourceDocumentId": "Source Document Id",
+      "sourceFileName": "Source File Name",
+      "sourcePdfS3Key": "Source Pdf S 3 Key",
+      "imageQuality": "Image Quality",
+      "imageFormat": "Image Format",
+      "conversionType": "Conversion Type",
+      "startPage": "Start Page",
+      "endPage": "End Page",
+      "totalPages": "Total Pages",
+      "status": "Status",
+      "errorMessage": "Error Message",
+      "requestedAt": "Requested At",
+      "startedAt": "Started At",
+      "completedAt": "Completed At",
+      "processingDuration": "Processing Duration",
+      "totalImagesSize": "Total Images Size",
+      "imagesGenerated": "Images Generated",
+      "dpi": "Dpi",
+      "requestedByUserId": "Requested By User Id",
+      "priority": "Priority",
+      "additionalOptions": "Additional Options",
+      "generatedImages": "Generated Images",
+      "batch": "Batch"
+    }
+  },
+  "pdfToImageServiceApp": {
+    "pdfToImageServiceImagePdfConversionRequest": {
+      "created": "A new Image Pdf Conversion Request is created with identifier {{ param }}",
+      "updated": "A Image Pdf Conversion Request is updated with identifier {{ param }}",
+      "deleted": "A Image Pdf Conversion Request is deleted with identifier {{ param }}"
+    }
+  }
+}

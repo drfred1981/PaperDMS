@@ -1,0 +1,13 @@
+{
+  "gatewayApp": {
+    "ImportStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "PROCESSING": "PROCESSING",
+      "COMPLETED": "COMPLETED",
+      "PARTIAL": "PARTIAL",
+      "FAILED": "FAILED",
+      "IGNORED": "IGNORED"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (archiveJob(); as archiveJobRef) {
+      <div>
+        <h2 data-cy="archiveJobDetailsHeading"><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.detail.title">Archive Job</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.name">Name</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.description">Description</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.documentQuery">Document Query</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.documentQuery }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveFormat">Archive Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ArchiveFormat.' + (archiveJobRef.archiveFormat ?? 'null')">{{
+              { null: '', ZIP: 'ZIP', TAR: 'TAR', TAR_GZ: 'TAR_GZ', TAR_BZ2: 'TAR_BZ2', TAR_XZ: 'TAR_XZ', SEVEN_ZIP: 'SEVEN_ZIP' }[
+                archiveJobRef.archiveFormat ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.compressionLevel">Compression Level</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.compressionLevel }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.encryptionEnabled">Encryption Enabled</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.encryptionEnabled }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.encryptionAlgorithm">Encryption Algorithm</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.encryptionAlgorithm }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.password">Password</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.password }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.s3ArchiveKey">S 3 Archive Key</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.s3ArchiveKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveSha256">Archive Sha 256</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.archiveSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.archiveSize">Archive Size</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.archiveSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.documentCount">Document Count</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.documentCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ArchiveStatus.' + (archiveJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', ARCHIVING: 'ARCHIVING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                archiveJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.archiveServiceArchiveJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ archiveJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/archive-job', archiveJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

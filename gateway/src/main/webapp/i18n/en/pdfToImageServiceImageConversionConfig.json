@@ -1,0 +1,39 @@
+{
+  "gatewayApp": {
+    "pdfToImageServiceImageConversionConfig": {
+      "home": {
+        "title": "Image Conversion Configs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image Conversion Config",
+        "createOrEditLabel": "Create or edit a Image Conversion Config",
+        "search": "Search for Image Conversion Config",
+        "notFound": "No Image Conversion Configs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Image Conversion Config {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Conversion Config"
+      },
+      "id": "ID",
+      "configName": "Config Name",
+      "description": "Description",
+      "defaultQuality": "Default Quality",
+      "defaultFormat": "Default Format",
+      "defaultDpi": "Default Dpi",
+      "defaultConversionType": "Default Conversion Type",
+      "defaultPriority": "Default Priority",
+      "isActive": "Is Active",
+      "isDefault": "Is Default",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    }
+  },
+  "pdfToImageServiceApp": {
+    "pdfToImageServiceImageConversionConfig": {
+      "created": "A new Image Conversion Config is created with identifier {{ param }}",
+      "updated": "A Image Conversion Config is updated with identifier {{ param }}",
+      "deleted": "A Image Conversion Config is deleted with identifier {{ param }}"
+    }
+  }
+}

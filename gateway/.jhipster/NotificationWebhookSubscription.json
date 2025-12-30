@@ -1,0 +1,101 @@
+{
+  "annotations": {
+    "changelogDate": "20251230070516"
+  },
+  "applications": ["notificationService", "gateway"],
+  "clientRootFolder": "notificationService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "secret",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "events",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "headers",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "retryCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxRetries",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "retryDelay",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastTriggerDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastSuccessDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastErrorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "failureCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "notificationService",
+  "name": "NotificationWebhookSubscription",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "notificationWebhookLog",
+      "otherEntityRelationshipName": "subscription",
+      "relationshipName": "notificationWebhookLogs",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

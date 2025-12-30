@@ -1,0 +1,227 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-permission-heading"
+        data-cy="DocumentPermissionCreateUpdateHeading"
+        jhiTranslate="gatewayApp.documentServiceDocumentPermission.home.createOrEditLabel"
+      >
+        Create or edit a Document Permission
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.documentServiceDocumentPermission.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let principalTypeRef = editForm.get('principalType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_principalType" jhiTranslate="gatewayApp.documentServiceDocumentPermission.principalType"
+            >Principal Type</label
+          >
+          <select
+            class="form-control"
+            name="principalType"
+            formControlName="principalType"
+            id="field_principalType"
+            data-cy="principalType"
+          >
+            <option [ngValue]="null">{{ 'gatewayApp.PrincipalType.null' | translate }}</option>
+            @for (principalType of principalTypeValues; track $index) {
+              <option [value]="principalType">{{ 'gatewayApp.PrincipalType.' + principalType | translate }}</option>
+            }
+          </select>
+          @if (principalTypeRef.invalid && (principalTypeRef.dirty || principalTypeRef.touched)) {
+            <div>
+              @if (editForm.get('principalType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let principalIdRef = editForm.get('principalId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_principalId" jhiTranslate="gatewayApp.documentServiceDocumentPermission.principalId"
+            >Principal Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="principalId"
+            id="field_principalId"
+            data-cy="principalId"
+            formControlName="principalId"
+          />
+          @if (principalIdRef.invalid && (principalIdRef.dirty || principalIdRef.touched)) {
+            <div>
+              @if (editForm.get('principalId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('principalId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let permissionRef = editForm.get('permission')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_permission" jhiTranslate="gatewayApp.documentServiceDocumentPermission.permission"
+            >Permission</label
+          >
+          <select class="form-control" name="permission" formControlName="permission" id="field_permission" data-cy="permission">
+            <option [ngValue]="null">{{ 'gatewayApp.PermissionType.null' | translate }}</option>
+            @for (permissionType of permissionTypeValues; track $index) {
+              <option [value]="permissionType">{{ 'gatewayApp.PermissionType.' + permissionType | translate }}</option>
+            }
+          </select>
+          @if (permissionRef.invalid && (permissionRef.dirty || permissionRef.touched)) {
+            <div>
+              @if (editForm.get('permission')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let canDelegateRef = editForm.get('canDelegate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_canDelegate" jhiTranslate="gatewayApp.documentServiceDocumentPermission.canDelegate"
+            >Can Delegate</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="canDelegate"
+            id="field_canDelegate"
+            data-cy="canDelegate"
+            formControlName="canDelegate"
+          />
+          @if (canDelegateRef.invalid && (canDelegateRef.dirty || canDelegateRef.touched)) {
+            <div>
+              @if (editForm.get('canDelegate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let grantedByRef = editForm.get('grantedBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_grantedBy" jhiTranslate="gatewayApp.documentServiceDocumentPermission.grantedBy"
+            >Granted By</label
+          >
+          <input type="text" class="form-control" name="grantedBy" id="field_grantedBy" data-cy="grantedBy" formControlName="grantedBy" />
+          @if (grantedByRef.invalid && (grantedByRef.dirty || grantedByRef.touched)) {
+            <div>
+              @if (editForm.get('grantedBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('grantedBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let grantedDateRef = editForm.get('grantedDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_grantedDate" jhiTranslate="gatewayApp.documentServiceDocumentPermission.grantedDate"
+            >Granted Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_grantedDate"
+              data-cy="grantedDate"
+              type="datetime-local"
+              class="form-control"
+              name="grantedDate"
+              formControlName="grantedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (grantedDateRef.invalid && (grantedDateRef.dirty || grantedDateRef.touched)) {
+            <div>
+              @if (editForm.get('grantedDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('grantedDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_document" jhiTranslate="gatewayApp.documentServiceDocumentPermission.document"
+            >Document</label
+          >
+          <select
+            class="form-control"
+            id="field_document"
+            data-cy="document"
+            name="document"
+            formControlName="document"
+            [compareWith]="compareDocument"
+          >
+            <option [ngValue]="null"></option>
+            @for (documentOption of documentsSharedCollection; track $index) {
+              <option [ngValue]="documentOption">{{ documentOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_metaPermissionGroup"
+            jhiTranslate="gatewayApp.documentServiceDocumentPermission.metaPermissionGroup"
+            >Meta Permission Group</label
+          >
+          <select
+            class="form-control"
+            id="field_metaPermissionGroup"
+            data-cy="metaPermissionGroup"
+            name="metaPermissionGroup"
+            formControlName="metaPermissionGroup"
+            [compareWith]="compareMetaPermissionGroup"
+          >
+            <option [ngValue]="null"></option>
+            @for (metaPermissionGroupOption of metaPermissionGroupsSharedCollection; track $index) {
+              <option [ngValue]="metaPermissionGroupOption">{{ metaPermissionGroupOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

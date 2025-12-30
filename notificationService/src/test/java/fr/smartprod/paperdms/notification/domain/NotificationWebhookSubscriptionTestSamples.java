@@ -1,0 +1,52 @@
+package fr.smartprod.paperdms.notification.domain;
+
+import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+
+public class NotificationWebhookSubscriptionTestSamples {
+
+    private static final Random random = new Random();
+    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
+    private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
+
+    public static NotificationWebhookSubscription getNotificationWebhookSubscriptionSample1() {
+        return new NotificationWebhookSubscription()
+            .id(1L)
+            .name("name1")
+            .url("url1")
+            .secret("secret1")
+            .retryCount(1)
+            .maxRetries(1)
+            .retryDelay(1)
+            .failureCount(1)
+            .createdBy("createdBy1");
+    }
+
+    public static NotificationWebhookSubscription getNotificationWebhookSubscriptionSample2() {
+        return new NotificationWebhookSubscription()
+            .id(2L)
+            .name("name2")
+            .url("url2")
+            .secret("secret2")
+            .retryCount(2)
+            .maxRetries(2)
+            .retryDelay(2)
+            .failureCount(2)
+            .createdBy("createdBy2");
+    }
+
+    public static NotificationWebhookSubscription getNotificationWebhookSubscriptionRandomSampleGenerator() {
+        return new NotificationWebhookSubscription()
+            .id(longCount.incrementAndGet())
+            .name(UUID.randomUUID().toString())
+            .url(UUID.randomUUID().toString())
+            .secret(UUID.randomUUID().toString())
+            .retryCount(intCount.incrementAndGet())
+            .maxRetries(intCount.incrementAndGet())
+            .retryDelay(intCount.incrementAndGet())
+            .failureCount(intCount.incrementAndGet())
+            .createdBy(UUID.randomUUID().toString());
+    }
+}

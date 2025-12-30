@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "monitoringServiceMonitoringAlertRule": {
+      "home": {
+        "title": "Monitoring Alert Rules",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Monitoring Alert Rule",
+        "createOrEditLabel": "Create or edit a Monitoring Alert Rule",
+        "search": "Search for Monitoring Alert Rule",
+        "notFound": "No Monitoring Alert Rules found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Monitoring Alert Rule {{ id }}?"
+      },
+      "detail": {
+        "title": "Monitoring Alert Rule"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "alertType": "Alert Type",
+      "conditions": "Conditions",
+      "severity": "Severity",
+      "recipients": "Recipients",
+      "isActive": "Is Active",
+      "triggerCount": "Trigger Count",
+      "lastTriggered": "Last Triggered",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "alerts": "Alerts"
+    }
+  },
+  "monitoringServiceApp": {
+    "monitoringServiceMonitoringAlertRule": {
+      "created": "A new Monitoring Alert Rule is created with identifier {{ param }}",
+      "updated": "A Monitoring Alert Rule is updated with identifier {{ param }}",
+      "deleted": "A Monitoring Alert Rule is deleted with identifier {{ param }}"
+    }
+  }
+}

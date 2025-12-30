@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity DocumentTag.
+    -->
+    <changeSet id="20251230064315-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="document_tag"
+                                 constraintName="fk_document_tag__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="meta_tag_id"
+                                 baseTableName="document_tag"
+                                 constraintName="fk_document_tag__meta_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="meta_tag"
+                                 />
+    </changeSet>
+</databaseChangeLog>

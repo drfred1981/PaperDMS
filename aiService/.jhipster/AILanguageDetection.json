@@ -1,0 +1,81 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063415"
+  },
+  "applications": ["aiService", "gateway"],
+  "clientRootFolder": "aiService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "ai_language_detection",
+  "fields": [
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "detectedLanguage",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "confidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "detectionMethod",
+      "fieldType": "AILanguageDetectionMethod",
+      "fieldValues": "TIKA,LANGDETECT,FASTTEXT,BERT_MULTILINGUAL,MANUAL,COMBINED"
+    },
+    {
+      "fieldName": "alternativeLanguages",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "textSample",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "resultCacheKey",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "128"
+    },
+    {
+      "fieldName": "isCached",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "detectedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "modelVersion",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "aiService",
+  "name": "AILanguageDetection",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "aIAutoTagJob",
+      "otherEntityRelationshipName": "languagePrediction",
+      "relationshipName": "job",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

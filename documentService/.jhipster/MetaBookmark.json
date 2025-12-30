@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20251230064715"
+  },
+  "applications": ["documentService", "gateway"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "userId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "entityType",
+      "fieldType": "MetaBookmarkType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DOCUMENT,FOLDER,SEARCH,DASHBOARD,WORKFLOW,SMART_FOLDER"
+    },
+    {
+      "fieldName": "entityName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "documentService",
+  "name": "MetaBookmark",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

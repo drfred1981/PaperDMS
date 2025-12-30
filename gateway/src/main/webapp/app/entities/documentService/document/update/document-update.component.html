@@ -1,0 +1,536 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-heading"
+        data-cy="DocumentCreateUpdateHeading"
+        jhiTranslate="gatewayApp.documentServiceDocument.home.createOrEditLabel"
+      >
+        Create or edit a Document
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.documentServiceDocument.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let titleRef = editForm.get('title')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_title" jhiTranslate="gatewayApp.documentServiceDocument.title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          @if (titleRef.invalid && (titleRef.dirty || titleRef.touched)) {
+            <div>
+              @if (editForm.get('title')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('title')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '500' }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let fileNameRef = editForm.get('fileName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fileName" jhiTranslate="gatewayApp.documentServiceDocument.fileName">File Name</label>
+          <input type="text" class="form-control" name="fileName" id="field_fileName" data-cy="fileName" formControlName="fileName" />
+          @if (fileNameRef.invalid && (fileNameRef.dirty || fileNameRef.touched)) {
+            <div>
+              @if (editForm.get('fileName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('fileName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '500' }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let fileSizeRef = editForm.get('fileSize')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fileSize" jhiTranslate="gatewayApp.documentServiceDocument.fileSize">File Size</label>
+          <input type="number" class="form-control" name="fileSize" id="field_fileSize" data-cy="fileSize" formControlName="fileSize" />
+          @if (fileSizeRef.invalid && (fileSizeRef.dirty || fileSizeRef.touched)) {
+            <div>
+              @if (editForm.get('fileSize')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('fileSize')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let mimeTypeRef = editForm.get('mimeType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_mimeType" jhiTranslate="gatewayApp.documentServiceDocument.mimeType">Mime Type</label>
+          <input type="text" class="form-control" name="mimeType" id="field_mimeType" data-cy="mimeType" formControlName="mimeType" />
+          @if (mimeTypeRef.invalid && (mimeTypeRef.dirty || mimeTypeRef.touched)) {
+            <div>
+              @if (editForm.get('mimeType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('mimeType')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let sha256Ref = editForm.get('sha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_sha256" jhiTranslate="gatewayApp.documentServiceDocument.sha256">Sha 256</label>
+          <input type="text" class="form-control" name="sha256" id="field_sha256" data-cy="sha256" formControlName="sha256" />
+          @if (sha256Ref.invalid && (sha256Ref.dirty || sha256Ref.touched)) {
+            <div>
+              @if (editForm.get('sha256')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('sha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let s3KeyRef = editForm.get('s3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3Key" jhiTranslate="gatewayApp.documentServiceDocument.s3Key">S 3 Key</label>
+          <input type="text" class="form-control" name="s3Key" id="field_s3Key" data-cy="s3Key" formControlName="s3Key" />
+          @if (s3KeyRef.invalid && (s3KeyRef.dirty || s3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('s3Key')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('s3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let s3BucketRef = editForm.get('s3Bucket')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3Bucket" jhiTranslate="gatewayApp.documentServiceDocument.s3Bucket">S 3 Bucket</label>
+          <input type="text" class="form-control" name="s3Bucket" id="field_s3Bucket" data-cy="s3Bucket" formControlName="s3Bucket" />
+          @if (s3BucketRef.invalid && (s3BucketRef.dirty || s3BucketRef.touched)) {
+            <div>
+              @if (editForm.get('s3Bucket')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('s3Bucket')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let s3RegionRef = editForm.get('s3Region')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3Region" jhiTranslate="gatewayApp.documentServiceDocument.s3Region">S 3 Region</label>
+          <input type="text" class="form-control" name="s3Region" id="field_s3Region" data-cy="s3Region" formControlName="s3Region" />
+          @if (s3RegionRef.invalid && (s3RegionRef.dirty || s3RegionRef.touched)) {
+            <div>
+              @if (editForm.get('s3Region')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let s3EMetaTagRef = editForm.get('s3EMetaTag')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3EMetaTag" jhiTranslate="gatewayApp.documentServiceDocument.s3EMetaTag"
+            >S 3 E Meta Tag</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="s3EMetaTag"
+            id="field_s3EMetaTag"
+            data-cy="s3EMetaTag"
+            formControlName="s3EMetaTag"
+          />
+          @if (s3EMetaTagRef.invalid && (s3EMetaTagRef.dirty || s3EMetaTagRef.touched)) {
+            <div>
+              @if (editForm.get('s3EMetaTag')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let thumbnailS3KeyRef = editForm.get('thumbnailS3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_thumbnailS3Key" jhiTranslate="gatewayApp.documentServiceDocument.thumbnailS3Key"
+            >Thumbnail S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="thumbnailS3Key"
+            id="field_thumbnailS3Key"
+            data-cy="thumbnailS3Key"
+            formControlName="thumbnailS3Key"
+          />
+          @if (thumbnailS3KeyRef.invalid && (thumbnailS3KeyRef.dirty || thumbnailS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('thumbnailS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let thumbnailSha256Ref = editForm.get('thumbnailSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_thumbnailSha256" jhiTranslate="gatewayApp.documentServiceDocument.thumbnailSha256"
+            >Thumbnail Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="thumbnailSha256"
+            id="field_thumbnailSha256"
+            data-cy="thumbnailSha256"
+            formControlName="thumbnailSha256"
+          />
+          @if (thumbnailSha256Ref.invalid && (thumbnailSha256Ref.dirty || thumbnailSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('thumbnailSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let webpPreviewS3KeyRef = editForm.get('webpPreviewS3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_webpPreviewS3Key" jhiTranslate="gatewayApp.documentServiceDocument.webpPreviewS3Key"
+            >Webp Preview S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="webpPreviewS3Key"
+            id="field_webpPreviewS3Key"
+            data-cy="webpPreviewS3Key"
+            formControlName="webpPreviewS3Key"
+          />
+          @if (webpPreviewS3KeyRef.invalid && (webpPreviewS3KeyRef.dirty || webpPreviewS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('webpPreviewS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let webpPreviewSha256Ref = editForm.get('webpPreviewSha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_webpPreviewSha256" jhiTranslate="gatewayApp.documentServiceDocument.webpPreviewSha256"
+            >Webp Preview Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="webpPreviewSha256"
+            id="field_webpPreviewSha256"
+            data-cy="webpPreviewSha256"
+            formControlName="webpPreviewSha256"
+          />
+          @if (webpPreviewSha256Ref.invalid && (webpPreviewSha256Ref.dirty || webpPreviewSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('webpPreviewSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let uploadDateRef = editForm.get('uploadDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_uploadDate" jhiTranslate="gatewayApp.documentServiceDocument.uploadDate">Upload Date</label>
+          <div class="d-flex">
+            <input
+              id="field_uploadDate"
+              data-cy="uploadDate"
+              type="datetime-local"
+              class="form-control"
+              name="uploadDate"
+              formControlName="uploadDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (uploadDateRef.invalid && (uploadDateRef.dirty || uploadDateRef.touched)) {
+            <div>
+              @if (editForm.get('uploadDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('uploadDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let isPublicRef = editForm.get('isPublic')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isPublic" jhiTranslate="gatewayApp.documentServiceDocument.isPublic">Is Public</label>
+          <input type="checkbox" class="form-check" name="isPublic" id="field_isPublic" data-cy="isPublic" formControlName="isPublic" />
+          @if (isPublicRef.invalid && (isPublicRef.dirty || isPublicRef.touched)) {
+            <div>
+              @if (editForm.get('isPublic')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_downloadCount" jhiTranslate="gatewayApp.documentServiceDocument.downloadCount"
+            >Download Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="downloadCount"
+            id="field_downloadCount"
+            data-cy="downloadCount"
+            formControlName="downloadCount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_viewCount" jhiTranslate="gatewayApp.documentServiceDocument.viewCount">View Count</label>
+          <input type="number" class="form-control" name="viewCount" id="field_viewCount" data-cy="viewCount" formControlName="viewCount" />
+        </div>
+
+        @let detectedLanguageRef = editForm.get('detectedLanguage')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_detectedLanguage" jhiTranslate="gatewayApp.documentServiceDocument.detectedLanguage"
+            >Detected Language</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="detectedLanguage"
+            id="field_detectedLanguage"
+            data-cy="detectedLanguage"
+            formControlName="detectedLanguage"
+          />
+          @if (detectedLanguageRef.invalid && (detectedLanguageRef.dirty || detectedLanguageRef.touched)) {
+            <div>
+              @if (editForm.get('detectedLanguage')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '10' }"
+                  >This field cannot be longer than 10 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let manualLanguageRef = editForm.get('manualLanguage')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_manualLanguage" jhiTranslate="gatewayApp.documentServiceDocument.manualLanguage"
+            >Manual Language</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="manualLanguage"
+            id="field_manualLanguage"
+            data-cy="manualLanguage"
+            formControlName="manualLanguage"
+          />
+          @if (manualLanguageRef.invalid && (manualLanguageRef.dirty || manualLanguageRef.touched)) {
+            <div>
+              @if (editForm.get('manualLanguage')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '10' }"
+                  >This field cannot be longer than 10 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let languageConfidenceRef = editForm.get('languageConfidence')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_languageConfidence" jhiTranslate="gatewayApp.documentServiceDocument.languageConfidence"
+            >Language Confidence</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="languageConfidence"
+            id="field_languageConfidence"
+            data-cy="languageConfidence"
+            formControlName="languageConfidence"
+          />
+          @if (languageConfidenceRef.invalid && (languageConfidenceRef.dirty || languageConfidenceRef.touched)) {
+            <div>
+              @if (editForm.get('languageConfidence')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              @if (editForm.get('languageConfidence')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1' }"
+                  >This field cannot be more than 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('languageConfidence')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pageCount" jhiTranslate="gatewayApp.documentServiceDocument.pageCount">Page Count</label>
+          <input type="number" class="form-control" name="pageCount" id="field_pageCount" data-cy="pageCount" formControlName="pageCount" />
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.documentServiceDocument.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let createdByRef = editForm.get('createdBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="gatewayApp.documentServiceDocument.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+          @if (createdByRef.invalid && (createdByRef.dirty || createdByRef.touched)) {
+            <div>
+              @if (editForm.get('createdBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('createdBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_documentType" jhiTranslate="gatewayApp.documentServiceDocument.documentType"
+            >Document Type</label
+          >
+          <select
+            class="form-control"
+            id="field_documentType"
+            data-cy="documentType"
+            name="documentType"
+            formControlName="documentType"
+            [compareWith]="compareDocumentType"
+          >
+            <option [ngValue]="null"></option>
+            @for (documentTypeOption of documentTypesSharedCollection; track $index) {
+              <option [ngValue]="documentTypeOption">{{ documentTypeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_folder" jhiTranslate="gatewayApp.documentServiceDocument.folder">Folder</label>
+          <select
+            class="form-control"
+            id="field_folder"
+            data-cy="folder"
+            name="folder"
+            formControlName="folder"
+            [compareWith]="compareMetaFolder"
+          >
+            <option [ngValue]="null"></option>
+            @for (metaFolderOption of metaFoldersSharedCollection; track $index) {
+              <option [ngValue]="metaFolderOption">{{ metaFolderOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

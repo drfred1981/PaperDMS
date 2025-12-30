@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentComment(); as documentCommentRef) {
+      <div>
+        <h2 data-cy="documentCommentDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceDocumentComment.detail.title">Document Comment</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentCommentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentComment.content">Content</span></dt>
+          <dd>
+            <span>{{ documentCommentRef.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentComment.pageNumber">Page Number</span></dt>
+          <dd>
+            <span>{{ documentCommentRef.pageNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentComment.isResolved">Is Resolved</span></dt>
+          <dd>
+            <span>{{ documentCommentRef.isResolved }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentComment.authorId">Author Id</span></dt>
+          <dd>
+            <span>{{ documentCommentRef.authorId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentComment.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ documentCommentRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentComment.document">Document</span></dt>
+          <dd>
+            @if (documentComment()!.document) {
+              <div>
+                <a [routerLink]="['/document', documentComment()!.document?.id, 'view']">{{ documentCommentRef.document?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentComment.parentComment">Parent Comment</span></dt>
+          <dd>
+            @if (documentComment()!.parentComment) {
+              <div>
+                <a [routerLink]="['/document-comment', documentComment()!.parentComment?.id, 'view']">{{
+                  documentCommentRef.parentComment?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-comment', documentCommentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

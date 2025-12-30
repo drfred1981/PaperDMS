@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20251230075216"
+  },
+  "applications": ["pdfToImageService", "gateway"],
+  "clientRootFolder": "pdfToImageService",
+  "databaseType": "sql",
+  "documentation": "Entité - Historique des conversions (archivage)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "originalRequestId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "archivedAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "conversionData",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "imagesCount",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "totalSize",
+      "fieldType": "Long",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "finalStatus",
+      "fieldType": "ConversionStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,PROCESSING,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "processingDuration",
+      "fieldType": "Long"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "pdfToImageService",
+  "name": "ImageConversionHistory",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

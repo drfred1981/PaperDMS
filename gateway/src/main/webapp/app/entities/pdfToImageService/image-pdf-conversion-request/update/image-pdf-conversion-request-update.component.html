@@ -1,0 +1,561 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-image-pdf-conversion-request-heading"
+        data-cy="ImagePdfConversionRequestCreateUpdateHeading"
+        jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.home.createOrEditLabel"
+      >
+        Create or edit a Image Pdf Conversion Request
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let sourceDocumentIdRef = editForm.get('sourceDocumentId')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_sourceDocumentId"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourceDocumentId"
+            >Source Document Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="sourceDocumentId"
+            id="field_sourceDocumentId"
+            data-cy="sourceDocumentId"
+            formControlName="sourceDocumentId"
+          />
+          @if (sourceDocumentIdRef.invalid && (sourceDocumentIdRef.dirty || sourceDocumentIdRef.touched)) {
+            <div>
+              @if (editForm.get('sourceDocumentId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('sourceDocumentId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let sourceFileNameRef = editForm.get('sourceFileName')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_sourceFileName"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourceFileName"
+            >Source File Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sourceFileName"
+            id="field_sourceFileName"
+            data-cy="sourceFileName"
+            formControlName="sourceFileName"
+          />
+          @if (sourceFileNameRef.invalid && (sourceFileNameRef.dirty || sourceFileNameRef.touched)) {
+            <div>
+              @if (editForm.get('sourceFileName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('sourceFileName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let sourcePdfS3KeyRef = editForm.get('sourcePdfS3Key')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_sourcePdfS3Key"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourcePdfS3Key"
+            >Source Pdf S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sourcePdfS3Key"
+            id="field_sourcePdfS3Key"
+            data-cy="sourcePdfS3Key"
+            formControlName="sourcePdfS3Key"
+          />
+          @if (sourcePdfS3KeyRef.invalid && (sourcePdfS3KeyRef.dirty || sourcePdfS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('sourcePdfS3Key')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('sourcePdfS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '500' }"
+                  >This field cannot be longer than 500 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let imageQualityRef = editForm.get('imageQuality')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_imageQuality"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imageQuality"
+            >Image Quality</label
+          >
+          <select class="form-control" name="imageQuality" formControlName="imageQuality" id="field_imageQuality" data-cy="imageQuality">
+            <option [ngValue]="null">{{ 'gatewayApp.ImageQuality.null' | translate }}</option>
+            @for (imageQuality of imageQualityValues; track $index) {
+              <option [value]="imageQuality">{{ 'gatewayApp.ImageQuality.' + imageQuality | translate }}</option>
+            }
+          </select>
+          @if (imageQualityRef.invalid && (imageQualityRef.dirty || imageQualityRef.touched)) {
+            <div>
+              @if (editForm.get('imageQuality')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let imageFormatRef = editForm.get('imageFormat')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_imageFormat" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imageFormat"
+            >Image Format</label
+          >
+          <select class="form-control" name="imageFormat" formControlName="imageFormat" id="field_imageFormat" data-cy="imageFormat">
+            <option [ngValue]="null">{{ 'gatewayApp.ImageFormat.null' | translate }}</option>
+            @for (imageFormat of imageFormatValues; track $index) {
+              <option [value]="imageFormat">{{ 'gatewayApp.ImageFormat.' + imageFormat | translate }}</option>
+            }
+          </select>
+          @if (imageFormatRef.invalid && (imageFormatRef.dirty || imageFormatRef.touched)) {
+            <div>
+              @if (editForm.get('imageFormat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let conversionTypeRef = editForm.get('conversionType')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_conversionType"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.conversionType"
+            >Conversion Type</label
+          >
+          <select
+            class="form-control"
+            name="conversionType"
+            formControlName="conversionType"
+            id="field_conversionType"
+            data-cy="conversionType"
+          >
+            <option [ngValue]="null">{{ 'gatewayApp.ConversionType.null' | translate }}</option>
+            @for (conversionType of conversionTypeValues; track $index) {
+              <option [value]="conversionType">{{ 'gatewayApp.ConversionType.' + conversionType | translate }}</option>
+            }
+          </select>
+          @if (conversionTypeRef.invalid && (conversionTypeRef.dirty || conversionTypeRef.touched)) {
+            <div>
+              @if (editForm.get('conversionType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let startPageRef = editForm.get('startPage')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_startPage" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.startPage"
+            >Start Page</label
+          >
+          <input type="number" class="form-control" name="startPage" id="field_startPage" data-cy="startPage" formControlName="startPage" />
+          @if (startPageRef.invalid && (startPageRef.dirty || startPageRef.touched)) {
+            <div>
+              @if (editForm.get('startPage')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '1' }"
+                  >This field should be at least 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('startPage')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let endPageRef = editForm.get('endPage')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_endPage" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.endPage"
+            >End Page</label
+          >
+          <input type="number" class="form-control" name="endPage" id="field_endPage" data-cy="endPage" formControlName="endPage" />
+          @if (endPageRef.invalid && (endPageRef.dirty || endPageRef.touched)) {
+            <div>
+              @if (editForm.get('endPage')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '1' }"
+                  >This field should be at least 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('endPage')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let totalPagesRef = editForm.get('totalPages')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_totalPages" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.totalPages"
+            >Total Pages</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalPages"
+            id="field_totalPages"
+            data-cy="totalPages"
+            formControlName="totalPages"
+          />
+          @if (totalPagesRef.invalid && (totalPagesRef.dirty || totalPagesRef.touched)) {
+            <div>
+              @if (editForm.get('totalPages')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '1' }"
+                  >This field should be at least 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalPages')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.status"
+            >Status</label
+          >
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.ConversionStatus.null' | translate }}</option>
+            @for (conversionStatus of conversionStatusValues; track $index) {
+              <option [value]="conversionStatus">{{ 'gatewayApp.ConversionStatus.' + conversionStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let errorMessageRef = editForm.get('errorMessage')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_errorMessage"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.errorMessage"
+            >Error Message</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          />
+          @if (errorMessageRef.invalid && (errorMessageRef.dirty || errorMessageRef.touched)) {
+            <div>
+              @if (editForm.get('errorMessage')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '2000' }"
+                  >This field cannot be longer than 2000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let requestedAtRef = editForm.get('requestedAt')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_requestedAt" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.requestedAt"
+            >Requested At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_requestedAt"
+              data-cy="requestedAt"
+              type="datetime-local"
+              class="form-control"
+              name="requestedAt"
+              formControlName="requestedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (requestedAtRef.invalid && (requestedAtRef.dirty || requestedAtRef.touched)) {
+            <div>
+              @if (editForm.get('requestedAt')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('requestedAt')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startedAt" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.startedAt"
+            >Started At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startedAt"
+              data-cy="startedAt"
+              type="datetime-local"
+              class="form-control"
+              name="startedAt"
+              formControlName="startedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_completedAt" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.completedAt"
+            >Completed At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_completedAt"
+              data-cy="completedAt"
+              type="datetime-local"
+              class="form-control"
+              name="completedAt"
+              formControlName="completedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_processingDuration"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.processingDuration"
+            >Processing Duration</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="processingDuration"
+            id="field_processingDuration"
+            data-cy="processingDuration"
+            formControlName="processingDuration"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalImagesSize"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.totalImagesSize"
+            >Total Images Size</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalImagesSize"
+            id="field_totalImagesSize"
+            data-cy="totalImagesSize"
+            formControlName="totalImagesSize"
+          />
+        </div>
+
+        @let imagesGeneratedRef = editForm.get('imagesGenerated')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_imagesGenerated"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imagesGenerated"
+            >Images Generated</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="imagesGenerated"
+            id="field_imagesGenerated"
+            data-cy="imagesGenerated"
+            formControlName="imagesGenerated"
+          />
+          @if (imagesGeneratedRef.invalid && (imagesGeneratedRef.dirty || imagesGeneratedRef.touched)) {
+            <div>
+              @if (editForm.get('imagesGenerated')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('imagesGenerated')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let dpiRef = editForm.get('dpi')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dpi" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.dpi">Dpi</label>
+          <input type="number" class="form-control" name="dpi" id="field_dpi" data-cy="dpi" formControlName="dpi" />
+          @if (dpiRef.invalid && (dpiRef.dirty || dpiRef.touched)) {
+            <div>
+              @if (editForm.get('dpi')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '72' }"
+                  >This field should be at least 72.</small
+                >
+              }
+              @if (editForm.get('dpi')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '1200' }"
+                  >This field cannot be more than 1200.</small
+                >
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('dpi')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_requestedByUserId"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.requestedByUserId"
+            >Requested By User Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="requestedByUserId"
+            id="field_requestedByUserId"
+            data-cy="requestedByUserId"
+            formControlName="requestedByUserId"
+          />
+        </div>
+
+        @let priorityRef = editForm.get('priority')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_priority" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.priority"
+            >Priority</label
+          >
+          <input type="number" class="form-control" name="priority" id="field_priority" data-cy="priority" formControlName="priority" />
+          @if (priorityRef.invalid && (priorityRef.dirty || priorityRef.touched)) {
+            <div>
+              @if (editForm.get('priority')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '1' }"
+                  >This field should be at least 1.</small
+                >
+              }
+              @if (editForm.get('priority')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '5' }"
+                  >This field cannot be more than 5.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('priority')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_additionalOptions"
+            jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.additionalOptions"
+            >Additional Options</label
+          >
+          <textarea
+            class="form-control"
+            name="additionalOptions"
+            id="field_additionalOptions"
+            data-cy="additionalOptions"
+            formControlName="additionalOptions"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_batch" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.batch"
+            >Batch</label
+          >
+          <select
+            class="form-control"
+            id="field_batch"
+            data-cy="batch"
+            name="batch"
+            formControlName="batch"
+            [compareWith]="compareImageConversionBatch"
+          >
+            <option [ngValue]="null"></option>
+            @for (imageConversionBatchOption of imageConversionBatchesSharedCollection; track $index) {
+              <option [ngValue]="imageConversionBatchOption">{{ imageConversionBatchOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

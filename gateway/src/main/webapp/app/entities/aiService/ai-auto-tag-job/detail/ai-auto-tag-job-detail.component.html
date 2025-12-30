@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (aIAutoTagJob(); as aIAutoTagJobRef) {
+      <div>
+        <h2 data-cy="aIAutoTagJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.detail.title">AI Auto Tag Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.s3Key">S 3 Key</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.s3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.extractedText">Extracted Text</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.extractedText }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.extractedTextSha256">Extracted Text Sha 256</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.extractedTextSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AiJobStatus.' + (aIAutoTagJobRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                IN_PROGRESS: 'IN_PROGRESS',
+                COMPLETED: 'COMPLETED',
+                FAILED: 'FAILED',
+                CANCELLED: 'CANCELLED',
+              }[aIAutoTagJobRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.modelVersion">Model Version</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.modelVersion }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.resultCacheKey">Result Cache Key</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.resultCacheKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.isCached">Is Cached</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.isCached }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ aIAutoTagJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.aITypePrediction">A I Type Prediction</span></dt>
+          <dd>
+            @if (aIAutoTagJob()!.aITypePrediction) {
+              <div>
+                <a [routerLink]="['/ai-type-prediction', aIAutoTagJob()!.aITypePrediction?.id, 'view']">{{
+                  aIAutoTagJobRef.aITypePrediction?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.languagePrediction">Language Prediction</span></dt>
+          <dd>
+            @if (aIAutoTagJob()!.languagePrediction) {
+              <div>
+                <a [routerLink]="['/ai-language-detection', aIAutoTagJob()!.languagePrediction?.id, 'view']">{{
+                  aIAutoTagJobRef.languagePrediction?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ai-auto-tag-job', aIAutoTagJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

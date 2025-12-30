@@ -12,7 +12,15 @@
     <property name="timeType" value="time(6)" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063015_added_entity_ImagePdfConversionRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063115_added_entity_ImageGeneratedImage.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063215_added_entity_ImageConversionConfig.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063315_added_entity_ImageConversionBatch.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063415_added_entity_ImageConversionHistory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063515_added_entity_ImageConversionStatistics.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20251230063015_added_entity_constraints_ImagePdfConversionRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063115_added_entity_constraints_ImageGeneratedImage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

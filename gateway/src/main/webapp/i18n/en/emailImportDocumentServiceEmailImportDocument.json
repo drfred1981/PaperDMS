@@ -1,0 +1,44 @@
+{
+  "gatewayApp": {
+    "emailImportDocumentServiceEmailImportDocument": {
+      "home": {
+        "title": "Email Import Documents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Email Import Document",
+        "createOrEditLabel": "Create or edit a Email Import Document",
+        "search": "Search for Email Import Document",
+        "notFound": "No Email Import Documents found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Email Import Document {{ id }}?"
+      },
+      "detail": {
+        "title": "Email Import Document"
+      },
+      "id": "ID",
+      "sha256": "Sha 256",
+      "fromEmail": "From Email",
+      "toEmail": "To Email",
+      "subject": "Subject",
+      "body": "Body",
+      "bodyHtml": "Body Html",
+      "receivedDate": "Received Date",
+      "processedDate": "Processed Date",
+      "status": "Status",
+      "attachmentCount": "Attachment Count",
+      "documentsCreated": "Documents Created",
+      "errorMessage": "Error Message",
+      "metadata": "Metadata",
+      "documentSha256": "Document Sha 256",
+      "emailImportEmailAttachments": "Email Import Email Attachments",
+      "appliedRule": "Applied Rule"
+    }
+  },
+  "emailImportDocumentServiceApp": {
+    "emailImportDocumentServiceEmailImportDocument": {
+      "created": "A new Email Import Document is created with identifier {{ param }}",
+      "updated": "A Email Import Document is updated with identifier {{ param }}",
+      "deleted": "A Email Import Document is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ocrResult(); as ocrResultRef) {
+      <div>
+        <h2 data-cy="ocrResultDetailsHeading"><span jhiTranslate="gatewayApp.ocrServiceOcrResult.detail.title">Ocr Result</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.pageNumber">Page Number</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.pageNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.pageSha256">Page Sha 256</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.pageSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.s3ResultKey">S 3 Result Key</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.s3ResultKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.s3Bucket">S 3 Bucket</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.s3Bucket }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.s3BoundingBoxKey">S 3 Bounding Box Key</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.s3BoundingBoxKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.boundingBoxes">Bounding Boxes</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.boundingBoxes }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.language">Language</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.language }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.wordCount">Word Count</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.wordCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.ocrEngine">Ocr Engine</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.OcrEngine.' + (ocrResultRef.ocrEngine ?? 'null')">{{
+              {
+                null: '',
+                TIKA_TESSERACT: 'TIKA_TESSERACT',
+                TIKA_NATIVE: 'TIKA_NATIVE',
+                OPENAI_VISION: 'OPENAI_VISION',
+                GOOGLE_VISION: 'GOOGLE_VISION',
+                AWS_TEXTRACT: 'AWS_TEXTRACT',
+                AZURE_VISION: 'AZURE_VISION',
+                ANTHROPIC_CLAUDE: 'ANTHROPIC_CLAUDE',
+                CUSTOM: 'CUSTOM',
+                HYBRID: 'HYBRID',
+              }[ocrResultRef.ocrEngine ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.processingTime">Processing Time</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.processingTime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.rawResponse">Raw Response</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.rawResponse }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.rawResponseS3Key">Raw Response S 3 Key</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.rawResponseS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.processedDate">Processed Date</span></dt>
+          <dd>
+            <span>{{ ocrResultRef.processedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOcrResult.job">Job</span></dt>
+          <dd>
+            @if (ocrResult()!.job) {
+              <div>
+                <a [routerLink]="['/ocr-job', ocrResult()!.job?.id, 'view']">{{ ocrResultRef.job?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ocr-result', ocrResultRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

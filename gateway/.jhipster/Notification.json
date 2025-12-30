@@ -1,0 +1,101 @@
+{
+  "annotations": {
+    "changelogDate": "20251230070116"
+  },
+  "applications": ["notificationService", "gateway"],
+  "clientRootFolder": "notificationService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "NotificationType",
+      "fieldValues": "DOCUMENT_UPLOADED,DOCUMENT_PROCESSED,DOCUMENT_SHARED,WORKFLOW_ASSIGNED,WORKFLOW_APPROVED,WORKFLOW_REJECTED,WORKFLOW_COMPLETED,OCR_COMPLETED,AI_TAG_SUGGESTED,SIMILAR_DOCUMENT_FOUND,SYSTEM_ALERT,CUSTOM"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "NotificationPriority",
+      "fieldValues": "LOW,NORMAL,HIGH,URGENT"
+    },
+    {
+      "fieldName": "recipientId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "isRead",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "readDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "channel",
+      "fieldType": "NotificationChannel",
+      "fieldValues": "EMAIL,PUSH,IN_APP,SMS,WEBHOOK"
+    },
+    {
+      "fieldName": "relatedEntityType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "relatedEntityName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "actionUrl",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "expirationDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "sentDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "notificationService",
+  "name": "Notification",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "notificationTemplate",
+      "otherEntityRelationshipName": "notifications",
+      "relationshipName": "template",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

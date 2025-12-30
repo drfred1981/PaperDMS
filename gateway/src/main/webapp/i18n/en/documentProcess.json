@@ -1,0 +1,26 @@
+{
+  "gatewayApp": {
+    "documentProcess": {
+      "home": {
+        "title": "Document Processes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Process",
+        "createOrEditLabel": "Create or edit a Document Process",
+        "search": "Search for Document Process",
+        "notFound": "No Document Processes found"
+      },
+      "created": "A new Document Process is created with identifier {{ param }}",
+      "updated": "A Document Process is updated with identifier {{ param }}",
+      "deleted": "A Document Process is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Document Process {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Process"
+      },
+      "id": "ID",
+      "status": "Status",
+      "documentSha256": "Document Sha 256"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (monitoringDocumentWatch(); as monitoringDocumentWatchRef) {
+      <div>
+        <h2 data-cy="monitoringDocumentWatchDetailsHeading">
+          <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.detail.title">Monitoring Document Watch</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.userId">User Id</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.watchType">Watch Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WatchType.' + (monitoringDocumentWatchRef.watchType ?? 'null')">{{
+              { null: '', AUTHOR: 'AUTHOR', REVIEWER: 'REVIEWER', AUDITOR: 'AUDITOR', STAKEHOLDER: 'STAKEHOLDER', CUSTOM: 'CUSTOM' }[
+                monitoringDocumentWatchRef.watchType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnView">Notify On View</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.notifyOnView }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnDownload">Notify On Download</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.notifyOnDownload }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnModify">Notify On Modify</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.notifyOnModify }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnShare">Notify On Share</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.notifyOnShare }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnDelete">Notify On Delete</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.notifyOnDelete }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ monitoringDocumentWatchRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/monitoring-document-watch', monitoringDocumentWatchRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

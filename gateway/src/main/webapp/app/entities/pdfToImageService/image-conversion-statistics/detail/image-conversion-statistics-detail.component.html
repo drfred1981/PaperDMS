@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (imageConversionStatistics(); as imageConversionStatisticsRef) {
+      <div>
+        <h2 data-cy="imageConversionStatisticsDetailsHeading">
+          <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.detail.title">Image Conversion Statistics</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.statisticsDate">Statistics Date</span></dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.statisticsDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalConversions">Total Conversions</span></dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.totalConversions }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.successfulConversions">Successful Conversions</span>
+          </dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.successfulConversions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.failedConversions">Failed Conversions</span></dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.failedConversions }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalPagesConverted">Total Pages Converted</span>
+          </dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.totalPagesConverted }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalImagesGenerated">Total Images Generated</span>
+          </dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.totalImagesGenerated }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalImagesSize">Total Images Size</span></dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.totalImagesSize }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.averageProcessingDuration"
+              >Average Processing Duration</span
+            >
+          </dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.averageProcessingDuration }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.maxProcessingDuration">Max Processing Duration</span>
+          </dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.maxProcessingDuration }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.minProcessingDuration">Min Processing Duration</span>
+          </dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.minProcessingDuration }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.calculatedAt">Calculated At</span></dt>
+          <dd>
+            <span>{{ imageConversionStatisticsRef.calculatedAt | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/image-conversion-statistics', imageConversionStatisticsRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

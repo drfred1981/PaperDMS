@@ -1,0 +1,13 @@
+export enum TaskAction {
+  APPROVE = 'APPROVE',
+
+  REJECT = 'REJECT',
+
+  REQUEST_CHANGES = 'REQUEST_CHANGES',
+
+  DELEGATE = 'DELEGATE',
+
+  CANCEL = 'CANCEL',
+
+  COMMENT = 'COMMENT',
+}

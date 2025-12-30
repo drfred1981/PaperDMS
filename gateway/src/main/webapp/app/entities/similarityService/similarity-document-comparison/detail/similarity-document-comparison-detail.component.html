@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (similarityDocumentComparison(); as similarityDocumentComparisonRef) {
+      <div>
+        <h2 data-cy="similarityDocumentComparisonDetailsHeading">
+          <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.detail.title">Similarity Document Comparison</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.id }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.sourceDocumentSha256"
+              >Source Document Sha 256</span
+            >
+          </dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.sourceDocumentSha256 }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.targetDocumentSha256"
+              >Target Document Sha 256</span
+            >
+          </dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.targetDocumentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.similarityScore">Similarity Score</span></dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.similarityScore }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.algorithm">Algorithm</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.SimilarityAlgorithm.' + (similarityDocumentComparisonRef.algorithm ?? 'null')">{{
+              {
+                null: '',
+                COSINE: 'COSINE',
+                JACCARD: 'JACCARD',
+                LEVENSHTEIN: 'LEVENSHTEIN',
+                LSH: 'LSH',
+                DEEP_LEARNING: 'DEEP_LEARNING',
+                COMBINED: 'COMBINED',
+              }[similarityDocumentComparisonRef.algorithm ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.features">Features</span></dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.features }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.computedDate">Computed Date</span></dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.computedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.isRelevant">Is Relevant</span></dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.isRelevant }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.reviewedBy">Reviewed By</span></dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.reviewedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.reviewedDate">Reviewed Date</span></dt>
+          <dd>
+            <span>{{ similarityDocumentComparisonRef.reviewedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.job">Job</span></dt>
+          <dd>
+            @if (similarityDocumentComparison()!.job) {
+              <div>
+                <a [routerLink]="['/similarity-job', similarityDocumentComparison()!.job?.id, 'view']">{{
+                  similarityDocumentComparisonRef.job?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/similarity-document-comparison', similarityDocumentComparisonRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

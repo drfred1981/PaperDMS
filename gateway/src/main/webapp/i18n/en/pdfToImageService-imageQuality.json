@@ -1,0 +1,11 @@
+{
+  "gatewayApp": {
+    "ImageQuality": {
+      "null": "",
+      "LOW": "LOW",
+      "MEDIUM": "MEDIUM",
+      "HIGH": "HIGH",
+      "ULTRA": "ULTRA"
+    }
+  }
+}

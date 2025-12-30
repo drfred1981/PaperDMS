@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="floatType" value="float4" dbms="postgresql"/>
+    <property name="clobType" value="clob" dbms="postgresql"/>
+    <property name="blobType" value="blob" dbms="postgresql"/>
+    <property name="uuidType" value="uuid" dbms="postgresql"/>
+    <property name="datetimeType" value="datetime" dbms="postgresql"/>
+    <property name="timeType" value="time(6)" dbms="postgresql"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063015_added_entity_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063115_added_entity_DocumentVersion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063215_added_entity_DocumentServiceStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063315_added_entity_DocumentMetadata.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063415_added_entity_DocumentType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063515_added_entity_DocumentTypeField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063615_added_entity_DocumentPermission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063715_added_entity_DocumentAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063815_added_entity_DocumentComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063915_added_entity_DocumentRelation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064015_added_entity_DocumentStatistics.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064115_added_entity_DocumentTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064215_added_entity_DocumentExtractedField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064315_added_entity_DocumentTag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064415_added_entity_MetaPermissionGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064515_added_entity_MetaSavedSearch.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064615_added_entity_MetaSmartFolder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064715_added_entity_MetaBookmark.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064815_added_entity_MetaMetaTagCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064915_added_entity_MetaFolder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230065015_added_entity_MetaTag.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20251230063015_added_entity_constraints_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063115_added_entity_constraints_DocumentVersion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063215_added_entity_constraints_DocumentServiceStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063315_added_entity_constraints_DocumentMetadata.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063515_added_entity_constraints_DocumentTypeField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063615_added_entity_constraints_DocumentPermission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063715_added_entity_constraints_DocumentAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230063815_added_entity_constraints_DocumentComment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064015_added_entity_constraints_DocumentStatistics.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064115_added_entity_constraints_DocumentTemplate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064215_added_entity_constraints_DocumentExtractedField.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064315_added_entity_constraints_DocumentTag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064815_added_entity_constraints_MetaMetaTagCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230064915_added_entity_constraints_MetaFolder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20251230065015_added_entity_constraints_MetaTag.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

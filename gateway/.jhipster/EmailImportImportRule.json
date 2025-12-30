@@ -1,0 +1,90 @@
+{
+  "annotations": {
+    "changelogDate": "20251230072916"
+  },
+  "applications": ["EmailImportDocumentService", "gateway"],
+  "clientRootFolder": "EmailImportDocumentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "conditions",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "actions",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "notifyUsers",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "matchCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastMatchDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "EmailImportDocumentService",
+  "name": "EmailImportImportRule",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "emailImportImportMapping",
+      "otherEntityRelationshipName": "rule",
+      "relationshipName": "emailImportImportMappings",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "emailImportDocument",
+      "otherEntityRelationshipName": "appliedRule",
+      "relationshipName": "emailImportDocuments",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

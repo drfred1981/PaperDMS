@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (aITypePrediction(); as aITypePredictionRef) {
+      <div>
+        <h2 data-cy="aITypePredictionDetailsHeading">
+          <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.detail.title">AI Type Prediction</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.documentTypeName">Document Type Name</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.documentTypeName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.reason">Reason</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.reason }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.modelVersion">Model Version</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.modelVersion }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.predictionS3Key">Prediction S 3 Key</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.predictionS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.isAccepted">Is Accepted</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.isAccepted }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.acceptedBy">Accepted By</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.acceptedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.acceptedDate">Accepted Date</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.acceptedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITypePrediction.predictionDate">Prediction Date</span></dt>
+          <dd>
+            <span>{{ aITypePredictionRef.predictionDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ai-type-prediction', aITypePredictionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

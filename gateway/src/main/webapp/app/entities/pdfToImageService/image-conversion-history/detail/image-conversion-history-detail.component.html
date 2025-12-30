@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (imageConversionHistory(); as imageConversionHistoryRef) {
+      <div>
+        <h2 data-cy="imageConversionHistoryDetailsHeading">
+          <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.detail.title">Image Conversion History</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ imageConversionHistoryRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.originalRequestId">Original Request Id</span></dt>
+          <dd>
+            <span>{{ imageConversionHistoryRef.originalRequestId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.archivedAt">Archived At</span></dt>
+          <dd>
+            <span>{{ imageConversionHistoryRef.archivedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.conversionData">Conversion Data</span></dt>
+          <dd>
+            <span>{{ imageConversionHistoryRef.conversionData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.imagesCount">Images Count</span></dt>
+          <dd>
+            <span>{{ imageConversionHistoryRef.imagesCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.totalSize">Total Size</span></dt>
+          <dd>
+            <span>{{ imageConversionHistoryRef.totalSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.finalStatus">Final Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ConversionStatus.' + (imageConversionHistoryRef.finalStatus ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                imageConversionHistoryRef.finalStatus ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.processingDuration">Processing Duration</span></dt>
+          <dd>
+            <span>{{ imageConversionHistoryRef.processingDuration }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/image-conversion-history', imageConversionHistoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

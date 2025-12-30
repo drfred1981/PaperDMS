@@ -1,0 +1,42 @@
+{
+  "gatewayApp": {
+    "workflowServiceWorkflowInstance": {
+      "home": {
+        "title": "Workflow Instances",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Workflow Instance",
+        "createOrEditLabel": "Create or edit a Workflow Instance",
+        "search": "Search for Workflow Instance",
+        "notFound": "No Workflow Instances found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Workflow Instance {{ id }}?"
+      },
+      "detail": {
+        "title": "Workflow Instance"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "status": "Status",
+      "currentStepNumber": "Current Step Number",
+      "startDate": "Start Date",
+      "dueDate": "Due Date",
+      "completedDate": "Completed Date",
+      "cancelledDate": "Cancelled Date",
+      "cancellationReason": "Cancellation Reason",
+      "priority": "Priority",
+      "metadata": "Metadata",
+      "createdBy": "Created By",
+      "approvalHistories": "Approval Histories",
+      "workflowTasks": "Workflow Tasks",
+      "workflow": "Workflow"
+    }
+  },
+  "workflowServiceApp": {
+    "workflowServiceWorkflowInstance": {
+      "created": "A new Workflow Instance is created with identifier {{ param }}",
+      "updated": "A Workflow Instance is updated with identifier {{ param }}",
+      "deleted": "A Workflow Instance is deleted with identifier {{ param }}"
+    }
+  }
+}

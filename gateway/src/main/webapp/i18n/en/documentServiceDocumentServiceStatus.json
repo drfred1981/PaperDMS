@@ -1,0 +1,42 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentServiceStatus": {
+      "home": {
+        "title": "Document Service Statuses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Service Status",
+        "createOrEditLabel": "Create or edit a Document Service Status",
+        "search": "Search for Document Service Status",
+        "notFound": "No Document Service Statuses found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Service Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Service Status"
+      },
+      "id": "ID",
+      "serviceType": "Service Type",
+      "status": "Status",
+      "statusDetails": "Status Details",
+      "errorMessage": "Error Message",
+      "retryCount": "Retry Count",
+      "lastProcessedDate": "Last Processed Date",
+      "processingStartDate": "Processing Start Date",
+      "processingEndDate": "Processing End Date",
+      "processingDuration": "Processing Duration",
+      "jobId": "Job Id",
+      "priority": "Priority",
+      "updatedBy": "Updated By",
+      "updatedDate": "Updated Date",
+      "document": "Document"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentServiceStatus": {
+      "created": "A new Document Service Status is created with identifier {{ param }}",
+      "updated": "A Document Service Status is updated with identifier {{ param }}",
+      "deleted": "A Document Service Status is deleted with identifier {{ param }}"
+    }
+  }
+}

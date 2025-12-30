@@ -1,0 +1,339 @@
+<div>
+  <h2 id="page-heading" data-cy="ImagePdfConversionRequestHeading">
+    <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.home.title">Image Pdf Conversion Requests</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-image-pdf-conversion-request"
+        [routerLink]="['/image-pdf-conversion-request/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.home.createLabel"
+          >Create a new Image Pdf Conversion Request</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.home.search"
+          >Search for Image Pdf Conversion Request</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.pdfToImageServiceImagePdfConversionRequest.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (imagePdfConversionRequests().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.home.notFound">No Image Pdf Conversion Requests found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceDocumentId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourceDocumentId">Source Document Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceFileName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourceFileName">Source File Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourcePdfS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourcePdfS3Key">Source Pdf S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imageQuality">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imageQuality">Image Quality</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imageFormat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imageFormat">Image Format</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="conversionType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.conversionType">Conversion Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startPage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.startPage">Start Page</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endPage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.endPage">End Page</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="totalPages">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.totalPages">Total Pages</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestedAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.requestedAt">Requested At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startedAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.startedAt">Started At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="completedAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.completedAt">Completed At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processingDuration">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.processingDuration">Processing Duration</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="totalImagesSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.totalImagesSize">Total Images Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imagesGenerated">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imagesGenerated">Images Generated</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dpi">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.dpi">Dpi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="requestedByUserId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.requestedByUserId">Requested By User Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="priority">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.priority">Priority</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="additionalOptions">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.additionalOptions">Additional Options</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="batch.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.batch">Batch</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (imagePdfConversionRequest of imagePdfConversionRequests(); track trackId(imagePdfConversionRequest)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/image-pdf-conversion-request', imagePdfConversionRequest.id, 'view']">{{
+                  imagePdfConversionRequest.id
+                }}</a>
+              </td>
+              <td>{{ imagePdfConversionRequest.sourceDocumentId }}</td>
+              <td>{{ imagePdfConversionRequest.sourceFileName }}</td>
+              <td>{{ imagePdfConversionRequest.sourcePdfS3Key }}</td>
+              <td [jhiTranslate]="'gatewayApp.ImageQuality.' + (imagePdfConversionRequest.imageQuality ?? 'null')">
+                {{
+                  { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', ULTRA: 'ULTRA' }[imagePdfConversionRequest.imageQuality ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.ImageFormat.' + (imagePdfConversionRequest.imageFormat ?? 'null')">
+                {{ { null: '', PNG: 'PNG', JPEG: 'JPEG', WEBP: 'WEBP' }[imagePdfConversionRequest.imageFormat ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.ConversionType.' + (imagePdfConversionRequest.conversionType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    SINGLE_PAGE: 'SINGLE_PAGE',
+                    ALL_PAGES: 'ALL_PAGES',
+                    PAGE_RANGE: 'PAGE_RANGE',
+                    FIRST_PAGE_ONLY: 'FIRST_PAGE_ONLY',
+                  }[imagePdfConversionRequest.conversionType ?? 'null']
+                }}
+              </td>
+              <td>{{ imagePdfConversionRequest.startPage }}</td>
+              <td>{{ imagePdfConversionRequest.endPage }}</td>
+              <td>{{ imagePdfConversionRequest.totalPages }}</td>
+              <td [jhiTranslate]="'gatewayApp.ConversionStatus.' + (imagePdfConversionRequest.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[imagePdfConversionRequest.status ?? 'null']
+                }}
+              </td>
+              <td>{{ imagePdfConversionRequest.errorMessage }}</td>
+              <td>{{ imagePdfConversionRequest.requestedAt | formatMediumDatetime }}</td>
+              <td>{{ imagePdfConversionRequest.startedAt | formatMediumDatetime }}</td>
+              <td>{{ imagePdfConversionRequest.completedAt | formatMediumDatetime }}</td>
+              <td>{{ imagePdfConversionRequest.processingDuration }}</td>
+              <td>{{ imagePdfConversionRequest.totalImagesSize }}</td>
+              <td>{{ imagePdfConversionRequest.imagesGenerated }}</td>
+              <td>{{ imagePdfConversionRequest.dpi }}</td>
+              <td>{{ imagePdfConversionRequest.requestedByUserId }}</td>
+              <td>{{ imagePdfConversionRequest.priority }}</td>
+              <td>{{ imagePdfConversionRequest.additionalOptions }}</td>
+              <td>
+                @if (imagePdfConversionRequest.batch) {
+                  <div>
+                    <a [routerLink]="['/image-conversion-batch', imagePdfConversionRequest.batch.id, 'view']">{{
+                      imagePdfConversionRequest.batch.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/image-pdf-conversion-request', imagePdfConversionRequest.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/image-pdf-conversion-request', imagePdfConversionRequest.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(imagePdfConversionRequest)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

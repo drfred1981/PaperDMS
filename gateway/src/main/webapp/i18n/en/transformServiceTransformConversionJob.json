@@ -1,0 +1,41 @@
+{
+  "gatewayApp": {
+    "transformServiceTransformConversionJob": {
+      "home": {
+        "title": "Transform Conversion Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Transform Conversion Job",
+        "createOrEditLabel": "Create or edit a Transform Conversion Job",
+        "search": "Search for Transform Conversion Job",
+        "notFound": "No Transform Conversion Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Transform Conversion Job {{ id }}?"
+      },
+      "detail": {
+        "title": "Transform Conversion Job"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "sourceFormat": "Source Format",
+      "targetFormat": "Target Format",
+      "conversionEngine": "Conversion Engine",
+      "options": "Options",
+      "outputS3Key": "Output S 3 Key",
+      "outputDocumentSha256": "Output Document Sha 256",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  },
+  "transformServiceApp": {
+    "transformServiceTransformConversionJob": {
+      "created": "A new Transform Conversion Job is created with identifier {{ param }}",
+      "updated": "A Transform Conversion Job is updated with identifier {{ param }}",
+      "deleted": "A Transform Conversion Job is deleted with identifier {{ param }}"
+    }
+  }
+}

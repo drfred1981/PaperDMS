@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "pdfToImageServiceImageConversionHistory": {
+      "home": {
+        "title": "Image Conversion Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image Conversion History",
+        "createOrEditLabel": "Create or edit a Image Conversion History",
+        "search": "Search for Image Conversion History",
+        "notFound": "No Image Conversion Histories found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Image Conversion History {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Conversion History"
+      },
+      "id": "ID",
+      "originalRequestId": "Original Request Id",
+      "archivedAt": "Archived At",
+      "conversionData": "Conversion Data",
+      "imagesCount": "Images Count",
+      "totalSize": "Total Size",
+      "finalStatus": "Final Status",
+      "processingDuration": "Processing Duration"
+    }
+  },
+  "pdfToImageServiceApp": {
+    "pdfToImageServiceImageConversionHistory": {
+      "created": "A new Image Conversion History is created with identifier {{ param }}",
+      "updated": "A Image Conversion History is updated with identifier {{ param }}",
+      "deleted": "A Image Conversion History is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaMetaTagCategory(); as metaMetaTagCategoryRef) {
+      <div>
+        <h2 data-cy="metaMetaTagCategoryDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.detail.title">Meta Meta Tag Category</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ metaMetaTagCategoryRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.name">Name</span></dt>
+          <dd>
+            <span>{{ metaMetaTagCategoryRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.color">Color</span></dt>
+          <dd>
+            <span>{{ metaMetaTagCategoryRef.color }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.displayOrder">Display Order</span></dt>
+          <dd>
+            <span>{{ metaMetaTagCategoryRef.displayOrder }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.isSystem">Is System</span></dt>
+          <dd>
+            <span>{{ metaMetaTagCategoryRef.isSystem }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ metaMetaTagCategoryRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ metaMetaTagCategoryRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaMetaTagCategory.parent">Parent</span></dt>
+          <dd>
+            @if (metaMetaTagCategory()!.parent) {
+              <div>
+                <a [routerLink]="['/meta-meta-tag-category', metaMetaTagCategory()!.parent?.id, 'view']">{{
+                  metaMetaTagCategoryRef.parent?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/meta-meta-tag-category', metaMetaTagCategoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{
+  "gatewayApp": {
+    "searchServiceSearchFacet": {
+      "home": {
+        "title": "Search Facets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Search Facet",
+        "createOrEditLabel": "Create or edit a Search Facet",
+        "search": "Search for Search Facet",
+        "notFound": "No Search Facets found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Search Facet {{ id }}?"
+      },
+      "detail": {
+        "title": "Search Facet"
+      },
+      "id": "ID",
+      "facetName": "Facet Name",
+      "facetType": "Facet Type",
+      "values": "Values",
+      "counts": "Counts",
+      "searchQuery": "Search Query"
+    }
+  },
+  "searchServiceApp": {
+    "searchServiceSearchFacet": {
+      "created": "A new Search Facet is created with identifier {{ param }}",
+      "updated": "A Search Facet is updated with identifier {{ param }}",
+      "deleted": "A Search Facet is deleted with identifier {{ param }}"
+    }
+  }
+}

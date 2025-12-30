@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (aICorrespondentPrediction(); as aICorrespondentPredictionRef) {
+      <div>
+        <h2 data-cy="aICorrespondentPredictionDetailsHeading">
+          <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.detail.title">AI Correspondent Prediction</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.correspondentName">Correspondent Name</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.correspondentName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.name">Name</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.email">Email</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.phone">Phone</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.phone }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.address">Address</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.company">Company</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.company }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.CorrespondentType.' + (aICorrespondentPredictionRef.type ?? 'null')">{{
+              { null: '', PERSON: 'PERSON', ORGANIZATION: 'ORGANIZATION', SYSTEM: 'SYSTEM', UNKNOWN: 'UNKNOWN' }[
+                aICorrespondentPredictionRef.type ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.role">Role</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.CorrespondentRole.' + (aICorrespondentPredictionRef.role ?? 'null')">{{
+              { null: '', SENDER: 'SENDER', RECIPIENT: 'RECIPIENT', CC: 'CC', BCC: 'BCC', BOTH: 'BOTH' }[
+                aICorrespondentPredictionRef.role ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.reason">Reason</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.reason }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.modelVersion">Model Version</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.modelVersion }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.predictionS3Key">Prediction S 3 Key</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.predictionS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.isAccepted">Is Accepted</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.isAccepted }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.acceptedBy">Accepted By</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.acceptedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.acceptedDate">Accepted Date</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.acceptedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.predictionDate">Prediction Date</span></dt>
+          <dd>
+            <span>{{ aICorrespondentPredictionRef.predictionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.job">Job</span></dt>
+          <dd>
+            @if (aICorrespondentPrediction()!.job) {
+              <div>
+                <a [routerLink]="['/ai-auto-tag-job', aICorrespondentPrediction()!.job?.id, 'view']">{{
+                  aICorrespondentPredictionRef.job?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/ai-correspondent-prediction', aICorrespondentPredictionRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

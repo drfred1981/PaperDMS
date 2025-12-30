@@ -1,0 +1,11 @@
+id;name;description;task_type;schedule;status;is_active;last_run;next_run;duration;records_processed;created_by;created_date
+1;ouch merrily when;../fake-data/blob/hipster.txt;UPDATE_STATISTICS;solace;PENDING;true;2025-12-30T00:00:44;2025-12-29T23:52:38;29032;24242;persecute almighty thrifty;2025-12-29T14:33:37
+2;stylish;../fake-data/blob/hipster.txt;OPTIMIZE_STORAGE;bowling;CANCELLED;false;2025-12-29T16:50:37;2025-12-29T12:59:27;16332;6895;colonialism traduce consequently;2025-12-29T14:23:28
+3;beneath;../fake-data/blob/hipster.txt;ROTATE_LOGS;grown commodity jiggle;CANCELLED;false;2025-12-29T16:59:25;2025-12-29T22:56:21;25662;19414;rot outrun;2025-12-29T10:03:56
+4;youthful saloon adumbrate;../fake-data/blob/hipster.txt;REBUILD_INDEX;eek quarrel;PROCESSING;true;2025-12-29T23:04:33;2025-12-29T11:45:30;1797;27978;brr joshingly;2025-12-29T08:42:47
+5;amongst phew an;../fake-data/blob/hipster.txt;VACUUM_DATABASE;lest spirit;CANCELLED;true;2025-12-29T23:22:00;2025-12-29T12:35:11;30611;22261;out redress;2025-12-30T04:27:29
+6;little finally;../fake-data/blob/hipster.txt;UPDATE_STATISTICS;bleakly unless lest;FAILED;false;2025-12-29T12:51:11;2025-12-29T06:51:53;13880;402;during meaty;2025-12-29T19:17:59
+7;since;../fake-data/blob/hipster.txt;ROTATE_LOGS;past shakily;FAILED;false;2025-12-29T21:05:39;2025-12-29T13:42:00;13155;7505;language;2025-12-29T10:24:47
+8;if viciously round;../fake-data/blob/hipster.txt;UPDATE_STATISTICS;that during;COMPLETED;true;2025-12-29T18:27:03;2025-12-29T12:30:53;23871;16497;ravage among;2025-12-29T21:20:50
+9;uncover;../fake-data/blob/hipster.txt;PRUNE_AUDIT_LOGS;blacken diversity;CANCELLED;false;2025-12-29T14:16:59;2025-12-29T14:40:04;720;13361;secrecy;2025-12-29T11:25:53
+10;aching eek sweetly;../fake-data/blob/hipster.txt;UPDATE_STATISTICS;loosely;COMPLETED;true;2025-12-29T11:49:03;2025-12-30T01:47:36;21649;1015;pack wallop but;2025-12-29T22:41:55

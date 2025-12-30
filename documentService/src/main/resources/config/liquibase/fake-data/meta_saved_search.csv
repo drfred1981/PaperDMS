@@ -1,0 +1,11 @@
+id;name;query;is_public;is_alert;alert_frequency;user_id;created_date
+1;geez transom;../fake-data/blob/hipster.txt;true;false;HOURLY;gah;2025-12-29T06:53:23
+2;huddle offensively ouch;../fake-data/blob/hipster.txt;false;true;HOURLY;tenement under;2025-12-30T03:28:29
+3;piglet;../fake-data/blob/hipster.txt;true;true;IMMEDIATELY;whose;2025-12-30T00:45:59
+4;pish overwork atop;../fake-data/blob/hipster.txt;false;true;MONTHLY;consequently unusual boo;2025-12-29T16:07:25
+5;once etch;../fake-data/blob/hipster.txt;true;true;IMMEDIATELY;quicker;2025-12-29T21:32:26
+6;speedily;../fake-data/blob/hipster.txt;false;false;MONTHLY;when though within;2025-12-29T18:39:09
+7;genuine duh pleasant;../fake-data/blob/hipster.txt;true;false;WEEKLY;partially;2025-12-29T08:22:06
+8;perfectly whispered magnificent;../fake-data/blob/hipster.txt;false;true;IMMEDIATELY;amid;2025-12-29T23:56:37
+9;insist;../fake-data/blob/hipster.txt;true;false;WEEKLY;bleak;2025-12-30T00:41:56
+10;lively;../fake-data/blob/hipster.txt;false;true;HOURLY;fluctuate camouflage knavishly;2025-12-29T14:12:13

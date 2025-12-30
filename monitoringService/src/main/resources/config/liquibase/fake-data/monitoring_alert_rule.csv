@@ -1,0 +1,11 @@
+id;name;description;alert_type;conditions;severity;recipients;is_active;trigger_count;last_triggered;created_by;created_date
+1;prudent;../fake-data/blob/hipster.txt;WORKFLOW_DELAYED;../fake-data/blob/hipster.txt;CRITICAL;../fake-data/blob/hipster.txt;false;28369;2025-12-30T05:30:33;exactly bestride;2025-12-29T17:45:51
+2;pish with;../fake-data/blob/hipster.txt;COMPLIANCE_VIOLATION;../fake-data/blob/hipster.txt;MEDIUM;../fake-data/blob/hipster.txt;true;4118;2025-12-30T04:42:41;flowery;2025-12-30T06:22:28
+3;incidentally of hunt;../fake-data/blob/hipster.txt;DOCUMENT_EXPIRATION;../fake-data/blob/hipster.txt;CRITICAL;../fake-data/blob/hipster.txt;true;9684;2025-12-29T17:18:14;swathe;2025-12-30T00:19:10
+4;doubtfully nor chime;../fake-data/blob/hipster.txt;CONTRACT_EXPIRATION;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;false;7885;2025-12-29T10:35:45;boohoo for;2025-12-30T02:33:18
+5;fooey cumbersome;../fake-data/blob/hipster.txt;COMPLIANCE_VIOLATION;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;false;25770;2025-12-30T04:53:55;woot ick hasty;2025-12-29T06:38:39
+6;once throughout;../fake-data/blob/hipster.txt;STORAGE_QUOTA;../fake-data/blob/hipster.txt;CRITICAL;../fake-data/blob/hipster.txt;false;32722;2025-12-30T04:41:46;about;2025-12-30T06:28:56
+7;once er;../fake-data/blob/hipster.txt;STORAGE_QUOTA;../fake-data/blob/hipster.txt;CRITICAL;../fake-data/blob/hipster.txt;false;520;2025-12-29T23:34:06;yearningly near reprove;2025-12-29T09:33:41
+8;whereas;../fake-data/blob/hipster.txt;COMPLIANCE_VIOLATION;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;true;29641;2025-12-29T16:44:52;for woefully;2025-12-29T08:12:13
+9;intent;../fake-data/blob/hipster.txt;INVOICE_OVERDUE;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;true;28245;2025-12-29T16:42:24;enroll gerbil;2025-12-30T05:16:00
+10;physically serenade;../fake-data/blob/hipster.txt;FAILED_OCR;../fake-data/blob/hipster.txt;CRITICAL;../fake-data/blob/hipster.txt;true;7683;2025-12-29T22:04:14;blindly bench;2025-12-29T23:28:10

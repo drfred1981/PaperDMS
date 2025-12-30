@@ -1,0 +1,32 @@
+{
+  "gatewayApp": {
+    "documentServiceMetaBookmark": {
+      "home": {
+        "title": "Meta Bookmarks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meta Bookmark",
+        "createOrEditLabel": "Create or edit a Meta Bookmark",
+        "search": "Search for Meta Bookmark",
+        "notFound": "No Meta Bookmarks found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Meta Bookmark {{ id }}?"
+      },
+      "detail": {
+        "title": "Meta Bookmark"
+      },
+      "id": "ID",
+      "userId": "User Id",
+      "entityType": "Entity Type",
+      "entityName": "Entity Name",
+      "createdDate": "Created Date"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceMetaBookmark": {
+      "created": "A new Meta Bookmark is created with identifier {{ param }}",
+      "updated": "A Meta Bookmark is updated with identifier {{ param }}",
+      "deleted": "A Meta Bookmark is deleted with identifier {{ param }}"
+    }
+  }
+}

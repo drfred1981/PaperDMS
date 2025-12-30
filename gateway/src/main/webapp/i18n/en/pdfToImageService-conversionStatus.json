@@ -1,0 +1,12 @@
+{
+  "gatewayApp": {
+    "ConversionStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "PROCESSING": "PROCESSING",
+      "COMPLETED": "COMPLETED",
+      "FAILED": "FAILED",
+      "CANCELLED": "CANCELLED"
+    }
+  }
+}

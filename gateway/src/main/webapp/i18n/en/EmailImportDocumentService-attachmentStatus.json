@@ -1,0 +1,12 @@
+{
+  "gatewayApp": {
+    "AttachmentStatus": {
+      "null": "",
+      "PENDING": "PENDING",
+      "PROCESSING": "PROCESSING",
+      "IMPORTED": "IMPORTED",
+      "SKIPPED": "SKIPPED",
+      "FAILED": "FAILED"
+    }
+  }
+}

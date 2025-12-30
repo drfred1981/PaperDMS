@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (emailImportImportRule(); as emailImportImportRuleRef) {
+      <div>
+        <h2 data-cy="emailImportImportRuleDetailsHeading">
+          <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.detail.title">Email Import Import Rule</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.name">Name</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.description">Description</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.priority">Priority</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.priority }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.conditions">Conditions</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.conditions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.actions">Actions</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.actions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.notifyUsers">Notify Users</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.notifyUsers }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.matchCount">Match Count</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.matchCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.lastMatchDate">Last Match Date</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.lastMatchDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportRule.lastModifiedDate">Last Modified Date</span>
+          </dt>
+          <dd>
+            <span>{{ emailImportImportRuleRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/email-import-import-rule', emailImportImportRuleRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

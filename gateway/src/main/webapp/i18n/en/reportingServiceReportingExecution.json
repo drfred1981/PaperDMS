@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "reportingServiceReportingExecution": {
+      "home": {
+        "title": "Reporting Executions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reporting Execution",
+        "createOrEditLabel": "Create or edit a Reporting Execution",
+        "search": "Search for Reporting Execution",
+        "notFound": "No Reporting Executions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Reporting Execution {{ id }}?"
+      },
+      "detail": {
+        "title": "Reporting Execution"
+      },
+      "id": "ID",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "recordsProcessed": "Records Processed",
+      "outputS3Key": "Output S 3 Key",
+      "outputSize": "Output Size",
+      "errorMessage": "Error Message",
+      "scheduledReport": "Scheduled Report"
+    }
+  },
+  "reportingServiceApp": {
+    "reportingServiceReportingExecution": {
+      "created": "A new Reporting Execution is created with identifier {{ param }}",
+      "updated": "A Reporting Execution is updated with identifier {{ param }}",
+      "deleted": "A Reporting Execution is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (emailImportEmailAttachment(); as emailImportEmailAttachmentRef) {
+      <div>
+        <h2 data-cy="emailImportEmailAttachmentDetailsHeading">
+          <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.detail.title"
+            >Email Import Email Attachment</span
+          >
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.fileName">File Name</span></dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.fileName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.fileSize">File Size</span></dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.fileSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.mimeType">Mime Type</span></dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.mimeType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.sha256">Sha 256</span></dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.sha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.s3Key">S 3 Key</span></dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.s3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AttachmentStatus.' + (emailImportEmailAttachmentRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', IMPORTED: 'IMPORTED', SKIPPED: 'SKIPPED', FAILED: 'FAILED' }[
+                emailImportEmailAttachmentRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.errorMessage }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.documentSha256">Document Sha 256</span>
+          </dt>
+          <dd>
+            <span>{{ emailImportEmailAttachmentRef.documentSha256 }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportEmailAttachment.emailImportDocument"
+              >Email Import Document</span
+            >
+          </dt>
+          <dd>
+            @if (emailImportEmailAttachment()!.emailImportDocument) {
+              <div>
+                <a [routerLink]="['/email-import-document', emailImportEmailAttachment()!.emailImportDocument?.id, 'view']">{{
+                  emailImportEmailAttachmentRef.emailImportDocument?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/email-import-email-attachment', emailImportEmailAttachmentRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

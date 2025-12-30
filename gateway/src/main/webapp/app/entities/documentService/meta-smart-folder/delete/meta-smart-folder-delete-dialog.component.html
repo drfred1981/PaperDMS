@@ -1,0 +1,28 @@
+@if (metaSmartFolder) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(metaSmartFolder.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="metaSmartFolderDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error />
+      <p
+        id="jhi-delete-metaSmartFolder-heading"
+        jhiTranslate="gatewayApp.documentServiceMetaSmartFolder.delete.question"
+        [translateValues]="{ id: metaSmartFolder.id }"
+      >
+        Are you sure you want to delete Meta Smart Folder {{ metaSmartFolder.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="jhi-confirm-delete-metaSmartFolder" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

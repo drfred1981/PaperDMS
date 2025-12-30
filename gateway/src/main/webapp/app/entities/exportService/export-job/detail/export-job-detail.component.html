@@ -1,0 +1,131 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (exportJob(); as exportJobRef) {
+      <div>
+        <h2 data-cy="exportJobDetailsHeading"><span jhiTranslate="gatewayApp.exportServiceExportJob.detail.title">Export Job</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ exportJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.name">Name</span></dt>
+          <dd>
+            <span>{{ exportJobRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.description">Description</span></dt>
+          <dd>
+            <span>{{ exportJobRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.documentQuery">Document Query</span></dt>
+          <dd>
+            <span>{{ exportJobRef.documentQuery }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.exportFormat">Export Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ExportFormat.' + (exportJobRef.exportFormat ?? 'null')">{{
+              {
+                null: '',
+                ORIGINAL: 'ORIGINAL',
+                PDF: 'PDF',
+                PDF_A: 'PDF_A',
+                ZIP: 'ZIP',
+                FOLDER: 'FOLDER',
+                CSV_INDEX: 'CSV_INDEX',
+                JSON_METADATA: 'JSON_METADATA',
+              }[exportJobRef.exportFormat ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.includeMetadata">Include Metadata</span></dt>
+          <dd>
+            <span>{{ exportJobRef.includeMetadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.includeVersions">Include Versions</span></dt>
+          <dd>
+            <span>{{ exportJobRef.includeVersions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.includeComments">Include Comments</span></dt>
+          <dd>
+            <span>{{ exportJobRef.includeComments }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.includeAuditTrail">Include Audit Trail</span></dt>
+          <dd>
+            <span>{{ exportJobRef.includeAuditTrail }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.s3ExportKey">S 3 Export Key</span></dt>
+          <dd>
+            <span>{{ exportJobRef.s3ExportKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.exportSize">Export Size</span></dt>
+          <dd>
+            <span>{{ exportJobRef.exportSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.documentCount">Document Count</span></dt>
+          <dd>
+            <span>{{ exportJobRef.documentCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.filesGenerated">Files Generated</span></dt>
+          <dd>
+            <span>{{ exportJobRef.filesGenerated }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ExportStatus.' + (exportJobRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                EXPORTING: 'EXPORTING',
+                COMPLETED: 'COMPLETED',
+                PARTIAL: 'PARTIAL',
+                FAILED: 'FAILED',
+                CANCELLED: 'CANCELLED',
+              }[exportJobRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ exportJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ exportJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ exportJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ exportJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ exportJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.exportServiceExportJob.exportPattern">Export Pattern</span></dt>
+          <dd>
+            @if (exportJob()!.exportPattern) {
+              <div>
+                <a [routerLink]="['/export-pattern', exportJob()!.exportPattern?.id, 'view']">{{ exportJobRef.exportPattern?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/export-job', exportJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

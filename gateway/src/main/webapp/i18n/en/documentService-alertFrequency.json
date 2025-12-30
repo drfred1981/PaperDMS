@@ -1,0 +1,13 @@
+{
+  "gatewayApp": {
+    "AlertFrequency": {
+      "null": "",
+      "IMMEDIATELY": "IMMEDIATELY",
+      "HOURLY": "HOURLY",
+      "DAILY": "DAILY",
+      "WEEKLY": "WEEKLY",
+      "MONTHLY": "MONTHLY",
+      "NEVER": "NEVER"
+    }
+  }
+}

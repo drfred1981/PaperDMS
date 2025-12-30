@@ -28,7 +28,7 @@
 # - In Consul mode, the ports are in the consul.yml file.
 # - In Eureka mode, the ports are in the jhipster-registry.yml file.
 
-name: paperdms
+name: pdftoimageservice
 services:
   jhipster-control-center:
     image: 'jhipster/jhipster-control-center:v0.5.0'
@@ -39,11 +39,12 @@ services:
       - echo "`ip route | grep default | cut -d ' ' -f3` host.docker.internal" | tee -a /etc/hosts > /dev/null && java -jar /jhipster-control-center.jar
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
-      - SPRING_PROFILES_ACTIVE=prod,api-docs,static
+      - SPRING_PROFILES_ACTIVE=prod,api-docs,none
       - SPRING_SECURITY_USER_PASSWORD=admin
       # The token should have the same value than the one declared in you Spring configuration under the jhipster.security.authentication.jwt.base64-secret configuration's entry
-      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=NWRiMzRiMzhhZjFiYWNmNzg3OTBjNzc2Yzg0NDI4MTJiNTBhMGVhZWZmOTUwYjY5NDQwM2YxNDU4YmI3YTA0M2NmODM0OTM5YzU2NjBjZWI2ZDM2M2Q3NzQ1YjNhNjZkYjgwMTNjNWNjNmM0NjQ0NGM0ZjkzNTllMWI5NjEwODY=
-      - SPRING_CLOUD_DISCOVERY_CLIENT_SIMPLE_INSTANCES_PAPERDMS_0_URI=http://host.docker.internal:8080
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=ZGQ3NjUyM2YwMjUxMjM1YjQzM2M3ODgwNTU4MTVmN2Y2YmIzNjhmMWE5Mzg2YmY0NjhmNjBkMmIyNmNkOGJiZGFiMGFmM2M5MjE1YTM4ODBmZGRmNTFkN2U1MThjY2FmZjQwMGE1MjkwOTcwZmMwMGNmZTE4ZGU4YmYxNTY4Y2E=
+      - SPRING_CLOUD_CONSUL_HOST=host.docker.internal
+      - SPRING_CLOUD_CONSUL_PORT=8500
       - LOGGING_FILE_NAME=/tmp/jhipster-control-center.log
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix

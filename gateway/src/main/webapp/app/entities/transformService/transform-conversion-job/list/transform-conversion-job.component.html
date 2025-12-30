@@ -1,0 +1,239 @@
+<div>
+  <h2 id="page-heading" data-cy="TransformConversionJobHeading">
+    <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.home.title">Transform Conversion Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-transform-conversion-job"
+        [routerLink]="['/transform-conversion-job/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.transformServiceTransformConversionJob.home.createLabel"
+          >Create a new Transform Conversion Job</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.transformServiceTransformConversionJob.home.search"
+          >Search for Transform Conversion Job</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.transformServiceTransformConversionJob.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (transformConversionJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.home.notFound">No Transform Conversion Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceFormat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.sourceFormat">Source Format</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="targetFormat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.targetFormat">Target Format</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="conversionEngine">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.conversionEngine">Conversion Engine</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="options">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.options">Options</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.outputS3Key">Output S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputDocumentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.outputDocumentSha256">Output Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.createdBy">Created By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformConversionJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (transformConversionJob of transformConversionJobs(); track trackId(transformConversionJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/transform-conversion-job', transformConversionJob.id, 'view']">{{ transformConversionJob.id }}</a>
+              </td>
+              <td>{{ transformConversionJob.documentSha256 }}</td>
+              <td>{{ transformConversionJob.sourceFormat }}</td>
+              <td>{{ transformConversionJob.targetFormat }}</td>
+              <td>{{ transformConversionJob.conversionEngine }}</td>
+              <td>{{ transformConversionJob.options }}</td>
+              <td>{{ transformConversionJob.outputS3Key }}</td>
+              <td>{{ transformConversionJob.outputDocumentSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformConversionJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[transformConversionJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ transformConversionJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ transformConversionJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ transformConversionJob.errorMessage }}</td>
+              <td>{{ transformConversionJob.createdBy }}</td>
+              <td>{{ transformConversionJob.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/transform-conversion-job', transformConversionJob.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/transform-conversion-job', transformConversionJob.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(transformConversionJob)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

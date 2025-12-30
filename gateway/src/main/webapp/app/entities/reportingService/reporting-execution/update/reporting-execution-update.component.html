@@ -1,0 +1,195 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-reporting-execution-heading"
+        data-cy="ReportingExecutionCreateUpdateHeading"
+        jhiTranslate="gatewayApp.reportingServiceReportingExecution.home.createOrEditLabel"
+      >
+        Create or edit a Reporting Execution
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.reportingServiceReportingExecution.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.reportingServiceReportingExecution.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.ReportingExecutionStatus.null' | translate }}</option>
+            @for (reportingExecutionStatus of reportingExecutionStatusValues; track $index) {
+              <option [value]="reportingExecutionStatus">
+                {{ 'gatewayApp.ReportingExecutionStatus.' + reportingExecutionStatus | translate }}
+              </option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let startDateRef = editForm.get('startDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" jhiTranslate="gatewayApp.reportingServiceReportingExecution.startDate"
+            >Start Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (startDateRef.invalid && (startDateRef.dirty || startDateRef.touched)) {
+            <div>
+              @if (editForm.get('startDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('startDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="gatewayApp.reportingServiceReportingExecution.endDate"
+            >End Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_recordsProcessed"
+            jhiTranslate="gatewayApp.reportingServiceReportingExecution.recordsProcessed"
+            >Records Processed</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="recordsProcessed"
+            id="field_recordsProcessed"
+            data-cy="recordsProcessed"
+            formControlName="recordsProcessed"
+          />
+        </div>
+
+        @let outputS3KeyRef = editForm.get('outputS3Key')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_outputS3Key" jhiTranslate="gatewayApp.reportingServiceReportingExecution.outputS3Key"
+            >Output S 3 Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="outputS3Key"
+            id="field_outputS3Key"
+            data-cy="outputS3Key"
+            formControlName="outputS3Key"
+          />
+          @if (outputS3KeyRef.invalid && (outputS3KeyRef.dirty || outputS3KeyRef.touched)) {
+            <div>
+              @if (editForm.get('outputS3Key')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_outputSize" jhiTranslate="gatewayApp.reportingServiceReportingExecution.outputSize"
+            >Output Size</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="outputSize"
+            id="field_outputSize"
+            data-cy="outputSize"
+            formControlName="outputSize"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_errorMessage" jhiTranslate="gatewayApp.reportingServiceReportingExecution.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_scheduledReport" jhiTranslate="gatewayApp.reportingServiceReportingExecution.scheduledReport"
+            >Scheduled Report</label
+          >
+          <select
+            class="form-control"
+            id="field_scheduledReport"
+            data-cy="scheduledReport"
+            name="scheduledReport"
+            formControlName="scheduledReport"
+            [compareWith]="compareReportingScheduledReport"
+          >
+            <option [ngValue]="null"></option>
+            @for (reportingScheduledReportOption of reportingScheduledReportsSharedCollection; track $index) {
+              <option [ngValue]="reportingScheduledReportOption">{{ reportingScheduledReportOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

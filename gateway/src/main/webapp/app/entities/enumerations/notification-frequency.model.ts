@@ -1,0 +1,11 @@
+export enum NotificationFrequency {
+  IMMEDIATELY = 'IMMEDIATELY',
+
+  HOURLY = 'HOURLY',
+
+  DAILY = 'DAILY',
+
+  WEEKLY = 'WEEKLY',
+
+  NEVER = 'NEVER',
+}

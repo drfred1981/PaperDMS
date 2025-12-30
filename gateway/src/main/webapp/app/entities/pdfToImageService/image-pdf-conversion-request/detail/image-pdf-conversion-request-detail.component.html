@@ -1,0 +1,146 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (imagePdfConversionRequest(); as imagePdfConversionRequestRef) {
+      <div>
+        <h2 data-cy="imagePdfConversionRequestDetailsHeading">
+          <span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.detail.title">Image Pdf Conversion Request</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourceDocumentId">Source Document Id</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.sourceDocumentId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourceFileName">Source File Name</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.sourceFileName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.sourcePdfS3Key">Source Pdf S 3 Key</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.sourcePdfS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imageQuality">Image Quality</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ImageQuality.' + (imagePdfConversionRequestRef.imageQuality ?? 'null')">{{
+              { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', ULTRA: 'ULTRA' }[imagePdfConversionRequestRef.imageQuality ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imageFormat">Image Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ImageFormat.' + (imagePdfConversionRequestRef.imageFormat ?? 'null')">{{
+              { null: '', PNG: 'PNG', JPEG: 'JPEG', WEBP: 'WEBP' }[imagePdfConversionRequestRef.imageFormat ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.conversionType">Conversion Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ConversionType.' + (imagePdfConversionRequestRef.conversionType ?? 'null')">{{
+              {
+                null: '',
+                SINGLE_PAGE: 'SINGLE_PAGE',
+                ALL_PAGES: 'ALL_PAGES',
+                PAGE_RANGE: 'PAGE_RANGE',
+                FIRST_PAGE_ONLY: 'FIRST_PAGE_ONLY',
+              }[imagePdfConversionRequestRef.conversionType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.startPage">Start Page</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.startPage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.endPage">End Page</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.endPage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.totalPages">Total Pages</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.totalPages }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ConversionStatus.' + (imagePdfConversionRequestRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                imagePdfConversionRequestRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.requestedAt">Requested At</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.requestedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.startedAt">Started At</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.startedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.completedAt">Completed At</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.completedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.processingDuration">Processing Duration</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.processingDuration }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.totalImagesSize">Total Images Size</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.totalImagesSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.imagesGenerated">Images Generated</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.imagesGenerated }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.dpi">Dpi</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.dpi }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.requestedByUserId">Requested By User Id</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.requestedByUserId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.priority">Priority</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.priority }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.additionalOptions">Additional Options</span></dt>
+          <dd>
+            <span>{{ imagePdfConversionRequestRef.additionalOptions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImagePdfConversionRequest.batch">Batch</span></dt>
+          <dd>
+            @if (imagePdfConversionRequest()!.batch) {
+              <div>
+                <a [routerLink]="['/image-conversion-batch', imagePdfConversionRequest()!.batch?.id, 'view']">{{
+                  imagePdfConversionRequestRef.batch?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/image-pdf-conversion-request', imagePdfConversionRequestRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

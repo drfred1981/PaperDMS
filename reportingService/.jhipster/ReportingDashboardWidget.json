@@ -1,0 +1,64 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063115"
+  },
+  "applications": ["reportingService", "gateway"],
+  "clientRootFolder": "reportingService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "widgetType",
+      "fieldType": "WidgetType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DOCUMENT_COUNT,STORAGE_USAGE,RECENT_UPLOADS,TOP_TAGS,WORKFLOW_STATUS,USER_ACTIVITY,CHART_LINE,CHART_BAR,CHART_PIE,CHART_DOUGHNUT,CHART_AREA,TABLE,METRIC,HEATMAP,GAUGE,TIMELINE"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "configuration",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataSource",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "position",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sizeX",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sizeY",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "reportingService",
+  "name": "ReportingDashboardWidget",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "reportingDashboard",
+      "otherEntityRelationshipName": "widgets",
+      "relationshipName": "dashboar",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

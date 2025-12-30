@@ -1,0 +1,33 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentStatistics": {
+      "home": {
+        "title": "Document Statistics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Statistics",
+        "createOrEditLabel": "Create or edit a Document Statistics",
+        "search": "Search for Document Statistics",
+        "notFound": "No Document Statistics found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Statistics {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Statistics"
+      },
+      "id": "ID",
+      "viewsTotal": "Views Total",
+      "downloadsTotal": "Downloads Total",
+      "uniqueViewers": "Unique Viewers",
+      "lastUpdated": "Last Updated",
+      "document": "Document"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentStatistics": {
+      "created": "A new Document Statistics is created with identifier {{ param }}",
+      "updated": "A Document Statistics is updated with identifier {{ param }}",
+      "deleted": "A Document Statistics is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,189 @@
+<div>
+  <h2 id="page-heading" data-cy="ReportingPerformanceMetricHeading">
+    <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.home.title">Reporting Performance Metrics</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reporting-performance-metric"
+        [routerLink]="['/reporting-performance-metric/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.home.createLabel"
+          >Create a new Reporting Performance Metric</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.home.search"
+          >Search for Reporting Performance Metric</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.reportingServiceReportingPerformanceMetric.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (reportingPerformanceMetrics().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.home.notFound">No Reporting Performance Metrics found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metricName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.metricName">Metric Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metricType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.metricType">Metric Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="value">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.value">Value</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="unit">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.unit">Unit</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="serviceName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.serviceName">Service Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="timestamp">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.timestamp">Timestamp</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (reportingPerformanceMetric of reportingPerformanceMetrics(); track trackId(reportingPerformanceMetric)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/reporting-performance-metric', reportingPerformanceMetric.id, 'view']">{{
+                  reportingPerformanceMetric.id
+                }}</a>
+              </td>
+              <td>{{ reportingPerformanceMetric.metricName }}</td>
+              <td [jhiTranslate]="'gatewayApp.MetricType.' + (reportingPerformanceMetric.metricType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    UPLOAD_SPEED: 'UPLOAD_SPEED',
+                    OCR_DURATION: 'OCR_DURATION',
+                    SEARCH_LATENCY: 'SEARCH_LATENCY',
+                    API_RESPONSE_TIME: 'API_RESPONSE_TIME',
+                    STORAGE_IOPS: 'STORAGE_IOPS',
+                    CACHE_HIT_RATE: 'CACHE_HIT_RATE',
+                    QUEUE_LENGTH: 'QUEUE_LENGTH',
+                    ERROR_RATE: 'ERROR_RATE',
+                    THROUGHPUT: 'THROUGHPUT',
+                    CONCURRENT_USERS: 'CONCURRENT_USERS',
+                  }[reportingPerformanceMetric.metricType ?? 'null']
+                }}
+              </td>
+              <td>{{ reportingPerformanceMetric.value }}</td>
+              <td>{{ reportingPerformanceMetric.unit }}</td>
+              <td>{{ reportingPerformanceMetric.serviceName }}</td>
+              <td>{{ reportingPerformanceMetric.timestamp | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/reporting-performance-metric', reportingPerformanceMetric.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/reporting-performance-metric', reportingPerformanceMetric.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(reportingPerformanceMetric)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,275 @@
+<div>
+  <h2 id="page-heading" data-cy="NotificationHeading">
+    <span jhiTranslate="gatewayApp.notificationServiceNotification.home.title">Notifications</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.notificationServiceNotification.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-notification"
+        [routerLink]="['/notification/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.notificationServiceNotification.home.createLabel"
+          >Create a new Notification</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.notificationServiceNotification.home.search"
+          >Search for Notification</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.notificationServiceNotification.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (notifications().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.notificationServiceNotification.home.notFound">No Notifications found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.title">Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="message">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.message">Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.type">Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="priority">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.priority">Priority</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recipientId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.recipientId">Recipient Id</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isRead">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.isRead">Is Read</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="readDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.readDate">Read Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="channel">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.channel">Channel</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="relatedEntityType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.relatedEntityType">Related Entity Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="relatedEntityName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.relatedEntityName">Related Entity Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="actionUrl">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.actionUrl">Action Url</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metadata">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.metadata">Metadata</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="expirationDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.expirationDate">Expiration Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sentDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.sentDate">Sent Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="template.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.notificationServiceNotification.template">Template</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (notification of notifications(); track trackId(notification)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/notification', notification.id, 'view']">{{ notification.id }}</a>
+              </td>
+              <td>{{ notification.title }}</td>
+              <td>{{ notification.message }}</td>
+              <td [jhiTranslate]="'gatewayApp.NotificationType.' + (notification.type ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DOCUMENT_UPLOADED: 'DOCUMENT_UPLOADED',
+                    DOCUMENT_PROCESSED: 'DOCUMENT_PROCESSED',
+                    DOCUMENT_SHARED: 'DOCUMENT_SHARED',
+                    WORKFLOW_ASSIGNED: 'WORKFLOW_ASSIGNED',
+                    WORKFLOW_APPROVED: 'WORKFLOW_APPROVED',
+                    WORKFLOW_REJECTED: 'WORKFLOW_REJECTED',
+                    WORKFLOW_COMPLETED: 'WORKFLOW_COMPLETED',
+                    OCR_COMPLETED: 'OCR_COMPLETED',
+                    AI_TAG_SUGGESTED: 'AI_TAG_SUGGESTED',
+                    SIMILAR_DOCUMENT_FOUND: 'SIMILAR_DOCUMENT_FOUND',
+                    SYSTEM_ALERT: 'SYSTEM_ALERT',
+                    CUSTOM: 'CUSTOM',
+                  }[notification.type ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.NotificationPriority.' + (notification.priority ?? 'null')">
+                {{ { null: '', LOW: 'LOW', NORMAL: 'NORMAL', HIGH: 'HIGH', URGENT: 'URGENT' }[notification.priority ?? 'null'] }}
+              </td>
+              <td>{{ notification.recipientId }}</td>
+              <td>{{ notification.isRead }}</td>
+              <td>{{ notification.readDate | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'gatewayApp.NotificationChannel.' + (notification.channel ?? 'null')">
+                {{
+                  { null: '', EMAIL: 'EMAIL', PUSH: 'PUSH', IN_APP: 'IN_APP', SMS: 'SMS', WEBHOOK: 'WEBHOOK' }[
+                    notification.channel ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ notification.relatedEntityType }}</td>
+              <td>{{ notification.relatedEntityName }}</td>
+              <td>{{ notification.actionUrl }}</td>
+              <td>{{ notification.metadata }}</td>
+              <td>{{ notification.expirationDate | formatMediumDatetime }}</td>
+              <td>{{ notification.sentDate | formatMediumDatetime }}</td>
+              <td>{{ notification.createdDate | formatMediumDatetime }}</td>
+              <td>
+                @if (notification.template) {
+                  <div>
+                    <a [routerLink]="['/notification-template', notification.template.id, 'view']">{{ notification.template.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/notification', notification.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/notification', notification.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(notification)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

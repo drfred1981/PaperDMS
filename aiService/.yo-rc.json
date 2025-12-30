@@ -1,0 +1,30 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 6,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "aiService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["AIAutoTagJob", "AITagPrediction", "AITypePrediction", "AICorrespondentPrediction", "AILanguageDetection", "AICache"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "YjAyNTA0NjFkMDgzZGE0ODhjMWUxYTBhNWNjYmJlOTcxYWYxN2RjYTUyMzYyMDY2MGZhMzkyODRmMDU3ODg2NGNjYmYxNzE2ZWE0YjYxOWM3YWVmZDI0ZTVlYTJhNmQ2MjE1MmM2NTRjZWM5YjlmNTgwMzg1NDk0MDE0MGNjNjY=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767076515000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.ai",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8086",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true,
+    "withAdminUi": true
+  }
+}

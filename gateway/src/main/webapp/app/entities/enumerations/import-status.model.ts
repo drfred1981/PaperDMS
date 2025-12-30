@@ -1,0 +1,13 @@
+export enum ImportStatus {
+  PENDING = 'PENDING',
+
+  PROCESSING = 'PROCESSING',
+
+  COMPLETED = 'COMPLETED',
+
+  PARTIAL = 'PARTIAL',
+
+  FAILED = 'FAILED',
+
+  IGNORED = 'IGNORED',
+}

@@ -1,0 +1,233 @@
+<div>
+  <h2 id="page-heading" data-cy="AICacheHeading">
+    <span jhiTranslate="gatewayApp.aiServiceAICache.home.title">AI Caches</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.aiServiceAICache.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ai-cache"
+        [routerLink]="['/ai-cache/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.aiServiceAICache.home.createLabel">Create a new AI Cache</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.aiServiceAICache.home.search"
+          >Search for AI Cache</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.aiServiceAICache.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (aICaches().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.aiServiceAICache.home.notFound">No AI Caches found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cacheKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.cacheKey">Cache Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="inputSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.inputSha256">Input Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="aiProvider">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.aiProvider">Ai Provider</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="aiModel">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.aiModel">Ai Model</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="operation">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.operation">Operation</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="inputData">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.inputData">Input Data</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="resultData">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.resultData">Result Data</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3ResultKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.s3ResultKey">S 3 Result Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="confidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.confidence">Confidence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metadata">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.metadata">Metadata</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hits">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.hits">Hits</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cost">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.cost">Cost</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastAccessDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.lastAccessDate">Last Access Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="expirationDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICache.expirationDate">Expiration Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (aICache of aICaches(); track trackId(aICache)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ai-cache', aICache.id, 'view']">{{ aICache.id }}</a>
+              </td>
+              <td>{{ aICache.cacheKey }}</td>
+              <td>{{ aICache.inputSha256 }}</td>
+              <td>{{ aICache.aiProvider }}</td>
+              <td>{{ aICache.aiModel }}</td>
+              <td>{{ aICache.operation }}</td>
+              <td>{{ aICache.inputData }}</td>
+              <td>{{ aICache.resultData }}</td>
+              <td>{{ aICache.s3ResultKey }}</td>
+              <td>{{ aICache.confidence }}</td>
+              <td>{{ aICache.metadata }}</td>
+              <td>{{ aICache.hits }}</td>
+              <td>{{ aICache.cost }}</td>
+              <td>{{ aICache.lastAccessDate | formatMediumDatetime }}</td>
+              <td>{{ aICache.createdDate | formatMediumDatetime }}</td>
+              <td>{{ aICache.expirationDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/ai-cache', aICache.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/ai-cache', aICache.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(aICache)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

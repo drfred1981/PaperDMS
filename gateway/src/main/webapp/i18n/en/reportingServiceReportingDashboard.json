@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "reportingServiceReportingDashboard": {
+      "home": {
+        "title": "Reporting Dashboards",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reporting Dashboard",
+        "createOrEditLabel": "Create or edit a Reporting Dashboard",
+        "search": "Search for Reporting Dashboard",
+        "notFound": "No Reporting Dashboards found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Reporting Dashboard {{ id }}?"
+      },
+      "detail": {
+        "title": "Reporting Dashboard"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "userId": "User Id",
+      "isPublic": "Is Public",
+      "layout": "Layout",
+      "refreshInterval": "Refresh Interval",
+      "isDefault": "Is Default",
+      "createdDate": "Created Date",
+      "widgets": "Widgets"
+    }
+  },
+  "reportingServiceApp": {
+    "reportingServiceReportingDashboard": {
+      "created": "A new Reporting Dashboard is created with identifier {{ param }}",
+      "updated": "A Reporting Dashboard is updated with identifier {{ param }}",
+      "deleted": "A Reporting Dashboard is deleted with identifier {{ param }}"
+    }
+  }
+}

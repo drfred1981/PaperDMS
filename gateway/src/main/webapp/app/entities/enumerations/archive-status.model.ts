@@ -1,0 +1,11 @@
+export enum ArchiveStatus {
+  PENDING = 'PENDING',
+
+  ARCHIVING = 'ARCHIVING',
+
+  COMPLETED = 'COMPLETED',
+
+  FAILED = 'FAILED',
+
+  CANCELLED = 'CANCELLED',
+}

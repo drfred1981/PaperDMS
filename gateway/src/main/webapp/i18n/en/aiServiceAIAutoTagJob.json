@@ -1,0 +1,44 @@
+{
+  "gatewayApp": {
+    "aiServiceAIAutoTagJob": {
+      "home": {
+        "title": "AI Auto Tag Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new AI Auto Tag Job",
+        "createOrEditLabel": "Create or edit a AI Auto Tag Job",
+        "search": "Search for AI Auto Tag Job",
+        "notFound": "No AI Auto Tag Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete AI Auto Tag Job {{ id }}?"
+      },
+      "detail": {
+        "title": "AI Auto Tag Job"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "s3Key": "S 3 Key",
+      "extractedText": "Extracted Text",
+      "extractedTextSha256": "Extracted Text Sha 256",
+      "status": "Status",
+      "modelVersion": "Model Version",
+      "resultCacheKey": "Result Cache Key",
+      "isCached": "Is Cached",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "createdDate": "Created Date",
+      "aITypePrediction": "A I Type Prediction",
+      "languagePrediction": "Language Prediction",
+      "aITagPredictions": "A I Tag Predictions",
+      "aICorrespondentPredictions": "A I Correspondent Predictions"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceAIAutoTagJob": {
+      "created": "A new AI Auto Tag Job is created with identifier {{ param }}",
+      "updated": "A AI Auto Tag Job is updated with identifier {{ param }}",
+      "deleted": "A AI Auto Tag Job is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20251230070016"
+  },
+  "applications": ["searchService", "gateway"],
+  "clientRootFolder": "searchService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "facetName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "facetType",
+      "fieldType": "FacetType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TERMS,DATE_RANGE,NUMBER_RANGE,HIERARCHY,NESTED"
+    },
+    {
+      "fieldName": "values",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "counts",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "searchService",
+  "name": "SearchFacet",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "searchQuery",
+      "otherEntityRelationshipName": "facets",
+      "relationshipName": "searchQuery",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

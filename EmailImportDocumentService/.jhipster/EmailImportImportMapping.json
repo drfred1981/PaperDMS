@@ -1,0 +1,64 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063315"
+  },
+  "applications": ["EmailImportDocumentService", "gateway"],
+  "clientRootFolder": "EmailImportDocumentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "emailField",
+      "fieldType": "EmailField",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "FROM,TO,CC,BCC,SUBJECT,BODY,BODY_HTML,DATE,ATTACHMENT_NAME,ATTACHMENT_COUNT,MESSAGE_ID,IN_REPLY_TO,HEADERS"
+    },
+    {
+      "fieldName": "documentField",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "transformation",
+      "fieldType": "MappingTransformation",
+      "fieldValues": "NONE,UPPERCASE,LOWERCASE,TRIM,EXTRACT_DATE,EXTRACT_NUMBER,EXTRACT_EMAIL,REGEX_EXTRACT,REPLACE,SPLIT,CONCAT,CUSTOM"
+    },
+    {
+      "fieldName": "transformationConfig",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "isRequired",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "defaultValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "validationRegex",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "EmailImportDocumentService",
+  "name": "EmailImportImportMapping",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "emailImportImportRule",
+      "otherEntityRelationshipName": "emailImportImportMappings",
+      "relationshipName": "rule",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

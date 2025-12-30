@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (emailImportDocument(); as emailImportDocumentRef) {
+      <div>
+        <h2 data-cy="emailImportDocumentDetailsHeading">
+          <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.detail.title">Email Import Document</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.sha256">Sha 256</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.sha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.fromEmail">From Email</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.fromEmail }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.toEmail">To Email</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.toEmail }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.subject">Subject</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.subject }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.body">Body</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.body }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.bodyHtml">Body Html</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.bodyHtml }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.receivedDate">Received Date</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.receivedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.processedDate">Processed Date</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.processedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ImportStatus.' + (emailImportDocumentRef.status ?? 'null')">{{
+              {
+                null: '',
+                PENDING: 'PENDING',
+                PROCESSING: 'PROCESSING',
+                COMPLETED: 'COMPLETED',
+                PARTIAL: 'PARTIAL',
+                FAILED: 'FAILED',
+                IGNORED: 'IGNORED',
+              }[emailImportDocumentRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.attachmentCount">Attachment Count</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.attachmentCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.documentsCreated">Documents Created</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.documentsCreated }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ emailImportDocumentRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.appliedRule">Applied Rule</span></dt>
+          <dd>
+            @if (emailImportDocument()!.appliedRule) {
+              <div>
+                <a [routerLink]="['/email-import-import-rule', emailImportDocument()!.appliedRule?.id, 'view']">{{
+                  emailImportDocumentRef.appliedRule?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/email-import-document', emailImportDocumentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

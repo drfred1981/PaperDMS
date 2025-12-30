@@ -1,0 +1,113 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (emailImportImportMapping(); as emailImportImportMappingRef) {
+      <div>
+        <h2 data-cy="emailImportImportMappingDetailsHeading">
+          <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.detail.title">Email Import Import Mapping</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ emailImportImportMappingRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.emailField">Email Field</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.EmailField.' + (emailImportImportMappingRef.emailField ?? 'null')">{{
+              {
+                null: '',
+                FROM: 'FROM',
+                TO: 'TO',
+                CC: 'CC',
+                BCC: 'BCC',
+                SUBJECT: 'SUBJECT',
+                BODY: 'BODY',
+                BODY_HTML: 'BODY_HTML',
+                DATE: 'DATE',
+                ATTACHMENT_NAME: 'ATTACHMENT_NAME',
+                ATTACHMENT_COUNT: 'ATTACHMENT_COUNT',
+                MESSAGE_ID: 'MESSAGE_ID',
+                IN_REPLY_TO: 'IN_REPLY_TO',
+                HEADERS: 'HEADERS',
+              }[emailImportImportMappingRef.emailField ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.documentField">Document Field</span></dt>
+          <dd>
+            <span>{{ emailImportImportMappingRef.documentField }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.transformation">Transformation</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.MappingTransformation.' + (emailImportImportMappingRef.transformation ?? 'null')">{{
+              {
+                null: '',
+                NONE: 'NONE',
+                UPPERCASE: 'UPPERCASE',
+                LOWERCASE: 'LOWERCASE',
+                TRIM: 'TRIM',
+                EXTRACT_DATE: 'EXTRACT_DATE',
+                EXTRACT_NUMBER: 'EXTRACT_NUMBER',
+                EXTRACT_EMAIL: 'EXTRACT_EMAIL',
+                REGEX_EXTRACT: 'REGEX_EXTRACT',
+                REPLACE: 'REPLACE',
+                SPLIT: 'SPLIT',
+                CONCAT: 'CONCAT',
+                CUSTOM: 'CUSTOM',
+              }[emailImportImportMappingRef.transformation ?? 'null']
+            }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.transformationConfig"
+              >Transformation Config</span
+            >
+          </dt>
+          <dd>
+            <span>{{ emailImportImportMappingRef.transformationConfig }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.isRequired">Is Required</span></dt>
+          <dd>
+            <span>{{ emailImportImportMappingRef.isRequired }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.defaultValue">Default Value</span></dt>
+          <dd>
+            <span>{{ emailImportImportMappingRef.defaultValue }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.validationRegex">Validation Regex</span>
+          </dt>
+          <dd>
+            <span>{{ emailImportImportMappingRef.validationRegex }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.rule">Rule</span></dt>
+          <dd>
+            @if (emailImportImportMapping()!.rule) {
+              <div>
+                <a [routerLink]="['/email-import-import-rule', emailImportImportMapping()!.rule?.id, 'view']">{{
+                  emailImportImportMappingRef.rule?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/email-import-import-mapping', emailImportImportMappingRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

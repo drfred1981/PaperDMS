@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (monitoringAlert(); as monitoringAlertRef) {
+      <div>
+        <h2 data-cy="monitoringAlertDetailsHeading">
+          <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.detail.title">Monitoring Alert</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.severity">Severity</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.Severity.' + (monitoringAlertRef.severity ?? 'null')">{{
+              { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', CRITICAL: 'CRITICAL' }[monitoringAlertRef.severity ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.title">Title</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.message">Message</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.message }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.entityType">Entity Type</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.entityType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.entityName">Entity Name</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.entityName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.MonitoringAlertStatus.' + (monitoringAlertRef.status ?? 'null')">{{
+              {
+                null: '',
+                ACTIVE: 'ACTIVE',
+                ACKNOWLEDGED: 'ACKNOWLEDGED',
+                RESOLVED: 'RESOLVED',
+                DISMISSED: 'DISMISSED',
+                ESCALATED: 'ESCALATED',
+              }[monitoringAlertRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.triggeredDate">Triggered Date</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.triggeredDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.acknowledgedBy">Acknowledged By</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.acknowledgedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.acknowledgedDate">Acknowledged Date</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.acknowledgedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.resolvedBy">Resolved By</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.resolvedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.resolvedDate">Resolved Date</span></dt>
+          <dd>
+            <span>{{ monitoringAlertRef.resolvedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlert.alertRule">Alert Rule</span></dt>
+          <dd>
+            @if (monitoringAlert()!.alertRule) {
+              <div>
+                <a [routerLink]="['/monitoring-alert-rule', monitoringAlert()!.alertRule?.id, 'view']">{{
+                  monitoringAlertRef.alertRule?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/monitoring-alert', monitoringAlertRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

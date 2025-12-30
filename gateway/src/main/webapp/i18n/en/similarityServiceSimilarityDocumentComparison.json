@@ -1,0 +1,38 @@
+{
+  "gatewayApp": {
+    "similarityServiceSimilarityDocumentComparison": {
+      "home": {
+        "title": "Similarity Document Comparisons",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Similarity Document Comparison",
+        "createOrEditLabel": "Create or edit a Similarity Document Comparison",
+        "search": "Search for Similarity Document Comparison",
+        "notFound": "No Similarity Document Comparisons found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Similarity Document Comparison {{ id }}?"
+      },
+      "detail": {
+        "title": "Similarity Document Comparison"
+      },
+      "id": "ID",
+      "sourceDocumentSha256": "Source Document Sha 256",
+      "targetDocumentSha256": "Target Document Sha 256",
+      "similarityScore": "Similarity Score",
+      "algorithm": "Algorithm",
+      "features": "Features",
+      "computedDate": "Computed Date",
+      "isRelevant": "Is Relevant",
+      "reviewedBy": "Reviewed By",
+      "reviewedDate": "Reviewed Date",
+      "job": "Job"
+    }
+  },
+  "similarityServiceApp": {
+    "similarityServiceSimilarityDocumentComparison": {
+      "created": "A new Similarity Document Comparison is created with identifier {{ param }}",
+      "updated": "A Similarity Document Comparison is updated with identifier {{ param }}",
+      "deleted": "A Similarity Document Comparison is deleted with identifier {{ param }}"
+    }
+  }
+}

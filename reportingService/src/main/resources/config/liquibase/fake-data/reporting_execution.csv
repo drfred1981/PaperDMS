@@ -1,0 +1,11 @@
+id;status;start_date;end_date;records_processed;output_s_3_key;output_size;error_message
+1;CANCELLED;2025-12-30T02:58:33;2025-12-29T17:12:32;28742;soupy content barring;20279;../fake-data/blob/hipster.txt
+2;PENDING;2025-12-29T23:57:42;2025-12-30T03:12:54;18851;if;1055;../fake-data/blob/hipster.txt
+3;FAILED;2025-12-29T23:40:54;2025-12-29T21:36:11;13624;round;6535;../fake-data/blob/hipster.txt
+4;PENDING;2025-12-29T11:18:22;2025-12-29T07:47:34;13497;yet;20320;../fake-data/blob/hipster.txt
+5;PENDING;2025-12-29T23:29:52;2025-12-29T16:00:29;21799;instead than emotional;14291;../fake-data/blob/hipster.txt
+6;FAILED;2025-12-30T03:46:37;2025-12-30T06:14:32;11129;physically jaggedly remark;9119;../fake-data/blob/hipster.txt
+7;COMPLETED;2025-12-30T02:27:00;2025-12-29T18:33:53;17688;enormously wriggler;17775;../fake-data/blob/hipster.txt
+8;PENDING;2025-12-30T02:02:58;2025-12-29T10:24:33;7447;gently drat rarely;7204;../fake-data/blob/hipster.txt
+9;RUNNING;2025-12-29T06:33:32;2025-12-29T09:41:00;5830;scarily allegation;7046;../fake-data/blob/hipster.txt
+10;RUNNING;2025-12-29T16:02:44;2025-12-29T13:55:16;31469;usefully;20901;../fake-data/blob/hipster.txt

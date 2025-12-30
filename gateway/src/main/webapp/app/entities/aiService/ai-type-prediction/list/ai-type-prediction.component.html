@@ -1,0 +1,191 @@
+<div>
+  <h2 id="page-heading" data-cy="AITypePredictionHeading">
+    <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.home.title">AI Type Predictions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ai-type-prediction"
+        [routerLink]="['/ai-type-prediction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.aiServiceAITypePrediction.home.createLabel"
+          >Create a new AI Type Prediction</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.aiServiceAITypePrediction.home.search"
+          >Search for AI Type Prediction</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.aiServiceAITypePrediction.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (aITypePredictions().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.home.notFound">No AI Type Predictions found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentTypeName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.documentTypeName">Document Type Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="confidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.confidence">Confidence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reason">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.reason">Reason</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="modelVersion">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.modelVersion">Model Version</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="predictionS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.predictionS3Key">Prediction S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isAccepted">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.isAccepted">Is Accepted</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="acceptedBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.acceptedBy">Accepted By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="acceptedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.acceptedDate">Accepted Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="predictionDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAITypePrediction.predictionDate">Prediction Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (aITypePrediction of aITypePredictions(); track trackId(aITypePrediction)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ai-type-prediction', aITypePrediction.id, 'view']">{{ aITypePrediction.id }}</a>
+              </td>
+              <td>{{ aITypePrediction.documentTypeName }}</td>
+              <td>{{ aITypePrediction.confidence }}</td>
+              <td>{{ aITypePrediction.reason }}</td>
+              <td>{{ aITypePrediction.modelVersion }}</td>
+              <td>{{ aITypePrediction.predictionS3Key }}</td>
+              <td>{{ aITypePrediction.isAccepted }}</td>
+              <td>{{ aITypePrediction.acceptedBy }}</td>
+              <td>{{ aITypePrediction.acceptedDate | formatMediumDatetime }}</td>
+              <td>{{ aITypePrediction.predictionDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/ai-type-prediction', aITypePrediction.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/ai-type-prediction', aITypePrediction.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(aITypePrediction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,11 @@
+export enum RedactionType {
+  BLACK_BOX = 'BLACK_BOX',
+
+  WHITE_BOX = 'WHITE_BOX',
+
+  PATTERN = 'PATTERN',
+
+  PIXELATE = 'PIXELATE',
+
+  BLUR = 'BLUR',
+}

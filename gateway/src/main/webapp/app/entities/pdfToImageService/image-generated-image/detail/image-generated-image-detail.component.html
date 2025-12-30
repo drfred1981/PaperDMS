@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (imageGeneratedImage(); as imageGeneratedImageRef) {
+      <div>
+        <h2 data-cy="imageGeneratedImageDetailsHeading">
+          <span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.detail.title">Image Generated Image</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.pageNumber">Page Number</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.pageNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.fileName">File Name</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.fileName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.s3Key">S 3 Key</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.s3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.preSignedUrl">Pre Signed Url</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.preSignedUrl }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.urlExpiresAt">Url Expires At</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.urlExpiresAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.format">Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ImageFormat.' + (imageGeneratedImageRef.format ?? 'null')">{{
+              { null: '', PNG: 'PNG', JPEG: 'JPEG', WEBP: 'WEBP' }[imageGeneratedImageRef.format ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.quality">Quality</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ImageQuality.' + (imageGeneratedImageRef.quality ?? 'null')">{{
+              { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', ULTRA: 'ULTRA' }[imageGeneratedImageRef.quality ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.width">Width</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.width }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.height">Height</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.height }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.fileSize">File Size</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.fileSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.dpi">Dpi</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.dpi }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.sha256Hash">Sha 256 Hash</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.sha256Hash }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.generatedAt">Generated At</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.generatedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ imageGeneratedImageRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageGeneratedImage.conversionRequest">Conversion Request</span></dt>
+          <dd>
+            @if (imageGeneratedImage()!.conversionRequest) {
+              <div>
+                <a [routerLink]="['/image-pdf-conversion-request', imageGeneratedImage()!.conversionRequest?.id, 'view']">{{
+                  imageGeneratedImageRef.conversionRequest?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/image-generated-image', imageGeneratedImageRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

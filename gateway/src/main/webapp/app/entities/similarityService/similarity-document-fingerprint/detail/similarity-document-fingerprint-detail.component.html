@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (similarityDocumentFingerprint(); as similarityDocumentFingerprintRef) {
+      <div>
+        <h2 data-cy="similarityDocumentFingerprintDetailsHeading">
+          <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentFingerprint.detail.title">Similarity Document Fingerprint</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ similarityDocumentFingerprintRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentFingerprint.fingerprintType">Fingerprint Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.FingerprintType.' + (similarityDocumentFingerprintRef.fingerprintType ?? 'null')">{{
+              { null: '', HASH: 'HASH', PERCEPTUAL: 'PERCEPTUAL', VECTOR_EMBEDDING: 'VECTOR_EMBEDDING', TF_IDF: 'TF_IDF', BERT: 'BERT' }[
+                similarityDocumentFingerprintRef.fingerprintType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentFingerprint.fingerprint">Fingerprint</span></dt>
+          <dd>
+            <span>{{ similarityDocumentFingerprintRef.fingerprint }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentFingerprint.vectorEmbedding">Vector Embedding</span></dt>
+          <dd>
+            <span>{{ similarityDocumentFingerprintRef.vectorEmbedding }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentFingerprint.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ similarityDocumentFingerprintRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentFingerprint.computedDate">Computed Date</span></dt>
+          <dd>
+            <span>{{ similarityDocumentFingerprintRef.computedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentFingerprint.lastUpdated">Last Updated</span></dt>
+          <dd>
+            <span>{{ similarityDocumentFingerprintRef.lastUpdated | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/similarity-document-fingerprint', similarityDocumentFingerprintRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

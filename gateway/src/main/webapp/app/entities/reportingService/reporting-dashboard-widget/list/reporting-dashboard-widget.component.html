@@ -1,0 +1,216 @@
+<div>
+  <h2 id="page-heading" data-cy="ReportingDashboardWidgetHeading">
+    <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.home.title">Reporting Dashboard Widgets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reporting-dashboard-widget"
+        [routerLink]="['/reporting-dashboard-widget/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.home.createLabel"
+          >Create a new Reporting Dashboard Widget</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.home.search"
+          >Search for Reporting Dashboard Widget</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.reportingServiceReportingDashboardWidget.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (reportingDashboardWidgets().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.home.notFound">No Reporting Dashboard Widgets found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="widgetType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.widgetType">Widget Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.title">Title</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="configuration">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.configuration">Configuration</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dataSource">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.dataSource">Data Source</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="position">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.position">Position</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sizeX">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.sizeX">Size X</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sizeY">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.sizeY">Size Y</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dashboar.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.dashboar">Dashboar</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (reportingDashboardWidget of reportingDashboardWidgets(); track trackId(reportingDashboardWidget)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/reporting-dashboard-widget', reportingDashboardWidget.id, 'view']">{{ reportingDashboardWidget.id }}</a>
+              </td>
+              <td [jhiTranslate]="'gatewayApp.WidgetType.' + (reportingDashboardWidget.widgetType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DOCUMENT_COUNT: 'DOCUMENT_COUNT',
+                    STORAGE_USAGE: 'STORAGE_USAGE',
+                    RECENT_UPLOADS: 'RECENT_UPLOADS',
+                    TOP_TAGS: 'TOP_TAGS',
+                    WORKFLOW_STATUS: 'WORKFLOW_STATUS',
+                    USER_ACTIVITY: 'USER_ACTIVITY',
+                    CHART_LINE: 'CHART_LINE',
+                    CHART_BAR: 'CHART_BAR',
+                    CHART_PIE: 'CHART_PIE',
+                    CHART_DOUGHNUT: 'CHART_DOUGHNUT',
+                    CHART_AREA: 'CHART_AREA',
+                    TABLE: 'TABLE',
+                    METRIC: 'METRIC',
+                    HEATMAP: 'HEATMAP',
+                    GAUGE: 'GAUGE',
+                    TIMELINE: 'TIMELINE',
+                  }[reportingDashboardWidget.widgetType ?? 'null']
+                }}
+              </td>
+              <td>{{ reportingDashboardWidget.title }}</td>
+              <td>{{ reportingDashboardWidget.configuration }}</td>
+              <td>{{ reportingDashboardWidget.dataSource }}</td>
+              <td>{{ reportingDashboardWidget.position }}</td>
+              <td>{{ reportingDashboardWidget.sizeX }}</td>
+              <td>{{ reportingDashboardWidget.sizeY }}</td>
+              <td>
+                @if (reportingDashboardWidget.dashboar) {
+                  <div>
+                    <a [routerLink]="['/reporting-dashboard', reportingDashboardWidget.dashboar.id, 'view']">{{
+                      reportingDashboardWidget.dashboar.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/reporting-dashboard-widget', reportingDashboardWidget.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/reporting-dashboard-widget', reportingDashboardWidget.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(reportingDashboardWidget)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

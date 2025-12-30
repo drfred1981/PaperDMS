@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "pdfToImageServiceImageConversionBatch": {
+      "home": {
+        "title": "Image Conversion Batches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image Conversion Batch",
+        "createOrEditLabel": "Create or edit a Image Conversion Batch",
+        "search": "Search for Image Conversion Batch",
+        "notFound": "No Image Conversion Batches found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Image Conversion Batch {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Conversion Batch"
+      },
+      "id": "ID",
+      "batchName": "Batch Name",
+      "description": "Description",
+      "createdAt": "Created At",
+      "status": "Status",
+      "totalConversions": "Total Conversions",
+      "completedConversions": "Completed Conversions",
+      "failedConversions": "Failed Conversions",
+      "startedAt": "Started At",
+      "completedAt": "Completed At",
+      "totalProcessingDuration": "Total Processing Duration",
+      "createdByUserId": "Created By User Id",
+      "conversions": "Conversions"
+    }
+  },
+  "pdfToImageServiceApp": {
+    "pdfToImageServiceImageConversionBatch": {
+      "created": "A new Image Conversion Batch is created with identifier {{ param }}",
+      "updated": "A Image Conversion Batch is updated with identifier {{ param }}",
+      "deleted": "A Image Conversion Batch is deleted with identifier {{ param }}"
+    }
+  }
+}

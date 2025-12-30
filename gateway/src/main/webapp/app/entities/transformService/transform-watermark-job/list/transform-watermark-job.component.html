@@ -1,0 +1,302 @@
+<div>
+  <h2 id="page-heading" data-cy="TransformWatermarkJobHeading">
+    <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.home.title">Transform Watermark Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-transform-watermark-job"
+        [routerLink]="['/transform-watermark-job/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.home.createLabel"
+          >Create a new Transform Watermark Job</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.home.search"
+          >Search for Transform Watermark Job</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.transformServiceTransformWatermarkJob.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (transformWatermarkJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.home.notFound">No Transform Watermark Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="watermarkType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.watermarkType">Watermark Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="watermarkText">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.watermarkText">Watermark Text</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="watermarkImageS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.watermarkImageS3Key">Watermark Image S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="position">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.position">Position</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="opacity">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.opacity">Opacity</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fontSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.fontSize">Font Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="color">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.color">Color</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rotation">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.rotation">Rotation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="tiled">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.tiled">Tiled</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.outputS3Key">Output S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputDocumentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.outputDocumentSha256">Output Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.createdBy">Created By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (transformWatermarkJob of transformWatermarkJobs(); track trackId(transformWatermarkJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/transform-watermark-job', transformWatermarkJob.id, 'view']">{{ transformWatermarkJob.id }}</a>
+              </td>
+              <td>{{ transformWatermarkJob.documentSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.WatermarkType.' + (transformWatermarkJob.watermarkType ?? 'null')">
+                {{
+                  { null: '', TEXT: 'TEXT', IMAGE: 'IMAGE', QR_CODE: 'QR_CODE', INVISIBLE: 'INVISIBLE' }[
+                    transformWatermarkJob.watermarkType ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ transformWatermarkJob.watermarkText }}</td>
+              <td>{{ transformWatermarkJob.watermarkImageS3Key }}</td>
+              <td [jhiTranslate]="'gatewayApp.WatermarkPosition.' + (transformWatermarkJob.position ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    TOP_LEFT: 'TOP_LEFT',
+                    TOP_CENTER: 'TOP_CENTER',
+                    TOP_RIGHT: 'TOP_RIGHT',
+                    CENTER: 'CENTER',
+                    DIAGONAL: 'DIAGONAL',
+                    BOTTOM_LEFT: 'BOTTOM_LEFT',
+                    BOTTOM_CENTER: 'BOTTOM_CENTER',
+                    BOTTOM_RIGHT: 'BOTTOM_RIGHT',
+                    TILED: 'TILED',
+                    CUSTOM: 'CUSTOM',
+                  }[transformWatermarkJob.position ?? 'null']
+                }}
+              </td>
+              <td>{{ transformWatermarkJob.opacity }}</td>
+              <td>{{ transformWatermarkJob.fontSize }}</td>
+              <td>{{ transformWatermarkJob.color }}</td>
+              <td>{{ transformWatermarkJob.rotation }}</td>
+              <td>{{ transformWatermarkJob.tiled }}</td>
+              <td>{{ transformWatermarkJob.outputS3Key }}</td>
+              <td>{{ transformWatermarkJob.outputDocumentSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformWatermarkJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[transformWatermarkJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ transformWatermarkJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ transformWatermarkJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ transformWatermarkJob.errorMessage }}</td>
+              <td>{{ transformWatermarkJob.createdBy }}</td>
+              <td>{{ transformWatermarkJob.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/transform-watermark-job', transformWatermarkJob.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/transform-watermark-job', transformWatermarkJob.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(transformWatermarkJob)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "notificationServiceNotificationEvent": {
+      "home": {
+        "title": "Notification Events",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Notification Event",
+        "createOrEditLabel": "Create or edit a Notification Event",
+        "search": "Search for Notification Event",
+        "notFound": "No Notification Events found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Notification Event {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification Event"
+      },
+      "id": "ID",
+      "eventType": "Event Type",
+      "entityType": "Entity Type",
+      "entityName": "Entity Name",
+      "userId": "User Id",
+      "eventData": "Event Data",
+      "eventDate": "Event Date",
+      "processed": "Processed",
+      "processedDate": "Processed Date"
+    }
+  },
+  "notificationServiceApp": {
+    "notificationServiceNotificationEvent": {
+      "created": "A new Notification Event is created with identifier {{ param }}",
+      "updated": "A Notification Event is updated with identifier {{ param }}",
+      "deleted": "A Notification Event is deleted with identifier {{ param }}"
+    }
+  }
+}

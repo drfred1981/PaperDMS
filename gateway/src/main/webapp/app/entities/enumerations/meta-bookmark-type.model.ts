@@ -1,0 +1,13 @@
+export enum MetaBookmarkType {
+  DOCUMENT = 'DOCUMENT',
+
+  FOLDER = 'FOLDER',
+
+  SEARCH = 'SEARCH',
+
+  DASHBOARD = 'DASHBOARD',
+
+  WORKFLOW = 'WORKFLOW',
+
+  SMART_FOLDER = 'SMART_FOLDER',
+}

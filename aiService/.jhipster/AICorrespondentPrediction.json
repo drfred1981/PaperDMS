@@ -1,0 +1,115 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063315"
+  },
+  "applications": ["aiService", "gateway"],
+  "clientRootFolder": "aiService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "ai_correspondent_prediction",
+  "fields": [
+    {
+      "fieldName": "correspondentName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "company",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "CorrespondentType",
+      "fieldValues": "PERSON,ORGANIZATION,SYSTEM,UNKNOWN"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "CorrespondentRole",
+      "fieldValues": "SENDER,RECIPIENT,CC,BCC,BOTH"
+    },
+    {
+      "fieldName": "confidence",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "reason",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "modelVersion",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "predictionS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "isAccepted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "acceptedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "acceptedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "predictionDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "aiService",
+  "name": "AICorrespondentPrediction",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "aIAutoTagJob",
+      "otherEntityRelationshipName": "aICorrespondentPredictions",
+      "relationshipName": "job",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

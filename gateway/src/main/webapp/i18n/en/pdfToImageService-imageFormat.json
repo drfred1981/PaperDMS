@@ -1,0 +1,10 @@
+{
+  "gatewayApp": {
+    "ImageFormat": {
+      "null": "",
+      "PNG": "PNG",
+      "JPEG": "JPEG",
+      "WEBP": "WEBP"
+    }
+  }
+}

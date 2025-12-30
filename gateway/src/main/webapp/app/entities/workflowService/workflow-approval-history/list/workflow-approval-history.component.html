@@ -1,0 +1,215 @@
+<div>
+  <h2 id="page-heading" data-cy="WorkflowApprovalHistoryHeading">
+    <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.home.title">Workflow Approval Histories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-workflow-approval-history"
+        [routerLink]="['/workflow-approval-history/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.home.createLabel"
+          >Create a new Workflow Approval History</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.home.search"
+          >Search for Workflow Approval History</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.workflowServiceWorkflowApprovalHistory.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (workflowApprovalHistories().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.home.notFound">No Workflow Approval Histories found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="stepNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.stepNumber">Step Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="action">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.action">Action</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="comment">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.comment">Comment</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="actionDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.actionDate">Action Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="actionBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.actionBy">Action By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="previousAssignee">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.previousAssignee">Previous Assignee</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="timeTaken">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.timeTaken">Time Taken</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="workflowInstance.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.workflowServiceWorkflowApprovalHistory.workflowInstance">Workflow Instance</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (workflowApprovalHistory of workflowApprovalHistories(); track trackId(workflowApprovalHistory)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/workflow-approval-history', workflowApprovalHistory.id, 'view']">{{ workflowApprovalHistory.id }}</a>
+              </td>
+              <td>{{ workflowApprovalHistory.documentSha256 }}</td>
+              <td>{{ workflowApprovalHistory.stepNumber }}</td>
+              <td [jhiTranslate]="'gatewayApp.TaskAction.' + (workflowApprovalHistory.action ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    APPROVE: 'APPROVE',
+                    REJECT: 'REJECT',
+                    REQUEST_CHANGES: 'REQUEST_CHANGES',
+                    DELEGATE: 'DELEGATE',
+                    CANCEL: 'CANCEL',
+                    COMMENT: 'COMMENT',
+                  }[workflowApprovalHistory.action ?? 'null']
+                }}
+              </td>
+              <td>{{ workflowApprovalHistory.comment }}</td>
+              <td>{{ workflowApprovalHistory.actionDate | formatMediumDatetime }}</td>
+              <td>{{ workflowApprovalHistory.actionBy }}</td>
+              <td>{{ workflowApprovalHistory.previousAssignee }}</td>
+              <td>{{ workflowApprovalHistory.timeTaken }}</td>
+              <td>
+                @if (workflowApprovalHistory.workflowInstance) {
+                  <div>
+                    <a [routerLink]="['/workflow-instance', workflowApprovalHistory.workflowInstance.id, 'view']">{{
+                      workflowApprovalHistory.workflowInstance.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/workflow-approval-history', workflowApprovalHistory.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/workflow-approval-history', workflowApprovalHistory.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(workflowApprovalHistory)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

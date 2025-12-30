@@ -1,0 +1,12 @@
+{
+  "gatewayApp": {
+    "MonitoringAlertStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "ACKNOWLEDGED": "ACKNOWLEDGED",
+      "RESOLVED": "RESOLVED",
+      "DISMISSED": "DISMISSED",
+      "ESCALATED": "ESCALATED"
+    }
+  }
+}

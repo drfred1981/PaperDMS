@@ -1,0 +1,126 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transformWatermarkJob(); as transformWatermarkJobRef) {
+      <div>
+        <h2 data-cy="transformWatermarkJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.detail.title">Transform Watermark Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.watermarkType">Watermark Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WatermarkType.' + (transformWatermarkJobRef.watermarkType ?? 'null')">{{
+              { null: '', TEXT: 'TEXT', IMAGE: 'IMAGE', QR_CODE: 'QR_CODE', INVISIBLE: 'INVISIBLE' }[
+                transformWatermarkJobRef.watermarkType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.watermarkText">Watermark Text</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.watermarkText }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.watermarkImageS3Key">Watermark Image S 3 Key</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.watermarkImageS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.position">Position</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WatermarkPosition.' + (transformWatermarkJobRef.position ?? 'null')">{{
+              {
+                null: '',
+                TOP_LEFT: 'TOP_LEFT',
+                TOP_CENTER: 'TOP_CENTER',
+                TOP_RIGHT: 'TOP_RIGHT',
+                CENTER: 'CENTER',
+                DIAGONAL: 'DIAGONAL',
+                BOTTOM_LEFT: 'BOTTOM_LEFT',
+                BOTTOM_CENTER: 'BOTTOM_CENTER',
+                BOTTOM_RIGHT: 'BOTTOM_RIGHT',
+                TILED: 'TILED',
+                CUSTOM: 'CUSTOM',
+              }[transformWatermarkJobRef.position ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.opacity">Opacity</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.opacity }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.fontSize">Font Size</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.fontSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.color">Color</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.color }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.rotation">Rotation</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.rotation }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.tiled">Tiled</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.tiled }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.outputDocumentSha256">Output Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.outputDocumentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformWatermarkJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                transformWatermarkJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformWatermarkJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ transformWatermarkJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transform-watermark-job', transformWatermarkJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

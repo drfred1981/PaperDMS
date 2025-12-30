@@ -1,0 +1,193 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-type-field-heading"
+        data-cy="DocumentTypeFieldCreateUpdateHeading"
+        jhiTranslate="gatewayApp.documentServiceDocumentTypeField.home.createOrEditLabel"
+      >
+        Create or edit a Document Type Field
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let fieldKeyRef = editForm.get('fieldKey')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fieldKey" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.fieldKey"
+            >Field Key</label
+          >
+          <input type="text" class="form-control" name="fieldKey" id="field_fieldKey" data-cy="fieldKey" formControlName="fieldKey" />
+          @if (fieldKeyRef.invalid && (fieldKeyRef.dirty || fieldKeyRef.touched)) {
+            <div>
+              @if (editForm.get('fieldKey')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('fieldKey')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let fieldLabelRef = editForm.get('fieldLabel')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fieldLabel" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.fieldLabel"
+            >Field Label</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fieldLabel"
+            id="field_fieldLabel"
+            data-cy="fieldLabel"
+            formControlName="fieldLabel"
+          />
+          @if (fieldLabelRef.invalid && (fieldLabelRef.dirty || fieldLabelRef.touched)) {
+            <div>
+              @if (editForm.get('fieldLabel')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('fieldLabel')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dataType" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.dataType"
+            >Data Type</label
+          >
+          <select class="form-control" name="dataType" formControlName="dataType" id="field_dataType" data-cy="dataType">
+            <option [ngValue]="null">{{ 'gatewayApp.MetadataType.null' | translate }}</option>
+            @for (metadataType of metadataTypeValues; track $index) {
+              <option [value]="metadataType">{{ 'gatewayApp.MetadataType.' + metadataType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let isRequiredRef = editForm.get('isRequired')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isRequired" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.isRequired"
+            >Is Required</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isRequired"
+            id="field_isRequired"
+            data-cy="isRequired"
+            formControlName="isRequired"
+          />
+          @if (isRequiredRef.invalid && (isRequiredRef.dirty || isRequiredRef.touched)) {
+            <div>
+              @if (editForm.get('isRequired')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let isSearchableRef = editForm.get('isSearchable')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_isSearchable" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.isSearchable"
+            >Is Searchable</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isSearchable"
+            id="field_isSearchable"
+            data-cy="isSearchable"
+            formControlName="isSearchable"
+          />
+          @if (isSearchableRef.invalid && (isSearchableRef.dirty || isSearchableRef.touched)) {
+            <div>
+              @if (editForm.get('isSearchable')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_documentType" jhiTranslate="gatewayApp.documentServiceDocumentTypeField.documentType"
+            >Document Type</label
+          >
+          <select
+            class="form-control"
+            id="field_documentType"
+            data-cy="documentType"
+            name="documentType"
+            formControlName="documentType"
+            [compareWith]="compareDocumentType"
+          >
+            <option [ngValue]="null"></option>
+            @for (documentTypeOption of documentTypesSharedCollection; track $index) {
+              <option [ngValue]="documentTypeOption">{{ documentTypeOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

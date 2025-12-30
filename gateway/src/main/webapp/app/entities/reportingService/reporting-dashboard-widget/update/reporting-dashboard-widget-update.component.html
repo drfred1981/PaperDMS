@@ -1,0 +1,202 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-reporting-dashboard-widget-heading"
+        data-cy="ReportingDashboardWidgetCreateUpdateHeading"
+        jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.home.createOrEditLabel"
+      >
+        Create or edit a Reporting Dashboard Widget
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let widgetTypeRef = editForm.get('widgetType')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_widgetType" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.widgetType"
+            >Widget Type</label
+          >
+          <select class="form-control" name="widgetType" formControlName="widgetType" id="field_widgetType" data-cy="widgetType">
+            <option [ngValue]="null">{{ 'gatewayApp.WidgetType.null' | translate }}</option>
+            @for (widgetType of widgetTypeValues; track $index) {
+              <option [value]="widgetType">{{ 'gatewayApp.WidgetType.' + widgetType | translate }}</option>
+            }
+          </select>
+          @if (widgetTypeRef.invalid && (widgetTypeRef.dirty || widgetTypeRef.touched)) {
+            <div>
+              @if (editForm.get('widgetType')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let titleRef = editForm.get('title')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_title" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          @if (titleRef.invalid && (titleRef.dirty || titleRef.touched)) {
+            <div>
+              @if (editForm.get('title')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('title')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let configurationRef = editForm.get('configuration')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_configuration"
+            jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.configuration"
+            >Configuration</label
+          >
+          <textarea
+            class="form-control"
+            name="configuration"
+            id="field_configuration"
+            data-cy="configuration"
+            formControlName="configuration"
+          ></textarea>
+          @if (configurationRef.invalid && (configurationRef.dirty || configurationRef.touched)) {
+            <div>
+              @if (editForm.get('configuration')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let dataSourceRef = editForm.get('dataSource')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dataSource" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.dataSource"
+            >Data Source</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dataSource"
+            id="field_dataSource"
+            data-cy="dataSource"
+            formControlName="dataSource"
+          />
+          @if (dataSourceRef.invalid && (dataSourceRef.dirty || dataSourceRef.touched)) {
+            <div>
+              @if (editForm.get('dataSource')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let positionRef = editForm.get('position')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_position" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.position"
+            >Position</label
+          >
+          <input type="number" class="form-control" name="position" id="field_position" data-cy="position" formControlName="position" />
+          @if (positionRef.invalid && (positionRef.dirty || positionRef.touched)) {
+            <div>
+              @if (editForm.get('position')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('position')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let sizeXRef = editForm.get('sizeX')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_sizeX" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.sizeX"
+            >Size X</label
+          >
+          <input type="number" class="form-control" name="sizeX" id="field_sizeX" data-cy="sizeX" formControlName="sizeX" />
+          @if (sizeXRef.invalid && (sizeXRef.dirty || sizeXRef.touched)) {
+            <div>
+              @if (editForm.get('sizeX')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('sizeX')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let sizeYRef = editForm.get('sizeY')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_sizeY" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.sizeY"
+            >Size Y</label
+          >
+          <input type="number" class="form-control" name="sizeY" id="field_sizeY" data-cy="sizeY" formControlName="sizeY" />
+          @if (sizeYRef.invalid && (sizeYRef.dirty || sizeYRef.touched)) {
+            <div>
+              @if (editForm.get('sizeY')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('sizeY')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dashboar" jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.dashboar"
+            >Dashboar</label
+          >
+          <select
+            class="form-control"
+            id="field_dashboar"
+            data-cy="dashboar"
+            name="dashboar"
+            formControlName="dashboar"
+            [compareWith]="compareReportingDashboard"
+          >
+            <option [ngValue]="null"></option>
+            @for (reportingDashboardOption of reportingDashboardsSharedCollection; track $index) {
+              <option [ngValue]="reportingDashboardOption">{{ reportingDashboardOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,213 @@
+<div>
+  <h2 id="page-heading" data-cy="AILanguageDetectionHeading">
+    <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.home.title">AI Language Detections</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ai-language-detection"
+        [routerLink]="['/ai-language-detection/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.aiServiceAILanguageDetection.home.createLabel"
+          >Create a new AI Language Detection</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.aiServiceAILanguageDetection.home.search"
+          >Search for AI Language Detection</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.aiServiceAILanguageDetection.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (aILanguageDetections().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.home.notFound">No AI Language Detections found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="detectedLanguage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.detectedLanguage">Detected Language</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="confidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.confidence">Confidence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="detectionMethod">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.detectionMethod">Detection Method</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="alternativeLanguages">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.alternativeLanguages">Alternative Languages</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="textSample">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.textSample">Text Sample</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="resultCacheKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.resultCacheKey">Result Cache Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isCached">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.isCached">Is Cached</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="detectedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.detectedDate">Detected Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="modelVersion">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAILanguageDetection.modelVersion">Model Version</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (aILanguageDetection of aILanguageDetections(); track trackId(aILanguageDetection)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ai-language-detection', aILanguageDetection.id, 'view']">{{ aILanguageDetection.id }}</a>
+              </td>
+              <td>{{ aILanguageDetection.documentSha256 }}</td>
+              <td>{{ aILanguageDetection.detectedLanguage }}</td>
+              <td>{{ aILanguageDetection.confidence }}</td>
+              <td [jhiTranslate]="'gatewayApp.AILanguageDetectionMethod.' + (aILanguageDetection.detectionMethod ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    TIKA: 'TIKA',
+                    LANGDETECT: 'LANGDETECT',
+                    FASTTEXT: 'FASTTEXT',
+                    BERT_MULTILINGUAL: 'BERT_MULTILINGUAL',
+                    MANUAL: 'MANUAL',
+                    COMBINED: 'COMBINED',
+                  }[aILanguageDetection.detectionMethod ?? 'null']
+                }}
+              </td>
+              <td>{{ aILanguageDetection.alternativeLanguages }}</td>
+              <td>{{ aILanguageDetection.textSample }}</td>
+              <td>{{ aILanguageDetection.resultCacheKey }}</td>
+              <td>{{ aILanguageDetection.isCached }}</td>
+              <td>{{ aILanguageDetection.detectedDate | formatMediumDatetime }}</td>
+              <td>{{ aILanguageDetection.modelVersion }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/ai-language-detection', aILanguageDetection.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/ai-language-detection', aILanguageDetection.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(aILanguageDetection)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

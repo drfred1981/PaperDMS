@@ -1,2 +1,6 @@
 org.springframework.test.context.ContextCustomizerFactory = \
-    com.mycompany.myapp.config.SqlTestContainersSpringContextCustomizerFactory
+    fr.smartprod.paperdms.emailimportdocument.config.\
+    SqlTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
+    emailimportdocument.config.\
+    RedisTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
+    emailimportdocument.config.KafkaTestContainersSpringContextCustomizerFactory

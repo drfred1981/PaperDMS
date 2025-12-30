@@ -1,0 +1,81 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063115"
+  },
+  "applications": ["similarityService", "gateway"],
+  "clientRootFolder": "similarityService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "AiJobStatus",
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "algorithm",
+      "fieldType": "SimilarityAlgorithm",
+      "fieldValues": "COSINE,JACCARD,LEVENSHTEIN,LSH,DEEP_LEARNING,COMBINED"
+    },
+    {
+      "fieldName": "scope",
+      "fieldType": "SimilarityScope",
+      "fieldValues": "ALL_DOCUMENTS,SAME_FOLDER,SAME_TYPE,SAME_TAGS,CUSTOM"
+    },
+    {
+      "fieldName": "minSimilarityThreshold",
+      "fieldType": "Double",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "matchesFound",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "similarityService",
+  "name": "SimilarityJob",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "similarityDocumentComparison",
+      "otherEntityRelationshipName": "job",
+      "relationshipName": "similarities",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

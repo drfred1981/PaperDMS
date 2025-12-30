@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20251230064015"
+  },
+  "applications": ["documentService", "gateway"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "viewsTotal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "downloadsTotal",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "uniqueViewers",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastUpdated",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "documentService",
+  "name": "DocumentStatistics",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "document",
+      "otherEntityRelationshipName": "statistics",
+      "relationshipName": "document",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

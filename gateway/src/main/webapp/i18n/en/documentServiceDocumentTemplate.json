@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentTemplate": {
+      "home": {
+        "title": "Document Templates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Template",
+        "createOrEditLabel": "Create or edit a Document Template",
+        "search": "Search for Document Template",
+        "notFound": "No Document Templates found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Template {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Template"
+      },
+      "id": "ID",
+      "name": "Name",
+      "templateSha256": "Template Sha 256",
+      "templateS3Key": "Template S 3 Key",
+      "isActive": "Is Active",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "documentType": "Document Type"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentTemplate": {
+      "created": "A new Document Template is created with identifier {{ param }}",
+      "updated": "A Document Template is updated with identifier {{ param }}",
+      "deleted": "A Document Template is deleted with identifier {{ param }}"
+    }
+  }
+}

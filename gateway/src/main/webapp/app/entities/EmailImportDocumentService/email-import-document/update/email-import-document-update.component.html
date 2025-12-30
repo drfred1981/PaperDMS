@@ -1,0 +1,311 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-email-import-document-heading"
+        data-cy="EmailImportDocumentCreateUpdateHeading"
+        jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.home.createOrEditLabel"
+      >
+        Create or edit a Email Import Document
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let sha256Ref = editForm.get('sha256')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_sha256" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.sha256"
+            >Sha 256</label
+          >
+          <input type="text" class="form-control" name="sha256" id="field_sha256" data-cy="sha256" formControlName="sha256" />
+          @if (sha256Ref.invalid && (sha256Ref.dirty || sha256Ref.touched)) {
+            <div>
+              @if (editForm.get('sha256')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('sha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let fromEmailRef = editForm.get('fromEmail')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_fromEmail" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.fromEmail"
+            >From Email</label
+          >
+          <input type="text" class="form-control" name="fromEmail" id="field_fromEmail" data-cy="fromEmail" formControlName="fromEmail" />
+          @if (fromEmailRef.invalid && (fromEmailRef.dirty || fromEmailRef.touched)) {
+            <div>
+              @if (editForm.get('fromEmail')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('fromEmail')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let toEmailRef = editForm.get('toEmail')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_toEmail" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.toEmail"
+            >To Email</label
+          >
+          <input type="text" class="form-control" name="toEmail" id="field_toEmail" data-cy="toEmail" formControlName="toEmail" />
+          @if (toEmailRef.invalid && (toEmailRef.dirty || toEmailRef.touched)) {
+            <div>
+              @if (editForm.get('toEmail')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('toEmail')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let subjectRef = editForm.get('subject')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_subject" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.subject"
+            >Subject</label
+          >
+          <input type="text" class="form-control" name="subject" id="field_subject" data-cy="subject" formControlName="subject" />
+          @if (subjectRef.invalid && (subjectRef.dirty || subjectRef.touched)) {
+            <div>
+              @if (editForm.get('subject')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_body" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.body"
+            >Body</label
+          >
+          <textarea class="form-control" name="body" id="field_body" data-cy="body" formControlName="body"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bodyHtml" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.bodyHtml"
+            >Body Html</label
+          >
+          <textarea class="form-control" name="bodyHtml" id="field_bodyHtml" data-cy="bodyHtml" formControlName="bodyHtml"></textarea>
+        </div>
+
+        @let receivedDateRef = editForm.get('receivedDate')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_receivedDate"
+            jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.receivedDate"
+            >Received Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_receivedDate"
+              data-cy="receivedDate"
+              type="datetime-local"
+              class="form-control"
+              name="receivedDate"
+              formControlName="receivedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (receivedDateRef.invalid && (receivedDateRef.dirty || receivedDateRef.touched)) {
+            <div>
+              @if (editForm.get('receivedDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('receivedDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_processedDate"
+            jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.processedDate"
+            >Processed Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_processedDate"
+              data-cy="processedDate"
+              type="datetime-local"
+              class="form-control"
+              name="processedDate"
+              formControlName="processedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.status"
+            >Status</label
+          >
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.ImportStatus.null' | translate }}</option>
+            @for (importStatus of importStatusValues; track $index) {
+              <option [value]="importStatus">{{ 'gatewayApp.ImportStatus.' + importStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_attachmentCount"
+            jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.attachmentCount"
+            >Attachment Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="attachmentCount"
+            id="field_attachmentCount"
+            data-cy="attachmentCount"
+            formControlName="attachmentCount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_documentsCreated"
+            jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.documentsCreated"
+            >Documents Created</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentsCreated"
+            id="field_documentsCreated"
+            data-cy="documentsCreated"
+            formControlName="documentsCreated"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_errorMessage"
+            jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_metadata" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.metadata"
+            >Metadata</label
+          >
+          <textarea class="form-control" name="metadata" id="field_metadata" data-cy="metadata" formControlName="metadata"></textarea>
+        </div>
+
+        @let documentSha256Ref = editForm.get('documentSha256')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_documentSha256"
+            jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.documentSha256"
+            >Document Sha 256</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="documentSha256"
+            id="field_documentSha256"
+            data-cy="documentSha256"
+            formControlName="documentSha256"
+          />
+          @if (documentSha256Ref.invalid && (documentSha256Ref.dirty || documentSha256Ref.touched)) {
+            <div>
+              @if (editForm.get('documentSha256')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '64' }"
+                  >This field cannot be longer than 64 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_appliedRule"
+            jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.appliedRule"
+            >Applied Rule</label
+          >
+          <select
+            class="form-control"
+            id="field_appliedRule"
+            data-cy="appliedRule"
+            name="appliedRule"
+            formControlName="appliedRule"
+            [compareWith]="compareEmailImportImportRule"
+          >
+            <option [ngValue]="null"></option>
+            @for (emailImportImportRuleOption of emailImportImportRulesSharedCollection; track $index) {
+              <option [ngValue]="emailImportImportRuleOption">{{ emailImportImportRuleOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

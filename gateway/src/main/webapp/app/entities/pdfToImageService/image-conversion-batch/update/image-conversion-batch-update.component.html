@@ -1,0 +1,300 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-image-conversion-batch-heading"
+        data-cy="ImageConversionBatchCreateUpdateHeading"
+        jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.home.createOrEditLabel"
+      >
+        Create or edit a Image Conversion Batch
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let batchNameRef = editForm.get('batchName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_batchName" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.batchName"
+            >Batch Name</label
+          >
+          <input type="text" class="form-control" name="batchName" id="field_batchName" data-cy="batchName" formControlName="batchName" />
+          @if (batchNameRef.invalid && (batchNameRef.dirty || batchNameRef.touched)) {
+            <div>
+              @if (editForm.get('batchName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('batchName')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let descriptionRef = editForm.get('description')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (descriptionRef.invalid && (descriptionRef.dirty || descriptionRef.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let createdAtRef = editForm.get('createdAt')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdAt" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.createdAt"
+            >Created At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdAt"
+              data-cy="createdAt"
+              type="datetime-local"
+              class="form-control"
+              name="createdAt"
+              formControlName="createdAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdAtRef.invalid && (createdAtRef.dirty || createdAtRef.touched)) {
+            <div>
+              @if (editForm.get('createdAt')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdAt')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.ConversionStatus.null' | translate }}</option>
+            @for (conversionStatus of conversionStatusValues; track $index) {
+              <option [value]="conversionStatus">{{ 'gatewayApp.ConversionStatus.' + conversionStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let totalConversionsRef = editForm.get('totalConversions')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalConversions"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.totalConversions"
+            >Total Conversions</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalConversions"
+            id="field_totalConversions"
+            data-cy="totalConversions"
+            formControlName="totalConversions"
+          />
+          @if (totalConversionsRef.invalid && (totalConversionsRef.dirty || totalConversionsRef.touched)) {
+            <div>
+              @if (editForm.get('totalConversions')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalConversions')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let completedConversionsRef = editForm.get('completedConversions')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_completedConversions"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.completedConversions"
+            >Completed Conversions</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="completedConversions"
+            id="field_completedConversions"
+            data-cy="completedConversions"
+            formControlName="completedConversions"
+          />
+          @if (completedConversionsRef.invalid && (completedConversionsRef.dirty || completedConversionsRef.touched)) {
+            <div>
+              @if (editForm.get('completedConversions')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('completedConversions')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let failedConversionsRef = editForm.get('failedConversions')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_failedConversions"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.failedConversions"
+            >Failed Conversions</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="failedConversions"
+            id="field_failedConversions"
+            data-cy="failedConversions"
+            formControlName="failedConversions"
+          />
+          @if (failedConversionsRef.invalid && (failedConversionsRef.dirty || failedConversionsRef.touched)) {
+            <div>
+              @if (editForm.get('failedConversions')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('failedConversions')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startedAt" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.startedAt"
+            >Started At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_startedAt"
+              data-cy="startedAt"
+              type="datetime-local"
+              class="form-control"
+              name="startedAt"
+              formControlName="startedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_completedAt" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.completedAt"
+            >Completed At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_completedAt"
+              data-cy="completedAt"
+              type="datetime-local"
+              class="form-control"
+              name="completedAt"
+              formControlName="completedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalProcessingDuration"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.totalProcessingDuration"
+            >Total Processing Duration</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalProcessingDuration"
+            id="field_totalProcessingDuration"
+            data-cy="totalProcessingDuration"
+            formControlName="totalProcessingDuration"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_createdByUserId"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.createdByUserId"
+            >Created By User Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="createdByUserId"
+            id="field_createdByUserId"
+            data-cy="createdByUserId"
+            formControlName="createdByUserId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

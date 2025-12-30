@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notificationWebhookSubscription(); as notificationWebhookSubscriptionRef) {
+      <div>
+        <h2 data-cy="notificationWebhookSubscriptionDetailsHeading">
+          <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.detail.title"
+            >Notification Webhook Subscription</span
+          >
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.name">Name</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.url">Url</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.url }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.secret">Secret</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.secret }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.events">Events</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.events }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.headers">Headers</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.headers }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.retryCount">Retry Count</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.retryCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.maxRetries">Max Retries</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.maxRetries }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.retryDelay">Retry Delay</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.retryDelay }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.lastTriggerDate">Last Trigger Date</span>
+          </dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.lastTriggerDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.lastSuccessDate">Last Success Date</span>
+          </dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.lastSuccessDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.lastErrorMessage">Last Error Message</span>
+          </dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.lastErrorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.failureCount">Failure Count</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.failureCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookSubscription.lastModifiedDate">Last Modified Date</span>
+          </dt>
+          <dd>
+            <span>{{ notificationWebhookSubscriptionRef.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/notification-webhook-subscription', notificationWebhookSubscriptionRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -18,7 +18,7 @@ application {
     messageBroker kafka
     serviceDiscoveryType consul
   }
-  entities Notification, NotificationTemplate, NotificationPreference, NotificationEvent, WebhookSubscription, NotificationWebhookLog
+  entities Notification, NotificationTemplate, NotificationPreference, NotificationEvent, NotificationWebhookSubscription, NotificationWebhookLog
 }
 // Enums
 enum NotificationType {
@@ -126,10 +126,10 @@ entity NotificationWebhookLog {
 // Relations
 relationship OneToMany {
   NotificationTemplate{notifications} to Notification{template}
-  WebhookSubscription{NotificationWebhookLogs} to NotificationWebhookLog{subscription}
+  NotificationWebhookSubscription{NotificationWebhookLogs} to NotificationWebhookLog{subscription}
 }
 
  
 
 microservice Notification, NotificationTemplate, NotificationPreference, 
-             NotificationEvent, WebhookSubscription, NotificationWebhookLog with notificationService
+             NotificationEvent, NotificationWebhookSubscription, NotificationWebhookLog with notificationService

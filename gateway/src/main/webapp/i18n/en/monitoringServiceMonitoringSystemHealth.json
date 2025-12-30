@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "monitoringServiceMonitoringSystemHealth": {
+      "home": {
+        "title": "Monitoring System Healths",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Monitoring System Health",
+        "createOrEditLabel": "Create or edit a Monitoring System Health",
+        "search": "Search for Monitoring System Health",
+        "notFound": "No Monitoring System Healths found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Monitoring System Health {{ id }}?"
+      },
+      "detail": {
+        "title": "Monitoring System Health"
+      },
+      "id": "ID",
+      "serviceName": "Service Name",
+      "status": "Status",
+      "version": "Version",
+      "uptime": "Uptime",
+      "cpuUsage": "Cpu Usage",
+      "memoryUsage": "Memory Usage",
+      "errorRate": "Error Rate",
+      "lastCheck": "Last Check"
+    }
+  },
+  "monitoringServiceApp": {
+    "monitoringServiceMonitoringSystemHealth": {
+      "created": "A new Monitoring System Health is created with identifier {{ param }}",
+      "updated": "A Monitoring System Health is updated with identifier {{ param }}",
+      "deleted": "A Monitoring System Health is deleted with identifier {{ param }}"
+    }
+  }
+}

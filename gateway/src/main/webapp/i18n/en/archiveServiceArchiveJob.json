@@ -1,0 +1,47 @@
+{
+  "gatewayApp": {
+    "archiveServiceArchiveJob": {
+      "home": {
+        "title": "Archive Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Archive Job",
+        "createOrEditLabel": "Create or edit a Archive Job",
+        "search": "Search for Archive Job",
+        "notFound": "No Archive Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Archive Job {{ id }}?"
+      },
+      "detail": {
+        "title": "Archive Job"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "documentQuery": "Document Query",
+      "archiveFormat": "Archive Format",
+      "compressionLevel": "Compression Level",
+      "encryptionEnabled": "Encryption Enabled",
+      "encryptionAlgorithm": "Encryption Algorithm",
+      "password": "Password",
+      "s3ArchiveKey": "S 3 Archive Key",
+      "archiveSha256": "Archive Sha 256",
+      "archiveSize": "Archive Size",
+      "documentCount": "Document Count",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "archivesDocuments": "Archives Documents"
+    }
+  },
+  "archiveServiceApp": {
+    "archiveServiceArchiveJob": {
+      "created": "A new Archive Job is created with identifier {{ param }}",
+      "updated": "A Archive Job is updated with identifier {{ param }}",
+      "deleted": "A Archive Job is deleted with identifier {{ param }}"
+    }
+  }
+}

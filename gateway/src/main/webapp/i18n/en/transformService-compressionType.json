@@ -1,0 +1,10 @@
+{
+  "gatewayApp": {
+    "CompressionType": {
+      "null": "",
+      "LOSSLESS": "LOSSLESS",
+      "LOSSY": "LOSSY",
+      "ADAPTIVE": "ADAPTIVE"
+    }
+  }
+}

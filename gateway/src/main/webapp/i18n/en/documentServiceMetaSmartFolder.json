@@ -1,0 +1,34 @@
+{
+  "gatewayApp": {
+    "documentServiceMetaSmartFolder": {
+      "home": {
+        "title": "Meta Smart Folders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meta Smart Folder",
+        "createOrEditLabel": "Create or edit a Meta Smart Folder",
+        "search": "Search for Meta Smart Folder",
+        "notFound": "No Meta Smart Folders found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Meta Smart Folder {{ id }}?"
+      },
+      "detail": {
+        "title": "Meta Smart Folder"
+      },
+      "id": "ID",
+      "name": "Name",
+      "queryJson": "Query Json",
+      "autoRefresh": "Auto Refresh",
+      "isPublic": "Is Public",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceMetaSmartFolder": {
+      "created": "A new Meta Smart Folder is created with identifier {{ param }}",
+      "updated": "A Meta Smart Folder is updated with identifier {{ param }}",
+      "deleted": "A Meta Smart Folder is deleted with identifier {{ param }}"
+    }
+  }
+}

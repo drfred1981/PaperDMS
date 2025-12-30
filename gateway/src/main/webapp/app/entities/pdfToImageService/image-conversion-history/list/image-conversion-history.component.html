@@ -1,0 +1,183 @@
+<div>
+  <h2 id="page-heading" data-cy="ImageConversionHistoryHeading">
+    <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.home.title">Image Conversion Histories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-image-conversion-history"
+        [routerLink]="['/image-conversion-history/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.home.createLabel"
+          >Create a new Image Conversion History</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.home.search"
+          >Search for Image Conversion History</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.pdfToImageServiceImageConversionHistory.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (imageConversionHistories().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.home.notFound">No Image Conversion Histories found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="originalRequestId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.originalRequestId">Original Request Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="archivedAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.archivedAt">Archived At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="conversionData">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.conversionData">Conversion Data</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imagesCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.imagesCount">Images Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="totalSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.totalSize">Total Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="finalStatus">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.finalStatus">Final Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processingDuration">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionHistory.processingDuration">Processing Duration</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (imageConversionHistory of imageConversionHistories(); track trackId(imageConversionHistory)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/image-conversion-history', imageConversionHistory.id, 'view']">{{ imageConversionHistory.id }}</a>
+              </td>
+              <td>{{ imageConversionHistory.originalRequestId }}</td>
+              <td>{{ imageConversionHistory.archivedAt | formatMediumDatetime }}</td>
+              <td>{{ imageConversionHistory.conversionData }}</td>
+              <td>{{ imageConversionHistory.imagesCount }}</td>
+              <td>{{ imageConversionHistory.totalSize }}</td>
+              <td [jhiTranslate]="'gatewayApp.ConversionStatus.' + (imageConversionHistory.finalStatus ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[imageConversionHistory.finalStatus ?? 'null']
+                }}
+              </td>
+              <td>{{ imageConversionHistory.processingDuration }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/image-conversion-history', imageConversionHistory.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/image-conversion-history', imageConversionHistory.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(imageConversionHistory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

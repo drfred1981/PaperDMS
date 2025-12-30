@@ -1,0 +1,11 @@
+id;facet_name;facet_type;values;counts
+1;experienced gah;NUMBER_RANGE;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+2;since smoothly but;NESTED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+3;designation;DATE_RANGE;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+4;so;DATE_RANGE;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+5;conceptualize gown including;NESTED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+6;ameliorate doodle;NUMBER_RANGE;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+7;a against;DATE_RANGE;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+8;crank tooth dependable;HIERARCHY;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+9;crossly;NESTED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt
+10;vary boo;HIERARCHY;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt

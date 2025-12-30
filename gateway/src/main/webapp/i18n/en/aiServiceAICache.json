@@ -1,0 +1,43 @@
+{
+  "gatewayApp": {
+    "aiServiceAICache": {
+      "home": {
+        "title": "AI Caches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new AI Cache",
+        "createOrEditLabel": "Create or edit a AI Cache",
+        "search": "Search for AI Cache",
+        "notFound": "No AI Caches found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete AI Cache {{ id }}?"
+      },
+      "detail": {
+        "title": "AI Cache"
+      },
+      "id": "ID",
+      "cacheKey": "Cache Key",
+      "inputSha256": "Input Sha 256",
+      "aiProvider": "Ai Provider",
+      "aiModel": "Ai Model",
+      "operation": "Operation",
+      "inputData": "Input Data",
+      "resultData": "Result Data",
+      "s3ResultKey": "S 3 Result Key",
+      "confidence": "Confidence",
+      "metadata": "Metadata",
+      "hits": "Hits",
+      "cost": "Cost",
+      "lastAccessDate": "Last Access Date",
+      "createdDate": "Created Date",
+      "expirationDate": "Expiration Date"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceAICache": {
+      "created": "A new AI Cache is created with identifier {{ param }}",
+      "updated": "A AI Cache is updated with identifier {{ param }}",
+      "deleted": "A AI Cache is deleted with identifier {{ param }}"
+    }
+  }
+}

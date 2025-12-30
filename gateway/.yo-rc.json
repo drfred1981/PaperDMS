@@ -1,0 +1,177 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "applications": {
+      "EmailImportDocumentService": {
+        "applicationIndex": 10,
+        "serverPort": "8090"
+      },
+      "aiService": {
+        "applicationIndex": 6,
+        "serverPort": "8086"
+      },
+      "archiveService": {
+        "applicationIndex": 8,
+        "serverPort": "8088"
+      },
+      "documentService": {
+        "applicationIndex": 1,
+        "serverPort": "8081"
+      },
+      "exportService": {
+        "applicationIndex": 9,
+        "serverPort": "8089"
+      },
+      "monitoringService": {
+        "applicationIndex": 11,
+        "serverPort": "8095"
+      },
+      "notificationService": {
+        "applicationIndex": 4,
+        "serverPort": "8084"
+      },
+      "ocrService": {
+        "applicationIndex": 2,
+        "serverPort": "8082"
+      },
+      "pdfToImageService": {
+        "applicationIndex": 14,
+        "clientFramework": "no",
+        "serverPort": "8096"
+      },
+      "reportingService": {
+        "applicationIndex": 13,
+        "serverPort": "8094"
+      },
+      "searchService": {
+        "applicationIndex": 3,
+        "serverPort": "8083"
+      },
+      "similarityService": {
+        "applicationIndex": 7,
+        "serverPort": "8087"
+      },
+      "transformService": {
+        "applicationIndex": 12,
+        "serverPort": "8092"
+      },
+      "workflowService": {
+        "applicationIndex": 5,
+        "serverPort": "8085"
+      }
+    },
+    "authenticationType": "jwt",
+    "baseName": "gateway",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "clientFramework": "angular",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "devServerPort": 4200,
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": true,
+    "entities": [
+      "Document",
+      "DocumentServiceStatus",
+      "MetaFolder",
+      "MetaTag",
+      "MetaMetaTagCategory",
+      "DocumentTag",
+      "DocumentType",
+      "DocumentTypeField",
+      "DocumentMetadata",
+      "DocumentExtractedField",
+      "DocumentPermission",
+      "MetaPermissionGroup",
+      "DocumentAudit",
+      "DocumentComment",
+      "DocumentRelation",
+      "DocumentStatistics",
+      "DocumentTemplate",
+      "MetaSavedSearch",
+      "MetaSmartFolder",
+      "MetaBookmark",
+      "DocumentVersion",
+      "DocumentProcess",
+      "OcrJob",
+      "OcrResult",
+      "OrcExtractedText",
+      "OcrComparison",
+      "OcrCache",
+      "SearchIndex",
+      "SearchQuery",
+      "SearchSemantic",
+      "SearchFacet",
+      "Notification",
+      "NotificationTemplate",
+      "NotificationPreference",
+      "NotificationEvent",
+      "NotificationWebhookSubscription",
+      "NotificationWebhookLog",
+      "Workflow",
+      "WorkflowStep",
+      "WorkflowInstance",
+      "WorkflowTask",
+      "WorkflowApprovalHistory",
+      "AIAutoTagJob",
+      "AITagPrediction",
+      "AITypePrediction",
+      "AICorrespondentPrediction",
+      "AILanguageDetection",
+      "AICache",
+      "SimilarityDocumentComparison",
+      "SimilarityJob",
+      "SimilarityDocumentFingerprint",
+      "SimilarityCluster",
+      "ArchiveJob",
+      "ArchiveDocument",
+      "ExportJob",
+      "ExportPattern",
+      "ExportResult",
+      "EmailImportDocument",
+      "EmailImportEmailAttachment",
+      "EmailImportImportRule",
+      "EmailImportImportMapping",
+      "MonitoringAlert",
+      "MonitoringAlertRule",
+      "MonitoringDocumentWatch",
+      "MonitoringMaintenanceTask",
+      "MonitoringSystemHealth",
+      "MonitoringServiceStatus",
+      "TransformConversionJob",
+      "TransformWatermarkJob",
+      "TransformRedactionJob",
+      "TransformCompressionJob",
+      "TransformMergeJob",
+      "ReportingDashboard",
+      "ReportingDashboardWidget",
+      "ReportingScheduledReport",
+      "ReportingExecution",
+      "ReportingSystemMetric",
+      "ReportingPerformanceMetric",
+      "ImagePdfConversionRequest",
+      "ImageGeneratedImage",
+      "ImageConversionBatch",
+      "ImageConversionConfig",
+      "ImageConversionHistory",
+      "ImageConversionStatistics"
+    ],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "MTUwMmMyMWRlY2VkNWFjZjJiZmVhYjI3OGFiZTY4ZDQ3MDZmMmE0YzdmYTgwNDc3YzkwZDZkNjgzMGM1MDc0MjI2NzBlMGY2NDA4MDgxYjg5NDc4ZTkwNmRiMThjMjEwZDgxMWUwZTA2YjFlZDEyZmNhOGU5ZTM0ZWIyMzRjOGQ=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767081196000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.gateway",
+    "prodDatabaseType": "postgresql",
+    "reactive": false,
+    "searchEngine": "elasticsearch",
+    "serverPort": 8080,
+    "serviceDiscoveryType": "consul",
+    "skipCommitHook": true,
+    "websocket": "spring-websocket",
+    "withAdminUi": true
+  }
+}

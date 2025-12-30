@@ -1,0 +1,26 @@
+package fr.smartprod.paperdms.workflow;
+
+import fr.smartprod.paperdms.workflow.config.AsyncSyncConfiguration;
+import fr.smartprod.paperdms.workflow.config.EmbeddedElasticsearch;
+import fr.smartprod.paperdms.workflow.config.EmbeddedKafka;
+import fr.smartprod.paperdms.workflow.config.EmbeddedRedis;
+import fr.smartprod.paperdms.workflow.config.EmbeddedSQL;
+import fr.smartprod.paperdms.workflow.config.JacksonConfiguration;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.boot.test.context.SpringBootTest;
+
+/**
+ * Base composite annotation for integration tests.
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@SpringBootTest(classes = { WorkflowServiceApp.class, JacksonConfiguration.class, AsyncSyncConfiguration.class })
+@EmbeddedRedis
+@EmbeddedElasticsearch
+@EmbeddedSQL
+@EmbeddedKafka
+public @interface IntegrationTest {
+}

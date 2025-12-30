@@ -1,0 +1,355 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-image-conversion-statistics-heading"
+        data-cy="ImageConversionStatisticsCreateUpdateHeading"
+        jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.home.createOrEditLabel"
+      >
+        Create or edit a Image Conversion Statistics
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let statisticsDateRef = editForm.get('statisticsDate')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_statisticsDate"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.statisticsDate"
+            >Statistics Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_statisticsDate"
+              data-cy="statisticsDate"
+              type="text"
+              class="form-control"
+              name="statisticsDate"
+              ngbDatepicker
+              #statisticsDateDp="ngbDatepicker"
+              formControlName="statisticsDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="statisticsDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (statisticsDateRef.invalid && (statisticsDateRef.dirty || statisticsDateRef.touched)) {
+            <div>
+              @if (editForm.get('statisticsDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let totalConversionsRef = editForm.get('totalConversions')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalConversions"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalConversions"
+            >Total Conversions</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalConversions"
+            id="field_totalConversions"
+            data-cy="totalConversions"
+            formControlName="totalConversions"
+          />
+          @if (totalConversionsRef.invalid && (totalConversionsRef.dirty || totalConversionsRef.touched)) {
+            <div>
+              @if (editForm.get('totalConversions')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalConversions')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let successfulConversionsRef = editForm.get('successfulConversions')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_successfulConversions"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.successfulConversions"
+            >Successful Conversions</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="successfulConversions"
+            id="field_successfulConversions"
+            data-cy="successfulConversions"
+            formControlName="successfulConversions"
+          />
+          @if (successfulConversionsRef.invalid && (successfulConversionsRef.dirty || successfulConversionsRef.touched)) {
+            <div>
+              @if (editForm.get('successfulConversions')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('successfulConversions')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let failedConversionsRef = editForm.get('failedConversions')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_failedConversions"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.failedConversions"
+            >Failed Conversions</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="failedConversions"
+            id="field_failedConversions"
+            data-cy="failedConversions"
+            formControlName="failedConversions"
+          />
+          @if (failedConversionsRef.invalid && (failedConversionsRef.dirty || failedConversionsRef.touched)) {
+            <div>
+              @if (editForm.get('failedConversions')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('failedConversions')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let totalPagesConvertedRef = editForm.get('totalPagesConverted')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalPagesConverted"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalPagesConverted"
+            >Total Pages Converted</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalPagesConverted"
+            id="field_totalPagesConverted"
+            data-cy="totalPagesConverted"
+            formControlName="totalPagesConverted"
+          />
+          @if (totalPagesConvertedRef.invalid && (totalPagesConvertedRef.dirty || totalPagesConvertedRef.touched)) {
+            <div>
+              @if (editForm.get('totalPagesConverted')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalPagesConverted')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let totalImagesGeneratedRef = editForm.get('totalImagesGenerated')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalImagesGenerated"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalImagesGenerated"
+            >Total Images Generated</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalImagesGenerated"
+            id="field_totalImagesGenerated"
+            data-cy="totalImagesGenerated"
+            formControlName="totalImagesGenerated"
+          />
+          @if (totalImagesGeneratedRef.invalid && (totalImagesGeneratedRef.dirty || totalImagesGeneratedRef.touched)) {
+            <div>
+              @if (editForm.get('totalImagesGenerated')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalImagesGenerated')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let totalImagesSizeRef = editForm.get('totalImagesSize')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_totalImagesSize"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.totalImagesSize"
+            >Total Images Size</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="totalImagesSize"
+            id="field_totalImagesSize"
+            data-cy="totalImagesSize"
+            formControlName="totalImagesSize"
+          />
+          @if (totalImagesSizeRef.invalid && (totalImagesSizeRef.dirty || totalImagesSizeRef.touched)) {
+            <div>
+              @if (editForm.get('totalImagesSize')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('totalImagesSize')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_averageProcessingDuration"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.averageProcessingDuration"
+            >Average Processing Duration</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="averageProcessingDuration"
+            id="field_averageProcessingDuration"
+            data-cy="averageProcessingDuration"
+            formControlName="averageProcessingDuration"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_maxProcessingDuration"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.maxProcessingDuration"
+            >Max Processing Duration</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="maxProcessingDuration"
+            id="field_maxProcessingDuration"
+            data-cy="maxProcessingDuration"
+            formControlName="maxProcessingDuration"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_minProcessingDuration"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.minProcessingDuration"
+            >Min Processing Duration</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="minProcessingDuration"
+            id="field_minProcessingDuration"
+            data-cy="minProcessingDuration"
+            formControlName="minProcessingDuration"
+          />
+        </div>
+
+        @let calculatedAtRef = editForm.get('calculatedAt')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_calculatedAt"
+            jhiTranslate="gatewayApp.pdfToImageServiceImageConversionStatistics.calculatedAt"
+            >Calculated At</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_calculatedAt"
+              data-cy="calculatedAt"
+              type="datetime-local"
+              class="form-control"
+              name="calculatedAt"
+              formControlName="calculatedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (calculatedAtRef.invalid && (calculatedAtRef.dirty || calculatedAtRef.touched)) {
+            <div>
+              @if (editForm.get('calculatedAt')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('calculatedAt')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

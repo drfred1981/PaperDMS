@@ -1,0 +1,223 @@
+<div>
+  <h2 id="page-heading" data-cy="ImageConversionConfigHeading">
+    <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.home.title">Image Conversion Configs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-image-conversion-config"
+        [routerLink]="['/image-conversion-config/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.home.createLabel"
+          >Create a new Image Conversion Config</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.home.search"
+          >Search for Image Conversion Config</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.pdfToImageServiceImageConversionConfig.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (imageConversionConfigs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.home.notFound">No Image Conversion Configs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="configName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.configName">Config Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultQuality">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultQuality">Default Quality</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultFormat">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultFormat">Default Format</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultDpi">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultDpi">Default Dpi</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultConversionType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultConversionType">Default Conversion Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultPriority">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultPriority">Default Priority</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isDefault">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.isDefault">Is Default</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.createdAt">Created At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updatedAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.updatedAt">Updated At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (imageConversionConfig of imageConversionConfigs(); track trackId(imageConversionConfig)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/image-conversion-config', imageConversionConfig.id, 'view']">{{ imageConversionConfig.id }}</a>
+              </td>
+              <td>{{ imageConversionConfig.configName }}</td>
+              <td>{{ imageConversionConfig.description }}</td>
+              <td [jhiTranslate]="'gatewayApp.ImageQuality.' + (imageConversionConfig.defaultQuality ?? 'null')">
+                {{
+                  { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', ULTRA: 'ULTRA' }[imageConversionConfig.defaultQuality ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.ImageFormat.' + (imageConversionConfig.defaultFormat ?? 'null')">
+                {{ { null: '', PNG: 'PNG', JPEG: 'JPEG', WEBP: 'WEBP' }[imageConversionConfig.defaultFormat ?? 'null'] }}
+              </td>
+              <td>{{ imageConversionConfig.defaultDpi }}</td>
+              <td [jhiTranslate]="'gatewayApp.ConversionType.' + (imageConversionConfig.defaultConversionType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    SINGLE_PAGE: 'SINGLE_PAGE',
+                    ALL_PAGES: 'ALL_PAGES',
+                    PAGE_RANGE: 'PAGE_RANGE',
+                    FIRST_PAGE_ONLY: 'FIRST_PAGE_ONLY',
+                  }[imageConversionConfig.defaultConversionType ?? 'null']
+                }}
+              </td>
+              <td>{{ imageConversionConfig.defaultPriority }}</td>
+              <td>{{ imageConversionConfig.isActive }}</td>
+              <td>{{ imageConversionConfig.isDefault }}</td>
+              <td>{{ imageConversionConfig.createdAt | formatMediumDatetime }}</td>
+              <td>{{ imageConversionConfig.updatedAt | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/image-conversion-config', imageConversionConfig.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/image-conversion-config', imageConversionConfig.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(imageConversionConfig)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

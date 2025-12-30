@@ -1,0 +1,11 @@
+id;source_document_sha_256;target_document_sha_256;similarity_score;algorithm;features;computed_date;is_relevant;reviewed_by;reviewed_date
+1;dividend oddly;pfft as regal;0.06;COMBINED;../fake-data/blob/hipster.txt;2025-12-29T15:31:24;false;sin detective;2025-12-29T15:59:38
+2;neatly woot;wicked chubby absent;0.72;LEVENSHTEIN;../fake-data/blob/hipster.txt;2025-12-29T14:34:31;true;dock incidentally fooey;2025-12-29T08:47:27
+3;coin dilate that;anenst;0.07;LEVENSHTEIN;../fake-data/blob/hipster.txt;2025-12-29T07:48:01;false;through galoshes;2025-12-29T16:36:33
+4;when motor mill;which ornate down;0.18;COMBINED;../fake-data/blob/hipster.txt;2025-12-29T08:02:35;true;fork exalt;2025-12-29T21:32:21
+5;given;archaeology;0.42;LEVENSHTEIN;../fake-data/blob/hipster.txt;2025-12-29T16:08:01;false;briskly hm duh;2025-12-29T18:31:36
+6;verify singing mockingly;uh-huh consequently;0.44;COMBINED;../fake-data/blob/hipster.txt;2025-12-29T07:35:39;true;supposing;2025-12-29T10:44:41
+7;phew swing unto;ah;0.83;LSH;../fake-data/blob/hipster.txt;2025-12-30T01:31:54;true;immediately pish ugh;2025-12-29T12:03:12
+8;authentic impish acquaintance;corny whenever whose;0.63;JACCARD;../fake-data/blob/hipster.txt;2025-12-29T08:32:35;true;cork against ill-fated;2025-12-29T12:03:41
+9;inside spellcheck indeed;after since;0.37;JACCARD;../fake-data/blob/hipster.txt;2025-12-30T04:10:04;false;unless apropos although;2025-12-30T01:53:54
+10;bouncy nervous deploy;through ha likewise;0.85;JACCARD;../fake-data/blob/hipster.txt;2025-12-29T07:07:12;true;untrue;2025-12-29T14:28:59

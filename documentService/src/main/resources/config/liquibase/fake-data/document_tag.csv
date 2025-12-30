@@ -1,0 +1,11 @@
+id;assigned_date;assigned_by;confidence;is_auto_meta_tagged;source
+1;2025-12-29T08:15:42;once;0.8;false;MANUAL
+2;2025-12-29T11:45:37;instead what soon;0.93;false;RULE_BASED
+3;2025-12-29T17:46:55;miscalculate duh;0.5;true;MANUAL
+4;2025-12-29T23:53:43;shakily for;0.79;true;AI_CONFIRMED
+5;2025-12-29T09:57:55;excluding lawmaker ouch;0.21;true;MANUAL
+6;2025-12-29T11:27:41;blind;0.43;false;RULE_BASED
+7;2025-12-30T03:59:50;phooey;0.61;true;RULE_BASED
+8;2025-12-30T00:58:28;diligently banish;0.99;false;AI_SUGGESTED
+9;2025-12-29T12:10:46;snowplow given sonata;0.39;true;RULE_BASED
+10;2025-12-30T06:10:44;best oh;0;false;MANUAL

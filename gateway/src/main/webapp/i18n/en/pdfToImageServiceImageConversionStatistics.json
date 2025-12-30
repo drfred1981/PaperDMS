@@ -1,0 +1,39 @@
+{
+  "gatewayApp": {
+    "pdfToImageServiceImageConversionStatistics": {
+      "home": {
+        "title": "Image Conversion Statistics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image Conversion Statistics",
+        "createOrEditLabel": "Create or edit a Image Conversion Statistics",
+        "search": "Search for Image Conversion Statistics",
+        "notFound": "No Image Conversion Statistics found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Image Conversion Statistics {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Conversion Statistics"
+      },
+      "id": "ID",
+      "statisticsDate": "Statistics Date",
+      "totalConversions": "Total Conversions",
+      "successfulConversions": "Successful Conversions",
+      "failedConversions": "Failed Conversions",
+      "totalPagesConverted": "Total Pages Converted",
+      "totalImagesGenerated": "Total Images Generated",
+      "totalImagesSize": "Total Images Size",
+      "averageProcessingDuration": "Average Processing Duration",
+      "maxProcessingDuration": "Max Processing Duration",
+      "minProcessingDuration": "Min Processing Duration",
+      "calculatedAt": "Calculated At"
+    }
+  },
+  "pdfToImageServiceApp": {
+    "pdfToImageServiceImageConversionStatistics": {
+      "created": "A new Image Conversion Statistics is created with identifier {{ param }}",
+      "updated": "A Image Conversion Statistics is updated with identifier {{ param }}",
+      "deleted": "A Image Conversion Statistics is deleted with identifier {{ param }}"
+    }
+  }
+}

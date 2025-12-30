@@ -1,14 +1,29 @@
 {
   "generator-jhipster": {
-    "baseName": "paperdms",
-    "creationTimestamp": 1767038181462,
-    "entities": [],
+    "applicationIndex": 10,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "EmailImportDocumentService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["EmailImportDocument", "EmailImportEmailAttachment", "EmailImportImportRule", "EmailImportImportMapping"],
     "jhipsterVersion": "8.11.0",
-    "jwtSecretKey": "Y2Y2ZDFhM2UxNDZhMThkMzg0MjgyY2JiZDUwMjg1NTUwODA3N2ZhMTA1YWQwN2EwM2NiMmVmOTNmMDc0YmZjYzMwODcxNzNhZDkzMGFjNTdlNzgzNzBiMzIzZmZlODMzMTkwNDA5MTFkNzdhYTM3NTk3ZDdhMzY2NTkyNzdkZDc=",
+    "jwtSecretKey": "M2QyOTMwOWI4YjU2ZGYzMzZiN2E1ZjdjODNmZjk1NDA5NDNkZjUyY2RkMmU2MDRmMTlkODhiMzNiMTczMzk0ZDAzMGI1NzE1NTNlZmM1MTQzMzBhYzEzZDg1MDNiMzVkNzJhNzM2ZTZmMGRiYzRlMDJhZDFmZmRjYzk2MTJlZDU=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767076395000,
+    "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.emailimportdocument",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8090",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

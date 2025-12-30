@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentAudit(); as documentAuditRef) {
+      <div>
+        <h2 data-cy="documentAuditDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceDocumentAudit.detail.title">Document Audit</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentAuditRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentAudit.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ documentAuditRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentAudit.action">Action</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AuditAction.' + (documentAuditRef.action ?? 'null')">{{
+              {
+                null: '',
+                CREATED: 'CREATED',
+                VIEWED: 'VIEWED',
+                DOWNLOADED: 'DOWNLOADED',
+                MODIFIED: 'MODIFIED',
+                DELETED: 'DELETED',
+                SHARED: 'SHARED',
+                PRINTED: 'PRINTED',
+                EXPORTED: 'EXPORTED',
+                PERMISSIONS_CHANGED: 'PERMISSIONS_CHANGED',
+                WORKFLOW_STARTED: 'WORKFLOW_STARTED',
+                WORKFLOW_COMPLETED: 'WORKFLOW_COMPLETED',
+                COMMENTED: 'COMMENTED',
+                RELATION_ADDED: 'RELATION_ADDED',
+                RELATION_REMOVED: 'RELATION_REMOVED',
+                ARCHIVED: 'ARCHIVED',
+                RESTORED: 'RESTORED',
+                SERVICE_STATUS_CHANGED: 'SERVICE_STATUS_CHANGED',
+              }[documentAuditRef.action ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentAudit.userId">User Id</span></dt>
+          <dd>
+            <span>{{ documentAuditRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentAudit.userIp">User Ip</span></dt>
+          <dd>
+            <span>{{ documentAuditRef.userIp }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentAudit.actionDate">Action Date</span></dt>
+          <dd>
+            <span>{{ documentAuditRef.actionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentAudit.additionalInfo">Additional Info</span></dt>
+          <dd>
+            <span>{{ documentAuditRef.additionalInfo }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentAudit.document">Document</span></dt>
+          <dd>
+            @if (documentAudit()!.document) {
+              <div>
+                <a [routerLink]="['/document', documentAudit()!.document?.id, 'view']">{{ documentAuditRef.document?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-audit', documentAuditRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

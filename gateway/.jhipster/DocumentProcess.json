@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20251230065116"
+  },
+  "applications": ["gateway"],
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "WorkflowInstanceStatus",
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,CANCELLED,REJECTED,ON_HOLD"
+    },
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "DocumentProcess",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

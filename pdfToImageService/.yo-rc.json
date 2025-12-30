@@ -1,14 +1,39 @@
 {
   "generator-jhipster": {
-    "baseName": "paperdms",
-    "creationTimestamp": 1767038184306,
-    "entities": [],
+    "applicationIndex": 14,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "pdfToImageService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "clientFramework": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": true,
+    "entities": [
+      "ImagePdfConversionRequest",
+      "ImageGeneratedImage",
+      "ImageConversionConfig",
+      "ImageConversionBatch",
+      "ImageConversionHistory",
+      "ImageConversionStatistics"
+    ],
     "jhipsterVersion": "8.11.0",
-    "jwtSecretKey": "NWRiMzRiMzhhZjFiYWNmNzg3OTBjNzc2Yzg0NDI4MTJiNTBhMGVhZWZmOTUwYjY5NDQwM2YxNDU4YmI3YTA0M2NmODM0OTM5YzU2NjBjZWI2ZDM2M2Q3NzQ1YjNhNjZkYjgwMTNjNWNjNmM0NjQ0NGM0ZjkzNTllMWI5NjEwODY=",
+    "jwtSecretKey": "ZGQ3NjUyM2YwMjUxMjM1YjQzM2M3ODgwNTU4MTVmN2Y2YmIzNjhmMWE5Mzg2YmY0NjhmNjBkMmIyNmNkOGJiZGFiMGFmM2M5MjE1YTM4ODBmZGRmNTFkN2U1MThjY2FmZjQwMGE1MjkwOTcwZmMwMGNmZTE4ZGU4YmYxNTY4Y2E=",
     "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767076515000,
+    "messageBroker": "kafka",
     "monorepository": true,
     "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.pdftoimage",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8096",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
     "skipCommitHook": true,
+    "skipUserManagement": true,
     "withAdminUi": true
   }
 }

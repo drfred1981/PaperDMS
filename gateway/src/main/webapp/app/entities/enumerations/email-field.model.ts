@@ -1,0 +1,27 @@
+export enum EmailField {
+  FROM = 'FROM',
+
+  TO = 'TO',
+
+  CC = 'CC',
+
+  BCC = 'BCC',
+
+  SUBJECT = 'SUBJECT',
+
+  BODY = 'BODY',
+
+  BODY_HTML = 'BODY_HTML',
+
+  DATE = 'DATE',
+
+  ATTACHMENT_NAME = 'ATTACHMENT_NAME',
+
+  ATTACHMENT_COUNT = 'ATTACHMENT_COUNT',
+
+  MESSAGE_ID = 'MESSAGE_ID',
+
+  IN_REPLY_TO = 'IN_REPLY_TO',
+
+  HEADERS = 'HEADERS',
+}

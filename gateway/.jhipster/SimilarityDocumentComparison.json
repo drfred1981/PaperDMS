@@ -1,0 +1,73 @@
+{
+  "annotations": {
+    "changelogDate": "20251230071816"
+  },
+  "applications": ["similarityService", "gateway"],
+  "clientRootFolder": "similarityService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "sourceDocumentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "targetDocumentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "similarityScore",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "1",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "algorithm",
+      "fieldType": "SimilarityAlgorithm",
+      "fieldValues": "COSINE,JACCARD,LEVENSHTEIN,LSH,DEEP_LEARNING,COMBINED"
+    },
+    {
+      "fieldName": "features",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "computedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isRelevant",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "reviewedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "reviewedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "similarityService",
+  "name": "SimilarityDocumentComparison",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "similarityJob",
+      "otherEntityRelationshipName": "similarities",
+      "relationshipName": "job",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

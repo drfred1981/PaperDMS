@@ -1,0 +1,249 @@
+<div>
+  <h2 id="page-heading" data-cy="AIAutoTagJobHeading">
+    <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.home.title">AI Auto Tag Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ai-auto-tag-job"
+        [routerLink]="['/ai-auto-tag-job/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.home.createLabel">Create a new AI Auto Tag Job</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.home.search"
+          >Search for AI Auto Tag Job</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.aiServiceAIAutoTagJob.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (aIAutoTagJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.home.notFound">No AI Auto Tag Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.s3Key">S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="extractedText">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.extractedText">Extracted Text</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="extractedTextSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.extractedTextSha256">Extracted Text Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="modelVersion">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.modelVersion">Model Version</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="resultCacheKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.resultCacheKey">Result Cache Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isCached">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.isCached">Is Cached</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="aITypePrediction.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.aITypePrediction">A I Type Prediction</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="languagePrediction.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAIAutoTagJob.languagePrediction">Language Prediction</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (aIAutoTagJob of aIAutoTagJobs(); track trackId(aIAutoTagJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ai-auto-tag-job', aIAutoTagJob.id, 'view']">{{ aIAutoTagJob.id }}</a>
+              </td>
+              <td>{{ aIAutoTagJob.documentSha256 }}</td>
+              <td>{{ aIAutoTagJob.s3Key }}</td>
+              <td>{{ aIAutoTagJob.extractedText }}</td>
+              <td>{{ aIAutoTagJob.extractedTextSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.AiJobStatus.' + (aIAutoTagJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    IN_PROGRESS: 'IN_PROGRESS',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[aIAutoTagJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ aIAutoTagJob.modelVersion }}</td>
+              <td>{{ aIAutoTagJob.resultCacheKey }}</td>
+              <td>{{ aIAutoTagJob.isCached }}</td>
+              <td>{{ aIAutoTagJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ aIAutoTagJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ aIAutoTagJob.errorMessage }}</td>
+              <td>{{ aIAutoTagJob.createdDate | formatMediumDatetime }}</td>
+              <td>
+                @if (aIAutoTagJob.aITypePrediction) {
+                  <div>
+                    <a [routerLink]="['/ai-type-prediction', aIAutoTagJob.aITypePrediction.id, 'view']">{{
+                      aIAutoTagJob.aITypePrediction.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (aIAutoTagJob.languagePrediction) {
+                  <div>
+                    <a [routerLink]="['/ai-language-detection', aIAutoTagJob.languagePrediction.id, 'view']">{{
+                      aIAutoTagJob.languagePrediction.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/ai-auto-tag-job', aIAutoTagJob.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/ai-auto-tag-job', aIAutoTagJob.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(aIAutoTagJob)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,61 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063515"
+  },
+  "applications": ["monitoringService", "gateway"],
+  "clientRootFolder": "monitoringService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "serviceName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "serviceType",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "MonitoringServiceStatusType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "RUNNING,STARTING,STOPPING,STOPPED,ERROR,MAINTENANCE"
+    },
+    {
+      "fieldName": "endpoint",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "port",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "lastPing",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isHealthy",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "monitoringService",
+  "name": "MonitoringServiceStatus",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

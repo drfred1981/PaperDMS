@@ -1,0 +1,288 @@
+<div>
+  <h2 id="page-heading" data-cy="AICorrespondentPredictionHeading">
+    <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.home.title">AI Correspondent Predictions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ai-correspondent-prediction"
+        [routerLink]="['/ai-correspondent-prediction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.home.createLabel"
+          >Create a new AI Correspondent Prediction</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.home.search"
+          >Search for AI Correspondent Prediction</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.aiServiceAICorrespondentPrediction.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (aICorrespondentPredictions().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.home.notFound">No AI Correspondent Predictions found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="correspondentName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.correspondentName">Correspondent Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.name">Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.email">Email</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phone">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.phone">Phone</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.address">Address</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="company">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.company">Company</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.type">Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="role">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.role">Role</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="confidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.confidence">Confidence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reason">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.reason">Reason</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="modelVersion">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.modelVersion">Model Version</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="predictionS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.predictionS3Key">Prediction S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isAccepted">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.isAccepted">Is Accepted</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="acceptedBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.acceptedBy">Accepted By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="acceptedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.acceptedDate">Accepted Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="predictionDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.predictionDate">Prediction Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="job.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.aiServiceAICorrespondentPrediction.job">Job</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (aICorrespondentPrediction of aICorrespondentPredictions(); track trackId(aICorrespondentPrediction)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/ai-correspondent-prediction', aICorrespondentPrediction.id, 'view']">{{
+                  aICorrespondentPrediction.id
+                }}</a>
+              </td>
+              <td>{{ aICorrespondentPrediction.correspondentName }}</td>
+              <td>{{ aICorrespondentPrediction.name }}</td>
+              <td>{{ aICorrespondentPrediction.email }}</td>
+              <td>{{ aICorrespondentPrediction.phone }}</td>
+              <td>{{ aICorrespondentPrediction.address }}</td>
+              <td>{{ aICorrespondentPrediction.company }}</td>
+              <td [jhiTranslate]="'gatewayApp.CorrespondentType.' + (aICorrespondentPrediction.type ?? 'null')">
+                {{
+                  { null: '', PERSON: 'PERSON', ORGANIZATION: 'ORGANIZATION', SYSTEM: 'SYSTEM', UNKNOWN: 'UNKNOWN' }[
+                    aICorrespondentPrediction.type ?? 'null'
+                  ]
+                }}
+              </td>
+              <td [jhiTranslate]="'gatewayApp.CorrespondentRole.' + (aICorrespondentPrediction.role ?? 'null')">
+                {{
+                  { null: '', SENDER: 'SENDER', RECIPIENT: 'RECIPIENT', CC: 'CC', BCC: 'BCC', BOTH: 'BOTH' }[
+                    aICorrespondentPrediction.role ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ aICorrespondentPrediction.confidence }}</td>
+              <td>{{ aICorrespondentPrediction.reason }}</td>
+              <td>{{ aICorrespondentPrediction.modelVersion }}</td>
+              <td>{{ aICorrespondentPrediction.predictionS3Key }}</td>
+              <td>{{ aICorrespondentPrediction.isAccepted }}</td>
+              <td>{{ aICorrespondentPrediction.acceptedBy }}</td>
+              <td>{{ aICorrespondentPrediction.acceptedDate | formatMediumDatetime }}</td>
+              <td>{{ aICorrespondentPrediction.predictionDate | formatMediumDatetime }}</td>
+              <td>
+                @if (aICorrespondentPrediction.job) {
+                  <div>
+                    <a [routerLink]="['/ai-auto-tag-job', aICorrespondentPrediction.job.id, 'view']">{{
+                      aICorrespondentPrediction.job.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/ai-correspondent-prediction', aICorrespondentPrediction.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/ai-correspondent-prediction', aICorrespondentPrediction.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(aICorrespondentPrediction)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportingScheduledReport(); as reportingScheduledReportRef) {
+      <div>
+        <h2 data-cy="reportingScheduledReportDetailsHeading">
+          <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.detail.title">Reporting Scheduled Report</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.name">Name</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.description">Description</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.reportType">Report Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ReportType.' + (reportingScheduledReportRef.reportType ?? 'null')">{{
+              {
+                null: '',
+                DOCUMENT_INVENTORY: 'DOCUMENT_INVENTORY',
+                USER_ACTIVITY: 'USER_ACTIVITY',
+                STORAGE_ANALYSIS: 'STORAGE_ANALYSIS',
+                COMPLIANCE_AUDIT: 'COMPLIANCE_AUDIT',
+                WORKFLOW_PERFORMANCE: 'WORKFLOW_PERFORMANCE',
+                TAG_USAGE: 'TAG_USAGE',
+                INVOICE_SUMMARY: 'INVOICE_SUMMARY',
+                CONTRACT_EXPIRATION: 'CONTRACT_EXPIRATION',
+                BANK_RECONCILIATION: 'BANK_RECONCILIATION',
+                PERFORMANCE_METRICS: 'PERFORMANCE_METRICS',
+                SYSTEM_HEALTH: 'SYSTEM_HEALTH',
+                CUSTOM: 'CUSTOM',
+              }[reportingScheduledReportRef.reportType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.query">Query</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.query }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.schedule">Schedule</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.schedule }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.format">Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ReportFormat.' + (reportingScheduledReportRef.format ?? 'null')">{{
+              { null: '', PDF: 'PDF', EXCEL: 'EXCEL', CSV: 'CSV', JSON: 'JSON', HTML: 'HTML', XML: 'XML' }[
+                reportingScheduledReportRef.format ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.recipients">Recipients</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.recipients }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.lastRun">Last Run</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.lastRun | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.nextRun">Next Run</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.nextRun | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ reportingScheduledReportRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/reporting-scheduled-report', reportingScheduledReportRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

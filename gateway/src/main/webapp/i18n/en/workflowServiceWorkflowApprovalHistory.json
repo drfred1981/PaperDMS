@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "workflowServiceWorkflowApprovalHistory": {
+      "home": {
+        "title": "Workflow Approval Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Workflow Approval History",
+        "createOrEditLabel": "Create or edit a Workflow Approval History",
+        "search": "Search for Workflow Approval History",
+        "notFound": "No Workflow Approval Histories found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Workflow Approval History {{ id }}?"
+      },
+      "detail": {
+        "title": "Workflow Approval History"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "stepNumber": "Step Number",
+      "action": "Action",
+      "comment": "Comment",
+      "actionDate": "Action Date",
+      "actionBy": "Action By",
+      "previousAssignee": "Previous Assignee",
+      "timeTaken": "Time Taken",
+      "workflowInstance": "Workflow Instance"
+    }
+  },
+  "workflowServiceApp": {
+    "workflowServiceWorkflowApprovalHistory": {
+      "created": "A new Workflow Approval History is created with identifier {{ param }}",
+      "updated": "A Workflow Approval History is updated with identifier {{ param }}",
+      "deleted": "A Workflow Approval History is deleted with identifier {{ param }}"
+    }
+  }
+}

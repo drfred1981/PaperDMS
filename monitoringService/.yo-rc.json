@@ -1,0 +1,36 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 11,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "monitoringService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": [
+      "MonitoringAlert",
+      "MonitoringAlertRule",
+      "MonitoringDocumentWatch",
+      "MonitoringMaintenanceTask",
+      "MonitoringSystemHealth",
+      "MonitoringServiceStatus"
+    ],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "NjQyZWE4MDgxOGVmYzI5MTYwNmRhNGU0NjNmZDhiOTk4NGE2ZGY4MjU2MzgwZWI0YzE3NWU2Y2QyNWRlNDA0OGQxZjFiMzBjNTc1NzE5NDc5ZDhhYjFmMGE2ZWFmZmVkZGRjZDljYzM3NTkwODFhOTdmODlkNGRmZTAwNzlmODM=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767076515000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.monitoring",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8095",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true,
+    "withAdminUi": true
+  }
+}

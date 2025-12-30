@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "reportingServiceReportingSystemMetric": {
+      "home": {
+        "title": "Reporting System Metrics",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reporting System Metric",
+        "createOrEditLabel": "Create or edit a Reporting System Metric",
+        "search": "Search for Reporting System Metric",
+        "notFound": "No Reporting System Metrics found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Reporting System Metric {{ id }}?"
+      },
+      "detail": {
+        "title": "Reporting System Metric"
+      },
+      "id": "ID",
+      "metricName": "Metric Name",
+      "cpuUsage": "Cpu Usage",
+      "memoryUsage": "Memory Usage",
+      "diskUsage": "Disk Usage",
+      "networkIn": "Network In",
+      "networkOut": "Network Out",
+      "activeConnections": "Active Connections",
+      "timestamp": "Timestamp"
+    }
+  },
+  "reportingServiceApp": {
+    "reportingServiceReportingSystemMetric": {
+      "created": "A new Reporting System Metric is created with identifier {{ param }}",
+      "updated": "A Reporting System Metric is updated with identifier {{ param }}",
+      "deleted": "A Reporting System Metric is deleted with identifier {{ param }}"
+    }
+  }
+}

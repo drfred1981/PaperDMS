@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (searchIndex(); as searchIndexRef) {
+      <div>
+        <h2 data-cy="searchIndexDetailsHeading">
+          <span jhiTranslate="gatewayApp.searchServiceSearchIndex.detail.title">Search Index</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.indexedContent">Indexed Content</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.indexedContent }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.metadata">Metadata</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.metadata }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.tags">Tags</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.tags }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.correspondents">Correspondents</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.correspondents }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.extractedEntities">Extracted Entities</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.extractedEntities }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.indexedDate">Indexed Date</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.indexedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.searchServiceSearchIndex.lastUpdated">Last Updated</span></dt>
+          <dd>
+            <span>{{ searchIndexRef.lastUpdated | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/search-index', searchIndexRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

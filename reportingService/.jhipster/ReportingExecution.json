@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063315"
+  },
+  "applications": ["reportingService", "gateway"],
+  "clientRootFolder": "reportingService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "status",
+      "fieldType": "ReportingExecutionStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,RUNNING,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "recordsProcessed",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "outputS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "outputSize",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "reportingService",
+  "name": "ReportingExecution",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "reportingScheduledReport",
+      "otherEntityRelationshipName": "reportsExecutions",
+      "relationshipName": "scheduledReport",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

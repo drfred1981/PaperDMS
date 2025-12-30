@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "emailImportDocumentServiceEmailImportEmailAttachment": {
+      "home": {
+        "title": "Email Import Email Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Email Import Email Attachment",
+        "createOrEditLabel": "Create or edit a Email Import Email Attachment",
+        "search": "Search for Email Import Email Attachment",
+        "notFound": "No Email Import Email Attachments found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Email Import Email Attachment {{ id }}?"
+      },
+      "detail": {
+        "title": "Email Import Email Attachment"
+      },
+      "id": "ID",
+      "fileName": "File Name",
+      "fileSize": "File Size",
+      "mimeType": "Mime Type",
+      "sha256": "Sha 256",
+      "s3Key": "S 3 Key",
+      "status": "Status",
+      "errorMessage": "Error Message",
+      "documentSha256": "Document Sha 256",
+      "emailImportDocument": "Email Import Document"
+    }
+  },
+  "emailImportDocumentServiceApp": {
+    "emailImportDocumentServiceEmailImportEmailAttachment": {
+      "created": "A new Email Import Email Attachment is created with identifier {{ param }}",
+      "updated": "A Email Import Email Attachment is updated with identifier {{ param }}",
+      "deleted": "A Email Import Email Attachment is deleted with identifier {{ param }}"
+    }
+  }
+}

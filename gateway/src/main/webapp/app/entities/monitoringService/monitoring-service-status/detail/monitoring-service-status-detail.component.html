@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (monitoringServiceStatus(); as monitoringServiceStatusRef) {
+      <div>
+        <h2 data-cy="monitoringServiceStatusDetailsHeading">
+          <span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.detail.title">Monitoring Service Status</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.serviceName">Service Name</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.serviceName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.serviceType">Service Type</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.serviceType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.MonitoringServiceStatusType.' + (monitoringServiceStatusRef.status ?? 'null')">{{
+              {
+                null: '',
+                RUNNING: 'RUNNING',
+                STARTING: 'STARTING',
+                STOPPING: 'STOPPING',
+                STOPPED: 'STOPPED',
+                ERROR: 'ERROR',
+                MAINTENANCE: 'MAINTENANCE',
+              }[monitoringServiceStatusRef.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.endpoint">Endpoint</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.endpoint }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.port">Port</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.port }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.version">Version</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.version }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.lastPing">Last Ping</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.lastPing | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringServiceStatus.isHealthy">Is Healthy</span></dt>
+          <dd>
+            <span>{{ monitoringServiceStatusRef.isHealthy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/monitoring-service-status', monitoringServiceStatusRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

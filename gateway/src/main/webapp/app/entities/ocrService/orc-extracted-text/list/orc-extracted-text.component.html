@@ -1,0 +1,222 @@
+<div>
+  <h2 id="page-heading" data-cy="OrcExtractedTextHeading">
+    <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.home.title">Orc Extracted Texts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-orc-extracted-text"
+        [routerLink]="['/orc-extracted-text/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.home.createLabel"
+          >Create a new Orc Extracted Text</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.home.search"
+          >Search for Orc Extracted Text</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.ocrServiceOrcExtractedText.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (orcExtractedTexts().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.home.notFound">No Orc Extracted Texts found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="content">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.content">Content</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.contentSha256">Content Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3ContentKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.s3ContentKey">S 3 Content Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="s3Bucket">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.s3Bucket">S 3 Bucket</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pageNumber">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.pageNumber">Page Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="language">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.language">Language</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="wordCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.wordCount">Word Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="hasStructuredData">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.hasStructuredData">Has Structured Data</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="structuredData">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.structuredData">Structured Data</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="structuredDataS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.structuredDataS3Key">Structured Data S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="extractedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.extractedDate">Extracted Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="job.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.job">Job</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (orcExtractedText of orcExtractedTexts(); track trackId(orcExtractedText)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/orc-extracted-text', orcExtractedText.id, 'view']">{{ orcExtractedText.id }}</a>
+              </td>
+              <td>{{ orcExtractedText.content }}</td>
+              <td>{{ orcExtractedText.contentSha256 }}</td>
+              <td>{{ orcExtractedText.s3ContentKey }}</td>
+              <td>{{ orcExtractedText.s3Bucket }}</td>
+              <td>{{ orcExtractedText.pageNumber }}</td>
+              <td>{{ orcExtractedText.language }}</td>
+              <td>{{ orcExtractedText.wordCount }}</td>
+              <td>{{ orcExtractedText.hasStructuredData }}</td>
+              <td>{{ orcExtractedText.structuredData }}</td>
+              <td>{{ orcExtractedText.structuredDataS3Key }}</td>
+              <td>{{ orcExtractedText.extractedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (orcExtractedText.job) {
+                  <div>
+                    <a [routerLink]="['/ocr-job', orcExtractedText.job.id, 'view']">{{ orcExtractedText.job.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/orc-extracted-text', orcExtractedText.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/orc-extracted-text', orcExtractedText.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(orcExtractedText)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

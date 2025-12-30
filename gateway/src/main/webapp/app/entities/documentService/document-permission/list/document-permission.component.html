@@ -1,0 +1,217 @@
+<div>
+  <h2 id="page-heading" data-cy="DocumentPermissionHeading">
+    <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.home.title">Document Permissions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-document-permission"
+        [routerLink]="['/document-permission/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.documentServiceDocumentPermission.home.createLabel"
+          >Create a new Document Permission</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.documentServiceDocumentPermission.home.search"
+          >Search for Document Permission</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.documentServiceDocumentPermission.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (documentPermissions().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.home.notFound">No Document Permissions found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="principalType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.principalType">Principal Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="principalId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.principalId">Principal Id</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="permission">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.permission">Permission</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="canDelegate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.canDelegate">Can Delegate</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="grantedBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.grantedBy">Granted By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="grantedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.grantedDate">Granted Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="document.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.document">Document</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metaPermissionGroup.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentPermission.metaPermissionGroup">Meta Permission Group</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (documentPermission of documentPermissions(); track trackId(documentPermission)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/document-permission', documentPermission.id, 'view']">{{ documentPermission.id }}</a>
+              </td>
+              <td [jhiTranslate]="'gatewayApp.PrincipalType.' + (documentPermission.principalType ?? 'null')">
+                {{
+                  { null: '', USER: 'USER', GROUP: 'GROUP', ROLE: 'ROLE', PUBLIC: 'PUBLIC', DEPARTMENT: 'DEPARTMENT' }[
+                    documentPermission.principalType ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ documentPermission.principalId }}</td>
+              <td [jhiTranslate]="'gatewayApp.PermissionType.' + (documentPermission.permission ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    VIEW: 'VIEW',
+                    DOWNLOAD: 'DOWNLOAD',
+                    EDIT: 'EDIT',
+                    DELETE: 'DELETE',
+                    SHARE: 'SHARE',
+                    APPROVE: 'APPROVE',
+                    PRINT: 'PRINT',
+                    EXPORT: 'EXPORT',
+                    COMMENT: 'COMMENT',
+                    MANAGE_PERMISSIONS: 'MANAGE_PERMISSIONS',
+                    FULL_CONTROL: 'FULL_CONTROL',
+                  }[documentPermission.permission ?? 'null']
+                }}
+              </td>
+              <td>{{ documentPermission.canDelegate }}</td>
+              <td>{{ documentPermission.grantedBy }}</td>
+              <td>{{ documentPermission.grantedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (documentPermission.document) {
+                  <div>
+                    <a [routerLink]="['/document', documentPermission.document.id, 'view']">{{ documentPermission.document.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (documentPermission.metaPermissionGroup) {
+                  <div>
+                    <a [routerLink]="['/meta-permission-group', documentPermission.metaPermissionGroup.id, 'view']">{{
+                      documentPermission.metaPermissionGroup.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/document-permission', documentPermission.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/document-permission', documentPermission.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(documentPermission)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

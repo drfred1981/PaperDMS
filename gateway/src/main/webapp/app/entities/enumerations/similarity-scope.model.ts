@@ -1,0 +1,11 @@
+export enum SimilarityScope {
+  ALL_DOCUMENTS = 'ALL_DOCUMENTS',
+
+  SAME_FOLDER = 'SAME_FOLDER',
+
+  SAME_TYPE = 'SAME_TYPE',
+
+  SAME_TAGS = 'SAME_TAGS',
+
+  CUSTOM = 'CUSTOM',
+}

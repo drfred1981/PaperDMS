@@ -1,0 +1,11 @@
+id;email_field;document_field;transformation;transformation_config;is_required;default_value;validation_regex
+1;DATE;dead;REPLACE;../fake-data/blob/hipster.txt;true;plus jumbo;energetically shocked
+2;MESSAGE_ID;until inwardly oh;TRIM;../fake-data/blob/hipster.txt;true;following;briefly controvert from
+3;BCC;er pace dreamily;NONE;../fake-data/blob/hipster.txt;true;hourly;celsius esteemed
+4;DATE;indeed except;EXTRACT_EMAIL;../fake-data/blob/hipster.txt;false;make coolly tool;dress poppy grass
+5;DATE;captain adjudge premise;REPLACE;../fake-data/blob/hipster.txt;true;within misread;yahoo
+6;ATTACHMENT_COUNT;tut;NONE;../fake-data/blob/hipster.txt;true;the fortunately by;comfortable
+7;BODY_HTML;blank aha;TRIM;../fake-data/blob/hipster.txt;true;harmful;where boohoo
+8;ATTACHMENT_COUNT;alienated shiny mockingly;TRIM;../fake-data/blob/hipster.txt;true;premier assail from;times except hovel
+9;HEADERS;for silver mmm;CONCAT;../fake-data/blob/hipster.txt;true;kit on;exhaust
+10;ATTACHMENT_COUNT;mountain contradict;REPLACE;../fake-data/blob/hipster.txt;true;pretty vision;gah well-worn yum

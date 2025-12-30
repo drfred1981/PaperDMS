@@ -1,2 +1,7 @@
 org.springframework.test.context.ContextCustomizerFactory = \
-    com.mycompany.myapp.config.SqlTestContainersSpringContextCustomizerFactory
+    fr.smartprod.paperdms.pdftoimage.config.\
+    SqlTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
+    pdftoimage.config.TestContainersSpringContextCustomizerFactory,fr.smartprod.\
+    paperdms.pdftoimage.config.\
+    RedisTestContainersSpringContextCustomizerFactory,fr.smartprod.paperdms.\
+    pdftoimage.config.KafkaTestContainersSpringContextCustomizerFactory

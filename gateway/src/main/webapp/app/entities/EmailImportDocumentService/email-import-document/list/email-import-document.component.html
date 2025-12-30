@@ -1,0 +1,266 @@
+<div>
+  <h2 id="page-heading" data-cy="EmailImportDocumentHeading">
+    <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.home.title">Email Import Documents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-email-import-document"
+        [routerLink]="['/email-import-document/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.home.createLabel"
+          >Create a new Email Import Document</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label
+          class="visually-hidden"
+          for="currentSearch"
+          jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.home.search"
+          >Search for Email Import Document</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.emailImportDocumentServiceEmailImportDocument.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (emailImportDocuments().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.home.notFound">No Email Import Documents found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.sha256">Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fromEmail">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.fromEmail">From Email</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toEmail">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.toEmail">To Email</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subject">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.subject">Subject</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="body">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.body">Body</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="bodyHtml">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.bodyHtml">Body Html</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="receivedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.receivedDate">Received Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="processedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.processedDate">Processed Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="attachmentCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.attachmentCount">Attachment Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentsCreated">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.documentsCreated">Documents Created</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metadata">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.metadata">Metadata</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="appliedRule.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportDocument.appliedRule">Applied Rule</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (emailImportDocument of emailImportDocuments(); track trackId(emailImportDocument)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/email-import-document', emailImportDocument.id, 'view']">{{ emailImportDocument.id }}</a>
+              </td>
+              <td>{{ emailImportDocument.sha256 }}</td>
+              <td>{{ emailImportDocument.fromEmail }}</td>
+              <td>{{ emailImportDocument.toEmail }}</td>
+              <td>{{ emailImportDocument.subject }}</td>
+              <td>{{ emailImportDocument.body }}</td>
+              <td>{{ emailImportDocument.bodyHtml }}</td>
+              <td>{{ emailImportDocument.receivedDate | formatMediumDatetime }}</td>
+              <td>{{ emailImportDocument.processedDate | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'gatewayApp.ImportStatus.' + (emailImportDocument.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    PARTIAL: 'PARTIAL',
+                    FAILED: 'FAILED',
+                    IGNORED: 'IGNORED',
+                  }[emailImportDocument.status ?? 'null']
+                }}
+              </td>
+              <td>{{ emailImportDocument.attachmentCount }}</td>
+              <td>{{ emailImportDocument.documentsCreated }}</td>
+              <td>{{ emailImportDocument.errorMessage }}</td>
+              <td>{{ emailImportDocument.metadata }}</td>
+              <td>{{ emailImportDocument.documentSha256 }}</td>
+              <td>
+                @if (emailImportDocument.appliedRule) {
+                  <div>
+                    <a [routerLink]="['/email-import-import-rule', emailImportDocument.appliedRule.id, 'view']">{{
+                      emailImportDocument.appliedRule.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/email-import-document', emailImportDocument.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/email-import-document', emailImportDocument.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(emailImportDocument)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

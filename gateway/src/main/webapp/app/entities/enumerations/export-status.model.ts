@@ -1,0 +1,13 @@
+export enum ExportStatus {
+  PENDING = 'PENDING',
+
+  EXPORTING = 'EXPORTING',
+
+  COMPLETED = 'COMPLETED',
+
+  PARTIAL = 'PARTIAL',
+
+  FAILED = 'FAILED',
+
+  CANCELLED = 'CANCELLED',
+}

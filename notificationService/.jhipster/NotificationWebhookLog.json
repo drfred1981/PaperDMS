@@ -1,0 +1,66 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063515"
+  },
+  "applications": ["notificationService", "gateway"],
+  "clientRootFolder": "notificationService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "eventType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "payload",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "responseStatus",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "responseBody",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "responseTime",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "attemptNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isSuccess",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "sentDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "notificationService",
+  "name": "NotificationWebhookLog",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "notificationWebhookSubscription",
+      "otherEntityRelationshipName": "notificationWebhookLogs",
+      "relationshipName": "subscription",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

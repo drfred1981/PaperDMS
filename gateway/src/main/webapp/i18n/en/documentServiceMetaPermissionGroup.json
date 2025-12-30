@@ -1,0 +1,34 @@
+{
+  "gatewayApp": {
+    "documentServiceMetaPermissionGroup": {
+      "home": {
+        "title": "Meta Permission Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meta Permission Group",
+        "createOrEditLabel": "Create or edit a Meta Permission Group",
+        "search": "Search for Meta Permission Group",
+        "notFound": "No Meta Permission Groups found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Meta Permission Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Meta Permission Group"
+      },
+      "id": "ID",
+      "name": "Name",
+      "permissions": "Permissions",
+      "isSystem": "Is System",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "documentPermissions": "Document Permissions"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceMetaPermissionGroup": {
+      "created": "A new Meta Permission Group is created with identifier {{ param }}",
+      "updated": "A Meta Permission Group is updated with identifier {{ param }}",
+      "deleted": "A Meta Permission Group is deleted with identifier {{ param }}"
+    }
+  }
+}

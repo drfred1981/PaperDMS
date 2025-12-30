@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "searchServiceSearchQuery": {
+      "home": {
+        "title": "Search Queries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Search Query",
+        "createOrEditLabel": "Create or edit a Search Query",
+        "search": "Search for Search Query",
+        "notFound": "No Search Queries found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Search Query {{ id }}?"
+      },
+      "detail": {
+        "title": "Search Query"
+      },
+      "id": "ID",
+      "query": "Query",
+      "filters": "Filters",
+      "resultCount": "Result Count",
+      "executionTime": "Execution Time",
+      "userId": "User Id",
+      "searchDate": "Search Date",
+      "isRelevant": "Is Relevant",
+      "facets": "Facets"
+    }
+  },
+  "searchServiceApp": {
+    "searchServiceSearchQuery": {
+      "created": "A new Search Query is created with identifier {{ param }}",
+      "updated": "A Search Query is updated with identifier {{ param }}",
+      "deleted": "A Search Query is deleted with identifier {{ param }}"
+    }
+  }
+}

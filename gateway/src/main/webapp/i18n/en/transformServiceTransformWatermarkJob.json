@@ -1,0 +1,46 @@
+{
+  "gatewayApp": {
+    "transformServiceTransformWatermarkJob": {
+      "home": {
+        "title": "Transform Watermark Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Transform Watermark Job",
+        "createOrEditLabel": "Create or edit a Transform Watermark Job",
+        "search": "Search for Transform Watermark Job",
+        "notFound": "No Transform Watermark Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Transform Watermark Job {{ id }}?"
+      },
+      "detail": {
+        "title": "Transform Watermark Job"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "watermarkType": "Watermark Type",
+      "watermarkText": "Watermark Text",
+      "watermarkImageS3Key": "Watermark Image S 3 Key",
+      "position": "Position",
+      "opacity": "Opacity",
+      "fontSize": "Font Size",
+      "color": "Color",
+      "rotation": "Rotation",
+      "tiled": "Tiled",
+      "outputS3Key": "Output S 3 Key",
+      "outputDocumentSha256": "Output Document Sha 256",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  },
+  "transformServiceApp": {
+    "transformServiceTransformWatermarkJob": {
+      "created": "A new Transform Watermark Job is created with identifier {{ param }}",
+      "updated": "A Transform Watermark Job is updated with identifier {{ param }}",
+      "deleted": "A Transform Watermark Job is deleted with identifier {{ param }}"
+    }
+  }
+}

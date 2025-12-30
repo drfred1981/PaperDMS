@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063415"
+  },
+  "applications": ["reportingService", "gateway"],
+  "clientRootFolder": "reportingService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "metricName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "metricType",
+      "fieldType": "MetricType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "UPLOAD_SPEED,OCR_DURATION,SEARCH_LATENCY,API_RESPONSE_TIME,STORAGE_IOPS,CACHE_HIT_RATE,QUEUE_LENGTH,ERROR_RATE,THROUGHPUT,CONCURRENT_USERS"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "serviceName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "timestamp",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "reportingService",
+  "name": "ReportingPerformanceMetric",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

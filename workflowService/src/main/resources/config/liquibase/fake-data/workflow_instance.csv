@@ -1,0 +1,11 @@
+id;document_sha_256;status;current_step_number;start_date;due_date;completed_date;cancelled_date;cancellation_reason;priority;metadata;created_by
+1;aside meh honorable;ON_HOLD;3763;2025-12-29T15:31:17;2025-12-29T15:19:17;2025-12-29T22:20:16;2025-12-30T04:15:43;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;geez
+2;below utterly;IN_PROGRESS;28592;2025-12-29T18:57:59;2025-12-29T17:15:08;2025-12-29T11:18:02;2025-12-29T08:10:56;../fake-data/blob/hipster.txt;URGENT;../fake-data/blob/hipster.txt;frivolous tentacle
+3;telescope valiantly;IN_PROGRESS;31792;2025-12-29T10:15:37;2025-12-29T20:09:29;2025-12-29T11:27:49;2025-12-29T20:48:08;../fake-data/blob/hipster.txt;NORMAL;../fake-data/blob/hipster.txt;density
+4;that categorise;ON_HOLD;28249;2025-12-30T03:25:40;2025-12-29T08:07:40;2025-12-30T00:43:31;2025-12-29T10:00:36;../fake-data/blob/hipster.txt;URGENT;../fake-data/blob/hipster.txt;institute likewise
+5;how pricey maestro;PENDING;2591;2025-12-29T07:31:04;2025-12-29T18:17:36;2025-12-29T18:18:58;2025-12-29T14:31:58;../fake-data/blob/hipster.txt;LOW;../fake-data/blob/hipster.txt;laughter kiddingly descriptive
+6;through indolent;PENDING;26919;2025-12-29T23:56:25;2025-12-29T19:31:31;2025-12-29T07:40:37;2025-12-29T19:15:48;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;what sophisticated coolly
+7;impure;IN_PROGRESS;17550;2025-12-29T19:21:48;2025-12-29T20:34:29;2025-12-29T20:14:50;2025-12-29T22:26:03;../fake-data/blob/hipster.txt;URGENT;../fake-data/blob/hipster.txt;whether affect
+8;and catch;COMPLETED;32006;2025-12-29T19:38:54;2025-12-30T00:26:56;2025-12-30T04:00:45;2025-12-29T07:24:59;../fake-data/blob/hipster.txt;NORMAL;../fake-data/blob/hipster.txt;fake unlike rationale
+9;caring boohoo sticker;REJECTED;9103;2025-12-29T15:57:45;2025-12-29T08:05:49;2025-12-29T15:03:25;2025-12-29T09:25:52;../fake-data/blob/hipster.txt;NORMAL;../fake-data/blob/hipster.txt;yippee savour frantically
+10;consequently um;COMPLETED;12500;2025-12-30T00:49:55;2025-12-30T04:30:57;2025-12-29T09:05:30;2025-12-30T02:14:33;../fake-data/blob/hipster.txt;HIGH;../fake-data/blob/hipster.txt;provided before against

@@ -1,0 +1,41 @@
+{
+  "gatewayApp": {
+    "exportServiceExportPattern": {
+      "home": {
+        "title": "Export Patterns",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Export Pattern",
+        "createOrEditLabel": "Create or edit a Export Pattern",
+        "search": "Search for Export Pattern",
+        "notFound": "No Export Patterns found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Export Pattern {{ id }}?"
+      },
+      "detail": {
+        "title": "Export Pattern"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "pathTemplate": "Path Template",
+      "fileNameTemplate": "File Name Template",
+      "variables": "Variables",
+      "examples": "Examples",
+      "isSystem": "Is System",
+      "isActive": "Is Active",
+      "usageCount": "Usage Count",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedDate": "Last Modified Date",
+      "exportJobs": "Export Jobs"
+    }
+  },
+  "exportServiceApp": {
+    "exportServiceExportPattern": {
+      "created": "A new Export Pattern is created with identifier {{ param }}",
+      "updated": "A Export Pattern is updated with identifier {{ param }}",
+      "deleted": "A Export Pattern is deleted with identifier {{ param }}"
+    }
+  }
+}

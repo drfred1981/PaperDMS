@@ -1,0 +1,148 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063015"
+  },
+  "applications": ["pdfToImageService", "gateway"],
+  "clientRootFolder": "pdfToImageService",
+  "databaseType": "sql",
+  "documentation": "Entite principale - Demande de conversion PDF vers image(s)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "sourceDocumentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sourceFileName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "sourcePdfS3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "imageQuality",
+      "fieldType": "ImageQuality",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LOW,MEDIUM,HIGH,ULTRA"
+    },
+    {
+      "fieldName": "imageFormat",
+      "fieldType": "ImageFormat",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PNG,JPEG,WEBP"
+    },
+    {
+      "fieldName": "conversionType",
+      "fieldType": "ConversionType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "SINGLE_PAGE,ALL_PAGES,PAGE_RANGE,FIRST_PAGE_ONLY"
+    },
+    {
+      "fieldName": "startPage",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "endPage",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "totalPages",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ConversionStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,PROCESSING,COMPLETED,FAILED,CANCELLED"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "requestedAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "startedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "completedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "processingDuration",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "totalImagesSize",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "imagesGenerated",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "dpi",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "1200",
+      "fieldValidateRulesMin": "72"
+    },
+    {
+      "fieldName": "requestedByUserId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "5",
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "additionalOptions",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "pdfToImageService",
+  "name": "ImagePdfConversionRequest",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "imageGeneratedImage",
+      "otherEntityRelationshipName": "conversionRequest",
+      "relationshipName": "generatedImages",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "imageConversionBatch",
+      "otherEntityRelationshipName": "conversions",
+      "relationshipName": "batch",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

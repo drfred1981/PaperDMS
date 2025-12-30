@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20251230064416"
+  },
+  "applications": ["documentService", "gateway"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "sourceDocumentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "targetDocumentId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "relationType",
+      "fieldType": "RelationType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "RELATED_TO,REPLACES,REPLACED_BY,SUPPLEMENTS,SUPPLEMENTED_BY,REFERENCED_BY,REFERENCES,ATTACHMENT_OF,HAS_ATTACHMENT,VERSION_OF,HAS_VERSION,COPY_OF,ORIGINAL_OF,PART_OF,HAS_PART,RESPONSE_TO,HAS_RESPONSE,AMENDMENT_OF,HAS_AMENDMENT,CUSTOM"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "documentService",
+  "name": "DocumentRelation",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

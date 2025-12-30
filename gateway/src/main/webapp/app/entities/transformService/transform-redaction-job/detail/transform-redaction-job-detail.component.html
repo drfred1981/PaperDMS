@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transformRedactionJob(); as transformRedactionJobRef) {
+      <div>
+        <h2 data-cy="transformRedactionJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.detail.title">Transform Redaction Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.redactionAreas">Redaction Areas</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.redactionAreas }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.redactionType">Redaction Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.RedactionType.' + (transformRedactionJobRef.redactionType ?? 'null')">{{
+              { null: '', BLACK_BOX: 'BLACK_BOX', WHITE_BOX: 'WHITE_BOX', PATTERN: 'PATTERN', PIXELATE: 'PIXELATE', BLUR: 'BLUR' }[
+                transformRedactionJobRef.redactionType ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.redactionColor">Redaction Color</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.redactionColor }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.replaceWith">Replace With</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.replaceWith }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.outputDocumentSha256">Output Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.outputDocumentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformRedactionJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                transformRedactionJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformRedactionJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ transformRedactionJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transform-redaction-job', transformRedactionJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transformMergeJob(); as transformMergeJobRef) {
+      <div>
+        <h2 data-cy="transformMergeJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.detail.title">Transform Merge Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.name">Name</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.sourceDocumentSha256">Source Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.sourceDocumentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.mergeOrder">Merge Order</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.mergeOrder }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.includeBookmarks">Include Bookmarks</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.includeBookmarks }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.includeToc">Include Toc</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.includeToc }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.addPageNumbers">Add Page Numbers</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.addPageNumbers }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.outputS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.outputDocumentSha256">Output Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.outputDocumentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformMergeJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                transformMergeJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ transformMergeJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transform-merge-job', transformMergeJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

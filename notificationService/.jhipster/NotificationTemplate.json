@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063115"
+  },
+  "applications": ["notificationService", "gateway"],
+  "clientRootFolder": "notificationService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength", "unique"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "bodyTemplate",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "NotificationType",
+      "fieldValues": "DOCUMENT_UPLOADED,DOCUMENT_PROCESSED,DOCUMENT_SHARED,WORKFLOW_ASSIGNED,WORKFLOW_APPROVED,WORKFLOW_REJECTED,WORKFLOW_COMPLETED,OCR_COMPLETED,AI_TAG_SUGGESTED,SIMILAR_DOCUMENT_FOUND,SYSTEM_ALERT,CUSTOM"
+    },
+    {
+      "fieldName": "channel",
+      "fieldType": "NotificationChannel",
+      "fieldValues": "EMAIL,PUSH,IN_APP,SMS,WEBHOOK"
+    },
+    {
+      "fieldName": "variables",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastModifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "notificationService",
+  "name": "NotificationTemplate",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "template",
+      "relationshipName": "notifications",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

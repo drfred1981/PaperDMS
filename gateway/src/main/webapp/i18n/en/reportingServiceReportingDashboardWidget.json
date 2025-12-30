@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "reportingServiceReportingDashboardWidget": {
+      "home": {
+        "title": "Reporting Dashboard Widgets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reporting Dashboard Widget",
+        "createOrEditLabel": "Create or edit a Reporting Dashboard Widget",
+        "search": "Search for Reporting Dashboard Widget",
+        "notFound": "No Reporting Dashboard Widgets found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Reporting Dashboard Widget {{ id }}?"
+      },
+      "detail": {
+        "title": "Reporting Dashboard Widget"
+      },
+      "id": "ID",
+      "widgetType": "Widget Type",
+      "title": "Title",
+      "configuration": "Configuration",
+      "dataSource": "Data Source",
+      "position": "Position",
+      "sizeX": "Size X",
+      "sizeY": "Size Y",
+      "dashboar": "Dashboar"
+    }
+  },
+  "reportingServiceApp": {
+    "reportingServiceReportingDashboardWidget": {
+      "created": "A new Reporting Dashboard Widget is created with identifier {{ param }}",
+      "updated": "A Reporting Dashboard Widget is updated with identifier {{ param }}",
+      "deleted": "A Reporting Dashboard Widget is deleted with identifier {{ param }}"
+    }
+  }
+}

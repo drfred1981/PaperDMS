@@ -1,0 +1,11 @@
+id;service_type;status;status_details;error_message;retry_count;last_processed_date;processing_start_date;processing_end_date;processing_duration;job_id;priority;updated_by;updated_date
+1;SIMILARITY_SERVICE;IN_PROGRESS;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2848;2025-12-29T12:04:14;2025-12-29T14:41:58;2025-12-29T20:44:38;27440;up;829;defensive;2025-12-29T15:09:24
+2;TRANSFORM_SERVICE;IN_PROGRESS;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;3072;2025-12-29T17:47:26;2025-12-29T12:11:56;2025-12-29T08:46:52;18513;hence repurpose inconsequential;24846;for come;2025-12-29T23:52:23
+3;SEARCH_SERVICE;RETRYING;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;32270;2025-12-29T09:18:17;2025-12-30T06:13:59;2025-12-30T05:51:02;19925;same stake;32746;between;2025-12-29T06:54:27
+4;WORKFLOW_SERVICE;COMPLETED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;29117;2025-12-29T18:11:56;2025-12-30T02:02:33;2025-12-29T13:31:49;24920;mmm;23107;so forswear naughty;2025-12-29T19:24:30
+5;SCAN_SERVICE;RETRYING;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;27039;2025-12-29T11:09:53;2025-12-29T14:48:35;2025-12-29T20:09:53;3010;woot ew disrespect;19781;loosely lobster scenario;2025-12-29T13:02:32
+6;SIMILARITY_SERVICE;SKIPPED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;13080;2025-12-29T13:47:58;2025-12-30T04:16:01;2025-12-29T23:37:26;22311;terribly brr;12792;if weakly arcade;2025-12-29T23:49:38
+7;ARCHIVE_SERVICE;QUEUED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;16581;2025-12-29T21:28:02;2025-12-30T04:16:08;2025-12-29T06:52:20;5499;testimonial;6316;except recklessly e-mail;2025-12-29T19:54:23
+8;TRANSFORM_SERVICE;FAILED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;29454;2025-12-29T11:46:05;2025-12-29T08:11:03;2025-12-30T02:46:56;17305;buck continually quarrel;15621;even however while;2025-12-29T15:22:30
+9;AI_SERVICE;SKIPPED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;23930;2025-12-29T10:31:59;2025-12-29T12:28:29;2025-12-29T06:33:44;7312;idle;28821;diligently hopelessly where;2025-12-29T15:10:45
+10;OCR_SERVICE;PARTIALLY_COMPLETED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;3183;2025-12-29T07:17:32;2025-12-29T16:40:04;2025-12-29T07:16:53;3200;miserably uh-huh demob;6221;defrag;2025-12-30T00:54:27

@@ -1,0 +1,194 @@
+<div>
+  <h2 id="page-heading" data-cy="SimilarityClusterHeading">
+    <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.home.title">Similarity Clusters</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-similarity-cluster"
+        [routerLink]="['/similarity-cluster/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.home.createLabel"
+          >Create a new Similarity Cluster</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.home.search"
+          >Search for Similarity Cluster</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.similarityServiceSimilarityCluster.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (similarityClusters().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.home.notFound">No Similarity Clusters found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.name">Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="algorithm">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.algorithm">Algorithm</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="centroid">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.centroid">Centroid</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.documentCount">Document Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="avgSimilarity">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.avgSimilarity">Avg Similarity</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastUpdated">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityCluster.lastUpdated">Last Updated</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (similarityCluster of similarityClusters(); track trackId(similarityCluster)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/similarity-cluster', similarityCluster.id, 'view']">{{ similarityCluster.id }}</a>
+              </td>
+              <td>{{ similarityCluster.name }}</td>
+              <td>{{ similarityCluster.description }}</td>
+              <td [jhiTranslate]="'gatewayApp.SimilarityAlgorithm.' + (similarityCluster.algorithm ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    COSINE: 'COSINE',
+                    JACCARD: 'JACCARD',
+                    LEVENSHTEIN: 'LEVENSHTEIN',
+                    LSH: 'LSH',
+                    DEEP_LEARNING: 'DEEP_LEARNING',
+                    COMBINED: 'COMBINED',
+                  }[similarityCluster.algorithm ?? 'null']
+                }}
+              </td>
+              <td>{{ similarityCluster.centroid }}</td>
+              <td>{{ similarityCluster.documentCount }}</td>
+              <td>{{ similarityCluster.avgSimilarity }}</td>
+              <td>{{ similarityCluster.createdDate | formatMediumDatetime }}</td>
+              <td>{{ similarityCluster.lastUpdated | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/similarity-cluster', similarityCluster.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/similarity-cluster', similarityCluster.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(similarityCluster)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

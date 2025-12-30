@@ -3,7 +3,7 @@ application {
   config {
     baseName EmailImportDocumentService
     applicationType microservice
-    packageName fr.smartprod.paperdms.EmailImportDocument
+    packageName fr.smartprod.paperdms.emailimportdocument
     authenticationType jwt
     databaseType sql
     devDatabaseType postgresql

@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportingPerformanceMetric(); as reportingPerformanceMetricRef) {
+      <div>
+        <h2 data-cy="reportingPerformanceMetricDetailsHeading">
+          <span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.detail.title">Reporting Performance Metric</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reportingPerformanceMetricRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.metricName">Metric Name</span></dt>
+          <dd>
+            <span>{{ reportingPerformanceMetricRef.metricName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.metricType">Metric Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.MetricType.' + (reportingPerformanceMetricRef.metricType ?? 'null')">{{
+              {
+                null: '',
+                UPLOAD_SPEED: 'UPLOAD_SPEED',
+                OCR_DURATION: 'OCR_DURATION',
+                SEARCH_LATENCY: 'SEARCH_LATENCY',
+                API_RESPONSE_TIME: 'API_RESPONSE_TIME',
+                STORAGE_IOPS: 'STORAGE_IOPS',
+                CACHE_HIT_RATE: 'CACHE_HIT_RATE',
+                QUEUE_LENGTH: 'QUEUE_LENGTH',
+                ERROR_RATE: 'ERROR_RATE',
+                THROUGHPUT: 'THROUGHPUT',
+                CONCURRENT_USERS: 'CONCURRENT_USERS',
+              }[reportingPerformanceMetricRef.metricType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.value">Value</span></dt>
+          <dd>
+            <span>{{ reportingPerformanceMetricRef.value }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.unit">Unit</span></dt>
+          <dd>
+            <span>{{ reportingPerformanceMetricRef.unit }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.serviceName">Service Name</span></dt>
+          <dd>
+            <span>{{ reportingPerformanceMetricRef.serviceName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingPerformanceMetric.timestamp">Timestamp</span></dt>
+          <dd>
+            <span>{{ reportingPerformanceMetricRef.timestamp | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/reporting-performance-metric', reportingPerformanceMetricRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,186 @@
+<div>
+  <h2 id="page-heading" data-cy="MetaSavedSearchHeading">
+    <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.home.title">Meta Saved Searches</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-meta-saved-search"
+        [routerLink]="['/meta-saved-search/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.home.createLabel"
+          >Create a new Meta Saved Search</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.home.search"
+          >Search for Meta Saved Search</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.documentServiceMetaSavedSearch.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (metaSavedSearches().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.home.notFound">No Meta Saved Searches found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.name">Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="query">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.query">Query</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isPublic">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.isPublic">Is Public</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isAlert">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.isAlert">Is Alert</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="alertFrequency">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.alertFrequency">Alert Frequency</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.userId">User Id</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (metaSavedSearch of metaSavedSearches(); track trackId(metaSavedSearch)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/meta-saved-search', metaSavedSearch.id, 'view']">{{ metaSavedSearch.id }}</a>
+              </td>
+              <td>{{ metaSavedSearch.name }}</td>
+              <td>{{ metaSavedSearch.query }}</td>
+              <td>{{ metaSavedSearch.isPublic }}</td>
+              <td>{{ metaSavedSearch.isAlert }}</td>
+              <td [jhiTranslate]="'gatewayApp.AlertFrequency.' + (metaSavedSearch.alertFrequency ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    IMMEDIATELY: 'IMMEDIATELY',
+                    HOURLY: 'HOURLY',
+                    DAILY: 'DAILY',
+                    WEEKLY: 'WEEKLY',
+                    MONTHLY: 'MONTHLY',
+                    NEVER: 'NEVER',
+                  }[metaSavedSearch.alertFrequency ?? 'null']
+                }}
+              </td>
+              <td>{{ metaSavedSearch.userId }}</td>
+              <td>{{ metaSavedSearch.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/meta-saved-search', metaSavedSearch.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/meta-saved-search', metaSavedSearch.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(metaSavedSearch)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaPermissionGroup(); as metaPermissionGroupRef) {
+      <div>
+        <h2 data-cy="metaPermissionGroupDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceMetaPermissionGroup.detail.title">Meta Permission Group</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ metaPermissionGroupRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaPermissionGroup.name">Name</span></dt>
+          <dd>
+            <span>{{ metaPermissionGroupRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaPermissionGroup.permissions">Permissions</span></dt>
+          <dd>
+            <span>{{ metaPermissionGroupRef.permissions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaPermissionGroup.isSystem">Is System</span></dt>
+          <dd>
+            <span>{{ metaPermissionGroupRef.isSystem }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaPermissionGroup.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ metaPermissionGroupRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaPermissionGroup.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ metaPermissionGroupRef.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/meta-permission-group', metaPermissionGroupRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

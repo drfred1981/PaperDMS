@@ -1,0 +1,30 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 2,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "ocrService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["OcrJob", "OcrResult", "OrcExtractedText", "OcrComparison", "OcrCache"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "OGQyYzJiNDU4OGE1ZWJlMDY3NjEzZGFhOTdkYmUxYjQxM2VlOTYzMmFiNWU1M2MxNGJjMjhkOGU5ZWJhNjEzNTdkOGRjYzBjNzdlODk0YWNkN2YxMDdlOWJiNzFlNjA3NTEyNTc5MTQ1YjdhYTg4MTcxMjkzMjY1OTE0MGI2NzU=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767076455000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.ocr",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8082",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true,
+    "withAdminUi": true
+  }
+}

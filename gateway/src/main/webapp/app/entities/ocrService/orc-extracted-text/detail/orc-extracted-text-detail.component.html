@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (orcExtractedText(); as orcExtractedTextRef) {
+      <div>
+        <h2 data-cy="orcExtractedTextDetailsHeading">
+          <span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.detail.title">Orc Extracted Text</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.content">Content</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.contentSha256">Content Sha 256</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.contentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.s3ContentKey">S 3 Content Key</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.s3ContentKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.s3Bucket">S 3 Bucket</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.s3Bucket }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.pageNumber">Page Number</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.pageNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.language">Language</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.language }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.wordCount">Word Count</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.wordCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.hasStructuredData">Has Structured Data</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.hasStructuredData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.structuredData">Structured Data</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.structuredData }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.structuredDataS3Key">Structured Data S 3 Key</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.structuredDataS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.extractedDate">Extracted Date</span></dt>
+          <dd>
+            <span>{{ orcExtractedTextRef.extractedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.ocrServiceOrcExtractedText.job">Job</span></dt>
+          <dd>
+            @if (orcExtractedText()!.job) {
+              <div>
+                <a [routerLink]="['/ocr-job', orcExtractedText()!.job?.id, 'view']">{{ orcExtractedTextRef.job?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/orc-extracted-text', orcExtractedTextRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

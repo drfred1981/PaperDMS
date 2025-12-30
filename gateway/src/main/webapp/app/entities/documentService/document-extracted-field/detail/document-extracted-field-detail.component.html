@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (documentExtractedField(); as documentExtractedFieldRef) {
+      <div>
+        <h2 data-cy="documentExtractedFieldDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.detail.title">Document Extracted Field</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ documentExtractedFieldRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.fieldKey">Field Key</span></dt>
+          <dd>
+            <span>{{ documentExtractedFieldRef.fieldKey }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.fieldValue">Field Value</span></dt>
+          <dd>
+            <span>{{ documentExtractedFieldRef.fieldValue }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ documentExtractedFieldRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.extractionMethod">Extraction Method</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ExtractionMethod.' + (documentExtractedFieldRef.extractionMethod ?? 'null')">{{
+              {
+                null: '',
+                OCR: 'OCR',
+                NLP: 'NLP',
+                REGEX: 'REGEX',
+                MANUAL: 'MANUAL',
+                AI_MODEL: 'AI_MODEL',
+                TEMPLATE_MATCHING: 'TEMPLATE_MATCHING',
+                BARCODE: 'BARCODE',
+                QR_CODE: 'QR_CODE',
+              }[documentExtractedFieldRef.extractionMethod ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.isVerified">Is Verified</span></dt>
+          <dd>
+            <span>{{ documentExtractedFieldRef.isVerified }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.extractedDate">Extracted Date</span></dt>
+          <dd>
+            <span>{{ documentExtractedFieldRef.extractedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.document">Document</span></dt>
+          <dd>
+            @if (documentExtractedField()!.document) {
+              <div>
+                <a [routerLink]="['/document', documentExtractedField()!.document?.id, 'view']">{{
+                  documentExtractedFieldRef.document?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/document-extracted-field', documentExtractedFieldRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

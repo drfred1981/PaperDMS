@@ -1,0 +1,179 @@
+<div>
+  <h2 id="page-heading" data-cy="ReportingSystemMetricHeading">
+    <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.home.title">Reporting System Metrics</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reporting-system-metric"
+        [routerLink]="['/reporting-system-metric/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.home.createLabel"
+          >Create a new Reporting System Metric</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.home.search"
+          >Search for Reporting System Metric</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.reportingServiceReportingSystemMetric.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (reportingSystemMetrics().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.home.notFound">No Reporting System Metrics found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="metricName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.metricName">Metric Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cpuUsage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.cpuUsage">Cpu Usage</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="memoryUsage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.memoryUsage">Memory Usage</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="diskUsage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.diskUsage">Disk Usage</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="networkIn">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.networkIn">Network In</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="networkOut">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.networkOut">Network Out</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="activeConnections">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.activeConnections">Active Connections</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="timestamp">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingSystemMetric.timestamp">Timestamp</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (reportingSystemMetric of reportingSystemMetrics(); track trackId(reportingSystemMetric)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/reporting-system-metric', reportingSystemMetric.id, 'view']">{{ reportingSystemMetric.id }}</a>
+              </td>
+              <td>{{ reportingSystemMetric.metricName }}</td>
+              <td>{{ reportingSystemMetric.cpuUsage }}</td>
+              <td>{{ reportingSystemMetric.memoryUsage }}</td>
+              <td>{{ reportingSystemMetric.diskUsage }}</td>
+              <td>{{ reportingSystemMetric.networkIn }}</td>
+              <td>{{ reportingSystemMetric.networkOut }}</td>
+              <td>{{ reportingSystemMetric.activeConnections }}</td>
+              <td>{{ reportingSystemMetric.timestamp | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/reporting-system-metric', reportingSystemMetric.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/reporting-system-metric', reportingSystemMetric.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(reportingSystemMetric)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

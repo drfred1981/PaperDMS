@@ -1,0 +1,11 @@
+id;document_sha_256;status;algorithm;scope;min_similarity_threshold;matches_found;start_date;end_date;error_message;created_date;created_by
+1;annually ouch inquisitively;IN_PROGRESS;COMBINED;SAME_FOLDER;0.22;28261;2025-12-29T20:35:33;2025-12-30T02:29:31;../fake-data/blob/hipster.txt;2025-12-30T00:30:05;bah
+2;queasily pish;FAILED;DEEP_LEARNING;ALL_DOCUMENTS;0.26;16705;2025-12-30T03:52:00;2025-12-30T00:40:15;../fake-data/blob/hipster.txt;2025-12-29T22:55:07;whoever sans
+3;misreport rapid;FAILED;LSH;CUSTOM;0.67;26048;2025-12-30T05:21:39;2025-12-29T12:31:54;../fake-data/blob/hipster.txt;2025-12-29T19:02:34;resort veto
+4;ick for multicolored;FAILED;JACCARD;SAME_FOLDER;0.67;26297;2025-12-29T15:49:37;2025-12-29T08:28:32;../fake-data/blob/hipster.txt;2025-12-29T22:29:54;culture internal coolly
+5;compromise perfectly;COMPLETED;LSH;SAME_TYPE;0.92;25390;2025-12-29T10:01:33;2025-12-29T15:14:26;../fake-data/blob/hipster.txt;2025-12-30T03:09:07;dreamily partridge pertain
+6;utterly impressive vainly;CANCELLED;LSH;SAME_TAGS;0;27579;2025-12-29T19:08:21;2025-12-29T07:32:56;../fake-data/blob/hipster.txt;2025-12-29T17:32:10;commercial
+7;circa;COMPLETED;COSINE;ALL_DOCUMENTS;0.96;6869;2025-12-29T16:05:21;2025-12-29T09:59:11;../fake-data/blob/hipster.txt;2025-12-29T10:27:22;alongside pfft mozzarella
+8;diversity;IN_PROGRESS;JACCARD;SAME_TAGS;0.26;6962;2025-12-30T03:17:12;2025-12-29T21:28:45;../fake-data/blob/hipster.txt;2025-12-29T20:34:51;frenetically whose lobotomise
+9;help release freely;COMPLETED;LEVENSHTEIN;ALL_DOCUMENTS;0.3;14750;2025-12-30T02:36:38;2025-12-29T08:25:20;../fake-data/blob/hipster.txt;2025-12-29T15:50:09;zealous polished fence
+10;spotless;IN_PROGRESS;DEEP_LEARNING;SAME_TAGS;0.45;3409;2025-12-29T09:38:32;2025-12-30T00:11:38;../fake-data/blob/hipster.txt;2025-12-29T19:06:37;midst

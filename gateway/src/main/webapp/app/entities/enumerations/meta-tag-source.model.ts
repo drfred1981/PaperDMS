@@ -1,0 +1,11 @@
+export enum MetaTagSource {
+  MANUAL = 'MANUAL',
+
+  AI_SUGGESTED = 'AI_SUGGESTED',
+
+  AI_CONFIRMED = 'AI_CONFIRMED',
+
+  RULE_BASED = 'RULE_BASED',
+
+  IMPORTED = 'IMPORTED',
+}

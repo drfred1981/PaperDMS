@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentAudit": {
+      "home": {
+        "title": "Document Audits",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Audit",
+        "createOrEditLabel": "Create or edit a Document Audit",
+        "search": "Search for Document Audit",
+        "notFound": "No Document Audits found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Audit {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Audit"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "action": "Action",
+      "userId": "User Id",
+      "userIp": "User Ip",
+      "actionDate": "Action Date",
+      "additionalInfo": "Additional Info",
+      "document": "Document"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentAudit": {
+      "created": "A new Document Audit is created with identifier {{ param }}",
+      "updated": "A Document Audit is updated with identifier {{ param }}",
+      "deleted": "A Document Audit is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,218 @@
+<div>
+  <h2 id="page-heading" data-cy="ImageConversionBatchHeading">
+    <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.home.title">Image Conversion Batches</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-image-conversion-batch"
+        [routerLink]="['/image-conversion-batch/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.home.createLabel"
+          >Create a new Image Conversion Batch</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.home.search"
+          >Search for Image Conversion Batch</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.pdfToImageServiceImageConversionBatch.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (imageConversionBatches().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.home.notFound">No Image Conversion Batches found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="batchName">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.batchName">Batch Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.createdAt">Created At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="totalConversions">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.totalConversions">Total Conversions</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="completedConversions">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.completedConversions">Completed Conversions</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="failedConversions">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.failedConversions">Failed Conversions</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startedAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.startedAt">Started At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="completedAt">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.completedAt">Completed At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="totalProcessingDuration">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.totalProcessingDuration"
+                  >Total Processing Duration</span
+                >
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdByUserId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.createdByUserId">Created By User Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (imageConversionBatch of imageConversionBatches(); track trackId(imageConversionBatch)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/image-conversion-batch', imageConversionBatch.id, 'view']">{{ imageConversionBatch.id }}</a>
+              </td>
+              <td>{{ imageConversionBatch.batchName }}</td>
+              <td>{{ imageConversionBatch.description }}</td>
+              <td>{{ imageConversionBatch.createdAt | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'gatewayApp.ConversionStatus.' + (imageConversionBatch.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[imageConversionBatch.status ?? 'null']
+                }}
+              </td>
+              <td>{{ imageConversionBatch.totalConversions }}</td>
+              <td>{{ imageConversionBatch.completedConversions }}</td>
+              <td>{{ imageConversionBatch.failedConversions }}</td>
+              <td>{{ imageConversionBatch.startedAt | formatMediumDatetime }}</td>
+              <td>{{ imageConversionBatch.completedAt | formatMediumDatetime }}</td>
+              <td>{{ imageConversionBatch.totalProcessingDuration }}</td>
+              <td>{{ imageConversionBatch.createdByUserId }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/image-conversion-batch', imageConversionBatch.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/image-conversion-batch', imageConversionBatch.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(imageConversionBatch)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

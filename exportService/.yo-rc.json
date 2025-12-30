@@ -1,0 +1,29 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 9,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "exportService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["ExportJob", "ExportPattern", "ExportResult"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "MmE1YmEzZmE3YWY1MjY2NDk5YWFkODNhN2U1ZTkxZDY3YTE2NzQwNzNkZTRiNGM1YWY5M2FkODdkNGM5YTJiODY0MTRjYjNjNTNiNGVlNWRjMjkzMzA3NWM2MjQzNGEzNzNkYzdhMjQxYTk4NzJlYjc5OTNhMjI1YTQyOGY2MGI=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767076335000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.export",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8089",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true,
+    "withAdminUi": true
+  }
+}

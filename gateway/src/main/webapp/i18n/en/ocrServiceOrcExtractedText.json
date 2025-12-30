@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "ocrServiceOrcExtractedText": {
+      "home": {
+        "title": "Orc Extracted Texts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Orc Extracted Text",
+        "createOrEditLabel": "Create or edit a Orc Extracted Text",
+        "search": "Search for Orc Extracted Text",
+        "notFound": "No Orc Extracted Texts found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Orc Extracted Text {{ id }}?"
+      },
+      "detail": {
+        "title": "Orc Extracted Text"
+      },
+      "id": "ID",
+      "content": "Content",
+      "contentSha256": "Content Sha 256",
+      "s3ContentKey": "S 3 Content Key",
+      "s3Bucket": "S 3 Bucket",
+      "pageNumber": "Page Number",
+      "language": "Language",
+      "wordCount": "Word Count",
+      "hasStructuredData": "Has Structured Data",
+      "structuredData": "Structured Data",
+      "structuredDataS3Key": "Structured Data S 3 Key",
+      "extractedDate": "Extracted Date",
+      "job": "Job"
+    }
+  },
+  "ocrServiceApp": {
+    "ocrServiceOrcExtractedText": {
+      "created": "A new Orc Extracted Text is created with identifier {{ param }}",
+      "updated": "A Orc Extracted Text is updated with identifier {{ param }}",
+      "deleted": "A Orc Extracted Text is deleted with identifier {{ param }}"
+    }
+  }
+}

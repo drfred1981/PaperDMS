@@ -1,0 +1,45 @@
+{
+  "gatewayApp": {
+    "aiServiceAICorrespondentPrediction": {
+      "home": {
+        "title": "AI Correspondent Predictions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new AI Correspondent Prediction",
+        "createOrEditLabel": "Create or edit a AI Correspondent Prediction",
+        "search": "Search for AI Correspondent Prediction",
+        "notFound": "No AI Correspondent Predictions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete AI Correspondent Prediction {{ id }}?"
+      },
+      "detail": {
+        "title": "AI Correspondent Prediction"
+      },
+      "id": "ID",
+      "correspondentName": "Correspondent Name",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "company": "Company",
+      "type": "Type",
+      "role": "Role",
+      "confidence": "Confidence",
+      "reason": "Reason",
+      "modelVersion": "Model Version",
+      "predictionS3Key": "Prediction S 3 Key",
+      "isAccepted": "Is Accepted",
+      "acceptedBy": "Accepted By",
+      "acceptedDate": "Accepted Date",
+      "predictionDate": "Prediction Date",
+      "job": "Job"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceAICorrespondentPrediction": {
+      "created": "A new AI Correspondent Prediction is created with identifier {{ param }}",
+      "updated": "A AI Correspondent Prediction is updated with identifier {{ param }}",
+      "deleted": "A AI Correspondent Prediction is deleted with identifier {{ param }}"
+    }
+  }
+}

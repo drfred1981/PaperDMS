@@ -1,0 +1,245 @@
+<div>
+  <h2 id="page-heading" data-cy="TransformMergeJobHeading">
+    <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.home.title">Transform Merge Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-transform-merge-job"
+        [routerLink]="['/transform-merge-job/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.transformServiceTransformMergeJob.home.createLabel"
+          >Create a new Transform Merge Job</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.transformServiceTransformMergeJob.home.search"
+          >Search for Transform Merge Job</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.transformServiceTransformMergeJob.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (transformMergeJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.home.notFound">No Transform Merge Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.name">Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceDocumentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.sourceDocumentSha256">Source Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mergeOrder">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.mergeOrder">Merge Order</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="includeBookmarks">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.includeBookmarks">Include Bookmarks</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="includeToc">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.includeToc">Include Toc</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="addPageNumbers">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.addPageNumbers">Add Page Numbers</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.outputS3Key">Output S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputDocumentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.outputDocumentSha256">Output Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.createdBy">Created By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformMergeJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (transformMergeJob of transformMergeJobs(); track trackId(transformMergeJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/transform-merge-job', transformMergeJob.id, 'view']">{{ transformMergeJob.id }}</a>
+              </td>
+              <td>{{ transformMergeJob.name }}</td>
+              <td>{{ transformMergeJob.sourceDocumentSha256 }}</td>
+              <td>{{ transformMergeJob.mergeOrder }}</td>
+              <td>{{ transformMergeJob.includeBookmarks }}</td>
+              <td>{{ transformMergeJob.includeToc }}</td>
+              <td>{{ transformMergeJob.addPageNumbers }}</td>
+              <td>{{ transformMergeJob.outputS3Key }}</td>
+              <td>{{ transformMergeJob.outputDocumentSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformMergeJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[transformMergeJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ transformMergeJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ transformMergeJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ transformMergeJob.errorMessage }}</td>
+              <td>{{ transformMergeJob.createdBy }}</td>
+              <td>{{ transformMergeJob.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/transform-merge-job', transformMergeJob.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/transform-merge-job', transformMergeJob.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(transformMergeJob)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

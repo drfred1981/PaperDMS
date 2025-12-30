@@ -1,0 +1,11 @@
+id;fingerprint_type;fingerprint;vector_embedding;metadata;computed_date;last_updated
+1;TF_IDF;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T20:24:54;2025-12-29T11:22:23
+2;TF_IDF;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T18:42:13;2025-12-29T14:22:30
+3;PERCEPTUAL;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T19:33:59;2025-12-30T03:13:21
+4;VECTOR_EMBEDDING;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T23:16:01;2025-12-29T09:00:34
+5;HASH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T20:16:05;2025-12-29T22:19:07
+6;HASH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T20:28:05;2025-12-29T11:00:51
+7;HASH;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T19:18:50;2025-12-29T07:38:07
+8;VECTOR_EMBEDDING;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T09:39:35;2025-12-30T03:12:47
+9;BERT;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T22:57:13;2025-12-29T09:40:13
+10;VECTOR_EMBEDDING;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2025-12-29T23:03:03;2025-12-29T13:59:11

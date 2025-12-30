@@ -1,0 +1,38 @@
+{
+  "gatewayApp": {
+    "aiServiceAITagPrediction": {
+      "home": {
+        "title": "AI Tag Predictions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new AI Tag Prediction",
+        "createOrEditLabel": "Create or edit a AI Tag Prediction",
+        "search": "Search for AI Tag Prediction",
+        "notFound": "No AI Tag Predictions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete AI Tag Prediction {{ id }}?"
+      },
+      "detail": {
+        "title": "AI Tag Prediction"
+      },
+      "id": "ID",
+      "tagName": "Tag Name",
+      "confidence": "Confidence",
+      "reason": "Reason",
+      "modelVersion": "Model Version",
+      "predictionS3Key": "Prediction S 3 Key",
+      "isAccepted": "Is Accepted",
+      "acceptedBy": "Accepted By",
+      "acceptedDate": "Accepted Date",
+      "predictionDate": "Prediction Date",
+      "job": "Job"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceAITagPrediction": {
+      "created": "A new AI Tag Prediction is created with identifier {{ param }}",
+      "updated": "A AI Tag Prediction is updated with identifier {{ param }}",
+      "deleted": "A AI Tag Prediction is deleted with identifier {{ param }}"
+    }
+  }
+}

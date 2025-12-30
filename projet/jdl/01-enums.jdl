@@ -22,7 +22,7 @@ enum ServiceStatus {
   FAILED, CANCELLED, SKIPPED, RETRYING, PARTIALLY_COMPLETED
 }
 
-enum TagSource {
+enum MetaTagSource {
   MANUAL, AI_SUGGESTED, AI_CONFIRMED, RULE_BASED, IMPORTED
 }
 
@@ -62,7 +62,7 @@ enum AlertFrequency {
   IMMEDIATELY, HOURLY, DAILY, WEEKLY, MONTHLY, NEVER
 }
 
-enum BookmarkType {
+enum MetaBookmarkType {
   DOCUMENT, FOLDER, SEARCH, DASHBOARD, WORKFLOW, SMART_FOLDER
 }
 

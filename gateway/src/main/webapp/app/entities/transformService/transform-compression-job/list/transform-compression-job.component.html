@@ -1,0 +1,263 @@
+<div>
+  <h2 id="page-heading" data-cy="TransformCompressionJobHeading">
+    <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.home.title">Transform Compression Jobs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-transform-compression-job"
+        [routerLink]="['/transform-compression-job/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.home.createLabel"
+          >Create a new Transform Compression Job</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.home.search"
+          >Search for Transform Compression Job</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.transformServiceTransformCompressionJob.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (transformCompressionJobs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.home.notFound">No Transform Compression Jobs found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="compressionType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.compressionType">Compression Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="quality">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.quality">Quality</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="targetSizeKb">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.targetSizeKb">Target Size Kb</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="originalSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.originalSize">Original Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="compressedSize">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.compressedSize">Compressed Size</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="compressionRatio">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.compressionRatio">Compression Ratio</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputS3Key">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.outputS3Key">Output S 3 Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="outputDocumentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.outputDocumentSha256">Output Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="startDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="endDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="errorMessage">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.errorMessage">Error Message</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.createdBy">Created By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (transformCompressionJob of transformCompressionJobs(); track trackId(transformCompressionJob)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/transform-compression-job', transformCompressionJob.id, 'view']">{{ transformCompressionJob.id }}</a>
+              </td>
+              <td>{{ transformCompressionJob.documentSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.CompressionType.' + (transformCompressionJob.compressionType ?? 'null')">
+                {{
+                  { null: '', LOSSLESS: 'LOSSLESS', LOSSY: 'LOSSY', ADAPTIVE: 'ADAPTIVE' }[
+                    transformCompressionJob.compressionType ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ transformCompressionJob.quality }}</td>
+              <td>{{ transformCompressionJob.targetSizeKb }}</td>
+              <td>{{ transformCompressionJob.originalSize }}</td>
+              <td>{{ transformCompressionJob.compressedSize }}</td>
+              <td>{{ transformCompressionJob.compressionRatio }}</td>
+              <td>{{ transformCompressionJob.outputS3Key }}</td>
+              <td>{{ transformCompressionJob.outputDocumentSha256 }}</td>
+              <td [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformCompressionJob.status ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    PENDING: 'PENDING',
+                    PROCESSING: 'PROCESSING',
+                    COMPLETED: 'COMPLETED',
+                    FAILED: 'FAILED',
+                    CANCELLED: 'CANCELLED',
+                  }[transformCompressionJob.status ?? 'null']
+                }}
+              </td>
+              <td>{{ transformCompressionJob.startDate | formatMediumDatetime }}</td>
+              <td>{{ transformCompressionJob.endDate | formatMediumDatetime }}</td>
+              <td>{{ transformCompressionJob.errorMessage }}</td>
+              <td>{{ transformCompressionJob.createdBy }}</td>
+              <td>{{ transformCompressionJob.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/transform-compression-job', transformCompressionJob.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/transform-compression-job', transformCompressionJob.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(transformCompressionJob)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

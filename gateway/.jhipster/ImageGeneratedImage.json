@@ -1,0 +1,107 @@
+{
+  "annotations": {
+    "changelogDate": "20251230074916"
+  },
+  "applications": ["pdfToImageService", "gateway"],
+  "clientRootFolder": "pdfToImageService",
+  "databaseType": "sql",
+  "documentation": "Entité - Image générée depuis un PDF",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "pageNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "fileName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "s3Key",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "preSignedUrl",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1000"
+    },
+    {
+      "fieldName": "urlExpiresAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "format",
+      "fieldType": "ImageFormat",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PNG,JPEG,WEBP"
+    },
+    {
+      "fieldName": "quality",
+      "fieldType": "ImageQuality",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LOW,MEDIUM,HIGH,ULTRA"
+    },
+    {
+      "fieldName": "width",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "height",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "fileSize",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "dpi",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "72"
+    },
+    {
+      "fieldName": "sha256Hash",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "generatedAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "pdfToImageService",
+  "name": "ImageGeneratedImage",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "imagePdfConversionRequest",
+      "otherEntityRelationshipName": "generatedImages",
+      "relationshipName": "conversionRequest",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

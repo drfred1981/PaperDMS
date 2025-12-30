@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "documentServiceMetaTag": {
+      "home": {
+        "title": "Meta Tags",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meta Tag",
+        "createOrEditLabel": "Create or edit a Meta Tag",
+        "search": "Search for Meta Tag",
+        "notFound": "No Meta Tags found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Meta Tag {{ id }}?"
+      },
+      "detail": {
+        "title": "Meta Tag"
+      },
+      "id": "ID",
+      "name": "Name",
+      "color": "Color",
+      "description": "Description",
+      "usageCount": "Usage Count",
+      "isSystem": "Is System",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "documentTags": "Document Tags",
+      "metaMetaTagCategory": "Meta Meta Tag Category"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceMetaTag": {
+      "created": "A new Meta Tag is created with identifier {{ param }}",
+      "updated": "A Meta Tag is updated with identifier {{ param }}",
+      "deleted": "A Meta Tag is deleted with identifier {{ param }}"
+    }
+  }
+}

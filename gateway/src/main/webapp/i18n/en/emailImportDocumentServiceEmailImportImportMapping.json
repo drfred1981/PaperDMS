@@ -1,0 +1,36 @@
+{
+  "gatewayApp": {
+    "emailImportDocumentServiceEmailImportImportMapping": {
+      "home": {
+        "title": "Email Import Import Mappings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Email Import Import Mapping",
+        "createOrEditLabel": "Create or edit a Email Import Import Mapping",
+        "search": "Search for Email Import Import Mapping",
+        "notFound": "No Email Import Import Mappings found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Email Import Import Mapping {{ id }}?"
+      },
+      "detail": {
+        "title": "Email Import Import Mapping"
+      },
+      "id": "ID",
+      "emailField": "Email Field",
+      "documentField": "Document Field",
+      "transformation": "Transformation",
+      "transformationConfig": "Transformation Config",
+      "isRequired": "Is Required",
+      "defaultValue": "Default Value",
+      "validationRegex": "Validation Regex",
+      "rule": "Rule"
+    }
+  },
+  "emailImportDocumentServiceApp": {
+    "emailImportDocumentServiceEmailImportImportMapping": {
+      "created": "A new Email Import Import Mapping is created with identifier {{ param }}",
+      "updated": "A Email Import Import Mapping is updated with identifier {{ param }}",
+      "deleted": "A Email Import Import Mapping is deleted with identifier {{ param }}"
+    }
+  }
+}

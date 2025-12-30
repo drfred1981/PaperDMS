@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentExtractedField": {
+      "home": {
+        "title": "Document Extracted Fields",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Extracted Field",
+        "createOrEditLabel": "Create or edit a Document Extracted Field",
+        "search": "Search for Document Extracted Field",
+        "notFound": "No Document Extracted Fields found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Extracted Field {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Extracted Field"
+      },
+      "id": "ID",
+      "fieldKey": "Field Key",
+      "fieldValue": "Field Value",
+      "confidence": "Confidence",
+      "extractionMethod": "Extraction Method",
+      "isVerified": "Is Verified",
+      "extractedDate": "Extracted Date",
+      "document": "Document"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentExtractedField": {
+      "created": "A new Document Extracted Field is created with identifier {{ param }}",
+      "updated": "A Document Extracted Field is updated with identifier {{ param }}",
+      "deleted": "A Document Extracted Field is deleted with identifier {{ param }}"
+    }
+  }
+}

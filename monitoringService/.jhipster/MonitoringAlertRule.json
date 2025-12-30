@@ -1,0 +1,82 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063115"
+  },
+  "applications": ["monitoringService", "gateway"],
+  "clientRootFolder": "monitoringService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "alertType",
+      "fieldType": "MonitoringAlertType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "DOCUMENT_EXPIRATION,STORAGE_QUOTA,UNUSUAL_ACTIVITY,COMPLIANCE_VIOLATION,WORKFLOW_DELAYED,FAILED_OCR,MISSING_METADATA,DUPLICATE_DETECTED,PERMISSION_CHANGED,SERVICE_DOWN,HIGH_ERROR_RATE,CONTRACT_EXPIRATION,INVOICE_OVERDUE,SYSTEM_OVERLOAD"
+    },
+    {
+      "fieldName": "conditions",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "severity",
+      "fieldType": "Severity",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LOW,MEDIUM,HIGH,CRITICAL"
+    },
+    {
+      "fieldName": "recipients",
+      "fieldType": "TextBlob",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "triggerCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastTriggered",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "monitoringService",
+  "name": "MonitoringAlertRule",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "monitoringAlert",
+      "otherEntityRelationshipName": "alertRule",
+      "relationshipName": "alerts",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

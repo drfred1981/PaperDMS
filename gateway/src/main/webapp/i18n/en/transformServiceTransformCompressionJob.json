@@ -1,0 +1,43 @@
+{
+  "gatewayApp": {
+    "transformServiceTransformCompressionJob": {
+      "home": {
+        "title": "Transform Compression Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Transform Compression Job",
+        "createOrEditLabel": "Create or edit a Transform Compression Job",
+        "search": "Search for Transform Compression Job",
+        "notFound": "No Transform Compression Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Transform Compression Job {{ id }}?"
+      },
+      "detail": {
+        "title": "Transform Compression Job"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "compressionType": "Compression Type",
+      "quality": "Quality",
+      "targetSizeKb": "Target Size Kb",
+      "originalSize": "Original Size",
+      "compressedSize": "Compressed Size",
+      "compressionRatio": "Compression Ratio",
+      "outputS3Key": "Output S 3 Key",
+      "outputDocumentSha256": "Output Document Sha 256",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  },
+  "transformServiceApp": {
+    "transformServiceTransformCompressionJob": {
+      "created": "A new Transform Compression Job is created with identifier {{ param }}",
+      "updated": "A Transform Compression Job is updated with identifier {{ param }}",
+      "deleted": "A Transform Compression Job is deleted with identifier {{ param }}"
+    }
+  }
+}

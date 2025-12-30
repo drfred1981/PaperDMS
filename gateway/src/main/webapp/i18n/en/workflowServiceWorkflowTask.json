@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "workflowServiceWorkflowTask": {
+      "home": {
+        "title": "Workflow Tasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Workflow Task",
+        "createOrEditLabel": "Create or edit a Workflow Task",
+        "search": "Search for Workflow Task",
+        "notFound": "No Workflow Tasks found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Workflow Task {{ id }}?"
+      },
+      "detail": {
+        "title": "Workflow Task"
+      },
+      "id": "ID",
+      "assigneeId": "Assignee Id",
+      "status": "Status",
+      "action": "Action",
+      "comment": "Comment",
+      "assignedDate": "Assigned Date",
+      "dueDate": "Due Date",
+      "completedDate": "Completed Date",
+      "reminderSent": "Reminder Sent",
+      "delegatedTo": "Delegated To",
+      "delegatedDate": "Delegated Date",
+      "instance": "Instance",
+      "step": "Step"
+    }
+  },
+  "workflowServiceApp": {
+    "workflowServiceWorkflowTask": {
+      "created": "A new Workflow Task is created with identifier {{ param }}",
+      "updated": "A Workflow Task is updated with identifier {{ param }}",
+      "deleted": "A Workflow Task is deleted with identifier {{ param }}"
+    }
+  }
+}

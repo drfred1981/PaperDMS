@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "documentServiceDocumentTag": {
+      "home": {
+        "title": "Document Tags",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document Tag",
+        "createOrEditLabel": "Create or edit a Document Tag",
+        "search": "Search for Document Tag",
+        "notFound": "No Document Tags found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document Tag {{ id }}?"
+      },
+      "detail": {
+        "title": "Document Tag"
+      },
+      "id": "ID",
+      "assignedDate": "Assigned Date",
+      "assignedBy": "Assigned By",
+      "confidence": "Confidence",
+      "isAutoMetaTagged": "Is Auto Meta Tagged",
+      "source": "Source",
+      "document": "Document",
+      "metaTag": "Meta Tag"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceDocumentTag": {
+      "created": "A new Document Tag is created with identifier {{ param }}",
+      "updated": "A Document Tag is updated with identifier {{ param }}",
+      "deleted": "A Document Tag is deleted with identifier {{ param }}"
+    }
+  }
+}

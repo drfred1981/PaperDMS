@@ -1,0 +1,93 @@
+{
+  "annotations": {
+    "changelogDate": "20251230070816"
+  },
+  "applications": ["workflowService", "gateway"],
+  "clientRootFolder": "workflowService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "stepNumber",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "stepType",
+      "fieldType": "WorkflowStepType",
+      "fieldValues": "APPROVAL,REVIEW,SIGNATURE,NOTIFICATION,CUSTOM"
+    },
+    {
+      "fieldName": "assigneeType",
+      "fieldType": "AssigneeType",
+      "fieldValues": "USER,GROUP,ROLE,DYNAMIC"
+    },
+    {
+      "fieldName": "assigneeId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "assigneeGroup",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "dueInDays",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isRequired",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "canDelegate",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "canReject",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "configuration",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "workflowService",
+  "name": "WorkflowStep",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "workflowTask",
+      "otherEntityRelationshipName": "step",
+      "relationshipName": "workflowTasks",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "workflow",
+      "otherEntityRelationshipName": "workflowStpes",
+      "relationshipName": "workflow",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

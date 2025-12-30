@@ -1,0 +1,77 @@
+{
+  "annotations": {
+    "changelogDate": "20251230075316"
+  },
+  "applications": ["pdfToImageService", "gateway"],
+  "clientRootFolder": "pdfToImageService",
+  "databaseType": "sql",
+  "documentation": "Entité - Statistiques de conversion (agrégées par jour)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "statisticsDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "totalConversions",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "successfulConversions",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "failedConversions",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "totalPagesConverted",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "totalImagesGenerated",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "totalImagesSize",
+      "fieldType": "Long",
+      "fieldValidateRules": ["min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "averageProcessingDuration",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "maxProcessingDuration",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "minProcessingDuration",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "calculatedAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "pdfToImageService",
+  "name": "ImageConversionStatistics",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

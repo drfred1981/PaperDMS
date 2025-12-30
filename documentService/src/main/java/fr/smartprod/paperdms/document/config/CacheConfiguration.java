@@ -1,0 +1,160 @@
+package fr.smartprod.paperdms.document.config;
+
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
+import org.hibernate.cache.jcache.ConfigSettings;
+import org.redisson.Redisson;
+import org.redisson.config.ClusterServersConfig;
+import org.redisson.config.Config;
+import org.redisson.config.SingleServerConfig;
+import org.redisson.jcache.configuration.RedissonConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.boot.info.GitProperties;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import tech.jhipster.config.JHipsterProperties;
+import tech.jhipster.config.cache.PrefixedKeyGenerator;
+
+@Configuration
+@EnableCaching
+public class CacheConfiguration {
+
+    private GitProperties gitProperties;
+    private BuildProperties buildProperties;
+
+    @Bean
+    public javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration(JHipsterProperties jHipsterProperties) {
+        MutableConfiguration<Object, Object> jcacheConfig = new MutableConfiguration<>();
+
+        URI redisUri = URI.create(jHipsterProperties.getCache().getRedis().getServer()[0]);
+
+        Config config = new Config();
+        // Fix Hibernate lazy initialization https://github.com/jhipster/generator-jhipster/issues/22889
+        config.setCodec(new org.redisson.codec.SerializationCodec());
+        if (jHipsterProperties.getCache().getRedis().isCluster()) {
+            ClusterServersConfig clusterServersConfig = config
+                .useClusterServers()
+                .setMasterConnectionPoolSize(jHipsterProperties.getCache().getRedis().getConnectionPoolSize())
+                .setMasterConnectionMinimumIdleSize(jHipsterProperties.getCache().getRedis().getConnectionMinimumIdleSize())
+                .setSubscriptionConnectionPoolSize(jHipsterProperties.getCache().getRedis().getSubscriptionConnectionPoolSize())
+                .addNodeAddress(jHipsterProperties.getCache().getRedis().getServer());
+
+            if (redisUri.getUserInfo() != null) {
+                clusterServersConfig.setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(':') + 1));
+            }
+        } else {
+            SingleServerConfig singleServerConfig = config
+                .useSingleServer()
+                .setConnectionPoolSize(jHipsterProperties.getCache().getRedis().getConnectionPoolSize())
+                .setConnectionMinimumIdleSize(jHipsterProperties.getCache().getRedis().getConnectionMinimumIdleSize())
+                .setSubscriptionConnectionPoolSize(jHipsterProperties.getCache().getRedis().getSubscriptionConnectionPoolSize())
+                .setAddress(jHipsterProperties.getCache().getRedis().getServer()[0]);
+
+            if (redisUri.getUserInfo() != null) {
+                singleServerConfig.setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(':') + 1));
+            }
+        }
+        jcacheConfig.setStatisticsEnabled(true);
+        jcacheConfig.setExpiryPolicyFactory(
+            CreatedExpiryPolicy.factoryOf(new Duration(TimeUnit.SECONDS, jHipsterProperties.getCache().getRedis().getExpiration()))
+        );
+        return RedissonConfiguration.fromInstance(Redisson.create(config), jcacheConfig);
+    }
+
+    @Bean
+    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(javax.cache.CacheManager cm) {
+        return hibernateProperties -> hibernateProperties.put(ConfigSettings.CACHE_MANAGER, cm);
+    }
+
+    @Bean
+    public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
+        return cm -> {
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".documentVersions", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".documentTags", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".statuses", jcacheConfiguration);
+            createCache(
+                cm,
+                fr.smartprod.paperdms.document.domain.Document.class.getName() + ".documentExtractedFields",
+                jcacheConfiguration
+            );
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".permissions", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".audits", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".comments", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".metadatas", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.Document.class.getName() + ".statistics", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentVersion.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentServiceStatus.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentMetadata.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentType.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentType.class.getName() + ".documents", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentType.class.getName() + ".documentTemplates", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentType.class.getName() + ".fields", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentTypeField.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentPermission.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentAudit.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentComment.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentComment.class.getName() + ".replies", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentRelation.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentStatistics.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentTemplate.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentExtractedField.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.DocumentTag.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaPermissionGroup.class.getName(), jcacheConfiguration);
+            createCache(
+                cm,
+                fr.smartprod.paperdms.document.domain.MetaPermissionGroup.class.getName() + ".documentPermissions",
+                jcacheConfiguration
+            );
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaSavedSearch.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaSmartFolder.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaBookmark.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaMetaTagCategory.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaMetaTagCategory.class.getName() + ".children", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaMetaTagCategory.class.getName() + ".metaTags", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaFolder.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaFolder.class.getName() + ".children", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaFolder.class.getName() + ".documents", jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaTag.class.getName(), jcacheConfiguration);
+            createCache(cm, fr.smartprod.paperdms.document.domain.MetaTag.class.getName() + ".documentTags", jcacheConfiguration);
+            // jhipster-needle-redis-add-entry
+        };
+    }
+
+    private void createCache(
+        javax.cache.CacheManager cm,
+        String cacheName,
+        javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration
+    ) {
+        javax.cache.Cache<Object, Object> cache = cm.getCache(cacheName);
+        if (cache != null) {
+            cache.clear();
+        } else {
+            cm.createCache(cacheName, jcacheConfiguration);
+        }
+    }
+
+    @Autowired(required = false)
+    public void setGitProperties(GitProperties gitProperties) {
+        this.gitProperties = gitProperties;
+    }
+
+    @Autowired(required = false)
+    public void setBuildProperties(BuildProperties buildProperties) {
+        this.buildProperties = buildProperties;
+    }
+
+    @Bean
+    public KeyGenerator keyGenerator() {
+        return new PrefixedKeyGenerator(this.gitProperties, this.buildProperties);
+    }
+}

@@ -1,0 +1,247 @@
+<div>
+  <h2 id="page-heading" data-cy="ReportingScheduledReportHeading">
+    <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.home.title">Reporting Scheduled Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-reporting-scheduled-report"
+        [routerLink]="['/reporting-scheduled-report/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.home.createLabel"
+          >Create a new Reporting Scheduled Report</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.home.search"
+          >Search for Reporting Scheduled Report</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.reportingServiceReportingScheduledReport.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (reportingScheduledReports().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.home.notFound">No Reporting Scheduled Reports found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.name">Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reportType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.reportType">Report Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="query">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.query">Query</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="schedule">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.schedule">Schedule</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="format">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.format">Format</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recipients">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.recipients">Recipients</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastRun">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.lastRun">Last Run</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nextRun">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.nextRun">Next Run</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.createdBy">Created By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.reportingServiceReportingScheduledReport.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (reportingScheduledReport of reportingScheduledReports(); track trackId(reportingScheduledReport)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/reporting-scheduled-report', reportingScheduledReport.id, 'view']">{{ reportingScheduledReport.id }}</a>
+              </td>
+              <td>{{ reportingScheduledReport.name }}</td>
+              <td>{{ reportingScheduledReport.description }}</td>
+              <td [jhiTranslate]="'gatewayApp.ReportType.' + (reportingScheduledReport.reportType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DOCUMENT_INVENTORY: 'DOCUMENT_INVENTORY',
+                    USER_ACTIVITY: 'USER_ACTIVITY',
+                    STORAGE_ANALYSIS: 'STORAGE_ANALYSIS',
+                    COMPLIANCE_AUDIT: 'COMPLIANCE_AUDIT',
+                    WORKFLOW_PERFORMANCE: 'WORKFLOW_PERFORMANCE',
+                    TAG_USAGE: 'TAG_USAGE',
+                    INVOICE_SUMMARY: 'INVOICE_SUMMARY',
+                    CONTRACT_EXPIRATION: 'CONTRACT_EXPIRATION',
+                    BANK_RECONCILIATION: 'BANK_RECONCILIATION',
+                    PERFORMANCE_METRICS: 'PERFORMANCE_METRICS',
+                    SYSTEM_HEALTH: 'SYSTEM_HEALTH',
+                    CUSTOM: 'CUSTOM',
+                  }[reportingScheduledReport.reportType ?? 'null']
+                }}
+              </td>
+              <td>{{ reportingScheduledReport.query }}</td>
+              <td>{{ reportingScheduledReport.schedule }}</td>
+              <td [jhiTranslate]="'gatewayApp.ReportFormat.' + (reportingScheduledReport.format ?? 'null')">
+                {{
+                  { null: '', PDF: 'PDF', EXCEL: 'EXCEL', CSV: 'CSV', JSON: 'JSON', HTML: 'HTML', XML: 'XML' }[
+                    reportingScheduledReport.format ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ reportingScheduledReport.recipients }}</td>
+              <td>{{ reportingScheduledReport.isActive }}</td>
+              <td>{{ reportingScheduledReport.lastRun | formatMediumDatetime }}</td>
+              <td>{{ reportingScheduledReport.nextRun | formatMediumDatetime }}</td>
+              <td>{{ reportingScheduledReport.createdBy }}</td>
+              <td>{{ reportingScheduledReport.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/reporting-scheduled-report', reportingScheduledReport.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/reporting-scheduled-report', reportingScheduledReport.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(reportingScheduledReport)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

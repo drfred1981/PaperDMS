@@ -1,0 +1,11 @@
+id;document_sha_256;compression_type;quality;target_size_kb;original_size;compressed_size;compression_ratio;output_s_3_key;output_document_sha_256;status;start_date;end_date;error_message;created_by;created_date
+1;tributary;LOSSY;28;13928;113;14315;28037.28;brightly tributary amidst;woot;PENDING;2025-12-29T11:28:28;2025-12-30T05:59:41;../fake-data/blob/hipster.txt;pear vestment;2025-12-29T11:14:27
+2;cap unnaturally;LOSSLESS;90;11097;8519;4575;3673.84;regarding;throughout around maintainer;CANCELLED;2025-12-29T08:37:19;2025-12-30T01:33:33;../fake-data/blob/hipster.txt;trash excepting positively;2025-12-29T18:47:43
+3;ice-cream alert;LOSSY;29;10983;29309;31849;16473.6;and;drive remorseful;PENDING;2025-12-30T06:30:10;2025-12-29T08:14:07;../fake-data/blob/hipster.txt;lashes ah;2025-12-29T18:58:09
+4;nun;ADAPTIVE;70;19115;19905;18540;16124.5;gee consequently;emerge underneath;PENDING;2025-12-29T13:06:08;2025-12-29T18:10:58;../fake-data/blob/hipster.txt;mmm;2025-12-30T06:18:01
+5;yuck meanwhile;LOSSY;35;21321;3914;10538;3539;finer;flood;COMPLETED;2025-12-29T09:12:59;2025-12-29T16:03:48;../fake-data/blob/hipster.txt;wherever ditch;2025-12-30T01:05:15
+6;canter oh;ADAPTIVE;58;9876;11416;4644;5177.15;even;monstrous easily rarely;PENDING;2025-12-29T18:59:03;2025-12-29T18:13:47;../fake-data/blob/hipster.txt;athwart where that;2025-12-29T22:19:22
+7;inasmuch;LOSSY;74;7140;9906;20191;18179.11;swing;sneak;COMPLETED;2025-12-30T03:33:39;2025-12-30T00:23:31;../fake-data/blob/hipster.txt;fidget;2025-12-29T09:52:11
+8;rival even hippodrome;ADAPTIVE;70;19739;1938;7731;31829.71;duh;ha excepting tough;CANCELLED;2025-12-29T12:26:46;2025-12-29T18:27:08;../fake-data/blob/hipster.txt;yin runway;2025-12-30T00:10:40
+9;summer;LOSSLESS;62;17245;25618;4720;4052.22;ha drat;softly;FAILED;2025-12-29T18:44:01;2025-12-30T01:14:32;../fake-data/blob/hipster.txt;watery;2025-12-29T07:00:13
+10;imaginative incidentally;LOSSLESS;79;1642;23082;9259;18900.71;horn waver by;however;PENDING;2025-12-29T19:21:45;2025-12-29T08:16:41;../fake-data/blob/hipster.txt;hence;2025-12-29T15:03:48

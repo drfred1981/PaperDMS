@@ -1,0 +1,35 @@
+{
+  "gatewayApp": {
+    "documentServiceMetaSavedSearch": {
+      "home": {
+        "title": "Meta Saved Searches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meta Saved Search",
+        "createOrEditLabel": "Create or edit a Meta Saved Search",
+        "search": "Search for Meta Saved Search",
+        "notFound": "No Meta Saved Searches found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Meta Saved Search {{ id }}?"
+      },
+      "detail": {
+        "title": "Meta Saved Search"
+      },
+      "id": "ID",
+      "name": "Name",
+      "query": "Query",
+      "isPublic": "Is Public",
+      "isAlert": "Is Alert",
+      "alertFrequency": "Alert Frequency",
+      "userId": "User Id",
+      "createdDate": "Created Date"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceMetaSavedSearch": {
+      "created": "A new Meta Saved Search is created with identifier {{ param }}",
+      "updated": "A Meta Saved Search is updated with identifier {{ param }}",
+      "deleted": "A Meta Saved Search is deleted with identifier {{ param }}"
+    }
+  }
+}

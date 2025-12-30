@@ -1,0 +1,11 @@
+id;step_number;name;description;step_type;assignee_type;assignee_id;assignee_group;due_in_days;is_required;can_delegate;can_reject;configuration
+1;25603;essential yet;../fake-data/blob/hipster.txt;SIGNATURE;ROLE;icy unabashedly another;during finer inasmuch;11495;true;false;false;../fake-data/blob/hipster.txt
+2;15088;round phew whoa;../fake-data/blob/hipster.txt;SIGNATURE;ROLE;whoa drat critical;once;1441;true;true;false;../fake-data/blob/hipster.txt
+3;10412;at bashfully;../fake-data/blob/hipster.txt;REVIEW;GROUP;overdue geez;bleak handover evenly;10979;false;false;false;../fake-data/blob/hipster.txt
+4;26972;pro ferret;../fake-data/blob/hipster.txt;SIGNATURE;ROLE;physically antelope;out frankly icebreaker;18629;true;true;false;../fake-data/blob/hipster.txt
+5;777;ignorance;../fake-data/blob/hipster.txt;NOTIFICATION;ROLE;disclosure;oof self-reliant sand;15842;true;false;true;../fake-data/blob/hipster.txt
+6;27239;the;../fake-data/blob/hipster.txt;REVIEW;ROLE;save;sneaky badly;12047;false;false;true;../fake-data/blob/hipster.txt
+7;12825;yahoo however forage;../fake-data/blob/hipster.txt;APPROVAL;DYNAMIC;yahoo foodstuffs whose;exactly;20072;true;true;true;../fake-data/blob/hipster.txt
+8;27522;tributary once;../fake-data/blob/hipster.txt;CUSTOM;ROLE;in since;indeed;32555;true;true;false;../fake-data/blob/hipster.txt
+9;31465;agreement;../fake-data/blob/hipster.txt;NOTIFICATION;ROLE;petty conservation;after;3236;true;true;true;../fake-data/blob/hipster.txt
+10;12537;co-producer;../fake-data/blob/hipster.txt;SIGNATURE;USER;unwritten hm;keel grubby;16783;true;true;false;../fake-data/blob/hipster.txt

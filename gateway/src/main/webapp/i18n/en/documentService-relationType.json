@@ -1,0 +1,27 @@
+{
+  "gatewayApp": {
+    "RelationType": {
+      "null": "",
+      "RELATED_TO": "RELATED_TO",
+      "REPLACES": "REPLACES",
+      "REPLACED_BY": "REPLACED_BY",
+      "SUPPLEMENTS": "SUPPLEMENTS",
+      "SUPPLEMENTED_BY": "SUPPLEMENTED_BY",
+      "REFERENCED_BY": "REFERENCED_BY",
+      "REFERENCES": "REFERENCES",
+      "ATTACHMENT_OF": "ATTACHMENT_OF",
+      "HAS_ATTACHMENT": "HAS_ATTACHMENT",
+      "VERSION_OF": "VERSION_OF",
+      "HAS_VERSION": "HAS_VERSION",
+      "COPY_OF": "COPY_OF",
+      "ORIGINAL_OF": "ORIGINAL_OF",
+      "PART_OF": "PART_OF",
+      "HAS_PART": "HAS_PART",
+      "RESPONSE_TO": "RESPONSE_TO",
+      "HAS_RESPONSE": "HAS_RESPONSE",
+      "AMENDMENT_OF": "AMENDMENT_OF",
+      "HAS_AMENDMENT": "HAS_AMENDMENT",
+      "CUSTOM": "CUSTOM"
+    }
+  }
+}

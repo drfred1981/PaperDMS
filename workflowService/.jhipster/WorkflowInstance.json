@@ -1,0 +1,91 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063215"
+  },
+  "applications": ["workflowService", "gateway"],
+  "clientRootFolder": "workflowService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "documentSha256",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "64"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "WorkflowInstanceStatus",
+      "fieldValues": "PENDING,IN_PROGRESS,COMPLETED,CANCELLED,REJECTED,ON_HOLD"
+    },
+    {
+      "fieldName": "currentStepNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dueDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "completedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "cancelledDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "cancellationReason",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "WorkflowPriority",
+      "fieldValues": "LOW,NORMAL,HIGH,URGENT"
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "workflowService",
+  "name": "WorkflowInstance",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "workflowApprovalHistory",
+      "otherEntityRelationshipName": "workflowInstance",
+      "relationshipName": "approvalHistories",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "workflowTask",
+      "otherEntityRelationshipName": "instance",
+      "relationshipName": "workflowTasks",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "workflow",
+      "otherEntityRelationshipName": "workflowInstances",
+      "relationshipName": "workflow",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

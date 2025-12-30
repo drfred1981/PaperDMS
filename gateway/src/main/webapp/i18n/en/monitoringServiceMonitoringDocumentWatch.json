@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "monitoringServiceMonitoringDocumentWatch": {
+      "home": {
+        "title": "Monitoring Document Watches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Monitoring Document Watch",
+        "createOrEditLabel": "Create or edit a Monitoring Document Watch",
+        "search": "Search for Monitoring Document Watch",
+        "notFound": "No Monitoring Document Watches found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Monitoring Document Watch {{ id }}?"
+      },
+      "detail": {
+        "title": "Monitoring Document Watch"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "userId": "User Id",
+      "watchType": "Watch Type",
+      "notifyOnView": "Notify On View",
+      "notifyOnDownload": "Notify On Download",
+      "notifyOnModify": "Notify On Modify",
+      "notifyOnShare": "Notify On Share",
+      "notifyOnDelete": "Notify On Delete",
+      "createdDate": "Created Date"
+    }
+  },
+  "monitoringServiceApp": {
+    "monitoringServiceMonitoringDocumentWatch": {
+      "created": "A new Monitoring Document Watch is created with identifier {{ param }}",
+      "updated": "A Monitoring Document Watch is updated with identifier {{ param }}",
+      "deleted": "A Monitoring Document Watch is deleted with identifier {{ param }}"
+    }
+  }
+}

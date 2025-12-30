@@ -1,0 +1,242 @@
+<div>
+  <h2 id="page-heading" data-cy="EmailImportImportMappingHeading">
+    <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.home.title">Email Import Import Mappings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-email-import-import-mapping"
+        [routerLink]="['/email-import-import-mapping/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.home.createLabel"
+          >Create a new Email Import Import Mapping</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label
+          class="visually-hidden"
+          for="currentSearch"
+          jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.home.search"
+          >Search for Email Import Import Mapping</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.emailImportDocumentServiceEmailImportImportMapping.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (emailImportImportMappings().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.home.notFound"
+        >No Email Import Import Mappings found</span
+      >
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="emailField">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.emailField">Email Field</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentField">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.documentField">Document Field</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="transformation">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.transformation">Transformation</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="transformationConfig">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.transformationConfig"
+                  >Transformation Config</span
+                >
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isRequired">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.isRequired">Is Required</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="defaultValue">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.defaultValue">Default Value</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="validationRegex">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.validationRegex">Validation Regex</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rule.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.emailImportDocumentServiceEmailImportImportMapping.rule">Rule</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (emailImportImportMapping of emailImportImportMappings(); track trackId(emailImportImportMapping)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/email-import-import-mapping', emailImportImportMapping.id, 'view']">{{
+                  emailImportImportMapping.id
+                }}</a>
+              </td>
+              <td [jhiTranslate]="'gatewayApp.EmailField.' + (emailImportImportMapping.emailField ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    FROM: 'FROM',
+                    TO: 'TO',
+                    CC: 'CC',
+                    BCC: 'BCC',
+                    SUBJECT: 'SUBJECT',
+                    BODY: 'BODY',
+                    BODY_HTML: 'BODY_HTML',
+                    DATE: 'DATE',
+                    ATTACHMENT_NAME: 'ATTACHMENT_NAME',
+                    ATTACHMENT_COUNT: 'ATTACHMENT_COUNT',
+                    MESSAGE_ID: 'MESSAGE_ID',
+                    IN_REPLY_TO: 'IN_REPLY_TO',
+                    HEADERS: 'HEADERS',
+                  }[emailImportImportMapping.emailField ?? 'null']
+                }}
+              </td>
+              <td>{{ emailImportImportMapping.documentField }}</td>
+              <td [jhiTranslate]="'gatewayApp.MappingTransformation.' + (emailImportImportMapping.transformation ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    NONE: 'NONE',
+                    UPPERCASE: 'UPPERCASE',
+                    LOWERCASE: 'LOWERCASE',
+                    TRIM: 'TRIM',
+                    EXTRACT_DATE: 'EXTRACT_DATE',
+                    EXTRACT_NUMBER: 'EXTRACT_NUMBER',
+                    EXTRACT_EMAIL: 'EXTRACT_EMAIL',
+                    REGEX_EXTRACT: 'REGEX_EXTRACT',
+                    REPLACE: 'REPLACE',
+                    SPLIT: 'SPLIT',
+                    CONCAT: 'CONCAT',
+                    CUSTOM: 'CUSTOM',
+                  }[emailImportImportMapping.transformation ?? 'null']
+                }}
+              </td>
+              <td>{{ emailImportImportMapping.transformationConfig }}</td>
+              <td>{{ emailImportImportMapping.isRequired }}</td>
+              <td>{{ emailImportImportMapping.defaultValue }}</td>
+              <td>{{ emailImportImportMapping.validationRegex }}</td>
+              <td>
+                @if (emailImportImportMapping.rule) {
+                  <div>
+                    <a [routerLink]="['/email-import-import-rule', emailImportImportMapping.rule.id, 'view']">{{
+                      emailImportImportMapping.rule.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/email-import-import-mapping', emailImportImportMapping.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/email-import-import-mapping', emailImportImportMapping.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(emailImportImportMapping)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

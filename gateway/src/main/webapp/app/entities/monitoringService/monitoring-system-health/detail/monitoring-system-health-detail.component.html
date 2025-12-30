@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (monitoringSystemHealth(); as monitoringSystemHealthRef) {
+      <div>
+        <h2 data-cy="monitoringSystemHealthDetailsHeading">
+          <span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.detail.title">Monitoring System Health</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.serviceName">Service Name</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.serviceName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.HealthStatus.' + (monitoringSystemHealthRef.status ?? 'null')">{{
+              { null: '', HEALTHY: 'HEALTHY', DEGRADED: 'DEGRADED', UNHEALTHY: 'UNHEALTHY', UNKNOWN: 'UNKNOWN' }[
+                monitoringSystemHealthRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.version">Version</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.version }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.uptime">Uptime</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.uptime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.cpuUsage">Cpu Usage</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.cpuUsage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.memoryUsage">Memory Usage</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.memoryUsage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.errorRate">Error Rate</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.errorRate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.monitoringServiceMonitoringSystemHealth.lastCheck">Last Check</span></dt>
+          <dd>
+            <span>{{ monitoringSystemHealthRef.lastCheck | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/monitoring-system-health', monitoringSystemHealthRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

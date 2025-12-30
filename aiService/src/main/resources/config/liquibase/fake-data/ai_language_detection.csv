@@ -1,0 +1,11 @@
+id;document_sha_256;detected_language;confidence;detection_method;alternative_languages;text_sample;result_cache_key;is_cached;detected_date;model_version
+1;a;from throu;0.81;COMBINED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;emphasise;false;2025-12-29T19:42:43;onto
+2;presume pity;provision ;0.14;BERT_MULTILINGUAL;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;yum;true;2025-12-30T02:40:13;westernize
+3;savour;optimistic;0.93;TIKA;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;passport nor;true;2025-12-29T13:24:42;inside noxious blissfully
+4;flu bleach;ick er;0.12;LANGDETECT;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;via alongside detective;false;2025-12-29T14:01:56;as limp athwart
+5;wherever actual;woot;0.89;MANUAL;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;times;true;2025-12-29T12:36:33;train upon quick
+6;that;sew scheme;0.55;MANUAL;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;desecrate phew;false;2025-12-30T01:47:08;indeed
+7;posh always between;rigidly;0.93;MANUAL;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;duh sneaky mid;false;2025-12-29T08:06:35;amongst trust
+8;after incline;upon scale;0.13;TIKA;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;plait phooey calmly;true;2025-12-29T20:33:30;premier depart
+9;what ashamed;than uh-hu;0.37;TIKA;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;drat;true;2025-12-29T11:18:16;blah wisely
+10;eek chops white;boring whi;0.68;COMBINED;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;tomorrow;true;2025-12-29T10:46:02;scuffle ah fearless

@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportingDashboardWidget(); as reportingDashboardWidgetRef) {
+      <div>
+        <h2 data-cy="reportingDashboardWidgetDetailsHeading">
+          <span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.detail.title">Reporting Dashboard Widget</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reportingDashboardWidgetRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.widgetType">Widget Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.WidgetType.' + (reportingDashboardWidgetRef.widgetType ?? 'null')">{{
+              {
+                null: '',
+                DOCUMENT_COUNT: 'DOCUMENT_COUNT',
+                STORAGE_USAGE: 'STORAGE_USAGE',
+                RECENT_UPLOADS: 'RECENT_UPLOADS',
+                TOP_TAGS: 'TOP_TAGS',
+                WORKFLOW_STATUS: 'WORKFLOW_STATUS',
+                USER_ACTIVITY: 'USER_ACTIVITY',
+                CHART_LINE: 'CHART_LINE',
+                CHART_BAR: 'CHART_BAR',
+                CHART_PIE: 'CHART_PIE',
+                CHART_DOUGHNUT: 'CHART_DOUGHNUT',
+                CHART_AREA: 'CHART_AREA',
+                TABLE: 'TABLE',
+                METRIC: 'METRIC',
+                HEATMAP: 'HEATMAP',
+                GAUGE: 'GAUGE',
+                TIMELINE: 'TIMELINE',
+              }[reportingDashboardWidgetRef.widgetType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.title">Title</span></dt>
+          <dd>
+            <span>{{ reportingDashboardWidgetRef.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.configuration">Configuration</span></dt>
+          <dd>
+            <span>{{ reportingDashboardWidgetRef.configuration }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.dataSource">Data Source</span></dt>
+          <dd>
+            <span>{{ reportingDashboardWidgetRef.dataSource }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.position">Position</span></dt>
+          <dd>
+            <span>{{ reportingDashboardWidgetRef.position }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.sizeX">Size X</span></dt>
+          <dd>
+            <span>{{ reportingDashboardWidgetRef.sizeX }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.sizeY">Size Y</span></dt>
+          <dd>
+            <span>{{ reportingDashboardWidgetRef.sizeY }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboardWidget.dashboar">Dashboar</span></dt>
+          <dd>
+            @if (reportingDashboardWidget()!.dashboar) {
+              <div>
+                <a [routerLink]="['/reporting-dashboard', reportingDashboardWidget()!.dashboar?.id, 'view']">{{
+                  reportingDashboardWidgetRef.dashboar?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/reporting-dashboard-widget', reportingDashboardWidgetRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

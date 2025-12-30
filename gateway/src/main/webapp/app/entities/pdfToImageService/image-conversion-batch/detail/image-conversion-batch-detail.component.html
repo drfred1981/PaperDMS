@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (imageConversionBatch(); as imageConversionBatchRef) {
+      <div>
+        <h2 data-cy="imageConversionBatchDetailsHeading">
+          <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.detail.title">Image Conversion Batch</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.batchName">Batch Name</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.batchName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.description">Description</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.createdAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ConversionStatus.' + (imageConversionBatchRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                imageConversionBatchRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.totalConversions">Total Conversions</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.totalConversions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.completedConversions">Completed Conversions</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.completedConversions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.failedConversions">Failed Conversions</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.failedConversions }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.startedAt">Started At</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.startedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.completedAt">Completed At</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.completedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.totalProcessingDuration">Total Processing Duration</span>
+          </dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.totalProcessingDuration }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionBatch.createdByUserId">Created By User Id</span></dt>
+          <dd>
+            <span>{{ imageConversionBatchRef.createdByUserId }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/image-conversion-batch', imageConversionBatchRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "gatewayApp": {
+    "HealthStatus": {
+      "null": "",
+      "HEALTHY": "HEALTHY",
+      "DEGRADED": "DEGRADED",
+      "UNHEALTHY": "UNHEALTHY",
+      "UNKNOWN": "UNKNOWN"
+    }
+  }
+}

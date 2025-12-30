@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "documentServiceMetaFolder": {
+      "home": {
+        "title": "Meta Folders",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Meta Folder",
+        "createOrEditLabel": "Create or edit a Meta Folder",
+        "search": "Search for Meta Folder",
+        "notFound": "No Meta Folders found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Meta Folder {{ id }}?"
+      },
+      "detail": {
+        "title": "Meta Folder"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "path": "Path",
+      "isShared": "Is Shared",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "children": "Children",
+      "documents": "Documents",
+      "parent": "Parent"
+    }
+  },
+  "documentServiceApp": {
+    "documentServiceMetaFolder": {
+      "created": "A new Meta Folder is created with identifier {{ param }}",
+      "updated": "A Meta Folder is updated with identifier {{ param }}",
+      "deleted": "A Meta Folder is deleted with identifier {{ param }}"
+    }
+  }
+}

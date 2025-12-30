@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (reportingDashboard(); as reportingDashboardRef) {
+      <div>
+        <h2 data-cy="reportingDashboardDetailsHeading">
+          <span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.detail.title">Reporting Dashboard</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.name">Name</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.description">Description</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.userId">User Id</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.isPublic">Is Public</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.isPublic }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.layout">Layout</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.layout }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.refreshInterval">Refresh Interval</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.refreshInterval }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.isDefault">Is Default</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.isDefault }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.reportingServiceReportingDashboard.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ reportingDashboardRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/reporting-dashboard', reportingDashboardRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

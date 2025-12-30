@@ -1,0 +1,45 @@
+{
+  "gatewayApp": {
+    "notificationServiceNotificationWebhookSubscription": {
+      "home": {
+        "title": "Notification Webhook Subscriptions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Notification Webhook Subscription",
+        "createOrEditLabel": "Create or edit a Notification Webhook Subscription",
+        "search": "Search for Notification Webhook Subscription",
+        "notFound": "No Notification Webhook Subscriptions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Notification Webhook Subscription {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification Webhook Subscription"
+      },
+      "id": "ID",
+      "name": "Name",
+      "url": "Url",
+      "secret": "Secret",
+      "events": "Events",
+      "headers": "Headers",
+      "isActive": "Is Active",
+      "retryCount": "Retry Count",
+      "maxRetries": "Max Retries",
+      "retryDelay": "Retry Delay",
+      "lastTriggerDate": "Last Trigger Date",
+      "lastSuccessDate": "Last Success Date",
+      "lastErrorMessage": "Last Error Message",
+      "failureCount": "Failure Count",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedDate": "Last Modified Date",
+      "notificationWebhookLogs": "Notification Webhook Logs"
+    }
+  },
+  "notificationServiceApp": {
+    "notificationServiceNotificationWebhookSubscription": {
+      "created": "A new Notification Webhook Subscription is created with identifier {{ param }}",
+      "updated": "A Notification Webhook Subscription is updated with identifier {{ param }}",
+      "deleted": "A Notification Webhook Subscription is deleted with identifier {{ param }}"
+    }
+  }
+}

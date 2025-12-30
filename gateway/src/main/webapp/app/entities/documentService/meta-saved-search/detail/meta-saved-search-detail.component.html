@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metaSavedSearch(); as metaSavedSearchRef) {
+      <div>
+        <h2 data-cy="metaSavedSearchDetailsHeading">
+          <span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.detail.title">Meta Saved Search</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ metaSavedSearchRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.name">Name</span></dt>
+          <dd>
+            <span>{{ metaSavedSearchRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.query">Query</span></dt>
+          <dd>
+            <span>{{ metaSavedSearchRef.query }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.isPublic">Is Public</span></dt>
+          <dd>
+            <span>{{ metaSavedSearchRef.isPublic }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.isAlert">Is Alert</span></dt>
+          <dd>
+            <span>{{ metaSavedSearchRef.isAlert }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.alertFrequency">Alert Frequency</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.AlertFrequency.' + (metaSavedSearchRef.alertFrequency ?? 'null')">{{
+              {
+                null: '',
+                IMMEDIATELY: 'IMMEDIATELY',
+                HOURLY: 'HOURLY',
+                DAILY: 'DAILY',
+                WEEKLY: 'WEEKLY',
+                MONTHLY: 'MONTHLY',
+                NEVER: 'NEVER',
+              }[metaSavedSearchRef.alertFrequency ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.userId">User Id</span></dt>
+          <dd>
+            <span>{{ metaSavedSearchRef.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.documentServiceMetaSavedSearch.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ metaSavedSearchRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/meta-saved-search', metaSavedSearchRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

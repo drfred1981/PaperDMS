@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (imageConversionConfig(); as imageConversionConfigRef) {
+      <div>
+        <h2 data-cy="imageConversionConfigDetailsHeading">
+          <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.detail.title">Image Conversion Config</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.configName">Config Name</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.configName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.description">Description</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultQuality">Default Quality</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ImageQuality.' + (imageConversionConfigRef.defaultQuality ?? 'null')">{{
+              { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', ULTRA: 'ULTRA' }[imageConversionConfigRef.defaultQuality ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultFormat">Default Format</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ImageFormat.' + (imageConversionConfigRef.defaultFormat ?? 'null')">{{
+              { null: '', PNG: 'PNG', JPEG: 'JPEG', WEBP: 'WEBP' }[imageConversionConfigRef.defaultFormat ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultDpi">Default Dpi</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.defaultDpi }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultConversionType">Default Conversion Type</span>
+          </dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.ConversionType.' + (imageConversionConfigRef.defaultConversionType ?? 'null')">{{
+              {
+                null: '',
+                SINGLE_PAGE: 'SINGLE_PAGE',
+                ALL_PAGES: 'ALL_PAGES',
+                PAGE_RANGE: 'PAGE_RANGE',
+                FIRST_PAGE_ONLY: 'FIRST_PAGE_ONLY',
+              }[imageConversionConfigRef.defaultConversionType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.defaultPriority">Default Priority</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.defaultPriority }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.isDefault">Is Default</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.isDefault }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.createdAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.pdfToImageServiceImageConversionConfig.updatedAt">Updated At</span></dt>
+          <dd>
+            <span>{{ imageConversionConfigRef.updatedAt | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/image-conversion-config', imageConversionConfigRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

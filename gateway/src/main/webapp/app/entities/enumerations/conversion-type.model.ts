@@ -1,0 +1,9 @@
+export enum ConversionType {
+  SINGLE_PAGE = 'SINGLE_PAGE',
+
+  ALL_PAGES = 'ALL_PAGES',
+
+  PAGE_RANGE = 'PAGE_RANGE',
+
+  FIRST_PAGE_ONLY = 'FIRST_PAGE_ONLY',
+}

@@ -1,0 +1,11 @@
+export enum MonitoringAlertStatus {
+  ACTIVE = 'ACTIVE',
+
+  ACKNOWLEDGED = 'ACKNOWLEDGED',
+
+  RESOLVED = 'RESOLVED',
+
+  DISMISSED = 'DISMISSED',
+
+  ESCALATED = 'ESCALATED',
+}

@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transformCompressionJob(); as transformCompressionJobRef) {
+      <div>
+        <h2 data-cy="transformCompressionJobDetailsHeading">
+          <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.detail.title">Transform Compression Job</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.documentSha256">Document Sha 256</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.documentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.compressionType">Compression Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.CompressionType.' + (transformCompressionJobRef.compressionType ?? 'null')">{{
+              { null: '', LOSSLESS: 'LOSSLESS', LOSSY: 'LOSSY', ADAPTIVE: 'ADAPTIVE' }[transformCompressionJobRef.compressionType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.quality">Quality</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.quality }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.targetSizeKb">Target Size Kb</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.targetSizeKb }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.originalSize">Original Size</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.originalSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.compressedSize">Compressed Size</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.compressedSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.compressionRatio">Compression Ratio</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.compressionRatio }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.outputS3Key">Output S 3 Key</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.outputS3Key }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.outputDocumentSha256">Output Document Sha 256</span>
+          </dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.outputDocumentSha256 }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gatewayApp.TransformStatus.' + (transformCompressionJobRef.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', PROCESSING: 'PROCESSING', COMPLETED: 'COMPLETED', FAILED: 'FAILED', CANCELLED: 'CANCELLED' }[
+                transformCompressionJobRef.status ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.startDate">Start Date</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.endDate">End Date</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.transformServiceTransformCompressionJob.createdDate">Created Date</span></dt>
+          <dd>
+            <span>{{ transformCompressionJobRef.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transform-compression-job', transformCompressionJobRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

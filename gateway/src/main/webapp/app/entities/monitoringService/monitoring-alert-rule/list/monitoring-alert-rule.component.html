@@ -1,0 +1,231 @@
+<div>
+  <h2 id="page-heading" data-cy="MonitoringAlertRuleHeading">
+    <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.home.title">Monitoring Alert Rules</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-monitoring-alert-rule"
+        [routerLink]="['/monitoring-alert-rule/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.home.createLabel"
+          >Create a new Monitoring Alert Rule</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.home.search"
+          >Search for Monitoring Alert Rule</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.monitoringServiceMonitoringAlertRule.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (monitoringAlertRules().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.home.notFound">No Monitoring Alert Rules found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.name">Name</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="alertType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.alertType">Alert Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="conditions">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.conditions">Conditions</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="severity">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.severity">Severity</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="recipients">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.recipients">Recipients</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isActive">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.isActive">Is Active</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="triggerCount">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.triggerCount">Trigger Count</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastTriggered">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.lastTriggered">Last Triggered</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.createdBy">Created By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringAlertRule.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (monitoringAlertRule of monitoringAlertRules(); track trackId(monitoringAlertRule)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/monitoring-alert-rule', monitoringAlertRule.id, 'view']">{{ monitoringAlertRule.id }}</a>
+              </td>
+              <td>{{ monitoringAlertRule.name }}</td>
+              <td>{{ monitoringAlertRule.description }}</td>
+              <td [jhiTranslate]="'gatewayApp.MonitoringAlertType.' + (monitoringAlertRule.alertType ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DOCUMENT_EXPIRATION: 'DOCUMENT_EXPIRATION',
+                    STORAGE_QUOTA: 'STORAGE_QUOTA',
+                    UNUSUAL_ACTIVITY: 'UNUSUAL_ACTIVITY',
+                    COMPLIANCE_VIOLATION: 'COMPLIANCE_VIOLATION',
+                    WORKFLOW_DELAYED: 'WORKFLOW_DELAYED',
+                    FAILED_OCR: 'FAILED_OCR',
+                    MISSING_METADATA: 'MISSING_METADATA',
+                    DUPLICATE_DETECTED: 'DUPLICATE_DETECTED',
+                    PERMISSION_CHANGED: 'PERMISSION_CHANGED',
+                    SERVICE_DOWN: 'SERVICE_DOWN',
+                    HIGH_ERROR_RATE: 'HIGH_ERROR_RATE',
+                    CONTRACT_EXPIRATION: 'CONTRACT_EXPIRATION',
+                    INVOICE_OVERDUE: 'INVOICE_OVERDUE',
+                    SYSTEM_OVERLOAD: 'SYSTEM_OVERLOAD',
+                  }[monitoringAlertRule.alertType ?? 'null']
+                }}
+              </td>
+              <td>{{ monitoringAlertRule.conditions }}</td>
+              <td [jhiTranslate]="'gatewayApp.Severity.' + (monitoringAlertRule.severity ?? 'null')">
+                {{ { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', CRITICAL: 'CRITICAL' }[monitoringAlertRule.severity ?? 'null'] }}
+              </td>
+              <td>{{ monitoringAlertRule.recipients }}</td>
+              <td>{{ monitoringAlertRule.isActive }}</td>
+              <td>{{ monitoringAlertRule.triggerCount }}</td>
+              <td>{{ monitoringAlertRule.lastTriggered | formatMediumDatetime }}</td>
+              <td>{{ monitoringAlertRule.createdBy }}</td>
+              <td>{{ monitoringAlertRule.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/monitoring-alert-rule', monitoringAlertRule.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/monitoring-alert-rule', monitoringAlertRule.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(monitoringAlertRule)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

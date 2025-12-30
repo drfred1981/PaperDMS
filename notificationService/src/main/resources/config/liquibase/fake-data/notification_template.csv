@@ -1,0 +1,11 @@
+id;name;subject;body_template;type;channel;variables;is_active;created_date;last_modified_date
+1;fairly sun tabletop;meh until;../fake-data/blob/hipster.txt;WORKFLOW_COMPLETED;EMAIL;../fake-data/blob/hipster.txt;false;2025-12-29T15:14:55;2025-12-29T17:15:13
+2;innocent jubilant tight;knickers partially;../fake-data/blob/hipster.txt;CUSTOM;WEBHOOK;../fake-data/blob/hipster.txt;false;2025-12-29T15:49:02;2025-12-29T19:23:02
+3;aw staid;dramatic;../fake-data/blob/hipster.txt;AI_TAG_SUGGESTED;IN_APP;../fake-data/blob/hipster.txt;true;2025-12-29T08:26:44;2025-12-30T00:18:02
+4;commodity onto including;quip;../fake-data/blob/hipster.txt;AI_TAG_SUGGESTED;WEBHOOK;../fake-data/blob/hipster.txt;false;2025-12-29T22:24:48;2025-12-30T06:06:31
+5;in insecure;usable uncork irresponsible;../fake-data/blob/hipster.txt;DOCUMENT_UPLOADED;WEBHOOK;../fake-data/blob/hipster.txt;false;2025-12-29T16:18:07;2025-12-29T07:17:13
+6;orange which;ouch screw yearly;../fake-data/blob/hipster.txt;SYSTEM_ALERT;EMAIL;../fake-data/blob/hipster.txt;true;2025-12-29T23:07:58;2025-12-29T13:57:49
+7;gadzooks expensive;gosh transplant defiantly;../fake-data/blob/hipster.txt;WORKFLOW_COMPLETED;EMAIL;../fake-data/blob/hipster.txt;false;2025-12-29T17:44:53;2025-12-29T22:54:42
+8;commonly;free but;../fake-data/blob/hipster.txt;OCR_COMPLETED;PUSH;../fake-data/blob/hipster.txt;true;2025-12-29T14:35:52;2025-12-29T11:03:01
+9;amid;even;../fake-data/blob/hipster.txt;AI_TAG_SUGGESTED;SMS;../fake-data/blob/hipster.txt;false;2025-12-29T08:18:31;2025-12-29T09:57:55
+10;although newsprint;righteously;../fake-data/blob/hipster.txt;WORKFLOW_APPROVED;EMAIL;../fake-data/blob/hipster.txt;true;2025-12-29T12:15:20;2025-12-30T00:35:56

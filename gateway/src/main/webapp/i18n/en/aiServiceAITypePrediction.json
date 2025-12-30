@@ -1,0 +1,38 @@
+{
+  "gatewayApp": {
+    "aiServiceAITypePrediction": {
+      "home": {
+        "title": "AI Type Predictions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new AI Type Prediction",
+        "createOrEditLabel": "Create or edit a AI Type Prediction",
+        "search": "Search for AI Type Prediction",
+        "notFound": "No AI Type Predictions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete AI Type Prediction {{ id }}?"
+      },
+      "detail": {
+        "title": "AI Type Prediction"
+      },
+      "id": "ID",
+      "documentTypeName": "Document Type Name",
+      "confidence": "Confidence",
+      "reason": "Reason",
+      "modelVersion": "Model Version",
+      "predictionS3Key": "Prediction S 3 Key",
+      "isAccepted": "Is Accepted",
+      "acceptedBy": "Accepted By",
+      "acceptedDate": "Accepted Date",
+      "predictionDate": "Prediction Date",
+      "job": "Job"
+    }
+  },
+  "aiServiceApp": {
+    "aiServiceAITypePrediction": {
+      "created": "A new AI Type Prediction is created with identifier {{ param }}",
+      "updated": "A AI Type Prediction is updated with identifier {{ param }}",
+      "deleted": "A AI Type Prediction is deleted with identifier {{ param }}"
+    }
+  }
+}

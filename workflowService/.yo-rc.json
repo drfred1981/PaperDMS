@@ -1,0 +1,30 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 5,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "workflowService",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableSwaggerCodegen": true,
+    "entities": ["Workflow", "WorkflowStep", "WorkflowInstance", "WorkflowTask", "WorkflowApprovalHistory"],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "NGM0YmFhNmNjY2JmMTEwNWM5NDljYmM0M2U2YjhmYjE1ZmJkY2I0ZTRhMzBiOWExY2M2MDNkZTE3YjE4OWVlNWQzMjI0MDBhODU0MzE0ZDg2MDU4OTZhMDAzMmUwODg0MGUwODBhNjViOWQ1YzE3N2VlYWYwZTkzNWExYzVjNzg=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1767076455000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageName": "fr.smartprod.paperdms.workflow",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "serverPort": "8085",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true,
+    "withAdminUi": true
+  }
+}

@@ -1,0 +1,375 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-export-job-heading"
+        data-cy="ExportJobCreateUpdateHeading"
+        jhiTranslate="gatewayApp.exportServiceExportJob.home.createOrEditLabel"
+      >
+        Create or edit a Export Job
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gatewayApp.exportServiceExportJob.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nameRef = editForm.get('name')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_name" jhiTranslate="gatewayApp.exportServiceExportJob.name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (nameRef.invalid && (nameRef.dirty || nameRef.touched)) {
+            <div>
+              @if (editForm.get('name')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('name')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="gatewayApp.exportServiceExportJob.description">Description</label>
+          <textarea
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          ></textarea>
+        </div>
+
+        @let documentQueryRef = editForm.get('documentQuery')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_documentQuery" jhiTranslate="gatewayApp.exportServiceExportJob.documentQuery"
+            >Document Query</label
+          >
+          <textarea
+            class="form-control"
+            name="documentQuery"
+            id="field_documentQuery"
+            data-cy="documentQuery"
+            formControlName="documentQuery"
+          ></textarea>
+          @if (documentQueryRef.invalid && (documentQueryRef.dirty || documentQueryRef.touched)) {
+            <div>
+              @if (editForm.get('documentQuery')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let exportFormatRef = editForm.get('exportFormat')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_exportFormat" jhiTranslate="gatewayApp.exportServiceExportJob.exportFormat"
+            >Export Format</label
+          >
+          <select class="form-control" name="exportFormat" formControlName="exportFormat" id="field_exportFormat" data-cy="exportFormat">
+            <option [ngValue]="null">{{ 'gatewayApp.ExportFormat.null' | translate }}</option>
+            @for (exportFormat of exportFormatValues; track $index) {
+              <option [value]="exportFormat">{{ 'gatewayApp.ExportFormat.' + exportFormat | translate }}</option>
+            }
+          </select>
+          @if (exportFormatRef.invalid && (exportFormatRef.dirty || exportFormatRef.touched)) {
+            <div>
+              @if (editForm.get('exportFormat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let includeMetadataRef = editForm.get('includeMetadata')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_includeMetadata" jhiTranslate="gatewayApp.exportServiceExportJob.includeMetadata"
+            >Include Metadata</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="includeMetadata"
+            id="field_includeMetadata"
+            data-cy="includeMetadata"
+            formControlName="includeMetadata"
+          />
+          @if (includeMetadataRef.invalid && (includeMetadataRef.dirty || includeMetadataRef.touched)) {
+            <div>
+              @if (editForm.get('includeMetadata')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let includeVersionsRef = editForm.get('includeVersions')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_includeVersions" jhiTranslate="gatewayApp.exportServiceExportJob.includeVersions"
+            >Include Versions</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="includeVersions"
+            id="field_includeVersions"
+            data-cy="includeVersions"
+            formControlName="includeVersions"
+          />
+          @if (includeVersionsRef.invalid && (includeVersionsRef.dirty || includeVersionsRef.touched)) {
+            <div>
+              @if (editForm.get('includeVersions')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_includeComments" jhiTranslate="gatewayApp.exportServiceExportJob.includeComments"
+            >Include Comments</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="includeComments"
+            id="field_includeComments"
+            data-cy="includeComments"
+            formControlName="includeComments"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_includeAuditTrail" jhiTranslate="gatewayApp.exportServiceExportJob.includeAuditTrail"
+            >Include Audit Trail</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="includeAuditTrail"
+            id="field_includeAuditTrail"
+            data-cy="includeAuditTrail"
+            formControlName="includeAuditTrail"
+          />
+        </div>
+
+        @let s3ExportKeyRef = editForm.get('s3ExportKey')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_s3ExportKey" jhiTranslate="gatewayApp.exportServiceExportJob.s3ExportKey"
+            >S 3 Export Key</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="s3ExportKey"
+            id="field_s3ExportKey"
+            data-cy="s3ExportKey"
+            formControlName="s3ExportKey"
+          />
+          @if (s3ExportKeyRef.invalid && (s3ExportKeyRef.dirty || s3ExportKeyRef.touched)) {
+            <div>
+              @if (editForm.get('s3ExportKey')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '1000' }"
+                  >This field cannot be longer than 1000 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_exportSize" jhiTranslate="gatewayApp.exportServiceExportJob.exportSize">Export Size</label>
+          <input
+            type="number"
+            class="form-control"
+            name="exportSize"
+            id="field_exportSize"
+            data-cy="exportSize"
+            formControlName="exportSize"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_documentCount" jhiTranslate="gatewayApp.exportServiceExportJob.documentCount"
+            >Document Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="documentCount"
+            id="field_documentCount"
+            data-cy="documentCount"
+            formControlName="documentCount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_filesGenerated" jhiTranslate="gatewayApp.exportServiceExportJob.filesGenerated"
+            >Files Generated</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="filesGenerated"
+            id="field_filesGenerated"
+            data-cy="filesGenerated"
+            formControlName="filesGenerated"
+          />
+        </div>
+
+        @let statusRef = editForm.get('status')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="gatewayApp.exportServiceExportJob.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'gatewayApp.ExportStatus.null' | translate }}</option>
+            @for (exportStatus of exportStatusValues; track $index) {
+              <option [value]="exportStatus">{{ 'gatewayApp.ExportStatus.' + exportStatus | translate }}</option>
+            }
+          </select>
+          @if (statusRef.invalid && (statusRef.dirty || statusRef.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDate" jhiTranslate="gatewayApp.exportServiceExportJob.startDate">Start Date</label>
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate" jhiTranslate="gatewayApp.exportServiceExportJob.endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_errorMessage" jhiTranslate="gatewayApp.exportServiceExportJob.errorMessage"
+            >Error Message</label
+          >
+          <textarea
+            class="form-control"
+            name="errorMessage"
+            id="field_errorMessage"
+            data-cy="errorMessage"
+            formControlName="errorMessage"
+          ></textarea>
+        </div>
+
+        @let createdByRef = editForm.get('createdBy')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="gatewayApp.exportServiceExportJob.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+          @if (createdByRef.invalid && (createdByRef.dirty || createdByRef.touched)) {
+            <div>
+              @if (editForm.get('createdBy')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('createdBy')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >This field cannot be longer than 50 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let createdDateRef = editForm.get('createdDate')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate" jhiTranslate="gatewayApp.exportServiceExportJob.createdDate"
+            >Created Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdDateRef.invalid && (createdDateRef.dirty || createdDateRef.touched)) {
+            <div>
+              @if (editForm.get('createdDate')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdDate')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_exportPattern" jhiTranslate="gatewayApp.exportServiceExportJob.exportPattern"
+            >Export Pattern</label
+          >
+          <select
+            class="form-control"
+            id="field_exportPattern"
+            data-cy="exportPattern"
+            name="exportPattern"
+            formControlName="exportPattern"
+            [compareWith]="compareExportPattern"
+          >
+            <option [ngValue]="null"></option>
+            @for (exportPatternOption of exportPatternsSharedCollection; track $index) {
+              <option [ngValue]="exportPatternOption">{{ exportPatternOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

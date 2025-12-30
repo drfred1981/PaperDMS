@@ -1,0 +1,82 @@
+{
+  "annotations": {
+    "changelogDate": "20251230075116"
+  },
+  "applications": ["pdfToImageService", "gateway"],
+  "clientRootFolder": "pdfToImageService",
+  "databaseType": "sql",
+  "documentation": "Entité - Configuration de conversion par défaut",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "configName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "defaultQuality",
+      "fieldType": "ImageQuality",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LOW,MEDIUM,HIGH,ULTRA"
+    },
+    {
+      "fieldName": "defaultFormat",
+      "fieldType": "ImageFormat",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PNG,JPEG,WEBP"
+    },
+    {
+      "fieldName": "defaultDpi",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "1200",
+      "fieldValidateRulesMin": "72"
+    },
+    {
+      "fieldName": "defaultConversionType",
+      "fieldType": "ConversionType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "SINGLE_PAGE,ALL_PAGES,PAGE_RANGE,FIRST_PAGE_ONLY"
+    },
+    {
+      "fieldName": "defaultPriority",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "5",
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "isDefault",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "pdfToImageService",
+  "name": "ImageConversionConfig",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

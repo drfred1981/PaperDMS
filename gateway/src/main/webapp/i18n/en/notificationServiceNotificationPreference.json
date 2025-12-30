@@ -1,0 +1,37 @@
+{
+  "gatewayApp": {
+    "notificationServiceNotificationPreference": {
+      "home": {
+        "title": "Notification Preferences",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Notification Preference",
+        "createOrEditLabel": "Create or edit a Notification Preference",
+        "search": "Search for Notification Preference",
+        "notFound": "No Notification Preferences found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Notification Preference {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification Preference"
+      },
+      "id": "ID",
+      "userId": "User Id",
+      "emailEnabled": "Email Enabled",
+      "pushEnabled": "Push Enabled",
+      "inAppEnabled": "In App Enabled",
+      "notificationTypes": "Notification Types",
+      "quietHoursStart": "Quiet Hours Start",
+      "quietHoursEnd": "Quiet Hours End",
+      "frequency": "Frequency",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  },
+  "notificationServiceApp": {
+    "notificationServiceNotificationPreference": {
+      "created": "A new Notification Preference is created with identifier {{ param }}",
+      "updated": "A Notification Preference is updated with identifier {{ param }}",
+      "deleted": "A Notification Preference is deleted with identifier {{ param }}"
+    }
+  }
+}

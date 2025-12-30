@@ -1,0 +1,42 @@
+{
+  "gatewayApp": {
+    "transformServiceTransformMergeJob": {
+      "home": {
+        "title": "Transform Merge Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Transform Merge Job",
+        "createOrEditLabel": "Create or edit a Transform Merge Job",
+        "search": "Search for Transform Merge Job",
+        "notFound": "No Transform Merge Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Transform Merge Job {{ id }}?"
+      },
+      "detail": {
+        "title": "Transform Merge Job"
+      },
+      "id": "ID",
+      "name": "Name",
+      "sourceDocumentSha256": "Source Document Sha 256",
+      "mergeOrder": "Merge Order",
+      "includeBookmarks": "Include Bookmarks",
+      "includeToc": "Include Toc",
+      "addPageNumbers": "Add Page Numbers",
+      "outputS3Key": "Output S 3 Key",
+      "outputDocumentSha256": "Output Document Sha 256",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  },
+  "transformServiceApp": {
+    "transformServiceTransformMergeJob": {
+      "created": "A new Transform Merge Job is created with identifier {{ param }}",
+      "updated": "A Transform Merge Job is updated with identifier {{ param }}",
+      "deleted": "A Transform Merge Job is deleted with identifier {{ param }}"
+    }
+  }
+}

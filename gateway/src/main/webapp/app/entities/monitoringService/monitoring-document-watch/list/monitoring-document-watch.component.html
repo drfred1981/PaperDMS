@@ -1,0 +1,200 @@
+<div>
+  <h2 id="page-heading" data-cy="MonitoringDocumentWatchHeading">
+    <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.home.title">Monitoring Document Watches</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-monitoring-document-watch"
+        [routerLink]="['/monitoring-document-watch/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.home.createLabel"
+          >Create a new Monitoring Document Watch</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.home.search"
+          >Search for Monitoring Document Watch</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.monitoringServiceMonitoringDocumentWatch.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (monitoringDocumentWatches().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.home.notFound">No Monitoring Document Watches found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="documentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.documentSha256">Document Sha 256</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userId">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.userId">User Id</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="watchType">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.watchType">Watch Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notifyOnView">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnView">Notify On View</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notifyOnDownload">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnDownload">Notify On Download</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notifyOnModify">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnModify">Notify On Modify</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notifyOnShare">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnShare">Notify On Share</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="notifyOnDelete">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.notifyOnDelete">Notify On Delete</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.monitoringServiceMonitoringDocumentWatch.createdDate">Created Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (monitoringDocumentWatch of monitoringDocumentWatches(); track trackId(monitoringDocumentWatch)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/monitoring-document-watch', monitoringDocumentWatch.id, 'view']">{{ monitoringDocumentWatch.id }}</a>
+              </td>
+              <td>{{ monitoringDocumentWatch.documentSha256 }}</td>
+              <td>{{ monitoringDocumentWatch.userId }}</td>
+              <td [jhiTranslate]="'gatewayApp.WatchType.' + (monitoringDocumentWatch.watchType ?? 'null')">
+                {{
+                  { null: '', AUTHOR: 'AUTHOR', REVIEWER: 'REVIEWER', AUDITOR: 'AUDITOR', STAKEHOLDER: 'STAKEHOLDER', CUSTOM: 'CUSTOM' }[
+                    monitoringDocumentWatch.watchType ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ monitoringDocumentWatch.notifyOnView }}</td>
+              <td>{{ monitoringDocumentWatch.notifyOnDownload }}</td>
+              <td>{{ monitoringDocumentWatch.notifyOnModify }}</td>
+              <td>{{ monitoringDocumentWatch.notifyOnShare }}</td>
+              <td>{{ monitoringDocumentWatch.notifyOnDelete }}</td>
+              <td>{{ monitoringDocumentWatch.createdDate | formatMediumDatetime }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/monitoring-document-watch', monitoringDocumentWatch.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/monitoring-document-watch', monitoringDocumentWatch.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(monitoringDocumentWatch)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

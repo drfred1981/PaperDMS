@@ -1,0 +1,192 @@
+<div>
+  <h2 id="page-heading" data-cy="DocumentExtractedFieldHeading">
+    <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.home.title">Document Extracted Fields</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-document-extracted-field"
+        [routerLink]="['/document-extracted-field/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.home.createLabel"
+          >Create a new Document Extracted Field</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.home.search"
+          >Search for Document Extracted Field</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.documentServiceDocumentExtractedField.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (documentExtractedFields().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.home.notFound">No Document Extracted Fields found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fieldKey">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.fieldKey">Field Key</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fieldValue">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.fieldValue">Field Value</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="confidence">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.confidence">Confidence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="extractionMethod">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.extractionMethod">Extraction Method</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isVerified">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.isVerified">Is Verified</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="extractedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.extractedDate">Extracted Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="document.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.documentServiceDocumentExtractedField.document">Document</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (documentExtractedField of documentExtractedFields(); track trackId(documentExtractedField)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/document-extracted-field', documentExtractedField.id, 'view']">{{ documentExtractedField.id }}</a>
+              </td>
+              <td>{{ documentExtractedField.fieldKey }}</td>
+              <td>{{ documentExtractedField.fieldValue }}</td>
+              <td>{{ documentExtractedField.confidence }}</td>
+              <td [jhiTranslate]="'gatewayApp.ExtractionMethod.' + (documentExtractedField.extractionMethod ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    OCR: 'OCR',
+                    NLP: 'NLP',
+                    REGEX: 'REGEX',
+                    MANUAL: 'MANUAL',
+                    AI_MODEL: 'AI_MODEL',
+                    TEMPLATE_MATCHING: 'TEMPLATE_MATCHING',
+                    BARCODE: 'BARCODE',
+                    QR_CODE: 'QR_CODE',
+                  }[documentExtractedField.extractionMethod ?? 'null']
+                }}
+              </td>
+              <td>{{ documentExtractedField.isVerified }}</td>
+              <td>{{ documentExtractedField.extractedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (documentExtractedField.document) {
+                  <div>
+                    <a [routerLink]="['/document', documentExtractedField.document.id, 'view']">{{ documentExtractedField.document.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/document-extracted-field', documentExtractedField.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/document-extracted-field', documentExtractedField.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(documentExtractedField)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,11 @@
+id;document_sha_256;step_number;action;comment;action_date;action_by;previous_assignee;time_taken
+1;hose shabby;22343;COMMENT;../fake-data/blob/hipster.txt;2025-12-30T02:36:29;gadzooks round anenst;when excellent;10240
+2;spirit;20951;COMMENT;../fake-data/blob/hipster.txt;2025-12-29T15:20:17;and ick mixed;complicated of dental;24168
+3;duster perp;20542;REQUEST_CHANGES;../fake-data/blob/hipster.txt;2025-12-30T06:14:47;seemingly;thorough cornet;9968
+4;hammock charming motivate;27227;APPROVE;../fake-data/blob/hipster.txt;2025-12-29T09:11:44;bah worth wrathful;brand likewise;28342
+5;even;29318;APPROVE;../fake-data/blob/hipster.txt;2025-12-29T12:21:53;guard solidly density;past frenetically;20983
+6;phooey;13352;CANCEL;../fake-data/blob/hipster.txt;2025-12-29T11:56:00;mmm;tragic aside;16124
+7;attribute above;20326;COMMENT;../fake-data/blob/hipster.txt;2025-12-29T18:51:50;misappropriate;brr nearly whoa;8475
+8;idolized oh shred;15534;REJECT;../fake-data/blob/hipster.txt;2025-12-30T01:02:23;gosh;round dazzling ugh;32061
+9;while tomorrow;32708;CANCEL;../fake-data/blob/hipster.txt;2025-12-29T16:06:50;up exempt;zowie accidentally;32692
+10;circa ick;30830;REJECT;../fake-data/blob/hipster.txt;2025-12-29T11:43:36;marten;inside;31766

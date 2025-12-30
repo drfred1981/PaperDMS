@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (aITagPrediction(); as aITagPredictionRef) {
+      <div>
+        <h2 data-cy="aITagPredictionDetailsHeading">
+          <span jhiTranslate="gatewayApp.aiServiceAITagPrediction.detail.title">AI Tag Prediction</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.tagName">Tag Name</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.tagName }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.confidence">Confidence</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.confidence }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.reason">Reason</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.reason }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.modelVersion">Model Version</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.modelVersion }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.predictionS3Key">Prediction S 3 Key</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.predictionS3Key }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.isAccepted">Is Accepted</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.isAccepted }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.acceptedBy">Accepted By</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.acceptedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.acceptedDate">Accepted Date</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.acceptedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.predictionDate">Prediction Date</span></dt>
+          <dd>
+            <span>{{ aITagPredictionRef.predictionDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.aiServiceAITagPrediction.job">Job</span></dt>
+          <dd>
+            @if (aITagPrediction()!.job) {
+              <div>
+                <a [routerLink]="['/ai-auto-tag-job', aITagPrediction()!.job?.id, 'view']">{{ aITagPredictionRef.job?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ai-tag-prediction', aITagPredictionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

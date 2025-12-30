@@ -1,0 +1,355 @@
+package fr.smartprod.paperdms.workflow.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import fr.smartprod.paperdms.workflow.domain.enumeration.AssigneeType;
+import fr.smartprod.paperdms.workflow.domain.enumeration.WorkflowStepType;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+/**
+ * A WorkflowStep.
+ */
+@Entity
+@Table(name = "workflow_step")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "workflowstep")
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class WorkflowStep implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
+    private Long id;
+
+    @NotNull
+    @Column(name = "step_number", nullable = false)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
+    private Integer stepNumber;
+
+    @NotNull
+    @Size(max = 255)
+    @Column(name = "name", length = 255, nullable = false)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
+    private String name;
+
+    @Lob
+    @Column(name = "description")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "step_type")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword)
+    private WorkflowStepType stepType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "assignee_type")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword)
+    private AssigneeType assigneeType;
+
+    @Size(max = 50)
+    @Column(name = "assignee_id", length = 50)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
+    private String assigneeId;
+
+    @Size(max = 100)
+    @Column(name = "assignee_group", length = 100)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
+    private String assigneeGroup;
+
+    @Column(name = "due_in_days")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
+    private Integer dueInDays;
+
+    @NotNull
+    @Column(name = "is_required", nullable = false)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Boolean)
+    private Boolean isRequired;
+
+    @NotNull
+    @Column(name = "can_delegate", nullable = false)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Boolean)
+    private Boolean canDelegate;
+
+    @NotNull
+    @Column(name = "can_reject", nullable = false)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Boolean)
+    private Boolean canReject;
+
+    @Lob
+    @Column(name = "configuration")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
+    private String configuration;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "step")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @org.springframework.data.annotation.Transient
+    @JsonIgnoreProperties(value = { "instance", "step" }, allowSetters = true)
+    private Set<WorkflowTask> workflowTasks = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "workflowStpes", "workflowInstances" }, allowSetters = true)
+    private Workflow workflow;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public WorkflowStep id(Long id) {
+        this.setId(id);
+        return this;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getStepNumber() {
+        return this.stepNumber;
+    }
+
+    public WorkflowStep stepNumber(Integer stepNumber) {
+        this.setStepNumber(stepNumber);
+        return this;
+    }
+
+    public void setStepNumber(Integer stepNumber) {
+        this.stepNumber = stepNumber;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public WorkflowStep name(String name) {
+        this.setName(name);
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public WorkflowStep description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public WorkflowStepType getStepType() {
+        return this.stepType;
+    }
+
+    public WorkflowStep stepType(WorkflowStepType stepType) {
+        this.setStepType(stepType);
+        return this;
+    }
+
+    public void setStepType(WorkflowStepType stepType) {
+        this.stepType = stepType;
+    }
+
+    public AssigneeType getAssigneeType() {
+        return this.assigneeType;
+    }
+
+    public WorkflowStep assigneeType(AssigneeType assigneeType) {
+        this.setAssigneeType(assigneeType);
+        return this;
+    }
+
+    public void setAssigneeType(AssigneeType assigneeType) {
+        this.assigneeType = assigneeType;
+    }
+
+    public String getAssigneeId() {
+        return this.assigneeId;
+    }
+
+    public WorkflowStep assigneeId(String assigneeId) {
+        this.setAssigneeId(assigneeId);
+        return this;
+    }
+
+    public void setAssigneeId(String assigneeId) {
+        this.assigneeId = assigneeId;
+    }
+
+    public String getAssigneeGroup() {
+        return this.assigneeGroup;
+    }
+
+    public WorkflowStep assigneeGroup(String assigneeGroup) {
+        this.setAssigneeGroup(assigneeGroup);
+        return this;
+    }
+
+    public void setAssigneeGroup(String assigneeGroup) {
+        this.assigneeGroup = assigneeGroup;
+    }
+
+    public Integer getDueInDays() {
+        return this.dueInDays;
+    }
+
+    public WorkflowStep dueInDays(Integer dueInDays) {
+        this.setDueInDays(dueInDays);
+        return this;
+    }
+
+    public void setDueInDays(Integer dueInDays) {
+        this.dueInDays = dueInDays;
+    }
+
+    public Boolean getIsRequired() {
+        return this.isRequired;
+    }
+
+    public WorkflowStep isRequired(Boolean isRequired) {
+        this.setIsRequired(isRequired);
+        return this;
+    }
+
+    public void setIsRequired(Boolean isRequired) {
+        this.isRequired = isRequired;
+    }
+
+    public Boolean getCanDelegate() {
+        return this.canDelegate;
+    }
+
+    public WorkflowStep canDelegate(Boolean canDelegate) {
+        this.setCanDelegate(canDelegate);
+        return this;
+    }
+
+    public void setCanDelegate(Boolean canDelegate) {
+        this.canDelegate = canDelegate;
+    }
+
+    public Boolean getCanReject() {
+        return this.canReject;
+    }
+
+    public WorkflowStep canReject(Boolean canReject) {
+        this.setCanReject(canReject);
+        return this;
+    }
+
+    public void setCanReject(Boolean canReject) {
+        this.canReject = canReject;
+    }
+
+    public String getConfiguration() {
+        return this.configuration;
+    }
+
+    public WorkflowStep configuration(String configuration) {
+        this.setConfiguration(configuration);
+        return this;
+    }
+
+    public void setConfiguration(String configuration) {
+        this.configuration = configuration;
+    }
+
+    public Set<WorkflowTask> getWorkflowTasks() {
+        return this.workflowTasks;
+    }
+
+    public void setWorkflowTasks(Set<WorkflowTask> workflowTasks) {
+        if (this.workflowTasks != null) {
+            this.workflowTasks.forEach(i -> i.setStep(null));
+        }
+        if (workflowTasks != null) {
+            workflowTasks.forEach(i -> i.setStep(this));
+        }
+        this.workflowTasks = workflowTasks;
+    }
+
+    public WorkflowStep workflowTasks(Set<WorkflowTask> workflowTasks) {
+        this.setWorkflowTasks(workflowTasks);
+        return this;
+    }
+
+    public WorkflowStep addWorkflowTasks(WorkflowTask workflowTask) {
+        this.workflowTasks.add(workflowTask);
+        workflowTask.setStep(this);
+        return this;
+    }
+
+    public WorkflowStep removeWorkflowTasks(WorkflowTask workflowTask) {
+        this.workflowTasks.remove(workflowTask);
+        workflowTask.setStep(null);
+        return this;
+    }
+
+    public Workflow getWorkflow() {
+        return this.workflow;
+    }
+
+    public void setWorkflow(Workflow workflow) {
+        this.workflow = workflow;
+    }
+
+    public WorkflowStep workflow(Workflow workflow) {
+        this.setWorkflow(workflow);
+        return this;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof WorkflowStep)) {
+            return false;
+        }
+        return getId() != null && getId().equals(((WorkflowStep) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "WorkflowStep{" +
+            "id=" + getId() +
+            ", stepNumber=" + getStepNumber() +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", stepType='" + getStepType() + "'" +
+            ", assigneeType='" + getAssigneeType() + "'" +
+            ", assigneeId='" + getAssigneeId() + "'" +
+            ", assigneeGroup='" + getAssigneeGroup() + "'" +
+            ", dueInDays=" + getDueInDays() +
+            ", isRequired='" + getIsRequired() + "'" +
+            ", canDelegate='" + getCanDelegate() + "'" +
+            ", canReject='" + getCanReject() + "'" +
+            ", configuration='" + getConfiguration() + "'" +
+            "}";
+    }
+}

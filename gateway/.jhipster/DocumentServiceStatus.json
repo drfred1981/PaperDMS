@@ -1,0 +1,87 @@
+{
+  "annotations": {
+    "changelogDate": "20251230063116"
+  },
+  "applications": ["documentService", "gateway"],
+  "clientRootFolder": "documentService",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "serviceType",
+      "fieldType": "ServiceType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "OCR_SERVICE,AI_SERVICE,WORKFLOW_SERVICE,SEARCH_SERVICE,TRANSFORM_SERVICE,ARCHIVE_SERVICE,EXPORT_SERVICE,SIMILARITY_SERVICE,BUSINESS_SERVICE,SCAN_SERVICE,EMAIL_IMPORT_SERVICE,REPORTING_SERVICE,MONITORING_SERVICE"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ServiceStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "NOT_APPLICABLE,PENDING,QUEUED,IN_PROGRESS,COMPLETED,FAILED,CANCELLED,SKIPPED,RETRYING,PARTIALLY_COMPLETED"
+    },
+    {
+      "fieldName": "statusDetails",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "errorMessage",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "retryCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastProcessedDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "processingStartDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "processingEndDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "processingDuration",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "jobId",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "updatedDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "documentService",
+  "name": "DocumentServiceStatus",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "document",
+      "otherEntityRelationshipName": "statuses",
+      "relationshipName": "document",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceClass"
+}

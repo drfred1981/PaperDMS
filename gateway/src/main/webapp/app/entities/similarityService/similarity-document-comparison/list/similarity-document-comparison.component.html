@@ -1,0 +1,234 @@
+<div>
+  <h2 id="page-heading" data-cy="SimilarityDocumentComparisonHeading">
+    <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.home.title">Similarity Document Comparisons</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-similarity-document-comparison"
+        [routerLink]="['/similarity-document-comparison/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.home.createLabel"
+          >Create a new Similarity Document Comparison</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label
+          class="visually-hidden"
+          for="currentSearch"
+          jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.home.search"
+          >Search for Similarity Document Comparison</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'gatewayApp.similarityServiceSimilarityDocumentComparison.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (similarityDocumentComparisons().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.home.notFound"
+        >No Similarity Document Comparisons found</span
+      >
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sourceDocumentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.sourceDocumentSha256"
+                  >Source Document Sha 256</span
+                >
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="targetDocumentSha256">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.targetDocumentSha256"
+                  >Target Document Sha 256</span
+                >
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="similarityScore">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.similarityScore">Similarity Score</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="algorithm">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.algorithm">Algorithm</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="features">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.features">Features</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="computedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.computedDate">Computed Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="isRelevant">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.isRelevant">Is Relevant</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reviewedBy">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.reviewedBy">Reviewed By</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reviewedDate">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.reviewedDate">Reviewed Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="job.id">
+              <div class="d-flex">
+                <span jhiTranslate="gatewayApp.similarityServiceSimilarityDocumentComparison.job">Job</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (similarityDocumentComparison of similarityDocumentComparisons(); track trackId(similarityDocumentComparison)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/similarity-document-comparison', similarityDocumentComparison.id, 'view']">{{
+                  similarityDocumentComparison.id
+                }}</a>
+              </td>
+              <td>{{ similarityDocumentComparison.sourceDocumentSha256 }}</td>
+              <td>{{ similarityDocumentComparison.targetDocumentSha256 }}</td>
+              <td>{{ similarityDocumentComparison.similarityScore }}</td>
+              <td [jhiTranslate]="'gatewayApp.SimilarityAlgorithm.' + (similarityDocumentComparison.algorithm ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    COSINE: 'COSINE',
+                    JACCARD: 'JACCARD',
+                    LEVENSHTEIN: 'LEVENSHTEIN',
+                    LSH: 'LSH',
+                    DEEP_LEARNING: 'DEEP_LEARNING',
+                    COMBINED: 'COMBINED',
+                  }[similarityDocumentComparison.algorithm ?? 'null']
+                }}
+              </td>
+              <td>{{ similarityDocumentComparison.features }}</td>
+              <td>{{ similarityDocumentComparison.computedDate | formatMediumDatetime }}</td>
+              <td>{{ similarityDocumentComparison.isRelevant }}</td>
+              <td>{{ similarityDocumentComparison.reviewedBy }}</td>
+              <td>{{ similarityDocumentComparison.reviewedDate | formatMediumDatetime }}</td>
+              <td>
+                @if (similarityDocumentComparison.job) {
+                  <div>
+                    <a [routerLink]="['/similarity-job', similarityDocumentComparison.job.id, 'view']">{{
+                      similarityDocumentComparison.job.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/similarity-document-comparison', similarityDocumentComparison.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/similarity-document-comparison', similarityDocumentComparison.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(similarityDocumentComparison)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

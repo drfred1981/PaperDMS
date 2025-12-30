@@ -1,0 +1,43 @@
+{
+  "gatewayApp": {
+    "pdfToImageServiceImageGeneratedImage": {
+      "home": {
+        "title": "Image Generated Images",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image Generated Image",
+        "createOrEditLabel": "Create or edit a Image Generated Image",
+        "search": "Search for Image Generated Image",
+        "notFound": "No Image Generated Images found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Image Generated Image {{ id }}?"
+      },
+      "detail": {
+        "title": "Image Generated Image"
+      },
+      "id": "ID",
+      "pageNumber": "Page Number",
+      "fileName": "File Name",
+      "s3Key": "S 3 Key",
+      "preSignedUrl": "Pre Signed Url",
+      "urlExpiresAt": "Url Expires At",
+      "format": "Format",
+      "quality": "Quality",
+      "width": "Width",
+      "height": "Height",
+      "fileSize": "File Size",
+      "dpi": "Dpi",
+      "sha256Hash": "Sha 256 Hash",
+      "generatedAt": "Generated At",
+      "metadata": "Metadata",
+      "conversionRequest": "Conversion Request"
+    }
+  },
+  "pdfToImageServiceApp": {
+    "pdfToImageServiceImageGeneratedImage": {
+      "created": "A new Image Generated Image is created with identifier {{ param }}",
+      "updated": "A Image Generated Image is updated with identifier {{ param }}",
+      "deleted": "A Image Generated Image is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notificationWebhookLog(); as notificationWebhookLogRef) {
+      <div>
+        <h2 data-cy="notificationWebhookLogDetailsHeading">
+          <span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.detail.title">Notification Webhook Log</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.eventType">Event Type</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.eventType }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.payload">Payload</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.payload }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.responseStatus">Response Status</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.responseStatus }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.responseBody">Response Body</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.responseBody }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.responseTime">Response Time</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.responseTime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.attemptNumber">Attempt Number</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.attemptNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.isSuccess">Is Success</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.isSuccess }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.errorMessage">Error Message</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.errorMessage }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.sentDate">Sent Date</span></dt>
+          <dd>
+            <span>{{ notificationWebhookLogRef.sentDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="gatewayApp.notificationServiceNotificationWebhookLog.subscription">Subscription</span></dt>
+          <dd>
+            @if (notificationWebhookLog()!.subscription) {
+              <div>
+                <a [routerLink]="['/notification-webhook-subscription', notificationWebhookLog()!.subscription?.id, 'view']">{{
+                  notificationWebhookLogRef.subscription?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/notification-webhook-log', notificationWebhookLogRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

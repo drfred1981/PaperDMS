@@ -1,0 +1,40 @@
+{
+  "gatewayApp": {
+    "similarityServiceSimilarityJob": {
+      "home": {
+        "title": "Similarity Jobs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Similarity Job",
+        "createOrEditLabel": "Create or edit a Similarity Job",
+        "search": "Search for Similarity Job",
+        "notFound": "No Similarity Jobs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Similarity Job {{ id }}?"
+      },
+      "detail": {
+        "title": "Similarity Job"
+      },
+      "id": "ID",
+      "documentSha256": "Document Sha 256",
+      "status": "Status",
+      "algorithm": "Algorithm",
+      "scope": "Scope",
+      "minSimilarityThreshold": "Min Similarity Threshold",
+      "matchesFound": "Matches Found",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "errorMessage": "Error Message",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "similarities": "Similarities"
+    }
+  },
+  "similarityServiceApp": {
+    "similarityServiceSimilarityJob": {
+      "created": "A new Similarity Job is created with identifier {{ param }}",
+      "updated": "A Similarity Job is updated with identifier {{ param }}",
+      "deleted": "A Similarity Job is deleted with identifier {{ param }}"
+    }
+  }
+}

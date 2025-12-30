@@ -15,7 +15,33 @@
 
 spring:
   application:
-    name: paperdms
+    name: pdfToImageService
+  cloud:
+    consul:
+      discovery:
+        enabled: false
+        instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+      config:
+        enabled: false
+      enabled: false
+    function:
+      definition: kafkaConsumer;kafkaProducer
+    stream:
+      kafka:
+        binder:
+          replicationFactor: 1
+          auto-create-topics: true
+      bindings:
+        binding-out-0:
+          content-type: text/plain
+          group: pdf-to-image-service
+        kafkaConsumer-in-0:
+          destination: sse-topic
+          content-type: text/plain
+          group: pdf-to-image-service
+        kafkaProducer-out-0:
+          content-type: text/plain
+          group: pdf-to-image-service
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: test
@@ -36,13 +62,13 @@ spring:
           authorities-claim-name: auth
   task:
     execution:
-      thread-name-prefix: paperdms-task-
+      thread-name-prefix: pdf-to-image-service-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: paperdms-scheduling-
+      thread-name-prefix: pdf-to-image-service-scheduling-
       pool:
         size: 20
   thymeleaf:
@@ -59,9 +85,9 @@ server:
 # ===================================================================
 jhipster:
   clientApp:
-    name: 'paperdmsApp'
+    name: 'pdfToImageServiceApp'
   mail:
-    from: paperdms@localhost.com
+    from: pdfToImageService@localhost.com
     base-url: http://127.0.0.1:8080
   logging:
     # To test json console appender
@@ -75,7 +101,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: NWRiMzRiMzhhZjFiYWNmNzg3OTBjNzc2Yzg0NDI4MTJiNTBhMGVhZWZmOTUwYjY5NDQwM2YxNDU4YmI3YTA0M2NmODM0OTM5YzU2NjBjZWI2ZDM2M2Q3NzQ1YjNhNjZkYjgwMTNjNWNjNmM0NjQ0NGM0ZjkzNTllMWI5NjEwODY=
+        base64-secret: ZGQ3NjUyM2YwMjUxMjM1YjQzM2M3ODgwNTU4MTVmN2Y2YmIzNjhmMWE5Mzg2YmY0NjhmNjBkMmIyNmNkOGJiZGFiMGFmM2M5MjE1YTM4ODBmZGRmNTFkN2U1MThjY2FmZjQwMGE1MjkwOTcwZmMwMGNmZTE4ZGU4YmYxNTY4Y2E=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 86400
