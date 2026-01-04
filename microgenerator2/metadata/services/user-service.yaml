@@ -1,0 +1,193 @@
+---
+# User Service
+# metadata/services/user-service.yaml
+
+category: service
+type: business
+name: "user-service"
+enabled: true
+
+service:
+  artifactId: "user-service"
+  port: 8081
+  packageName: "com.example.user"
+  
+  dependencies:
+    - spring-boot-starter-web
+    - spring-boot-starter-data-jpa
+    - spring-cloud-starter-netflix-eureka-client
+    - postgresql
+    - lombok
+    - spring-boot-starter-validation
+    - spring-boot-starter-actuator
+    - micrometer-registry-prometheus
+  
+  database:
+    enabled: true
+    name: "userdb"
+  
+  elasticsearch:
+    enabled: true
+    index: "users"
+  
+  redis:
+    enabled: true
+    prefix: "user:"
+  
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+
+frontend:
+  displayName: "Utilisateurs"
+  icon: "pi pi-users"
+  menuPosition: 1
+  
+  # Traductions spécifiques au service
+  translations:
+    "user.title":
+      fr: "Gestion des utilisateurs"
+      en: "User Management"
+      es: "Gestión de usuarios"
+      de: "Benutzerverwaltung"
+    
+    "user.list":
+      fr: "Liste des utilisateurs"
+      en: "User List"
+      es: "Lista de usuarios"
+      de: "Benutzerliste"
+    
+    "user.create":
+      fr: "Créer un utilisateur"
+      en: "Create User"
+      es: "Crear usuario"
+      de: "Benutzer erstellen"
+    
+    "user.edit":
+      fr: "Modifier l'utilisateur"
+      en: "Edit User"
+      es: "Editar usuario"
+      de: "Benutzer bearbeiten"
+    
+    "user.delete":
+      fr: "Supprimer l'utilisateur"
+      en: "Delete User"
+      es: "Eliminar usuario"
+      de: "Benutzer löschen"
+    
+    "user.field.username":
+      fr: "Nom d'utilisateur"
+      en: "Username"
+      es: "Nombre de usuario"
+      de: "Benutzername"
+    
+    "user.field.email":
+      fr: "Email"
+      en: "Email"
+      es: "Correo electrónico"
+      de: "E-Mail"
+    
+    "user.field.firstName":
+      fr: "Prénom"
+      en: "First Name"
+      es: "Nombre"
+      de: "Vorname"
+    
+    "user.field.lastName":
+      fr: "Nom"
+      en: "Last Name"
+      es: "Apellido"
+      de: "Nachname"
+    
+    "user.field.active":
+      fr: "Actif"
+      en: "Active"
+      es: "Activo"
+      de: "Aktiv"
+
+docker:
+  image: "user-service"
+  dependsOn:
+    - postgres-user-service
+    - eureka-server
+    - elasticsearch
+    - redis
+
+# Entités du service
+entities:
+  - name: "User"
+    tableName: "users"
+    
+    frontend:
+      displayName: "Utilisateur"
+      pluralName: "Utilisateurs"
+      icon: "pi pi-user"
+      searchEnabled: true
+      exportEnabled: true
+      defaultSort: "username,asc"
+      pageSize: 10
+    
+    fields:
+      - name: "id"
+        type: "Long"
+        annotations:
+          - "@Id"
+          - "@GeneratedValue(strategy = GenerationType.IDENTITY)"
+        frontend:
+          hide: true
+      
+      - name: "username"
+        type: "String"
+        annotations:
+          - "@Column(nullable = false, unique = true, length = 50)"
+          - "@NotBlank"
+          - "@Size(min = 3, max = 50)"
+        frontend:
+          label: "Nom d'utilisateur"
+          required: true
+          minLength: 3
+          maxLength: 50
+      
+      - name: "email"
+        type: "String"
+        annotations:
+          - "@Column(nullable = false, unique = true, length = 100)"
+          - "@Email"
+          - "@NotBlank"
+        frontend:
+          label: "Email"
+          type: "email"
+          required: true
+      
+      - name: "firstName"
+        type: "String"
+        annotations:
+          - "@Column(name = \"first_name\", length = 100)"
+        frontend:
+          label: "Prénom"
+      
+      - name: "lastName"
+        type: "String"
+        annotations:
+          - "@Column(name = \"last_name\", length = 100)"
+        frontend:
+          label: "Nom"
+      
+      - name: "active"
+        type: "Boolean"
+        annotations:
+          - "@Column(nullable = false)"
+        defaultValue: "true"
+        frontend:
+          label: "Actif"
+          type: "switch"
+      
+      - name: "createdAt"
+        type: "LocalDateTime"
+        annotations:
+          - "@Column(name = \"created_at\", nullable = false, updatable = false)"
+          - "@CreationTimestamp"
+        frontend:
+          label: "Date de création"
+          type: "date"
+          hideInForm: true

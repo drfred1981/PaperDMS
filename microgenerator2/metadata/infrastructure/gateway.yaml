@@ -1,0 +1,65 @@
+---
+# API Gateway
+# metadata/infrastructure/gateway.yaml
+
+category: infrastructure
+type: gateway
+name: "api-gateway"
+enabled: true
+
+service:
+  artifactId: "api-gateway"
+  port: 8080
+  packageName: "com.example.gateway"
+  
+  dependencies:
+    - spring-boot-starter-webflux
+    - spring-cloud-starter-gateway
+    - spring-cloud-starter-netflix-eureka-client
+    - spring-boot-starter-actuator
+    - micrometer-registry-prometheus
+  
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+  
+  healthCheck:
+    endpoint: "/actuator/health"
+    interval: "30s"
+    timeout: "10s"
+    retries: 5
+  
+  environment:
+    - "SPRING_PROFILES_ACTIVE=docker"
+
+  routes:
+    - id: "user-service"
+      uri: "lb://user-service"
+      predicates:
+        - "Path=/api/users/**"
+    
+    - id: "product-service"
+      uri: "lb://product-service"
+      predicates:
+        - "Path=/api/products/**"
+    
+    - id: "order-service"
+      uri: "lb://order-service"
+      predicates:
+        - "Path=/api/orders/**"
+    
+    - id: "auth-service"
+      uri: "lb://auth-service"
+      predicates:
+        - "Path=/api/auth/**"
+
+frontend:
+  displayName: "API Gateway"
+  icon: "pi pi-shield"
+  menuPosition: 101
+
+docker:
+  image: "api-gateway"
+  containerName: "api-gateway"
+  dependsOn:
+    - eureka-server

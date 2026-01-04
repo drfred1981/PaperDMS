@@ -1,0 +1,65 @@
+---
+# Configuration Monitoring & Observability
+# metadata/infrastructure/monitoring.yaml
+
+category: infrastructure
+type: monitoring
+
+# Prometheus
+prometheus:
+  enabled: true
+  host: "prometheus"
+  port: 9090
+  version: "v2.48.0"
+  scrapeInterval: "15s"
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+
+# Grafana
+grafana:
+  enabled: true
+  host: "grafana"
+  port: 3000
+  version: "10.2.2"
+  adminUser: "admin"
+  adminPassword: "admin"
+  resources:
+    memory: "256m"
+    cpus: "0.5"
+
+# Alertmanager
+alertmanager:
+  enabled: true
+  host: "alertmanager"
+  port: 9093
+  version: "v0.26.0"
+  resources:
+    memory: "128m"
+    cpus: "0.25"
+
+# Alertes configurées
+alerts:
+  - name: "ServiceDown"
+    severity: "critical"
+    category: "availability"
+    expr: 'up{job=~".*-service|eureka-server|api-gateway"} == 0'
+    for: "1m"
+    
+  - name: "HighCPUUsage"
+    severity: "warning"
+    category: "performance"
+    expr: 'system_cpu_usage{job=~".*-service"} > 0.8'
+    for: "5m"
+  
+  - name: "HighMemoryUsage"
+    severity: "warning"
+    category: "performance"
+    expr: 'jvm_memory_used_bytes{job=~".*-service",area="heap"} / jvm_memory_max_bytes{area="heap"} > 0.9'
+    for: "5m"
+  
+  - name: "HighErrorRate"
+    severity: "warning"
+    category: "errors"
+    expr: 'rate(http_server_requests_seconds_count{status=~"5.."}[5m]) > 0.05'
+    for: "5m"

@@ -1,0 +1,220 @@
+---
+# Order Service
+# metadata/services/order-service.yaml
+
+category: service
+type: business
+name: "order-service"
+enabled: true
+
+service:
+  artifactId: "order-service"
+  port: 8083
+  packageName: "com.example.order"
+  
+  dependencies:
+    - spring-cloud-starter-netflix-eureka-client
+    - spring-cloud-starter-openfeign
+    - spring-cloud-starter-loadbalancer 
+  
+  feign_clients:
+    - service: "user-service"      # Nom dans Eureka
+      entity: "User"               # Entité cible
+    - service: "product-service"
+      entity: "Product"
+  database:
+    enabled: true
+    name: "orderdb"
+  
+  elasticsearch:
+    enabled: false
+  
+  redis:
+    enabled: true
+    prefix: "order:"
+  
+  kafka:
+    enabled: true
+  
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+
+frontend:
+  displayName: "Commandes"
+  icon: "pi pi-file"
+  menuPosition: 3
+
+docker:
+  image: "order-service"
+  dependsOn:
+    - postgres-order-service
+    - eureka-server
+    - redis
+    - kafka
+
+entities:
+  - name: "Order"
+    tableName: "orders"
+    
+    frontend:
+      displayName: "Commande"
+      pluralName: "Commandes"
+      icon: "pi pi-shopping-bag"
+      searchEnabled: true
+      exportEnabled: true
+      defaultSort: "orderDate,desc"
+      pageSize: 10
+    
+    fields:
+      - name: "id"
+        type: "Long"
+        annotations:
+          - "@Id"
+          - "@GeneratedValue(strategy = GenerationType.IDENTITY)"
+        frontend:
+          hide: true
+      
+      - name: "orderNumber"
+        type: "String"
+        annotations:
+          - "@Column(name = \"order_number\", nullable = false, unique = true, length = 50)"
+          - "@NotBlank"
+        frontend:
+          label: "Numéro de commande"
+          required: true
+      
+      - name: "userId"
+        type: "Long"
+        annotations:
+          - "@Column(name = \"user_id\", nullable = false)"
+          - "@NotNull"
+        frontend:
+          label: "Client"
+          type: "dropdown"
+          dataSource:
+            endpoint: "/api/users"
+            displayField: "username"
+            valueField: "id"
+      
+      - name: "totalAmount"
+        type: "BigDecimal"
+        annotations:
+          - "@Column(name = \"total_amount\", nullable = false, precision = 10, scale = 2)"
+          - "@NotNull"
+          - "@DecimalMin(value = \"0.01\")"
+        frontend:
+          label: "Montant total"
+          type: "number"
+          required: true
+      
+      - name: "status"
+        type: "OrderStatus"
+        annotations:
+          - "@Enumerated(EnumType.STRING)"
+          - "@Column(nullable = false, length = 20)"
+        defaultValue: "PENDING"
+        frontend:
+          label: "Statut"
+          type: "dropdown"
+      
+      - name: "orderDate"
+        type: "LocalDateTime"
+        annotations:
+          - "@Column(name = \"order_date\", nullable = false)"
+          - "@CreationTimestamp"
+        frontend:
+          label: "Date de commande"
+          type: "date"
+          hideInForm: true
+    
+    enums:
+      - name: "OrderStatus"
+        values:
+          - "PENDING"
+          - "CONFIRMED"
+          - "PROCESSING"
+          - "SHIPPED"
+          - "DELIVERED"
+          - "CANCELLED"
+
+# Ajout des traductions
+frontend:
+  translations:
+    "order.title":
+      fr: "Gestion des commandes"
+      en: "Order Management"
+      es: "Gestión de pedidos"
+      de: "Bestellverwaltung"
+    
+    "order.list":
+      fr: "Liste des commandes"
+      en: "Order List"
+      es: "Lista de pedidos"
+      de: "Bestellliste"
+    
+    "order.create":
+      fr: "Créer une commande"
+      en: "Create Order"
+      es: "Crear pedido"
+      de: "Bestellung erstellen"
+    
+    "order.edit":
+      fr: "Modifier la commande"
+      en: "Edit Order"
+      es: "Editar pedido"
+      de: "Bestellung bearbeiten"
+    
+    "order.field.orderNumber":
+      fr: "Numéro de commande"
+      en: "Order Number"
+      es: "Número de pedido"
+      de: "Bestellnummer"
+    
+    "order.field.orderDate":
+      fr: "Date de commande"
+      en: "Order Date"
+      es: "Fecha de pedido"
+      de: "Bestelldatum"
+    
+    "order.field.totalAmount":
+      fr: "Montant total"
+      en: "Total Amount"
+      es: "Monto total"
+      de: "Gesamtbetrag"
+    
+    "order.field.status":
+      fr: "Statut"
+      en: "Status"
+      es: "Estado"
+      de: "Status"
+    
+    "order.status.pending":
+      fr: "En attente"
+      en: "Pending"
+      es: "Pendiente"
+      de: "Ausstehend"
+    
+    "order.status.confirmed":
+      fr: "Confirmée"
+      en: "Confirmed"
+      es: "Confirmado"
+      de: "Bestätigt"
+    
+    "order.status.shipped":
+      fr: "Expédiée"
+      en: "Shipped"
+      es: "Enviado"
+      de: "Versendet"
+    
+    "order.status.delivered":
+      fr: "Livrée"
+      en: "Delivered"
+      es: "Entregado"
+      de: "Geliefert"
+    
+    "order.status.cancelled":
+      fr: "Annulée"
+      en: "Cancelled"
+      es: "Cancelado"
+      de: "Storniert"

@@ -20,7 +20,7 @@ env:
   
 
 includes:
-  jhispter: .taskfiles/jhispter
+  jhipster: .taskfiles/jhipster
   build: .taskfiles/build
   docker: .taskfiles/docker
   modules: .taskfiles/modules

@@ -1,0 +1,354 @@
+---
+# Keycloak - Identity and Access Management
+# metadata/infrastructure/keycloak.yaml
+
+category: infrastructure
+type: security
+name: "keycloak"
+enabled: true
+
+service:
+  # Keycloak est un service standalone
+  standalone: true
+  port: 9999
+  
+  resources:
+    memory: "1g"
+    cpus: "1.0"
+  
+  healthCheck:
+    endpoint: "/health/ready"
+    interval: "30s"
+    timeout: "10s"
+    retries: 5
+    startPeriod: "120s"
+  
+  # Database configuration
+  database:
+    enabled: true
+    type: "postgresql"
+    host: "postgres-keycloak"
+    port: 5432
+    name: "keycloak"
+    username: "keycloak"
+    password: "keycloak"
+  
+  # Admin credentials
+  admin:
+    username: "admin"
+    password: "${KEYCLOAK_ADMIN_PASSWORD:-admin}"
+  
+  # Realm configuration
+  realm:
+    name: "microservices"
+    displayName: "Microservices Platform"
+    enabled: true
+    
+    # Clients (applications)
+    clients:
+      - clientId: "api-gateway"
+        name: "API Gateway"
+        enabled: true
+        publicClient: false
+        serviceAccountsEnabled: true
+        directAccessGrantsEnabled: true
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        redirectUris:
+          - "http://localhost:8080/*"
+          - "https://api.example.com/*"
+        webOrigins:
+          - "http://localhost:4200"
+          - "https://app.example.com"
+      
+      - clientId: "frontend-app"
+        name: "Frontend Application"
+        enabled: true
+        publicClient: true
+        directAccessGrantsEnabled: false
+        standardFlowEnabled: true
+        implicitFlowEnabled: false
+        redirectUris:
+          - "http://localhost:4200/*"
+          - "https://app.example.com/*"
+        webOrigins:
+          - "http://localhost:4200"
+          - "https://app.example.com"
+      
+      - clientId: "user-service"
+        name: "User Service"
+        enabled: true
+        publicClient: false
+        serviceAccountsEnabled: true
+        bearerOnly: true
+      
+      - clientId: "product-service"
+        name: "Product Service"
+        enabled: true
+        publicClient: false
+        serviceAccountsEnabled: true
+        bearerOnly: true
+      
+      - clientId: "order-service"
+        name: "Order Service"
+        enabled: true
+        publicClient: false
+        serviceAccountsEnabled: true
+        bearerOnly: true
+    
+    # Roles
+    roles:
+      - name: "user"
+        description: "Standard user role"
+      - name: "admin"
+        description: "Administrator role"
+      - name: "moderator"
+        description: "Moderator role"
+      - name: "manager"
+        description: "Manager role"
+    
+    # Users (examples)
+    users:
+      - username: "admin"
+        email: "admin@example.com"
+        firstName: "Admin"
+        lastName: "User"
+        enabled: true
+        emailVerified: true
+        roles:
+          - "admin"
+          - "user"
+        credentials:
+          - type: "password"
+            value: "admin123"
+            temporary: false
+      
+      - username: "user"
+        email: "user@example.com"
+        firstName: "Test"
+        lastName: "User"
+        enabled: true
+        emailVerified: true
+        roles:
+          - "user"
+        credentials:
+          - type: "password"
+            value: "user123"
+            temporary: false
+
+frontend:
+  displayName: "Authentication Server"
+  icon: "pi pi-shield"
+  menuPosition: 105
+  description: "Single Sign-On and Identity Management"
+  adminUrl: "http://localhost:9999/admin"
+
+docker:
+  image: "quay.io/keycloak/keycloak:23.0"
+  containerName: "keycloak"
+  ports:
+    - "9999:8080"
+  
+  dependsOn:
+    - postgres-keycloak
+  
+  environment:
+    - "KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN:-admin}"
+    - "KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}"
+    - "KC_DB=postgres"
+    - "KC_DB_URL=jdbc:postgresql://postgres-keycloak:5432/keycloak"
+    - "KC_DB_USERNAME=${KEYCLOAK_DB_USER:-keycloak}"
+    - "KC_DB_PASSWORD=${KEYCLOAK_DB_PASSWORD:-keycloak}"
+    - "KC_HOSTNAME=localhost"
+    - "KC_HOSTNAME_PORT=9999"
+    - "KC_HOSTNAME_STRICT=false"
+    - "KC_HOSTNAME_STRICT_HTTPS=false"
+    - "KC_HTTP_ENABLED=true"
+    - "KC_HEALTH_ENABLED=true"
+    - "KC_METRICS_ENABLED=true"
+  
+  command: "start-dev"
+  
+  volumes: []
+
+# PostgreSQL pour Keycloak
+keycloakDatabase:
+  image: "postgres:15-alpine"
+  containerName: "postgres-keycloak"
+  environment:
+    - "POSTGRES_DB=keycloak"
+    - "POSTGRES_USER=${KEYCLOAK_DB_USER:-keycloak}"
+    - "POSTGRES_PASSWORD=${KEYCLOAK_DB_PASSWORD:-keycloak}"
+  volumes:
+    - "postgres_keycloak_data:/var/lib/postgresql/data"
+  resources:
+    memory: "256m"
+    cpus: "0.5"
+
+# Integration avec les microservices
+clientIntegration:
+  dependencies:
+    - "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+    - "org.springframework.boot:spring-boot-starter-oauth2-client"
+  
+  configuration: |
+    spring:
+      security:
+        oauth2:
+          resourceserver:
+            jwt:
+              issuer-uri: http://keycloak:8080/realms/microservices
+              jwk-set-uri: http://keycloak:8080/realms/microservices/protocol/openid-connect/certs
+          client:
+            registration:
+              keycloak:
+                client-id: ${spring.application.name}
+                client-secret: ${KEYCLOAK_CLIENT_SECRET}
+                authorization-grant-type: authorization_code
+                redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+                scope:
+                  - openid
+                  - profile
+                  - email
+            provider:
+              keycloak:
+                issuer-uri: http://keycloak:8080/realms/microservices
+                user-name-attribute: preferred_username
+
+# Configuration de sécurité Spring
+securityConfiguration: |
+  @Configuration
+  @EnableWebSecurity
+  public class SecurityConfig {
+      
+      @Bean
+      public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+          http
+              .authorizeHttpRequests(authz -> authz
+                  .requestMatchers("/actuator/**").permitAll()
+                  .requestMatchers("/api/public/**").permitAll()
+                  .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                  .anyRequest().authenticated()
+              )
+              .oauth2ResourceServer(oauth2 -> oauth2
+                  .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+              );
+          
+          return http.build();
+      }
+      
+      @Bean
+      public JwtAuthenticationConverter jwtAuthenticationConverter() {
+          JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+          grantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
+          grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
+          
+          JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+          jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+          
+          return jwtAuthenticationConverter;
+      }
+  }
+
+# Endpoints
+endpoints:
+  # Admin Console
+  admin: "http://localhost:9999/admin"
+  
+  # Realm endpoints
+  token: "http://localhost:9999/realms/microservices/protocol/openid-connect/token"
+  userinfo: "http://localhost:9999/realms/microservices/protocol/openid-connect/userinfo"
+  logout: "http://localhost:9999/realms/microservices/protocol/openid-connect/logout"
+  jwks: "http://localhost:9999/realms/microservices/protocol/openid-connect/certs"
+  
+  # Health
+  health: "http://localhost:9999/health"
+  metrics: "http://localhost:9999/metrics"
+
+# OAuth2 Flows
+flows:
+  # Authorization Code Flow (Web Apps)
+  authorizationCode:
+    description: "Standard flow for web applications"
+    steps:
+      - "User redirected to Keycloak login"
+      - "User authenticates"
+      - "Keycloak redirects back with authorization code"
+      - "App exchanges code for access token"
+      - "App uses access token to call APIs"
+  
+  # Resource Owner Password Flow (Mobile/Native Apps)
+  passwordGrant:
+    description: "Direct authentication with username/password"
+    endpoint: "/realms/microservices/protocol/openid-connect/token"
+    params:
+      grant_type: "password"
+      client_id: "frontend-app"
+      username: "user@example.com"
+      password: "password"
+  
+  # Client Credentials Flow (Service-to-Service)
+  clientCredentials:
+    description: "Machine-to-machine authentication"
+    endpoint: "/realms/microservices/protocol/openid-connect/token"
+    params:
+      grant_type: "client_credentials"
+      client_id: "user-service"
+      client_secret: "${CLIENT_SECRET}"
+
+# Token configuration
+tokens:
+  access:
+    lifespan: 300  # 5 minutes
+    type: "Bearer"
+    format: "JWT"
+  
+  refresh:
+    lifespan: 1800  # 30 minutes
+  
+  id:
+    lifespan: 300  # 5 minutes
+
+# Single Sign-On (SSO)
+sso:
+  enabled: true
+  sessionIdleTimeout: 1800  # 30 minutes
+  sessionMaxLifespan: 36000  # 10 hours
+  rememberMe: true
+
+# Social Login (optional)
+socialProviders:
+  google:
+    enabled: false
+    clientId: "${GOOGLE_CLIENT_ID}"
+    clientSecret: "${GOOGLE_CLIENT_SECRET}"
+  
+  github:
+    enabled: false
+    clientId: "${GITHUB_CLIENT_ID}"
+    clientSecret: "${GITHUB_CLIENT_SECRET}"
+
+# Multi-factor Authentication
+mfa:
+  enabled: false
+  otp:
+    type: "totp"  # Time-based OTP
+    algorithm: "HmacSHA1"
+    digits: 6
+    period: 30
+
+# Monitoring
+monitoring:
+  metrics:
+    enabled: true
+    endpoint: "/metrics"
+  
+  events:
+    enabled: true
+    types:
+      - "LOGIN"
+      - "LOGIN_ERROR"
+      - "LOGOUT"
+      - "REGISTER"
+      - "UPDATE_PASSWORD"
+      - "UPDATE_EMAIL"

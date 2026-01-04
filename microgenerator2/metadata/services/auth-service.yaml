@@ -1,0 +1,220 @@
+---
+# Authentication Service
+# metadata/services/auth-service.yaml
+
+category: service
+type: security
+name: "auth-service"
+enabled: true
+
+service:
+  artifactId: "auth-service"
+  port: 8090
+  packageName: "com.example.auth"
+  
+  dependencies:
+    - spring-boot-starter-web
+    - spring-boot-starter-data-jpa
+    - spring-boot-starter-security
+    - spring-cloud-starter-netflix-eureka-client
+    - postgresql
+    - lombok
+    - spring-boot-starter-validation
+    - io.jsonwebtoken:jjwt-api:0.11.5
+    - io.jsonwebtoken:jjwt-impl:0.11.5
+    - io.jsonwebtoken:jjwt-jackson:0.11.5
+  
+  database:
+    enabled: true
+    name: "authdb"
+  
+  redis:
+    enabled: true
+    prefix: "auth:"
+  
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+
+frontend:
+  displayName: "Authentification"
+  icon: "pi pi-lock"
+  menuPosition: 99
+
+docker:
+  image: "auth-service"
+  dependsOn:
+    - postgres-auth-service
+    - eureka-server
+    - redis
+
+entities:
+  - name: "User"
+    tableName: "auth_users"
+    
+    fields:
+      - name: "id"
+        type: "Long"
+        annotations:
+          - "@Id"
+          - "@GeneratedValue(strategy = GenerationType.IDENTITY)"
+      
+      - name: "username"
+        type: "String"
+        annotations:
+          - "@Column(nullable = false, unique = true, length = 50)"
+          - "@NotBlank"
+          - "@Size(min = 3, max = 50)"
+      
+      - name: "email"
+        type: "String"
+        annotations:
+          - "@Column(nullable = false, unique = true, length = 100)"
+          - "@Email"
+          - "@NotBlank"
+      
+      - name: "password"
+        type: "String"
+        annotations:
+          - "@Column(nullable = false)"
+          - "@Size(min = 8)"
+      
+      - name: "role"
+        type: "UserRole"
+        annotations:
+          - "@Enumerated(EnumType.STRING)"
+          - "@Column(nullable = false)"
+      
+      - name: "enabled"
+        type: "Boolean"
+        annotations:
+          - "@Column(nullable = false)"
+        defaultValue: "true"
+      
+      - name: "createdAt"
+        type: "LocalDateTime"
+        annotations:
+          - "@Column(name = \"created_at\", nullable = false, updatable = false)"
+          - "@CreationTimestamp"
+    
+    enums:
+      - name: "UserRole"
+        values:
+          - "USER"
+          - "ADMIN"
+          - "MODERATOR"
+  
+  - name: "RefreshToken"
+    tableName: "refresh_tokens"
+    
+    fields:
+      - name: "id"
+        type: "Long"
+        annotations:
+          - "@Id"
+          - "@GeneratedValue(strategy = GenerationType.IDENTITY)"
+      
+      - name: "userId"
+        type: "Long"
+        annotations:
+          - "@Column(name = \"user_id\", nullable = false)"
+          - "@NotNull"
+      
+      - name: "token"
+        type: "String"
+        annotations:
+          - "@Column(nullable = false, unique = true, length = 255)"
+          - "@NotBlank"
+      
+      - name: "expiryDate"
+        type: "LocalDateTime"
+        annotations:
+          - "@Column(name = \"expiry_date\", nullable = false)"
+          - "@NotNull"
+
+# Ajout des traductions
+frontend:
+  translations:
+    "auth.title":
+      fr: "Authentification"
+      en: "Authentication"
+      es: "Autenticación"
+      de: "Authentifizierung"
+    
+    "auth.login":
+      fr: "Connexion"
+      en: "Login"
+      es: "Iniciar sesión"
+      de: "Anmelden"
+    
+    "auth.logout":
+      fr: "Déconnexion"
+      en: "Logout"
+      es: "Cerrar sesión"
+      de: "Abmelden"
+    
+    "auth.register":
+      fr: "S'inscrire"
+      en: "Register"
+      es: "Registrarse"
+      de: "Registrieren"
+    
+    "auth.forgotPassword":
+      fr: "Mot de passe oublié ?"
+      en: "Forgot password?"
+      es: "¿Olvidó su contraseña?"
+      de: "Passwort vergessen?"
+    
+    "auth.resetPassword":
+      fr: "Réinitialiser le mot de passe"
+      en: "Reset Password"
+      es: "Restablecer contraseña"
+      de: "Passwort zurücksetzen"
+    
+    "auth.changePassword":
+      fr: "Changer le mot de passe"
+      en: "Change Password"
+      es: "Cambiar contraseña"
+      de: "Passwort ändern"
+    
+    "auth.field.username":
+      fr: "Nom d'utilisateur"
+      en: "Username"
+      es: "Nombre de usuario"
+      de: "Benutzername"
+    
+    "auth.field.password":
+      fr: "Mot de passe"
+      en: "Password"
+      es: "Contraseña"
+      de: "Passwort"
+    
+    "auth.field.confirmPassword":
+      fr: "Confirmer le mot de passe"
+      en: "Confirm Password"
+      es: "Confirmar contraseña"
+      de: "Passwort bestätigen"
+    
+    "auth.error.invalidCredentials":
+      fr: "Nom d'utilisateur ou mot de passe invalide"
+      en: "Invalid username or password"
+      es: "Nombre de usuario o contraseña no válidos"
+      de: "Ungültiger Benutzername oder Passwort"
+    
+    "auth.error.sessionExpired":
+      fr: "Votre session a expiré"
+      en: "Your session has expired"
+      es: "Su sesión ha expirado"
+      de: "Ihre Sitzung ist abgelaufen"
+    
+    "auth.success.login":
+      fr: "Connexion réussie"
+      en: "Login successful"
+      es: "Inicio de sesión exitoso"
+      de: "Anmeldung erfolgreich"
+    
+    "auth.success.logout":
+      fr: "Déconnexion réussie"
+      en: "Logout successful"
+      es: "Cierre de sesión exitoso"
+      de: "Abmeldung erfolgreich"

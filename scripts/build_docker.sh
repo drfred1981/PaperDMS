@@ -1,4 +1,4 @@
-mvnArray=("paperdms-common")
+mvnArray=() #"paperdms-common"
 msArray=("gateway"  "documentService" "ocrService" "searchService" "notificationService" "workflowService" "aiService" "similarityService" "archiveService" "exportService" "emailImportService"
  "transformService"  "reportingService" "monitoringService" )
 
@@ -10,6 +10,7 @@ done
 
 for str in ${msArray[@]}; do
   cd $str
+  chmod +x ./mvnw
   ./mvnw -DskipTests -Pprod package jib:dockerBuild
   cd ..
 done

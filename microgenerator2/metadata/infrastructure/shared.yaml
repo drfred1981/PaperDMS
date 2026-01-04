@@ -1,0 +1,86 @@
+---
+# Configuration de l'infrastructure partagée
+# metadata/infrastructure/shared.yaml
+
+category: infrastructure
+type: shared
+
+# Configuration des bases de données
+databases:
+  mode: "per-service"  # Options: "shared" ou "per-service"
+  
+  shared:
+    enabled: false
+    type: "postgresql"
+    host: "postgres-shared"
+    port: 5432
+    database: "microservices_db"
+    username: "postgres"
+    password: "postgres"
+  
+  default:
+    type: "postgresql"
+    port: 5432
+    username: "postgres"
+    password: "postgres"
+    version: "15-alpine"
+    resources:
+      memory: "512m"
+      cpus: "0.5"
+
+# Configuration Elasticsearch
+elasticsearch:
+  mode: "shared"
+  enabled: true
+  host: "elasticsearch"
+  port: 9200
+  version: "8.11.0"
+  cluster_name: "microservices-cluster"
+  discovery_type: "single-node"
+  password: "elastic"
+  resources:
+    memory: "1g"
+    cpus: "1.0"
+  environment:
+    - "xpack.security.enabled=false"
+    - "discovery.type=single-node"
+    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+
+# Configuration Redis
+redis:
+  mode: "shared"
+  enabled: true
+  host: "redis"
+  port: 6379
+  password: "redis"
+  version: "7-alpine"
+  resources:
+    memory: "256m"
+    cpus: "0.5"
+
+# Configuration Kafka
+kafka:
+  enabled: true
+  host: "kafka"
+  port: 9092
+  version: "7.5.0"
+  
+  zookeeper:
+    host: "zookeeper"
+    port: 2181
+    version: "7.5.0"
+  
+  resources:
+    memory: "1g"
+    cpus: "1.0"
+  
+  topics:
+    - name: "order.created"
+      partitions: 3
+      replication: 1
+    - name: "payment.processed"
+      partitions: 3
+      replication: 1
+    - name: "inventory.reserved"
+      partitions: 3
+      replication: 1

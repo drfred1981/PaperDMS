@@ -1,0 +1,529 @@
+---
+# Configuration globale du projet
+# metadata/global.yaml
+
+project:
+  name: "microservices-platform"
+  version: "1.0.0"
+  description: "Enterprise microservices platform with full-stack generation"
+  groupId: "com.example"
+  basePackage: "com.example"
+
+# Configuration i18n globale
+i18n:
+  defaultLanguage: "fr"
+  supportedLanguages:
+    - "fr"
+    - "en"
+    - "es"
+    - "de"
+  
+  # Traductions globales (interface générale)
+  translations:
+    # Navigation
+    "nav.home":
+      fr: "Accueil"
+      en: "Home"
+      es: "Inicio"
+      de: "Startseite"
+    
+    "nav.dashboard":
+      fr: "Tableau de bord"
+      en: "Dashboard"
+      es: "Panel"
+      de: "Dashboard"
+    
+    "nav.users":
+      fr: "Utilisateurs"
+      en: "Users"
+      es: "Usuarios"
+      de: "Benutzer"
+    
+    "nav.products":
+      fr: "Produits"
+      en: "Products"
+      es: "Productos"
+      de: "Produkte"
+    
+    "nav.orders":
+      fr: "Commandes"
+      en: "Orders"
+      es: "Pedidos"
+      de: "Bestellungen"
+    
+    "nav.settings":
+      fr: "Paramètres"
+      en: "Settings"
+      es: "Configuración"
+      de: "Einstellungen"
+    
+    "nav.logout":
+      fr: "Déconnexion"
+      en: "Logout"
+      es: "Cerrar sesión"
+      de: "Abmelden"
+    
+    # Actions CRUD
+    "action.create":
+      fr: "Créer"
+      en: "Create"
+      es: "Crear"
+      de: "Erstellen"
+    
+    "action.read":
+      fr: "Lire"
+      en: "Read"
+      es: "Leer"
+      de: "Lesen"
+    
+    "action.update":
+      fr: "Mettre à jour"
+      en: "Update"
+      es: "Actualizar"
+      de: "Aktualisieren"
+    
+    "action.delete":
+      fr: "Supprimer"
+      en: "Delete"
+      es: "Eliminar"
+      de: "Löschen"
+    
+    "action.save":
+      fr: "Enregistrer"
+      en: "Save"
+      es: "Guardar"
+      de: "Speichern"
+    
+    "action.cancel":
+      fr: "Annuler"
+      en: "Cancel"
+      es: "Cancelar"
+      de: "Abbrechen"
+    
+    "action.edit":
+      fr: "Modifier"
+      en: "Edit"
+      es: "Editar"
+      de: "Bearbeiten"
+    
+    "action.view":
+      fr: "Voir"
+      en: "View"
+      es: "Ver"
+      de: "Ansehen"
+    
+    "action.search":
+      fr: "Rechercher"
+      en: "Search"
+      es: "Buscar"
+      de: "Suchen"
+    
+    "action.filter":
+      fr: "Filtrer"
+      en: "Filter"
+      es: "Filtrar"
+      de: "Filtern"
+    
+    "action.export":
+      fr: "Exporter"
+      en: "Export"
+      es: "Exportar"
+      de: "Exportieren"
+    
+    "action.import":
+      fr: "Importer"
+      en: "Import"
+      es: "Importar"
+      de: "Importieren"
+    
+    "action.refresh":
+      fr: "Actualiser"
+      en: "Refresh"
+      es: "Actualizar"
+      de: "Aktualisieren"
+    
+    "action.close":
+      fr: "Fermer"
+      en: "Close"
+      es: "Cerrar"
+      de: "Schließen"
+    
+    "action.confirm":
+      fr: "Confirmer"
+      en: "Confirm"
+      es: "Confirmar"
+      de: "Bestätigen"
+    
+    "action.back":
+      fr: "Retour"
+      en: "Back"
+      es: "Volver"
+      de: "Zurück"
+    
+    "action.next":
+      fr: "Suivant"
+      en: "Next"
+      es: "Siguiente"
+      de: "Weiter"
+    
+    "action.previous":
+      fr: "Précédent"
+      en: "Previous"
+      es: "Anterior"
+      de: "Zurück"
+    
+    "action.submit":
+      fr: "Soumettre"
+      en: "Submit"
+      es: "Enviar"
+      de: "Absenden"
+    
+    # Labels communs
+    "label.name":
+      fr: "Nom"
+      en: "Name"
+      es: "Nombre"
+      de: "Name"
+    
+    "label.email":
+      fr: "Email"
+      en: "Email"
+      es: "Correo electrónico"
+      de: "E-Mail"
+    
+    "label.password":
+      fr: "Mot de passe"
+      en: "Password"
+      es: "Contraseña"
+      de: "Passwort"
+    
+    "label.description":
+      fr: "Description"
+      en: "Description"
+      es: "Descripción"
+      de: "Beschreibung"
+    
+    "label.status":
+      fr: "Statut"
+      en: "Status"
+      es: "Estado"
+      de: "Status"
+    
+    "label.date":
+      fr: "Date"
+      en: "Date"
+      es: "Fecha"
+      de: "Datum"
+    
+    "label.createdAt":
+      fr: "Créé le"
+      en: "Created at"
+      es: "Creado el"
+      de: "Erstellt am"
+    
+    "label.updatedAt":
+      fr: "Modifié le"
+      en: "Updated at"
+      es: "Actualizado el"
+      de: "Aktualisiert am"
+    
+    "label.actions":
+      fr: "Actions"
+      en: "Actions"
+      es: "Acciones"
+      de: "Aktionen"
+    
+    "label.total":
+      fr: "Total"
+      en: "Total"
+      es: "Total"
+      de: "Gesamt"
+    
+    "label.price":
+      fr: "Prix"
+      en: "Price"
+      es: "Precio"
+      de: "Preis"
+    
+    "label.quantity":
+      fr: "Quantité"
+      en: "Quantity"
+      es: "Cantidad"
+      de: "Menge"
+    
+    # Validation messages
+    "validation.required":
+      fr: "Ce champ est requis"
+      en: "This field is required"
+      es: "Este campo es obligatorio"
+      de: "Dieses Feld ist erforderlich"
+    
+    "validation.email":
+      fr: "Format email invalide"
+      en: "Invalid email format"
+      es: "Formato de correo no válido"
+      de: "Ungültiges E-Mail-Format"
+    
+    "validation.minLength":
+      fr: "Minimum {min} caractères"
+      en: "Minimum {min} characters"
+      es: "Mínimo {min} caracteres"
+      de: "Mindestens {min} Zeichen"
+    
+    "validation.maxLength":
+      fr: "Maximum {max} caractères"
+      en: "Maximum {max} characters"
+      es: "Máximo {max} caracteres"
+      de: "Maximal {max} Zeichen"
+    
+    "validation.min":
+      fr: "La valeur minimale est {min}"
+      en: "Minimum value is {min}"
+      es: "El valor mínimo es {min}"
+      de: "Mindestwert ist {min}"
+    
+    "validation.max":
+      fr: "La valeur maximale est {max}"
+      en: "Maximum value is {max}"
+      es: "El valor máximo es {max}"
+      de: "Höchstwert ist {max}"
+    
+    "validation.pattern":
+      fr: "Format invalide"
+      en: "Invalid format"
+      es: "Formato no válido"
+      de: "Ungültiges Format"
+    
+    # Success messages
+    "message.success.created":
+      fr: "Élément créé avec succès"
+      en: "Item created successfully"
+      es: "Elemento creado con éxito"
+      de: "Element erfolgreich erstellt"
+    
+    "message.success.updated":
+      fr: "Élément mis à jour avec succès"
+      en: "Item updated successfully"
+      es: "Elemento actualizado con éxito"
+      de: "Element erfolgreich aktualisiert"
+    
+    "message.success.deleted":
+      fr: "Élément supprimé avec succès"
+      en: "Item deleted successfully"
+      es: "Elemento eliminado con éxito"
+      de: "Element erfolgreich gelöscht"
+    
+    "message.success.saved":
+      fr: "Données enregistrées avec succès"
+      en: "Data saved successfully"
+      es: "Datos guardados con éxito"
+      de: "Daten erfolgreich gespeichert"
+    
+    # Error messages
+    "message.error.generic":
+      fr: "Une erreur est survenue"
+      en: "An error occurred"
+      es: "Se produjo un error"
+      de: "Ein Fehler ist aufgetreten"
+    
+    "message.error.notFound":
+      fr: "Élément non trouvé"
+      en: "Item not found"
+      es: "Elemento no encontrado"
+      de: "Element nicht gefunden"
+    
+    "message.error.unauthorized":
+      fr: "Non autorisé"
+      en: "Unauthorized"
+      es: "No autorizado"
+      de: "Nicht autorisiert"
+    
+    "message.error.forbidden":
+      fr: "Accès interdit"
+      en: "Access forbidden"
+      es: "Acceso prohibido"
+      de: "Zugriff verboten"
+    
+    "message.error.server":
+      fr: "Erreur serveur"
+      en: "Server error"
+      es: "Error del servidor"
+      de: "Serverfehler"
+    
+    "message.error.network":
+      fr: "Erreur réseau"
+      en: "Network error"
+      es: "Error de red"
+      de: "Netzwerkfehler"
+    
+    # Confirmation messages
+    "confirm.delete.title":
+      fr: "Confirmer la suppression"
+      en: "Confirm deletion"
+      es: "Confirmar eliminación"
+      de: "Löschen bestätigen"
+    
+    "confirm.delete.message":
+      fr: "Êtes-vous sûr de vouloir supprimer cet élément ?"
+      en: "Are you sure you want to delete this item?"
+      es: "¿Está seguro de que desea eliminar este elemento?"
+      de: "Sind Sie sicher, dass Sie dieses Element löschen möchten?"
+    
+    "confirm.save.title":
+      fr: "Enregistrer les modifications"
+      en: "Save changes"
+      es: "Guardar cambios"
+      de: "Änderungen speichern"
+    
+    "confirm.save.message":
+      fr: "Voulez-vous enregistrer les modifications ?"
+      en: "Do you want to save the changes?"
+      es: "¿Desea guardar los cambios?"
+      de: "Möchten Sie die Änderungen speichern?"
+    
+    # Table/List
+    "table.empty":
+      fr: "Aucun élément trouvé"
+      en: "No items found"
+      es: "No se encontraron elementos"
+      de: "Keine Elemente gefunden"
+    
+    "table.loading":
+      fr: "Chargement en cours..."
+      en: "Loading..."
+      es: "Cargando..."
+      de: "Lädt..."
+    
+    "table.showing":
+      fr: "Affichage de {first} à {last} sur {total} éléments"
+      en: "Showing {first} to {last} of {total} items"
+      es: "Mostrando {first} a {last} de {total} elementos"
+      de: "Zeige {first} bis {last} von {total} Elementen"
+    
+    # Pagination
+    "pagination.first":
+      fr: "Premier"
+      en: "First"
+      es: "Primero"
+      de: "Erste"
+    
+    "pagination.last":
+      fr: "Dernier"
+      en: "Last"
+      es: "Último"
+      de: "Letzte"
+    
+    "pagination.rowsPerPage":
+      fr: "Éléments par page"
+      en: "Rows per page"
+      es: "Filas por página"
+      de: "Zeilen pro Seite"
+    
+    # Authentication
+    "auth.login":
+      fr: "Connexion"
+      en: "Login"
+      es: "Iniciar sesión"
+      de: "Anmelden"
+    
+    "auth.logout":
+      fr: "Déconnexion"
+      en: "Logout"
+      es: "Cerrar sesión"
+      de: "Abmelden"
+    
+    "auth.register":
+      fr: "S'inscrire"
+      en: "Register"
+      es: "Registrarse"
+      de: "Registrieren"
+    
+    "auth.forgotPassword":
+      fr: "Mot de passe oublié ?"
+      en: "Forgot password?"
+      es: "¿Olvidó su contraseña?"
+      de: "Passwort vergessen?"
+    
+    "auth.username":
+      fr: "Nom d'utilisateur"
+      en: "Username"
+      es: "Nombre de usuario"
+      de: "Benutzername"
+
+# Configuration des réseaux
+network:
+  name: "microservices-network"
+  driver: "bridge"
+
+# Configuration des volumes
+volumes:
+  postgres_data: {}
+  elasticsearch_data: {}
+  redis_data: {}
+  kafka_data: {}
+  zookeeper_data: {}
+  prometheus_data: {}
+  grafana_data: {}
+
+# Dépendances Maven communes
+commonDependencies:
+  spring:
+    - spring-boot-starter-web
+    - spring-boot-starter-data-jpa
+    - spring-boot-starter-validation
+    - spring-cloud-starter-netflix-eureka-client
+    - spring-boot-starter-actuator
+  
+  monitoring:
+    - micrometer-registry-prometheus
+  
+  tools:
+    - lombok
+    - mapstruct
+  
+  database:
+    - postgresql
+  
+  test:
+    - spring-boot-starter-test
+
+# Configuration des ressources par défaut
+defaultResources:
+  service:
+    memory: "512m"
+    cpus: "0.5"
+  
+  database:
+    memory: "512m"
+    cpus: "0.5"
+  
+  infrastructure:
+    memory: "512m"
+    cpus: "0.5"
+  
+  monitoring:
+    memory: "256m"
+    cpus: "0.25"
+
+# Configuration santé/health checks
+defaultHealthCheck:
+  endpoint: "/actuator/health"
+  interval: "30s"
+  timeout: "10s"
+  retries: 3
+
+# Configuration Spring Boot par défaut
+defaultSpringConfig:
+  profiles:
+    active: "docker"
+  
+  jpa:
+    hibernate:
+      ddl-auto: "update"
+    show-sql: false
+  
+  actuator:
+    endpoints:
+      web:
+        exposure:
+          include: "health,info,metrics,prometheus"

@@ -1,0 +1,126 @@
+---
+# Zipkin - Distributed Tracing Server
+# metadata/infrastructure/zipkin.yaml
+
+category: infrastructure
+type: tracing
+name: "zipkin"
+enabled: true
+
+service:
+  # Zipkin est un service standalone (pas Spring Boot custom)
+  standalone: true
+  port: 9411
+  
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+  
+  healthCheck:
+    endpoint: "/health"
+    interval: "30s"
+    timeout: "10s"
+    retries: 3
+  
+  environment:
+    - "STORAGE_TYPE=elasticsearch"
+    - "ES_HOSTS=elasticsearch:9200"
+    - "JAVA_OPTS=-Xms256m -Xmx512m"
+  
+  # Configuration du storage
+  storage:
+    type: "elasticsearch"  # mem, mysql, cassandra, elasticsearch
+    elasticsearch:
+      hosts: "elasticsearch:9200"
+      index: "zipkin"
+    
+    # Alternative MySQL
+    mysql:
+      host: "mysql"
+      port: 3306
+      database: "zipkin"
+      username: "zipkin"
+      password: "zipkin"
+  
+  # Configuration de la collecte
+  collector:
+    http:
+      enabled: true
+    kafka:
+      enabled: false
+      bootstrap-servers: "kafka:9092"
+      topic: "zipkin"
+  
+  # UI Configuration
+  ui:
+    enabled: true
+    basepath: "/"
+    query:
+      lookback: 86400000  # 24h en ms
+      limit: 10
+
+frontend:
+  displayName: "Distributed Tracing"
+  icon: "pi pi-share-alt"
+  menuPosition: 103
+  description: "Trace requests across microservices"
+
+docker:
+  image: "openzipkin/zipkin:latest"
+  containerName: "zipkin"
+  ports:
+    - "9411:9411"
+  
+  dependsOn:
+    - elasticsearch
+  
+  environment:
+    - "STORAGE_TYPE=elasticsearch"
+    - "ES_HOSTS=http://elasticsearch:9200"
+    - "ES_HTTP_LOGGING=BASIC"
+    - "JAVA_OPTS=-Xms256m -Xmx512m"
+  
+  volumes: []
+
+# Integration avec les microservices
+clientIntegration:
+  dependencies:
+    # Pour Spring Boot 3
+    - "io.micrometer:micrometer-tracing-bridge-brave"
+    - "io.zipkin.reporter2:zipkin-reporter-brave"
+  
+  configuration: |
+    management:
+      tracing:
+        sampling:
+          probability: 1.0  # 100% en dev, 0.1 en prod (10%)
+      zipkin:
+        tracing:
+          endpoint: http://zipkin:9411/api/v2/spans
+
+# Queries utiles
+queries:
+  # Trouver les traces lentes
+  - name: "slow-requests"
+    description: "Requests slower than 1 second"
+    filter: "minDuration=1000000"
+  
+  # Erreurs
+  - name: "errors"
+    description: "Traces with errors"
+    tags: "error=true"
+  
+  # Par service
+  - name: "by-service"
+    description: "Traces for specific service"
+    serviceName: "user-service"
+
+# Alertes recommandées
+alerts:
+  - name: "HighLatency"
+    description: "Alert when p95 latency > 1s"
+    condition: "p95 > 1000ms"
+    
+  - name: "HighErrorRate"
+    description: "Alert when error rate > 5%"
+    condition: "error_rate > 0.05"

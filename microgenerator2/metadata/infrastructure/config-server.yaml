@@ -1,0 +1,273 @@
+---
+# Configuration Server - Spring Cloud Config
+# metadata/infrastructure/config-server.yaml
+
+category: infrastructure
+type: config
+name: "config-server"
+enabled: true
+
+service:
+  artifactId: "config-server"
+  port: 8888
+  packageName: "com.example.config"
+  
+  dependencies:
+    - spring-boot-starter-web
+    - spring-cloud-config-server
+    - spring-cloud-starter-netflix-eureka-client
+    - spring-boot-starter-actuator
+    - micrometer-registry-prometheus
+  
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+  
+  healthCheck:
+    endpoint: "/actuator/health"
+    interval: "30s"
+    timeout: "10s"
+    retries: 5
+  
+  environment:
+    - "SPRING_PROFILES_ACTIVE=native"
+    - "SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:/config"
+  
+  # Configuration du Config Server
+  config:
+    # Mode de stockage (native, git, vault, etc.)
+    mode: "native"
+    
+    # Configuration pour mode Git (optionnel)
+    git:
+      uri: "https://github.com/your-org/config-repo"
+      searchPaths: "/{application}"
+      defaultLabel: "main"
+      username: "${GIT_USERNAME}"
+      password: "${GIT_PASSWORD}"
+    
+    # Configuration pour mode Native (par défaut)
+    native:
+      searchLocations: "file:/config"
+    
+    # Encryption (optionnel)
+    encryption:
+      enabled: false
+      keyStore:
+        location: "classpath:/config-server.jks"
+        password: "${KEYSTORE_PASSWORD}"
+        alias: "config-server-key"
+
+frontend:
+  displayName: "Configuration Server"
+  icon: "pi pi-cog"
+  menuPosition: 102
+
+docker:
+  image: "config-server"
+  containerName: "config-server"
+  dependsOn:
+    - eureka-server
+  
+  volumes:
+    - "./config:/config:ro"
+  
+  # Variables d'environnement pour Git mode
+  environment:
+    - "GIT_USERNAME=${GIT_USERNAME:-}"
+    - "GIT_PASSWORD=${GIT_PASSWORD:-}"
+    - "KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD:-changeit}"
+
+# Structure des fichiers de configuration
+configFiles:
+  # Configuration par défaut pour tous les services
+  application.yml: |
+    spring:
+      application:
+        name: ${spring.application.name}
+      cloud:
+        config:
+          enabled: true
+    
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: health,info,metrics,prometheus
+      metrics:
+        export:
+          prometheus:
+            enabled: true
+    
+    eureka:
+      client:
+        serviceUrl:
+          defaultZone: http://eureka-server:8761/eureka/
+        registerWithEureka: true
+        fetchRegistry: true
+      instance:
+        preferIpAddress: true
+        lease-renewal-interval-in-seconds: 30
+        lease-expiration-duration-in-seconds: 90
+  
+  # Configuration pour user-service
+  user-service.yml: |
+    server:
+      port: 8081
+    
+    spring:
+      datasource:
+        url: jdbc:postgresql://postgres-user-service:5432/userdb
+        username: ${USER_SERVICE_DB_USER:postgres}
+        password: ${USER_SERVICE_DB_PASSWORD:postgres}
+      jpa:
+        hibernate:
+          ddl-auto: update
+        show-sql: false
+      
+      data:
+        elasticsearch:
+          cluster-name: microservices-cluster
+          cluster-nodes: elasticsearch:9200
+      
+      redis:
+        host: redis
+        port: 6379
+        password: ${REDIS_PASSWORD:redis}
+  
+  # Configuration pour product-service
+  product-service.yml: |
+    server:
+      port: 8082
+    
+    spring:
+      datasource:
+        url: jdbc:postgresql://postgres-product-service:5432/productdb
+        username: ${PRODUCT_SERVICE_DB_USER:postgres}
+        password: ${PRODUCT_SERVICE_DB_PASSWORD:postgres}
+      jpa:
+        hibernate:
+          ddl-auto: update
+      
+      data:
+        elasticsearch:
+          cluster-name: microservices-cluster
+          cluster-nodes: elasticsearch:9200
+      
+      redis:
+        host: redis
+        port: 6379
+  
+  # Configuration pour order-service
+  order-service.yml: |
+    server:
+      port: 8083
+    
+    spring:
+      datasource:
+        url: jdbc:postgresql://postgres-order-service:5432/orderdb
+        username: ${ORDER_SERVICE_DB_USER:postgres}
+        password: ${ORDER_SERVICE_DB_PASSWORD:postgres}
+      
+      redis:
+        host: redis
+        port: 6379
+      
+      kafka:
+        bootstrap-servers: kafka:9092
+        consumer:
+          group-id: order-service
+          auto-offset-reset: earliest
+        producer:
+          key-serializer: org.apache.kafka.common.serialization.StringSerializer
+          value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  
+  # Configuration pour auth-service
+  auth-service.yml: |
+    server:
+      port: 8090
+    
+    spring:
+      datasource:
+        url: jdbc:postgresql://postgres-auth-service:5432/authdb
+        username: ${AUTH_SERVICE_DB_USER:postgres}
+        password: ${AUTH_SERVICE_DB_PASSWORD:postgres}
+      
+      redis:
+        host: redis
+        port: 6379
+    
+    jwt:
+      secret: ${JWT_SECRET:your-secret-key-change-this-in-production}
+      expiration: 86400000
+      refresh-expiration: 604800000
+  
+  # Configuration pour api-gateway
+  api-gateway.yml: |
+    server:
+      port: 8080
+    
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**
+              filters:
+                - StripPrefix=1
+            
+            - id: product-service
+              uri: lb://product-service
+              predicates:
+                - Path=/api/products/**
+              filters:
+                - StripPrefix=1
+            
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/api/orders/**
+              filters:
+                - StripPrefix=1
+            
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth/**
+              filters:
+                - StripPrefix=1
+          
+          globalcors:
+            corsConfigurations:
+              '[/**]':
+                allowedOrigins: "*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+
+# Templates de configuration pour nouveaux services
+templates:
+  default-service: |
+    server:
+      port: ${SERVER_PORT}
+    
+    spring:
+      datasource:
+        url: jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
+        username: ${DB_USER:postgres}
+        password: ${DB_PASSWORD:postgres}
+      jpa:
+        hibernate:
+          ddl-auto: update
+        show-sql: false
+      
+      redis:
+        host: redis
+        port: 6379
+        password: ${REDIS_PASSWORD:redis}

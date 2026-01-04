@@ -1,0 +1,179 @@
+---
+# Product Service
+# metadata/services/product-service.yaml
+
+category: service
+type: business
+name: "product-service"
+enabled: true
+
+service:
+  artifactId: "product-service"
+  port: 8082
+  packageName: "com.example.product"
+  
+  database:
+    enabled: true
+    name: "productdb"
+  
+  elasticsearch:
+    enabled: true
+    index: "products"
+  
+  redis:
+    enabled: true
+    prefix: "product:"
+  
+  resources:
+    memory: "512m"
+    cpus: "0.5"
+
+frontend:
+  displayName: "Produits"
+  icon: "pi pi-shopping-cart"
+  menuPosition: 2
+
+docker:
+  image: "product-service"
+  dependsOn:
+    - postgres-product-service
+    - eureka-server
+    - elasticsearch
+    - redis
+
+entities:
+  - name: "Product"
+    tableName: "products"
+    
+    frontend:
+      displayName: "Produit"
+      pluralName: "Produits"
+      icon: "pi pi-box"
+      searchEnabled: true
+      exportEnabled: true
+      defaultSort: "name,asc"
+      pageSize: 10
+    
+    fields:
+      - name: "id"
+        type: "Long"
+        annotations:
+          - "@Id"
+          - "@GeneratedValue(strategy = GenerationType.IDENTITY)"
+        frontend:
+          hide: true
+      
+      - name: "name"
+        type: "String"
+        annotations:
+          - "@Column(nullable = false, length = 200)"
+          - "@NotBlank"
+          - "@Size(max = 200)"
+        frontend:
+          label: "Nom"
+          required: true
+          maxLength: 200
+      
+      - name: "description"
+        type: "String"
+        annotations:
+          - "@Column(length = 2000)"
+        frontend:
+          label: "Description"
+          type: "textarea"
+      
+      - name: "price"
+        type: "BigDecimal"
+        annotations:
+          - "@Column(nullable = false, precision = 10, scale = 2)"
+          - "@NotNull"
+          - "@DecimalMin(value = \"0.01\")"
+        frontend:
+          label: "Prix"
+          type: "number"
+          required: true
+          min: 0.01
+      
+      - name: "stock"
+        type: "Integer"
+        annotations:
+          - "@Column(nullable = false)"
+          - "@Min(0)"
+        defaultValue: "0"
+        frontend:
+          label: "Stock"
+          type: "number"
+          min: 0
+      
+      - name: "category"
+        type: "String"
+        annotations:
+          - "@Column(length = 100)"
+        frontend:
+          label: "Catégorie"
+      
+      - name: "active"
+        type: "Boolean"
+        annotations:
+          - "@Column(nullable = false)"
+        defaultValue: "true"
+        frontend:
+          label: "Actif"
+          type: "switch"
+
+# Ajout des traductions
+frontend:
+  translations:
+    "product.title":
+      fr: "Gestion des produits"
+      en: "Product Management"
+      es: "Gestión de productos"
+      de: "Produktverwaltung"
+    
+    "product.list":
+      fr: "Liste des produits"
+      en: "Product List"
+      es: "Lista de productos"
+      de: "Produktliste"
+    
+    "product.create":
+      fr: "Créer un produit"
+      en: "Create Product"
+      es: "Crear producto"
+      de: "Produkt erstellen"
+    
+    "product.edit":
+      fr: "Modifier le produit"
+      en: "Edit Product"
+      es: "Editar producto"
+      de: "Produkt bearbeiten"
+    
+    "product.field.name":
+      fr: "Nom"
+      en: "Name"
+      es: "Nombre"
+      de: "Name"
+    
+    "product.field.description":
+      fr: "Description"
+      en: "Description"
+      es: "Descripción"
+      de: "Beschreibung"
+    
+    "product.field.price":
+      fr: "Prix"
+      en: "Price"
+      es: "Precio"
+      de: "Preis"
+    
+    "product.field.stock":
+      fr: "Stock"
+      en: "Stock"
+      es: "Stock"
+      de: "Bestand"
+    
+    "product.field.available":
+      fr: "Disponible"
+      en: "Available"
+      es: "Disponible"
+      de: "Verfügbar"

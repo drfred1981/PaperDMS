@@ -1,0 +1,218 @@
+---
+# Kibana - Elasticsearch UI and Logging Dashboard
+# metadata/infrastructure/kibana.yaml
+
+category: infrastructure
+type: logging
+name: "kibana"
+enabled: true
+
+service:
+  # Kibana est un service standalone
+  standalone: true
+  port: 5601
+  
+  resources:
+    memory: "1g"
+    cpus: "1.0"
+  
+  healthCheck:
+    endpoint: "/api/status"
+    interval: "30s"
+    timeout: "10s"
+    retries: 5
+    startPeriod: "60s"
+  
+  environment:
+    - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+    - "SERVER_NAME=kibana"
+    - "SERVER_HOST=0.0.0.0"
+  
+  # Configuration Elasticsearch
+  elasticsearch:
+    hosts: ["http://elasticsearch:9200"]
+    username: "elastic"
+    password: "${ELASTIC_PASSWORD:-}"
+    requestTimeout: 30000
+    pingTimeout: 30000
+  
+  # Configuration Server
+  server:
+    host: "0.0.0.0"
+    port: 5601
+    name: "kibana"
+    basePath: ""
+    rewriteBasePath: false
+  
+  # Logging
+  logging:
+    dest: stdout
+    silent: false
+    quiet: false
+    verbose: false
+
+frontend:
+  displayName: "Logs & Analytics"
+  icon: "pi pi-chart-bar"
+  menuPosition: 104
+  description: "Search and analyze logs from all services"
+
+docker:
+  image: "docker.elastic.co/kibana/kibana:8.11.0"
+  containerName: "kibana"
+  ports:
+    - "5601:5601"
+  
+  dependsOn:
+    - elasticsearch
+  
+  environment:
+    - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+    - "ELASTICSEARCH_USERNAME=elastic"
+    - "ELASTICSEARCH_PASSWORD=${ELASTIC_PASSWORD:-elastic}"
+    - "SERVER_NAME=kibana"
+    - "SERVER_HOST=0.0.0.0"
+    - "LOGGING_VERBOSE=false"
+  
+  volumes:
+    - "kibana_data:/usr/share/kibana/data"
+
+# Logstash configuration (log shipper)
+logstash:
+  enabled: true
+  port: 5000
+  
+  docker:
+    image: "docker.elastic.co/logstash/logstash:8.11.0"
+    containerName: "logstash"
+    ports:
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    
+    environment:
+      - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+      - "XPACK_MONITORING_ENABLED=false"
+    
+    volumes:
+      - "./logstash/pipeline:/usr/share/logstash/pipeline:ro"
+      - "./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro"
+  
+  # Pipeline configuration
+  pipeline:
+    input: |
+      input {
+        tcp {
+          port => 5000
+          codec => json
+        }
+        udp {
+          port => 5000
+          codec => json
+        }
+      }
+    
+    filter: |
+      filter {
+        # Parse JSON logs
+        if [message] =~ /^\{/ {
+          json {
+            source => "message"
+          }
+        }
+        
+        # Add tags based on service
+        if [service_name] {
+          mutate {
+            add_tag => [ "%{service_name}" ]
+          }
+        }
+        
+        # Parse Java stack traces
+        if [level] == "ERROR" {
+          mutate {
+            add_tag => [ "error" ]
+          }
+        }
+      }
+    
+    output: |
+      output {
+        elasticsearch {
+          hosts => ["http://elasticsearch:9200"]
+          index => "logs-%{service_name:unknown}-%{+YYYY.MM.dd}"
+        }
+        
+        # Debug output
+        stdout {
+          codec => rubydebug
+        }
+      }
+
+# Configuration pour les microservices
+clientIntegration:
+  dependencies:
+    - "net.logstash.logback:logstash-logback-encoder:7.4"
+  
+  logbackConfiguration: |
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+      <destination>logstash:5000</destination>
+      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <customFields>{"service_name":"${spring.application.name}"}</customFields>
+      </encoder>
+    </appender>
+
+# Index patterns recommandés
+indexPatterns:
+  - name: "logs-*"
+    timeField: "@timestamp"
+    description: "All service logs"
+  
+  - name: "logs-user-service-*"
+    timeField: "@timestamp"
+    description: "User service logs"
+  
+  - name: "logs-error-*"
+    timeField: "@timestamp"
+    description: "Error logs only"
+
+# Dashboards pré-configurés
+dashboards:
+  - name: "Service Overview"
+    description: "Overview of all microservices logs"
+    visualizations:
+      - "Log volume over time"
+      - "Error rate by service"
+      - "Top error messages"
+      - "Response time distribution"
+  
+  - name: "Error Analysis"
+    description: "Detailed error analysis"
+    visualizations:
+      - "Error timeline"
+      - "Stack traces"
+      - "Error frequency by service"
+      - "Top exceptions"
+
+# Saved searches
+savedSearches:
+  - name: "Errors last 24h"
+    query: 'level:"ERROR" AND @timestamp:[now-24h TO now]'
+  
+  - name: "Slow queries"
+    query: 'duration:>1000 AND @timestamp:[now-1h TO now]'
+  
+  - name: "Authentication failures"
+    query: 'message:"Authentication failed" AND @timestamp:[now-24h TO now]'
+
+# Alertes Kibana
+alerts:
+  - name: "HighErrorRate"
+    description: "Alert when error rate exceeds 5%"
+    threshold: 5
+    timeWindow: "5m"
+    
+  - name: "ServiceDown"
+    description: "No logs from service in 5 minutes"
+    threshold: 0
+    timeWindow: "5m"
